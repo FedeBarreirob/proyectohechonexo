@@ -1,0 +1,9 @@
+<h2>Login</h2>
+<form [formGroup]="frmLogin">
+    <input type="text" formControlName="username" id="username"/>
+    <input type="password" formControlName="password" id="password"/>
+    <button (click)="login()" [disabled]="frmLogin.invalid">Login</button>
+</form>
+
+<h1>{{mensaje}}</h1>
+
