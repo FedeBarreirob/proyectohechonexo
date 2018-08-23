@@ -12,6 +12,7 @@ import { UserAuth } from '../models/security/user';
 export class LoginComponent implements OnInit {
 
   frmLogin: FormGroup;
+  private formSubmitAttempt: boolean;
   loading = false;
   submitted = false;
   returnUrl: string;
@@ -38,26 +39,37 @@ export class LoginComponent implements OnInit {
   }
 
   login() {
-    const frm = this.frmLogin.value;
-    this.authenticationService.login(frm.username, frm.password).subscribe(
-      respuesta => {
+    if (this.frmLogin.valid) {
+      const frm = this.frmLogin.value;
+      this.authenticationService.login(frm.username, frm.password).subscribe(
+        respuesta => {
 
-        if (respuesta && respuesta.exito == true) {
-          let user = new UserAuth();
-          user.username = frm.username;
-          user.token = respuesta.token;
-          localStorage.setItem('currentUser', JSON.stringify(user));
+          if (respuesta && respuesta.exito == true) {
+            let user = new UserAuth();
+            user.username = frm.username;
+            user.token = respuesta.token;
+            localStorage.setItem('currentUser', JSON.stringify(user));
 
-          console.log(user);
+            console.log(user);
 
-          this.router.navigate([this.returnUrl]);
-        } else {
-          this.mensaje = (respuesta.mensaje) ? respuesta.mensaje : 'Acceso denegado';
-        }
-      },
-      error => {
-        this.error = error;
-        this.loading = false;
-      });
+            this.router.navigate([this.returnUrl]);
+          } else {
+            this.mensaje = (respuesta.mensaje) ? respuesta.mensaje : 'Acceso denegado';
+          }
+        },
+        error => {
+          this.error = error;
+          this.loading = false;
+        });
+    } else {
+      this.formSubmitAttempt = true;
+    }
+  }
+
+  isFieldInvalid(field: string) { 
+    return (
+      (!this.frmLogin.get(field).valid && this.frmLogin.get(field).touched) ||
+      (this.frmLogin.get(field).untouched && this.formSubmitAttempt)
+    );
   }
 }
