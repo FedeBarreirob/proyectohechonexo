@@ -1,0 +1,26 @@
+.sidenav-container {
+  height: 100%;
+}
+
+.sidenav {
+  /*width: 250px;*/
+  box-shadow: 3px 0 6px rgba(0, 0, 0, .24);
+}
+
+.mat-toolbar.mat-primary {
+  position: sticky;
+  top: 0;
+}
+
+.mat-nav-list a.active {
+  border-left: 4px solid blue;
+}
+
+.mat-nav-list a:hover {
+  background-color: lightsteelblue;
+}
+
+.logo-sidebar {
+  width: 70%;
+  height: auto;
+}
