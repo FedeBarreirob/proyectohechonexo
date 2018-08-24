@@ -3,11 +3,11 @@
     [mode]="(isHandset$ | async) ? 'over' : 'side'" [opened]="!(isHandset$ | async) && authService.esLogueado">
     <mat-toolbar color="background" *ngIf="authService.esLogueado"><img src="/assets/logo.png" class="logo-sidebar" alt="image caption"/></mat-toolbar>
     <mat-nav-list *ngIf="authService.esLogueado">
-      <a mat-list-item routerLink="/" routerLinkActive="active">Inicio</a>
+      <a mat-list-item routerLink="/dashboard" routerLinkActive="active">Inicio</a>
       <a mat-list-item href="#"><span matBadge="4" matBadgeOverlap="false">Notificaciones</span></a>
       <a mat-list-item href="#">Entregas</a>
       <a mat-list-item href="#">Ventas</a>
-      <a mat-list-item href="#">Cuenta Corriente</a>
+      <a mat-list-item routerLink="/ctacte" routerLinkActive="active">Cuenta Corriente</a>
       <a mat-list-item href="#">Cta Cte Aplicada</a>
       <a mat-list-item href="#">Archivo de operaciones</a>
       <a mat-list-item href="#">Ayuda</a>

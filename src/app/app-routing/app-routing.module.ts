@@ -1,12 +1,13 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 
+// guarda
+import { AuthGuardGuard } from '../security/auth-guard.guard'
+
 // componentes
 import { DashboardComponent } from '../dashboard/dashboard.component'
 import { LoginComponent } from '../login/login.component'
-
-// guarda
-import { AuthGuardGuard } from '../security/auth-guard.guard'
+import { CtacteComponent } from '../ctacte/ctacte.component';
 
 const routes: Routes = [
   {
@@ -14,11 +15,16 @@ const routes: Routes = [
     component: LoginComponent,
   },
   {
-    path: '',
+    path: 'dashboard',
     component: DashboardComponent,
     canActivate: [AuthGuardGuard]
   },
-  { path: '**', redirectTo: '' }
+  {
+    path: 'ctacte',
+    component: CtacteComponent,
+    canActivate: [AuthGuardGuard]
+  },
+  { path: '**', redirectTo: 'dashboard' }
 ];
 
 @NgModule({

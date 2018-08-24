@@ -21,13 +21,15 @@ import { DashboardComponent } from './dashboard/dashboard.component';
 import { MainNavComponent } from './main-nav/main-nav.component';
 import { LayoutModule } from '@angular/cdk/layout';
 import { MatToolbarModule, MatButtonModule, MatSidenavModule, MatIconModule, MatListModule } from '@angular/material';
+import { CtacteComponent } from './ctacte/ctacte.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     LoginComponent,
     DashboardComponent,
-    MainNavComponent
+    MainNavComponent,
+    CtacteComponent
   ],
   imports: [
     HttpClientModule,
