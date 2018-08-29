@@ -1,29 +1,110 @@
-<button (click)="cargarListado()">sfdf</button>
+<div class="container" fxLayout="row" fxLayout.xs="column" fxLayoutWrap fxLayoutGap="0.5%" fxLayoutAlign="space-evenly stretch">
+  <div fxFlex="100%">
+    <mat-progress-bar *ngIf="cargando" mode="indeterminate"></mat-progress-bar>
 
-<div class="basic-container">
+    <mat-card>
+      <mat-card-content>
 
-  <mat-accordion>
+        <mat-form-field>
+          <input matInput placeholder="Cuenta" [(ngModel)]="cuenta">
+        </mat-form-field>
 
-      <mat-expansion-panel *ngFor="let movimiento of (listadoCtaCte ? listadoCtaCte : [])">
-          <mat-expansion-panel-header>
+        <mat-form-field>
+          <input [(ngModel)]="fechaDesde" matInput [matDatepicker]="desde" placeholder="Fecha desde">
+          <mat-datepicker-toggle matSuffix [for]="desde"></mat-datepicker-toggle>
+          <mat-datepicker #desde></mat-datepicker>
+        </mat-form-field>
 
+        <mat-form-field>
+          <input [(ngModel)]="fechaHasta" matInput [matDatepicker]="hasta" placeholder="Fecha hasta">
+          <mat-datepicker-toggle matSuffix [for]="hasta"></mat-datepicker-toggle>
+          <mat-datepicker #hasta></mat-datepicker>
+        </mat-form-field>
 
-              <mat-grid-list cols="2" rowHeight="2:1">
-                  <mat-grid-tile>{{movimiento.concepto}}</mat-grid-tile>
-                  <mat-grid-tile>{{movimiento.importeComprobantePesos}}</mat-grid-tile>
-                  <mat-grid-tile>{{movimiento.fechaVencimiento}}</mat-grid-tile>
-                  <mat-grid-tile>{{movimiento.importeComprobanteDolares}}</mat-grid-tile>
-                </mat-grid-list>
+        <button (click)="cargarListado()">Filtrar</button>
+      </mat-card-content>
+    </mat-card>
+  </div>
+</div>
 
-              
-            
-          </mat-expansion-panel-header>
+<div class="container" fxLayout="row" fxLayout.xs="column" fxLayoutWrap fxLayoutGap="0.5%" fxLayoutAlign="space-evenly stretch">
+  <div fxFlex="100%">
+    <mat-card>
+      <mat-card-title>Cuenta Corriente - Saldos</mat-card-title>
 
+      <table *ngIf="saldosTotales" class="tabla-saldos">
+        <tr>
+          <th>Saldo en pesos</th>
+          <th>Saldo en dólares</th>
+          <th>Saldo contable</th>
+        </tr>
 
-          {{movimiento.tipoMovimiento}}
-        </mat-expansion-panel>
+        <tr>
+          <td>AR$ {{saldosTotales.saldoPesos | number: '.2'}}</td>
+          <td>US$ {{saldosTotales.saldoDolares | number: '.2'}}</td>
+          <td>AR$ {{saldosTotales.saldoContable | number: '.2'}}</td>
+        </tr>
+      </table>
+    </mat-card>
+  </div>
+</div>
 
+<div class="container" fxLayout="row" fxLayout.xs="column" fxLayoutWrap fxLayoutGap="0.5%" fxLayoutAlign="space-evenly stretch">
+  <div fxFlex="auto">
+    <mat-card>
+      <mat-card-title>Movimientos</mat-card-title>
 
-  </mat-accordion>
+      <mat-nav-list class="listadoCtaCte">
 
+        <a mat-list-item *ngFor="let movimiento of (listadoCtaCte ? listadoCtaCte : [])" (click)="verDetalle(movimiento)">
+
+          <table class="tabla-movimiento">
+            <tr>
+              <td class="concepto">{{movimiento.concepto}}</td>
+              <td class="importe">AR$ {{movimiento.importeComprobantePesos | number: '.2'}} </td>
+            </tr>
+            <tr>
+              <td class="fecha">{{movimiento.fechaVencimiento}}</td>
+              <td class="importe">US$ {{movimiento.importeComprobanteDolares | number: '.2'}}</td>
+            </tr>
+          </table>
+
+          <mat-divider></mat-divider>
+        </a>
+
+      </mat-nav-list>
+
+    </mat-card>
+  </div>
+
+  <div fxFlex="50%" *ngIf="movimientoSeleccionado">
+    <mat-card>
+      <mat-card-title>Detalle</mat-card-title>
+      <mat-card-content>
+        <table class="tabla-movimiento">
+          <tr>
+            <td>Fecha cta.cte</td>
+            <td>{{movimientoSeleccionado.fechaCtaCte}}</td>
+          </tr>
+
+          <tr>
+            <td>Fecha vencimiento</td>
+            <td>{{movimientoSeleccionado.fechaVencimiento}}</td>
+          </tr>
+
+          <tr>
+            <td>Descripción</td>
+            <td>{{movimientoSeleccionado.concepto}}</td>
+          </tr>
+
+          <tr>
+            <td>Comprobante</td>
+            <td>{{movimientoSeleccionado.comprobante}}</td>
+          </tr>
+        </table>
+
+        <button (click)="movimientoSeleccionado=null">Cerrar</button>
+      </mat-card-content>
+    </mat-card>
+  </div>
 </div>

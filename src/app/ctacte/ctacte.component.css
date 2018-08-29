@@ -1,0 +1,34 @@
+.listadoCtaCte a:hover {
+    background-color: beige;
+  }
+  
+  .tabla-movimiento {
+    border: none;
+    width: 100%;
+    font-size: 10px;
+  }
+
+  .tabla-movimiento td {
+    width: 50%;
+  }
+
+  .importe {
+    text-align: right;
+    font-weight: bold;
+  }
+
+  .fecha {
+    color: dimgray;
+  }
+
+  .concepto {
+    font-weight: bold;
+  }
+
+  /*saldos*/
+  .tabla-saldos {
+    border: none;
+    width: 100%;
+    font-size: 12px;
+    text-align: right;
+  }
