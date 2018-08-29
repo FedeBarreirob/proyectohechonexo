@@ -1,7 +1,7 @@
 <mat-sidenav-container class="sidenav-container">
   <mat-sidenav #drawer class="sidenav" fixedInViewport="true" [attr.role]="(isHandset$ | async) ? 'dialog' : 'navigation'"
     [mode]="(isHandset$ | async) ? 'over' : 'side'" [opened]="!(isHandset$ | async) && authService.esLogueado">
-    <mat-toolbar color="background" *ngIf="authService.esLogueado"><img src="/assets/logo.png" class="logo-sidebar" alt="image caption"/></mat-toolbar>
+    <mat-toolbar color="background" *ngIf="authService.esLogueado"><img src="assets/logo.png" class="logo-sidebar" alt="image caption"/></mat-toolbar>
     <mat-nav-list *ngIf="authService.esLogueado">
       <a mat-list-item routerLink="/dashboard" routerLinkActive="active">Inicio</a>
       <a mat-list-item href="#"><span matBadge="4" matBadgeOverlap="false">Notificaciones</span></a>
