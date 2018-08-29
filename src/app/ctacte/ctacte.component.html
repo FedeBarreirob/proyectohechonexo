@@ -1,3 +1,29 @@
-<p>
-  ctacte works!
-</p>
+<button (click)="cargarListado()">sfdf</button>
+
+<div class="basic-container">
+
+  <mat-accordion>
+
+      <mat-expansion-panel *ngFor="let movimiento of (listadoCtaCte ? listadoCtaCte : [])">
+          <mat-expansion-panel-header>
+
+
+              <mat-grid-list cols="2" rowHeight="2:1">
+                  <mat-grid-tile>{{movimiento.concepto}}</mat-grid-tile>
+                  <mat-grid-tile>{{movimiento.importeComprobantePesos}}</mat-grid-tile>
+                  <mat-grid-tile>{{movimiento.fechaVencimiento}}</mat-grid-tile>
+                  <mat-grid-tile>{{movimiento.importeComprobanteDolares}}</mat-grid-tile>
+                </mat-grid-list>
+
+              
+            
+          </mat-expansion-panel-header>
+
+
+          {{movimiento.tipoMovimiento}}
+        </mat-expansion-panel>
+
+
+  </mat-accordion>
+
+</div>

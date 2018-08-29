@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { ResponseAutentificacion } from '../../interfaces/security/response.autentificacion';
-import { BehaviorSubject } from 'rxjs';
+import { environment } from '../../../environments/environment'
 
 @Injectable({
   providedIn: 'root'
@@ -10,6 +10,7 @@ export class AuthenticationService {
 
   constructor(private http: HttpClient) { }
 
+  // funcion encargada de autenticar el usuario y obtener el token requerido para el consumo de servicios
   login(username: string, password: string) {
 
     const httpOptions = {
@@ -21,26 +22,32 @@ export class AuthenticationService {
       "password": password
     });
 
-    return this.http.post<ResponseAutentificacion>("http://localhost:8080/DigitalSeguridad-1.0-SNAPSHOT/api/autentificacion/login",
+    return this.http.post<ResponseAutentificacion>(environment.urlSeguridadLogin,
       credenciales,
       httpOptions);
   }
 
+  // cierra la sesion
   logout() {
     localStorage.removeItem('currentUser');
   }
 
+  // funcion que indica si el usuario se encuentra logueado en el sistema
+  // no se verifica validez del token asociado
   get esLogueado() {
-    //let loggedIn = new BehaviorSubject<boolean>(false);
-
     if (localStorage.getItem('currentUser')) {
-      //loggedIn.next(true);
       return true;
     } else {
-      //loggedIn.next(false);
       return false;
     }
+  }
 
-    //return loggedIn.asObservable();
+  // funcion que devuelve el usuario logueado
+  usuarioLogueado() {
+    if (this.esLogueado) {
+      return JSON.parse(localStorage.getItem('currentUser'));
+    } else {
+      return null;
+    }
   }
 }

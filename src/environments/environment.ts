@@ -3,7 +3,9 @@
 // The list of file replacements can be found in `angular.json`.
 
 export const environment = {
-  production: false
+  production: false,
+  urlSeguridadLogin: 'http://localhost:8080/DigitalSeguridad-1.0-SNAPSHOT/api/autentificacion/login',
+  urlCuentaCorrienteListado: 'http://localhost:8080/DigitalCuentaCorriente-1.0-SNAPSHOT/api/CuentaCorriente/listado'
 };
 
 /*
