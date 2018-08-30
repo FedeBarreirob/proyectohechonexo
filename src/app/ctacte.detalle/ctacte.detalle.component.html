@@ -1,0 +1,31 @@
+<h2 mat-dialog-title>Detalle</h2>
+
+<mat-dialog-content class="mat-typography">
+
+  <table class="tabla-movimiento">
+    <tr>
+      <td>Fecha cta.cte</td>
+      <td align="end">{{data.fechaCtaCte}}</td>
+    </tr>
+
+    <tr>
+      <td>Fecha vencimiento</td>
+      <td align="end">{{data.fechaVencimiento}}</td>
+    </tr>
+
+    <tr>
+      <td>Descripción</td>
+      <td align="end">{{data.concepto}}</td>
+    </tr>
+
+    <tr>
+      <td>Comprobante</td>
+      <td align="end">{{data.comprobante}}</td>
+    </tr>
+  </table>
+
+</mat-dialog-content>
+
+<mat-dialog-actions align="end">
+  <button mat-button mat-dialog-close>Cerrar</button>
+</mat-dialog-actions>

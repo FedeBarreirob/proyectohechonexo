@@ -1,110 +1,97 @@
-<div class="container" fxLayout="row" fxLayout.xs="column" fxLayoutWrap fxLayoutGap="0.5%" fxLayoutAlign="space-evenly stretch">
+<div class="container" fxLayout="column" fxLayout.xs="column" fxLayoutWrap fxLayoutGap="0.5%" fxLayoutAlign="space-around stretch">
   <div fxFlex="100%">
     <mat-progress-bar *ngIf="cargando" mode="indeterminate"></mat-progress-bar>
 
-    <mat-card>
-      <mat-card-content>
+    <mat-expansion-panel>
+      <mat-expansion-panel-header>
+        Filtro
+      </mat-expansion-panel-header>
 
-        <mat-form-field>
-          <input matInput placeholder="Cuenta" [(ngModel)]="cuenta">
-        </mat-form-field>
+      <div class="container" fxLayout="row" fxLayout.xs="column" fxLayoutGap="0.5%" fxLayoutAlign="space-around stretch">
 
-        <mat-form-field>
-          <input [(ngModel)]="fechaDesde" matInput [matDatepicker]="desde" placeholder="Fecha desde">
-          <mat-datepicker-toggle matSuffix [for]="desde"></mat-datepicker-toggle>
-          <mat-datepicker #desde></mat-datepicker>
-        </mat-form-field>
+        <div fxFlex="33%">
+          <mat-form-field>
+              <mat-select [(ngModel)]="cuenta" placeholder="Seleccione una cuenta" disableRipple>
+                <mat-option value="484">484</mat-option>
+              </mat-select>
+            </mat-form-field>
+        </div>
 
-        <mat-form-field>
-          <input [(ngModel)]="fechaHasta" matInput [matDatepicker]="hasta" placeholder="Fecha hasta">
-          <mat-datepicker-toggle matSuffix [for]="hasta"></mat-datepicker-toggle>
-          <mat-datepicker #hasta></mat-datepicker>
-        </mat-form-field>
+        <div fxFlex="33%">
+          <mat-form-field>
+            <input [(ngModel)]="fechaDesde" matInput [matDatepicker]="desde" placeholder="Fecha desde" readonly>
+            <mat-datepicker-toggle matSuffix [for]="desde"></mat-datepicker-toggle>
+            <mat-datepicker touchUi #desde></mat-datepicker>
+          </mat-form-field>
+        </div>
 
-        <button (click)="cargarListado()">Filtrar</button>
-      </mat-card-content>
-    </mat-card>
+        <div fxFlex="33%">
+          <mat-form-field>
+            <input [(ngModel)]="fechaHasta" matInput [matDatepicker]="hasta" placeholder="Fecha hasta" readonly>
+            <mat-datepicker-toggle matSuffix [for]="hasta"></mat-datepicker-toggle>
+            <mat-datepicker touchUi #hasta></mat-datepicker>
+          </mat-form-field>
+        </div>
+      </div>
+
+      <mat-action-row>
+        <button mat-button (click)="cargarListado()">Buscar</button>
+      </mat-action-row>
+    </mat-expansion-panel>
+
   </div>
-</div>
 
-<div class="container" fxLayout="row" fxLayout.xs="column" fxLayoutWrap fxLayoutGap="0.5%" fxLayoutAlign="space-evenly stretch">
   <div fxFlex="100%">
-    <mat-card>
-      <mat-card-title>Cuenta Corriente - Saldos</mat-card-title>
+    <div *ngIf="saldosTotales" class="container" fxLayout="row" fxLayout.xs="column" fxLayoutGap="0.5%" fxLayoutAlign="space-around stretch">
+      <div fxFlex="33%">
+        <h3 mat-dialog-title align="center">Saldo en pesos</h3>
+        <mat-dialog-content class="mat-typography">
+          <p align="center">AR$ {{saldosTotales.saldoPesos | number: '.2'}}</p>
+        </mat-dialog-content>
+      </div>
 
-      <table *ngIf="saldosTotales" class="tabla-saldos">
-        <tr>
-          <th>Saldo en pesos</th>
-          <th>Saldo en dólares</th>
-          <th>Saldo contable</th>
-        </tr>
+      <div fxFlex="33%">
+        <h3 mat-dialog-title align="center">Saldo en dólares</h3>
+        <mat-dialog-content class="mat-typography">
+          <p align="center">US$ {{saldosTotales.saldoDolares | number: '.2'}}</p>
+        </mat-dialog-content>
+      </div>
 
-        <tr>
-          <td>AR$ {{saldosTotales.saldoPesos | number: '.2'}}</td>
-          <td>US$ {{saldosTotales.saldoDolares | number: '.2'}}</td>
-          <td>AR$ {{saldosTotales.saldoContable | number: '.2'}}</td>
-        </tr>
-      </table>
-    </mat-card>
+      <div fxFlex="33%">
+        <h3 mat-dialog-title align="center">Saldo contable</h3>
+        <mat-dialog-content class="mat-typography">
+          <p align="center">AR$ {{saldosTotales.saldoContable | number: '.2'}}</p>
+        </mat-dialog-content>
+      </div>
+    </div>
   </div>
-</div>
 
-<div class="container" fxLayout="row" fxLayout.xs="column" fxLayoutWrap fxLayoutGap="0.5%" fxLayoutAlign="space-evenly stretch">
-  <div fxFlex="auto">
+  <div fxFlex="100%">
     <mat-card>
       <mat-card-title>Movimientos</mat-card-title>
 
-      <mat-nav-list class="listadoCtaCte">
-
-        <a mat-list-item *ngFor="let movimiento of (listadoCtaCte ? listadoCtaCte : [])" (click)="verDetalle(movimiento)">
-
-          <table class="tabla-movimiento">
-            <tr>
-              <td class="concepto">{{movimiento.concepto}}</td>
-              <td class="importe">AR$ {{movimiento.importeComprobantePesos | number: '.2'}} </td>
-            </tr>
-            <tr>
-              <td class="fecha">{{movimiento.fechaVencimiento}}</td>
-              <td class="importe">US$ {{movimiento.importeComprobanteDolares | number: '.2'}}</td>
-            </tr>
-          </table>
-
-          <mat-divider></mat-divider>
-        </a>
-
-      </mat-nav-list>
-
-    </mat-card>
-  </div>
-
-  <div fxFlex="50%" *ngIf="movimientoSeleccionado">
-    <mat-card>
-      <mat-card-title>Detalle</mat-card-title>
       <mat-card-content>
-        <table class="tabla-movimiento">
-          <tr>
-            <td>Fecha cta.cte</td>
-            <td>{{movimientoSeleccionado.fechaCtaCte}}</td>
-          </tr>
+        <mat-nav-list class="listadoCtaCte">
 
-          <tr>
-            <td>Fecha vencimiento</td>
-            <td>{{movimientoSeleccionado.fechaVencimiento}}</td>
-          </tr>
+          <a mat-list-item *ngFor="let movimiento of (listadoCtaCte ? listadoCtaCte : [])" (click)="verDetalle(movimiento)">
 
-          <tr>
-            <td>Descripción</td>
-            <td>{{movimientoSeleccionado.concepto}}</td>
-          </tr>
+            <table class="tabla-movimiento">
+              <tr>
+                <td class="concepto">{{movimiento.concepto}}</td>
+                <td class="importe">AR$ {{movimiento.importeComprobantePesos | number: '.2'}} </td>
+              </tr>
+              <tr>
+                <td class="fecha">{{movimiento.fechaVencimiento}}</td>
+                <td class="importe">US$ {{movimiento.importeComprobanteDolares | number: '.2'}}</td>
+              </tr>
+            </table>
 
-          <tr>
-            <td>Comprobante</td>
-            <td>{{movimientoSeleccionado.comprobante}}</td>
-          </tr>
-        </table>
+            <mat-divider></mat-divider>
+          </a>
 
-        <button (click)="movimientoSeleccionado=null">Cerrar</button>
+        </mat-nav-list>
       </mat-card-content>
     </mat-card>
   </div>
+
 </div>

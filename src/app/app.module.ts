@@ -27,6 +27,7 @@ import { MainNavComponent } from './main-nav/main-nav.component';
 import { LayoutModule } from '@angular/cdk/layout';
 import { MatToolbarModule, MatButtonModule, MatSidenavModule, MatIconModule, MatListModule } from '@angular/material';
 import { CtacteComponent } from './ctacte/ctacte.component';
+import { CtacteDetalleComponent } from './ctacte.detalle/ctacte.detalle.component';
 
 registerLocaleData(localeEsAr, 'es-AR');
 
@@ -36,7 +37,8 @@ registerLocaleData(localeEsAr, 'es-AR');
     LoginComponent,
     DashboardComponent,
     MainNavComponent,
-    CtacteComponent
+    CtacteComponent,
+    CtacteDetalleComponent
   ],
   imports: [
     HttpClientModule,
@@ -57,8 +59,9 @@ registerLocaleData(localeEsAr, 'es-AR');
   providers: [
     { provide: HTTP_INTERCEPTORS, useClass: ErrorAuthInterceptor, multi: true },
     { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true },
-    { provide: LOCALE_ID, useValue: 'es-AR' } 
+    { provide: LOCALE_ID, useValue: 'es-AR' }
   ],
+  entryComponents: [CtacteDetalleComponent],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

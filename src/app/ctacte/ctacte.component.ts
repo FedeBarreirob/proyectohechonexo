@@ -5,6 +5,8 @@ import { FiltroListadoCtaCte } from '../interfaces/ctacte/filtro.listado.ctacte'
 import { UserAuth } from '../models/security/user';
 import { AuthenticationService } from '../services/security/authentication.service';
 import { DatePipe } from '@angular/common';
+import { MatDialog } from '@angular/material';
+import { CtacteDetalleComponent } from '../ctacte.detalle/ctacte.detalle.component';
 
 @Component({
   selector: 'app-ctacte',
@@ -14,19 +16,20 @@ import { DatePipe } from '@angular/common';
 })
 export class CtacteComponent implements OnInit {
 
-  private listadoCtaCte: Array<MovimientoCtaCte>;
+  public listadoCtaCte: Array<MovimientoCtaCte>;
   private movimientoSeleccionado: MovimientoCtaCte = null;
-  private saldosTotales: SaldosTotales = null;
-  private cargando: boolean;
+  public saldosTotales: SaldosTotales = null;
+  public cargando: boolean;
 
-  private cuenta: string = "";
-  private fechaDesde: Date = new Date();
-  private fechaHasta: Date = new Date();
+  public cuenta: string = "";
+  public fechaDesde: Date = new Date();
+  public fechaHasta: Date = new Date();
 
   constructor(
     private ctacteService: CtacteService,
     private authenticationService: AuthenticationService,
-    private datePipe: DatePipe
+    private datePipe: DatePipe,
+    public dialog: MatDialog
   ) { }
 
   ngOnInit() {
@@ -64,5 +67,9 @@ export class CtacteComponent implements OnInit {
   // funcion que muestra el detalle de un movimiento seleccionado
   verDetalle(movimiento: MovimientoCtaCte) {
     this.movimientoSeleccionado = movimiento;
+
+    this.dialog.open(CtacteDetalleComponent, {
+      data: movimiento
+    });
   }
 }
