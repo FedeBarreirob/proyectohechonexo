@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { FiltroListadoCtaCte } from '../../interfaces/ctacte/filtro.listado.ctacte';
 import { ListadoCuentaCorriente } from '../../interfaces/ctacte/listado.ctacte';
-import { environment } from '../../../environments/environment'
+import { environment } from '../../../environments/environment';
 
 @Injectable({
   providedIn: 'root'

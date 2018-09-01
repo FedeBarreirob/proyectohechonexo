@@ -1,23 +1,23 @@
 import { Component, OnInit } from '@angular/core';
-import { CtacteService } from '../services/ctacte/ctacte.service'
-import { MovimientoCtaCte, SaldosTotales } from '../interfaces/ctacte/listado.ctacte';
-import { FiltroListadoCtaCte } from '../interfaces/ctacte/filtro.listado.ctacte';
+import { CtacteAplicadaService } from '../services/ctacte-aplicada/ctacte-aplicada.service'
+import { MovimientoCtaCteAplicada, SaldosTotales } from '../interfaces/ctacte-aplicada/listado-ctacte-aplicada';
+import { FiltroCtacteAplicada } from '../interfaces/ctacte-aplicada/filtro-ctacte-aplicada';
 import { UserAuth } from '../models/security/user';
 import { AuthenticationService } from '../services/security/authentication.service';
 import { DatePipe } from '@angular/common';
 import { MatDialog } from '@angular/material';
-import { CtacteDetalleComponent } from '../ctacte.detalle/ctacte.detalle.component';
+import { CtacteAplicadaDetalleComponent } from '../ctacte-aplicada-detalle/ctacte-aplicada-detalle.component';
 
 @Component({
-  selector: 'app-ctacte',
-  templateUrl: './ctacte.component.html',
-  styleUrls: ['./ctacte.component.css'],
+  selector: 'app-ctacte-aplicada',
+  templateUrl: './ctacte-aplicada.component.html',
+  styleUrls: ['./ctacte-aplicada.component.css'],
   providers: [DatePipe]
 })
-export class CtacteComponent implements OnInit {
+export class CtacteAplicadaComponent implements OnInit {
 
-  public listadoCtaCte: Array<MovimientoCtaCte>;
-  private movimientoSeleccionado: MovimientoCtaCte = null;
+  public listadoCtaCte: Array<MovimientoCtaCteAplicada>;
+  private movimientoSeleccionado: MovimientoCtaCteAplicada = null;
   public saldosTotales: SaldosTotales = null;
   public cargando: boolean;
 
@@ -25,12 +25,10 @@ export class CtacteComponent implements OnInit {
   public fechaDesde: Date = new Date();
   public fechaHasta: Date = new Date();
 
-  constructor(
-    private ctacteService: CtacteService,
+  constructor(private ctacteService: CtacteAplicadaService,
     private authenticationService: AuthenticationService,
     private datePipe: DatePipe,
-    public dialog: MatDialog
-  ) { }
+    public dialog: MatDialog) { }
 
   ngOnInit() {
     this.cargando = false;
@@ -40,7 +38,7 @@ export class CtacteComponent implements OnInit {
   cargarListado() {
     this.cargando = true;
 
-    let filtro: FiltroListadoCtaCte = {
+    let filtro: FiltroCtacteAplicada = {
       cuenta: this.cuenta,
       fechaDesde: this.datePipe.transform(this.fechaDesde, 'dd/MM/yyyy'),
       fechaHasta: this.datePipe.transform(this.fechaHasta, 'dd/MM/yyyy')
@@ -60,10 +58,10 @@ export class CtacteComponent implements OnInit {
   }
 
   // funcion que muestra el detalle de un movimiento seleccionado
-  verDetalle(movimiento: MovimientoCtaCte) {
+  verDetalle(movimiento: MovimientoCtaCteAplicada) {
     this.movimientoSeleccionado = movimiento;
 
-    this.dialog.open(CtacteDetalleComponent, {
+    this.dialog.open(CtacteAplicadaDetalleComponent, {
       data: movimiento
     });
   }

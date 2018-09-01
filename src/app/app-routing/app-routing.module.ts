@@ -8,6 +8,7 @@ import { AuthGuardGuard } from '../security/auth-guard.guard'
 import { DashboardComponent } from '../dashboard/dashboard.component'
 import { LoginComponent } from '../login/login.component'
 import { CtacteComponent } from '../ctacte/ctacte.component';
+import { CtacteAplicadaComponent } from '../ctacte-aplicada/ctacte-aplicada.component'
 
 const routes: Routes = [
   {
@@ -22,6 +23,11 @@ const routes: Routes = [
   {
     path: 'ctacte',
     component: CtacteComponent,
+    canActivate: [AuthGuardGuard]
+  },
+  {
+    path: 'ctacte-aplicada',
+    component: CtacteAplicadaComponent,
     canActivate: [AuthGuardGuard]
   },
   { path: '**', redirectTo: 'dashboard' }
