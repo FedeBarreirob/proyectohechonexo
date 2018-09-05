@@ -30,6 +30,8 @@ import { CtacteComponent } from './ctacte/ctacte.component';
 import { CtacteDetalleComponent } from './ctacte.detalle/ctacte.detalle.component';
 import { CtacteAplicadaComponent } from './ctacte-aplicada/ctacte-aplicada.component';
 import { CtacteAplicadaDetalleComponent } from './ctacte-aplicada-detalle/ctacte-aplicada-detalle.component';
+import { EntregasComponent } from './entregas/entregas.component';
+import { EntregasDetalleComponent } from './entregas-detalle/entregas-detalle.component';
 
 registerLocaleData(localeEsAr, 'es-AR');
 
@@ -42,7 +44,9 @@ registerLocaleData(localeEsAr, 'es-AR');
     CtacteComponent,
     CtacteDetalleComponent,
     CtacteAplicadaComponent,
-    CtacteAplicadaDetalleComponent
+    CtacteAplicadaDetalleComponent,
+    EntregasComponent,
+    EntregasDetalleComponent
   ],
   imports: [
     HttpClientModule,
@@ -65,7 +69,11 @@ registerLocaleData(localeEsAr, 'es-AR');
     { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true },
     { provide: LOCALE_ID, useValue: 'es-AR' }
   ],
-  entryComponents: [CtacteDetalleComponent, CtacteAplicadaDetalleComponent],
+  entryComponents: [
+    CtacteDetalleComponent,
+    CtacteAplicadaDetalleComponent,
+    EntregasDetalleComponent
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

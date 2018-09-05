@@ -1,0 +1,66 @@
+<h2 mat-dialog-title>Detalle</h2>
+
+<mat-dialog-content class="mat-typography">
+
+  <table class="tabla-movimiento">
+    <tr>
+      <td>Fecha</td>
+      <td align="end">{{data.fecha}}</td>
+    </tr>
+
+    <tr>
+      <td>Producto</td>
+      <td align="end">{{data.especie}}</td>
+    </tr>
+
+    <tr>
+      <td>Campaña</td>
+      <td align="end">{{data.cosecha}}</td>
+    </tr>
+
+    <tr>
+      <td>Campo</td>
+      <td align="end">{{data.campo}}</td>
+    </tr>
+
+    <tr>
+      <td>Kg Brutos</td>
+      <td align="end">{{data.kilosBrutos | number: '.0'}}</td>
+    </tr>
+
+    <tr>
+      <td>Humedad</td>
+      <td align="end">{{data.porcentajeHumedad | number: '.2'}} % {{data.kgMermaHumedad | number: '.2'}} Kg</td>
+    </tr>
+
+    <tr>
+      <td>Zarandeo</td>
+      <td align="end">{{data.porcentajeZarandeo | number: '.2'}} % {{data.kgMermaZarandeo | number: '.2'}} Kg</td>
+    </tr>
+
+    <tr>
+      <td>Volátil</td>
+      <td align="end">{{data.porcentajeVolatil | number: '.2'}} % {{data.kgMermaVolatil | number: '.2'}} Kg</td>
+    </tr>
+
+    <tr>
+      <td>Kg Netos</td>
+      <td align="end">{{data.kilosNetos | number: '.0'}}</td>
+    </tr>
+
+    <tr>
+      <td>Ticket</td>
+      <td align="end">{{data.comprobante}}</td>
+    </tr>
+
+    <tr>
+      <td>RM/CP</td>
+      <td align="end">{{data.numeroComprobanteExterno}}</td>
+    </tr>
+  </table>
+
+</mat-dialog-content>
+
+<mat-dialog-actions align="end">
+  <button mat-button mat-dialog-close>Cerrar</button>
+</mat-dialog-actions>

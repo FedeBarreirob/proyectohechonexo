@@ -1,0 +1,33 @@
+.listado-entregas a:hover {
+    background-color: beige;
+  }
+  
+  .tabla-movimiento {
+    border: none;
+    width: 100%;
+    font-size: 10px;
+  }
+
+  .tabla-movimiento td {
+    width: 50%;
+  }
+
+  .importe {
+    text-align: right;
+    font-weight: bold;
+  }
+
+  .engris {
+    color: dimgray;
+  }
+
+  .conceptos {
+    font-weight: bold;
+  }
+
+  .tabla-totales {
+    border: none;
+    width: 100%;
+    font-size: 9px;
+    text-align: right;
+  }

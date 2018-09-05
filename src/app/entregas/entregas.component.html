@@ -1,0 +1,120 @@
+<div class="container" fxLayout="column" fxLayout.xs="column" fxLayoutWrap fxLayoutGap="0.5%" fxLayoutAlign="space-around stretch">
+  <div fxFlex="100%">
+    <mat-progress-bar *ngIf="cargando" mode="indeterminate"></mat-progress-bar>
+
+    <mat-expansion-panel>
+      <mat-expansion-panel-header>
+        Filtro
+      </mat-expansion-panel-header>
+
+      <div class="container" fxLayout="row" fxLayout.xs="column" fxLayoutGap="0.5%" fxLayoutAlign="space-around stretch">
+
+        <div fxFlex="33%">
+          <mat-form-field>
+            <mat-select [(ngModel)]="cuenta" placeholder="Seleccione una cuenta" disableRipple>
+              <mat-option value="484">484</mat-option>
+            </mat-select>
+          </mat-form-field>
+        </div>
+
+        <div fxFlex="33%">
+          <mat-form-field>
+            <input [(ngModel)]="fechaDesde" matInput [matDatepicker]="desde" placeholder="Fecha desde" readonly>
+            <mat-datepicker-toggle matSuffix [for]="desde"></mat-datepicker-toggle>
+            <mat-datepicker touchUi #desde></mat-datepicker>
+          </mat-form-field>
+        </div>
+
+        <div fxFlex="33%">
+          <mat-form-field>
+            <input [(ngModel)]="fechaHasta" matInput [matDatepicker]="hasta" placeholder="Fecha hasta" readonly>
+            <mat-datepicker-toggle matSuffix [for]="hasta"></mat-datepicker-toggle>
+            <mat-datepicker touchUi #hasta></mat-datepicker>
+          </mat-form-field>
+        </div>
+      </div>
+
+      <mat-action-row>
+        <button mat-button (click)="cargarListado()">Buscar</button>
+      </mat-action-row>
+    </mat-expansion-panel>
+
+  </div>
+
+  <div fxFlex="100%">
+    <div *ngIf="totales" class="container" fxLayout="row" fxLayout.xs="column" fxLayoutGap="0.5%" fxLayoutAlign="space-around stretch">
+      <div fxFlex="33%">
+        <h4 mat-dialog-title align="center">Kilos brutos</h4>
+        <mat-dialog-content class="mat-typography">
+          <p align="center">{{totales.totalKgBrutos | number: '.2'}} Kg</p>
+        </mat-dialog-content>
+      </div>
+
+      <div fxFlex="33%">
+        <h4 mat-dialog-title align="center">Kilos humedad</h4>
+        <mat-dialog-content class="mat-typography">
+          <p align="center">{{totales.totalKgHumedad | number: '.2'}} Kg</p>
+        </mat-dialog-content>
+      </div>
+
+      <div fxFlex="33%">
+        <h4 mat-dialog-title align="center">Kilos zarandeo</h4>
+        <mat-dialog-content class="mat-typography">
+          <p align="center">{{totales.totalKgZarandeo | number: '.2'}} Kg</p>
+        </mat-dialog-content>
+      </div>
+
+      <div fxFlex="33%">
+        <h4 mat-dialog-title align="center">Kilos volátil</h4>
+        <mat-dialog-content class="mat-typography">
+          <p align="center">{{totales.totalKgVolatil | number: '.2'}} Kg</p>
+        </mat-dialog-content>
+      </div>
+
+      <div fxFlex="33%">
+        <h4 mat-dialog-title align="center">Kilos netos</h4>
+        <mat-dialog-content class="mat-typography">
+          <p align="center">{{totales.totalKgNetos | number: '.2'}} Kg</p>
+        </mat-dialog-content>
+      </div>
+
+      <div fxFlex="33%">
+        <h4 mat-dialog-title align="center">Kilos netos</h4>
+        <mat-dialog-content class="mat-typography">
+          <p align="center">{{ totales.cantidadEntregas }}</p>
+        </mat-dialog-content>
+      </div>
+    </div>
+  </div>
+
+  <div fxFlex="100%">
+    <mat-card>
+      <mat-card-title>Movimientos</mat-card-title>
+
+      <mat-card-content>
+        <mat-nav-list class="listado-entregas">
+
+          <a mat-list-item *ngFor="let movimiento of (listadoEntregas ? listadoEntregas : [])" (click)="verDetalle(movimiento)">
+
+            <table class="tabla-movimiento">
+              <tr>
+                <td class="conceptos" align="start">{{movimiento.especie}} {{movimiento.cosecha}}</td>
+                <td class="conceptos" align="center">{{movimiento.kilosBrutos | number: '.0'}}</td>
+                <td class="conceptos" align="center">{{movimiento.kilosNetos | number: '.0'}}</td>
+              </tr>
+              <tr>
+                <td class="engris" align="start">{{movimiento.fecha}} </td>
+                <td class="engris" align="center">Kg Brutos</td>
+                <td class="engris" align="center">Kg Netos</td>
+              </tr>
+            </table>
+
+            <mat-divider></mat-divider>
+          </a>
+
+        </mat-nav-list>
+      </mat-card-content>
+    </mat-card>
+  </div>
+
+</div>

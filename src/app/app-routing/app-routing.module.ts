@@ -2,13 +2,14 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 
 // guarda
-import { AuthGuardGuard } from '../security/auth-guard.guard'
+import { AuthGuardGuard } from '../security/auth-guard.guard';
 
 // componentes
-import { DashboardComponent } from '../dashboard/dashboard.component'
-import { LoginComponent } from '../login/login.component'
+import { DashboardComponent } from '../dashboard/dashboard.component';
+import { LoginComponent } from '../login/login.component';
 import { CtacteComponent } from '../ctacte/ctacte.component';
-import { CtacteAplicadaComponent } from '../ctacte-aplicada/ctacte-aplicada.component'
+import { CtacteAplicadaComponent } from '../ctacte-aplicada/ctacte-aplicada.component';
+import { EntregasComponent } from '../entregas/entregas.component';
 
 const routes: Routes = [
   {
@@ -28,6 +29,11 @@ const routes: Routes = [
   {
     path: 'ctacte-aplicada',
     component: CtacteAplicadaComponent,
+    canActivate: [AuthGuardGuard]
+  },
+  {
+    path: 'entregas',
+    component: EntregasComponent,
     canActivate: [AuthGuardGuard]
   },
   { path: '**', redirectTo: 'dashboard' }
