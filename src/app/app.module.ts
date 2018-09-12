@@ -32,6 +32,8 @@ import { CtacteAplicadaComponent } from './ctacte-aplicada/ctacte-aplicada.compo
 import { CtacteAplicadaDetalleComponent } from './ctacte-aplicada-detalle/ctacte-aplicada-detalle.component';
 import { EntregasComponent } from './entregas/entregas.component';
 import { EntregasDetalleComponent } from './entregas-detalle/entregas-detalle.component';
+import { VentasComponent } from './ventas/ventas.component';
+import { VentasDetalleComponent } from './ventas-detalle/ventas-detalle.component';
 
 registerLocaleData(localeEsAr, 'es-AR');
 
@@ -46,7 +48,9 @@ registerLocaleData(localeEsAr, 'es-AR');
     CtacteAplicadaComponent,
     CtacteAplicadaDetalleComponent,
     EntregasComponent,
-    EntregasDetalleComponent
+    EntregasDetalleComponent,
+    VentasComponent,
+    VentasDetalleComponent
   ],
   imports: [
     HttpClientModule,
