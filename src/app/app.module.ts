@@ -76,7 +76,8 @@ registerLocaleData(localeEsAr, 'es-AR');
   entryComponents: [
     CtacteDetalleComponent,
     CtacteAplicadaDetalleComponent,
-    EntregasDetalleComponent
+    EntregasDetalleComponent,
+    VentasDetalleComponent
   ],
   bootstrap: [AppComponent]
 })

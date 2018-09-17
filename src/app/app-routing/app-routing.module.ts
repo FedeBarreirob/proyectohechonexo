@@ -10,6 +10,7 @@ import { LoginComponent } from '../login/login.component';
 import { CtacteComponent } from '../ctacte/ctacte.component';
 import { CtacteAplicadaComponent } from '../ctacte-aplicada/ctacte-aplicada.component';
 import { EntregasComponent } from '../entregas/entregas.component';
+import { VentasComponent } from '../ventas/ventas.component'
 
 const routes: Routes = [
   {
@@ -34,6 +35,11 @@ const routes: Routes = [
   {
     path: 'entregas',
     component: EntregasComponent,
+    canActivate: [AuthGuardGuard]
+  },
+  {
+    path: 'ventas',
+    component: VentasComponent,
     canActivate: [AuthGuardGuard]
   },
   { path: '**', redirectTo: 'dashboard' }

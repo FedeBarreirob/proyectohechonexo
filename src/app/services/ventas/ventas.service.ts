@@ -12,7 +12,7 @@ export class VentasService {
   constructor(private http: HttpClient) { }
 
   // funcion que retorna un observable del listado con las ventas asociado a una cuenta dada
-  listadoEntregas(filtro: FiltroVentas, token: string) {
+  listadoVentas(filtro: FiltroVentas, token: string) {
 
     const httpOptions = {
       headers: new HttpHeaders({
