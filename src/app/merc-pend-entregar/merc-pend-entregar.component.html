@@ -43,45 +43,24 @@
 
   <div fxFlex="100%">
     <div *ngIf="totales" class="container" fxLayout="row" fxLayout.xs="column" fxLayoutGap="0.5%" fxLayoutAlign="space-around stretch">
-      <div fxFlex="16%">
-        <h4 mat-dialog-title align="center">Kilos brutos</h4>
+      <div fxFlex="33%">
+        <h4 mat-dialog-title align="center">Cantidad</h4>
         <mat-dialog-content class="mat-typography">
-          <p align="center">{{totales.totalKgBrutos | number: '.2'}} Kg</p>
+          <p align="center">{{totales.totalCantidad | number: '.2'}} Kg</p>
         </mat-dialog-content>
       </div>
 
-      <div fxFlex="16%">
-        <h4 mat-dialog-title align="center">Kilos humedad</h4>
+      <div fxFlex="33%">
+        <h4 mat-dialog-title align="center">Pendiente</h4>
         <mat-dialog-content class="mat-typography">
-          <p align="center">{{totales.totalKgHumedad | number: '.2'}} Kg</p>
+          <p align="center">{{totales.totalCantidadPendiente | number: '.2'}} Kg</p>
         </mat-dialog-content>
       </div>
 
-      <div fxFlex="16%">
-        <h4 mat-dialog-title align="center">Kilos zarandeo</h4>
+      <div fxFlex="33%">
+        <h4 mat-dialog-title align="center">Total</h4>
         <mat-dialog-content class="mat-typography">
-          <p align="center">{{totales.totalKgZarandeo | number: '.2'}} Kg</p>
-        </mat-dialog-content>
-      </div>
-
-      <div fxFlex="16%">
-        <h4 mat-dialog-title align="center">Kilos volátil</h4>
-        <mat-dialog-content class="mat-typography">
-          <p align="center">{{totales.totalKgVolatil | number: '.2'}} Kg</p>
-        </mat-dialog-content>
-      </div>
-
-      <div fxFlex="16%">
-        <h4 mat-dialog-title align="center">Kilos netos</h4>
-        <mat-dialog-content class="mat-typography">
-          <p align="center">{{totales.totalKgNetos | number: '.2'}} Kg</p>
-        </mat-dialog-content>
-      </div>
-
-      <div fxFlex="16%">
-        <h4 mat-dialog-title align="center">Kilos netos</h4>
-        <mat-dialog-content class="mat-typography">
-          <p align="center">{{ totales.cantidadEntregas }}</p>
+          <p align="center">US$ {{totales.totalTotal | number: '.2'}}</p>
         </mat-dialog-content>
       </div>
     </div>
@@ -92,20 +71,20 @@
       <mat-card-title>Movimientos</mat-card-title>
 
       <mat-card-content>
-        <mat-nav-list class="listado-entregas">
+        <mat-nav-list class="listado-merc-pend-entregar">
 
-          <a mat-list-item *ngFor="let movimiento of (listadoEntregas ? listadoEntregas : [])" (click)="verDetalle(movimiento)">
+          <a mat-list-item *ngFor="let movimiento of (listadoMercPendEntregar ? listadoMercPendEntregar : [])" (click)="verDetalle(movimiento)">
 
             <table class="tabla-movimiento">
               <tr>
-                <td class="conceptos" align="start">{{movimiento.especie}} {{movimiento.cosecha}}</td>
-                <td class="conceptos" align="center">{{movimiento.kilosBrutos | number: '.0'}}</td>
-                <td class="conceptos" align="center">{{movimiento.kilosNetos | number: '.0'}}</td>
+                <td class="conceptos" align="start">{{movimiento.descripcionArticulo}}</td>
+                <td class="conceptos" align="center">{{movimiento.cantidad | number: '.0'}}</td>
+                <td class="conceptos" align="center">{{movimiento.cantidadPendiente | number: '.0'}}</td>
               </tr>
               <tr>
                 <td class="engris" align="start">{{movimiento.fecha}} </td>
-                <td class="engris" align="center">Kg Brutos</td>
-                <td class="engris" align="center">Kg Netos</td>
+                <td class="engris" align="center">Cantidad</td>
+                <td class="engris" align="center">Cant. Pend.</td>
               </tr>
             </table>
 

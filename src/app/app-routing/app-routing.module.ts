@@ -11,6 +11,7 @@ import { CtacteComponent } from '../ctacte/ctacte.component';
 import { CtacteAplicadaComponent } from '../ctacte-aplicada/ctacte-aplicada.component';
 import { EntregasComponent } from '../entregas/entregas.component';
 import { VentasComponent } from '../ventas/ventas.component'
+import { MercPendEntregarComponent } from '../merc-pend-entregar/merc-pend-entregar.component'
 
 const routes: Routes = [
   {
@@ -40,6 +41,11 @@ const routes: Routes = [
   {
     path: 'ventas',
     component: VentasComponent,
+    canActivate: [AuthGuardGuard]
+  },
+  {
+    path: 'mercaderia-pendiente-entregar',
+    component: MercPendEntregarComponent,
     canActivate: [AuthGuardGuard]
   },
   { path: '**', redirectTo: 'dashboard' }

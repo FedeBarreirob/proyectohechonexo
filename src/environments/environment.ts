@@ -8,7 +8,8 @@ export const environment = {
   urlCuentaCorrienteListado: 'http://localhost:8080/DigitalCuentaCorriente-1.0-SNAPSHOT/api/CuentaCorriente/listado',
   urlCuentaCorrienteAplicadaListado: 'http://localhost:8080/DigitalCuentaCorriente-1.0-SNAPSHOT/api/CuentaAplicadaCorriente/listado',
   urlEntregasListado: 'http://localhost:8080/DigitalEntregasYVentas-1.0-SNAPSHOT/api/Entregas/listado',
-  urlVentasListado: 'http://localhost:8080/DigitalEntregasYVentas-1.0-SNAPSHOT/api/Ventas/listado'
+  urlVentasListado: 'http://localhost:8080/DigitalEntregasYVentas-1.0-SNAPSHOT/api/Ventas/listado',
+  urlMercaderiaPendienteEntregarListado: 'http://localhost:8080/DigitalEntregasYVentas-1.0-SNAPSHOT/api/MercaderiaPendienteDeEntregar/listado'
 };
 
 /*
