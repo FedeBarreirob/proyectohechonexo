@@ -5,5 +5,6 @@ export const environment = {
   urlCuentaCorrienteAplicadaListado: 'http://192.168.20.63:8080/DigitalCuentaCorriente-1.0-SNAPSHOT/api/CuentaAplicadaCorriente/listado',
   urlEntregasListado: 'http://192.168.20.63:8080/DigitalEntregasYVentas-1.0-SNAPSHOT/api/Entregas/listado',
   urlVentasListado: 'http://192.168.20.63:8080/DigitalEntregasYVentas-1.0-SNAPSHOT/api/Ventas/listado',
-  urlMercaderiaPendienteEntregarListado: 'http://192.168.20.63:8080/DigitalEntregasYVentas-1.0-SNAPSHOT/api/MercaderiaPendienteDeEntregar/listado'
+  urlMercaderiaPendienteEntregarListado: 'http://192.168.20.63:8080/DigitalEntregasYVentas-1.0-SNAPSHOT/api/MercaderiaPendienteDeEntregar/listado',
+  urlComprobantesPendientesDeFacturarListado: 'http://192.168.20.63:8080/DigitalEntregasYVentas-1.0-SNAPSHOT/api/ComprobantesPendientesDeFacturar/listado'
 };

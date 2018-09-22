@@ -9,7 +9,8 @@ export const environment = {
   urlCuentaCorrienteAplicadaListado: 'http://localhost:8080/DigitalCuentaCorriente-1.0-SNAPSHOT/api/CuentaAplicadaCorriente/listado',
   urlEntregasListado: 'http://localhost:8080/DigitalEntregasYVentas-1.0-SNAPSHOT/api/Entregas/listado',
   urlVentasListado: 'http://localhost:8080/DigitalEntregasYVentas-1.0-SNAPSHOT/api/Ventas/listado',
-  urlMercaderiaPendienteEntregarListado: 'http://localhost:8080/DigitalEntregasYVentas-1.0-SNAPSHOT/api/MercaderiaPendienteDeEntregar/listado'
+  urlMercaderiaPendienteEntregarListado: 'http://localhost:8080/DigitalEntregasYVentas-1.0-SNAPSHOT/api/MercaderiaPendienteDeEntregar/listado',
+  urlComprobantesPendientesDeFacturarListado: 'http://localhost:8080/DigitalEntregasYVentas-1.0-SNAPSHOT/api/ComprobantesPendientesDeFacturar/listado'
 };
 
 /*

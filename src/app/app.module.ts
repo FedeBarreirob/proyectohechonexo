@@ -36,6 +36,8 @@ import { VentasComponent } from './ventas/ventas.component';
 import { VentasDetalleComponent } from './ventas-detalle/ventas-detalle.component';
 import { MercPendEntregarComponent } from './merc-pend-entregar/merc-pend-entregar.component';
 import { MercPendEntregarDetalleComponent } from './merc-pend-entregar-detalle/merc-pend-entregar-detalle.component';
+import { ComprobantesPendFacturarComponent } from './comprobantes-pend-facturar/comprobantes-pend-facturar.component';
+import { ComprobantesPendFacturarDetalleComponent } from './comprobantes-pend-facturar-detalle/comprobantes-pend-facturar-detalle.component';
 
 registerLocaleData(localeEsAr, 'es-AR');
 
@@ -54,7 +56,9 @@ registerLocaleData(localeEsAr, 'es-AR');
     VentasComponent,
     VentasDetalleComponent,
     MercPendEntregarComponent,
-    MercPendEntregarDetalleComponent
+    MercPendEntregarDetalleComponent,
+    ComprobantesPendFacturarComponent,
+    ComprobantesPendFacturarDetalleComponent
   ],
   imports: [
     HttpClientModule,
@@ -82,7 +86,8 @@ registerLocaleData(localeEsAr, 'es-AR');
     CtacteAplicadaDetalleComponent,
     EntregasDetalleComponent,
     VentasDetalleComponent,
-    MercPendEntregarDetalleComponent
+    MercPendEntregarDetalleComponent,
+    ComprobantesPendFacturarDetalleComponent
   ],
   bootstrap: [AppComponent]
 })
