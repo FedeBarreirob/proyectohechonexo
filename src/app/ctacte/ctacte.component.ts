@@ -7,6 +7,7 @@ import { AuthenticationService } from '../services/security/authentication.servi
 import { DatePipe } from '@angular/common';
 import { MatDialog } from '@angular/material';
 import { CtacteDetalleComponent } from '../ctacte.detalle/ctacte.detalle.component';
+import { ExcelService } from '../services/sharedServices/exportadores/excel/excel.service'
 
 @Component({
   selector: 'app-ctacte',
@@ -29,7 +30,8 @@ export class CtacteComponent implements OnInit {
     private ctacteService: CtacteService,
     private authenticationService: AuthenticationService,
     private datePipe: DatePipe,
-    public dialog: MatDialog
+    public dialog: MatDialog,
+    private excelService : ExcelService
   ) { }
 
   ngOnInit() {
@@ -51,6 +53,8 @@ export class CtacteComponent implements OnInit {
       return this.ctacteService.listadoCtaCte(filtro, usuarioLogueado.token).subscribe(respuesta => {
         this.listadoCtaCte = respuesta.datos.listado;
         this.saldosTotales = respuesta.datos.saldosTotales;
+
+        this.excelService.exportAsExcelFile(this.listadoCtaCte, "archivi");
 
         this.cargando = false;
       }, error => {
