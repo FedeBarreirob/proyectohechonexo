@@ -7,7 +7,7 @@ import { AuthenticationService } from '../services/security/authentication.servi
 import { DatePipe } from '@angular/common';
 import { MatDialog } from '@angular/material';
 import { CtacteDetalleComponent } from '../ctacte.detalle/ctacte.detalle.component';
-import { ExcelService } from '../services/sharedServices/exportadores/excel/excel.service'
+import { CtacteMasOperacionesComponent } from '../ctacte-mas-operaciones/ctacte-mas-operaciones.component';
 
 @Component({
   selector: 'app-ctacte',
@@ -30,8 +30,7 @@ export class CtacteComponent implements OnInit {
     private ctacteService: CtacteService,
     private authenticationService: AuthenticationService,
     private datePipe: DatePipe,
-    public dialog: MatDialog,
-    private excelService : ExcelService
+    public dialog: MatDialog
   ) { }
 
   ngOnInit() {
@@ -54,8 +53,6 @@ export class CtacteComponent implements OnInit {
         this.listadoCtaCte = respuesta.datos.listado;
         this.saldosTotales = respuesta.datos.saldosTotales;
 
-        this.excelService.exportAsExcelFile(this.listadoCtaCte, "archivi");
-
         this.cargando = false;
       }, error => {
         this.cargando = false;
@@ -69,6 +66,13 @@ export class CtacteComponent implements OnInit {
 
     this.dialog.open(CtacteDetalleComponent, {
       data: movimiento
+    });
+  }
+
+  // funcion que muestra las operaciones extras
+  verOpcionesExtras() {
+    this.dialog.open(CtacteMasOperacionesComponent, {
+      data: this.listadoCtaCte
     });
   }
 }
