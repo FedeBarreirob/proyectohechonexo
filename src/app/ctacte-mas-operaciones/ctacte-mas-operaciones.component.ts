@@ -1,7 +1,7 @@
 import { Component, OnInit, Inject } from '@angular/core';
 import { MAT_DIALOG_DATA } from '@angular/material';
 import { MovimientoCtaCte } from '../interfaces/ctacte/listado.ctacte';
-import { ExcelService } from '../services/sharedServices/exportadores/excel/excel.service';
+import { CtaCteExportacionesService } from '../services/ctacte/cta-cte-exportaciones.service';
 
 @Component({
   selector: 'app-ctacte-mas-operaciones',
@@ -11,13 +11,18 @@ import { ExcelService } from '../services/sharedServices/exportadores/excel/exce
 export class CtacteMasOperacionesComponent implements OnInit {
 
   constructor(@Inject(MAT_DIALOG_DATA) public data: Array<MovimientoCtaCte>,
-    private excelService: ExcelService) { }
+    private exportacionesService: CtaCteExportacionesService) { }
 
   ngOnInit() {
   }
 
   // funcion encargada de exportar el listado a excel
   exportarAExcel() {
-    this.excelService.exportAsExcelFile(this.data, "ctacte");
+    this.exportacionesService.exportarListadoMovCtaCteDetalleExcel(this.data);
+  }
+
+  // funcion encargada de exportar el listado a pdf
+  exportarAPDF() {
+    this.exportacionesService.exportarListadoMovCtaCteDetallePDF(this.data);
   }
 }
