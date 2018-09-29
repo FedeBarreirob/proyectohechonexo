@@ -1,6 +1,6 @@
 import { Component, OnInit, Inject } from '@angular/core';
 import { MAT_DIALOG_DATA } from '@angular/material';
-import { MovimientoCtaCte } from '../interfaces/ctacte/listado.ctacte';
+import { MovimientoCtaCte, SaldosTotales } from '../interfaces/ctacte/listado.ctacte';
 import { CtaCteExportacionesService } from '../services/ctacte/cta-cte-exportaciones.service';
 
 @Component({
@@ -10,7 +10,7 @@ import { CtaCteExportacionesService } from '../services/ctacte/cta-cte-exportaci
 })
 export class CtacteMasOperacionesComponent implements OnInit {
 
-  constructor(@Inject(MAT_DIALOG_DATA) public data: Array<MovimientoCtaCte>,
+  constructor(@Inject(MAT_DIALOG_DATA) public data: any,
     private exportacionesService: CtaCteExportacionesService) { }
 
   ngOnInit() {
@@ -18,11 +18,14 @@ export class CtacteMasOperacionesComponent implements OnInit {
 
   // funcion encargada de exportar el listado a excel
   exportarAExcel() {
-    this.exportacionesService.exportarListadoMovCtaCteDetalleExcel(this.data);
+    let movimientos: Array<MovimientoCtaCte> = this.data.movimientos;
+    this.exportacionesService.exportarListadoMovCtaCteDetalleExcel(movimientos);
   }
 
   // funcion encargada de exportar el listado a pdf
   exportarAPDF() {
-    this.exportacionesService.exportarListadoMovCtaCteDetallePDF(this.data);
+    let movimientos: Array<MovimientoCtaCte> = this.data.movimientos;
+    let saldos: SaldosTotales = this.data.saldos;
+    this.exportacionesService.exportarListadoMovCtaCteDetallePDF(movimientos, saldos);
   }
 }

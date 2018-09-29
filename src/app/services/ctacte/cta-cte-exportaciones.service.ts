@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { ExcelService } from '../sharedServices/exportadores/excel/excel.service';
 import { PdfService } from '../sharedServices/exportadores/pdf/pdf.service';
-import { MovimientoCtaCte } from '../../interfaces/ctacte/listado.ctacte';
+import { MovimientoCtaCte, SaldosTotales } from '../../interfaces/ctacte/listado.ctacte';
 
 @Injectable({
   providedIn: 'root'
@@ -46,22 +46,28 @@ export class CtaCteExportacionesService {
   }
 
   // funcion que exporta a pdf un movimiento de ctacte detalle
-  exportarListadoMovCtaCteDetallePDF(movimimentos: Array<MovimientoCtaCte>) {
+  exportarListadoMovCtaCteDetallePDF(movimimentos: Array<MovimientoCtaCte>, saldos: SaldosTotales) {
     try {
 
-      // preparar datos
       let rows = [];
+      let opciones = [];
+      let columnas = [];
+
+      // listado de movimientos
+      // .. preparar datos
+      let movimientosRows = [];
       for (let movimiento of movimimentos) {
-        rows.push([
+        movimientosRows.push([
           movimiento.concepto,
           movimiento.fechaVencimiento,
           movimiento.importeComprobantePesos,
           movimiento.importeComprobanteDolares
         ]);
       }
+      rows.push(movimientosRows);
 
-      // preparar opciones
-      let opciones = {
+      // .. preparar opciones
+      let movimientosOpciones = {
         startY: 30,
         columnStyles: {
           0: { columnWidth: '25%', halign: 'left' },
@@ -70,12 +76,39 @@ export class CtaCteExportacionesService {
           3: { columnWidth: '25%', halign: 'right' }
         }
       };
+      opciones.push(movimientosOpciones);
+
+      // .. columnas
+      let movimientosColumnas = ["Concepto", "Fecha", "Pesos", "Dolares"];
+      columnas.push(movimientosColumnas);
+
+      // saldos
+      // .. preparar datos
+      let saldosRow = [];
+      saldosRow.push(["Saldo en pesos", saldos.saldoPesos]);
+      saldosRow.push(["Saldo en dólares", saldos.saldoDolares]);
+      saldosRow.push(["Saldo en contable", saldos.saldoContable]);
+      rows.push(saldosRow);
+
+      // .. preparar opciones
+      let saldosOpciones = {
+        startY: 30,
+        columnStyles: {
+          0: { columnWidth: '50%', halign: 'left' },
+          1: { columnWidth: '50%', halign: 'right' },
+        }
+      };
+      opciones.push(saldosOpciones);
+
+      // .. columnas
+      let saldosColumnas = ["Concepto", "Valor"];
+      columnas.push(saldosColumnas);
 
       // renderizar
-      this.pdfService.listaAPdf(
+      this.pdfService.listaMultipleAPdf(
         rows,
         "Movimientos de cuenta corriente",
-        ["Concepto", "Fecha", "Pesos", "Dolares"],
+        columnas,
         "cuenta-corriente",
         opciones
       );

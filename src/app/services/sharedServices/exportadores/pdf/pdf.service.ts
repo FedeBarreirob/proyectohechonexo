@@ -70,4 +70,32 @@ export class PdfService {
       console.log(e);
     }
   }
+
+  // funcion encargada de generar un pdf a partir de una lista multiple de objetos
+  // cada elemento en la lista es otra lista y se corresponde con las opciones y las columnas
+  listaMultipleAPdf(lista: Array<any>, titulo: string, columnasTablas: Array<string>, nombreArchivo: string, opcionesExtras: Array<any>) {
+    try {
+      let pdf = new jsPDF('p', 'mm', 'a4');
+      pdf.text(10, 25, titulo);
+
+      for (let i = 0; i < lista.length; i++) {
+        let rows = lista[i];
+        let opciones = opcionesExtras[i];
+        let columnas = columnasTablas[i];
+
+        // agregar un espacio a la tabla
+        if (i > 0) {
+          opciones.startY = pdf.autoTable.previous.finalY + 10;
+          opciones.pageBreak = 'avoid';
+        }
+
+        pdf.autoTable(columnas, rows, opciones);
+      }
+
+      // renderizar      
+      pdf.save(`${nombreArchivo}.pdf`);
+    } catch (e) {
+      console.log(e);
+    }
+  }
 }

@@ -72,7 +72,10 @@ export class CtacteComponent implements OnInit {
   // funcion que muestra las operaciones extras
   verOpcionesExtras() {
     this.dialog.open(CtacteMasOperacionesComponent, {
-      data: this.listadoCtaCte
+      data: {
+        movimientos: this.listadoCtaCte,
+        saldos: this.saldosTotales
+      } 
     });
   }
 }
