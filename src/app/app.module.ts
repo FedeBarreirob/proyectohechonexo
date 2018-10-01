@@ -6,7 +6,7 @@ import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 import { FlexLayoutModule } from '@angular/flex-layout';
 
 // locale
-import { registerLocaleData } from '@angular/common';
+import { registerLocaleData, DecimalPipe } from '@angular/common';
 import localeEsAr from '@angular/common/locales/es-AR';
 
 // Animaciones
@@ -83,7 +83,8 @@ registerLocaleData(localeEsAr, 'es-AR');
   providers: [
     { provide: HTTP_INTERCEPTORS, useClass: ErrorAuthInterceptor, multi: true },
     { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true },
-    { provide: LOCALE_ID, useValue: 'es-AR' }
+    { provide: LOCALE_ID, useValue: 'es-AR' },
+    DecimalPipe
   ],
   entryComponents: [
     CtacteDetalleComponent,

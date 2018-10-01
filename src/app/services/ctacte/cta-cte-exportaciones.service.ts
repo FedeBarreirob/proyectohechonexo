@@ -1,14 +1,18 @@
-import { Injectable } from '@angular/core';
+import { Injectable, NgModule } from '@angular/core';
 import { ExcelService } from '../sharedServices/exportadores/excel/excel.service';
 import { PdfService } from '../sharedServices/exportadores/pdf/pdf.service';
 import { MovimientoCtaCte, SaldosTotales } from '../../interfaces/ctacte/listado.ctacte';
+import { DecimalPipe } from '@angular/common';
 
 @Injectable({
   providedIn: 'root'
 })
 export class CtaCteExportacionesService {
 
-  constructor(private excelService: ExcelService, private pdfService: PdfService) { }
+  constructor(
+    private excelService: ExcelService,
+    private pdfService: PdfService,
+    private decimalPipe: DecimalPipe) { }
 
   // funcion que exporta a excel un movimiento de ctacte detalle
   exportarMovCtaCteDetalleExcel(movimiento: MovimientoCtaCte) {
@@ -60,8 +64,8 @@ export class CtaCteExportacionesService {
         movimientosRows.push([
           movimiento.concepto,
           movimiento.fechaVencimiento,
-          movimiento.importeComprobantePesos,
-          movimiento.importeComprobanteDolares
+          `AR$ ${this.decimalPipe.transform(movimiento.importeComprobantePesos, '.2')}`,
+          `US$ ${this.decimalPipe.transform(movimiento.importeComprobanteDolares, '.2')}`
         ]);
       }
       rows.push(movimientosRows);
@@ -85,9 +89,24 @@ export class CtaCteExportacionesService {
       // saldos
       // .. preparar datos
       let saldosRow = [];
-      saldosRow.push(["Saldo en pesos", saldos.saldoPesos]);
-      saldosRow.push(["Saldo en dólares", saldos.saldoDolares]);
-      saldosRow.push(["Saldo en contable", saldos.saldoContable]);
+      saldosRow.push(
+        [
+          "Saldo en pesos",
+          `AR$ ${this.decimalPipe.transform(saldos.saldoPesos, '.2')}`
+        ]
+      );
+      saldosRow.push(
+        [
+          "Saldo en dólares",
+          `US$ ${this.decimalPipe.transform(saldos.saldoDolares, '.2')}`
+        ]
+      );
+      saldosRow.push(
+        [
+          "Saldo en contable",
+          `AR$ ${this.decimalPipe.transform(saldos.saldoContable, '.2')}`
+        ]
+      );
       rows.push(saldosRow);
 
       // .. preparar opciones
