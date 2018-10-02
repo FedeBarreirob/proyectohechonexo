@@ -10,8 +10,10 @@ import { CtaCteExportacionesService } from '../services/ctacte/cta-cte-exportaci
 })
 export class CtacteMasOperacionesComponent implements OnInit {
 
-  constructor(@Inject(MAT_DIALOG_DATA) public data: any,
-    private exportacionesService: CtaCteExportacionesService) { }
+  constructor(
+    @Inject(MAT_DIALOG_DATA) public data: any,
+    private exportacionesService: CtaCteExportacionesService
+  ) { }
 
   ngOnInit() {
   }

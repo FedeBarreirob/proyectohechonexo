@@ -7,6 +7,7 @@ import { AuthenticationService } from '../services/security/authentication.servi
 import { DatePipe } from '@angular/common';
 import { MatDialog } from '@angular/material';
 import { CtacteAplicadaDetalleComponent } from '../ctacte-aplicada-detalle/ctacte-aplicada-detalle.component';
+import { CtaCteAplicadaMasOperacionesComponent } from '../cta-cte-aplicada-mas-operaciones/cta-cte-aplicada-mas-operaciones.component';
 
 @Component({
   selector: 'app-ctacte-aplicada',
@@ -63,6 +64,16 @@ export class CtacteAplicadaComponent implements OnInit {
 
     this.dialog.open(CtacteAplicadaDetalleComponent, {
       data: movimiento
+    });
+  }
+
+  // funcion que muestra las operaciones extras
+  verOpcionesExtras() {
+    this.dialog.open(CtaCteAplicadaMasOperacionesComponent, {
+      data: {
+        movimientos: this.listadoCtaCte,
+        saldos: this.saldosTotales
+      } 
     });
   }
 }

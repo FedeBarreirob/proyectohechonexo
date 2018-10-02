@@ -1,56 +1,56 @@
 import { Injectable } from '@angular/core';
 import { ExcelService } from '../sharedServices/exportadores/excel/excel.service';
 import { PdfService } from '../sharedServices/exportadores/pdf/pdf.service';
-import { MovimientoCtaCte, SaldosTotales } from '../../interfaces/ctacte/listado.ctacte';
+import { MovimientoCtaCteAplicada, SaldosTotales } from '../../interfaces/ctacte-aplicada/listado-ctacte-aplicada';
 import { DecimalPipe } from '@angular/common';
 
 @Injectable({
   providedIn: 'root'
 })
-export class CtaCteExportacionesService {
+export class CtaCteAplicadaExportacionesServiceService {
 
   constructor(
     private excelService: ExcelService,
     private pdfService: PdfService,
     private decimalPipe: DecimalPipe) { }
 
-  // funcion que exporta a excel un movimiento de ctacte detalle
-  exportarMovCtaCteDetalleExcel(movimiento: MovimientoCtaCte) {
+    // funcion que exporta a excel un movimiento de ctacte aplicada detalle
+  exportarMovCtaCteDetalleExcel(movimiento: MovimientoCtaCteAplicada) {
     try {
-      let listado: Array<MovimientoCtaCte> = [];
+      let listado: Array<MovimientoCtaCteAplicada> = [];
       listado.push(movimiento);
 
-      this.excelService.exportAsExcelFile(listado, "ctacte");
+      this.excelService.exportAsExcelFile(listado, "ctacte-aplicada");
     } catch (e) {
       console.log(e);
     }
   }
 
-  // funcion que exporta a pdf un movimiento de ctacte detalle
-  exportarMovCtaCteDetallePDF(movimiento: MovimientoCtaCte) {
+  // funcion que exporta a pdf un movimiento de ctacte aplicada detalle
+  exportarMovCtaCteDetallePDF(movimiento: MovimientoCtaCteAplicada) {
     try {
       this.pdfService.objetoAPdf(
         movimiento,
-        "Detalle de movimiento de cuenta corriente",
+        "Detalle de movimiento de cuenta corriente aplicada",
         ["Concepto", "Valor"],
-        "cuenta-corriente-detalle"
+        "cuenta-corriente-detalle-aplicada"
       );
     } catch (e) {
       console.log(e);
     }
   }
 
-  // funcion que exporta a excel un listado movimiento de ctacte detalle
-  exportarListadoMovCtaCteDetalleExcel(movimimentos: Array<MovimientoCtaCte>) {
+  // funcion que exporta a excel un listado movimiento de ctacte detallea aplicada
+  exportarListadoMovCtaCteDetalleExcel(movimimentos: Array<MovimientoCtaCteAplicada>) {
     try {
-      this.excelService.exportAsExcelFile(movimimentos, "ctacte");
+      this.excelService.exportAsExcelFile(movimimentos, "ctacte-aplicada");
     } catch (e) {
       console.log(e);
     }
   }
 
-  // funcion que exporta a pdf un movimiento de ctacte detalle
-  exportarListadoMovCtaCteDetallePDF(movimimentos: Array<MovimientoCtaCte>, saldos: SaldosTotales) {
+  // funcion que exporta a pdf un movimiento de ctacte detalle aplicada
+  exportarListadoMovCtaCteDetallePDF(movimimentos: Array<MovimientoCtaCteAplicada>, saldos: SaldosTotales) {
     try {
 
       let rows = [];
@@ -101,12 +101,6 @@ export class CtaCteExportacionesService {
           `US$ ${this.decimalPipe.transform(saldos.saldoDolares, '.2')}`
         ]
       );
-      saldosRow.push(
-        [
-          "Saldo en contable",
-          `AR$ ${this.decimalPipe.transform(saldos.saldoContable, '.2')}`
-        ]
-      );
       rows.push(saldosRow);
 
       // .. preparar opciones
@@ -126,9 +120,9 @@ export class CtaCteExportacionesService {
       // renderizar
       this.pdfService.listaMultipleAPdf(
         rows,
-        "Movimientos de cuenta corriente",
+        "Movimientos de cuenta corriente aplicada",
         columnas,
-        "cuenta-corriente",
+        "cuenta-corriente-aplicada",
         opciones
       );
     } catch (e) {

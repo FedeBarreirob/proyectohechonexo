@@ -40,6 +40,8 @@ import { ComprobantesPendFacturarComponent } from './comprobantes-pend-facturar/
 import { ComprobantesPendFacturarDetalleComponent } from './comprobantes-pend-facturar-detalle/comprobantes-pend-facturar-detalle.component';
 import { CtacteMasOperacionesComponent } from './ctacte-mas-operaciones/ctacte-mas-operaciones.component';
 import { CtacteDetalleMasOperacionesComponent } from './ctacte-detalle-mas-operaciones/ctacte-detalle-mas-operaciones.component';
+import { CtaCteAplicadaMasOperacionesComponent } from './cta-cte-aplicada-mas-operaciones/cta-cte-aplicada-mas-operaciones.component';
+import { CtaCteAplicadaDetalleMasOperacionesComponent } from './cta-cte-aplicada-detalle-mas-operaciones/cta-cte-aplicada-detalle-mas-operaciones.component';
 
 registerLocaleData(localeEsAr, 'es-AR');
 
@@ -62,7 +64,9 @@ registerLocaleData(localeEsAr, 'es-AR');
     ComprobantesPendFacturarComponent,
     ComprobantesPendFacturarDetalleComponent,
     CtacteMasOperacionesComponent,
-    CtacteDetalleMasOperacionesComponent
+    CtacteDetalleMasOperacionesComponent,
+    CtaCteAplicadaMasOperacionesComponent,
+    CtaCteAplicadaDetalleMasOperacionesComponent
   ],
   imports: [
     HttpClientModule,
@@ -94,7 +98,9 @@ registerLocaleData(localeEsAr, 'es-AR');
     MercPendEntregarDetalleComponent,
     ComprobantesPendFacturarDetalleComponent,
     CtacteMasOperacionesComponent,
-    CtacteDetalleMasOperacionesComponent
+    CtacteDetalleMasOperacionesComponent,
+    CtaCteAplicadaMasOperacionesComponent,
+    CtaCteAplicadaDetalleMasOperacionesComponent
   ],
   bootstrap: [AppComponent]
 })
