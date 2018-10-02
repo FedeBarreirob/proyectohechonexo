@@ -7,7 +7,7 @@ import { AuthenticationService } from '../services/security/authentication.servi
 import { DatePipe } from '@angular/common';
 import { MatDialog } from '@angular/material';
 import { EntregasDetalleComponent } from '../entregas-detalle/entregas-detalle.component';
-
+import { EntregasMasOperacionesComponent } from '../entregas-mas-operaciones/entregas-mas-operaciones.component';
 
 @Component({
   selector: 'app-entregas',
@@ -64,6 +64,16 @@ export class EntregasComponent implements OnInit {
 
     this.dialog.open(EntregasDetalleComponent, {
       data: movimiento
+    });
+  }
+
+  // funcion que muestra las operaciones extras
+  verOpcionesExtras() {
+    this.dialog.open(EntregasMasOperacionesComponent, {
+      data: {
+        movimientos: this.listadoEntregas,
+        totales: this.totales
+      }
     });
   }
 }

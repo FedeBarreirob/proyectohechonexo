@@ -79,7 +79,7 @@
       </div>
 
       <div fxFlex="16%">
-        <h4 mat-dialog-title align="center">Kilos netos</h4>
+        <h4 mat-dialog-title align="center">Entregas</h4>
         <mat-dialog-content class="mat-typography">
           <p align="center">{{ totales.cantidadEntregas }}</p>
         </mat-dialog-content>
@@ -117,4 +117,7 @@
     </mat-card>
   </div>
 
+  <button mat-mini-fab class="custom-button" (click)="verOpcionesExtras()" *ngIf="listadoEntregas != null">
+    <mat-icon aria-label="Más opciones">add</mat-icon>
+  </button>
 </div>

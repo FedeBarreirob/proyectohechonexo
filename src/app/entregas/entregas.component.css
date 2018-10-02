@@ -31,3 +31,9 @@
     font-size: 9px;
     text-align: right;
   }
+
+  .custom-button{
+    position: fixed;
+    right: 30px;
+    bottom: 30px;
+  }
