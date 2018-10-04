@@ -44,6 +44,8 @@ import { CtaCteAplicadaMasOperacionesComponent } from './cta-cte-aplicada-mas-op
 import { CtaCteAplicadaDetalleMasOperacionesComponent } from './cta-cte-aplicada-detalle-mas-operaciones/cta-cte-aplicada-detalle-mas-operaciones.component';
 import { EntregasMasOperacionesComponent } from './entregas-mas-operaciones/entregas-mas-operaciones.component';
 import { EntregasDetalleMasOperacionesComponent } from './entregas-detalle-mas-operaciones/entregas-detalle-mas-operaciones.component';
+import { VentasMasOperacionesComponent } from './ventas-mas-operaciones/ventas-mas-operaciones.component';
+import { VentasDetalleMasOperacionesComponent } from './ventas-detalle-mas-operaciones/ventas-detalle-mas-operaciones.component';
 
 registerLocaleData(localeEsAr, 'es-AR');
 
@@ -70,7 +72,9 @@ registerLocaleData(localeEsAr, 'es-AR');
     CtaCteAplicadaMasOperacionesComponent,
     CtaCteAplicadaDetalleMasOperacionesComponent,
     EntregasMasOperacionesComponent,
-    EntregasDetalleMasOperacionesComponent
+    EntregasDetalleMasOperacionesComponent,
+    VentasMasOperacionesComponent,
+    VentasDetalleMasOperacionesComponent
   ],
   imports: [
     HttpClientModule,
@@ -106,7 +110,9 @@ registerLocaleData(localeEsAr, 'es-AR');
     CtaCteAplicadaMasOperacionesComponent,
     CtaCteAplicadaDetalleMasOperacionesComponent,
     EntregasMasOperacionesComponent,
-    EntregasDetalleMasOperacionesComponent
+    EntregasDetalleMasOperacionesComponent,
+    VentasMasOperacionesComponent,
+    VentasDetalleMasOperacionesComponent
   ],
   bootstrap: [AppComponent]
 })

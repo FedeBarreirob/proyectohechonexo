@@ -7,6 +7,7 @@ import { AuthenticationService } from '../services/security/authentication.servi
 import { DatePipe } from '@angular/common';
 import { MatDialog } from '@angular/material';
 import { VentasDetalleComponent } from '../ventas-detalle/ventas-detalle.component';
+import { VentasMasOperacionesComponent } from '../ventas-mas-operaciones/ventas-mas-operaciones.component';
 
 @Component({
   selector: 'app-ventas',
@@ -63,6 +64,16 @@ export class VentasComponent implements OnInit {
 
     this.dialog.open(VentasDetalleComponent, {
       data: movimiento
+    });
+  }
+
+  // funcion que muestra las operaciones extras
+  verOpcionesExtras() {
+    this.dialog.open(VentasMasOperacionesComponent, {
+      data: {
+        movimientos: this.listadoVentas,
+        totales: this.totales
+      }
     });
   }
 }
