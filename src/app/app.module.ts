@@ -48,6 +48,8 @@ import { VentasMasOperacionesComponent } from './ventas-mas-operaciones/ventas-m
 import { VentasDetalleMasOperacionesComponent } from './ventas-detalle-mas-operaciones/ventas-detalle-mas-operaciones.component';
 import { MercPendEntregarMasOperacionesComponent } from './merc-pend-entregar-mas-operaciones/merc-pend-entregar-mas-operaciones.component';
 import { MercPendEntregarDetalleMasOperacionesComponent } from './merc-pend-entregar-detalle-mas-operaciones/merc-pend-entregar-detalle-mas-operaciones.component';
+import { ComprobantesPendFacturarMasOperacionesComponent } from './comprobantes-pend-facturar-mas-operaciones/comprobantes-pend-facturar-mas-operaciones.component';
+import { ComprobantesPendFacturarDetalleMasOperacionesComponent } from './comprobantes-pend-facturar-detalle-mas-operaciones/comprobantes-pend-facturar-detalle-mas-operaciones.component';
 
 registerLocaleData(localeEsAr, 'es-AR');
 
@@ -78,7 +80,9 @@ registerLocaleData(localeEsAr, 'es-AR');
     VentasMasOperacionesComponent,
     VentasDetalleMasOperacionesComponent,
     MercPendEntregarMasOperacionesComponent,
-    MercPendEntregarDetalleMasOperacionesComponent
+    MercPendEntregarDetalleMasOperacionesComponent,
+    ComprobantesPendFacturarMasOperacionesComponent,
+    ComprobantesPendFacturarDetalleMasOperacionesComponent
   ],
   imports: [
     HttpClientModule,
@@ -118,7 +122,9 @@ registerLocaleData(localeEsAr, 'es-AR');
     VentasMasOperacionesComponent,
     VentasDetalleMasOperacionesComponent,
     MercPendEntregarMasOperacionesComponent,
-    MercPendEntregarDetalleMasOperacionesComponent
+    MercPendEntregarDetalleMasOperacionesComponent,
+    ComprobantesPendFacturarMasOperacionesComponent,
+    ComprobantesPendFacturarDetalleMasOperacionesComponent
   ],
   bootstrap: [AppComponent]
 })

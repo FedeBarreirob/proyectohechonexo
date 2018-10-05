@@ -7,6 +7,7 @@ import { AuthenticationService } from '../services/security/authentication.servi
 import { DatePipe } from '@angular/common';
 import { MatDialog } from '@angular/material';
 import { ComprobantesPendFacturarDetalleComponent } from '../comprobantes-pend-facturar-detalle/comprobantes-pend-facturar-detalle.component';
+import { ComprobantesPendFacturarMasOperacionesComponent } from '../comprobantes-pend-facturar-mas-operaciones/comprobantes-pend-facturar-mas-operaciones.component';
 
 @Component({
   selector: 'app-comprobantes-pend-facturar',
@@ -63,6 +64,16 @@ export class ComprobantesPendFacturarComponent implements OnInit {
 
     this.dialog.open(ComprobantesPendFacturarDetalleComponent, {
       data: movimiento
+    });
+  }
+
+  // funcion que muestra las operaciones extras
+  verOpcionesExtras() {
+    this.dialog.open(ComprobantesPendFacturarMasOperacionesComponent, {
+      data: {
+        movimientos: this.listadoCompPendFact,
+        totales: this.totales
+      }
     });
   }
 }
