@@ -7,6 +7,7 @@ import { AuthenticationService } from '../services/security/authentication.servi
 import { DatePipe } from '@angular/common';
 import { MatDialog } from '@angular/material';
 import { MercPendEntregarDetalleComponent } from '../merc-pend-entregar-detalle/merc-pend-entregar-detalle.component';
+import { MercPendEntregarMasOperacionesComponent } from '../merc-pend-entregar-mas-operaciones/merc-pend-entregar-mas-operaciones.component';
 
 @Component({
   selector: 'app-merc-pend-entregar',
@@ -63,6 +64,16 @@ export class MercPendEntregarComponent implements OnInit {
 
     this.dialog.open(MercPendEntregarDetalleComponent, {
       data: movimiento
+    });
+  }
+
+  // funcion que muestra las operaciones extras
+  verOpcionesExtras() {
+    this.dialog.open(MercPendEntregarMasOperacionesComponent, {
+      data: {
+        movimientos: this.listadoMercPendEntregar,
+        totales: this.totales
+      }
     });
   }
 }

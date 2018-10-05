@@ -46,6 +46,8 @@ import { EntregasMasOperacionesComponent } from './entregas-mas-operaciones/entr
 import { EntregasDetalleMasOperacionesComponent } from './entregas-detalle-mas-operaciones/entregas-detalle-mas-operaciones.component';
 import { VentasMasOperacionesComponent } from './ventas-mas-operaciones/ventas-mas-operaciones.component';
 import { VentasDetalleMasOperacionesComponent } from './ventas-detalle-mas-operaciones/ventas-detalle-mas-operaciones.component';
+import { MercPendEntregarMasOperacionesComponent } from './merc-pend-entregar-mas-operaciones/merc-pend-entregar-mas-operaciones.component';
+import { MercPendEntregarDetalleMasOperacionesComponent } from './merc-pend-entregar-detalle-mas-operaciones/merc-pend-entregar-detalle-mas-operaciones.component';
 
 registerLocaleData(localeEsAr, 'es-AR');
 
@@ -74,7 +76,9 @@ registerLocaleData(localeEsAr, 'es-AR');
     EntregasMasOperacionesComponent,
     EntregasDetalleMasOperacionesComponent,
     VentasMasOperacionesComponent,
-    VentasDetalleMasOperacionesComponent
+    VentasDetalleMasOperacionesComponent,
+    MercPendEntregarMasOperacionesComponent,
+    MercPendEntregarDetalleMasOperacionesComponent
   ],
   imports: [
     HttpClientModule,
@@ -112,7 +116,9 @@ registerLocaleData(localeEsAr, 'es-AR');
     EntregasMasOperacionesComponent,
     EntregasDetalleMasOperacionesComponent,
     VentasMasOperacionesComponent,
-    VentasDetalleMasOperacionesComponent
+    VentasDetalleMasOperacionesComponent,
+    MercPendEntregarMasOperacionesComponent,
+    MercPendEntregarDetalleMasOperacionesComponent
   ],
   bootstrap: [AppComponent]
 })
