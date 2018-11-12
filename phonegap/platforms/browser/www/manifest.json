@@ -1,0 +1,10 @@
+{
+  "background_color": "#FFF",
+  "display": "standalone",
+  "name": "Gaviglio Digital App",
+  "short_name": "Gaviglio Digital App",
+  "version": "com.gaviglio.app",
+  "author": "PhoneGap Team",
+  "icons": [],
+  "start_url": "index.html"
+}
