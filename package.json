@@ -7,7 +7,9 @@
     "build": "ng build",
     "test": "ng test",
     "lint": "ng lint",
-    "e2e": "ng e2e"
+    "e2e": "ng e2e",
+    "phonegap": "ng build --prod --base-href . --output-path phonegap/www",
+    "phonegap-run": "npm run phonegap && cd phonegap && phonegap run android"
   },
   "private": true,
   "dependencies": {
