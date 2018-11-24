@@ -50,6 +50,7 @@ import { MercPendEntregarMasOperacionesComponent } from './merc-pend-entregar-ma
 import { MercPendEntregarDetalleMasOperacionesComponent } from './merc-pend-entregar-detalle-mas-operaciones/merc-pend-entregar-detalle-mas-operaciones.component';
 import { ComprobantesPendFacturarMasOperacionesComponent } from './comprobantes-pend-facturar-mas-operaciones/comprobantes-pend-facturar-mas-operaciones.component';
 import { ComprobantesPendFacturarDetalleMasOperacionesComponent } from './comprobantes-pend-facturar-detalle-mas-operaciones/comprobantes-pend-facturar-detalle-mas-operaciones.component';
+import { PerfilesListadoComponent } from './perfiles-listado/perfiles-listado.component';
 
 registerLocaleData(localeEsAr, 'es-AR');
 
@@ -82,7 +83,8 @@ registerLocaleData(localeEsAr, 'es-AR');
     MercPendEntregarMasOperacionesComponent,
     MercPendEntregarDetalleMasOperacionesComponent,
     ComprobantesPendFacturarMasOperacionesComponent,
-    ComprobantesPendFacturarDetalleMasOperacionesComponent
+    ComprobantesPendFacturarDetalleMasOperacionesComponent,
+    PerfilesListadoComponent
   ],
   imports: [
     HttpClientModule,

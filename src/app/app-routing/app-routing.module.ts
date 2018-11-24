@@ -13,6 +13,7 @@ import { EntregasComponent } from '../entregas/entregas.component';
 import { VentasComponent } from '../ventas/ventas.component'
 import { MercPendEntregarComponent } from '../merc-pend-entregar/merc-pend-entregar.component'
 import { ComprobantesPendFacturarComponent } from '../comprobantes-pend-facturar/comprobantes-pend-facturar.component'
+import { PerfilesListadoComponent } from '../perfiles-listado/perfiles-listado.component'
 
 const routes: Routes = [
   {
@@ -52,6 +53,11 @@ const routes: Routes = [
   {
     path: 'comprobantes-pendientes-facturar',
     component: ComprobantesPendFacturarComponent,
+    canActivate: [AuthGuardGuard]
+  },
+  {
+    path: 'perfiles',
+    component: PerfilesListadoComponent,
     canActivate: [AuthGuardGuard]
   },
   { path: '**', redirectTo: 'dashboard' }

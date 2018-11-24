@@ -1,0 +1,34 @@
+.listado a:hover {
+    background-color: beige;
+  }
+  
+  .tabla-listado {
+    border: none;
+    width: 100%;
+    font-size: 10px;
+  }
+
+  .tabla-listado td {
+    width: 50%;
+  }
+
+  .engris {
+    color: dimgray;
+  }
+
+  .conceptos {
+    font-weight: bold;
+  }
+
+  .tabla-totales {
+    border: none;
+    width: 100%;
+    font-size: 9px;
+    text-align: right;
+  }
+
+  .custom-button{
+    position: fixed;
+    right: 30px;
+    bottom: 30px;
+  }
