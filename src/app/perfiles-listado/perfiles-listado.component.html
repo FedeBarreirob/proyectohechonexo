@@ -1,8 +1,6 @@
-<p>
-  perfiles-listado works!
-</p>
+<div class="container" fxLayout="column" fxLayout.xs="column" fxLayoutWrap fxLayoutGap="0.5%" fxLayoutAlign="space-around stretch">
 
-<mat-paginator [length]="100"
-              [pageSize]="10"
-              [pageSizeOptions]="[5, 10, 25, 100]">
-</mat-paginator>
+  <button mat-mini-fab class="custom-button" (click)="nuevoPerfil()">
+    <mat-icon aria-label="Crear perfil">add</mat-icon>
+  </button>
+</div>

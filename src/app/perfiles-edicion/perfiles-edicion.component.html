@@ -1,0 +1,134 @@
+<h2 mat-dialog-title>Nuevo Perfil</h2>
+
+<mat-dialog-content class="mat-typography">
+
+  <mat-accordion>
+
+    <!-- Datos de acceso al sistema -->
+    <mat-expansion-panel>
+      <mat-expansion-panel-header>
+        Datos de acceso al sistema
+      </mat-expansion-panel-header>
+
+      <form [formGroup]="formDatosAccesoGroup">
+        <div fxLayout="row" fxLayoutAlign="space-between center">
+          <div fxFlex="30%">
+            <mat-form-field class="full-width-input">
+              <input matInput placeholder="Usuario" formControlName="username" required>
+              <mat-error *ngIf="isDatoAccesoFieldInvalid('username')">
+                Por favor ingrese su nombre de usuario
+              </mat-error>
+            </mat-form-field>
+          </div>
+
+          <div fxFlex="30%">
+            <mat-form-field class="full-width-input">
+              <input matInput type="password" placeholder="Contraseña" formControlName="password" required>
+              <mat-error *ngIf="isDatoAccesoFieldInvalid('password')">
+                Por favor ingrese su contraseña
+              </mat-error>
+            </mat-form-field>
+          </div>
+
+          <div fxFlex="30%">
+            <mat-form-field class="full-width-input">
+              <input matInput type="password" placeholder="Confirmación contraseña" formControlName="passwordConfirmacion"
+                required>
+              <mat-error *ngIf="isDatoAccesoFieldInvalid('passwordConfirmacion')">
+                Por favor ingrese la confirmación de su contraseña
+              </mat-error>
+            </mat-form-field>
+          </div>
+        </div>
+      </form>
+
+    </mat-expansion-panel>
+
+    <!-- Datos personales -->
+    <mat-expansion-panel>
+      <mat-expansion-panel-header>
+        Datos personales
+      </mat-expansion-panel-header>
+
+      <form [formGroup]="formDatosPersonalesGroup">
+        <div fxLayout="row" fxLayoutAlign="space-between center">
+          <div fxFlex="30%">
+            <mat-form-field class="full-width-input">
+              <input matInput placeholder="Nombre" formControlName="nombre" required>
+              <mat-error *ngIf="isDatosPersonalesFieldInvalid('nombre')">
+                Por favor ingrese su nombre
+              </mat-error>
+            </mat-form-field>
+          </div>
+
+          <div fxFlex="66%">
+            <mat-form-field class="full-width-input">
+              <input matInput placeholder="Domicilio" formControlName="domicilio" required>
+              <mat-error *ngIf="isDatosPersonalesFieldInvalid('domicilio')">
+                Por favor ingrese su domicilio
+              </mat-error>
+            </mat-form-field>
+          </div>
+        </div>
+
+        <div fxLayout="row" fxLayoutAlign="space-between center">
+          <div fxFlex="66%">
+            <mat-form-field class="full-width-input">
+              <input matInput placeholder="Teléfonos" formControlName="telefonos" required>
+              <mat-error *ngIf="isDatosPersonalesFieldInvalid('telefonos')">
+                Por favor ingrese su teléfono
+              </mat-error>
+            </mat-form-field>
+          </div>
+
+          <div fxFlex="30%">
+            <mat-form-field class="full-width-input">
+              <input type="email" matInput placeholder="Email" formControlName="email" required>
+              <mat-error *ngIf="isDatosPersonalesFieldInvalid('email')">
+                Por favor ingrese su emáil
+              </mat-error>
+            </mat-form-field>
+          </div>
+        </div>
+
+        <div fxLayout="row" fxLayoutAlign="space-between center">
+          <div fxFlex="30%">
+            <mat-form-field class="full-width-input">
+              <input matInput placeholder="CUIT" formControlName="cuit" required>
+              <mat-error *ngIf="isDatosPersonalesFieldInvalid('cuit')">
+                Por favor ingrese su CUIT
+              </mat-error>
+            </mat-form-field>
+          </div>
+
+          <div fxFlex="66%">
+            <mat-form-field class="full-width-input">
+              <input matInput placeholder="CBU" formControlName="cbu" required>
+              <mat-error *ngIf="isDatosPersonalesFieldInvalid('cbu')">
+                Por favor ingrese su CBU
+              </mat-error>
+            </mat-form-field>
+          </div>
+        </div>
+      </form>
+
+    </mat-expansion-panel>
+
+    <!-- Cuentas vinculadas -->
+    <mat-expansion-panel>
+      <mat-expansion-panel-header>
+        Cuentas vinculadas
+      </mat-expansion-panel-header>
+
+      This the expansion 2 content
+
+    </mat-expansion-panel>
+
+  </mat-accordion>
+
+</mat-dialog-content>
+
+<mat-dialog-actions align="end">
+  <button mat-button (click)="guardar()">Guardar</button>
+  <button mat-button mat-dialog-close>Cancelar</button>
+</mat-dialog-actions>

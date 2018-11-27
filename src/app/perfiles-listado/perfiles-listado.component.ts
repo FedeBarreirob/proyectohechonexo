@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { MatDialog } from '@angular/material';
+import { PerfilesEdicionComponent } from '../perfiles-edicion/perfiles-edicion.component';
 
 @Component({
   selector: 'app-perfiles-listado',
@@ -7,9 +9,12 @@ import { Component, OnInit } from '@angular/core';
 })
 export class PerfilesListadoComponent implements OnInit {
 
-  constructor() { }
+  constructor(private dialog: MatDialog) { }
 
   ngOnInit() {
   }
 
+  nuevoPerfil() {
+    this.dialog.open(PerfilesEdicionComponent, { panelClass: 'mat-dialog-container' });
+  }
 }
