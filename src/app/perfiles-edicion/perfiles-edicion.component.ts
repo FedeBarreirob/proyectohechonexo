@@ -5,6 +5,7 @@ import { PerfilesService } from '../services/perfiles/perfiles.service';
 import { PerfilBasico } from '../interfaces/perfiles/perfil-basico';
 import { PerfilBasicoCredencial } from '../interfaces/perfiles/perfil-basico-credencial';
 import { PerfilBasicoInfoPersonal } from '../interfaces/perfiles/perfil-basico-informacion-personal';
+import { Rol } from '../interfaces/security/rol';
 
 @Component({
   selector: 'app-perfiles-edicion',
@@ -21,6 +22,17 @@ export class PerfilesEdicionComponent implements OnInit {
   public formCuentasVinculadasGroup: FormGroup;
 
   public listadoCodigos: string[] = [];
+  public roles: Array<Rol> = [
+    {
+      id: 1,
+      denominacion: "Administrador",
+      admin: true
+    },
+    {
+      id: 2,
+      denominacion: "Productor",
+      admin: false
+    }];
 
   constructor(
     private formBuilder: FormBuilder,
@@ -31,70 +43,64 @@ export class PerfilesEdicionComponent implements OnInit {
 
   ngOnInit() {
     this.formDatosAccesoGroup = this.formBuilder.group({
-      username: ['', Validators.required],
-      password: ['', Validators.required],
-      passwordConfirmacion: ['', Validators.required]
+      username: [''],
+      password: [''],
+      passwordConfirmacion: [''],
+      rol: [null]
     });
 
     this.formDatosPersonalesGroup = this.formBuilder.group({
-      nombre: ['', Validators.required],
-      domicilio: ['', Validators.required],
-      telefonos: ['', Validators.required],
-      email: ['', Validators.required, Validators.email],
-      cuit: ['', Validators.required],
-      cbu: ['', Validators.required]
+      nombre: [''],
+      domicilio: [''],
+      telefonos: [''],
+      email: [''],
+      cuit: [''],
+      cbu: [''],
     });
 
     this.formCuentasVinculadasGroup = this.formBuilder.group({
-      entidadCodigo: ['', Validators.required]
+      entidadCodigo: [''],
     });
   }
 
   guardar() {
+    if (!this.guardando) {
+      this.guardando = true;
 
-    this.guardando = true;
+      let datosAcceso: PerfilBasicoCredencial = this.formDatosAccesoGroup.getRawValue();
+      let informacionPersonal: PerfilBasicoInfoPersonal = this.formDatosPersonalesGroup.getRawValue();
+      let rol: Rol = this.formDatosAccesoGroup.value.rol;
 
-    let datosAcceso: PerfilBasicoCredencial = this.formDatosAccesoGroup.getRawValue();
-    let informacionPersonal: PerfilBasicoInfoPersonal = this.formDatosPersonalesGroup.getRawValue();
-    let perfilBasico: PerfilBasico = {
-      credencial: datosAcceso,
-      informacionPersonal: informacionPersonal,
-      entidadCodigos: this.listadoCodigos,
-      rol: null
-    };
+      let perfilBasico: PerfilBasico = {
+        credencial: datosAcceso,
+        informacionPersonal: informacionPersonal,
+        entidadCodigos: this.listadoCodigos,
+        rol: rol
+      };
 
-    this.perfilService.registrarNuevo(perfilBasico)
-      .subscribe(respuesta => {
+      console.log(perfilBasico);
 
-        this.guardando = false;
+      this.perfilService.registrarNuevo(perfilBasico)
+        .subscribe(respuesta => {
 
-        if (respuesta && respuesta.exito == false) {
-          this.openSnackBar(respuesta.mensaje, "Registro del perfil");
-        } else {
-          this.openSnackBar(respuesta.mensaje, "Registro del perfil");
-          this.dialogRef.close();
-        }
+          this.guardando = false;
 
-      }, error => {
-        this.guardando = false;
+          if (respuesta && respuesta.exito == false) {
+            this.openSnackBar(respuesta.mensaje, "Registro del perfil");
+          } else {
+            this.openSnackBar(respuesta.mensaje, "Registro del perfil");
+            this.dialogRef.close();
+          }
 
-        this.openSnackBar("Error al intentar registrar el perfil", "Registro del perfil");
-        console.log(error);
-      });
-  }
+        }, error => {
+          this.guardando = false;
 
-  isDatoAccesoFieldInvalid(field: string) {
-    return (
-      (!this.formDatosAccesoGroup.get(field).valid && this.formDatosAccesoGroup.get(field).touched) ||
-      (this.formDatosAccesoGroup.get(field).untouched && this.formSubmitAttempt)
-    );
-  }
-
-  isDatosPersonalesFieldInvalid(field: string) {
-    return (
-      (!this.formDatosPersonalesGroup.get(field).valid && this.formDatosPersonalesGroup.get(field).touched) ||
-      (this.formDatosPersonalesGroup.get(field).untouched && this.formSubmitAttempt)
-    );
+          this.openSnackBar("Error al intentar registrar el perfil", "Registro del perfil");
+          console.log(error);
+        });
+    } else {
+      this.openSnackBar("Existe un proceso de registro ejecutándose.", "Registro del perfil");
+    }
   }
 
   isCuentasVinculadasFieldInvalid(field: string) {

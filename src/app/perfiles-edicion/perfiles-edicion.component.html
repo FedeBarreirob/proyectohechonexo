@@ -3,71 +3,68 @@
 
 <mat-dialog-content class="mat-typography">
 
-  <mat-accordion>
+  <!-- Datos de acceso al sistema -->
+  <mat-card>
+    <mat-card-header>
+      <mat-card-title>Datos de acceso al sistema</mat-card-title>
+    </mat-card-header>
 
-    <!-- Datos de acceso al sistema -->
-    <mat-expansion-panel>
-      <mat-expansion-panel-header>
-        Datos de acceso al sistema
-      </mat-expansion-panel-header>
-
+    <mat-card-content>
       <form [formGroup]="formDatosAccesoGroup">
         <div fxLayout="row" fxLayoutAlign="space-between center">
           <div fxFlex="30%">
             <mat-form-field class="full-width-input">
-              <input matInput placeholder="Usuario" formControlName="username" required>
-              <mat-error *ngIf="isDatoAccesoFieldInvalid('username')">
-                Por favor ingrese su nombre de usuario
-              </mat-error>
+              <input matInput placeholder="Usuario" formControlName="username">
             </mat-form-field>
           </div>
 
           <div fxFlex="30%">
             <mat-form-field class="full-width-input">
-              <input matInput type="password" placeholder="Contraseña" formControlName="password" required>
-              <mat-error *ngIf="isDatoAccesoFieldInvalid('password')">
-                Por favor ingrese su contraseña
-              </mat-error>
+              <input matInput type="password" placeholder="Contraseña" formControlName="password">
             </mat-form-field>
           </div>
 
           <div fxFlex="30%">
             <mat-form-field class="full-width-input">
-              <input matInput type="password" placeholder="Confirmación contraseña" formControlName="passwordConfirmacion"
-                required>
-              <mat-error *ngIf="isDatoAccesoFieldInvalid('passwordConfirmacion')">
-                Por favor ingrese la confirmación de su contraseña
-              </mat-error>
+              <input matInput type="password" placeholder="Confirmación contraseña" formControlName="passwordConfirmacion">
+            </mat-form-field>
+          </div>
+        </div>
+
+        <div fxLayout="row" fxLayoutAlign="space-between center">
+          <div fxFlex="100%">
+            <mat-form-field>
+              <mat-select placeholder="Rol" formControlName="rol">
+                <mat-option *ngFor="let rol of roles" [value]="rol">
+                  {{rol.denominacion}}
+                </mat-option>
+              </mat-select>
             </mat-form-field>
           </div>
         </div>
       </form>
+    </mat-card-content>
 
-    </mat-expansion-panel>
+  </mat-card>
 
-    <!-- Datos personales -->
-    <mat-expansion-panel>
-      <mat-expansion-panel-header>
-        Datos personales
-      </mat-expansion-panel-header>
+  <!-- Datos personales -->
+  <mat-card>
+    <mat-card-header>
+      <mat-card-title>Datos personales</mat-card-title>
+    </mat-card-header>
 
+    <mat-card-content>
       <form [formGroup]="formDatosPersonalesGroup">
         <div fxLayout="row" fxLayoutAlign="space-between center">
           <div fxFlex="30%">
             <mat-form-field class="full-width-input">
-              <input matInput placeholder="Nombre" formControlName="nombre" required>
-              <mat-error *ngIf="isDatosPersonalesFieldInvalid('nombre')">
-                Por favor ingrese su nombre
-              </mat-error>
+              <input matInput placeholder="Nombre" formControlName="nombre">
             </mat-form-field>
           </div>
 
           <div fxFlex="66%">
             <mat-form-field class="full-width-input">
-              <input matInput placeholder="Domicilio" formControlName="domicilio" required>
-              <mat-error *ngIf="isDatosPersonalesFieldInvalid('domicilio')">
-                Por favor ingrese su domicilio
-              </mat-error>
+              <input matInput placeholder="Domicilio" formControlName="domicilio">
             </mat-form-field>
           </div>
         </div>
@@ -75,19 +72,13 @@
         <div fxLayout="row" fxLayoutAlign="space-between center">
           <div fxFlex="66%">
             <mat-form-field class="full-width-input">
-              <input matInput placeholder="Teléfonos" formControlName="telefonos" required>
-              <mat-error *ngIf="isDatosPersonalesFieldInvalid('telefonos')">
-                Por favor ingrese su teléfono
-              </mat-error>
+              <input matInput placeholder="Teléfonos" formControlName="telefonos">
             </mat-form-field>
           </div>
 
           <div fxFlex="30%">
             <mat-form-field class="full-width-input">
-              <input type="email" matInput placeholder="Email" formControlName="email" required>
-              <mat-error *ngIf="isDatosPersonalesFieldInvalid('email')">
-                Por favor ingrese su emáil
-              </mat-error>
+              <input type="email" matInput placeholder="Email" formControlName="email">
             </mat-form-field>
           </div>
         </div>
@@ -95,44 +86,42 @@
         <div fxLayout="row" fxLayoutAlign="space-between center">
           <div fxFlex="30%">
             <mat-form-field class="full-width-input">
-              <input matInput placeholder="CUIT" formControlName="cuit" required>
-              <mat-error *ngIf="isDatosPersonalesFieldInvalid('cuit')">
-                Por favor ingrese su CUIT
-              </mat-error>
+              <input matInput placeholder="CUIT" formControlName="cuit">
             </mat-form-field>
           </div>
 
           <div fxFlex="66%">
             <mat-form-field class="full-width-input">
-              <input matInput placeholder="CBU" formControlName="cbu" required>
-              <mat-error *ngIf="isDatosPersonalesFieldInvalid('cbu')">
-                Por favor ingrese su CBU
-              </mat-error>
+              <input matInput placeholder="CBU" formControlName="cbu">
             </mat-form-field>
           </div>
         </div>
       </form>
+    </mat-card-content>
+  </mat-card>
 
-    </mat-expansion-panel>
+  <!-- Cuentas vinculadas -->
+  <mat-card>
+    <mat-card-header>
+      <mat-card-title>Cuentas vinculadas</mat-card-title>
+    </mat-card-header>
 
-    <!-- Cuentas vinculadas -->
-    <mat-expansion-panel>
-      <mat-expansion-panel-header>
-        Cuentas vinculadas
-      </mat-expansion-panel-header>
+    <mat-card-content>
       <form [formGroup]="formCuentasVinculadasGroup">
         <div fxLayout="row" fxLayoutAlign="space-between center">
           <div fxFlex="55%">
             <mat-form-field class="full-width-input">
               <input matInput placeholder="Código cuenta" formControlName="entidadCodigo" required>
-              <mat-error *ngIf="isCuentasVinculadasFieldInvalid('entidadCodigo')">
-                Por favor ingrese la cuenta de Algoritmo a vincular
+              <mat-error>
+                <mat-error *ngIf="isCuentasVinculadasFieldInvalid('entidadCodigo')">
+                  Por favor ingrese la cuenta de Algoritmo
+                </mat-error>
               </mat-error>
             </mat-form-field>
           </div>
 
           <div fxFlex="40%">
-              <button mat-raised-button color="primary" (click)="agregarCuenta()">Vincular</button>
+            <button mat-raised-button color="primary" (click)="agregarCuenta()">Vincular</button>
           </div>
         </div>
 
@@ -150,10 +139,8 @@
           </div>
         </div>
       </form>
-
-    </mat-expansion-panel>
-
-  </mat-accordion>
+    </mat-card-content>
+  </mat-card>
 
 </mat-dialog-content>
 
