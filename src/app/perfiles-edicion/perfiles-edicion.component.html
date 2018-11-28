@@ -1,3 +1,4 @@
+<mat-progress-bar *ngIf="guardando" mode="indeterminate"></mat-progress-bar>
 <h2 mat-dialog-title>Nuevo Perfil</h2>
 
 <mat-dialog-content class="mat-typography">
@@ -119,8 +120,36 @@
       <mat-expansion-panel-header>
         Cuentas vinculadas
       </mat-expansion-panel-header>
+      <form [formGroup]="formCuentasVinculadasGroup">
+        <div fxLayout="row" fxLayoutAlign="space-between center">
+          <div fxFlex="55%">
+            <mat-form-field class="full-width-input">
+              <input matInput placeholder="Código cuenta" formControlName="entidadCodigo" required>
+              <mat-error *ngIf="isCuentasVinculadasFieldInvalid('entidadCodigo')">
+                Por favor ingrese la cuenta de Algoritmo a vincular
+              </mat-error>
+            </mat-form-field>
+          </div>
 
-      This the expansion 2 content
+          <div fxFlex="40%">
+              <button mat-raised-button color="primary" (click)="agregarCuenta()">Vincular</button>
+          </div>
+        </div>
+
+        <div fxLayout="row" fxLayoutAlign="space-between center">
+          <div fxFlex="100%">
+            <mat-list>
+              <mat-list-item *ngFor="let codigo of listadoCodigos">
+                <div fxFlex="50%">
+                  {{ codigo }}
+                </div>
+                <div fxFlex="50%"><button mat-button (click)="quitarCuenta(codigo)">Desvincular</button></div>
+                <mat-divider></mat-divider>
+              </mat-list-item>
+            </mat-list>
+          </div>
+        </div>
+      </form>
 
     </mat-expansion-panel>
 
@@ -129,6 +158,6 @@
 </mat-dialog-content>
 
 <mat-dialog-actions align="end">
-  <button mat-button (click)="guardar()">Guardar</button>
-  <button mat-button mat-dialog-close>Cancelar</button>
+  <button mat-raised-button color="primary" (click)="guardar()">Guardar</button>
+  <button mat-dialog-close mat-raised-button>Cancelar</button>
 </mat-dialog-actions>

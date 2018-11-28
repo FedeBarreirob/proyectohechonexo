@@ -20,6 +20,6 @@ export class PerfilesService {
     let nuevoPerfilJson = JSON.stringify(nuevoPerfil);
 
     return this.http.post<ResponseServicio>(
-      environment.urlSeguridadPerfilRegistrar, nuevoPerfil, httpOptions);
+      environment.urlSeguridadPerfilRegistrar, nuevoPerfilJson, httpOptions);
   }
 }
