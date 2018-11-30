@@ -8,6 +8,7 @@ import { FlexLayoutModule } from '@angular/flex-layout';
 // locale
 import { registerLocaleData, DecimalPipe } from '@angular/common';
 import localeEsAr from '@angular/common/locales/es-AR';
+import { CustomPaginatorEspanol } from './internacionalizacion/paginador-espanol';
 
 // Animaciones
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations'
@@ -25,7 +26,7 @@ import { LoginComponent } from './login/login.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { MainNavComponent } from './main-nav/main-nav.component';
 import { LayoutModule } from '@angular/cdk/layout';
-import { MatToolbarModule, MatButtonModule, MatSidenavModule, MatIconModule, MatListModule } from '@angular/material';
+import { MatToolbarModule, MatButtonModule, MatSidenavModule, MatIconModule, MatListModule, MatPaginatorIntl } from '@angular/material';
 import { CtacteComponent } from './ctacte/ctacte.component';
 import { CtacteDetalleComponent } from './ctacte.detalle/ctacte.detalle.component';
 import { CtacteAplicadaComponent } from './ctacte-aplicada/ctacte-aplicada.component';
@@ -108,7 +109,8 @@ registerLocaleData(localeEsAr, 'es-AR');
     { provide: HTTP_INTERCEPTORS, useClass: ErrorAuthInterceptor, multi: true },
     { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true },
     { provide: LOCALE_ID, useValue: 'es-AR' },
-    DecimalPipe
+    DecimalPipe,
+    { provide: MatPaginatorIntl, useClass: CustomPaginatorEspanol }
   ],
   entryComponents: [
     CtacteDetalleComponent,

@@ -6,6 +6,8 @@ import { PerfilBasico } from '../interfaces/perfiles/perfil-basico';
 import { PerfilBasicoCredencial } from '../interfaces/perfiles/perfil-basico-credencial';
 import { PerfilBasicoInfoPersonal } from '../interfaces/perfiles/perfil-basico-informacion-personal';
 import { Rol } from '../interfaces/security/rol';
+import { AuthenticationService } from '../services/security/authentication.service';
+import { UserAuth } from '../models/security/user';
 
 @Component({
   selector: 'app-perfiles-edicion',
@@ -16,6 +18,7 @@ export class PerfilesEdicionComponent implements OnInit {
 
   private formSubmitAttempt: boolean;
   private guardando: boolean = false;
+  private usuarioLogueado: UserAuth;
 
   public formDatosAccesoGroup: FormGroup;
   public formDatosPersonalesGroup: FormGroup;
@@ -35,11 +38,14 @@ export class PerfilesEdicionComponent implements OnInit {
     }];
 
   constructor(
+    private authenticationService: AuthenticationService,
     private formBuilder: FormBuilder,
     private snackBar: MatSnackBar,
     private perfilService: PerfilesService,
     private dialogRef: MatDialogRef<PerfilesEdicionComponent>
-  ) { }
+  ) {
+    this.usuarioLogueado = <UserAuth>this.authenticationService.usuarioLogueado();
+  }
 
   ngOnInit() {
     this.formDatosAccesoGroup = this.formBuilder.group({
@@ -78,9 +84,7 @@ export class PerfilesEdicionComponent implements OnInit {
         rol: rol
       };
 
-      console.log(perfilBasico);
-
-      this.perfilService.registrarNuevo(perfilBasico)
+      this.perfilService.registrarNuevo(perfilBasico, this.usuarioLogueado.token)
         .subscribe(respuesta => {
 
           this.guardando = false;
