@@ -24,6 +24,9 @@ export class PerfilesEdicionComponent implements OnInit {
   private formDatosPersonalesGroup: FormGroup;
   private formCuentasVinculadasGroup: FormGroup;
 
+  private esRegistroNuevo: boolean;
+  private titulo: string;
+
   private listadoCodigos: string[] = [];
   private roles: Array<Rol> = [
     {
@@ -51,6 +54,10 @@ export class PerfilesEdicionComponent implements OnInit {
   }
 
   ngOnInit() {
+    // determinar si es un registro nuevo o una actualizacion de perfil
+    this.esRegistroNuevo = this.data == null ? true : false;
+    this.titulo = this.esRegistroNuevo ? "Nuevo perfil" : "Ver/Editar perfil";
+
     // credenciales
     if (this.data != null) {
       this.formDatosAccesoGroup = this.formBuilder.group(this.data.credencial);
@@ -103,27 +110,58 @@ export class PerfilesEdicionComponent implements OnInit {
         rol: rol
       };
 
-      this.perfilService.registrarNuevo(this.perfilBasico, this.usuarioLogueado.token)
-        .subscribe(respuesta => {
-
-          this.guardando = false;
-
-          if (respuesta && respuesta.exito == false) {
-            this.openSnackBar(respuesta.mensaje, "Registro del perfil");
-          } else {
-            this.openSnackBar(respuesta.mensaje, "Registro del perfil");
-            this.dialogRef.close();
-          }
-
-        }, error => {
-          this.guardando = false;
-
-          this.openSnackBar("Error al intentar registrar el perfil", "Registro del perfil");
-          console.log(error);
-        });
+      if (this.esRegistroNuevo) {
+        this.guardarNuevo();
+      } else {
+        this.guardarModificar();
+      }
     } else {
-      this.openSnackBar("Existe un proceso de registro ejecutándose.", "Registro del perfil");
+      this.openSnackBar("Existe un proceso de registro ejecutándose.", "Registro/Actualización del perfil");
     }
+  }
+
+  // funcion encargada de guardar un nuevo perfil
+  guardarNuevo() {
+    this.perfilService.registrarNuevo(this.perfilBasico, this.usuarioLogueado.token)
+      .subscribe(respuesta => {
+
+        this.guardando = false;
+
+        if (respuesta && respuesta.exito == false) {
+          this.openSnackBar(respuesta.mensaje, "Registro del perfil");
+        } else {
+          this.openSnackBar(respuesta.mensaje, "Registro del perfil");
+          this.dialogRef.close();
+        }
+
+      }, error => {
+        this.guardando = false;
+
+        this.openSnackBar("Error al intentar registrar el perfil", "Registro del perfil");
+        console.log(error);
+      });
+  }
+
+  // funcion encargada de actualizar un perfil
+  guardarModificar() {
+    this.perfilService.actualizar(this.perfilBasico, this.usuarioLogueado.token)
+      .subscribe(respuesta => {
+
+        this.guardando = false;
+
+        if (respuesta && respuesta.exito == false) {
+          this.openSnackBar(respuesta.mensaje, "Actualización del perfil");
+        } else {
+          this.openSnackBar(respuesta.mensaje, "Actualización del perfil");
+          this.dialogRef.close();
+        }
+
+      }, error => {
+        this.guardando = false;
+
+        this.openSnackBar("Error al intentar actualizar el perfil", "Actualización del perfil");
+        console.log(error);
+      });
   }
 
   isCuentasVinculadasFieldInvalid(field: string) {

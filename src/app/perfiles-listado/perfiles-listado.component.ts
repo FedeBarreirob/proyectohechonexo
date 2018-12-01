@@ -53,16 +53,18 @@ export class PerfilesListadoComponent implements OnInit {
 
   // despliega el formulario que muestra un menu de operaciones sobre el perfil seleccionado
   verOperaciones(perfil: PerfilBasico) {
-    this.dialog.open(PerfilOperacionesComponent, {
+    const dialogRef = this.dialog.open(PerfilOperacionesComponent, {
       data: perfil
     });
+
+    dialogRef.afterClosed().subscribe(
+      data => this.cargarListado(this.pageEvent)
+    );
   }
 
   // lista los perfiles registrados en el sistema
   cargarListado(event?: PageEvent) {
     this.cargando = true;
-
-    console.log(event);
 
     if (event != null) {
       this.filtro.numeroPagina = event.pageIndex + 1;

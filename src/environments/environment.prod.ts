@@ -8,5 +8,6 @@ export const environment = {
   urlMercaderiaPendienteEntregarListado: 'http://192.168.20.63:8080/DigitalEntregasYVentas-1.0-SNAPSHOT/api/MercaderiaPendienteDeEntregar/listado',
   urlComprobantesPendientesDeFacturarListado: 'http://192.168.20.63:8080/DigitalEntregasYVentas-1.0-SNAPSHOT/api/ComprobantesPendientesDeFacturar/listado',
   urlSeguridadPerfilRegistrar: 'http://192.168.20.63:8080/DigitalSeguridad-1.0-SNAPSHOT/api/perfiles/registrar',
-  urlSeguridadPerfilListar: 'http://192.168.20.63:8080/DigitalSeguridad-1.0-SNAPSHOT/api/perfiles/lista'
+  urlSeguridadPerfilListar: 'http://192.168.20.63:8080/DigitalSeguridad-1.0-SNAPSHOT/api/perfiles/lista',
+  urlSeguridadPerfilModificar: 'http://192.168.20.63:8080/DigitalSeguridad-1.0-SNAPSHOT/api/perfiles/modificar'
 };

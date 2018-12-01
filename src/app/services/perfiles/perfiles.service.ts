@@ -30,7 +30,7 @@ export class PerfilesService {
 
   // funcion que devuelve un listado paginado
   listadoPaginado(filtro: FiltroGenericoLista, token: string) {
-    
+
     const httpOptions = {
       headers: new HttpHeaders({
         'Content-Type': 'application/json',
@@ -42,5 +42,21 @@ export class PerfilesService {
 
     return this.http.post<ResponseServicio>(
       environment.urlSeguridadPerfilListar, filtroJson, httpOptions);
+  }
+
+  // funcion encargada de actualizar la informacion personal y cuentas de un perfil existente
+  actualizar(perfil: PerfilBasico, token: string) {
+
+    const httpOptions = {
+      headers: new HttpHeaders({
+        'Content-Type': 'application/json',
+        'Authorization': `Bearer ${token}`
+      })
+    };
+
+    let perfilJson = JSON.stringify(perfil);
+
+    return this.http.post<ResponseServicio>(
+      environment.urlSeguridadPerfilModificar, perfilJson, httpOptions);
   }
 }

@@ -12,7 +12,8 @@ export const environment = {
   urlMercaderiaPendienteEntregarListado: 'http://localhost:8080/DigitalEntregasYVentas-1.0-SNAPSHOT/api/MercaderiaPendienteDeEntregar/listado',
   urlComprobantesPendientesDeFacturarListado: 'http://localhost:8080/DigitalEntregasYVentas-1.0-SNAPSHOT/api/ComprobantesPendientesDeFacturar/listado',
   urlSeguridadPerfilRegistrar: 'http://localhost:8080/DigitalSeguridad-1.0-SNAPSHOT/api/perfiles/registrar',
-  urlSeguridadPerfilListar: 'http://localhost:8080/DigitalSeguridad-1.0-SNAPSHOT/api/perfiles/lista'
+  urlSeguridadPerfilListar: 'http://localhost:8080/DigitalSeguridad-1.0-SNAPSHOT/api/perfiles/lista',
+  urlSeguridadPerfilModificar: 'http://localhost:8080/DigitalSeguridad-1.0-SNAPSHOT/api/perfiles/modificar'
 };
 
 /*
