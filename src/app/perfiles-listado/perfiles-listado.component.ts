@@ -48,7 +48,7 @@ export class PerfilesListadoComponent implements OnInit {
 
   // despliega el formulario para crear un nuevo perfil
   nuevoPerfil() {
-    this.dialog.open(PerfilesEdicionComponent, { panelClass: 'mat-dialog-container' });
+    this.dialog.open(PerfilesEdicionComponent);
   }
 
   // despliega el formulario que muestra un menu de operaciones sobre el perfil seleccionado

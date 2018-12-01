@@ -1,6 +1,6 @@
-import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { MatSnackBar, MatDialogRef } from '@angular/material';
+import { Component, OnInit, Inject } from '@angular/core';
+import { FormBuilder, FormGroup, Validators, FormControl } from '@angular/forms';
+import { MatSnackBar, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
 import { PerfilesService } from '../services/perfiles/perfiles.service';
 import { PerfilBasico } from '../interfaces/perfiles/perfil-basico';
 import { PerfilBasicoCredencial } from '../interfaces/perfiles/perfil-basico-credencial';
@@ -20,12 +20,12 @@ export class PerfilesEdicionComponent implements OnInit {
   private guardando: boolean = false;
   private usuarioLogueado: UserAuth;
 
-  public formDatosAccesoGroup: FormGroup;
-  public formDatosPersonalesGroup: FormGroup;
-  public formCuentasVinculadasGroup: FormGroup;
+  private formDatosAccesoGroup: FormGroup;
+  private formDatosPersonalesGroup: FormGroup;
+  private formCuentasVinculadasGroup: FormGroup;
 
-  public listadoCodigos: string[] = [];
-  public roles: Array<Rol> = [
+  private listadoCodigos: string[] = [];
+  private roles: Array<Rol> = [
     {
       id: 1,
       denominacion: "Administrador",
@@ -37,38 +37,57 @@ export class PerfilesEdicionComponent implements OnInit {
       admin: false
     }];
 
+  private perfilBasico: PerfilBasico;
+
   constructor(
     private authenticationService: AuthenticationService,
     private formBuilder: FormBuilder,
     private snackBar: MatSnackBar,
     private perfilService: PerfilesService,
-    private dialogRef: MatDialogRef<PerfilesEdicionComponent>
+    private dialogRef: MatDialogRef<PerfilesEdicionComponent>,
+    @Inject(MAT_DIALOG_DATA) public data: PerfilBasico
   ) {
     this.usuarioLogueado = <UserAuth>this.authenticationService.usuarioLogueado();
   }
 
   ngOnInit() {
-    this.formDatosAccesoGroup = this.formBuilder.group({
-      username: [''],
-      password: [''],
-      passwordConfirmacion: [''],
-      rol: [null]
-    });
+    // credenciales
+    if (this.data != null) {
+      this.formDatosAccesoGroup = this.formBuilder.group(this.data.credencial);
+      this.formDatosAccesoGroup.addControl('rol', new FormControl(this.roles.filter(x => x.id == (this.data.rol != null ? this.data.rol.id : null))[0]));
+    } else {
+      this.formDatosAccesoGroup = this.formBuilder.group({
+        username: [''],
+        password: [''],
+        passwordConfirmacion: [''],
+        rol: [null]
+      });
+    }
 
-    this.formDatosPersonalesGroup = this.formBuilder.group({
-      nombre: [''],
-      domicilio: [''],
-      telefonos: [''],
-      email: [''],
-      cuit: [''],
-      cbu: [''],
-    });
+    // informacion personal
+    if (this.data != null) {
+      this.formDatosPersonalesGroup = this.formBuilder.group(this.data.informacionPersonal);
+    } else {
+      this.formDatosPersonalesGroup = this.formBuilder.group({
+        nombre: [''],
+        domicilio: [''],
+        telefonos: [''],
+        email: [''],
+        cuit: [''],
+        cbu: [''],
+      });
+    }
 
+    // cuentas vinculadas
     this.formCuentasVinculadasGroup = this.formBuilder.group({
       entidadCodigo: [''],
     });
+    if (this.data != null && this.data.entidadCodigos != null) {
+      this.listadoCodigos = Object.assign([], this.data.entidadCodigos);
+    }
   }
 
+  // funcion encargada de enviar los datos para su persistencia
   guardar() {
     if (!this.guardando) {
       this.guardando = true;
@@ -77,14 +96,14 @@ export class PerfilesEdicionComponent implements OnInit {
       let informacionPersonal: PerfilBasicoInfoPersonal = this.formDatosPersonalesGroup.getRawValue();
       let rol: Rol = this.formDatosAccesoGroup.value.rol;
 
-      let perfilBasico: PerfilBasico = {
+      this.perfilBasico = {
         credencial: datosAcceso,
         informacionPersonal: informacionPersonal,
         entidadCodigos: this.listadoCodigos,
         rol: rol
       };
 
-      this.perfilService.registrarNuevo(perfilBasico, this.usuarioLogueado.token)
+      this.perfilService.registrarNuevo(this.perfilBasico, this.usuarioLogueado.token)
         .subscribe(respuesta => {
 
           this.guardando = false;
