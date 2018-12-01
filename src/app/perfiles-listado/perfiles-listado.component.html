@@ -59,7 +59,7 @@
         <mat-card-content>
           <mat-nav-list class="listado">
 
-            <a mat-list-item *ngFor="let perfil of (listaPaginada.listado ? listaPaginada.listado : [])">
+            <a mat-list-item *ngFor="let perfil of (listaPaginada.listado ? listaPaginada.listado : [])" (click)="verOperaciones(perfil)">
 
               <div fxFlexFill fxLayout="row" fxLayoutAlign="space-between center">
                 <div fxFlex="33%">

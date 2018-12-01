@@ -6,6 +6,8 @@ import { PerfilesService } from '../services/perfiles/perfiles.service';
 import { FiltroGenericoLista } from '../interfaces/varios/filtro-generico-lista';
 import { AuthenticationService } from '../services/security/authentication.service';
 import { UserAuth } from '../models/security/user';
+import { PerfilOperacionesComponent } from '../perfil-operaciones/perfil-operaciones.component';
+import { PerfilBasico } from '../interfaces/perfiles/perfil-basico';
 
 @Component({
   selector: 'app-perfiles-listado',
@@ -47,6 +49,13 @@ export class PerfilesListadoComponent implements OnInit {
   // despliega el formulario para crear un nuevo perfil
   nuevoPerfil() {
     this.dialog.open(PerfilesEdicionComponent, { panelClass: 'mat-dialog-container' });
+  }
+
+  // despliega el formulario que muestra un menu de operaciones sobre el perfil seleccionado
+  verOperaciones(perfil: PerfilBasico) {
+    this.dialog.open(PerfilOperacionesComponent, {
+      data: perfil
+    });
   }
 
   // lista los perfiles registrados en el sistema
