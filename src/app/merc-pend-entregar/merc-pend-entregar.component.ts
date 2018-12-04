@@ -8,6 +8,7 @@ import { DatePipe } from '@angular/common';
 import { MatDialog } from '@angular/material';
 import { MercPendEntregarDetalleComponent } from '../merc-pend-entregar-detalle/merc-pend-entregar-detalle.component';
 import { MercPendEntregarMasOperacionesComponent } from '../merc-pend-entregar-mas-operaciones/merc-pend-entregar-mas-operaciones.component';
+import { PerfilBasico } from '../interfaces/perfiles/perfil-basico';
 
 @Component({
   selector: 'app-merc-pend-entregar',
@@ -23,6 +24,7 @@ export class MercPendEntregarComponent implements OnInit {
   public cargando: boolean;
 
   public cuenta: string = "";
+  private perfilBasico: PerfilBasico;
   public fechaDesde: Date = new Date();
   public fechaHasta: Date = new Date();
 
@@ -33,6 +35,7 @@ export class MercPendEntregarComponent implements OnInit {
 
   ngOnInit() {
     this.cargando = false;
+    this.perfilBasico = this.authenticationService.perfilUsuarioLogueado();
   }
 
   // funcion que ejecuta la carga del listado de mercaderia pendiente de entregar

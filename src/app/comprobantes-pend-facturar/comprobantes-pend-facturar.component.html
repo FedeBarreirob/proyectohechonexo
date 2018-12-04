@@ -12,8 +12,9 @@
         <div fxFlex="33%">
           <mat-form-field>
             <mat-select [(ngModel)]="cuenta" placeholder="Seleccione una cuenta" disableRipple>
-              <mat-option value="255">255</mat-option>
-              <mat-option value="484">484</mat-option>
+              <mat-option *ngFor="let cuentaVinculada of (perfilBasico != null ? perfilBasico.entidadCodigos : [])" [value]="cuentaVinculada">
+                {{cuentaVinculada}}
+              </mat-option>
             </mat-select>
           </mat-form-field>
         </div>

@@ -8,6 +8,7 @@ import { DatePipe } from '@angular/common';
 import { MatDialog } from '@angular/material';
 import { ComprobantesPendFacturarDetalleComponent } from '../comprobantes-pend-facturar-detalle/comprobantes-pend-facturar-detalle.component';
 import { ComprobantesPendFacturarMasOperacionesComponent } from '../comprobantes-pend-facturar-mas-operaciones/comprobantes-pend-facturar-mas-operaciones.component';
+import { PerfilBasico } from '../interfaces/perfiles/perfil-basico';
 
 @Component({
   selector: 'app-comprobantes-pend-facturar',
@@ -23,6 +24,7 @@ export class ComprobantesPendFacturarComponent implements OnInit {
   public cargando: boolean;
 
   public cuenta: string = "";
+  private perfilBasico: PerfilBasico;
   public fechaDesde: Date = new Date();
   public fechaHasta: Date = new Date();
 
@@ -33,6 +35,7 @@ export class ComprobantesPendFacturarComponent implements OnInit {
 
   ngOnInit() {
     this.cargando = false;
+    this.perfilBasico = this.authenticationService.perfilUsuarioLogueado();
   }
 
   // funcion que ejecuta la carga del listado de comprobantes pendientes de facturar

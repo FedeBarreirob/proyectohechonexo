@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { ResponseAutentificacion } from '../../interfaces/security/response.autentificacion';
 import { environment } from '../../../environments/environment'
+import { PerfilBasico } from '../../interfaces/perfiles/perfil-basico';
 
 @Injectable({
   providedIn: 'root'
@@ -55,7 +56,7 @@ export class AuthenticationService {
   // funcion que devuelve el perfil del usuario logueado
   perfilUsuarioLogueado() {
     if (this.esLogueado) {
-      return JSON.parse(localStorage.getItem('currentUserPerfil'));
+      return <PerfilBasico> JSON.parse(localStorage.getItem('currentUserPerfil'));
     } else {
       return null;
     }

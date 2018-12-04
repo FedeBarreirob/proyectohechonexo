@@ -8,6 +8,7 @@ import { DatePipe } from '@angular/common';
 import { MatDialog } from '@angular/material';
 import { EntregasDetalleComponent } from '../entregas-detalle/entregas-detalle.component';
 import { EntregasMasOperacionesComponent } from '../entregas-mas-operaciones/entregas-mas-operaciones.component';
+import { PerfilBasico } from '../interfaces/perfiles/perfil-basico';
 
 @Component({
   selector: 'app-entregas',
@@ -17,14 +18,15 @@ import { EntregasMasOperacionesComponent } from '../entregas-mas-operaciones/ent
 })
 export class EntregasComponent implements OnInit {
 
-  public listadoEntregas: Array<MovimientoEntrega>;
+  private listadoEntregas: Array<MovimientoEntrega>;
   private movimientoSeleccionado: MovimientoEntrega = null;
-  public totales: EntregasTotales = null;
-  public cargando: boolean;
+  private totales: EntregasTotales = null;
+  private cargando: boolean;
 
-  public cuenta: string = "";
-  public fechaDesde: Date = new Date();
-  public fechaHasta: Date = new Date();
+  private cuenta: string = "";
+  private perfilBasico: PerfilBasico;
+  private fechaDesde: Date = new Date();
+  private fechaHasta: Date = new Date();
 
   constructor(private entregasService: EntregasService,
     private authenticationService: AuthenticationService,
@@ -33,6 +35,7 @@ export class EntregasComponent implements OnInit {
 
   ngOnInit() {
     this.cargando = false;
+    this.perfilBasico = this.authenticationService.perfilUsuarioLogueado();
   }
 
   // funcion que ejecuta la carga del listado de entregas

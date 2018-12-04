@@ -8,6 +8,7 @@ import { DatePipe } from '@angular/common';
 import { MatDialog } from '@angular/material';
 import { CtacteAplicadaDetalleComponent } from '../ctacte-aplicada-detalle/ctacte-aplicada-detalle.component';
 import { CtaCteAplicadaMasOperacionesComponent } from '../cta-cte-aplicada-mas-operaciones/cta-cte-aplicada-mas-operaciones.component';
+import { PerfilBasico } from '../interfaces/perfiles/perfil-basico';
 
 @Component({
   selector: 'app-ctacte-aplicada',
@@ -23,6 +24,7 @@ export class CtacteAplicadaComponent implements OnInit {
   public cargando: boolean;
 
   public cuenta: string = "";
+  private perfilBasico: PerfilBasico;
   public fechaDesde: Date = new Date();
   public fechaHasta: Date = new Date();
 
@@ -33,6 +35,7 @@ export class CtacteAplicadaComponent implements OnInit {
 
   ngOnInit() {
     this.cargando = false;
+    this.perfilBasico = this.authenticationService.perfilUsuarioLogueado();
   }
 
   // funcion que ejecuta la carga del listado de ctacte
