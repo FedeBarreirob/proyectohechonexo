@@ -3,6 +3,7 @@ import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { AuthenticationService } from '../services/security/authentication.service';
 import { UserAuth } from '../models/security/user';
+import { PerfilesService } from '../services/perfiles/perfiles.service';
 
 @Component({
   selector: 'app-login',
@@ -23,7 +24,8 @@ export class LoginComponent implements OnInit {
     private formBuilder: FormBuilder,
     private route: ActivatedRoute,
     private router: Router,
-    private authenticationService: AuthenticationService) { }
+    private authenticationService: AuthenticationService,
+    private perfilService: PerfilesService) { }
 
   ngOnInit() {
     this.frmLogin = this.formBuilder.group({
@@ -50,7 +52,7 @@ export class LoginComponent implements OnInit {
             user.token = respuesta.token;
             localStorage.setItem('currentUser', JSON.stringify(user));
 
-            console.log(user);
+            this.cargarPerfilLogueado(respuesta.token);
 
             this.router.navigate([this.returnUrl]);
           } else {
@@ -66,7 +68,19 @@ export class LoginComponent implements OnInit {
     }
   }
 
-  isFieldInvalid(field: string) { 
+  // funcion encargada de cargar 
+  private cargarPerfilLogueado(token: string) {
+    this.perfilService.perfilLogueado(token).subscribe(respuesta => {
+
+      if (respuesta && respuesta.exito == true) {
+        localStorage.setItem('currentUserPerfil', JSON.stringify(respuesta.datos));
+      } else {
+        console.log(respuesta);
+      }
+    }, error => { console.log("Error al intentar obtener los datos del perfil") });
+  }
+
+  isFieldInvalid(field: string) {
     return (
       (!this.frmLogin.get(field).valid && this.frmLogin.get(field).touched) ||
       (this.frmLogin.get(field).untouched && this.formSubmitAttempt)

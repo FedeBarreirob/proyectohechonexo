@@ -30,6 +30,7 @@ export class AuthenticationService {
   // cierra la sesion
   logout() {
     localStorage.removeItem('currentUser');
+    localStorage.removeItem('currentUserPerfil');
   }
 
   // funcion que indica si el usuario se encuentra logueado en el sistema
@@ -46,6 +47,15 @@ export class AuthenticationService {
   usuarioLogueado() {
     if (this.esLogueado) {
       return JSON.parse(localStorage.getItem('currentUser'));
+    } else {
+      return null;
+    }
+  }
+
+  // funcion que devuelve el perfil del usuario logueado
+  perfilUsuarioLogueado() {
+    if (this.esLogueado) {
+      return JSON.parse(localStorage.getItem('currentUserPerfil'));
     } else {
       return null;
     }

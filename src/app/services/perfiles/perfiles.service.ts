@@ -59,4 +59,18 @@ export class PerfilesService {
     return this.http.post<ResponseServicio>(
       environment.urlSeguridadPerfilModificar, perfilJson, httpOptions);
   }
+
+  // funcion que devuelve los datos del perfil que se encuentra vinculado al token actual
+  perfilLogueado(token: string) {
+
+    const httpOptions = {
+      headers: new HttpHeaders({
+        'Content-Type': 'application/json',
+        'Authorization': `Bearer ${token}`
+      })
+    };
+
+    return this.http.post<ResponseServicio>(
+      environment.urlSeguridadPerfilLogueado, null, httpOptions);
+  }
 }
