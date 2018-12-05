@@ -1,9 +1,10 @@
 import { Component, OnInit } from '@angular/core';
-import { FormGroup, FormBuilder, Validators } from '@angular/forms';
+import { FormGroup, FormBuilder } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { AuthenticationService } from '../services/security/authentication.service';
 import { UserAuth } from '../models/security/user';
 import { PerfilesService } from '../services/perfiles/perfiles.service';
+import { MatSnackBar } from '@angular/material';
 
 @Component({
   selector: 'app-login',
@@ -13,24 +14,22 @@ import { PerfilesService } from '../services/perfiles/perfiles.service';
 export class LoginComponent implements OnInit {
 
   frmLogin: FormGroup;
-  private formSubmitAttempt: boolean;
-  loading = false;
-  submitted = false;
+  logueando: boolean = false;
   returnUrl: string;
-  error = '';
-  mensaje = '';
 
   constructor(
     private formBuilder: FormBuilder,
     private route: ActivatedRoute,
     private router: Router,
     private authenticationService: AuthenticationService,
-    private perfilService: PerfilesService) { }
+    private perfilService: PerfilesService,
+    private snackBar: MatSnackBar
+  ) { }
 
   ngOnInit() {
     this.frmLogin = this.formBuilder.group({
-      username: ['', Validators.required],
-      password: ['', Validators.required]
+      username: [''],
+      password: ['']
     });
 
     // reset login status
@@ -41,11 +40,11 @@ export class LoginComponent implements OnInit {
   }
 
   login() {
-    if (this.frmLogin.valid) {
+    if (!this.logueando) {
+      this.logueando = true;
       const frm = this.frmLogin.value;
       this.authenticationService.login(frm.username, frm.password).subscribe(
         respuesta => {
-
           if (respuesta && respuesta.exito == true) {
             let user = new UserAuth();
             user.username = frm.username;
@@ -56,15 +55,16 @@ export class LoginComponent implements OnInit {
 
             this.router.navigate([this.returnUrl]);
           } else {
-            this.mensaje = (respuesta.mensaje) ? respuesta.mensaje : 'Acceso denegado';
+            this.logueando = false;
+            this.openSnackBar((respuesta.mensaje) ? respuesta.mensaje : 'Acceso denegado', "Login");
           }
         },
         error => {
-          this.error = error;
-          this.loading = false;
+          this.logueando = false;
+          this.openSnackBar(error, "Login");
         });
     } else {
-      this.formSubmitAttempt = true;
+      this.openSnackBar("Existe un proceso de login ejecutándose.", "Login");
     }
   }
 
@@ -77,13 +77,15 @@ export class LoginComponent implements OnInit {
       } else {
         console.log(respuesta);
       }
-    }, error => { console.log("Error al intentar obtener los datos del perfil") });
+    }, error => {
+      this.openSnackBar("Error al intentar obtener los datos del perfil", "Login");
+    });
   }
 
-  isFieldInvalid(field: string) {
-    return (
-      (!this.frmLogin.get(field).valid && this.frmLogin.get(field).touched) ||
-      (this.frmLogin.get(field).untouched && this.formSubmitAttempt)
-    );
+  // abre una notificacion
+  openSnackBar(message: string, action: string) {
+    this.snackBar.open(message, action, {
+      duration: 2000,
+    });
   }
 }

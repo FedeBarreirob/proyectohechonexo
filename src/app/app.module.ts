@@ -6,7 +6,7 @@ import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 import { FlexLayoutModule } from '@angular/flex-layout';
 
 // locale
-import { registerLocaleData, DecimalPipe } from '@angular/common';
+import { registerLocaleData, DecimalPipe, CommonModule } from '@angular/common';
 import localeEsAr from '@angular/common/locales/es-AR';
 import { CustomPaginatorEspanol } from './internacionalizacion/paginador-espanol';
 
@@ -54,6 +54,7 @@ import { ComprobantesPendFacturarDetalleMasOperacionesComponent } from './compro
 import { PerfilesListadoComponent } from './perfiles-listado/perfiles-listado.component';
 import { PerfilesEdicionComponent } from './perfiles-edicion/perfiles-edicion.component';
 import { PerfilOperacionesComponent } from './perfil-operaciones/perfil-operaciones.component';
+import { JwtHelperService, JwtModule } from '@auth0/angular-jwt';
 
 registerLocaleData(localeEsAr, 'es-AR');
 
@@ -105,14 +106,26 @@ registerLocaleData(localeEsAr, 'es-AR');
     MatIconModule,
     MatListModule,
     FlexLayoutModule,
-    FormsModule
+    FormsModule,
+    CommonModule,
+    JwtModule.forRoot({
+      config: {
+        throwNoTokenError: false,
+        tokenGetter: () => {
+          let usuario = JSON.parse(localStorage.getItem('currentUser'));
+          return usuario != null ? usuario.token : '';
+        },
+        whitelistedDomains: []
+      }
+    })
   ],
   providers: [
     { provide: HTTP_INTERCEPTORS, useClass: ErrorAuthInterceptor, multi: true },
     { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true },
     { provide: LOCALE_ID, useValue: 'es-AR' },
     DecimalPipe,
-    { provide: MatPaginatorIntl, useClass: CustomPaginatorEspanol }
+    { provide: MatPaginatorIntl, useClass: CustomPaginatorEspanol },
+    JwtHelperService
   ],
   entryComponents: [
     CtacteDetalleComponent,

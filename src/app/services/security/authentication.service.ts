@@ -3,13 +3,17 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { ResponseAutentificacion } from '../../interfaces/security/response.autentificacion';
 import { environment } from '../../../environments/environment'
 import { PerfilBasico } from '../../interfaces/perfiles/perfil-basico';
+import { JwtHelperService } from '@auth0/angular-jwt';
 
 @Injectable({
   providedIn: 'root'
 })
 export class AuthenticationService {
 
-  constructor(private http: HttpClient) { }
+  constructor(
+    private http: HttpClient,
+    private jwtHelper: JwtHelperService
+  ) { }
 
   // funcion encargada de autenticar el usuario y obtener el token requerido para el consumo de servicios
   login(username: string, password: string) {
@@ -38,7 +42,8 @@ export class AuthenticationService {
   // no se verifica validez del token asociado
   get esLogueado() {
     if (localStorage.getItem('currentUser')) {
-      return true;
+      let usuario = JSON.parse(localStorage.getItem('currentUser'));
+      return !this.jwtHelper.isTokenExpired(usuario.token);
     } else {
       return false;
     }
@@ -56,7 +61,7 @@ export class AuthenticationService {
   // funcion que devuelve el perfil del usuario logueado
   perfilUsuarioLogueado() {
     if (this.esLogueado) {
-      return <PerfilBasico> JSON.parse(localStorage.getItem('currentUserPerfil'));
+      return <PerfilBasico>JSON.parse(localStorage.getItem('currentUserPerfil'));
     } else {
       return null;
     }
