@@ -23,44 +23,70 @@ const routes: Routes = [
   {
     path: 'dashboard',
     component: DashboardComponent,
-    canActivate: [AuthGuardGuard]
+    canActivate: [AuthGuardGuard],
+    data: {
+      rolAdmin: false
+    }
   },
   {
     path: 'ctacte',
     component: CtacteComponent,
-    canActivate: [AuthGuardGuard]
+    canActivate: [AuthGuardGuard],
+    data: {
+      rolAdmin: false
+    }
   },
   {
     path: 'ctacte-aplicada',
     component: CtacteAplicadaComponent,
-    canActivate: [AuthGuardGuard]
+    canActivate: [AuthGuardGuard],
+    data: {
+      rolAdmin: false
+    }
   },
   {
     path: 'entregas',
     component: EntregasComponent,
-    canActivate: [AuthGuardGuard]
+    canActivate: [AuthGuardGuard],
+    data: {
+      rolAdmin: false
+    }
   },
   {
     path: 'ventas',
     component: VentasComponent,
-    canActivate: [AuthGuardGuard]
+    canActivate: [AuthGuardGuard],
+    data: {
+      rolAdmin: false
+    }
   },
   {
     path: 'mercaderia-pendiente-entregar',
     component: MercPendEntregarComponent,
-    canActivate: [AuthGuardGuard]
+    canActivate: [AuthGuardGuard],
+    data: {
+      rolAdmin: false
+    }
   },
   {
     path: 'comprobantes-pendientes-facturar',
     component: ComprobantesPendFacturarComponent,
-    canActivate: [AuthGuardGuard]
+    canActivate: [AuthGuardGuard],
+    data: {
+      rolAdmin: false
+    }
   },
   {
     path: 'perfiles',
     component: PerfilesListadoComponent,
-    canActivate: [AuthGuardGuard]
-  },
-  { path: '**', redirectTo: 'dashboard' }
+    canActivate: [AuthGuardGuard],
+    data: {
+      rolAdmin: true
+    }
+  }/*,
+  {
+    path: '**', redirectTo: 'dashboard'
+  }*/
 ];
 
 @NgModule({

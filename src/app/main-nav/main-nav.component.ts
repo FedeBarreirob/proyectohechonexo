@@ -12,12 +12,15 @@ import { AuthenticationService } from '../services/security/authentication.servi
 
 export class MainNavComponent {
 
+  constructor(
+    private breakpointObserver: BreakpointObserver,
+    public authService: AuthenticationService) {
+  }
+
   isHandset$: Observable<boolean> = this.breakpointObserver.observe(Breakpoints.Handset)
     .pipe(
       map(result => result.matches)
     );
-
-  constructor(private breakpointObserver: BreakpointObserver, public authService: AuthenticationService) { }
 
 }
 

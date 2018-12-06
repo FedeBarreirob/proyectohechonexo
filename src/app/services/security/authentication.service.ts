@@ -66,4 +66,15 @@ export class AuthenticationService {
       return null;
     }
   }
+
+  // funcion que indica si el usuario es admin
+  get esAdmin() {
+    let perfil = this.perfilUsuarioLogueado();
+    if (perfil != null && perfil.rol != null) {
+      return perfil.rol.admin;
+    } else {
+      return false;
+    }
+  }
+
 }

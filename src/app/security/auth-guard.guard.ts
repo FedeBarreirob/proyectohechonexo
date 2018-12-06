@@ -18,10 +18,26 @@ export class AuthGuardGuard implements CanActivate {
     state: RouterStateSnapshot): Observable<boolean> | Promise<boolean> | boolean {
 
     // si existe, esta logueado
-    if (this.authenticationService.esLogueado) {
+    if (this.authenticationService.esLogueado && this.elRolPermiteIngresar(next.data)) {
       return true;
     } else {
       this.router.navigate(['/login'], { queryParams: { returnUrl: state.url } });
+      return false;
+    }
+  }
+
+  // funcion que verifica si el rol del perfil del usuario logueado le permite ingresar a la seccion indicada
+  private elRolPermiteIngresar(data: any): boolean {
+    let perfil = this.authenticationService.perfilUsuarioLogueado();
+    if (data != null && data.rolAdmin != null && perfil != null && perfil.rol != null) {
+      if (data.rolAdmin == true && perfil.rol.admin == true) {
+        return true;
+      } else if (data.rolAdmin == false) {
+        return true;
+      } else {
+        return false;
+      }
+    } else {
       return false;
     }
   }
