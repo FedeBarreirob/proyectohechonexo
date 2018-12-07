@@ -5,6 +5,7 @@ import { AuthenticationService } from '../services/security/authentication.servi
 import { UserAuth } from '../models/security/user';
 import { PerfilesService } from '../services/perfiles/perfiles.service';
 import { MatSnackBar } from '@angular/material';
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-login',
@@ -51,9 +52,11 @@ export class LoginComponent implements OnInit {
             user.token = respuesta.token;
             localStorage.setItem('currentUser', JSON.stringify(user));
 
-            this.cargarPerfilLogueado(respuesta.token);
-
-            this.router.navigate([this.returnUrl]);
+            this.cargarPerfilLogueado(respuesta.token).subscribe(cargoPerfil => {
+              if (cargoPerfil == true) {
+                this.router.navigate([this.returnUrl]);
+              }
+            });
           } else {
             this.logueando = false;
             this.openSnackBar((respuesta.mensaje) ? respuesta.mensaje : 'Acceso denegado', "Login");
@@ -68,17 +71,23 @@ export class LoginComponent implements OnInit {
     }
   }
 
-  // funcion encargada de cargar 
-  private cargarPerfilLogueado(token: string) {
-    this.perfilService.perfilLogueado(token).subscribe(respuesta => {
+  // funcion encargada de cargar el perfil
+  private cargarPerfilLogueado(token: string): Observable<boolean> {
+    return new Observable<boolean>(observer => {
+      this.perfilService.perfilLogueado(token).subscribe(respuesta => {
 
-      if (respuesta && respuesta.exito == true) {
-        localStorage.setItem('currentUserPerfil', JSON.stringify(respuesta.datos));
-      } else {
-        console.log(respuesta);
-      }
-    }, error => {
-      this.openSnackBar("Error al intentar obtener los datos del perfil", "Login");
+        if (respuesta != null && respuesta.exito == true) {
+          localStorage.setItem('currentUserPerfil', JSON.stringify(respuesta.datos));
+          observer.next(true);
+        } else {
+          console.log(respuesta);
+          observer.next(false);
+        }
+      }, error => {
+        this.openSnackBar("Error al intentar obtener los datos del perfil", "Login");
+        observer.next(false);
+      });
+
     });
   }
 

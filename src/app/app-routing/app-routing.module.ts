@@ -83,10 +83,10 @@ const routes: Routes = [
     data: {
       rolAdmin: true
     }
-  }/*,
+  },
   {
     path: '**', redirectTo: 'dashboard'
-  }*/
+  }
 ];
 
 @NgModule({
