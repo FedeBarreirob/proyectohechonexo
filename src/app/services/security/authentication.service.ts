@@ -4,6 +4,10 @@ import { ResponseAutentificacion } from '../../interfaces/security/response.aute
 import { environment } from '../../../environments/environment'
 import { PerfilBasico } from '../../interfaces/perfiles/perfil-basico';
 import { JwtHelperService } from '@auth0/angular-jwt';
+import { Observable } from 'rxjs';
+import { map } from 'rxjs/operators';
+
+
 
 @Injectable({
   providedIn: 'root'
@@ -16,7 +20,7 @@ export class AuthenticationService {
   ) { }
 
   // funcion encargada de autenticar el usuario y obtener el token requerido para el consumo de servicios
-  login(username: string, password: string) {
+  login(username: string, password: string) : Observable<ResponseAutentificacion> {
 
     const httpOptions = {
       headers: new HttpHeaders({ 'Content-Type': 'application/json' })

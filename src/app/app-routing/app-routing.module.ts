@@ -85,7 +85,10 @@ const routes: Routes = [
     }
   },
   {
-    path: '**', redirectTo: 'dashboard'
+    path: '', redirectTo: '/dashboard', pathMatch: 'full'
+  },
+  {
+    path: '**', redirectTo: '/dashboard'
   }
 ];
 
