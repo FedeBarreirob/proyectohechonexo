@@ -55,6 +55,9 @@ import { PerfilesListadoComponent } from './perfiles-listado/perfiles-listado.co
 import { PerfilesEdicionComponent } from './perfiles-edicion/perfiles-edicion.component';
 import { PerfilOperacionesComponent } from './perfil-operaciones/perfil-operaciones.component';
 import { JwtHelperService, JwtModule } from '@auth0/angular-jwt';
+import { AccesoTercerosComponent } from './acceso-terceros/acceso-terceros.component';
+import { AccesoTercerosEdicionComponent } from './acceso-terceros-edicion/acceso-terceros-edicion.component';
+import { AccesoTercerosOperacionesComponent } from './acceso-terceros-operaciones/acceso-terceros-operaciones.component';
 
 registerLocaleData(localeEsAr, 'es-AR');
 
@@ -90,7 +93,10 @@ registerLocaleData(localeEsAr, 'es-AR');
     ComprobantesPendFacturarDetalleMasOperacionesComponent,
     PerfilesListadoComponent,
     PerfilesEdicionComponent,
-    PerfilOperacionesComponent
+    PerfilOperacionesComponent,
+    AccesoTercerosComponent,
+    AccesoTercerosEdicionComponent,
+    AccesoTercerosOperacionesComponent
   ],
   imports: [
     HttpClientModule,
@@ -147,7 +153,9 @@ registerLocaleData(localeEsAr, 'es-AR');
     ComprobantesPendFacturarMasOperacionesComponent,
     ComprobantesPendFacturarDetalleMasOperacionesComponent,
     PerfilesEdicionComponent,
-    PerfilOperacionesComponent
+    PerfilOperacionesComponent,
+    AccesoTercerosEdicionComponent,
+    AccesoTercerosOperacionesComponent
   ],
   bootstrap: [AppComponent]
 })

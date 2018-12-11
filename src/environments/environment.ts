@@ -14,7 +14,10 @@ export const environment = {
   urlSeguridadPerfilRegistrar: 'http://localhost:8080/DigitalSeguridad-1.0-SNAPSHOT/api/perfiles/registrar',
   urlSeguridadPerfilListar: 'http://localhost:8080/DigitalSeguridad-1.0-SNAPSHOT/api/perfiles/lista',
   urlSeguridadPerfilModificar: 'http://localhost:8080/DigitalSeguridad-1.0-SNAPSHOT/api/perfiles/modificar',
-  urlSeguridadPerfilLogueado: 'http://localhost:8080/DigitalSeguridad-1.0-SNAPSHOT/api/perfiles/perfil'
+  urlSeguridadPerfilLogueado: 'http://localhost:8080/DigitalSeguridad-1.0-SNAPSHOT/api/perfiles/perfil',
+  urlSeguridadTerceroRegistrar: 'http://localhost:8080/DigitalSeguridad-1.0-SNAPSHOT/api/terceros/registrar',
+  urlSeguridadTerceroListar: 'http://localhost:8080/DigitalSeguridad-1.0-SNAPSHOT/api/terceros/lista',
+  urlSeguridadTerceroModificar: 'http://localhost:8080/DigitalSeguridad-1.0-SNAPSHOT/api/terceros/modificar',
 };
 
 /*

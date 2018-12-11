@@ -14,6 +14,7 @@ import { VentasComponent } from '../ventas/ventas.component'
 import { MercPendEntregarComponent } from '../merc-pend-entregar/merc-pend-entregar.component'
 import { ComprobantesPendFacturarComponent } from '../comprobantes-pend-facturar/comprobantes-pend-facturar.component'
 import { PerfilesListadoComponent } from '../perfiles-listado/perfiles-listado.component'
+import { AccesoTercerosComponent } from '../acceso-terceros/acceso-terceros.component';
 
 const routes: Routes = [
   {
@@ -82,6 +83,14 @@ const routes: Routes = [
     canActivate: [AuthGuardGuard],
     data: {
       rolAdmin: true
+    }
+  },
+  {
+    path: 'acceso-terceros',
+    component: AccesoTercerosComponent,
+    canActivate: [AuthGuardGuard],
+    data: {
+      rolAdmin: false
     }
   },
   {

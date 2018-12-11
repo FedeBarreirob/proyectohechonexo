@@ -10,5 +10,8 @@ export const environment = {
   urlSeguridadPerfilRegistrar: 'http://192.168.20.63:8080/DigitalSeguridad-1.0-SNAPSHOT/api/perfiles/registrar',
   urlSeguridadPerfilListar: 'http://192.168.20.63:8080/DigitalSeguridad-1.0-SNAPSHOT/api/perfiles/lista',
   urlSeguridadPerfilModificar: 'http://192.168.20.63:8080/DigitalSeguridad-1.0-SNAPSHOT/api/perfiles/modificar',
-  urlSeguridadPerfilLogueado: 'http://192.168.20.63:8080/DigitalSeguridad-1.0-SNAPSHOT/api/perfiles/perfil'
+  urlSeguridadPerfilLogueado: 'http://192.168.20.63:8080/DigitalSeguridad-1.0-SNAPSHOT/api/perfiles/perfil',
+  urlSeguridadTerceroRegistrar: 'http://192.168.20.63:8080/DigitalSeguridad-1.0-SNAPSHOT/api/terceros/registrar',
+  urlSeguridadTerceroListar: 'http://192.168.20.63:8080/DigitalSeguridad-1.0-SNAPSHOT/api/terceros/lista',
+  urlSeguridadTerceroModificar: 'http://192.168.20.63:8080/DigitalSeguridad-1.0-SNAPSHOT/api/terceros/modificar',
 };

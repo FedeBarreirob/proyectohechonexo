@@ -1,0 +1,65 @@
+<mat-progress-bar *ngIf="guardando" mode="indeterminate"></mat-progress-bar>
+<h2 mat-dialog-title>{{titulo}}</h2>
+
+<mat-dialog-content class="mat-typography">
+
+  <!-- Datos de acceso al sistema -->
+  <mat-card>
+    <mat-card-header>
+      <mat-card-title>Datos de acceso al sistema</mat-card-title>
+    </mat-card-header>
+
+    <mat-card-content>
+      <form [formGroup]="formDatosAccesoGroup">
+        <div fxLayout="row" fxLayoutAlign="space-between center">
+
+          <div fxFlex="30%">
+            <mat-form-field class="full-width-input">
+              <input [readonly]="esRegistroNuevo == false" matInput placeholder="Usuario" formControlName="username">
+            </mat-form-field>
+          </div>
+
+          <div fxFlex="30%" *ngIf="esRegistroNuevo">
+            <mat-form-field class="full-width-input">
+              <input matInput type="password" placeholder="Contraseña" formControlName="password">
+            </mat-form-field>
+          </div>
+
+          <div fxFlex="30%" *ngIf="esRegistroNuevo">
+            <mat-form-field class="full-width-input">
+              <input matInput type="password" placeholder="Confirmación contraseña" formControlName="passwordConfirmacion">
+            </mat-form-field>
+          </div>
+        </div>
+
+      </form>
+    </mat-card-content>
+
+  </mat-card>
+
+  <!-- Datos adicionales -->
+  <mat-card>
+    <mat-card-header>
+      <mat-card-title>Datos adicionales</mat-card-title>
+    </mat-card-header>
+
+    <mat-card-content>
+      <form [formGroup]="formDatosTerceroGroup">
+        <div fxLayout="row" fxLayoutAlign="space-between center">
+          <div fxFlex="100%">
+            <mat-form-field class="full-width-input">
+              <input matInput placeholder="Descripción" formControlName="descripcion">
+            </mat-form-field>
+          </div>
+        </div>
+
+      </form>
+    </mat-card-content>
+  </mat-card>
+
+</mat-dialog-content>
+
+<mat-dialog-actions align="end">
+  <button mat-raised-button color="primary" (click)="guardar()">Guardar</button>
+  <button mat-dialog-close mat-raised-button>Cancelar</button>
+</mat-dialog-actions>

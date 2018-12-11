@@ -1,0 +1,86 @@
+<div class="container" fxLayout="column" fxLayout.xs="column" fxLayoutWrap fxLayoutGap="0.5%" fxLayoutAlign="space-around stretch">
+  <mat-progress-bar *ngIf="cargando" mode="indeterminate"></mat-progress-bar>
+
+  <div fxLayout="row" fxLayoutAlign="space-between center">
+
+    <!-- Filtro -->
+    <div fxFlex="100%">
+
+      <mat-card>
+        <mat-card-content>
+          <div fxLayout="row" fxLayoutAlign="space-between center">
+            <div fxFlex="100%">
+              <mat-form-field class="full-width-input">
+                <input [(ngModel)]="filtro.filtro" matInput placeholder="Filtro de búsqueda" />
+              </mat-form-field>
+            </div>
+          </div>
+        </mat-card-content>
+
+        <mat-card-actions>
+          <div fxFlex></div>
+          <button mat-raised-button (click)="cargarListado()">Buscar</button>
+        </mat-card-actions>
+
+      </mat-card>
+
+    </div>
+  </div>
+
+  <!-- Listado -->
+  <div fxLayout="row" fxLayoutAlign="space-between center">
+    <div fxFlex="100%">
+      <mat-card>
+        <div fxFlexFill fxLayout="row" fxLayoutAlign="space-between center">
+          <div fxFlex="100%">
+            <h1>Accesos a terceros</h1>
+          </div>
+        </div>
+
+        <div fxFlexFill fxLayout="row" fxLayoutAlign="space-between center">
+          <div fxFlex="50%">
+            <strong>Nombre de usuario</strong>
+          </div>
+
+          <div fxFlex="50%">
+            <strong>Descripción</strong>
+          </div>
+
+        </div>
+
+        <mat-card-content>
+          <mat-nav-list class="listado">
+
+            <a mat-list-item *ngFor="let tercero of (listaPaginada.listado ? listaPaginada.listado : [])" (click)="verOperaciones(tercero)">
+
+              <div fxFlexFill fxLayout="row" fxLayoutAlign="space-between center">
+                <div fxFlex="50%">
+                  {{tercero.credencial.username}}
+                </div>
+
+                <div fxFlex="50%">
+                  {{tercero.descripcion}}
+                </div>
+              </div>
+
+              <mat-divider></mat-divider>
+            </a>
+
+          </mat-nav-list>
+        </mat-card-content>
+      </mat-card>
+    </div>
+  </div>
+
+  <!-- Paginador -->
+  <div fxLayout="row" fxLayoutAlign="space-between center">
+    <div fxFlex="100%">
+      <mat-paginator [length]="listaPaginada.cantidadTotalRegistros" [pageSize]="filtro.cantPorPagina" (page)="pageEvent = cargarListado($event)" [pageSizeOptions]="pageSizeOptions">
+      </mat-paginator>
+    </div>
+  </div>
+
+  <button mat-mini-fab class="custom-button" (click)="nuevoAccesoATercero()">
+    <mat-icon aria-label="Crear acceso a tercero">add</mat-icon>
+  </button>
+</div>
