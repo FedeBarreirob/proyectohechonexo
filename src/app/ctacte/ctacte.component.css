@@ -1,40 +1,58 @@
-.listadoCtaCte a:hover {
-    background-color: beige;
-  }
-  
-  .tabla-movimiento {
-    border: none;
-    width: 100%;
-    font-size: 10px;
-  }
+.movimiento:hover {
+  cursor: pointer;
+  background-color: beige;
+}
 
-  .tabla-movimiento td {
-    width: 50%;
-  }
+.importe {
+  text-align: right;
+  font-weight: bold;
+  padding: .2rem;
+  font-size: .7rem;
+}
 
-  .importe {
-    text-align: right;
-    font-weight: bold;
-  }
+.fecha {
+  color: dimgray;
+  padding: .2rem;
+  font-size: .7rem;
+}
 
-  .fecha {
-    color: dimgray;
-  }
+.concepto {
+  font-weight: bold;
+  padding: .2rem;
+  font-size: .7rem;
+}
 
-  .concepto {
-    font-weight: bold;
-  }
+.conceptoEncabezado {
+  font-weight: bold;
+  padding: .2rem;
+  font-size: .7rem;
+  text-align: center;
+}
 
-  /*saldos*/
-  .tabla-saldos {
-    border: none;
-    width: 100%;
-    font-size: 12px;
-    text-align: right;
-  }
+.importeListaCompleta {
+  text-align: right;
+  padding: .2rem;
+  font-size: .65rem;
+}
 
-  .custom-button{
-    position: fixed;
-    right: 30px;
-    bottom: 30px;
-  }
+.conceptoListaCompleta {
+  padding: .2rem;
+  font-size: .65rem;
+  text-align: center;
+  text-align: left;
+}
+
+/*saldos*/
+
+.tabla-saldos {
+  border: none;
+  width: 100%;
+  font-size: 12px;
+  text-align: right;
+}
+
+.custom-button {
+  position: fixed;
+  right: 30px;
+  bottom: 30px;
+}
