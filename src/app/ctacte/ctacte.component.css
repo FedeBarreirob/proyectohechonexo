@@ -56,3 +56,11 @@
   right: 30px;
   bottom: 30px;
 }
+
+.filaPar {
+  background-color: #d6e4da;
+}
+
+.filaImpar {
+  background-color: #fefffe;
+}
