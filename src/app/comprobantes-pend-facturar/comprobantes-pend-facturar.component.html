@@ -11,8 +11,10 @@
 
         <div fxFlex="33%">
           <mat-form-field>
-            <mat-select [(ngModel)]="cuenta" placeholder="Seleccione una cuenta" disableRipple>
-              <mat-option *ngFor="let cuentaVinculada of (perfilBasico != null ? perfilBasico.entidadCodigos : [])" [value]="cuentaVinculada">
+            <mat-select [disabled]="cargando==true" [(ngModel)]="cuenta" placeholder="Seleccione una cuenta"
+              disableRipple>
+              <mat-option *ngFor="let cuentaVinculada of (perfilBasico != null ? perfilBasico.entidadCodigos : [])"
+                [value]="cuentaVinculada">
                 {{cuentaVinculada}}
               </mat-option>
             </mat-select>
@@ -21,7 +23,8 @@
 
         <div fxFlex="33%">
           <mat-form-field>
-            <input [(ngModel)]="fechaDesde" matInput [matDatepicker]="desde" placeholder="Fecha desde" readonly>
+            <input [disabled]="cargando==true" [(ngModel)]="fechaDesde" matInput [matDatepicker]="desde" placeholder="Fecha desde"
+              readonly>
             <mat-datepicker-toggle matSuffix [for]="desde"></mat-datepicker-toggle>
             <mat-datepicker touchUi #desde></mat-datepicker>
           </mat-form-field>
@@ -29,7 +32,8 @@
 
         <div fxFlex="33%">
           <mat-form-field>
-            <input [(ngModel)]="fechaHasta" matInput [matDatepicker]="hasta" placeholder="Fecha hasta" readonly>
+            <input [disabled]="cargando==true" [(ngModel)]="fechaHasta" matInput [matDatepicker]="hasta" placeholder="Fecha hasta"
+              readonly>
             <mat-datepicker-toggle matSuffix [for]="hasta"></mat-datepicker-toggle>
             <mat-datepicker touchUi #hasta></mat-datepicker>
           </mat-form-field>
@@ -37,7 +41,7 @@
       </div>
 
       <mat-action-row>
-        <button mat-button (click)="cargarListado()">Buscar</button>
+        <button [disabled]="cargando==true" mat-button (click)="cargarListado()">Buscar</button>
       </mat-action-row>
     </mat-expansion-panel>
 
@@ -70,35 +74,68 @@
 
   <div fxFlex="100%">
     <mat-card>
-      <mat-card-title>Movimientos</mat-card-title>
+      <mat-card-title>Comprobantes Pendientes de Facturar</mat-card-title>
 
       <mat-card-content>
-        <mat-nav-list class="listado-comp-pend-facturar">
 
-          <a mat-list-item *ngFor="let movimiento of (listadoCompPendFact ? listadoCompPendFact : [])" (click)="verDetalle(movimiento)">
+        <!-- Movimiento para panalla chicas -->
+        <div fxHide.lg fxHide.md class="movimiento" *ngFor="let movimiento of (listadoCompPendFact ? listadoCompPendFact : [])"
+          (click)="verDetalle(movimiento)">
 
-            <table class="tabla-movimiento">
-              <tr>
-                <td class="conceptos" align="start">{{movimiento.descripcionArticulo}}</td>
-                <td class="conceptos" align="center">{{movimiento.cantidad | number: '.0'}}</td>
-                <td class="conceptos" align="center">{{movimiento.cantidadPendiente | number: '.0'}}</td>
-              </tr>
-              <tr>
-                <td class="engris" align="start">{{movimiento.fecha}} </td>
-                <td class="engris" align="center">Cantidad</td>
-                <td class="engris" align="center">Cant. Pend.</td>
-              </tr>
-            </table>
+          <div fxLayout="row" fxLayoutAlign="center space-between">
+            <div fxFlex="50%" class="concepto">{{movimiento.descripcionArticulo}}</div>
+            <div fxFlex="25%" class="importe" align="right">{{movimiento.cantidad | number: '.0'}}</div>
+            <div fxFlex="25%" class="importe" align="right">{{movimiento.cantidadPendiente | number: '.0'}}</div>
+          </div>
+          <div fxLayout="row" fxLayoutAlign="center space-between">
+            <div fxFlex="50%" class="fecha">{{movimiento.fecha}}</div>
+            <div fxFlex="25%" class="engris" align="right">Cantidad</div>
+            <div fxFlex="25%" class="engris" align="right">Cant. Pend.</div>
+          </div>
 
-            <mat-divider></mat-divider>
-          </a>
+          <mat-divider></mat-divider>
+        </div>
 
-        </mat-nav-list>
+        <!-- Movimiento para panalla grandes -->
+        <span fxHide.xs fxHide.sm>
+          <!-- Encabezado -->
+          <div fxLayout="row" fxLayoutAlign="center space-between">
+            <div fxFlex="12%" class="conceptoEncabezado">Comprobante</div>
+            <mat-divider [vertical]="true"></mat-divider>
+            <div fxFlex="6%" class="conceptoEncabezado">Fecha</div>
+            <mat-divider [vertical]="true"></mat-divider>
+            <div fxFlex="7%" class="conceptoEncabezado">Artículo</div>
+            <mat-divider [vertical]="true"></mat-divider>
+            <div fxFlex class="conceptoEncabezado">Descripción</div>
+            <mat-divider [vertical]="true"></mat-divider>
+            <div fxFlex="12%" class="conceptoEncabezado">Cantidad</div>
+            <mat-divider [vertical]="true"></mat-divider>
+            <div fxFlex="12%" class="conceptoEncabezado">Pendiente</div>
+            <mat-divider [vertical]="true"></mat-divider>
+            <div fxFlex="12%" class="conceptoEncabezado">Total</div>
+          </div>
+
+          <!--Movimientos-->
+          <div fxLayout="row" fxLayoutAlign="center space-between" class="movimiento" *ngFor="let movimiento of (listadoCompPendFact ? listadoCompPendFact : []); index as i"
+            (click)="verDetalle(movimiento)" [ngClass]="i%2 == 0 ? 'filaPar' : 'filaImpar'">
+
+            <div fxFlex="12%" class="conceptoListaCompleta">{{movimiento.tipoComprobante}} {{movimiento.comprobante}}</div>
+            <div fxFlex="6%" class="conceptoListaCompleta">{{movimiento.fecha}}</div>
+            <div fxFlex="7%" class="conceptoListaCompleta">{{movimiento.codArticulo}}</div>
+            <div fxFlex class="conceptoListaCompleta">{{movimiento.descripcionArticulo}}</div>
+            <div fxFlex="12%" class="importeListaCompleta">{{movimiento.cantidad | number: '.0'}}</div>
+            <div fxFlex="12%" class="importeListaCompleta">{{movimiento.cantidadPendiente | number: '.0'}}</div>
+            <div fxFlex="12%" class="importeListaCompleta">{{movimiento.totalUsd | number: '.2'}}</div>
+
+          </div>
+
+        </span>
+
       </mat-card-content>
     </mat-card>
   </div>
 
-  <button mat-mini-fab class="custom-button" (click)="verOpcionesExtras()" *ngIf="listadoCompPendFact != null">
-      <mat-icon aria-label="Más opciones">add</mat-icon>
+  <button [disabled]="cargando==true" mat-mini-fab class="custom-button" (click)="verOpcionesExtras()" *ngIf="listadoCompPendFact != null">
+    <mat-icon aria-label="Más opciones">add</mat-icon>
   </button>
 </div>
