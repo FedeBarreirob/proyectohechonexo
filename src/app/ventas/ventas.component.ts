@@ -63,7 +63,8 @@ export class VentasComponent implements OnInit {
     let filtro: FiltroVentas = {
       cuenta: this.cuenta,
       fechaDesde: this.datePipe.transform(this.fechaDesde, 'dd/MM/yyyy'),
-      fechaHasta: this.datePipe.transform(this.fechaHasta, 'dd/MM/yyyy')
+      fechaHasta: this.datePipe.transform(this.fechaHasta, 'dd/MM/yyyy'),
+      filtroEspecieCosechaDTO: this.filtroEspecieCosechaSeleccionado
     }
 
     let usuarioLogueado = <UserAuth>this.authenticationService.usuarioLogueado();
