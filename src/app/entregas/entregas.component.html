@@ -12,8 +12,9 @@
         <div fxFlex="25%">
           <mat-form-field>
             <mat-select [disabled]="cargando==true || cargandoFiltros==true" [(ngModel)]="cuenta" placeholder="Seleccione una cuenta"
-             disableRipple (selectionChange)="cargarFiltrosEspecieCosecha()">
-              <mat-option *ngFor="let cuentaVinculada of (perfilBasico != null ? perfilBasico.entidadCodigos : [])" [value]="cuentaVinculada">
+              disableRipple (selectionChange)="cargarFiltrosEspecieCosecha()">
+              <mat-option *ngFor="let cuentaVinculada of (perfilBasico != null ? perfilBasico.entidadCodigos : [])"
+                [value]="cuentaVinculada">
                 {{cuentaVinculada}}
               </mat-option>
             </mat-select>
@@ -22,7 +23,8 @@
 
         <div fxFlex="25%">
           <mat-form-field>
-            <input [disabled]="cargando==true" [(ngModel)]="fechaDesde" matInput [matDatepicker]="desde" placeholder="Fecha desde" readonly>
+            <input [disabled]="cargando==true" [(ngModel)]="fechaDesde" matInput [matDatepicker]="desde" placeholder="Fecha desde"
+              readonly>
             <mat-datepicker-toggle matSuffix [for]="desde"></mat-datepicker-toggle>
             <mat-datepicker touchUi #desde></mat-datepicker>
           </mat-form-field>
@@ -30,27 +32,27 @@
 
         <div fxFlex="25%">
           <mat-form-field>
-            <input [disabled]="cargando==true" [(ngModel)]="fechaHasta" matInput [matDatepicker]="hasta" placeholder="Fecha hasta" readonly>
+            <input [disabled]="cargando==true" [(ngModel)]="fechaHasta" matInput [matDatepicker]="hasta" placeholder="Fecha hasta"
+              readonly>
             <mat-datepicker-toggle matSuffix [for]="hasta"></mat-datepicker-toggle>
             <mat-datepicker touchUi #hasta></mat-datepicker>
           </mat-form-field>
         </div>
 
         <div fxFlex="25%">
-            <mat-form-field>
-              <mat-select [disabled]="cargando==true || cargandoFiltros==true" [(ngModel)]="filtroEspecieCosechaSeleccionado" placeholder="Producto"
-                disableRipple>
-                <mat-option>
-                  Quitar filtro
-                </mat-option>
-                <mat-option *ngFor="let filtro of (filtrosEspecieCosecha != null ? filtrosEspecieCosecha : [])"
-                  [value]="filtro">
-                  {{filtro.descripcion}}
-                </mat-option>
-              </mat-select>
-              <mat-progress-bar *ngIf="cargandoFiltros==true" mode="buffer"></mat-progress-bar>
-            </mat-form-field>
-          </div>
+          <mat-form-field>
+            <mat-select [disabled]="cargando==true || cargandoFiltros==true" [(ngModel)]="filtroEspecieCosechaSeleccionado"
+              placeholder="Producto" disableRipple>
+              <mat-option>
+                Quitar filtro
+              </mat-option>
+              <mat-option *ngFor="let filtro of (filtrosEspecieCosecha != null ? filtrosEspecieCosecha : [])" [value]="filtro">
+                {{filtro.descripcion}}
+              </mat-option>
+            </mat-select>
+            <mat-progress-bar *ngIf="cargandoFiltros==true" mode="buffer"></mat-progress-bar>
+          </mat-form-field>
+        </div>
 
       </div>
 
@@ -109,30 +111,150 @@
 
   <div fxFlex="100%">
     <mat-card>
-      <mat-card-title>Movimientos</mat-card-title>
+      <mat-card-title>Entregas</mat-card-title>
 
       <mat-card-content>
-        <mat-nav-list class="listado-entregas">
 
-          <a mat-list-item *ngFor="let movimiento of (listadoEntregas ? listadoEntregas : [])" (click)="verDetalle(movimiento)">
+        <!-- Movimiento para panalla chicas -->
+        <div fxHide.lg fxHide.md class="movimiento" *ngFor="let movimiento of (listadoEntregas ? listadoEntregas : [])"
+          (click)="verDetalle(movimiento)">
 
-            <table class="tabla-movimiento">
-              <tr>
-                <td class="conceptos" align="start">{{movimiento.especie}} {{movimiento.cosecha}}</td>
-                <td class="conceptos" align="center">{{movimiento.kilosBrutos | number: '.0'}}</td>
-                <td class="conceptos" align="center">{{movimiento.kilosNetos | number: '.0'}}</td>
-              </tr>
-              <tr>
-                <td class="engris" align="start">{{movimiento.fecha}} </td>
-                <td class="engris" align="center">Kg Brutos</td>
-                <td class="engris" align="center">Kg Netos</td>
-              </tr>
-            </table>
+          <div fxLayout="row" fxLayoutAlign="center space-between">
+            <div fxFlex="50%" class="concepto">{{movimiento.especie}} {{movimiento.cosecha}}</div>
+            <div fxFlex="25%" class="importe" align="right">{{movimiento.kilosBrutos | number: '.0'}}</div>
+            <div fxFlex="25%" class="importe" align="right">{{movimiento.kilosNetos | number: '.0'}}</div>
+          </div>
+          <div fxLayout="row" fxLayoutAlign="center space-between">
+            <div fxFlex="50%" class="fecha">{{movimiento.fecha}}</div>
+            <div fxFlex="25%" class="engris" align="right">Kg Brutos</div>
+            <div fxFlex="25%" class="engris" align="right">Kg Netos</div>
+          </div>
+
+          <mat-divider></mat-divider>
+        </div>
+
+        <!-- Movimiento para panalla grandes -->
+        <span fxHide.xs fxHide.sm>
+          <!-- Encabezado -->
+          <div fxLayout="row" fxLayoutAlign="center space-between">
+            <div fxFlex="6%" class="conceptoEncabezado">Fecha</div>
+            <mat-divider [vertical]="true"></mat-divider>
+            <div fxFlex="12%" class="conceptoEncabezado">Comprobante</div>
+            <mat-divider [vertical]="true"></mat-divider>
+            <div fxFlex="6%" class="conceptoEncabezado">Brutos</div>
+            <mat-divider [vertical]="true"></mat-divider>
+
+            <div fxFlex="6%">
+              <div fxLayout="row" fxLayoutAlign="start space-between">
+                <div fxFlex="100%" class="conceptoEncabezado">Humedad</div>
+              </div>
+
+              <div fxLayout="row" fxLayoutAlign="center space-between">
+                <div fxFlex="50%" class="conceptoEncabezado">%</div>
+                <mat-divider [vertical]="true"></mat-divider>
+                <div fxFlex="50%" class="conceptoEncabezado">Kg.</div>
+              </div>
+            </div>
+
+            <mat-divider [vertical]="true"></mat-divider>
+
+            <div fxFlex="6%">
+              <div fxLayout="row" fxLayoutAlign="start space-between">
+                <div fxFlex="100%" class="conceptoEncabezado">Zarandeo</div>
+              </div>
+
+              <div fxLayout="row" fxLayoutAlign="center space-between">
+                <div fxFlex="50%" class="conceptoEncabezado">%</div>
+                <mat-divider [vertical]="true"></mat-divider>
+                <div fxFlex="50%" class="conceptoEncabezado">Kg.</div>
+              </div>
+            </div>
+
+            <mat-divider [vertical]="true"></mat-divider>
+
+            <div fxFlex="6%">
+              <div fxLayout="row" fxLayoutAlign="start space-between">
+                <div fxFlex="100%" class="conceptoEncabezado">Volátil</div>
+              </div>
+
+              <div fxLayout="row" fxLayoutAlign="center space-between">
+                <div fxFlex="50%" class="conceptoEncabezado">%</div>
+                <mat-divider [vertical]="true"></mat-divider>
+                <div fxFlex="50%" class="conceptoEncabezado">Kg.</div>
+              </div>
+            </div>
+
+            <mat-divider [vertical]="true"></mat-divider>
+            <div fxFlex="8%" class="conceptoEncabezado">Factor/Grado</div>
+            <mat-divider [vertical]="true"></mat-divider>
+            <div fxFlex="6%" class="conceptoEncabezado">Netos</div>
+            <mat-divider [vertical]="true"></mat-divider>
+            <div fxFlex="2%" class="conceptoEncabezado">Pla</div>
+            <mat-divider [vertical]="true"></mat-divider>
+            <div fxFlex="7%" class="conceptoEncabezado">N1116A</div>
+            <mat-divider [vertical]="true"></mat-divider>
+            <div fxFlex="5%" class="conceptoEncabezado">RM/CP</div>
+            <mat-divider [vertical]="true"></mat-divider>
+            <div fxFlex="6%" class="conceptoEncabezado">ACARREO</div>
+            <mat-divider [vertical]="true"></mat-divider>
+            <div fxFlex class="conceptoEncabezado">Empresa Transp.</div>
+          </div>
+
+          <!--Movimientos agrupados-->
+          <span *ngFor="let movimientoAgrupado of (listadoEntregasAgrupadasPorCampo ? listadoEntregasAgrupadasPorCampo : [])">
+
+            <!--Informacion del campo-->
+            <div fxLayout="row" fxLayoutAlign="start none">
+              <div fxFlex="6%"></div>
+              <div fxFlex="94%" class="tituloCampo">{{movimientoAgrupado.campo}}</div>
+            </div>
+
+            <!--Listados de movimientos del campo-->
+            <div fxLayout="row" fxLayoutAlign="center space-between" class="movimiento" *ngFor="let movimiento of movimientoAgrupado.listado; index as i"
+              (click)="verDetalle(movimiento)" [ngClass]="i%2 == 0 ? 'filaPar' : 'filaImpar'" fxLayoutGap="0.5%">
+
+              <div fxFlex="6%" class="conceptoListaCompleta">{{movimiento.fecha}}</div>
+              <div fxFlex="12%" class="conceptoListaCompleta">{{movimiento.comprobante}}</div>
+              <div fxFlex="6%" class="importeListaCompleta">{{movimiento.kilosBrutos | number: '.0'}}</div>
+              <div fxFlex="3%" class="importeListaCompleta">{{movimiento.porcentajeHumedad | number: '.2'}}</div>
+              <div fxFlex="3%" class="importeListaCompleta">{{movimiento.kgMermaHumedad | number: '.0'}}</div>
+              <div fxFlex="2%" class="importeListaCompleta">{{movimiento.porcentajeZarandeo | number: '.2'}}</div>
+              <div fxFlex="2%" class="importeListaCompleta">{{movimiento.kgMermaZarandeo | number: '.0'}}</div>
+              <div fxFlex="3%" class="importeListaCompleta">{{movimiento.porcentajeVolatil | number: '.2'}}</div>
+              <div fxFlex="3%" class="importeListaCompleta">{{movimiento.kgMermaVolatil | number: '.0'}}</div>
+              <div fxFlex="8%" class="importeListaCompleta">{{movimiento.factor}}/{{movimiento.grado}}</div>
+              <div fxFlex="6%" class="importeListaCompleta">{{movimiento.kilosNetos | number: '.0'}}</div>
+              <div fxFlex="2%" class="importeListaCompleta">{{movimiento.planta}}</div>
+              <div fxFlex="7%" class="importeListaCompleta">{{movimiento.n1116A}}</div>
+              <div fxFlex="5%" class="importeListaCompleta">{{movimiento.numeroComprobanteExterno}}</div>
+              <div fxFlex="6%" class="conceptoListaCompleta">{{movimiento.acarreo}}</div>
+              <div fxFlex class="conceptoListaCompleta">{{movimiento.empresaTransporte}}</div>
+
+            </div>
+
+            <!-- Total del campo -->
+            <div fxLayout="row" fxLayoutAlign="start none">
+              <div fxFlex="6%"></div>
+              <div fxFlex="12%" class="tituloTotalCampo">TOTAL CAMPO:</div>
+              <div fxFlex="6%" class="importeTotalCampo">{{movimientoAgrupado.totales.totalKgBrutos | number: '.0'}}</div>
+              <div fxFlex="3%"></div>
+              <div fxFlex="3%" class="importeTotalCampo">{{movimientoAgrupado.totales.totalKgHumedad | number: '.0'}}</div>
+              <div fxFlex="3%"></div>
+              <div fxFlex="3%" class="importeTotalCampo">{{movimientoAgrupado.totales.totalKgZarandeo | number: '.0'}}</div>
+              <div fxFlex="3%"></div>
+              <div fxFlex="3%" class="importeTotalCampo">{{movimientoAgrupado.totales.totalKgVolatil | number: '.0'}}</div>
+              <div fxFlex="8%"></div>
+              <div fxFlex="3%" class="importeTotalCampo">{{movimientoAgrupado.totales.totalKgNetos | number: '.0'}}</div>
+              <div fxFlex="2%"></div>
+              <div fxFlex="7%" class="tituloTotalCampo">ENTREGAS:</div>
+              <div fxFlex="5%" class="importeTotalCampo">{{movimientoAgrupado.totales.cantidadEntregas | number: '.0'}}</div>
+            </div>
 
             <mat-divider></mat-divider>
-          </a>
+          </span>
 
-        </mat-nav-list>
+        </span>
+
       </mat-card-content>
     </mat-card>
   </div>

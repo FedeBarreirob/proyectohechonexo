@@ -3,6 +3,7 @@ export interface ListadoEntregas {
     mensaje: string,
     datos: {
         listado: Array<MovimientoEntrega>,
+        listadoAgrupadoPorCampo: Array<MovimientoEntregaAgrupadoPorCampo>
         totales: EntregasTotales
     }
 }
@@ -38,4 +39,10 @@ export interface EntregasTotales {
     totalKgVolatil: number,
     totalKgNetos: number,
     cantidadEntregas: number
+}
+
+export interface MovimientoEntregaAgrupadoPorCampo {
+    campo: string,
+    listado: Array<MovimientoEntrega>,
+    totales: EntregasTotales
 }

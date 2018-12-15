@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { EntregasService } from '../services/entregas/entregas.service';
-import { MovimientoEntrega, EntregasTotales } from '../interfaces/entregas/listado-entregas';
+import { MovimientoEntrega, EntregasTotales, MovimientoEntregaAgrupadoPorCampo } from '../interfaces/entregas/listado-entregas';
 import { FiltroEntregas } from '../interfaces/entregas/filtro-entregas';
 import { UserAuth } from '../models/security/user';
 import { AuthenticationService } from '../services/security/authentication.service';
@@ -23,6 +23,8 @@ export class EntregasComponent implements OnInit {
   private movimientoSeleccionado: MovimientoEntrega = null;
   private totales: EntregasTotales = null;
   private cargando: boolean;
+
+  private listadoEntregasAgrupadasPorCampo: Array<MovimientoEntregaAgrupadoPorCampo>;
 
   private cuenta: string = "";
   private perfilBasico: PerfilBasico;
@@ -71,6 +73,7 @@ export class EntregasComponent implements OnInit {
     if (usuarioLogueado != null) {
       return this.entregasService.listadoEntregas(filtro, usuarioLogueado.token).subscribe(respuesta => {
         this.listadoEntregas = respuesta.datos.listado;
+        this.listadoEntregasAgrupadasPorCampo = respuesta.datos.listadoAgrupadoPorCampo;
         this.totales = respuesta.datos.totales;
 
         this.cargando = false;
