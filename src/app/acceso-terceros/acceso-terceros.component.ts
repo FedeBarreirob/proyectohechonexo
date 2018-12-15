@@ -16,15 +16,15 @@ import { AccesoTercerosOperacionesComponent } from '../acceso-terceros-operacion
 })
 export class AccesoTercerosComponent implements OnInit {
 
-  private listaPaginada: ListadoPaginado = {
+  public listaPaginada: ListadoPaginado = {
     listado: [],
     cantidadTotalRegistros: 0,
     cantidadPorPagina: 0,
     paginaActual: 0
   };
-  private cargando: boolean;
+  public cargando: boolean;
   private usuarioLogueado: UserAuth;
-  private filtro: FiltroGenericoListaConFiltroId = {
+  public filtro: FiltroGenericoListaConFiltroId = {
     filtro: "",
     numeroPagina: 1,
     cantPorPagina: 25,

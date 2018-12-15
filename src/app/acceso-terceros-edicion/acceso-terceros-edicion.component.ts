@@ -15,14 +15,14 @@ import { TerceroBasicoCredencial } from '../interfaces/acceso-terceros/tercero-c
 export class AccesoTercerosEdicionComponent implements OnInit {
 
   private formSubmitAttempt: boolean;
-  private guardando: boolean = false;
+  public guardando: boolean = false;
   private usuarioLogueado: UserAuth;
 
-  private formDatosAccesoGroup: FormGroup;
-  private formDatosTerceroGroup: FormGroup;
+  public formDatosAccesoGroup: FormGroup;
+  public formDatosTerceroGroup: FormGroup;
 
-  private esRegistroNuevo: boolean;
-  private titulo: string;
+  public esRegistroNuevo: boolean;
+  public titulo: string;
 
   private terceroBasico: TerceroBasico;
 

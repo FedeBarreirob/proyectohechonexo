@@ -24,7 +24,7 @@ export class ComprobantesPendFacturarComponent implements OnInit {
   public cargando: boolean;
 
   public cuenta: string = "";
-  private perfilBasico: PerfilBasico;
+  public perfilBasico: PerfilBasico;
   public fechaDesde: Date = new Date();
   public fechaHasta: Date = new Date();
 

@@ -61,6 +61,11 @@ import { AccesoTercerosOperacionesComponent } from './acceso-terceros-operacione
 
 registerLocaleData(localeEsAr, 'es-AR');
 
+export function tokenGetter() {
+  let usuario = JSON.parse(localStorage.getItem('currentUser'));
+  return usuario != null ? usuario.token : '';
+}
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -117,10 +122,7 @@ registerLocaleData(localeEsAr, 'es-AR');
     JwtModule.forRoot({
       config: {
         throwNoTokenError: false,
-        tokenGetter: () => {
-          let usuario = JSON.parse(localStorage.getItem('currentUser'));
-          return usuario != null ? usuario.token : '';
-        },
+        tokenGetter: tokenGetter,
         whitelistedDomains: []
       }
     })

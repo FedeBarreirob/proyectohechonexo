@@ -132,7 +132,7 @@
           <div fxLayout="row" fxLayoutAlign="center space-between" class="movimiento" *ngFor="let movimiento of (listadoCtaCte ? listadoCtaCte : []); index as i"
             (click)="verDetalle(movimiento)" [ngClass]="i%2 == 0 ? 'filaPar' : 'filaImpar'">
 
-            <div fxFlex="10%" class="conceptoListaCompleta">{{movimiento.comprobante}}</div>
+            <div fxFlex="10%" class="conceptoListaCompleta">{{movimiento.comprobanteAfectado}}</div>
             <div fxFlex="6%" class="conceptoListaCompleta">{{movimiento.fechaCtaCte}}</div>
             <div fxFlex="7%" class="conceptoListaCompleta">{{movimiento.fechaVencimiento}}</div>
             <div fxFlex="24%" class="conceptoListaCompleta">{{movimiento.concepto}}</div>

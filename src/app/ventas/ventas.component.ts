@@ -19,19 +19,19 @@ import { FiltroEspecieCosecha } from '../interfaces/varios/filtro-especie-cosech
 })
 export class VentasComponent implements OnInit {
 
-  private listadoVentas: Array<MovimientoVenta>;
+  public listadoVentas: Array<MovimientoVenta>;
   private movimientoSeleccionado: MovimientoVenta = null;
-  private totales: VentasTotales = null;
-  private cargando: boolean;
+  public totales: VentasTotales = null;
+  public cargando: boolean;
 
-  private cuenta: string = "";
-  private perfilBasico: PerfilBasico;
-  private fechaDesde: Date = new Date();
-  private fechaHasta: Date = new Date();
+  public cuenta: string = "";
+  public perfilBasico: PerfilBasico;
+  public fechaDesde: Date = new Date();
+  public fechaHasta: Date = new Date();
 
-  private filtrosEspecieCosecha: Array<FiltroEspecieCosecha> = [];
-  private filtroEspecieCosechaSeleccionado: FiltroEspecieCosecha = null;
-  private cargandoFiltros: boolean;
+  public filtrosEspecieCosecha: Array<FiltroEspecieCosecha> = [];
+  public filtroEspecieCosechaSeleccionado: FiltroEspecieCosecha = null;
+  public cargandoFiltros: boolean;
 
   constructor(private ventasService: VentasService,
     private authenticationService: AuthenticationService,

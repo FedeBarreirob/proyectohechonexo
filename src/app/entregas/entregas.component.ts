@@ -19,21 +19,21 @@ import { FiltroEspecieCosecha } from '../interfaces/varios/filtro-especie-cosech
 })
 export class EntregasComponent implements OnInit {
 
-  private listadoEntregas: Array<MovimientoEntrega>;
+  public listadoEntregas: Array<MovimientoEntrega>;
   private movimientoSeleccionado: MovimientoEntrega = null;
-  private totales: EntregasTotales = null;
-  private cargando: boolean;
+  public totales: EntregasTotales = null;
+  public cargando: boolean;
 
-  private listadoEntregasAgrupadasPorCampo: Array<MovimientoEntregaAgrupadoPorCampo>;
+  public listadoEntregasAgrupadasPorCampo: Array<MovimientoEntregaAgrupadoPorCampo>;
 
-  private cuenta: string = "";
-  private perfilBasico: PerfilBasico;
-  private fechaDesde: Date = new Date();
-  private fechaHasta: Date = new Date();
+  public cuenta: string = "";
+  public perfilBasico: PerfilBasico;
+  public fechaDesde: Date = new Date();
+  public fechaHasta: Date = new Date();
 
-  private filtrosEspecieCosecha: Array<FiltroEspecieCosecha> = [];
-  private filtroEspecieCosechaSeleccionado: FiltroEspecieCosecha = null;
-  private cargandoFiltros: boolean;
+  public filtrosEspecieCosecha: Array<FiltroEspecieCosecha> = [];
+  public filtroEspecieCosechaSeleccionado: FiltroEspecieCosecha = null;
+  public cargandoFiltros: boolean;
 
   constructor(private entregasService: EntregasService,
     private authenticationService: AuthenticationService,

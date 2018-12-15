@@ -16,15 +16,15 @@ import { PerfilBasico } from '../interfaces/perfiles/perfil-basico';
 })
 export class PerfilesListadoComponent implements OnInit {
 
-  private listaPaginada: ListadoPaginado = {
+  public listaPaginada: ListadoPaginado = {
     listado: [],
     cantidadTotalRegistros: 0,
     cantidadPorPagina: 0,
     paginaActual: 0
   };
-  private cargando: boolean;
+  public cargando: boolean;
   private usuarioLogueado: UserAuth;
-  private filtro: FiltroGenericoLista = {
+  public filtro: FiltroGenericoLista = {
     filtro: "",
     numeroPagina: 1,
     cantPorPagina: 25

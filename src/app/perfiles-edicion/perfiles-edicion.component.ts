@@ -17,18 +17,18 @@ import { UserAuth } from '../models/security/user';
 export class PerfilesEdicionComponent implements OnInit {
 
   private formSubmitAttempt: boolean;
-  private guardando: boolean = false;
+  public guardando: boolean = false;
   private usuarioLogueado: UserAuth;
 
-  private formDatosAccesoGroup: FormGroup;
-  private formDatosPersonalesGroup: FormGroup;
-  private formCuentasVinculadasGroup: FormGroup;
+  public formDatosAccesoGroup: FormGroup;
+  public formDatosPersonalesGroup: FormGroup;
+  public formCuentasVinculadasGroup: FormGroup;
 
-  private esRegistroNuevo: boolean;
-  private titulo: string;
+  public esRegistroNuevo: boolean;
+  public titulo: string;
 
-  private listadoCodigos: string[] = [];
-  private roles: Array<Rol> = [
+  public listadoCodigos: string[] = [];
+  public roles: Array<Rol> = [
     {
       id: 1,
       denominacion: "Administrador",
@@ -40,7 +40,7 @@ export class PerfilesEdicionComponent implements OnInit {
       admin: false
     }];
 
-  private perfilBasico: PerfilBasico;
+  public perfilBasico: PerfilBasico;
 
   constructor(
     private authenticationService: AuthenticationService,
