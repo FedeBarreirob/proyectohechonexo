@@ -9,6 +9,7 @@ import { MatDialog } from '@angular/material';
 import { EntregasDetalleComponent } from '../entregas-detalle/entregas-detalle.component';
 import { EntregasMasOperacionesComponent } from '../entregas-mas-operaciones/entregas-mas-operaciones.component';
 import { PerfilBasico } from '../interfaces/perfiles/perfil-basico';
+import { FiltroEspecieCosecha } from '../interfaces/varios/filtro-especie-cosecha';
 
 @Component({
   selector: 'app-entregas',
@@ -28,6 +29,10 @@ export class EntregasComponent implements OnInit {
   private fechaDesde: Date = new Date();
   private fechaHasta: Date = new Date();
 
+  private filtrosEspecieCosecha: Array<FiltroEspecieCosecha> = [];
+  private filtroEspecieCosechaSeleccionado: FiltroEspecieCosecha = null;
+  private cargandoFiltros: boolean;
+
   constructor(private entregasService: EntregasService,
     private authenticationService: AuthenticationService,
     private datePipe: DatePipe,
@@ -38,6 +43,19 @@ export class EntregasComponent implements OnInit {
     this.perfilBasico = this.authenticationService.perfilUsuarioLogueado();
   }
 
+  // funcion encargada de cargar los filtros de especie cosecha cuando se cambia la seleccion de cuenta
+  cargarFiltrosEspecieCosecha() {
+    this.cargandoFiltros = true;
+    this.filtroEspecieCosechaSeleccionado = null;
+    let usuarioLogueado = <UserAuth>this.authenticationService.usuarioLogueado();
+    this.entregasService.listadoFiltrosEspecieCosecha(this.cuenta, usuarioLogueado.token).subscribe(
+      respuesta => {
+        this.filtrosEspecieCosecha = respuesta;
+        this.cargandoFiltros = false;
+      }, error => { console.log("error"); this.cargandoFiltros = true; }
+    );
+  }
+
   // funcion que ejecuta la carga del listado de entregas
   cargarListado() {
     this.cargando = true;
@@ -45,7 +63,8 @@ export class EntregasComponent implements OnInit {
     let filtro: FiltroEntregas = {
       cuenta: this.cuenta,
       fechaDesde: this.datePipe.transform(this.fechaDesde, 'dd/MM/yyyy'),
-      fechaHasta: this.datePipe.transform(this.fechaHasta, 'dd/MM/yyyy')
+      fechaHasta: this.datePipe.transform(this.fechaHasta, 'dd/MM/yyyy'),
+      filtroEspecieCosechaDTO: this.filtroEspecieCosechaSeleccionado
     }
 
     let usuarioLogueado = <UserAuth>this.authenticationService.usuarioLogueado();

@@ -9,9 +9,10 @@
 
       <div class="container" fxLayout="row" fxLayout.xs="column" fxLayoutGap="0.5%" fxLayoutAlign="space-around stretch">
 
-        <div fxFlex="33%">
+        <div fxFlex="25%">
           <mat-form-field>
-            <mat-select [(ngModel)]="cuenta" placeholder="Seleccione una cuenta" disableRipple>
+            <mat-select [disabled]="cargando==true || cargandoFiltros==true" [(ngModel)]="cuenta" placeholder="Seleccione una cuenta"
+             disableRipple (selectionChange)="cargarFiltrosEspecieCosecha()">
               <mat-option *ngFor="let cuentaVinculada of (perfilBasico != null ? perfilBasico.entidadCodigos : [])" [value]="cuentaVinculada">
                 {{cuentaVinculada}}
               </mat-option>
@@ -19,25 +20,42 @@
           </mat-form-field>
         </div>
 
-        <div fxFlex="33%">
+        <div fxFlex="25%">
           <mat-form-field>
-            <input [(ngModel)]="fechaDesde" matInput [matDatepicker]="desde" placeholder="Fecha desde" readonly>
+            <input [disabled]="cargando==true" [(ngModel)]="fechaDesde" matInput [matDatepicker]="desde" placeholder="Fecha desde" readonly>
             <mat-datepicker-toggle matSuffix [for]="desde"></mat-datepicker-toggle>
             <mat-datepicker touchUi #desde></mat-datepicker>
           </mat-form-field>
         </div>
 
-        <div fxFlex="33%">
+        <div fxFlex="25%">
           <mat-form-field>
-            <input [(ngModel)]="fechaHasta" matInput [matDatepicker]="hasta" placeholder="Fecha hasta" readonly>
+            <input [disabled]="cargando==true" [(ngModel)]="fechaHasta" matInput [matDatepicker]="hasta" placeholder="Fecha hasta" readonly>
             <mat-datepicker-toggle matSuffix [for]="hasta"></mat-datepicker-toggle>
             <mat-datepicker touchUi #hasta></mat-datepicker>
           </mat-form-field>
         </div>
+
+        <div fxFlex="25%">
+            <mat-form-field>
+              <mat-select [disabled]="cargando==true || cargandoFiltros==true" [(ngModel)]="filtroEspecieCosechaSeleccionado" placeholder="Producto"
+                disableRipple>
+                <mat-option>
+                  Quitar filtro
+                </mat-option>
+                <mat-option *ngFor="let filtro of (filtrosEspecieCosecha != null ? filtrosEspecieCosecha : [])"
+                  [value]="filtro">
+                  {{filtro.descripcion}}
+                </mat-option>
+              </mat-select>
+              <mat-progress-bar *ngIf="cargandoFiltros==true" mode="buffer"></mat-progress-bar>
+            </mat-form-field>
+          </div>
+
       </div>
 
       <mat-action-row>
-        <button mat-button (click)="cargarListado()">Buscar</button>
+        <button [disabled]="cargando==true || cargandoFiltros==true" mat-button (click)="cargarListado()">Buscar</button>
       </mat-action-row>
     </mat-expansion-panel>
 
@@ -119,7 +137,7 @@
     </mat-card>
   </div>
 
-  <button mat-mini-fab class="custom-button" (click)="verOpcionesExtras()" *ngIf="listadoEntregas != null">
+  <button [disabled]="cargando==true" mat-mini-fab class="custom-button" (click)="verOpcionesExtras()" *ngIf="listadoEntregas != null">
     <mat-icon aria-label="Más opciones">add</mat-icon>
   </button>
 </div>
