@@ -11,7 +11,7 @@
           <div fxLayout="row" fxLayoutAlign="space-between center">
             <div fxFlex="100%">
               <mat-form-field class="full-width-input">
-                <input [(ngModel)]="filtro.filtro" matInput placeholder="Filtro de búsqueda" />
+                <input [disabled]="cargando" [(ngModel)]="filtro.filtro" matInput placeholder="Filtro de búsqueda" />
               </mat-form-field>
             </div>
           </div>
@@ -19,7 +19,7 @@
 
         <mat-card-actions>
           <div fxFlex></div>
-          <button mat-raised-button (click)="cargarListado()">Buscar</button>
+          <button [disabled]="cargando" mat-raised-button (click)="cargarListado()">Buscar</button>
         </mat-card-actions>
 
       </mat-card>
@@ -97,7 +97,7 @@
     </div>
   </div>
 
-  <button mat-mini-fab class="custom-button" (click)="nuevoPerfil()">
+  <button [disabled]="cargando" mat-mini-fab class="custom-button" (click)="nuevoPerfil()">
     <mat-icon aria-label="Crear perfil">add</mat-icon>
   </button>
 </div>

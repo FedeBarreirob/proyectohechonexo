@@ -22,6 +22,9 @@ export class MainNavComponent {
       map(result => result.matches)
     );
 
+  get isPantallaPequena(): boolean {
+    return this.breakpointObserver.isMatched('(max-width: 599px)');
+  }
 }
 
 

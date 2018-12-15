@@ -1,5 +1,5 @@
 <mat-sidenav-container class="sidenav-container">
-  <mat-sidenav #drawer class="sidenav" fixedInViewport="true" [attr.role]="(isHandset$ | async) ? 'dialog' : 'navigation'"
+  <mat-sidenav (click)="isPantallaPequena && drawer.toggle()" #drawer class="sidenav" fixedInViewport="true" [attr.role]="(isHandset$ | async) ? 'dialog' : 'navigation'"
     [mode]="(isHandset$ | async) ? 'over' : 'side'" [opened]="!(isHandset$ | async) && authService.esLogueado">
     <mat-toolbar color="background" *ngIf="authService.esLogueado"><img src="assets/logo.png" class="logo-sidebar" alt="image caption"/></mat-toolbar>
     <mat-nav-list *ngIf="authService.esLogueado">

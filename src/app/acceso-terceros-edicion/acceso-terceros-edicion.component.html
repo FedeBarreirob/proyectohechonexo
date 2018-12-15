@@ -60,6 +60,6 @@
 </mat-dialog-content>
 
 <mat-dialog-actions align="end">
-  <button mat-raised-button color="primary" (click)="guardar()">Guardar</button>
-  <button mat-dialog-close mat-raised-button>Cancelar</button>
+  <button [disabled]="guardando" mat-raised-button color="primary" (click)="guardar()">Guardar</button>
+  <button [disabled]="guardando" mat-dialog-close mat-raised-button>Cancelar</button>
 </mat-dialog-actions>
