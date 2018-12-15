@@ -9,6 +9,7 @@ import { MatDialog } from '@angular/material';
 import { VentasDetalleComponent } from '../ventas-detalle/ventas-detalle.component';
 import { VentasMasOperacionesComponent } from '../ventas-mas-operaciones/ventas-mas-operaciones.component';
 import { PerfilBasico } from '../interfaces/perfiles/perfil-basico';
+import { FiltroEspecieCosecha } from '../interfaces/varios/filtro-especie-cosecha';
 
 @Component({
   selector: 'app-ventas',
@@ -18,15 +19,19 @@ import { PerfilBasico } from '../interfaces/perfiles/perfil-basico';
 })
 export class VentasComponent implements OnInit {
 
-  public listadoVentas: Array<MovimientoVenta>;
+  private listadoVentas: Array<MovimientoVenta>;
   private movimientoSeleccionado: MovimientoVenta = null;
-  public totales: VentasTotales = null;
-  public cargando: boolean;
+  private totales: VentasTotales = null;
+  private cargando: boolean;
 
-  public cuenta: string = "";
+  private cuenta: string = "";
   private perfilBasico: PerfilBasico;
-  public fechaDesde: Date = new Date();
-  public fechaHasta: Date = new Date();
+  private fechaDesde: Date = new Date();
+  private fechaHasta: Date = new Date();
+
+  private filtrosEspecieCosecha: Array<FiltroEspecieCosecha> = [];
+  private filtroEspecieCosechaSeleccionado: FiltroEspecieCosecha = null;
+  private cargandoFiltros: boolean;
 
   constructor(private ventasService: VentasService,
     private authenticationService: AuthenticationService,
@@ -36,6 +41,19 @@ export class VentasComponent implements OnInit {
   ngOnInit() {
     this.cargando = false;
     this.perfilBasico = this.authenticationService.perfilUsuarioLogueado();
+  }
+
+  // funcion encargada de cargar los filtros de especie cosecha cuando se cambia la seleccion de cuenta
+  cargarFiltrosEspecieCosecha() {
+    this.cargandoFiltros = true;
+    this.filtroEspecieCosechaSeleccionado = null;
+    let usuarioLogueado = <UserAuth>this.authenticationService.usuarioLogueado();
+    this.ventasService.listadoFiltrosEspecieCosecha(this.cuenta, usuarioLogueado.token).subscribe(
+      respuesta => {
+        this.filtrosEspecieCosecha = respuesta;
+        this.cargandoFiltros = false;
+      }, error => { console.log("error"); this.cargandoFiltros = true; }
+    );
   }
 
   // funcion que ejecuta la carga del listado de ventas
