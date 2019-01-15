@@ -5,17 +5,17 @@ import { RouterModule, Routes } from '@angular/router';
 import { AuthGuardGuard } from '../security/auth-guard.guard';
 
 // componentes
-import { DashboardComponent } from '../dashboard/dashboard.component';
-import { LoginComponent } from '../login/login.component';
-import { CtacteComponent } from '../ctacte/ctacte.component';
-import { CtacteAplicadaComponent } from '../ctacte-aplicada/ctacte-aplicada.component';
-import { EntregasComponent } from '../entregas/entregas.component';
-import { VentasComponent } from '../ventas/ventas.component'
-import { MercPendEntregarComponent } from '../merc-pend-entregar/merc-pend-entregar.component'
-import { ComprobantesPendFacturarComponent } from '../comprobantes-pend-facturar/comprobantes-pend-facturar.component'
-import { PerfilesListadoComponent } from '../perfiles-listado/perfiles-listado.component'
-import { AccesoTercerosComponent } from '../acceso-terceros/acceso-terceros.component';
-import { OtrosMovimientosComponent } from '../otros-movimientos/otros-movimientos.component';
+import { DashboardComponent } from '../components/tablero/dashboard/dashboard.component';
+import { LoginComponent } from '../components/login/login.component';
+import { CtacteComponent } from '../components/listados/cta-cte/ctacte/ctacte.component';
+import { CtacteAplicadaComponent } from '../components/listados/cta-cte-aplicada/ctacte-aplicada/ctacte-aplicada.component';
+import { EntregasComponent } from '../components/listados/entregas/entregas/entregas.component';
+import { VentasComponent } from '../components/listados/ventas/ventas/ventas.component'
+import { MercPendEntregarComponent } from '../components/listados/merc-pend-entregar/merc-pend-entregar/merc-pend-entregar.component'
+import { ComprobantesPendFacturarComponent } from '../components/listados/comprobantes-pend-facturar/comprobantes-pend-facturar/comprobantes-pend-facturar.component'
+import { PerfilesListadoComponent } from '../components/usuarios-y-perfiles/perfiles/perfiles-listado/perfiles-listado.component'
+import { AccesoTercerosComponent } from '../components/usuarios-y-perfiles/terceros/acceso-terceros/acceso-terceros.component';
+import { OtrosMovimientosComponent } from '../components/listados/otros-movimientos/otros-movimientos/otros-movimientos.component';
 
 const routes: Routes = [
   {
