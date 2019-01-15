@@ -1,3 +1,62 @@
-<p>
-  otros-movimientos-detalle works!
-</p>
+<h2 mat-dialog-title>Detalle</h2>
+
+<mat-dialog-content class="mat-typography">
+
+	<table class="tabla-movimiento">
+		<tr>
+			<td>Fecha del comprobante</td>
+			<td align="end">{{data.fechaComprobante}}</td>
+		</tr>
+
+		<tr>
+			<td>Comprobante</td>
+			<td align="end">{{data.comprobante}}</td>
+		</tr>
+
+		<tr>
+			<td>Producto</td>
+			<td align="end">{{data.especie}}</td>
+		</tr>
+
+		<tr>
+			<td>Campaña</td>
+			<td align="end">{{data.cosecha}}</td>
+		</tr>
+
+		<tr>
+			<td>Productor/Receptor</td>
+			<td align="end">{{data.productorReceptor}}</td>
+		</tr>
+
+		<tr>
+			<td>Fecha del comprobante origen</td>
+			<td align="end">{{data.fechaComprobanteOrigen}}</td>
+		</tr>
+
+		<tr>
+			<td>Comprobante origen</td>
+			<td align="end">{{data.comprobanteOrigen}}</td>
+		</tr>
+
+		<tr>
+			<td>Kg Entrada</td>
+			<td align="end">{{data.kgEntradas | number: '.0'}}</td>
+		</tr>
+
+		<tr>
+			<td>Kg Salida</td>
+			<td align="end">{{data.kgSalidas | number: '.0'}}</td>
+		</tr>
+
+		<tr>
+			<td>Observaciones</td>
+			<td align="end">{{data.observaciones}}</td>
+		</tr>
+	</table>
+
+</mat-dialog-content>
+
+<mat-dialog-actions align="end">
+	<button mat-button (click)="verOpcionesExtras()">Más operaciones</button>
+	<button mat-button mat-dialog-close>Cerrar</button>
+</mat-dialog-actions>

@@ -61,6 +61,7 @@ import { AccesoTercerosOperacionesComponent } from './acceso-terceros-operacione
 import { OtrosMovimientosComponent } from './otros-movimientos/otros-movimientos.component';
 import { OtrosMovimientosDetalleComponent } from './otros-movimientos-detalle/otros-movimientos-detalle.component';
 import { OtrosMovimientosMasOperacionesComponent } from './otros-movimientos-mas-operaciones/otros-movimientos-mas-operaciones.component';
+import { OtrosMovimientosDetalleMasOperacionesComponent } from './otros-movimientos-detalle-mas-operaciones/otros-movimientos-detalle-mas-operaciones.component';
 
 registerLocaleData(localeEsAr, 'es-AR');
 
@@ -107,7 +108,8 @@ export function tokenGetter() {
     AccesoTercerosOperacionesComponent,
     OtrosMovimientosComponent,
     OtrosMovimientosDetalleComponent,
-    OtrosMovimientosMasOperacionesComponent
+    OtrosMovimientosMasOperacionesComponent,
+    OtrosMovimientosDetalleMasOperacionesComponent
   ],
   imports: [
     HttpClientModule,
@@ -165,7 +167,8 @@ export function tokenGetter() {
     AccesoTercerosEdicionComponent,
     AccesoTercerosOperacionesComponent,
     OtrosMovimientosDetalleComponent,
-    OtrosMovimientosMasOperacionesComponent
+    OtrosMovimientosMasOperacionesComponent,
+    OtrosMovimientosDetalleMasOperacionesComponent
   ],
   bootstrap: [AppComponent]
 })
