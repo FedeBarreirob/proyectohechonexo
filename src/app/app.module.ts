@@ -58,6 +58,9 @@ import { JwtHelperService, JwtModule } from '@auth0/angular-jwt';
 import { AccesoTercerosComponent } from './acceso-terceros/acceso-terceros.component';
 import { AccesoTercerosEdicionComponent } from './acceso-terceros-edicion/acceso-terceros-edicion.component';
 import { AccesoTercerosOperacionesComponent } from './acceso-terceros-operaciones/acceso-terceros-operaciones.component';
+import { OtrosMovimientosComponent } from './otros-movimientos/otros-movimientos.component';
+import { OtrosMovimientosDetalleComponent } from './otros-movimientos-detalle/otros-movimientos-detalle.component';
+import { OtrosMovimientosMasOperacionesComponent } from './otros-movimientos-mas-operaciones/otros-movimientos-mas-operaciones.component';
 
 registerLocaleData(localeEsAr, 'es-AR');
 
@@ -101,7 +104,10 @@ export function tokenGetter() {
     PerfilOperacionesComponent,
     AccesoTercerosComponent,
     AccesoTercerosEdicionComponent,
-    AccesoTercerosOperacionesComponent
+    AccesoTercerosOperacionesComponent,
+    OtrosMovimientosComponent,
+    OtrosMovimientosDetalleComponent,
+    OtrosMovimientosMasOperacionesComponent
   ],
   imports: [
     HttpClientModule,
@@ -157,7 +163,9 @@ export function tokenGetter() {
     PerfilesEdicionComponent,
     PerfilOperacionesComponent,
     AccesoTercerosEdicionComponent,
-    AccesoTercerosOperacionesComponent
+    AccesoTercerosOperacionesComponent,
+    OtrosMovimientosDetalleComponent,
+    OtrosMovimientosMasOperacionesComponent
   ],
   bootstrap: [AppComponent]
 })

@@ -15,6 +15,7 @@ import { MercPendEntregarComponent } from '../merc-pend-entregar/merc-pend-entre
 import { ComprobantesPendFacturarComponent } from '../comprobantes-pend-facturar/comprobantes-pend-facturar.component'
 import { PerfilesListadoComponent } from '../perfiles-listado/perfiles-listado.component'
 import { AccesoTercerosComponent } from '../acceso-terceros/acceso-terceros.component';
+import { OtrosMovimientosComponent } from '../otros-movimientos/otros-movimientos.component';
 
 const routes: Routes = [
   {
@@ -72,6 +73,14 @@ const routes: Routes = [
   {
     path: 'comprobantes-pendientes-facturar',
     component: ComprobantesPendFacturarComponent,
+    canActivate: [AuthGuardGuard],
+    data: {
+      rolAdmin: false
+    }
+  },
+  {
+    path: 'otros-movimientos',
+    component: OtrosMovimientosComponent,
     canActivate: [AuthGuardGuard],
     data: {
       rolAdmin: false

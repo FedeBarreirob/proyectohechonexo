@@ -15,5 +15,7 @@ export const environment = {
   urlSeguridadTerceroListar: 'http://192.168.20.63:8080/DigitalSeguridad-1.0-SNAPSHOT/api/terceros/lista',
   urlSeguridadTerceroModificar: 'http://192.168.20.63:8080/DigitalSeguridad-1.0-SNAPSHOT/api/terceros/modificar',
   urlVentasFiltrosEspecieCosecha: 'http://192.168.20.63:8080/DigitalEntregasYVentas-1.0-SNAPSHOT/api/Ventas/filtrosEspecieCosechas',
-  urlEntregasFiltrosEspecieCosecha: 'http://192.168.20.63:8080/DigitalEntregasYVentas-1.0-SNAPSHOT/api/Entregas/filtrosEspecieCosechas'
+  urlEntregasFiltrosEspecieCosecha: 'http://192.168.20.63:8080/DigitalEntregasYVentas-1.0-SNAPSHOT/api/Entregas/filtrosEspecieCosechas',
+  urlOtrosMovimientosListado: 'http://192.168.20.63:8080/DigitalEntregasYVentas-1.0-SNAPSHOT/api/OtrosMovimientos/listado',
+  urlOtrosMovimientosFiltrosEspecieCosecha: 'http://192.168.20.63:8080/DigitalEntregasYVentas-1.0-SNAPSHOT/api/OtrosMovimientos/filtrosEspecieCosechas'
 };

@@ -19,7 +19,9 @@ export const environment = {
   urlSeguridadTerceroListar: 'http://localhost:8080/DigitalSeguridad-1.0-SNAPSHOT/api/terceros/lista',
   urlSeguridadTerceroModificar: 'http://localhost:8080/DigitalSeguridad-1.0-SNAPSHOT/api/terceros/modificar',
   urlVentasFiltrosEspecieCosecha: 'http://localhost:8080/DigitalEntregasYVentas-1.0-SNAPSHOT/api/Ventas/filtrosEspecieCosechas',
-  urlEntregasFiltrosEspecieCosecha: 'http://localhost:8080/DigitalEntregasYVentas-1.0-SNAPSHOT/api/Entregas/filtrosEspecieCosechas'
+  urlEntregasFiltrosEspecieCosecha: 'http://localhost:8080/DigitalEntregasYVentas-1.0-SNAPSHOT/api/Entregas/filtrosEspecieCosechas',
+  urlOtrosMovimientosListado: 'http://localhost:8080/DigitalEntregasYVentas-1.0-SNAPSHOT/api/OtrosMovimientos/listado',
+  urlOtrosMovimientosFiltrosEspecieCosecha: 'http://localhost:8080/DigitalEntregasYVentas-1.0-SNAPSHOT/api/OtrosMovimientos/filtrosEspecieCosechas'
 };
 
 /*
