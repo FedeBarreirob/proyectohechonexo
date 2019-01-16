@@ -13,7 +13,7 @@
       <a mat-list-item routerLink="/mercaderia-pendiente-entregar" routerLinkActive="active">Merc. Pend. Entregar</a>
       <a mat-list-item routerLink="/comprobantes-pendientes-facturar" routerLinkActive="active">Comprob. Pend. Facturar</a>
       <a *ngIf="authService.esAdmin" mat-list-item routerLink="/administrador-de-cuentas" routerLinkActive="active">Administrador de cuentas</a>
-      <a mat-list-item routerLink="/acceso-terceros" routerLinkActive="active">Accesos a terceros</a>
+      <a *ngIf="authService.esAdmin || authService.esRol('PRODUCTOR')" mat-list-item routerLink="/acceso-terceros" routerLinkActive="active">Accesos a terceros</a>
       <a mat-list-item href="#">Archivo de comprobantes</a>
       <a mat-list-item routerLink="/login" routerLinkActive="active">Cerrar Sersión</a>
     </mat-nav-list>
