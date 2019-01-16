@@ -87,7 +87,7 @@ const routes: Routes = [
     }
   },
   {
-    path: 'perfiles',
+    path: 'administrador-de-cuentas',
     component: PerfilesListadoComponent,
     canActivate: [AuthGuardGuard],
     data: {
