@@ -8,7 +8,7 @@ export interface ListadoCtacteAplicada {
 }
 
 export interface MovimientoCtaCteAplicada {
-    comprobanteAfectado: string,
+    comprobante: string,
     fechaCtaCte: Date,
     fechaVencimiento: Date,
     concepto: string,
