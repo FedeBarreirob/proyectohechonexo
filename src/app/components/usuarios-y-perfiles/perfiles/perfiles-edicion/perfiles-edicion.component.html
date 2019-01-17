@@ -3,149 +3,124 @@
 
 <mat-dialog-content class="mat-typography">
 
-  <!-- Datos de acceso al sistema -->
-  <mat-card>
-    <mat-card-header>
-      <mat-card-title>Datos de acceso al sistema</mat-card-title>
-    </mat-card-header>
+	<!-- Datos de acceso al sistema -->
+	<mat-card>
+		<mat-card-header>
+			<mat-card-title>Datos de acceso al sistema</mat-card-title>
+		</mat-card-header>
 
-    <mat-card-content>
-      <form [formGroup]="formDatosAccesoGroup">
-        <div fxLayout="row" fxLayoutAlign="space-between center">
+		<mat-card-content>
+			<form [formGroup]="formDatosAccesoGroup">
+				<div fxLayout="row" fxLayoutAlign="space-between center">
 
-          <div fxFlex="30%">
-            <mat-form-field class="full-width-input">
-              <input [readonly]="esRegistroNuevo == false" matInput placeholder="Usuario" formControlName="username">
-            </mat-form-field>
-          </div>
+					<div fxFlex="30%">
+						<mat-form-field class="full-width-input">
+							<input [readonly]="esRegistroNuevo == false" matInput placeholder="Usuario" formControlName="username">
+						</mat-form-field>
+					</div>
 
-          <div fxFlex="30%" *ngIf="esRegistroNuevo">
-            <mat-form-field class="full-width-input">
-              <input matInput type="password" placeholder="Contraseña" formControlName="password">
-            </mat-form-field>
-          </div>
+					<div fxFlex="30%" *ngIf="esRegistroNuevo">
+						<mat-form-field class="full-width-input">
+							<input matInput type="password" placeholder="Contraseña" formControlName="password">
+						</mat-form-field>
+					</div>
 
-          <div fxFlex="30%" *ngIf="esRegistroNuevo">
-            <mat-form-field class="full-width-input">
-              <input matInput type="password" placeholder="Confirmación contraseña" formControlName="passwordConfirmacion">
-            </mat-form-field>
-          </div>
-        </div>
+					<div fxFlex="30%" *ngIf="esRegistroNuevo">
+						<mat-form-field class="full-width-input">
+							<input matInput type="password" placeholder="Confirmación contraseña" formControlName="passwordConfirmacion">
+						</mat-form-field>
+					</div>
+				</div>
 
-        <div fxLayout="row" fxLayoutAlign="space-between center">
-          <div fxFlex="100%">
-            <mat-form-field>
-              <mat-select placeholder="Rol" formControlName="rol">
-                <mat-option *ngFor="let rol of roles" [value]="rol">
-                  {{rol.denominacion}}
-                </mat-option>
-              </mat-select>
-            </mat-form-field>
-          </div>
-        </div>
-      </form>
-    </mat-card-content>
+				<div fxLayout="row" fxLayoutAlign="space-between center">
+					<div fxFlex="100%">
+						<mat-form-field>
+							<mat-select placeholder="Rol" formControlName="rol">
+								<mat-option *ngFor="let rol of roles" [value]="rol">
+									{{rol.denominacion}}
+								</mat-option>
+							</mat-select>
+						</mat-form-field>
+					</div>
+				</div>
+			</form>
+		</mat-card-content>
 
-  </mat-card>
+	</mat-card>
 
-  <!-- Datos personales -->
-  <mat-card>
-    <mat-card-header>
-      <mat-card-title>Datos personales</mat-card-title>
-    </mat-card-header>
+	<!-- Datos personales -->
+	<mat-card>
+		<mat-card-header>
+			<mat-card-title>Datos personales</mat-card-title>
+		</mat-card-header>
 
-    <mat-card-content>
-      <form [formGroup]="formDatosPersonalesGroup">
-        <div fxLayout="row" fxLayoutAlign="space-between center">
-          <div fxFlex="30%">
-            <mat-form-field class="full-width-input">
-              <input matInput placeholder="Nombre" formControlName="nombre">
-            </mat-form-field>
-          </div>
+		<mat-card-content>
+			<form [formGroup]="formDatosPersonalesGroup">
+				<div fxLayout="row" fxLayoutAlign="space-between center">
+					<div fxFlex="100%">
+						<mat-form-field class="full-width-input">
+							<input matInput placeholder="Nombre" formControlName="nombre">
+						</mat-form-field>
+					</div>
+				</div>
 
-          <div fxFlex="66%">
-            <mat-form-field class="full-width-input">
-              <input matInput placeholder="Domicilio" formControlName="domicilio">
-            </mat-form-field>
-          </div>
-        </div>
+				<div fxLayout="row" fxLayoutAlign="space-between center">
+					<div fxFlex="100%">
+						<mat-form-field class="full-width-input">
+							<input type="email" matInput placeholder="Email" formControlName="email">
+						</mat-form-field>
+					</div>
+				</div>
 
-        <div fxLayout="row" fxLayoutAlign="space-between center">
-          <div fxFlex="66%">
-            <mat-form-field class="full-width-input">
-              <input matInput placeholder="Teléfonos" formControlName="telefonos">
-            </mat-form-field>
-          </div>
+			</form>
+		</mat-card-content>
+	</mat-card>
 
-          <div fxFlex="30%">
-            <mat-form-field class="full-width-input">
-              <input type="email" matInput placeholder="Email" formControlName="email">
-            </mat-form-field>
-          </div>
-        </div>
+	<!-- Cuentas vinculadas -->
+	<mat-card>
+		<mat-card-header>
+			<mat-card-title>Cuentas vinculadas</mat-card-title>
+		</mat-card-header>
 
-        <div fxLayout="row" fxLayoutAlign="space-between center">
-          <div fxFlex="30%">
-            <mat-form-field class="full-width-input">
-              <input matInput placeholder="CUIT" formControlName="cuit">
-            </mat-form-field>
-          </div>
+		<mat-card-content>
+			<form [formGroup]="formCuentasVinculadasGroup">
+				<div fxLayout="row" fxLayoutAlign="space-between center">
+					<div fxFlex="55%">
+						<mat-form-field class="full-width-input">
+							<input matInput placeholder="Código cuenta" formControlName="entidadCodigo" required>
+							<mat-error>
+								<mat-error *ngIf="isCuentasVinculadasFieldInvalid('entidadCodigo')">
+									Por favor ingrese la cuenta de Algoritmo
+								</mat-error>
+							</mat-error>
+						</mat-form-field>
+					</div>
 
-          <div fxFlex="66%">
-            <mat-form-field class="full-width-input">
-              <input matInput placeholder="CBU" formControlName="cbu">
-            </mat-form-field>
-          </div>
-        </div>
-      </form>
-    </mat-card-content>
-  </mat-card>
+					<div fxFlex="40%">
+						<button mat-raised-button color="primary" (click)="agregarCuenta()">Vincular</button>
+					</div>
+				</div>
 
-  <!-- Cuentas vinculadas -->
-  <mat-card>
-    <mat-card-header>
-      <mat-card-title>Cuentas vinculadas</mat-card-title>
-    </mat-card-header>
-
-    <mat-card-content>
-      <form [formGroup]="formCuentasVinculadasGroup">
-        <div fxLayout="row" fxLayoutAlign="space-between center">
-          <div fxFlex="55%">
-            <mat-form-field class="full-width-input">
-              <input matInput placeholder="Código cuenta" formControlName="entidadCodigo" required>
-              <mat-error>
-                <mat-error *ngIf="isCuentasVinculadasFieldInvalid('entidadCodigo')">
-                  Por favor ingrese la cuenta de Algoritmo
-                </mat-error>
-              </mat-error>
-            </mat-form-field>
-          </div>
-
-          <div fxFlex="40%">
-            <button mat-raised-button color="primary" (click)="agregarCuenta()">Vincular</button>
-          </div>
-        </div>
-
-        <div fxLayout="row" fxLayoutAlign="space-between center">
-          <div fxFlex="100%">
-            <mat-list>
-              <mat-list-item *ngFor="let codigo of listadoCodigos">
-                <div fxFlex="50%">
-                  {{ codigo }}
-                </div>
-                <div fxFlex="50%"><button mat-button (click)="quitarCuenta(codigo)">Desvincular</button></div>
-                <mat-divider></mat-divider>
-              </mat-list-item>
-            </mat-list>
-          </div>
-        </div>
-      </form>
-    </mat-card-content>
-  </mat-card>
+				<div fxLayout="row" fxLayoutAlign="space-between center">
+					<div fxFlex="100%">
+						<mat-list>
+							<mat-list-item *ngFor="let codigo of listadoCodigos">
+								<div fxFlex="50%">
+									{{ codigo }}
+								</div>
+								<div fxFlex="50%"><button mat-button (click)="quitarCuenta(codigo)">Desvincular</button></div>
+								<mat-divider></mat-divider>
+							</mat-list-item>
+						</mat-list>
+					</div>
+				</div>
+			</form>
+		</mat-card-content>
+	</mat-card>
 
 </mat-dialog-content>
 
 <mat-dialog-actions align="end">
-  <button [disabled]="guardando" mat-raised-button color="primary" (click)="guardar()">Guardar</button>
-  <button [disabled]="guardando" mat-dialog-close mat-raised-button>Cancelar</button>
+	<button [disabled]="guardando" mat-raised-button color="primary" (click)="guardar()">Guardar</button>
+	<button [disabled]="guardando" mat-dialog-close mat-raised-button>Cancelar</button>
 </mat-dialog-actions>
