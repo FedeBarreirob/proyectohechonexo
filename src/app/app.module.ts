@@ -26,7 +26,7 @@ import { LoginComponent } from './components/login/login.component';
 import { DashboardComponent } from './components/tablero/dashboard/dashboard.component';
 import { MainNavComponent } from './components/menu/main-nav/main-nav.component';
 import { LayoutModule } from '@angular/cdk/layout';
-import { MatToolbarModule, MatButtonModule, MatSidenavModule, MatIconModule, MatListModule, MatPaginatorIntl } from '@angular/material';
+import { MatToolbarModule, MatButtonModule, MatSidenavModule, MatIconModule, MatListModule, MatPaginatorIntl, MatAutocompleteModule, MatInputModule } from '@angular/material';
 import { CtacteComponent } from './components/listados/cta-cte/ctacte/ctacte.component';
 import { CtacteDetalleComponent } from './components/listados/cta-cte/ctacte.detalle/ctacte.detalle.component';
 import { CtacteAplicadaComponent } from './components/listados/cta-cte-aplicada/ctacte-aplicada/ctacte-aplicada.component';
@@ -66,110 +66,112 @@ import { OtrosMovimientosDetalleMasOperacionesComponent } from './components/lis
 registerLocaleData(localeEsAr, 'es-AR');
 
 export function tokenGetter() {
-  let usuario = JSON.parse(localStorage.getItem('currentUser'));
-  return usuario != null ? usuario.token : '';
+	let usuario = JSON.parse(localStorage.getItem('currentUser'));
+	return usuario != null ? usuario.token : '';
 }
 
 @NgModule({
-  declarations: [
-    AppComponent,
-    LoginComponent,
-    DashboardComponent,
-    MainNavComponent,
-    CtacteComponent,
-    CtacteDetalleComponent,
-    CtacteAplicadaComponent,
-    CtacteAplicadaDetalleComponent,
-    EntregasComponent,
-    EntregasDetalleComponent,
-    VentasComponent,
-    VentasDetalleComponent,
-    MercPendEntregarComponent,
-    MercPendEntregarDetalleComponent,
-    ComprobantesPendFacturarComponent,
-    ComprobantesPendFacturarDetalleComponent,
-    CtacteMasOperacionesComponent,
-    CtacteDetalleMasOperacionesComponent,
-    CtaCteAplicadaMasOperacionesComponent,
-    CtaCteAplicadaDetalleMasOperacionesComponent,
-    EntregasMasOperacionesComponent,
-    EntregasDetalleMasOperacionesComponent,
-    VentasMasOperacionesComponent,
-    VentasDetalleMasOperacionesComponent,
-    MercPendEntregarMasOperacionesComponent,
-    MercPendEntregarDetalleMasOperacionesComponent,
-    ComprobantesPendFacturarMasOperacionesComponent,
-    ComprobantesPendFacturarDetalleMasOperacionesComponent,
-    PerfilesListadoComponent,
-    PerfilesEdicionComponent,
-    PerfilOperacionesComponent,
-    AccesoTercerosComponent,
-    AccesoTercerosEdicionComponent,
-    AccesoTercerosOperacionesComponent,
-    OtrosMovimientosComponent,
-    OtrosMovimientosDetalleComponent,
-    OtrosMovimientosMasOperacionesComponent,
-    OtrosMovimientosDetalleMasOperacionesComponent
-  ],
-  imports: [
-    HttpClientModule,
-    BrowserModule,
-    BrowserAnimationsModule,
-    MaterialModule,
-    AppRoutingModule,
-    ReactiveFormsModule,
-    LayoutModule,
-    MatToolbarModule,
-    MatButtonModule,
-    MatSidenavModule,
-    MatIconModule,
-    MatListModule,
-    FlexLayoutModule,
-    FormsModule,
-    CommonModule,
-    JwtModule.forRoot({
-      config: {
-        throwNoTokenError: false,
-        tokenGetter: tokenGetter,
-        whitelistedDomains: []
-      }
-    })
-  ],
-  providers: [
-    { provide: HTTP_INTERCEPTORS, useClass: ErrorAuthInterceptor, multi: true },
-    { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true },
-    { provide: LOCALE_ID, useValue: 'es-AR' },
-    DecimalPipe,
-    { provide: MatPaginatorIntl, useClass: CustomPaginatorEspanol },
-    JwtHelperService
-  ],
-  entryComponents: [
-    CtacteDetalleComponent,
-    CtacteAplicadaDetalleComponent,
-    EntregasDetalleComponent,
-    VentasDetalleComponent,
-    MercPendEntregarDetalleComponent,
-    ComprobantesPendFacturarDetalleComponent,
-    CtacteMasOperacionesComponent,
-    CtacteDetalleMasOperacionesComponent,
-    CtaCteAplicadaMasOperacionesComponent,
-    CtaCteAplicadaDetalleMasOperacionesComponent,
-    EntregasMasOperacionesComponent,
-    EntregasDetalleMasOperacionesComponent,
-    VentasMasOperacionesComponent,
-    VentasDetalleMasOperacionesComponent,
-    MercPendEntregarMasOperacionesComponent,
-    MercPendEntregarDetalleMasOperacionesComponent,
-    ComprobantesPendFacturarMasOperacionesComponent,
-    ComprobantesPendFacturarDetalleMasOperacionesComponent,
-    PerfilesEdicionComponent,
-    PerfilOperacionesComponent,
-    AccesoTercerosEdicionComponent,
-    AccesoTercerosOperacionesComponent,
-    OtrosMovimientosDetalleComponent,
-    OtrosMovimientosMasOperacionesComponent,
-    OtrosMovimientosDetalleMasOperacionesComponent
-  ],
-  bootstrap: [AppComponent]
+	declarations: [
+		AppComponent,
+		LoginComponent,
+		DashboardComponent,
+		MainNavComponent,
+		CtacteComponent,
+		CtacteDetalleComponent,
+		CtacteAplicadaComponent,
+		CtacteAplicadaDetalleComponent,
+		EntregasComponent,
+		EntregasDetalleComponent,
+		VentasComponent,
+		VentasDetalleComponent,
+		MercPendEntregarComponent,
+		MercPendEntregarDetalleComponent,
+		ComprobantesPendFacturarComponent,
+		ComprobantesPendFacturarDetalleComponent,
+		CtacteMasOperacionesComponent,
+		CtacteDetalleMasOperacionesComponent,
+		CtaCteAplicadaMasOperacionesComponent,
+		CtaCteAplicadaDetalleMasOperacionesComponent,
+		EntregasMasOperacionesComponent,
+		EntregasDetalleMasOperacionesComponent,
+		VentasMasOperacionesComponent,
+		VentasDetalleMasOperacionesComponent,
+		MercPendEntregarMasOperacionesComponent,
+		MercPendEntregarDetalleMasOperacionesComponent,
+		ComprobantesPendFacturarMasOperacionesComponent,
+		ComprobantesPendFacturarDetalleMasOperacionesComponent,
+		PerfilesListadoComponent,
+		PerfilesEdicionComponent,
+		PerfilOperacionesComponent,
+		AccesoTercerosComponent,
+		AccesoTercerosEdicionComponent,
+		AccesoTercerosOperacionesComponent,
+		OtrosMovimientosComponent,
+		OtrosMovimientosDetalleComponent,
+		OtrosMovimientosMasOperacionesComponent,
+		OtrosMovimientosDetalleMasOperacionesComponent
+	],
+	imports: [
+		HttpClientModule,
+		BrowserModule,
+		BrowserAnimationsModule,
+		MaterialModule,
+		AppRoutingModule,
+		ReactiveFormsModule,
+		LayoutModule,
+		MatToolbarModule,
+		MatAutocompleteModule,
+		MatButtonModule,
+		MatSidenavModule,
+		MatIconModule,
+		MatListModule,
+		MatInputModule,
+		FlexLayoutModule,
+		FormsModule,
+		CommonModule,
+		JwtModule.forRoot({
+			config: {
+				throwNoTokenError: false,
+				tokenGetter: tokenGetter,
+				whitelistedDomains: []
+			}
+		})
+	],
+	providers: [
+		{ provide: HTTP_INTERCEPTORS, useClass: ErrorAuthInterceptor, multi: true },
+		{ provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true },
+		{ provide: LOCALE_ID, useValue: 'es-AR' },
+		DecimalPipe,
+		{ provide: MatPaginatorIntl, useClass: CustomPaginatorEspanol },
+		JwtHelperService
+	],
+	entryComponents: [
+		CtacteDetalleComponent,
+		CtacteAplicadaDetalleComponent,
+		EntregasDetalleComponent,
+		VentasDetalleComponent,
+		MercPendEntregarDetalleComponent,
+		ComprobantesPendFacturarDetalleComponent,
+		CtacteMasOperacionesComponent,
+		CtacteDetalleMasOperacionesComponent,
+		CtaCteAplicadaMasOperacionesComponent,
+		CtaCteAplicadaDetalleMasOperacionesComponent,
+		EntregasMasOperacionesComponent,
+		EntregasDetalleMasOperacionesComponent,
+		VentasMasOperacionesComponent,
+		VentasDetalleMasOperacionesComponent,
+		MercPendEntregarMasOperacionesComponent,
+		MercPendEntregarDetalleMasOperacionesComponent,
+		ComprobantesPendFacturarMasOperacionesComponent,
+		ComprobantesPendFacturarDetalleMasOperacionesComponent,
+		PerfilesEdicionComponent,
+		PerfilOperacionesComponent,
+		AccesoTercerosEdicionComponent,
+		AccesoTercerosOperacionesComponent,
+		OtrosMovimientosDetalleComponent,
+		OtrosMovimientosMasOperacionesComponent,
+		OtrosMovimientosDetalleMasOperacionesComponent
+	],
+	bootstrap: [AppComponent]
 })
 export class AppModule { }

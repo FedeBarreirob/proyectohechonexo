@@ -1,6 +1,8 @@
 export enum RoleEnum {
-    ADMINISTRADOR,
-    PRODUCTOR,
-    TERCERO,
-    NINGUNO
+    ADMINISTRADOR = 1,
+    SUB_ADMINISTRADOR = 7,
+    PRODUCTOR = 2,
+    TERCERO = 3,
+    COMERCIAL = 9,
+    NINGUNO = 0
 }

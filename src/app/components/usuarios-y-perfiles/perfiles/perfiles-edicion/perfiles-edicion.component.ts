@@ -28,6 +28,7 @@ export class PerfilesEdicionComponent implements OnInit {
   public titulo: string;
 
   public listadoCodigos: string[] = [];
+  // TODO: Ver de traer los roles por servicio
   public roles: Array<Rol> = [
     {
       id: 1,
@@ -35,8 +36,18 @@ export class PerfilesEdicionComponent implements OnInit {
       admin: true
     },
     {
+      id: 7,
+      denominacion: "SubAdministrador",
+      admin: false
+    },
+    {
       id: 2,
       denominacion: "Productor",
+      admin: false
+    },
+    {
+      id: 9,
+      denominacion: "Comercial",
       admin: false
     }];
 

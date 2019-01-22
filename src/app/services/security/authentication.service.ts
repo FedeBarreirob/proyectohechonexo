@@ -5,9 +5,8 @@ import { environment } from '../../../environments/environment'
 import { PerfilBasico } from '../../interfaces/perfiles/perfil-basico';
 import { JwtHelperService } from '@auth0/angular-jwt';
 import { Observable } from 'rxjs';
-import { RoleEnum } from 'src/app/enums/role-enum.enum';
-
-
+import { RoleEnum } from '../../enums/role-enum.enum';
+import { Rol } from '../../interfaces/security/rol';
 
 @Injectable({
 	providedIn: 'root'
@@ -86,27 +85,21 @@ export class AuthenticationService {
 		try {
 			let perfil = this.perfilUsuarioLogueado();
 			if (perfil != null && perfil.rol != null) {
+				return perfil.rol.id === RoleEnum[rolDescripcion];
+			} else {
+				return false;
+			}
+		} catch (e) {
+			console.log(e);
+			return false;
+		}
+	}
 
-				let rolEnum: RoleEnum;
-
-				switch (perfil.rol.id) {
-					case 1:
-						rolEnum = RoleEnum.ADMINISTRADOR;
-						break;
-
-					case 2:
-						rolEnum = RoleEnum.PRODUCTOR;
-						break;
-
-					case 3:
-						rolEnum = RoleEnum.TERCERO;
-						break;
-
-					default:
-						rolEnum = RoleEnum.NINGUNO;
-				}
-
-				return rolEnum === RoleEnum[rolDescripcion];
+	// funcion encargada de verificar si un rol ingresado corresponde a una descripcion dada
+	correspondeRol(rol: Rol, rolDescripcion: string): boolean {
+		try {
+			if (rol != null) {
+				return rol.id === RoleEnum[rolDescripcion];
 			} else {
 				return false;
 			}

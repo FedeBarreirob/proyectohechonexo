@@ -77,9 +77,51 @@
 	</mat-card>
 
 	<!-- Cuentas vinculadas -->
-	<mat-card>
+	<mat-card *ngIf="authenticationService.correspondeRol(formDatosAccesoGroup.value.rol, 'PRODUCTOR') || authenticationService.correspondeRol(formDatosAccesoGroup.value.rol, 'COMERCIAL')">
 		<mat-card-header>
 			<mat-card-title>Cuentas vinculadas</mat-card-title>
+		</mat-card-header>
+
+		<mat-card-content>
+			<form [formGroup]="formCuentasVinculadasGroup">
+				<div fxLayout="row" fxLayoutAlign="space-between center">
+					<div fxFlex="55%">
+						<mat-form-field class="full-width-input">
+							<input matInput placeholder="Código cuenta" formControlName="entidadCodigo" required>
+							<mat-error>
+								<mat-error *ngIf="isCuentasVinculadasFieldInvalid('entidadCodigo')">
+									Por favor ingrese la cuenta de Algoritmo
+								</mat-error>
+							</mat-error>
+						</mat-form-field>
+					</div>
+
+					<div fxFlex="40%">
+						<button mat-raised-button color="primary" (click)="agregarCuenta()">Vincular</button>
+					</div>
+				</div>
+
+				<div fxLayout="row" fxLayoutAlign="space-between center">
+					<div fxFlex="100%">
+						<mat-list>
+							<mat-list-item *ngFor="let codigo of listadoCodigos">
+								<div fxFlex="50%">
+									{{ codigo }}
+								</div>
+								<div fxFlex="50%"><button mat-button (click)="quitarCuenta(codigo)">Desvincular</button></div>
+								<mat-divider></mat-divider>
+							</mat-list-item>
+						</mat-list>
+					</div>
+				</div>
+			</form>
+		</mat-card-content>
+	</mat-card>
+
+	<!-- Comerciales vinculados -->
+	<mat-card *ngIf="authenticationService.correspondeRol(formDatosAccesoGroup.value.rol, 'SUB_ADMINISTRADOR')">
+		<mat-card-header>
+			<mat-card-title>Comerciales vinculados</mat-card-title>
 		</mat-card-header>
 
 		<mat-card-content>
