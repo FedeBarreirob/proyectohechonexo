@@ -11,7 +11,14 @@ import { FiltroEspecieCosecha } from '../../interfaces/varios/filtro-especie-cos
 })
 export class EntregasService {
 
-  constructor(private http: HttpClient) { }
+  private urlEntregasListado = `${environment.hostEntregasYVentas}/Entregas/listado`;
+  private urlEntregasFiltrosEspecieCosecha = `${environment.hostEntregasYVentas}/Entregas/filtrosEspecieCosechas`;
+
+  constructor(private http: HttpClient) { 
+    this.urlEntregasListado = `${environment.hostEntregasYVentas}/Entregas/listado`;
+    this.urlEntregasFiltrosEspecieCosecha = `${environment.hostEntregasYVentas}/Entregas/filtrosEspecieCosechas`;
+
+  }
 
   // funcion que retorna un observable del listado con las entregas asociado a una cuenta dada
   listadoEntregas(filtro: FiltroEntregas, token: string) {
@@ -23,7 +30,7 @@ export class EntregasService {
       })
     };
 
-    return this.http.post<ListadoEntregas>(environment.urlEntregasListado,
+    return this.http.post<ListadoEntregas>(this.urlEntregasListado,
       JSON.stringify(filtro),
       httpOptions);
   }
@@ -38,7 +45,7 @@ export class EntregasService {
       })
     };
 
-    let urlConParametro = `${environment.urlEntregasFiltrosEspecieCosecha}/${cuenta}`;
+    let urlConParametro = `${this.urlEntregasFiltrosEspecieCosecha}/${cuenta}`;
     return this.http.get<Array<FiltroEspecieCosecha>>(urlConParametro, httpOptions);
   }
 }

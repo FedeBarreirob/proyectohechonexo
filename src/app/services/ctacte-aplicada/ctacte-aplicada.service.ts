@@ -9,6 +9,8 @@ import { environment } from '../../../environments/environment';
 })
 export class CtacteAplicadaService {
 
+  private urlCuentaCorrienteAplicadaListado = `${environment.hostCtaCte}/CuentaAplicadaCorriente/listado`;
+
   constructor(private http: HttpClient) { }
 
   // funcion que retorna un observable del listado con la ctacte corriente aplicada asociado a una cuenta dada
@@ -21,7 +23,7 @@ export class CtacteAplicadaService {
       })
     };
 
-    return this.http.post<ListadoCtacteAplicada>(environment.urlCuentaCorrienteListado,
+    return this.http.post<ListadoCtacteAplicada>(this.urlCuentaCorrienteAplicadaListado,
       JSON.stringify(filtro),
       httpOptions);
   }

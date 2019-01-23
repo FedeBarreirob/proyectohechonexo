@@ -1,21 +1,6 @@
 export const environment = {
   production: true,
-  urlSeguridadLogin: 'http://192.168.20.63:8080/DigitalSeguridad-1.0-SNAPSHOT/api/autentificacion/login',
-  urlCuentaCorrienteListado: 'http://192.168.20.63:8080/DigitalCuentaCorriente-1.0-SNAPSHOT/api/CuentaCorriente/listado',
-  urlCuentaCorrienteAplicadaListado: 'http://192.168.20.63:8080/DigitalCuentaCorriente-1.0-SNAPSHOT/api/CuentaAplicadaCorriente/listado',
-  urlEntregasListado: 'http://192.168.20.63:8080/DigitalEntregasYVentas-1.0-SNAPSHOT/api/Entregas/listado',
-  urlVentasListado: 'http://192.168.20.63:8080/DigitalEntregasYVentas-1.0-SNAPSHOT/api/Ventas/listado',
-  urlMercaderiaPendienteEntregarListado: 'http://192.168.20.63:8080/DigitalEntregasYVentas-1.0-SNAPSHOT/api/MercaderiaPendienteDeEntregar/listado',
-  urlComprobantesPendientesDeFacturarListado: 'http://192.168.20.63:8080/DigitalEntregasYVentas-1.0-SNAPSHOT/api/ComprobantesPendientesDeFacturar/listado',
-  urlSeguridadPerfilRegistrar: 'http://192.168.20.63:8080/DigitalSeguridad-1.0-SNAPSHOT/api/perfiles/registrar',
-  urlSeguridadPerfilListar: 'http://192.168.20.63:8080/DigitalSeguridad-1.0-SNAPSHOT/api/perfiles/lista',
-  urlSeguridadPerfilModificar: 'http://192.168.20.63:8080/DigitalSeguridad-1.0-SNAPSHOT/api/perfiles/modificar',
-  urlSeguridadPerfilLogueado: 'http://192.168.20.63:8080/DigitalSeguridad-1.0-SNAPSHOT/api/perfiles/perfil',
-  urlSeguridadTerceroRegistrar: 'http://192.168.20.63:8080/DigitalSeguridad-1.0-SNAPSHOT/api/terceros/registrar',
-  urlSeguridadTerceroListar: 'http://192.168.20.63:8080/DigitalSeguridad-1.0-SNAPSHOT/api/terceros/lista',
-  urlSeguridadTerceroModificar: 'http://192.168.20.63:8080/DigitalSeguridad-1.0-SNAPSHOT/api/terceros/modificar',
-  urlVentasFiltrosEspecieCosecha: 'http://192.168.20.63:8080/DigitalEntregasYVentas-1.0-SNAPSHOT/api/Ventas/filtrosEspecieCosechas',
-  urlEntregasFiltrosEspecieCosecha: 'http://192.168.20.63:8080/DigitalEntregasYVentas-1.0-SNAPSHOT/api/Entregas/filtrosEspecieCosechas',
-  urlOtrosMovimientosListado: 'http://192.168.20.63:8080/DigitalEntregasYVentas-1.0-SNAPSHOT/api/OtrosMovimientos/listado',
-  urlOtrosMovimientosFiltrosEspecieCosecha: 'http://192.168.20.63:8080/DigitalEntregasYVentas-1.0-SNAPSHOT/api/OtrosMovimientos/filtrosEspecieCosechas'
+  hostSeguridad: 'http://192.168.20.63:8080/DigitalSeguridad-1.0-SNAPSHOT/api',
+  hostCtaCte: 'http://192.168.20.63:8080/DigitalCuentaCorriente-1.0-SNAPSHOT/api',
+  hostEntregasYVentas: 'http://192.168.20.63:8080/DigitalEntregasYVentas-1.0-SNAPSHOT/api'
 };

@@ -9,6 +9,8 @@ import { environment } from '../../../environments/environment';
 })
 export class ComprobantesPendFacturarService {
 
+  private urlComprobantesPendientesDeFacturarListado = `${environment.hostEntregasYVentas}/ComprobantesPendientesDeFacturar/listado`;
+
   constructor(private http: HttpClient) { }
 
   // funcion que retorna un observable del listado con los comprobantes pendientes de facturar asociado a una cuenta dada
@@ -21,7 +23,7 @@ export class ComprobantesPendFacturarService {
       })
     };
 
-    return this.http.post<ListadoComprobantesPendFact>(environment.urlComprobantesPendientesDeFacturarListado,
+    return this.http.post<ListadoComprobantesPendFact>(this.urlComprobantesPendientesDeFacturarListado,
       JSON.stringify(filtro),
       httpOptions);
   }

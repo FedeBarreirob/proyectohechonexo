@@ -11,6 +11,9 @@ import { ListadoOtrosMovimientos } from '../../interfaces/otros-movimientos/list
 })
 export class OtrosMovimientosService {
 
+	private urlOtrosMovimientosListado = `${environment.hostEntregasYVentas}/OtrosMovimientos/listado`;
+	private urlOtrosMovimientosFiltrosEspecieCosecha = `${environment.hostEntregasYVentas}/OtrosMovimientos/filtrosEspecieCosechas`;
+
 	constructor(private http: HttpClient) { }
 
 	// funcion que retorna un observable del listado con los otros movimientos asociado a una cuenta dada
@@ -23,7 +26,7 @@ export class OtrosMovimientosService {
 			})
 		};
 
-		return this.http.post<ListadoOtrosMovimientos>(environment.urlOtrosMovimientosListado,
+		return this.http.post<ListadoOtrosMovimientos>(this.urlOtrosMovimientosListado,
 			JSON.stringify(filtro),
 			httpOptions);
 	}
@@ -38,7 +41,7 @@ export class OtrosMovimientosService {
 			})
 		};
 
-		let urlConParametro = `${environment.urlOtrosMovimientosFiltrosEspecieCosecha}/${cuenta}`;
+		let urlConParametro = `${this.urlOtrosMovimientosFiltrosEspecieCosecha}/${cuenta}`;
 		return this.http.get<Array<FiltroEspecieCosecha>>(urlConParametro, httpOptions);
 	}
 

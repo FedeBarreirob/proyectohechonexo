@@ -9,6 +9,8 @@ import { environment } from '../../../environments/environment';
 })
 export class MercPendEntregarService {
 
+  private urlMercaderiaPendienteEntregarListado = `${environment.hostEntregasYVentas}/MercaderiaPendienteDeEntregar/listado`;
+
   constructor(private http: HttpClient) { }
 
   // funcion que retorna un observable del listado con las mercaderias pendientes de entregar asociado a una cuenta dada
@@ -21,7 +23,7 @@ export class MercPendEntregarService {
       })
     };
 
-    return this.http.post<ListadoMercPendEntregar>(environment.urlMercaderiaPendienteEntregarListado,
+    return this.http.post<ListadoMercPendEntregar>(this.urlMercaderiaPendienteEntregarListado,
       JSON.stringify(filtro),
       httpOptions);
   }

@@ -11,6 +11,9 @@ import { Observable } from 'rxjs';
 })
 export class VentasService {
 
+  private urlVentasListado = `${environment.hostEntregasYVentas}/Ventas/listado`;
+  private urlVentasFiltrosEspecieCosecha = `${environment.hostEntregasYVentas}/Ventas/filtrosEspecieCosechas`;
+
   constructor(private http: HttpClient) { }
 
   // funcion que retorna un observable del listado con las ventas asociado a una cuenta dada
@@ -23,7 +26,7 @@ export class VentasService {
       })
     };
 
-    return this.http.post<ListadoVentas>(environment.urlVentasListado,
+    return this.http.post<ListadoVentas>(this.urlVentasListado,
       JSON.stringify(filtro),
       httpOptions);
   }
@@ -38,7 +41,7 @@ export class VentasService {
       })
     };
 
-    let urlConParametro = `${environment.urlVentasFiltrosEspecieCosecha}/${cuenta}`;
+    let urlConParametro = `${this.urlVentasFiltrosEspecieCosecha}/${cuenta}`;
     return this.http.get<Array<FiltroEspecieCosecha>>(urlConParametro, httpOptions);
   }
 

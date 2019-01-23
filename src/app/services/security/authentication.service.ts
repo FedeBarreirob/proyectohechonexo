@@ -13,6 +13,8 @@ import { Rol } from '../../interfaces/security/rol';
 })
 export class AuthenticationService {
 
+	private urlSeguridadLogin = `${environment.hostSeguridad}/autentificacion/login`;
+
 	constructor(
 		private http: HttpClient,
 		private jwtHelper: JwtHelperService
@@ -30,7 +32,7 @@ export class AuthenticationService {
 			"password": password
 		});
 
-		return this.http.post<ResponseAutentificacion>(environment.urlSeguridadLogin,
+		return this.http.post<ResponseAutentificacion>(this.urlSeguridadLogin,
 			credenciales,
 			httpOptions);
 	}

@@ -10,6 +10,11 @@ import { FiltroGenericoLista } from '../../interfaces/varios/filtro-generico-lis
 })
 export class PerfilesService {
 
+  private urlSeguridadPerfilRegistrar = `${environment.hostSeguridad}/perfiles/registrar`;
+  private urlSeguridadPerfilListar = `${environment.hostSeguridad}/perfiles/lista`;
+  private urlSeguridadPerfilModificar = `${environment.hostSeguridad}/perfiles/modificar`;
+  private urlSeguridadPerfilLogueado = `${environment.hostSeguridad}/perfiles/perfil`;
+
   constructor(private http: HttpClient) { }
 
   // funcion encargada de registrar un nuevo perfil
@@ -25,7 +30,7 @@ export class PerfilesService {
     let nuevoPerfilJson = JSON.stringify(nuevoPerfil);
 
     return this.http.post<ResponseServicio>(
-      environment.urlSeguridadPerfilRegistrar, nuevoPerfilJson, httpOptions);
+      this.urlSeguridadPerfilRegistrar, nuevoPerfilJson, httpOptions);
   }
 
   // funcion que devuelve un listado paginado
@@ -41,7 +46,7 @@ export class PerfilesService {
     let filtroJson = JSON.stringify(filtro);
 
     return this.http.post<ResponseServicio>(
-      environment.urlSeguridadPerfilListar, filtroJson, httpOptions);
+      this.urlSeguridadPerfilListar, filtroJson, httpOptions);
   }
 
   // funcion encargada de actualizar la informacion personal y cuentas de un perfil existente
@@ -57,7 +62,7 @@ export class PerfilesService {
     let perfilJson = JSON.stringify(perfil);
 
     return this.http.post<ResponseServicio>(
-      environment.urlSeguridadPerfilModificar, perfilJson, httpOptions);
+      this.urlSeguridadPerfilModificar, perfilJson, httpOptions);
   }
 
   // funcion que devuelve los datos del perfil que se encuentra vinculado al token actual
@@ -71,6 +76,6 @@ export class PerfilesService {
     };
 
     return this.http.post<ResponseServicio>(
-      environment.urlSeguridadPerfilLogueado, null, httpOptions);
+      this.urlSeguridadPerfilLogueado, null, httpOptions);
   }
 }

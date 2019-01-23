@@ -10,6 +10,10 @@ import { FiltroGenericoListaConFiltroId } from '../../interfaces/varios/filtro-g
 })
 export class TercerosService {
 
+  private urlSeguridadTerceroRegistrar = `${environment.hostSeguridad}/terceros/registrar`;
+  private urlSeguridadTerceroListar = `${environment.hostSeguridad}/terceros/lista`;
+  private urlSeguridadTerceroModificar = `${environment.hostSeguridad}/terceros/modificar`;
+
   constructor(private http: HttpClient) { }
 
   // funcion encargada de registrar un nuevo acceso a tercero
@@ -25,7 +29,7 @@ export class TercerosService {
     let nuevoAccesoTerceroJson = JSON.stringify(nuevoAccesoTercero);
 
     return this.http.post<ResponseServicio>(
-      environment.urlSeguridadTerceroRegistrar, nuevoAccesoTerceroJson, httpOptions);
+      this.urlSeguridadTerceroRegistrar, nuevoAccesoTerceroJson, httpOptions);
   }
 
   // funcion que devuelve un listado paginado
@@ -41,7 +45,7 @@ export class TercerosService {
     let filtroJson = JSON.stringify(filtro);
 
     return this.http.post<ResponseServicio>(
-      environment.urlSeguridadTerceroListar, filtroJson, httpOptions);
+      this.urlSeguridadTerceroListar, filtroJson, httpOptions);
   }
 
   // funcion encargada de actualizar la informacion de un acceso a tercero existente
@@ -57,6 +61,6 @@ export class TercerosService {
     let accesoTerceroJson = JSON.stringify(accesoTercero);
 
     return this.http.post<ResponseServicio>(
-      environment.urlSeguridadTerceroModificar, accesoTerceroJson, httpOptions);
+      this.urlSeguridadTerceroModificar, accesoTerceroJson, httpOptions);
   }
 }
