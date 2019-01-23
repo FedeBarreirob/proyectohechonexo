@@ -125,38 +125,47 @@
 		</mat-card-header>
 
 		<mat-card-content>
-			<form [formGroup]="formCuentasVinculadasGroup">
-				<div fxLayout="row" fxLayoutAlign="space-between center">
-					<div fxFlex="55%">
-						<mat-form-field class="full-width-input">
-							<input matInput placeholder="Código cuenta" formControlName="entidadCodigo" required>
-							<mat-error>
-								<mat-error *ngIf="isCuentasVinculadasFieldInvalid('entidadCodigo')">
-									Por favor ingrese la cuenta de Algoritmo
-								</mat-error>
-							</mat-error>
-						</mat-form-field>
-					</div>
 
-					<div fxFlex="40%">
-						<button mat-raised-button color="primary" (click)="agregarCuenta()">Vincular</button>
-					</div>
+			<div fxLayout="row" fxLayoutAlign="space-between center">
+				<div fxFlex="55%">
+
+					<mat-form-field class="container">
+
+						<!-- input buscador de comerciales -->
+						<input type="text" placeholder="Buscar comerciales ..." matInput [formControl]="buscadorComercial"
+						 [matAutocomplete]="auto" (change)="limpiarSeleccionComercial()">
+
+						<!-- panel con el resultado de la busqueda -->
+						<mat-autocomplete #auto="matAutocomplete" [displayWith]="displayComercial" (optionSelected)="seleccionarComercial($event.option.value)">
+							<mat-option *ngFor="let comercial of listadoComerciales" [value]="comercial">
+								{{ comercial.informacionPersonal.nombre !== null ? comercial.informacionPersonal.nombre :
+								comercial.credencial.username }}
+							</mat-option>
+						</mat-autocomplete>
+
+					</mat-form-field>
 				</div>
 
-				<div fxLayout="row" fxLayoutAlign="space-between center">
-					<div fxFlex="100%">
-						<mat-list>
-							<mat-list-item *ngFor="let codigo of listadoCodigos">
-								<div fxFlex="50%">
-									{{ codigo }}
-								</div>
-								<div fxFlex="50%"><button mat-button (click)="quitarCuenta(codigo)">Desvincular</button></div>
-								<mat-divider></mat-divider>
-							</mat-list-item>
-						</mat-list>
-					</div>
+				<div fxFlex="40%">
+					<button mat-raised-button color="primary" (click)="agregarComercial()">Vincular</button>
 				</div>
-			</form>
+			</div>
+
+			<div fxLayout="row" fxLayoutAlign="space-between center">
+				<div fxFlex="100%">
+					<mat-list>
+						<mat-list-item *ngFor="let comercial of listadoComercialesSeleccionados">
+							<div fxFlex="50%">
+								{{ comercial.informacionPersonal.nombre !== null ? comercial.informacionPersonal.nombre :
+								comercial.credencial.username }}
+							</div>
+							<div fxFlex="50%"><button mat-button (click)="quitarComercial(comercial)">Desvincular</button></div>
+							<mat-divider></mat-divider>
+						</mat-list-item>
+					</mat-list>
+				</div>
+			</div>
+
 		</mat-card-content>
 	</mat-card>
 
