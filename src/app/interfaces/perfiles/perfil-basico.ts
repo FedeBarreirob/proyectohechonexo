@@ -6,5 +6,6 @@ export interface PerfilBasico {
     credencial: PerfilBasicoCredencial,
     rol: Rol,
     informacionPersonal: PerfilBasicoInfoPersonal,
-    entidadCodigos: Array<string>
+    entidadCodigos: Array<string>,
+    comercialesVinculados: Array<PerfilBasico>
 }

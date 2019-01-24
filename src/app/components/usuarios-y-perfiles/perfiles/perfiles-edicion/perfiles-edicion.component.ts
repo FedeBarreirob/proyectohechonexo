@@ -118,9 +118,9 @@ export class PerfilesEdicionComponent implements OnInit {
 		this.formComercialesVinculadosGroup = this.formBuilder.group({
 			perfilComercial: [''],
 		});
-		/*if (this.data != null && this.data.entidadCodigos != null) {
-			this.listadoCodigos = Object.assign([], this.data.entidadCodigos);
-		}*/
+		if (this.data != null && this.data.comercialesVinculados != null) {
+			this.listadoComercialesSeleccionados = Object.assign([], this.data.comercialesVinculados);
+		}
 
 		this.buscadorComercial.valueChanges.subscribe(
 			termino => {
@@ -148,7 +148,8 @@ export class PerfilesEdicionComponent implements OnInit {
 				credencial: datosAcceso,
 				informacionPersonal: informacionPersonal,
 				entidadCodigos: this.listadoCodigos,
-				rol: rol
+				rol: rol,
+				comercialesVinculados: this.listadoComercialesSeleccionados
 			};
 
 			if (this.esRegistroNuevo) {
@@ -269,19 +270,61 @@ export class PerfilesEdicionComponent implements OnInit {
 	}
 
 	// funcion encargada de limpiar la seleccion
-	limpiarSeleccionComercial() {
+	limpiarSeleccionComercialSiVacio() {
 		if (this.buscadorComercial.value == "") {
-			this.comercialSeleccionado = null;
+			this.limpiarComercialSeleccionado();
 		}
+	}
+
+	// limpia la entrada de texto y el comercial seleccionado
+	private limpiarComercialSeleccionado() {
+		this.buscadorComercial.reset();
+		this.comercialSeleccionado = null;
 	}
 
 	// funcion encargada de agregar un comercial a la lista de vinculaciones
 	agregarComercial() {
-		this.listadoComercialesSeleccionados.push(this.comercialSeleccionado);
+
+		if (this.comercialSeleccionado != null) {
+
+			const index: number = this.indiceEnListaComercial(this.comercialSeleccionado);
+			if (index == -1) {
+
+				this.listadoComercialesSeleccionados.unshift(this.comercialSeleccionado);
+				this.limpiarComercialSeleccionado();
+
+			} else {
+				this.openSnackBar("El comercial ya se encuentra en el listado", "Vinculación de comerciales");
+			}
+
+		} else {
+			this.openSnackBar("Indique el comercial", "Vinculación de comerciales");
+		}
 	}
 
 	// funcion encargada de quitar un comercial del listado de comerciales
 	quitarComercial(comercial: PerfilBasico) {
 
+		const index: number = this.indiceEnListaComercial(comercial);
+
+		if (index !== -1) {
+			this.listadoComercialesSeleccionados.splice(index, 1);
+		}
+	}
+
+	// funcion que devuelve el indice en el listado de un comercial
+	private indiceEnListaComercial(comercial: PerfilBasico): number {
+		return this.listadoComercialesSeleccionados
+			.map(unComercial => unComercial.informacionPersonal.id)
+			.indexOf(comercial.informacionPersonal.id);
+	}
+
+	// funcion encargada de limpiar los datos vinculados al perfil
+	limpiarDatosVinculadosAlPerfil() {
+		this.formCuentasVinculadasGroup.reset();
+		this.limpiarComercialSeleccionado();
+		this.listadoCodigos = [];
+		this.listadoComerciales = [];
+		this.listadoComercialesSeleccionados = [];
 	}
 }

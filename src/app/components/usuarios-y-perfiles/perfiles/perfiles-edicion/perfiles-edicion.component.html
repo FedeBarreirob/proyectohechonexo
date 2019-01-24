@@ -35,7 +35,7 @@
 				<div fxLayout="row" fxLayoutAlign="space-between center">
 					<div fxFlex="100%">
 						<mat-form-field>
-							<mat-select placeholder="Rol" formControlName="rol">
+							<mat-select placeholder="Rol" formControlName="rol" (selectionChange)="limpiarDatosVinculadosAlPerfil()">
 								<mat-option *ngFor="let rol of roles" [value]="rol">
 									{{rol.denominacion}}
 								</mat-option>
@@ -133,7 +133,7 @@
 
 						<!-- input buscador de comerciales -->
 						<input type="text" placeholder="Buscar comerciales ..." matInput [formControl]="buscadorComercial"
-						 [matAutocomplete]="auto" (change)="limpiarSeleccionComercial()">
+						 [matAutocomplete]="auto" (change)="limpiarSeleccionComercialSiVacio()">
 
 						<!-- panel con el resultado de la busqueda -->
 						<mat-autocomplete #auto="matAutocomplete" [displayWith]="displayComercial" (optionSelected)="seleccionarComercial($event.option.value)">
