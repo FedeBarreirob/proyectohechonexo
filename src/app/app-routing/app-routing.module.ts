@@ -91,7 +91,7 @@ const routes: Routes = [
     component: PerfilesListadoComponent,
     canActivate: [AuthGuardGuard],
     data: {
-      rolAdmin: true
+      rolAdmin: false
     }
   },
   {
