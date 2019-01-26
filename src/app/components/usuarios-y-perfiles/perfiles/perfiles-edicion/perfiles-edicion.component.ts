@@ -1,6 +1,6 @@
-import { Component, OnInit, Inject, ViewChild } from '@angular/core';
+import { Component, OnInit, Inject } from '@angular/core';
 import { FormBuilder, FormGroup, FormControl } from '@angular/forms';
-import { MatSnackBar, MatDialogRef, MAT_DIALOG_DATA, MatAutocompleteTrigger } from '@angular/material';
+import { MatSnackBar, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
 import { PerfilesService } from '../../../../services/perfiles/perfiles.service';
 import { PerfilBasico } from '../../../../interfaces/perfiles/perfil-basico';
 import { PerfilBasicoCredencial } from '../../../../interfaces/perfiles/perfil-basico-credencial';
@@ -82,14 +82,29 @@ export class PerfilesEdicionComponent implements OnInit {
 		// credenciales
 		if (this.data != null) {
 			this.formDatosAccesoGroup = this.formBuilder.group(this.data.credencial);
-			this.formDatosAccesoGroup.addControl('rol', new FormControl(this.roles.filter(x => x.id == (this.data.rol != null ? this.data.rol.id : null))[0]));
+
+			// se establece rol PRODUCTOR por defecto en caso que el usuario que genera el registro se a suadmin o comercial
+			if (this.authenticationService.esSuadminOComercial()) {
+				this.formDatosAccesoGroup.addControl('rol', new FormControl({ value: this.roles.filter(x => x.id == RoleEnum.PRODUCTOR.valueOf())[0], disabled: true }));
+			} else {
+				this.formDatosAccesoGroup.addControl('rol', new FormControl(this.roles.filter(x => x.id == (this.data.rol != null ? this.data.rol.id : null))[0]));
+			}
 		} else {
-			this.formDatosAccesoGroup = this.formBuilder.group({
-				username: [''],
-				password: [''],
-				passwordConfirmacion: [''],
-				rol: [null]
-			});
+			if (this.authenticationService.esSuadminOComercial()) {
+				this.formDatosAccesoGroup = this.formBuilder.group({
+					username: [''],
+					password: [''],
+					passwordConfirmacion: [''],
+					rol: new FormControl({ value: this.roles.filter(x => x.id == RoleEnum.PRODUCTOR.valueOf())[0], disabled: true })
+				});
+			} else {
+				this.formDatosAccesoGroup = this.formBuilder.group({
+					username: [''],
+					password: [''],
+					passwordConfirmacion: [''],
+					rol: [null]
+				});
+			}
 		}
 
 		// informacion personal
@@ -327,4 +342,5 @@ export class PerfilesEdicionComponent implements OnInit {
 		this.listadoComerciales = [];
 		this.listadoComercialesSeleccionados = [];
 	}
+
 }

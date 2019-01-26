@@ -110,4 +110,10 @@ export class AuthenticationService {
 			return false;
 		}
 	}
+
+	// funcion que determina si el usuario logueado es comercial o suadmin
+	esSuadminOComercial(): boolean {
+		return this.esRol('SUB_ADMINISTRADOR') || this.esRol('COMERCIAL');
+	}
+
 }
