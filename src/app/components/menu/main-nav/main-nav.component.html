@@ -1,7 +1,8 @@
 <mat-sidenav-container class="sidenav-container">
-  <mat-sidenav (click)="isPantallaPequena && drawer.toggle()" #drawer class="sidenav" fixedInViewport="true" [attr.role]="(isHandset$ | async) ? 'dialog' : 'navigation'"
-    [mode]="(isHandset$ | async) ? 'over' : 'side'" [opened]="!(isHandset$ | async) && authService.esLogueado">
-    <mat-toolbar color="background" *ngIf="authService.esLogueado"><img src="assets/logo.png" class="logo-sidebar" alt="image caption"/></mat-toolbar>
+  <mat-sidenav (click)="isPantallaPequena && drawer.toggle()" #drawer class="sidenav" fixedInViewport="true"
+    [attr.role]="(isHandset$ | async) ? 'dialog' : 'navigation'" [mode]="(isHandset$ | async) ? 'over' : 'side'"
+    [opened]="!(isHandset$ | async) && authService.esLogueado">
+    <mat-toolbar color="background" *ngIf="authService.esLogueado"><img src="assets/logo.png" class="logo-sidebar" alt="image caption" /></mat-toolbar>
     <mat-nav-list *ngIf="authService.esLogueado">
       <a mat-list-item routerLink="/dashboard" routerLinkActive="active">Inicio</a>
       <!--<a mat-list-item href="#"><span matBadge="4" matBadgeOverlap="false">Notificaciones</span></a>-->
@@ -12,8 +13,10 @@
       <a mat-list-item routerLink="/ctacte-aplicada" routerLinkActive="active">Cta Cte Aplicada</a>
       <a mat-list-item routerLink="/mercaderia-pendiente-entregar" routerLinkActive="active">Merc. Pend. Entregar</a>
       <a mat-list-item routerLink="/comprobantes-pendientes-facturar" routerLinkActive="active">Comprob. Pend. Facturar</a>
-      <a *ngIf="authService.esAdmin || authService.esRol('SUB_ADMINISTRADOR') || authService.esRol('COMERCIAL')" mat-list-item routerLink="/administrador-de-cuentas" routerLinkActive="active">Administrador de cuentas</a>
-      <a *ngIf="authService.esAdmin || authService.esRol('PRODUCTOR')" mat-list-item routerLink="/acceso-terceros" routerLinkActive="active">Accesos a terceros</a>
+      <a *ngIf="authService.esAdmin || authService.esRol('SUB_ADMINISTRADOR') || authService.esRol('COMERCIAL')"
+        mat-list-item routerLink="/administrador-de-cuentas" routerLinkActive="active">Administrador de cuentas</a>
+      <a *ngIf="authService.esAdmin || authService.esRol('PRODUCTOR')" mat-list-item routerLink="/acceso-terceros"
+        routerLinkActive="active">Accesos a terceros</a>
       <a mat-list-item href="#">Archivo de comprobantes</a>
       <a mat-list-item routerLink="/login" routerLinkActive="active">Cerrar Sersión</a>
     </mat-nav-list>
@@ -24,6 +27,12 @@
         <mat-icon aria-label="Side nav toggle icon">menu</mat-icon>
       </button>
       <span>Gaviglio Digital - Clientes</span>
+
+      <span class="relleno"></span>
+
+      <span class="relleno" *ngIf="authService.esAdmin || authService.esRol('SUB_ADMINISTRADOR') || authService.esRol('COMERCIAL')">
+        <app-selector-cuentas></app-selector-cuentas>
+      </span>
     </mat-toolbar>
 
     <ng-content></ng-content>

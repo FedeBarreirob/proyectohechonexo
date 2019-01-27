@@ -1,0 +1,23 @@
+<form class="form-selector-perfiles">
+
+    <mat-form-field class="container-selector-perfiles">
+
+        <!-- input buscador de comerciales -->
+        <input type="text" placeholder="Buscar cuentas de ..." matInput [formControl]="buscadorPerfiles" [matAutocomplete]="auto"
+          (change)="limpiarSeleccionSiVacio()">
+      
+        <!-- panel con el resultado de la busqueda -->
+        <mat-autocomplete #auto="matAutocomplete" [displayWith]="displayPerfil" (optionSelected)="seleccionarPerfil($event.option.value)">
+          <mat-option *ngIf="isLoading">
+            <mat-spinner diameter="20"></mat-spinner>
+          </mat-option>
+          <mat-option *ngFor="let perfil of listadoPerfiles" [value]="perfil">
+            {{ perfil.informacionPersonal.nombre !== null && perfil.informacionPersonal.nombre !== "" ?
+            perfil.informacionPersonal.nombre :
+            perfil.credencial.username }}
+          </mat-option>
+        </mat-autocomplete>
+      
+      </mat-form-field>
+
+</form>
