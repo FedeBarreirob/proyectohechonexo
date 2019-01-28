@@ -37,7 +37,11 @@ export class CtacteComponent implements OnInit {
 
   ngOnInit() {
     this.cargando = false;
-    this.perfilBasico = this.authenticationService.perfilUsuarioLogueado();
+
+    this.authenticationService.perfilActivo$.subscribe(
+      perfil => this.perfilBasico = perfil);
+
+    this.authenticationService.setPerfilActivo(null);
   }
 
   // funcion que ejecuta la carga del listado de ctacte
@@ -78,7 +82,7 @@ export class CtacteComponent implements OnInit {
       data: {
         movimientos: this.listadoCtaCte,
         saldos: this.saldosTotales
-      } 
+      }
     });
   }
 }

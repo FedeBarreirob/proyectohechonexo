@@ -4,7 +4,7 @@ import { ResponseAutentificacion } from '../../interfaces/security/response.aute
 import { environment } from '../../../environments/environment'
 import { PerfilBasico } from '../../interfaces/perfiles/perfil-basico';
 import { JwtHelperService } from '@auth0/angular-jwt';
-import { Observable } from 'rxjs';
+import { Observable, Subject } from 'rxjs';
 import { RoleEnum } from '../../enums/role-enum.enum';
 import { Rol } from '../../interfaces/security/rol';
 
@@ -14,6 +14,8 @@ import { Rol } from '../../interfaces/security/rol';
 export class AuthenticationService {
 
 	private urlSeguridadLogin = `${environment.hostSeguridad}/autentificacion/login`;
+
+	_perfilActivo$ = new Subject<PerfilBasico>();
 
 	constructor(
 		private http: HttpClient,
@@ -41,6 +43,7 @@ export class AuthenticationService {
 	logout() {
 		localStorage.removeItem('currentUser');
 		localStorage.removeItem('currentUserPerfil');
+		localStorage.removeItem('seleccionadoUserPerfil');
 	}
 
 	// funcion que indica si el usuario se encuentra logueado en el sistema
@@ -70,6 +73,31 @@ export class AuthenticationService {
 		} else {
 			return null;
 		}
+	}
+
+	// funcion que devuelve el perfil del usuario seleccionado
+	perfilUsuarioSeleccionado() {
+		if (localStorage.getItem('seleccionadoUserPerfil') !== null) {
+			return JSON.parse(localStorage.getItem('seleccionadoUserPerfil'));
+		} else {
+			return this.perfilUsuarioLogueado();
+		}
+	}
+
+	// funcion que devuelve el perfil seleccionado, si este es nulo, devuelve el perfil del usuario logueado
+	get perfilActivo$(): Observable<PerfilBasico> {
+		return this._perfilActivo$.asObservable();
+	}
+
+	// funcion que establece el perfil activo
+	setPerfilActivo(perfil?: PerfilBasico) {
+		localStorage.removeItem('seleccionadoUserPerfil');
+
+		if (perfil != null) {
+			localStorage.setItem('seleccionadoUserPerfil', JSON.stringify(perfil));
+		}
+
+		this._perfilActivo$.next(this.perfilUsuarioSeleccionado());
 	}
 
 	// funcion que indica si el usuario es admin

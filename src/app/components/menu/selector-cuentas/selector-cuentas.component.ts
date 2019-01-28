@@ -86,6 +86,7 @@ export class SelectorCuentasComponent implements OnInit {
 	private limpiarPerfilSeleccionado() {
 		this.buscadorPerfiles.reset();
 		this.perfilSeleccionado = null;
+		this.authenticationService.setPerfilActivo(null);
 	}
 
 	// funcion encargada de obtener el texto a mostrar cuando se seleccione un perfil
@@ -101,6 +102,7 @@ export class SelectorCuentasComponent implements OnInit {
 	seleccionarPerfil(perfil: PerfilBasico) {
 		if (!this.isLoading) {
 			this.perfilSeleccionado = perfil;
+			this.authenticationService.setPerfilActivo(perfil);
 		}
 	}
 }
