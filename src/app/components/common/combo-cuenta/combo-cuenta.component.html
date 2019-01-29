@@ -1,0 +1,10 @@
+<mat-form-field>
+  <mat-select [disabled]="disabled==true" placeholder="Seleccione una cuenta"
+  (selectionChange)="seleccionar($event.value)"
+    disableRipple>
+    <mat-option *ngFor="let cuentaVinculada of (perfilBasico != null ? perfilBasico.entidadCodigos : [])"
+      [value]="cuentaVinculada">
+      {{cuentaVinculada}}
+    </mat-option>
+  </mat-select>
+</mat-form-field>

@@ -11,6 +11,7 @@
           <mat-option *ngIf="isLoading">
             <mat-spinner diameter="20"></mat-spinner>
           </mat-option>
+          <mat-option>Ninguno</mat-option>
           <mat-option *ngFor="let perfil of listadoPerfiles" [value]="perfil">
             {{ perfil.informacionPersonal.nombre !== null && perfil.informacionPersonal.nombre !== "" ?
             perfil.informacionPersonal.nombre :

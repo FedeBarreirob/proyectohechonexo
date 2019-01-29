@@ -10,15 +10,7 @@
       <div class="container" fxLayout="row" fxLayout.xs="column" fxLayoutGap="0.5%" fxLayoutAlign="space-around stretch">
 
         <div fxFlex="25%">
-          <mat-form-field>
-            <mat-select [disabled]="cargando==true || cargandoFiltros==true" [(ngModel)]="cuenta" placeholder="Seleccione una cuenta"
-              disableRipple (selectionChange)="cargarFiltrosEspecieCosecha()">
-              <mat-option *ngFor="let cuentaVinculada of (perfilBasico != null ? perfilBasico.entidadCodigos : [])"
-                [value]="cuentaVinculada">
-                {{cuentaVinculada}}
-              </mat-option>
-            </mat-select>
-          </mat-form-field>
+          <app-combo-cuenta [disabled]="cargando==true" (change)="seleccionarCuenta($event)"></app-combo-cuenta>
         </div>
 
         <div fxFlex="25%">

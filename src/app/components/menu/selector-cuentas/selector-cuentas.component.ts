@@ -6,6 +6,7 @@ import { UserAuth } from '../../../models/security/user';
 import { AuthenticationService } from '../../../services/security/authentication.service';
 import { FiltroGenericoLista } from '../../../interfaces/varios/filtro-generico-lista';
 import { debounceTime, tap } from 'rxjs/operators';
+import { isUndefined } from 'util';
 
 @Component({
 	selector: 'app-selector-cuentas',
@@ -102,7 +103,15 @@ export class SelectorCuentasComponent implements OnInit {
 	seleccionarPerfil(perfil: PerfilBasico) {
 		if (!this.isLoading) {
 			this.perfilSeleccionado = perfil;
-			this.authenticationService.setPerfilActivo(perfil);
+
+			if(!isUndefined(perfil)) {
+				this.authenticationService.setPerfilActivo(perfil);
+			} else {
+				this.limpiarPerfilSeleccionado();
+			}
+			
+		} else {
+			this.limpiarPerfilSeleccionado();
 		}
 	}
 }

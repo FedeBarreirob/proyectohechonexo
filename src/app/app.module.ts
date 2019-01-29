@@ -63,6 +63,7 @@ import { OtrosMovimientosDetalleComponent } from './components/listados/otros-mo
 import { OtrosMovimientosMasOperacionesComponent } from './components/listados/otros-movimientos/otros-movimientos-mas-operaciones/otros-movimientos-mas-operaciones.component';
 import { OtrosMovimientosDetalleMasOperacionesComponent } from './components/listados/otros-movimientos/otros-movimientos-detalle-mas-operaciones/otros-movimientos-detalle-mas-operaciones.component';
 import { SelectorCuentasComponent } from './components/menu/selector-cuentas/selector-cuentas.component';
+import { ComboCuentaComponent } from './components/common/combo-cuenta/combo-cuenta.component';
 
 registerLocaleData(localeEsAr, 'es-AR');
 
@@ -111,7 +112,8 @@ export function tokenGetter() {
 		OtrosMovimientosDetalleComponent,
 		OtrosMovimientosMasOperacionesComponent,
 		OtrosMovimientosDetalleMasOperacionesComponent,
-		SelectorCuentasComponent
+		SelectorCuentasComponent,
+		ComboCuentaComponent
 	],
 	imports: [
 		HttpClientModule,

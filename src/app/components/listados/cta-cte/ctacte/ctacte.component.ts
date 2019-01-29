@@ -40,8 +40,6 @@ export class CtacteComponent implements OnInit {
 
     this.authenticationService.perfilActivo$.subscribe(
       perfil => this.perfilBasico = perfil);
-
-    this.authenticationService.setPerfilActivo(null);
   }
 
   // funcion que ejecuta la carga del listado de ctacte
@@ -84,5 +82,10 @@ export class CtacteComponent implements OnInit {
         saldos: this.saldosTotales
       }
     });
+  }
+
+  // funcion encargada de capturar el valor de la cuenta
+  seleccionarCuenta(cuentaSeleccionada?: string) {
+    this.cuenta = cuentaSeleccionada;
   }
 }

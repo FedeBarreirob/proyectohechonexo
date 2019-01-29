@@ -35,7 +35,9 @@ export class MercPendEntregarComponent implements OnInit {
 
   ngOnInit() {
     this.cargando = false;
-    this.perfilBasico = this.authenticationService.perfilUsuarioLogueado();
+
+    this.authenticationService.perfilActivo$.subscribe(
+      perfil => this.perfilBasico = perfil);
   }
 
   // funcion que ejecuta la carga del listado de mercaderia pendiente de entregar
@@ -78,5 +80,10 @@ export class MercPendEntregarComponent implements OnInit {
         totales: this.totales
       }
     });
+  }
+
+  // funcion encargada de capturar el valor de la cuenta
+  seleccionarCuenta(cuentaSeleccionada?: string) {
+    this.cuenta = cuentaSeleccionada;
   }
 }

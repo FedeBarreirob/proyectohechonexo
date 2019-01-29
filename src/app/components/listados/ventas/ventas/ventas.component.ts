@@ -40,7 +40,9 @@ export class VentasComponent implements OnInit {
 
 	ngOnInit() {
 		this.cargando = false;
-		this.perfilBasico = this.authenticationService.perfilUsuarioLogueado();
+
+		this.authenticationService.perfilActivo$.subscribe(
+			perfil => this.perfilBasico = perfil);
 	}
 
 	// funcion encargada de cargar los filtros de especie cosecha cuando se cambia la seleccion de cuenta
@@ -97,5 +99,11 @@ export class VentasComponent implements OnInit {
 				totales: this.totales
 			}
 		});
+	}
+
+	// funcion encargada de capturar el valor de la cuenta
+	seleccionarCuenta(cuentaSeleccionada?: string) {
+		this.cuenta = cuentaSeleccionada;
+		this.cargarFiltrosEspecieCosecha();
 	}
 }
