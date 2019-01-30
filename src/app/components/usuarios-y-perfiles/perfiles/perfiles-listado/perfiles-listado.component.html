@@ -37,51 +37,76 @@
           </div>
         </div>
 
-        <div fxFlexFill fxLayout="row" fxLayoutAlign="space-between center">
-          <div fxFlex="33%">
-            <strong>Nombre de usuario</strong>
+        <div fxFlexFill fxLayout="row" fxLayoutAlign="space-between center" fxLayoutGap="2px">
+          <div fxFlex="15%">
+            <strong>Usuario</strong>
           </div>
 
-          <div fxFlex="33%">
+          <div fxFlex="40%">
             <strong>Nombre</strong>
           </div>
 
-          <div fxFlex="33%">
+          <div fxFlex="21%">
             <strong>Rol</strong>
           </div>
 
-          <div fxFlex="33%">
-            <strong>Administrador</strong>
+          <div fxFlex="12%">
+            <strong>Admin.</strong>
+          </div>
+
+          <div fxFlex="12%">
+            <strong>Operaciones</strong>
           </div>
 
         </div>
 
         <mat-card-content>
-          <mat-nav-list class="listado">
+          <mat-nav-list class="listado" *ngFor="let perfil of (listaPaginada.listado ? listaPaginada.listado : [])">
 
-            <a mat-list-item *ngFor="let perfil of (listaPaginada.listado ? listaPaginada.listado : [])" (click)="verOperaciones(perfil)">
-
-              <div fxFlexFill fxLayout="row" fxLayoutAlign="space-between center">
-                <div fxFlex="33%">
-                  {{perfil.credencial.username}}
-                </div>
-
-                <div fxFlex="33%">
-                  {{perfil.informacionPersonal.nombre}}
-                </div>
-
-                <div fxFlex="33%">
-                  {{ perfil.rol != null ? perfil.rol.denominacion : '-'}}
-                </div>
-
-                <div fxFlex="33%">
-                  {{ perfil.rol != null ? (perfil.rol.admin == true ? 'Sí' : 'No') : '-'}}
-                </div>
-
+            <div fxFlexFill fxLayout="row" fxLayoutAlign="space-between center" fxLayoutGap="2px">
+              <div fxFlex="15%">
+                {{perfil.credencial.username}}
               </div>
 
-              <mat-divider></mat-divider>
-            </a>
+              <div fxFlex="40%">
+                {{perfil.informacionPersonal.nombre}}
+              </div>
+
+              <div fxFlex="21%">
+                {{ perfil.rol != null ? perfil.rol.denominacion : '-'}}
+              </div>
+
+              <div fxFlex="12%">
+                {{ perfil.rol != null ? (perfil.rol.admin == true ? 'Sí' : 'No') : '-'}}
+              </div>
+
+              <div fxFlex="12%">
+                <div fxFlexFill fxLayout="row" fxLayoutAlign="space-around center" fxLayoutGap="2px">
+
+                  <div fxFlex="25%">
+                    <mat-slide-toggle [checked]="!perfil.credencial.baja" (change)="habilitacion(perfil, $event)"></mat-slide-toggle>
+                  </div>
+                  <div fxFlex="25%">
+                    <button mat-icon-button color="primary" (click)="verEditar(perfil)">
+                      <mat-icon>pageview</mat-icon>
+                    </button>
+                  </div>
+                  <div fxFlex="25%">
+                    <button mat-icon-button color="primary">
+                      <mat-icon>vpn_key</mat-icon>
+                    </button>
+                  </div>
+                  <div fxFlex="25%">
+                    <button mat-icon-button color="warn">
+                      <mat-icon>delete</mat-icon>
+                    </button>
+                  </div>
+                </div>
+              </div>
+
+            </div>
+
+            <mat-divider></mat-divider>
 
           </mat-nav-list>
         </mat-card-content>
@@ -92,7 +117,8 @@
   <!-- Paginador -->
   <div fxLayout="row" fxLayoutAlign="space-between center">
     <div fxFlex="100%">
-      <mat-paginator [length]="listaPaginada.cantidadTotalRegistros" [pageSize]="filtro.cantPorPagina" (page)="pageEvent = cargarListado($event)" [pageSizeOptions]="pageSizeOptions">
+      <mat-paginator [length]="listaPaginada.cantidadTotalRegistros" [pageSize]="filtro.cantPorPagina" (page)="pageEvent = cargarListado($event)"
+        [pageSizeOptions]="pageSizeOptions">
       </mat-paginator>
     </div>
   </div>

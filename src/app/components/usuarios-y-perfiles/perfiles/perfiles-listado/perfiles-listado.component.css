@@ -1,38 +1,42 @@
-.listado a:hover {
-    background-color: beige;
-  }
-  
-  .tabla-listado {
-    border: none;
-    width: 100%;
-    font-size: 10px;
-  }
+mat-nav-list {
+  padding-left: .5em;
+  padding-right: .5em;
+}
+mat-nav-list:hover {
+  background-color: beige;
+}
 
-  .tabla-listado td {
-    width: 50%;
-  }
+.tabla-listado {
+  border: none;
+  width: 100%;
+  font-size: 10px;
+}
 
-  .engris {
-    color: dimgray;
-  }
+.tabla-listado td {
+  width: 50%;
+}
 
-  .conceptos {
-    font-weight: bold;
-  }
+.engris {
+  color: dimgray;
+}
 
-  .tabla-totales {
-    border: none;
-    width: 100%;
-    font-size: 9px;
-    text-align: right;
-  }
+.conceptos {
+  font-weight: bold;
+}
 
-  .custom-button{
-    position: fixed;
-    right: 30px;
-    bottom: 60px;
-  }
+.tabla-totales {
+  border: none;
+  width: 100%;
+  font-size: 9px;
+  text-align: right;
+}
 
-  mat-form-field {
-    width: 100%;
-  }
+.custom-button {
+  position: fixed;
+  right: 30px;
+  bottom: 60px;
+}
+
+mat-form-field {
+  width: 100%;
+}

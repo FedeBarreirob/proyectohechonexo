@@ -53,7 +53,6 @@ import { ComprobantesPendFacturarMasOperacionesComponent } from './components/li
 import { ComprobantesPendFacturarDetalleMasOperacionesComponent } from './components/listados/comprobantes-pend-facturar/comprobantes-pend-facturar-detalle-mas-operaciones/comprobantes-pend-facturar-detalle-mas-operaciones.component';
 import { PerfilesListadoComponent } from './components/usuarios-y-perfiles/perfiles/perfiles-listado/perfiles-listado.component';
 import { PerfilesEdicionComponent } from './components/usuarios-y-perfiles/perfiles/perfiles-edicion/perfiles-edicion.component';
-import { PerfilOperacionesComponent } from './components/usuarios-y-perfiles/perfiles/perfil-operaciones/perfil-operaciones.component';
 import { JwtHelperService, JwtModule } from '@auth0/angular-jwt';
 import { AccesoTercerosComponent } from './components/usuarios-y-perfiles/terceros/acceso-terceros/acceso-terceros.component';
 import { AccesoTercerosEdicionComponent } from './components/usuarios-y-perfiles/terceros/acceso-terceros-edicion/acceso-terceros-edicion.component';
@@ -104,7 +103,6 @@ export function tokenGetter() {
 		ComprobantesPendFacturarDetalleMasOperacionesComponent,
 		PerfilesListadoComponent,
 		PerfilesEdicionComponent,
-		PerfilOperacionesComponent,
 		AccesoTercerosComponent,
 		AccesoTercerosEdicionComponent,
 		AccesoTercerosOperacionesComponent,
@@ -169,7 +167,6 @@ export function tokenGetter() {
 		ComprobantesPendFacturarMasOperacionesComponent,
 		ComprobantesPendFacturarDetalleMasOperacionesComponent,
 		PerfilesEdicionComponent,
-		PerfilOperacionesComponent,
 		AccesoTercerosEdicionComponent,
 		AccesoTercerosOperacionesComponent,
 		OtrosMovimientosDetalleComponent,

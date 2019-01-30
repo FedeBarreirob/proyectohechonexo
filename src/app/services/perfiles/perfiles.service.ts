@@ -6,6 +6,7 @@ import { ResponseServicio } from '../../interfaces/varios/response-servicio';
 import { FiltroGenericoLista } from '../../interfaces/varios/filtro-generico-lista';
 import { debounceTime } from 'rxjs/internal/operators/debounceTime';
 import { map } from 'rxjs/internal/operators/map';
+import { BajaPerfil } from '../../interfaces/perfiles/baja-perfil';
 
 
 @Injectable({
@@ -18,6 +19,7 @@ export class PerfilesService {
 	private urlSeguridadPerfilModificar = `${environment.hostSeguridad}/perfiles/modificar`;
 	private urlSeguridadPerfilLogueado = `${environment.hostSeguridad}/perfiles/perfil`;
 	private urlSeguridadPerfilListarDeUnRol = `${environment.hostSeguridad}/perfiles/listaDeUnRol`;
+	private urlSeguridadPerfilDarDeBaja = `${environment.hostSeguridad}/perfiles/darDeBaja`;
 
 	constructor(private http: HttpClient) { }
 
@@ -108,5 +110,24 @@ export class PerfilesService {
 					return [];
 				}
 			}));
+	}
+
+	// funcion encargada de dar de baja un perfil
+	darDeBajaPerfil(perfilId: number, baja: boolean, token: string) {
+
+		const httpOptions = {
+			headers: new HttpHeaders({
+				'Content-Type': 'application/json',
+				'Authorization': `Bearer ${token}`
+			})
+		};
+
+		let bajaPerfil: BajaPerfil = {
+			perfilId: perfilId,
+			baja: baja
+		};
+
+		return this.http.put<ResponseServicio>(
+			this.urlSeguridadPerfilDarDeBaja, bajaPerfil, httpOptions);
 	}
 }
