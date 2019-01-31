@@ -1,129 +1,129 @@
 <div class="container" fxLayout="column" fxLayout.xs="column" fxLayoutWrap fxLayoutGap="0.5%" fxLayoutAlign="space-around stretch">
-  <mat-progress-bar *ngIf="cargando" mode="indeterminate"></mat-progress-bar>
+	<mat-progress-bar *ngIf="cargando" mode="indeterminate"></mat-progress-bar>
 
-  <div fxLayout="row" fxLayoutAlign="space-between center">
+	<div fxLayout="row" fxLayoutAlign="space-between center">
 
-    <!-- Filtro -->
-    <div fxFlex="100%">
+		<!-- Filtro -->
+		<div fxFlex="100%">
 
-      <mat-card>
-        <mat-card-content>
-          <div fxLayout="row" fxLayoutAlign="space-between center">
-            <div fxFlex="100%">
-              <mat-form-field class="full-width-input">
-                <input [disabled]="cargando" [(ngModel)]="filtro.filtro" matInput placeholder="Filtro de búsqueda" />
-              </mat-form-field>
-            </div>
-          </div>
-        </mat-card-content>
+			<mat-card>
+				<mat-card-content>
+					<div fxLayout="row" fxLayoutAlign="space-between center">
+						<div fxFlex="100%">
+							<mat-form-field class="full-width-input">
+								<input [disabled]="cargando" [(ngModel)]="filtro.filtro" matInput placeholder="Filtro de búsqueda" />
+							</mat-form-field>
+						</div>
+					</div>
+				</mat-card-content>
 
-        <mat-card-actions>
-          <div fxFlex></div>
-          <button [disabled]="cargando" mat-raised-button (click)="cargarListado()">Buscar</button>
-        </mat-card-actions>
+				<mat-card-actions>
+					<div fxFlex></div>
+					<button [disabled]="cargando" mat-raised-button (click)="cargarListado()">Buscar</button>
+				</mat-card-actions>
 
-      </mat-card>
+			</mat-card>
 
-    </div>
-  </div>
+		</div>
+	</div>
 
-  <!-- Listado -->
-  <div fxLayout="row" fxLayoutAlign="space-between center">
-    <div fxFlex="100%">
-      <mat-card>
-        <div fxFlexFill fxLayout="row" fxLayoutAlign="space-between center">
-          <div fxFlex="100%">
-            <mat-card-title>Administrador de cuentas</mat-card-title>
-          </div>
-        </div>
+	<!-- Listado -->
+	<div fxLayout="row" fxLayoutAlign="space-between center">
+		<div fxFlex="100%">
+			<mat-card>
+				<div fxFlexFill fxLayout="row" fxLayoutAlign="space-between center">
+					<div fxFlex="100%">
+						<mat-card-title>Administrador de cuentas</mat-card-title>
+					</div>
+				</div>
 
-        <div fxFlexFill fxLayout="row" fxLayoutAlign="space-between center" fxLayoutGap="2px">
-          <div fxFlex="15%">
-            <strong>Usuario</strong>
-          </div>
+				<div fxFlexFill fxLayout="row" fxLayoutAlign="space-between center" fxLayoutGap="2px">
+					<div fxFlex="15%">
+						<strong>Usuario</strong>
+					</div>
 
-          <div fxFlex="40%">
-            <strong>Nombre</strong>
-          </div>
+					<div fxFlex="40%">
+						<strong>Nombre</strong>
+					</div>
 
-          <div fxFlex="21%">
-            <strong>Rol</strong>
-          </div>
+					<div fxFlex="21%">
+						<strong>Rol</strong>
+					</div>
 
-          <div fxFlex="12%">
-            <strong>Admin.</strong>
-          </div>
+					<div fxFlex="12%">
+						<strong>Admin.</strong>
+					</div>
 
-          <div fxFlex="12%">
-            <strong>Operaciones</strong>
-          </div>
+					<div fxFlex="12%">
+						<strong>Operaciones</strong>
+					</div>
 
-        </div>
+				</div>
 
-        <mat-card-content>
-          <mat-nav-list class="listado" *ngFor="let perfil of (listaPaginada.listado ? listaPaginada.listado : [])">
+				<mat-card-content>
+					<mat-nav-list class="listado" *ngFor="let perfil of (listaPaginada.listado ? listaPaginada.listado : [])">
 
-            <div fxFlexFill fxLayout="row" fxLayoutAlign="space-between center" fxLayoutGap="2px">
-              <div fxFlex="15%">
-                {{perfil.credencial.username}}
-              </div>
+						<div fxFlexFill fxLayout="row" fxLayoutAlign="space-between center" fxLayoutGap="2px">
+							<div fxFlex="15%">
+								{{perfil.credencial.username}}
+							</div>
 
-              <div fxFlex="40%">
-                {{perfil.informacionPersonal.nombre}}
-              </div>
+							<div fxFlex="40%">
+								{{perfil.informacionPersonal.nombre}}
+							</div>
 
-              <div fxFlex="21%">
-                {{ perfil.rol != null ? perfil.rol.denominacion : '-'}}
-              </div>
+							<div fxFlex="21%">
+								{{ perfil.rol != null ? perfil.rol.denominacion : '-'}}
+							</div>
 
-              <div fxFlex="12%">
-                {{ perfil.rol != null ? (perfil.rol.admin == true ? 'Sí' : 'No') : '-'}}
-              </div>
+							<div fxFlex="12%">
+								{{ perfil.rol != null ? (perfil.rol.admin == true ? 'Sí' : 'No') : '-'}}
+							</div>
 
-              <div fxFlex="12%">
-                <div fxFlexFill fxLayout="row" fxLayoutAlign="space-around center" fxLayoutGap="2px">
+							<div fxFlex="12%">
+								<div fxFlexFill fxLayout="row" fxLayoutAlign="space-around center" fxLayoutGap="2px">
 
-                  <div fxFlex="25%">
-                    <mat-slide-toggle [checked]="!perfil.credencial.baja" (change)="habilitacion(perfil, $event)"></mat-slide-toggle>
-                  </div>
-                  <div fxFlex="25%">
-                    <button mat-icon-button color="primary" (click)="verEditar(perfil)">
-                      <mat-icon>pageview</mat-icon>
-                    </button>
-                  </div>
-                  <div fxFlex="25%">
-                    <button mat-icon-button color="primary">
-                      <mat-icon>vpn_key</mat-icon>
-                    </button>
-                  </div>
-                  <div fxFlex="25%">
-                    <button mat-icon-button color="warn" (click)="eliminar(perfil)">
-                      <mat-icon>delete</mat-icon>
-                    </button>
-                  </div>
-                </div>
-              </div>
+									<div fxFlex="25%">
+										<mat-slide-toggle [checked]="!perfil.credencial.baja" (change)="habilitacion(perfil, $event)"></mat-slide-toggle>
+									</div>
+									<div fxFlex="25%">
+										<button mat-icon-button color="primary" (click)="verEditar(perfil)">
+											<mat-icon>pageview</mat-icon>
+										</button>
+									</div>
+									<div fxFlex="25%">
+										<button mat-icon-button color="primary">
+											<mat-icon>vpn_key</mat-icon>
+										</button>
+									</div>
+									<div fxFlex="25%">
+										<button mat-icon-button color="warn" (click)="eliminar(perfil)">
+											<mat-icon>delete</mat-icon>
+										</button>
+									</div>
+								</div>
+							</div>
 
-            </div>
+						</div>
 
-            <mat-divider></mat-divider>
+						<mat-divider></mat-divider>
 
-          </mat-nav-list>
-        </mat-card-content>
-      </mat-card>
-    </div>
-  </div>
+					</mat-nav-list>
+				</mat-card-content>
+			</mat-card>
+		</div>
+	</div>
 
-  <!-- Paginador -->
-  <div fxLayout="row" fxLayoutAlign="space-between center">
-    <div fxFlex="100%">
-      <mat-paginator [length]="listaPaginada.cantidadTotalRegistros" [pageSize]="filtro.cantPorPagina" (page)="pageEvent = cargarListado($event)"
-        [pageSizeOptions]="pageSizeOptions">
-      </mat-paginator>
-    </div>
-  </div>
+	<!-- Paginador -->
+	<div fxLayout="row" fxLayoutAlign="space-between center">
+		<div fxFlex="100%">
+			<mat-paginator [length]="listaPaginada.cantidadTotalRegistros" [pageSize]="filtro.cantPorPagina" (page)="pageEvent = cargarListado($event)"
+			 [pageSizeOptions]="pageSizeOptions">
+			</mat-paginator>
+		</div>
+	</div>
 
-  <button [disabled]="cargando" mat-mini-fab class="custom-button" (click)="nuevoPerfil()">
-    <mat-icon aria-label="Crear perfil">add</mat-icon>
-  </button>
+	<button [disabled]="cargando" mat-mini-fab class="custom-button" (click)="nuevoPerfil()">
+		<mat-icon aria-label="Crear perfil">add</mat-icon>
+	</button>
 </div>

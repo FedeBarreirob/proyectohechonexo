@@ -56,7 +56,6 @@ import { PerfilesEdicionComponent } from './components/usuarios-y-perfiles/perfi
 import { JwtHelperService, JwtModule } from '@auth0/angular-jwt';
 import { AccesoTercerosComponent } from './components/usuarios-y-perfiles/terceros/acceso-terceros/acceso-terceros.component';
 import { AccesoTercerosEdicionComponent } from './components/usuarios-y-perfiles/terceros/acceso-terceros-edicion/acceso-terceros-edicion.component';
-import { AccesoTercerosOperacionesComponent } from './components/usuarios-y-perfiles/terceros/acceso-terceros-operaciones/acceso-terceros-operaciones.component';
 import { OtrosMovimientosComponent } from './components/listados/otros-movimientos/otros-movimientos/otros-movimientos.component';
 import { OtrosMovimientosDetalleComponent } from './components/listados/otros-movimientos/otros-movimientos-detalle/otros-movimientos-detalle.component';
 import { OtrosMovimientosMasOperacionesComponent } from './components/listados/otros-movimientos/otros-movimientos-mas-operaciones/otros-movimientos-mas-operaciones.component';
@@ -105,7 +104,6 @@ export function tokenGetter() {
 		PerfilesEdicionComponent,
 		AccesoTercerosComponent,
 		AccesoTercerosEdicionComponent,
-		AccesoTercerosOperacionesComponent,
 		OtrosMovimientosComponent,
 		OtrosMovimientosDetalleComponent,
 		OtrosMovimientosMasOperacionesComponent,
@@ -168,7 +166,6 @@ export function tokenGetter() {
 		ComprobantesPendFacturarDetalleMasOperacionesComponent,
 		PerfilesEdicionComponent,
 		AccesoTercerosEdicionComponent,
-		AccesoTercerosOperacionesComponent,
 		OtrosMovimientosDetalleComponent,
 		OtrosMovimientosMasOperacionesComponent,
 		OtrosMovimientosDetalleMasOperacionesComponent

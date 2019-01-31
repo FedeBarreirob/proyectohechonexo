@@ -1,86 +1,115 @@
 <div class="container" fxLayout="column" fxLayout.xs="column" fxLayoutWrap fxLayoutGap="0.5%" fxLayoutAlign="space-around stretch">
-  <mat-progress-bar *ngIf="cargando" mode="indeterminate"></mat-progress-bar>
+	<mat-progress-bar *ngIf="cargando" mode="indeterminate"></mat-progress-bar>
 
-  <div fxLayout="row" fxLayoutAlign="space-between center">
+	<div fxLayout="row" fxLayoutAlign="space-between center">
 
-    <!-- Filtro -->
-    <div fxFlex="100%">
+		<!-- Filtro -->
+		<div fxFlex="100%">
 
-      <mat-card>
-        <mat-card-content>
-          <div fxLayout="row" fxLayoutAlign="space-between center">
-            <div fxFlex="100%">
-              <mat-form-field class="full-width-input">
-                <input [disabled]="cargando" [(ngModel)]="filtro.filtro" matInput placeholder="Filtro de búsqueda" />
-              </mat-form-field>
-            </div>
-          </div>
-        </mat-card-content>
+			<mat-card>
+				<mat-card-content>
+					<div fxLayout="row" fxLayoutAlign="space-between center">
+						<div fxFlex="100%">
+							<mat-form-field class="full-width-input">
+								<input [disabled]="cargando" [(ngModel)]="filtro.filtro" matInput placeholder="Filtro de búsqueda" />
+							</mat-form-field>
+						</div>
+					</div>
+				</mat-card-content>
 
-        <mat-card-actions>
-          <div fxFlex></div>
-          <button [disabled]="cargando" mat-raised-button (click)="cargarListado()">Buscar</button>
-        </mat-card-actions>
+				<mat-card-actions>
+					<div fxFlex></div>
+					<button [disabled]="cargando" mat-raised-button (click)="cargarListado()">Buscar</button>
+				</mat-card-actions>
 
-      </mat-card>
+			</mat-card>
 
-    </div>
-  </div>
+		</div>
+	</div>
 
-  <!-- Listado -->
-  <div fxLayout="row" fxLayoutAlign="space-between center">
-    <div fxFlex="100%">
-      <mat-card>
-        <div fxFlexFill fxLayout="row" fxLayoutAlign="space-between center">
-          <div fxFlex="100%">
-            <mat-card-title>Accesos a terceros</mat-card-title>
-          </div>
-        </div>
+	<!-- Listado -->
+	<div fxLayout="row" fxLayoutAlign="space-between center">
+		<div fxFlex="100%">
+			<mat-card>
+				<div fxFlexFill fxLayout="row" fxLayoutAlign="space-between center">
+					<div fxFlex="100%">
+						<mat-card-title>Accesos a terceros</mat-card-title>
+					</div>
+				</div>
 
-        <div fxFlexFill fxLayout="row" fxLayoutAlign="space-between center">
-          <div fxFlex="50%">
-            <strong>Nombre de usuario</strong>
-          </div>
+				<div fxFlexFill fxLayout="row" fxLayoutAlign="space-between center">
+					<div fxFlex="25%">
+						<strong>Nombre de usuario</strong>
+					</div>
 
-          <div fxFlex="50%">
-            <strong>Descripción</strong>
-          </div>
+					<div fxFlex="50%">
+						<strong>Descripción</strong>
+					</div>
 
-        </div>
+					<div fxFlex="25%">
+						<strong>Operaciones</strong>
+					</div>
 
-        <mat-card-content>
-          <mat-nav-list class="listado">
+				</div>
 
-            <a mat-list-item *ngFor="let tercero of (listaPaginada.listado ? listaPaginada.listado : [])" (click)="verOperaciones(tercero)">
+				<mat-card-content>
+					<mat-nav-list class="listado" *ngFor="let tercero of (listaPaginada.listado ? listaPaginada.listado : [])" (click)="verOperaciones(tercero)">
 
-              <div fxFlexFill fxLayout="row" fxLayoutAlign="space-between center">
-                <div fxFlex="50%">
-                  {{tercero.credencial.username}}
-                </div>
 
-                <div fxFlex="50%">
-                  {{tercero.descripcion}}
-                </div>
-              </div>
+						<div fxFlexFill fxLayout="row" fxLayoutAlign="space-between center" fxLayoutGap="2px">
+							<div fxFlex="25%">
+								{{tercero.credencial.username}}
+							</div>
 
-              <mat-divider></mat-divider>
-            </a>
+							<div fxFlex="50%">
+								{{tercero.descripcion}}
+							</div>
 
-          </mat-nav-list>
-        </mat-card-content>
-      </mat-card>
-    </div>
-  </div>
+							<div fxFlex="25%">
+								<div fxFlexFill fxLayout="row" fxLayoutAlign="space-around center" fxLayoutGap="2px">
 
-  <!-- Paginador -->
-  <div fxLayout="row" fxLayoutAlign="space-between center">
-    <div fxFlex="100%">
-      <mat-paginator [length]="listaPaginada.cantidadTotalRegistros" [pageSize]="filtro.cantPorPagina" (page)="pageEvent = cargarListado($event)" [pageSizeOptions]="pageSizeOptions">
-      </mat-paginator>
-    </div>
-  </div>
+									<div fxFlex="25%">
+										<mat-slide-toggle [checked]="!tercero.credencial.baja" (change)="habilitacion(tercero, $event)"></mat-slide-toggle>
+									</div>
+									<div fxFlex="25%">
+										<button mat-icon-button color="primary" (click)="verEditar(tercero)">
+											<mat-icon>pageview</mat-icon>
+										</button>
+									</div>
+									<div fxFlex="25%">
+										<button mat-icon-button color="primary">
+											<mat-icon>vpn_key</mat-icon>
+										</button>
+									</div>
+									<div fxFlex="25%">
+										<button mat-icon-button color="warn" (click)="eliminar(tercero)">
+											<mat-icon>delete</mat-icon>
+										</button>
+									</div>
+								</div>
+							</div>
 
-  <button [disabled]="cargando" mat-mini-fab class="custom-button" (click)="nuevoAccesoATercero()">
-    <mat-icon aria-label="Crear acceso a tercero">add</mat-icon>
-  </button>
+						</div>
+
+						<mat-divider></mat-divider>
+
+
+					</mat-nav-list>
+				</mat-card-content>
+			</mat-card>
+		</div>
+	</div>
+
+	<!-- Paginador -->
+	<div fxLayout="row" fxLayoutAlign="space-between center">
+		<div fxFlex="100%">
+			<mat-paginator [length]="listaPaginada.cantidadTotalRegistros" [pageSize]="filtro.cantPorPagina" (page)="pageEvent = cargarListado($event)"
+			 [pageSizeOptions]="pageSizeOptions">
+			</mat-paginator>
+		</div>
+	</div>
+
+	<button [disabled]="cargando" mat-mini-fab class="custom-button" (click)="nuevoAccesoATercero()">
+		<mat-icon aria-label="Crear acceso a tercero">add</mat-icon>
+	</button>
 </div>
