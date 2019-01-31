@@ -20,6 +20,7 @@ export class PerfilesService {
 	private urlSeguridadPerfilLogueado = `${environment.hostSeguridad}/perfiles/perfil`;
 	private urlSeguridadPerfilListarDeUnRol = `${environment.hostSeguridad}/perfiles/listaDeUnRol`;
 	private urlSeguridadPerfilDarDeBaja = `${environment.hostSeguridad}/perfiles/darDeBaja`;
+	private urlSeguridadPerfilEliminar = `${environment.hostSeguridad}/perfiles`;
 
 	constructor(private http: HttpClient) { }
 
@@ -129,5 +130,19 @@ export class PerfilesService {
 
 		return this.http.put<ResponseServicio>(
 			this.urlSeguridadPerfilDarDeBaja, bajaPerfil, httpOptions);
+	}
+
+	// funcion encargada de eliminar un perfil
+	eliminarPerfil(perfilId: number, token: string) {
+
+		const httpOptions = {
+			headers: new HttpHeaders({
+				'Content-Type': 'application/json',
+				'Authorization': `Bearer ${token}`
+			})
+		};
+
+		let urlDelete = `${this.urlSeguridadPerfilEliminar}/${perfilId}`;
+		return this.http.delete<ResponseServicio>(urlDelete, httpOptions);
 	}
 }

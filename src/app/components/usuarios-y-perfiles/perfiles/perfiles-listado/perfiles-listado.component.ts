@@ -109,4 +109,27 @@ export class PerfilesListadoComponent implements OnInit {
 			duration: 2000,
 		});
 	}
+
+	// funcion encargada de eliminar un perfil dado
+	eliminar(perfil: PerfilBasico) {
+
+		let mensaje = `¿Está seguro de borrar el perfil de ${perfil.credencial.username}?`;
+
+		if (confirm(mensaje)) {
+
+			this.perfilService.eliminarPerfil(
+				perfil.informacionPersonal.id,
+				this.usuarioLogueado.token
+			).subscribe(
+				respuesta => {
+					if (respuesta.exito == true) {
+						this.cargarListado(this.pageEvent);
+					}
+
+					this.openSnackBar(respuesta.mensaje, "Eliminación de Perfil");
+				},
+				error => console.log(error)
+			);
+		}
+	}
 }
