@@ -7,6 +7,8 @@ import { FiltroGenericoLista } from '../../interfaces/varios/filtro-generico-lis
 import { debounceTime } from 'rxjs/internal/operators/debounceTime';
 import { map } from 'rxjs/internal/operators/map';
 import { BajaPerfil } from '../../interfaces/perfiles/baja-perfil';
+import { EntidadAlg } from '../../interfaces/perfiles/entidad-alg';
+import { EntidadAlgPk } from '../../interfaces/perfiles/entidad-alg-pk';
 
 
 @Injectable({
@@ -21,6 +23,7 @@ export class PerfilesService {
 	private urlSeguridadPerfilListarDeUnRol = `${environment.hostSeguridad}/perfiles/listaDeUnRol`;
 	private urlSeguridadPerfilDarDeBaja = `${environment.hostSeguridad}/perfiles/darDeBaja`;
 	private urlSeguridadPerfilEliminar = `${environment.hostSeguridad}/perfiles`;
+	private urlSeguridadPerfilEntidadPorId = `${environment.hostSeguridad}/perfiles/entidadPorId`;
 
 	constructor(private http: HttpClient) { }
 
@@ -144,5 +147,24 @@ export class PerfilesService {
 
 		let urlDelete = `${this.urlSeguridadPerfilEliminar}/${perfilId}`;
 		return this.http.delete<ResponseServicio>(urlDelete, httpOptions);
+	}
+
+	// funcion que devuelve los datos de una entidad a partir del codigo de algoritmo
+	datosCuenta(cuenta: string, token: string) {
+
+		const httpOptions = {
+			headers: new HttpHeaders({
+				'Content-Type': 'application/json',
+				'Authorization': `Bearer ${token}`
+			})
+		};
+
+		let entidadPk: EntidadAlgPk = {
+			tipoEntidad: 3,
+			codigo: cuenta
+		}
+
+		return this.http.post<EntidadAlg>(
+			this.urlSeguridadPerfilEntidadPorId, entidadPk, httpOptions);
 	}
 }

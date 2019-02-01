@@ -16,108 +16,117 @@ import { ComprobantesPendFacturarComponent } from '../components/listados/compro
 import { PerfilesListadoComponent } from '../components/usuarios-y-perfiles/perfiles/perfiles-listado/perfiles-listado.component'
 import { AccesoTercerosComponent } from '../components/usuarios-y-perfiles/terceros/acceso-terceros/acceso-terceros.component';
 import { OtrosMovimientosComponent } from '../components/listados/otros-movimientos/otros-movimientos/otros-movimientos.component';
+import { InformacionDePerfilComponent } from '../components/usuarios-y-perfiles/informacion-de-perfil/informacion-de-perfil.component';
 
 const routes: Routes = [
-  {
-    path: 'login',
-    component: LoginComponent,
-  },
-  {
-    path: 'dashboard',
-    component: DashboardComponent,
-    canActivate: [AuthGuardGuard],
-    data: {
-      rolAdmin: false
-    }
-  },
-  {
-    path: 'ctacte',
-    component: CtacteComponent,
-    canActivate: [AuthGuardGuard],
-    data: {
-      rolAdmin: false
-    }
-  },
-  {
-    path: 'ctacte-aplicada',
-    component: CtacteAplicadaComponent,
-    canActivate: [AuthGuardGuard],
-    data: {
-      rolAdmin: false
-    }
-  },
-  {
-    path: 'entregas',
-    component: EntregasComponent,
-    canActivate: [AuthGuardGuard],
-    data: {
-      rolAdmin: false
-    }
-  },
-  {
-    path: 'ventas',
-    component: VentasComponent,
-    canActivate: [AuthGuardGuard],
-    data: {
-      rolAdmin: false
-    }
-  },
-  {
-    path: 'mercaderia-pendiente-entregar',
-    component: MercPendEntregarComponent,
-    canActivate: [AuthGuardGuard],
-    data: {
-      rolAdmin: false
-    }
-  },
-  {
-    path: 'comprobantes-pendientes-facturar',
-    component: ComprobantesPendFacturarComponent,
-    canActivate: [AuthGuardGuard],
-    data: {
-      rolAdmin: false
-    }
-  },
-  {
-    path: 'otros-movimientos',
-    component: OtrosMovimientosComponent,
-    canActivate: [AuthGuardGuard],
-    data: {
-      rolAdmin: false
-    }
-  },
-  {
-    path: 'administrador-de-cuentas',
-    component: PerfilesListadoComponent,
-    canActivate: [AuthGuardGuard],
-    data: {
-      rolAdmin: false
-    }
-  },
-  {
-    path: 'acceso-terceros',
-    component: AccesoTercerosComponent,
-    canActivate: [AuthGuardGuard],
-    data: {
-      rolAdmin: false
-    }
-  },
-  {
-    path: '', redirectTo: '/dashboard', pathMatch: 'full'
-  },
-  {
-    path: '**', redirectTo: '/dashboard'
-  }
+	{
+		path: 'login',
+		component: LoginComponent,
+	},
+	{
+		path: 'dashboard',
+		component: DashboardComponent,
+		canActivate: [AuthGuardGuard],
+		data: {
+			rolAdmin: false
+		}
+	},
+	{
+		path: 'ctacte',
+		component: CtacteComponent,
+		canActivate: [AuthGuardGuard],
+		data: {
+			rolAdmin: false
+		}
+	},
+	{
+		path: 'ctacte-aplicada',
+		component: CtacteAplicadaComponent,
+		canActivate: [AuthGuardGuard],
+		data: {
+			rolAdmin: false
+		}
+	},
+	{
+		path: 'entregas',
+		component: EntregasComponent,
+		canActivate: [AuthGuardGuard],
+		data: {
+			rolAdmin: false
+		}
+	},
+	{
+		path: 'ventas',
+		component: VentasComponent,
+		canActivate: [AuthGuardGuard],
+		data: {
+			rolAdmin: false
+		}
+	},
+	{
+		path: 'mercaderia-pendiente-entregar',
+		component: MercPendEntregarComponent,
+		canActivate: [AuthGuardGuard],
+		data: {
+			rolAdmin: false
+		}
+	},
+	{
+		path: 'comprobantes-pendientes-facturar',
+		component: ComprobantesPendFacturarComponent,
+		canActivate: [AuthGuardGuard],
+		data: {
+			rolAdmin: false
+		}
+	},
+	{
+		path: 'otros-movimientos',
+		component: OtrosMovimientosComponent,
+		canActivate: [AuthGuardGuard],
+		data: {
+			rolAdmin: false
+		}
+	},
+	{
+		path: 'administrador-de-cuentas',
+		component: PerfilesListadoComponent,
+		canActivate: [AuthGuardGuard],
+		data: {
+			rolAdmin: false
+		}
+	},
+	{
+		path: 'acceso-terceros',
+		component: AccesoTercerosComponent,
+		canActivate: [AuthGuardGuard],
+		data: {
+			rolAdmin: false
+		}
+	},
+	{
+		path: 'informacion-de-perfil',
+		component: InformacionDePerfilComponent,
+		canActivate: [AuthGuardGuard],
+		data: {
+			rolAdmin: false
+		}
+	},
+	{
+		path: '', redirectTo: '/dashboard', pathMatch: 'full'
+	},
+	{
+		path: '**', redirectTo: '/dashboard'
+	}
 ];
 
 @NgModule({
-  imports: [
-    RouterModule.forRoot(routes)
-  ],
-  exports: [
-    RouterModule
-  ],
-  declarations: [
-  ]
+	imports: [
+		RouterModule.forRoot(routes)
+	],
+	exports: [
+		RouterModule
+	],
+	declarations: [
+	]
 })
 export class AppRoutingModule { }
