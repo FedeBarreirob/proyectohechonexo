@@ -2,31 +2,33 @@
 
 <mat-dialog-content class="mat-typography">
 
-  <table class="tabla-movimiento">
-    <tr>
-      <td>Fecha cta.cte</td>
-      <td align="end">{{data.fechaCtaCte}}</td>
-    </tr>
+	<table class="tabla-movimiento">
+		<tr>
+			<td>Fecha cta.cte</td>
+			<td align="end">{{data.fechaCtaCte}}</td>
+		</tr>
 
-    <tr>
-      <td>Fecha vencimiento</td>
-      <td align="end">{{data.fechaVencimiento}}</td>
-    </tr>
+		<tr>
+			<td>Fecha vencimiento</td>
+			<td align="end">{{data.fechaVencimiento}}</td>
+		</tr>
 
-    <tr>
-      <td>Descripción</td>
-      <td align="end">{{data.concepto}}</td>
-    </tr>
+		<tr>
+			<td>Descripción</td>
+			<td align="end">{{data.concepto}}</td>
+		</tr>
 
-    <tr>
-      <td>Comprobante</td>
-      <td align="end">{{data.comprobanteAfectado}}</td>
-    </tr>
-  </table>
+		<tr *ngIf="data.comprobanteAfectado">
+			<td>Comprobante</td>
+			<td align="end" (click)="descargarComprobante(data)" class="comprobante">
+				<mat-icon svgIcon="pdf"></mat-icon>{{data.comprobanteAfectado}}
+			</td>
+		</tr>
+	</table>
 
 </mat-dialog-content>
 
 <mat-dialog-actions align="end">
-  <button mat-button (click)="verOpcionesExtras()">Acciones</button>
-  <button mat-button mat-dialog-close>Cerrar</button>
+	<button mat-button (click)="verOpcionesExtras()">Acciones</button>
+	<button mat-button mat-dialog-close>Cerrar</button>
 </mat-dialog-actions>
