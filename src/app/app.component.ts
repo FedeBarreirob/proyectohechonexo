@@ -17,7 +17,7 @@ export class AppComponent {
   ) {
     this.matIconRegistry.addSvgIcon(
       "pdf",
-      this.domSanitizer.bypassSecurityTrustResourceUrl("../assets/pdf.svg")
+      this.domSanitizer.bypassSecurityTrustResourceUrl("assets/pdf.svg")
     );
   }
 }
