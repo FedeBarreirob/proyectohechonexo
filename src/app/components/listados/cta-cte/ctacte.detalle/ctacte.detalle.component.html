@@ -18,9 +18,11 @@
       <td align="end">{{data.concepto}}</td>
     </tr>
 
-    <tr>
+    <tr *ngIf="data.comprobante">
       <td>Comprobante</td>
-      <td align="end">{{data.comprobante}}</td>
+      <td align="end" (click)="descargarComprobante(data)" class="comprobante">
+          <mat-icon svgIcon="pdf"></mat-icon>{{data.comprobante}}
+      </td>
     </tr>
   </table>
 

@@ -5,87 +5,118 @@ import { FiltroListadoCtaCte } from '../../../../interfaces/ctacte/filtro.listad
 import { UserAuth } from '../../../../models/security/user';
 import { AuthenticationService } from '../../../../services/security/authentication.service';
 import { DatePipe } from '@angular/common';
-import { MatDialog } from '@angular/material';
+import { MatDialog, MatSnackBar } from '@angular/material';
 import { CtacteDetalleComponent } from '../ctacte.detalle/ctacte.detalle.component';
 import { CtacteMasOperacionesComponent } from '../ctacte-mas-operaciones/ctacte-mas-operaciones.component';
 import { PerfilBasico } from '../../../../interfaces/perfiles/perfil-basico';
+import { ComprobantesDownloaderService } from '../../../../services/sharedServices/downloader/comprobantes-downloader.service';
+import { saveAs } from 'file-saver/FileSaver';
 
 @Component({
-  selector: 'app-ctacte',
-  templateUrl: './ctacte.component.html',
-  styleUrls: ['./ctacte.component.css'],
-  providers: [DatePipe]
+	selector: 'app-ctacte',
+	templateUrl: './ctacte.component.html',
+	styleUrls: ['./ctacte.component.css'],
+	providers: [DatePipe]
 })
 export class CtacteComponent implements OnInit {
 
-  public listadoCtaCte: Array<MovimientoCtaCte>;
-  private movimientoSeleccionado: MovimientoCtaCte = null;
-  public saldosTotales: SaldosTotales = null;
-  public cargando: boolean;
+	public listadoCtaCte: Array<MovimientoCtaCte>;
+	private movimientoSeleccionado: MovimientoCtaCte = null;
+	public saldosTotales: SaldosTotales = null;
+	public cargando: boolean;
 
-  public cuenta: string = "";
-  public perfilBasico: PerfilBasico;
-  public fechaDesde: Date = new Date();
-  public fechaHasta: Date = new Date();
+	public cuenta: string = "";
+	public perfilBasico: PerfilBasico;
+	public fechaDesde: Date = new Date();
+	public fechaHasta: Date = new Date();
 
-  constructor(
-    private ctacteService: CtacteService,
-    private authenticationService: AuthenticationService,
-    private datePipe: DatePipe,
-    public dialog: MatDialog
-  ) { }
+	constructor(
+		private ctacteService: CtacteService,
+		private authenticationService: AuthenticationService,
+		private datePipe: DatePipe,
+		public dialog: MatDialog,
+		private comprobanteDownloaderService: ComprobantesDownloaderService,
+		private snackBar: MatSnackBar
+	) { }
 
-  ngOnInit() {
-    this.cargando = false;
+	ngOnInit() {
+		this.cargando = false;
 
-    this.authenticationService.perfilActivo$.subscribe(
-      perfil => this.perfilBasico = perfil);
-  }
+		this.authenticationService.perfilActivo$.subscribe(
+			perfil => this.perfilBasico = perfil);
+	}
 
-  // funcion que ejecuta la carga del listado de ctacte
-  cargarListado() {
-    this.cargando = true;
+	// funcion que ejecuta la carga del listado de ctacte
+	cargarListado() {
+		this.cargando = true;
 
-    let filtro: FiltroListadoCtaCte = {
-      cuenta: this.cuenta,
-      fechaDesde: this.datePipe.transform(this.fechaDesde, 'dd/MM/yyyy'),
-      fechaHasta: this.datePipe.transform(this.fechaHasta, 'dd/MM/yyyy')
-    }
+		let filtro: FiltroListadoCtaCte = {
+			cuenta: this.cuenta,
+			fechaDesde: this.datePipe.transform(this.fechaDesde, 'dd/MM/yyyy'),
+			fechaHasta: this.datePipe.transform(this.fechaHasta, 'dd/MM/yyyy')
+		}
 
-    let usuarioLogueado = <UserAuth>this.authenticationService.usuarioLogueado();
-    if (usuarioLogueado != null) {
-      return this.ctacteService.listadoCtaCte(filtro, usuarioLogueado.token).subscribe(respuesta => {
-        this.listadoCtaCte = respuesta.datos.listado;
-        this.saldosTotales = respuesta.datos.saldosTotales;
+		let usuarioLogueado = <UserAuth>this.authenticationService.usuarioLogueado();
+		if (usuarioLogueado != null) {
+			return this.ctacteService.listadoCtaCte(filtro, usuarioLogueado.token).subscribe(respuesta => {
+				this.listadoCtaCte = respuesta.datos.listado;
+				this.saldosTotales = respuesta.datos.saldosTotales;
 
-        this.cargando = false;
-      }, error => {
-        this.cargando = false;
-      });
-    }
-  }
+				this.cargando = false;
+			}, error => {
+				this.cargando = false;
+			});
+		}
+	}
 
-  // funcion que muestra el detalle de un movimiento seleccionado
-  verDetalle(movimiento: MovimientoCtaCte) {
-    this.movimientoSeleccionado = movimiento;
+	// funcion que muestra el detalle de un movimiento seleccionado
+	verDetalle(movimiento: MovimientoCtaCte) {
+		this.movimientoSeleccionado = movimiento;
 
-    this.dialog.open(CtacteDetalleComponent, {
-      data: movimiento
-    });
-  }
+		this.dialog.open(CtacteDetalleComponent, {
+			data: movimiento
+		});
+	}
 
-  // funcion que muestra las operaciones extras
-  verOpcionesExtras() {
-    this.dialog.open(CtacteMasOperacionesComponent, {
-      data: {
-        movimientos: this.listadoCtaCte,
-        saldos: this.saldosTotales
-      }
-    });
-  }
+	// funcion que muestra las operaciones extras
+	verOpcionesExtras() {
+		this.dialog.open(CtacteMasOperacionesComponent, {
+			data: {
+				movimientos: this.listadoCtaCte,
+				saldos: this.saldosTotales
+			}
+		});
+	}
 
-  // funcion encargada de capturar el valor de la cuenta
-  seleccionarCuenta(cuentaSeleccionada?: string) {
-    this.cuenta = cuentaSeleccionada;
-  }
+	// funcion encargada de capturar el valor de la cuenta
+	seleccionarCuenta(cuentaSeleccionada?: string) {
+		this.cuenta = cuentaSeleccionada;
+	}
+
+	// funcion que inicia la descarga del comprobante
+	descargarComprobante(movimiento: MovimientoCtaCte) {
+		let usuarioLogueado = <UserAuth>this.authenticationService.usuarioLogueado();
+		if (usuarioLogueado != null) {
+			this.comprobanteDownloaderService.comprobanteDescargado(movimiento.linkComprobante, movimiento.comprobante, usuarioLogueado.token)
+				.subscribe(respuesta => {
+					var mediaType = 'application/pdf';
+					var blob = new Blob([respuesta], { type: mediaType });
+					var filename = `${movimiento.comprobante}.pdf`;
+
+					if (blob.size !== 0) {
+						saveAs(blob, filename);
+					} else {
+						this.openSnackBar("El comprobante no se encuentra disponible para su descarga.", "Descarga de comprobantes");
+					}
+
+				}, error => console.log(error));
+		}
+	}
+
+	// abre una notificacion
+	openSnackBar(message: string, action: string) {
+		this.snackBar.open(message, action, {
+			duration: 2000,
+		});
+	}
 }

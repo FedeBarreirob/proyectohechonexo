@@ -1,187 +1,197 @@
 <div class="container" fxLayout="column" fxLayout.xs="column" fxLayoutWrap fxLayoutGap="0.5%" fxLayoutAlign="space-around stretch">
-  <div fxFlex="100%">
-    <mat-progress-bar *ngIf="cargando" mode="indeterminate"></mat-progress-bar>
+	<div fxFlex="100%">
+		<mat-progress-bar *ngIf="cargando" mode="indeterminate"></mat-progress-bar>
 
-    <mat-expansion-panel>
-      <mat-expansion-panel-header>
-        Filtro
-      </mat-expansion-panel-header>
+		<mat-expansion-panel>
+			<mat-expansion-panel-header>
+				Filtro
+			</mat-expansion-panel-header>
 
-      <div class="container" fxLayout="row" fxLayout.xs="column" fxLayoutGap="0.5%" fxLayoutAlign="space-around stretch">
+			<div class="container" fxLayout="row" fxLayout.xs="column" fxLayoutGap="0.5%" fxLayoutAlign="space-around stretch">
 
-        <div fxFlex="33%">
-          <app-combo-cuenta [disabled]="cargando==true" (change)="seleccionarCuenta($event)"></app-combo-cuenta>
-        </div>
+				<div fxFlex="33%">
+					<app-combo-cuenta [disabled]="cargando==true" (change)="seleccionarCuenta($event)"></app-combo-cuenta>
+				</div>
 
-        <div fxFlex="33%">
-          <mat-form-field>
-            <input [disabled]="cargando==true" [(ngModel)]="fechaDesde" matInput [matDatepicker]="desde" placeholder="Fecha desde"
-              readonly>
-            <mat-datepicker-toggle matSuffix [for]="desde"></mat-datepicker-toggle>
-            <mat-datepicker touchUi #desde></mat-datepicker>
-          </mat-form-field>
-        </div>
+				<div fxFlex="33%">
+					<mat-form-field>
+						<input [disabled]="cargando==true" [(ngModel)]="fechaDesde" matInput [matDatepicker]="desde" placeholder="Fecha desde"
+						 readonly>
+						<mat-datepicker-toggle matSuffix [for]="desde"></mat-datepicker-toggle>
+						<mat-datepicker touchUi #desde></mat-datepicker>
+					</mat-form-field>
+				</div>
 
-        <div fxFlex="33%">
-          <mat-form-field>
-            <input [disabled]="cargando==true" [(ngModel)]="fechaHasta" matInput [matDatepicker]="hasta" placeholder="Fecha hasta"
-              readonly>
-            <mat-datepicker-toggle matSuffix [for]="hasta"></mat-datepicker-toggle>
-            <mat-datepicker touchUi #hasta></mat-datepicker>
-          </mat-form-field>
-        </div>
-      </div>
+				<div fxFlex="33%">
+					<mat-form-field>
+						<input [disabled]="cargando==true" [(ngModel)]="fechaHasta" matInput [matDatepicker]="hasta" placeholder="Fecha hasta"
+						 readonly>
+						<mat-datepicker-toggle matSuffix [for]="hasta"></mat-datepicker-toggle>
+						<mat-datepicker touchUi #hasta></mat-datepicker>
+					</mat-form-field>
+				</div>
+			</div>
 
-      <mat-action-row>
-        <button mat-button (click)="cargarListado()" [disabled]="cargando==true">Buscar</button>
-      </mat-action-row>
-    </mat-expansion-panel>
+			<mat-action-row>
+				<button mat-button (click)="cargarListado()" [disabled]="cargando==true">Buscar</button>
+			</mat-action-row>
+		</mat-expansion-panel>
 
-  </div>
+	</div>
 
-  <div fxFlex="100%">
-    <div *ngIf="saldosTotales" class="container" fxLayout="row" fxLayout.xs="column" fxLayoutGap="0.5%" fxLayoutAlign="space-around stretch">
-      <div fxFlex="33%">
-        <h3 mat-dialog-title align="center">Saldo en pesos</h3>
-        <mat-dialog-content class="mat-typography">
-          <p align="center">AR$ {{saldosTotales.saldoPesos | number: '.2'}}</p>
-        </mat-dialog-content>
-      </div>
+	<div fxFlex="100%">
+		<div *ngIf="saldosTotales" class="container" fxLayout="row" fxLayout.xs="column" fxLayoutGap="0.5%" fxLayoutAlign="space-around stretch">
+			<div fxFlex="33%">
+				<h3 mat-dialog-title align="center">Saldo en pesos</h3>
+				<mat-dialog-content class="mat-typography">
+					<p align="center">AR$ {{saldosTotales.saldoPesos | number: '.2'}}</p>
+				</mat-dialog-content>
+			</div>
 
-      <div fxFlex="33%">
-        <h3 mat-dialog-title align="center">Saldo en dólares</h3>
-        <mat-dialog-content class="mat-typography">
-          <p align="center">US$ {{saldosTotales.saldoDolares | number: '.2'}}</p>
-        </mat-dialog-content>
-      </div>
+			<div fxFlex="33%">
+				<h3 mat-dialog-title align="center">Saldo en dólares</h3>
+				<mat-dialog-content class="mat-typography">
+					<p align="center">US$ {{saldosTotales.saldoDolares | number: '.2'}}</p>
+				</mat-dialog-content>
+			</div>
 
-      <div fxFlex="33%">
-        <h3 mat-dialog-title align="center">Saldo contable</h3>
-        <mat-dialog-content class="mat-typography">
-          <p align="center">AR$ {{saldosTotales.saldoContable | number: '.2'}}</p>
-        </mat-dialog-content>
-      </div>
-    </div>
-  </div>
+			<div fxFlex="33%">
+				<h3 mat-dialog-title align="center">Saldo contable</h3>
+				<mat-dialog-content class="mat-typography">
+					<p align="center">AR$ {{saldosTotales.saldoContable | number: '.2'}}</p>
+				</mat-dialog-content>
+			</div>
+		</div>
+	</div>
 
-  <div fxFlex="100%">
-    <mat-card>
-      <mat-card-title>Ficha de Cuenta Corriente</mat-card-title>
+	<div fxFlex="100%">
+		<mat-card>
+			<mat-card-title>Ficha de Cuenta Corriente</mat-card-title>
 
-      <mat-card-content>
+			<mat-card-content>
 
-        <!-- Movimiento para panalla chicas -->
-        <div fxHide.lg fxHide.md class="movimiento" *ngFor="let movimiento of (listadoCtaCte ? listadoCtaCte : [])"
-          (click)="verDetalle(movimiento)">
-          <span *ngIf="movimiento.concepto != 'TRANSPORTE'">
-            <div fxLayout="row" fxLayoutAlign="center space-between">
-              <div fxFlex="50%" class="concepto">{{movimiento.concepto}}</div>
-              <div fxFlex="50%" class="importe">AR$ {{movimiento.importeComprobantePesos | number: '.2'}}</div>
-            </div>
-            <div fxLayout="row" fxLayoutAlign="center space-between">
-              <div fxFlex="50%" class="fecha">{{movimiento.fechaVencimiento}}</div>
-              <div fxFlex="50%" class="importe">US$ {{movimiento.importeComprobanteDolares | number: '.2'}}</div>
-            </div>
-          </span>
+				<!-- Movimiento para panalla chicas -->
+				<div fxHide.lg fxHide.md class="movimiento" *ngFor="let movimiento of (listadoCtaCte ? listadoCtaCte : [])" (click)="verDetalle(movimiento)">
+					<span *ngIf="movimiento.concepto != 'TRANSPORTE'">
+						<div fxLayout="row" fxLayoutAlign="center space-between">
+							<div fxFlex="50%" class="concepto">{{movimiento.concepto}}</div>
+							<div fxFlex="50%" class="importe">AR$ {{movimiento.importeComprobantePesos | number: '.2'}}</div>
+						</div>
+						<div fxLayout="row" fxLayoutAlign="center space-between">
+							<div fxFlex="50%" class="fecha">{{movimiento.fechaVencimiento}}</div>
+							<div fxFlex="50%" class="importe">US$ {{movimiento.importeComprobanteDolares | number: '.2'}}</div>
+						</div>
+					</span>
 
-          <span *ngIf="movimiento.concepto == 'TRANSPORTE'">
-            <div fxLayout="row" fxLayoutAlign="center space-between">
-              <div fxFlex="25%" class="concepto">{{movimiento.concepto}}</div>
-              <div fxFlex="25%" class="importe">Saldo en pesos</div>
-              <div fxFlex="25%" class="importe">Saldo en dólares</div>
-              <div fxFlex="25%" class="importe">Saldo en contable</div>
-            </div>
-            <div fxLayout="row" fxLayoutAlign="center space-between">
-              <div fxFlex="25%" class="concepto"></div>
-              <div fxFlex="25%" class="importe">AR$ {{movimiento.saldoPesos | number: '.2'}}</div>
-              <div fxFlex="25%" class="importe">US$ {{movimiento.saldoDolares | number: '.2'}}</div>
-              <div fxFlex="25%" class="importe">AR$ {{movimiento.saldoContable | number: '.2'}}</div>
-            </div>
-          </span>
+					<span *ngIf="movimiento.concepto == 'TRANSPORTE'">
+						<div fxLayout="row" fxLayoutAlign="center space-between">
+							<div fxFlex="25%" class="concepto">{{movimiento.concepto}}</div>
+							<div fxFlex="25%" class="importe">Saldo en pesos</div>
+							<div fxFlex="25%" class="importe">Saldo en dólares</div>
+							<div fxFlex="25%" class="importe">Saldo en contable</div>
+						</div>
+						<div fxLayout="row" fxLayoutAlign="center space-between">
+							<div fxFlex="25%" class="concepto"></div>
+							<div fxFlex="25%" class="importe">AR$ {{movimiento.saldoPesos | number: '.2'}}</div>
+							<div fxFlex="25%" class="importe">US$ {{movimiento.saldoDolares | number: '.2'}}</div>
+							<div fxFlex="25%" class="importe">AR$ {{movimiento.saldoContable | number: '.2'}}</div>
+						</div>
+					</span>
 
-          <mat-divider></mat-divider>
-        </div>
+					<mat-divider></mat-divider>
+				</div>
 
-        <!-- Movimiento para panalla grandes -->
-        <span fxHide.xs fxHide.sm>
-          <!-- Encabezado -->
-          <div fxLayout="row" fxLayoutAlign="center space-between">
+				<!-- Movimiento para panalla grandes -->
+				<span fxHide.xs fxHide.sm>
+					<!-- Encabezado -->
+					<div fxLayout="row" fxLayoutAlign="center space-between">
 
-            <div fxFlex="7%" class="conceptoEncabezado">Fecha vencimiento</div>
-            <mat-divider [vertical]="true"></mat-divider>
-            <div fxFlex="10%" class="conceptoEncabezado">Comprobante</div>
-            <mat-divider [vertical]="true"></mat-divider>
-            <div fxFlex="16%" class="conceptoEncabezado">Concepto</div>
-            <mat-divider [vertical]="true"></mat-divider>
-            <div fxFlex="6%" class="conceptoEncabezado">Fecha C.C.</div>
-            <mat-divider [vertical]="true"></mat-divider>
-            <div fxFlex="5%" class="conceptoEncabezado">Tipo de cambio</div>
+						<div fxFlex="6%" class="conceptoEncabezado">Fecha venc.</div>
+						<mat-divider [vertical]="true"></mat-divider>
+						<div fxFlex="12%" class="conceptoEncabezado">Comprobante</div>
+						<mat-divider [vertical]="true"></mat-divider>
+						<div fxFlex="13%" class="conceptoEncabezado">Concepto</div>
+						<mat-divider [vertical]="true"></mat-divider>
+						<div fxFlex="6%" class="conceptoEncabezado">Fecha C.C.</div>
+						<mat-divider [vertical]="true"></mat-divider>
+						<div fxFlex="5%" class="conceptoEncabezado">Tipo de cambio</div>
 
-            <mat-divider [vertical]="true"></mat-divider>
+						<mat-divider [vertical]="true"></mat-divider>
 
-            <div fxFlex="20%">
-              <div fxLayout="row" fxLayoutAlign="start space-between">
-                <div fxFlex="100%" class="conceptoEncabezado">Importe Comprobante</div>
-              </div>
+						<div fxFlex="20%">
+							<div fxLayout="row" fxLayoutAlign="start space-between">
+								<div fxFlex="100%" class="conceptoEncabezado">Importe Comprobante</div>
+							</div>
 
-              <div fxLayout="row" fxLayoutAlign="center space-between">
-                <div fxFlex="50%" class="conceptoEncabezado">Pesos</div>
-                <mat-divider [vertical]="true"></mat-divider>
-                <div fxFlex="50%" class="conceptoEncabezado">Dólares</div>
-              </div>
-            </div>
+							<div fxLayout="row" fxLayoutAlign="center space-between">
+								<div fxFlex="50%" class="conceptoEncabezado">Pesos</div>
+								<mat-divider [vertical]="true"></mat-divider>
+								<div fxFlex="50%" class="conceptoEncabezado">Dólares</div>
+							</div>
+						</div>
 
-            <mat-divider [vertical]="true"></mat-divider>
+						<mat-divider [vertical]="true"></mat-divider>
 
-            <div fxFlex="36%">
-              <div fxLayout="row" fxLayoutAlign="start space-between">
-                <div fxFlex="100%" class="conceptoEncabezado">Saldo</div>
-              </div>
+						<div fxFlex="36%">
+							<div fxLayout="row" fxLayoutAlign="start space-between">
+								<div fxFlex="100%" class="conceptoEncabezado">Saldo</div>
+							</div>
 
-              <div fxLayout="row" fxLayoutAlign="center space-between">
-                <div fxFlex="33%" class="conceptoEncabezado">Pesos</div>
-                <mat-divider [vertical]="true"></mat-divider>
-                <div fxFlex="33%" class="conceptoEncabezado">Dólares</div>
-                <mat-divider [vertical]="true"></mat-divider>
-                <div fxFlex="33%" class="conceptoEncabezado">Contable</div>
-              </div>
-            </div>
-          </div>
+							<div fxLayout="row" fxLayoutAlign="center space-between">
+								<div fxFlex="33%" class="conceptoEncabezado">Pesos</div>
+								<mat-divider [vertical]="true"></mat-divider>
+								<div fxFlex="33%" class="conceptoEncabezado">Dólares</div>
+								<mat-divider [vertical]="true"></mat-divider>
+								<div fxFlex="33%" class="conceptoEncabezado">Contable</div>
+							</div>
+						</div>
+					</div>
 
-          <!--Movimientos-->
-          <div fxLayout="row" fxLayoutAlign="center space-between" class="movimiento" *ngFor="let movimiento of (listadoCtaCte ? listadoCtaCte : []); index as i"
-            (click)="verDetalle(movimiento)" [ngClass]="i%2 == 0 ? 'filaPar' : 'filaImpar'">
-            <div fxFlex="7%" class="conceptoListaCompleta">{{movimiento.fechaVencimiento}}</div>
-            <div fxFlex="10%" class="conceptoListaCompleta">{{movimiento.comprobante}}</div>
-            <div fxFlex="16%" class="conceptoListaCompleta">{{movimiento.concepto}}</div>
-            <div fxFlex="6%" class="conceptoListaCompleta">{{movimiento.fechaCtaCte}}</div>
-            <div fxFlex="5%" class="importeListaCompleta">{{movimiento.tipoDeCambio}}</div>
+					<!--Movimientos-->
+					<div fxLayout="row" fxLayoutAlign="center space-between" class="movimiento" *ngFor="let movimiento of (listadoCtaCte ? listadoCtaCte : []); index as i"
+					 [ngClass]="i%2 == 0 ? 'filaPar' : 'filaImpar'">
+						<div fxFlex="6%" class="conceptoListaCompleta" (click)="verDetalle(movimiento)">{{movimiento.fechaVencimiento}}</div>
 
-            <div fxFlex="20%">
-              <div fxLayout="row" fxLayoutAlign="center space-between">
-                <div fxFlex="50%" class="importeListaCompleta">{{movimiento.importeComprobantePesos | number: '.2'}}</div>
-                <div fxFlex="50%" class="importeListaCompleta">{{movimiento.importeComprobanteDolares | number: '.2'}}</div>
-              </div>
-            </div>
+						<div *ngIf="movimiento.comprobante" fxFlex="12%" class="conceptoListaCompleta" (click)="descargarComprobante(movimiento)">
+							<div fxLayout="row" fxLayoutAlign="space-around center">
+								<div fxFlex="22%">
+									<mat-icon svgIcon="pdf"></mat-icon>
+								</div>
+								<div fxFlex="78%">{{movimiento.comprobante}}</div>
+							</div>
+						</div>
 
-            <div fxFlex="36%">
-              <div fxLayout="row" fxLayoutAlign="center space-between">
-                <div fxFlex="33%" class="importeListaCompleta">{{movimiento.saldoPesos | number: '.2'}}</div>
-                <div fxFlex="33%" class="importeListaCompleta">{{movimiento.saldoDolares | number: '.2'}}</div>
-                <div fxFlex="33%" class="importeListaCompleta">{{movimiento.saldoContable | number: '.2'}}</div>
-              </div>
-            </div>
+						<div *ngIf="!movimiento.comprobante" fxFlex="12%" class="conceptoListaCompleta"></div>
 
-          </div>
+						<div fxFlex="13%" class="conceptoListaCompleta" (click)="verDetalle(movimiento)">{{movimiento.concepto}}</div>
+						<div fxFlex="6%" class="conceptoListaCompleta" (click)="verDetalle(movimiento)">{{movimiento.fechaCtaCte}}</div>
+						<div fxFlex="5%" class="importeListaCompleta" (click)="verDetalle(movimiento)">{{movimiento.tipoDeCambio}}</div>
 
-        </span>
+						<div fxFlex="20%" (click)="verDetalle(movimiento)">
+							<div fxLayout="row" fxLayoutAlign="center space-between">
+								<div fxFlex="50%" class="importeListaCompleta">{{movimiento.importeComprobantePesos | number: '.2'}}</div>
+								<div fxFlex="50%" class="importeListaCompleta">{{movimiento.importeComprobanteDolares | number: '.2'}}</div>
+							</div>
+						</div>
 
-      </mat-card-content>
-    </mat-card>
-  </div>
+						<div fxFlex="36%" (click)="verDetalle(movimiento)">
+							<div fxLayout="row" fxLayoutAlign="center space-between">
+								<div fxFlex="33%" class="importeListaCompleta">{{movimiento.saldoPesos | number: '.2'}}</div>
+								<div fxFlex="33%" class="importeListaCompleta">{{movimiento.saldoDolares | number: '.2'}}</div>
+								<div fxFlex="33%" class="importeListaCompleta">{{movimiento.saldoContable | number: '.2'}}</div>
+							</div>
+						</div>
 
-  <button [disabled]="cargando==true" mat-mini-fab class="custom-button" (click)="verOpcionesExtras()" *ngIf="listadoCtaCte != null">
-    <mat-icon aria-label="Más opciones">list</mat-icon>
-  </button>
+					</div>
+
+				</span>
+
+			</mat-card-content>
+		</mat-card>
+	</div>
+
+	<button [disabled]="cargando==true" mat-mini-fab class="custom-button" (click)="verOpcionesExtras()" *ngIf="listadoCtaCte != null">
+		<mat-icon aria-label="Más opciones">list</mat-icon>
+	</button>
 
 </div>
