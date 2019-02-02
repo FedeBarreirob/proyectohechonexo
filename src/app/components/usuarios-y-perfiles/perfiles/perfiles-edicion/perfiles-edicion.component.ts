@@ -64,7 +64,7 @@ export class PerfilesEdicionComponent implements OnInit {
 	searchControl: any;
 
 	constructor(
-		private authenticationService: AuthenticationService,
+		public authenticationService: AuthenticationService,
 		private formBuilder: FormBuilder,
 		private snackBar: MatSnackBar,
 		private perfilService: PerfilesService,
