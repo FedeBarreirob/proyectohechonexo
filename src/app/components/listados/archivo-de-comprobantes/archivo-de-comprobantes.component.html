@@ -1,0 +1,99 @@
+<div class="container" fxLayout="column" fxLayout.xs="column" fxLayoutWrap fxLayoutGap="0.5%" fxLayoutAlign="space-around stretch">
+	<div fxLayout="row" fxLayoutAlign="center space-between">
+		<div fxFlex="100%">
+			<mat-progress-bar *ngIf="cargando" mode="indeterminate"></mat-progress-bar>
+
+			<mat-expansion-panel>
+				<mat-expansion-panel-header>
+					Filtro
+				</mat-expansion-panel-header>
+
+				<div fxLayout="row" fxLayoutGap="5%" fxLayoutAlign="space-between center">
+
+					<div fxFlex="100%" fxFlex.xs="100%">
+						<app-combo-cuenta [disabled]="cargando==true" (change)="cuenta = $event"></app-combo-cuenta>
+					</div>
+
+				</div>
+
+				<div fxLayout="row" fxLayoutGap="5%" fxLayoutAlign="space-between center">
+					<div fxFlex="50%" fxFlex.xs="100%">
+						<mat-form-field>
+							<input [disabled]="cargando==true" [(ngModel)]="fechaDesde" matInput [matDatepicker]="desde" placeholder="Fecha desde"
+							 readonly>
+							<mat-datepicker-toggle matSuffix [for]="desde"></mat-datepicker-toggle>
+							<mat-datepicker touchUi #desde></mat-datepicker>
+						</mat-form-field>
+					</div>
+
+					<div fxFlex="50%" fxFlex.xs="100%">
+						<mat-form-field>
+							<input [disabled]="cargando==true" [(ngModel)]="fechaHasta" matInput [matDatepicker]="hasta" placeholder="Fecha hasta"
+							 readonly>
+							<mat-datepicker-toggle matSuffix [for]="hasta"></mat-datepicker-toggle>
+							<mat-datepicker touchUi #hasta></mat-datepicker>
+						</mat-form-field>
+					</div>
+				</div>
+
+				<div fxLayout="row" fxLayoutGap="5%" fxLayoutAlign="space-between center">
+					<div fxFlex="33%" fxFlex.xs="100%">
+						<mat-radio-group class="radio-group" [(ngModel)]="esAplicada" [disabled]="cargando==true">
+							<mat-radio-button class="radio-button" [value]="false">Cuenta Corriente</mat-radio-button>
+							<mat-radio-button class="radio-button" [value]="true">Cuenta Corriente Aplicada</mat-radio-button>
+						</mat-radio-group>
+					</div>
+
+					<div fxFlex="67%" fxFlex.xs="100%">
+						<mat-form-field>
+							<input [disabled]="cargando==true" matInput placeholder="Filtro" [(ngModel)]="filtro">
+						</mat-form-field>
+					</div>
+
+				</div>
+
+				<mat-action-row>
+					<button mat-button mat-raised-button color="primary" (click)="cargarListado()" [disabled]="cargando==true || !esFiltroCompleto()">Buscar</button>
+				</mat-action-row>
+			</mat-expansion-panel>
+
+		</div>
+	</div>
+
+	<div fxLayout="row" fxLayoutAlign="center space-between">
+
+		<div fxFlex="100%">
+			<mat-card>
+				<mat-card-title>Archivo de comprobantes</mat-card-title>
+
+				<mat-card-content *ngIf="cargando==false && comprobantes.length != 0">
+
+					<div align="right">
+						<mat-slide-toggle [color]="primary" [(ngModel)]="toggleSeleccionTodo" (change)="seleccionarTodoONada($event)">
+							Todos
+						</mat-slide-toggle>
+					</div>
+
+					<mat-selection-list (ngModelChange)="actualizarSeleccion($event)" [(ngModel)]="comprobantesSeleccionados">
+						<mat-list-option *ngFor="let comprobante of comprobantes" [value]="comprobante">
+							<h4 mat-line>
+								<mat-icon svgIcon="pdf"></mat-icon> {{comprobante.comprobante}}
+							</h4>
+							<p mat-line><span [ngClass]="(comprobante.existeArchivo)?'ok':'bad'">{{ comprobante.existeArchivo ? 'Disponible
+									para
+									su descarga' : 'No disponible para su descarga' }}</span></p>
+						</mat-list-option>
+					</mat-selection-list>
+
+				</mat-card-content>
+			</mat-card>
+		</div>
+
+	</div>
+
+	<button color="primary" *ngIf="comprobantesSeleccionados.length != 0" [disabled]="cargando==true" mat-mini-fab class="custom-button"
+	 (click)="descargar()">
+		<mat-icon aria-label="Descargar">cloud_download</mat-icon>
+	</button>
+
+</div>

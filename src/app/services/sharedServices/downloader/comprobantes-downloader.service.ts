@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { environment } from '../../../../environments/environment';
 import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { Observable } from 'rxjs';
+import { ComprobanteParaDescarga } from '../../../interfaces/archivo-de-comprobantes/comprobante-para-descarga';
 
 @Injectable({
   providedIn: 'root'
@@ -9,6 +10,7 @@ import { Observable } from 'rxjs';
 export class ComprobantesDownloaderService {
 
   private urlCtaCteComprobantesDescargar = `${environment.hostCtaCte}/Comprobantes/descargar`;
+  private urlCtaCteComprobantesDescargarMasivo = `${environment.hostCtaCte}/Comprobantes/descargarMasivo`;
 
   constructor(private http: HttpClient) { }
 
@@ -27,5 +29,19 @@ export class ComprobantesDownloaderService {
     }
 
     return this.http.get(this.urlCtaCteComprobantesDescargar, options);
+  }
+
+  // funcion que devuelve un zip con comprobantes pdf a partir de un listado de comprobantes a descargar
+  comprobanteDescargadoMasivo(comprobantes: Array<ComprobanteParaDescarga>, token: string): Observable<Blob> {
+
+    const httpOptions = {
+      headers: new HttpHeaders({
+        'Content-Type': 'application/json',
+        'Authorization': `Bearer ${token}`
+      }),
+      responseType: 'blob' as 'blob'
+    };
+
+    return this.http.post(this.urlCtaCteComprobantesDescargarMasivo, JSON.stringify(comprobantes), httpOptions);
   }
 }

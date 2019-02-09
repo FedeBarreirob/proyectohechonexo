@@ -63,6 +63,7 @@ import { OtrosMovimientosDetalleMasOperacionesComponent } from './components/lis
 import { SelectorCuentasComponent } from './components/menu/selector-cuentas/selector-cuentas.component';
 import { ComboCuentaComponent } from './components/common/combo-cuenta/combo-cuenta.component';
 import { InformacionDePerfilComponent } from './components/usuarios-y-perfiles/informacion-de-perfil/informacion-de-perfil.component';
+import { ArchivoDeComprobantesComponent } from './components/listados/archivo-de-comprobantes/archivo-de-comprobantes.component';
 
 registerLocaleData(localeEsAr, 'es-AR');
 
@@ -111,7 +112,8 @@ export function tokenGetter() {
 		OtrosMovimientosDetalleMasOperacionesComponent,
 		SelectorCuentasComponent,
 		ComboCuentaComponent,
-		InformacionDePerfilComponent
+		InformacionDePerfilComponent,
+		ArchivoDeComprobantesComponent
 	],
 	imports: [
 		HttpClientModule,

@@ -17,7 +17,7 @@
 			<a *ngIf="authService.esAdmin || authService.esRol('PRODUCTOR')" mat-list-item routerLink="/acceso-terceros"
 			 routerLinkActive="active">Accesos a terceros</a>
 			<a mat-list-item routerLink="/informacion-de-perfil" routerLinkActive="active">Información del perfil</a>
-			<a mat-list-item href="#">Archivo de comprobantes</a>
+			<a mat-list-item routerLink="/archivo-de-comprobantes" routerLinkActive="active">Archivo de comprobantes</a>
 			<a mat-list-item routerLink="/login" routerLinkActive="active">Cerrar Sersión</a>
 		</mat-nav-list>
 	</mat-sidenav>

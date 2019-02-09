@@ -17,6 +17,7 @@ import { PerfilesListadoComponent } from '../components/usuarios-y-perfiles/perf
 import { AccesoTercerosComponent } from '../components/usuarios-y-perfiles/terceros/acceso-terceros/acceso-terceros.component';
 import { OtrosMovimientosComponent } from '../components/listados/otros-movimientos/otros-movimientos/otros-movimientos.component';
 import { InformacionDePerfilComponent } from '../components/usuarios-y-perfiles/informacion-de-perfil/informacion-de-perfil.component';
+import { ArchivoDeComprobantesComponent } from '../components/listados/archivo-de-comprobantes/archivo-de-comprobantes.component';
 
 const routes: Routes = [
 	{
@@ -106,6 +107,14 @@ const routes: Routes = [
 	{
 		path: 'informacion-de-perfil',
 		component: InformacionDePerfilComponent,
+		canActivate: [AuthGuardGuard],
+		data: {
+			rolAdmin: false
+		}
+	},
+	{
+		path: 'archivo-de-comprobantes',
+		component: ArchivoDeComprobantesComponent,
 		canActivate: [AuthGuardGuard],
 		data: {
 			rolAdmin: false
