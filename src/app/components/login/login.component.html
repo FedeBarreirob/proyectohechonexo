@@ -12,7 +12,11 @@
       </form>
     </mat-card-content>
     <mat-card-actions>
-      <button type="button" mat-raised-button color="primary" (click)="login()">Iniciar sesión</button>
+      <button [disabled]="logueando" type="button" mat-raised-button color="primary" (click)="login()">Ingresar</button>
+      <p>¿Olvidó su contraseña?
+        <a routerLink="/recuperacion-password">Recuperar</a>
+      </p>
+      <p>¿No tiene cuenta aún? Crear una gratis</p>
     </mat-card-actions>
     <mat-card-footer>
       <mat-progress-bar *ngIf="logueando" mode="indeterminate"></mat-progress-bar>

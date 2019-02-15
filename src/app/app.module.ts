@@ -64,6 +64,8 @@ import { SelectorCuentasComponent } from './components/menu/selector-cuentas/sel
 import { ComboCuentaComponent } from './components/common/combo-cuenta/combo-cuenta.component';
 import { InformacionDePerfilComponent } from './components/usuarios-y-perfiles/informacion-de-perfil/informacion-de-perfil.component';
 import { ArchivoDeComprobantesComponent } from './components/listados/archivo-de-comprobantes/archivo-de-comprobantes.component';
+import { RecuperacionPasswordComponent } from './components/usuarios-y-perfiles/recuperacion-password/recuperacion-password.component';
+import { RestablecimientoPasswordComponent } from './components/usuarios-y-perfiles/restablecimiento-password/restablecimiento-password.component';
 
 registerLocaleData(localeEsAr, 'es-AR');
 
@@ -113,7 +115,9 @@ export function tokenGetter() {
 		SelectorCuentasComponent,
 		ComboCuentaComponent,
 		InformacionDePerfilComponent,
-		ArchivoDeComprobantesComponent
+		ArchivoDeComprobantesComponent,
+		RecuperacionPasswordComponent,
+		RestablecimientoPasswordComponent
 	],
 	imports: [
 		HttpClientModule,

@@ -7,6 +7,9 @@ import { JwtHelperService } from '@auth0/angular-jwt';
 import { Observable, Subject } from 'rxjs';
 import { RoleEnum } from '../../enums/role-enum.enum';
 import { Rol } from '../../interfaces/security/rol';
+import { SolicitudRecuperacionPassword } from '../../interfaces/security/solicitud-recuperacion-password';
+import { ResponseServicio } from '../../interfaces/varios/response-servicio';
+import { NuevoPassword } from '../../interfaces/security/nuevo-password';
 
 @Injectable({
 	providedIn: 'root'
@@ -14,6 +17,8 @@ import { Rol } from '../../interfaces/security/rol';
 export class AuthenticationService {
 
 	private urlSeguridadLogin = `${environment.hostSeguridad}/autentificacion/login`;
+	private urlSolicitudRecupPassword = `${environment.hostSeguridad}/autentificacion/solicitudRecuperacionPassword`;
+	private urlSolicitudRestablecimientoPassword = `${environment.hostSeguridad}/autentificacion/restablecerPassword`;
 
 	_perfilActivo$ = new Subject<PerfilBasico>();
 
@@ -144,4 +149,34 @@ export class AuthenticationService {
 		return this.esRol('SUB_ADMINISTRADOR') || this.esRol('COMERCIAL');
 	}
 
+	// funcion que envia la solicitud para recuperar la contrasena
+	solicitudRecuperacionPassword(solicitud: SolicitudRecuperacionPassword): Observable<ResponseServicio> {
+		const httpOptions = {
+			headers: new HttpHeaders({ 'Content-Type': 'application/json' })
+		};
+
+		let solicitudJson = JSON.stringify(solicitud);
+
+		return this.http.post<ResponseServicio>(
+			this.urlSolicitudRecupPassword,
+			solicitudJson,
+			httpOptions);
+	}
+
+	// funcion encargada de restablecer la contrasena 
+	restablecerPassword(nuevoPassword: NuevoPassword, token: string): Observable<ResponseServicio> {
+		const httpOptions = {
+			headers: new HttpHeaders({
+				'Content-Type': 'application/json',
+				'Authorization': `Bearer ${token}`
+			})
+		};
+
+		let nuevoPasswordJson = JSON.stringify(nuevoPassword);
+
+		return this.http.post<ResponseServicio>(
+			this.urlSolicitudRestablecimientoPassword,
+			nuevoPasswordJson,
+			httpOptions);
+	}
 }

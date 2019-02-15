@@ -18,6 +18,8 @@ import { AccesoTercerosComponent } from '../components/usuarios-y-perfiles/terce
 import { OtrosMovimientosComponent } from '../components/listados/otros-movimientos/otros-movimientos/otros-movimientos.component';
 import { InformacionDePerfilComponent } from '../components/usuarios-y-perfiles/informacion-de-perfil/informacion-de-perfil.component';
 import { ArchivoDeComprobantesComponent } from '../components/listados/archivo-de-comprobantes/archivo-de-comprobantes.component';
+import { RecuperacionPasswordComponent } from '../components/usuarios-y-perfiles/recuperacion-password/recuperacion-password.component';
+import { RestablecimientoPasswordComponent } from '../components/usuarios-y-perfiles/restablecimiento-password/restablecimiento-password.component';
 
 const routes: Routes = [
 	{
@@ -119,6 +121,14 @@ const routes: Routes = [
 		data: {
 			rolAdmin: false
 		}
+	},
+	{
+		path: 'recuperacion-password',
+		component: RecuperacionPasswordComponent
+	},
+	{
+		path: 'restablecer-password/:token',
+		component: RestablecimientoPasswordComponent
 	},
 	{
 		path: '', redirectTo: '/dashboard', pathMatch: 'full'
