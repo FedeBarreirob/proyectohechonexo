@@ -66,6 +66,7 @@ import { InformacionDePerfilComponent } from './components/usuarios-y-perfiles/i
 import { ArchivoDeComprobantesComponent } from './components/listados/archivo-de-comprobantes/archivo-de-comprobantes.component';
 import { RecuperacionPasswordComponent } from './components/usuarios-y-perfiles/recuperacion-password/recuperacion-password.component';
 import { RestablecimientoPasswordComponent } from './components/usuarios-y-perfiles/restablecimiento-password/restablecimiento-password.component';
+import { ModalCambioPasswordComponent } from './components/usuarios-y-perfiles/modal-cambio-password/modal-cambio-password.component';
 
 registerLocaleData(localeEsAr, 'es-AR');
 
@@ -117,7 +118,8 @@ export function tokenGetter() {
 		InformacionDePerfilComponent,
 		ArchivoDeComprobantesComponent,
 		RecuperacionPasswordComponent,
-		RestablecimientoPasswordComponent
+		RestablecimientoPasswordComponent,
+		ModalCambioPasswordComponent
 	],
 	imports: [
 		HttpClientModule,
@@ -176,7 +178,8 @@ export function tokenGetter() {
 		AccesoTercerosEdicionComponent,
 		OtrosMovimientosDetalleComponent,
 		OtrosMovimientosMasOperacionesComponent,
-		OtrosMovimientosDetalleMasOperacionesComponent
+		OtrosMovimientosDetalleMasOperacionesComponent,
+		ModalCambioPasswordComponent
 	],
 	bootstrap: [AppComponent]
 })

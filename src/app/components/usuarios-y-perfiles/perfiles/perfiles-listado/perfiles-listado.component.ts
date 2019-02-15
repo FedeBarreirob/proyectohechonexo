@@ -7,6 +7,7 @@ import { FiltroGenericoLista } from '../../../../interfaces/varios/filtro-generi
 import { AuthenticationService } from '../../../../services/security/authentication.service';
 import { UserAuth } from '../../../../models/security/user';
 import { PerfilBasico } from '../../../../interfaces/perfiles/perfil-basico';
+import { ModalCambioPasswordComponent } from '../../modal-cambio-password/modal-cambio-password.component';
 
 @Component({
 	selector: 'app-perfiles-listado',
@@ -131,5 +132,14 @@ export class PerfilesListadoComponent implements OnInit {
 				error => console.log(error)
 			);
 		}
+	}
+
+	// funcion que muestra el dialogo de cambio de password
+	cambiarPassword(perfil: PerfilBasico) {
+		const dialogRef = this.dialog.open(ModalCambioPasswordComponent, { data: perfil.credencial.username });
+
+		dialogRef.afterClosed().subscribe(
+			data => this.cargarListado(this.pageEvent)
+		);
 	}
 }

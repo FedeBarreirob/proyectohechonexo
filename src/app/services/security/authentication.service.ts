@@ -10,6 +10,7 @@ import { Rol } from '../../interfaces/security/rol';
 import { SolicitudRecuperacionPassword } from '../../interfaces/security/solicitud-recuperacion-password';
 import { ResponseServicio } from '../../interfaces/varios/response-servicio';
 import { NuevoPassword } from '../../interfaces/security/nuevo-password';
+import { CambioPasswordUsuario } from '../../interfaces/security/cambio-password-usuario';
 
 @Injectable({
 	providedIn: 'root'
@@ -19,6 +20,7 @@ export class AuthenticationService {
 	private urlSeguridadLogin = `${environment.hostSeguridad}/autentificacion/login`;
 	private urlSolicitudRecupPassword = `${environment.hostSeguridad}/autentificacion/solicitudRecuperacionPassword`;
 	private urlSolicitudRestablecimientoPassword = `${environment.hostSeguridad}/autentificacion/restablecerPassword`;
+	private urlSolicitudRestablecimientoPasswordPorNombreUsuario = `${environment.hostSeguridad}/autentificacion/restablecerPasswordPorNombreUsuario`;
 
 	_perfilActivo$ = new Subject<PerfilBasico>();
 
@@ -177,6 +179,23 @@ export class AuthenticationService {
 		return this.http.post<ResponseServicio>(
 			this.urlSolicitudRestablecimientoPassword,
 			nuevoPasswordJson,
+			httpOptions);
+	}
+
+	// funcion encargada de restablecer la contrasena a traves del nombre de usuario
+	restablecerPasswordPorNombreDeUsuario(cambioPassword: CambioPasswordUsuario, token: string): Observable<ResponseServicio> {
+		const httpOptions = {
+			headers: new HttpHeaders({
+				'Content-Type': 'application/json',
+				'Authorization': `Bearer ${token}`
+			})
+		};
+
+		let cambioPasswordJson = JSON.stringify(cambioPassword);
+
+		return this.http.post<ResponseServicio>(
+			this.urlSolicitudRestablecimientoPasswordPorNombreUsuario,
+			cambioPasswordJson,
 			httpOptions);
 	}
 }

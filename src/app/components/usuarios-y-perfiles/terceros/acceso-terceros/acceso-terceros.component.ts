@@ -7,6 +7,7 @@ import { TercerosService } from '../../../../services/acceso-terceros/terceros.s
 import { AuthenticationService } from '../../../../services/security/authentication.service';
 import { AccesoTercerosEdicionComponent } from '../acceso-terceros-edicion/acceso-terceros-edicion.component';
 import { TerceroBasico } from '../../../../interfaces/acceso-terceros/tercero-basico';
+import { ModalCambioPasswordComponent } from '../../modal-cambio-password/modal-cambio-password.component';
 
 @Component({
 	selector: 'app-acceso-terceros',
@@ -138,5 +139,14 @@ export class AccesoTercerosComponent implements OnInit {
 				error => console.log(error)
 			);
 		}
+	}
+
+	// funcion que muestra el dialogo de cambio de password
+	cambiarPassword(tercero: TerceroBasico) {
+		const dialogRef = this.dialog.open(ModalCambioPasswordComponent, { data: tercero.credencial.username });
+
+		dialogRef.afterClosed().subscribe(
+			data => this.cargarListado(this.pageEvent)
+		);
 	}
 }
