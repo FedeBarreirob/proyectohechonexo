@@ -6,7 +6,8 @@ export const environment = {
   production: false,
   hostSeguridad: 'http://localhost:8080/DigitalSeguridad-1.0-SNAPSHOT/api',
   hostCtaCte: 'http://localhost:8080/DigitalCuentaCorriente-1.0-SNAPSHOT/api',
-  hostEntregasYVentas: 'http://localhost:8080/DigitalEntregasYVentas-1.0-SNAPSHOT/api'
+  hostEntregasYVentas: 'http://localhost:8080/DigitalEntregasYVentas-1.0-SNAPSHOT/api',
+  baseUrl: 'http://localhost:4200/#'
 };
 
 /*

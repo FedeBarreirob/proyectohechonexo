@@ -4,6 +4,7 @@ import { Router } from '@angular/router';
 import { MatSnackBar } from '@angular/material';
 import { AuthenticationService } from '../../../services/security/authentication.service';
 import { SolicitudRecuperacionPassword } from 'src/app/interfaces/security/solicitud-recuperacion-password';
+import { environment } from '../../../../environments/environment';
 
 @Component({
 	selector: 'app-recuperacion-password',
@@ -35,7 +36,7 @@ export class RecuperacionPasswordComponent implements OnInit {
 
 		let solicitud: SolicitudRecuperacionPassword = {
 			email: this.frmRecup.value.email,
-			urlCallback: `${location.origin}/restablecer-password`
+			urlCallback: `${environment.baseUrl}/restablecer-password`
 		};
 
 		this.authenticationService.solicitudRecuperacionPassword(solicitud).subscribe(
