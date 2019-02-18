@@ -4,5 +4,6 @@ export interface TerceroBasico {
     id: number,
     descripcion: string,
     perfilId: number,
-    credencial: TerceroBasicoCredencial
+    credencial: TerceroBasicoCredencial,
+    subtipo?: string
 }

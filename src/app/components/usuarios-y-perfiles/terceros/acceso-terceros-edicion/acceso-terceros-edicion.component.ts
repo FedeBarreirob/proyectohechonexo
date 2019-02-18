@@ -1,6 +1,6 @@
 import { Component, OnInit, Inject } from '@angular/core';
 import { UserAuth } from '../../../../models/security/user';
-import { FormGroup, FormBuilder } from '@angular/forms';
+import { FormGroup, FormBuilder, FormControl } from '@angular/forms';
 import { TerceroBasico } from '../../../../interfaces/acceso-terceros/tercero-basico';
 import { AuthenticationService } from '../../../../services/security/authentication.service';
 import { MatSnackBar, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
@@ -8,135 +8,142 @@ import { TercerosService } from '../../../../services/acceso-terceros/terceros.s
 import { TerceroBasicoCredencial } from '../../../../interfaces/acceso-terceros/tercero-credencial';
 
 @Component({
-  selector: 'app-acceso-terceros-edicion',
-  templateUrl: './acceso-terceros-edicion.component.html',
-  styleUrls: ['./acceso-terceros-edicion.component.css']
+	selector: 'app-acceso-terceros-edicion',
+	templateUrl: './acceso-terceros-edicion.component.html',
+	styleUrls: ['./acceso-terceros-edicion.component.css']
 })
 export class AccesoTercerosEdicionComponent implements OnInit {
 
-  private formSubmitAttempt: boolean;
-  public guardando: boolean = false;
-  private usuarioLogueado: UserAuth;
+	private formSubmitAttempt: boolean;
+	public guardando: boolean = false;
+	private usuarioLogueado: UserAuth;
 
-  public formDatosAccesoGroup: FormGroup;
-  public formDatosTerceroGroup: FormGroup;
+	public formDatosAccesoGroup: FormGroup;
+	public formDatosTerceroGroup: FormGroup;
 
-  public esRegistroNuevo: boolean;
-  public titulo: string;
+	public esRegistroNuevo: boolean;
+	public titulo: string;
 
-  private terceroBasico: TerceroBasico;
+	private terceroBasico: TerceroBasico;
 
-  constructor(
-    private authenticationService: AuthenticationService,
-    private formBuilder: FormBuilder,
-    private snackBar: MatSnackBar,
-    private terceroService: TercerosService,
-    private dialogRef: MatDialogRef<AccesoTercerosEdicionComponent>,
-    @Inject(MAT_DIALOG_DATA) public data: TerceroBasico
-  ) {
-    this.usuarioLogueado = <UserAuth>this.authenticationService.usuarioLogueado();
-  }
+	// subtipos para los perfiles
+	public subtiposTerceros: Array<string> = ['CONTADOR', 'COLABORADOR', 'OTRO'];
 
-  ngOnInit() {
-    // determinar si es un registro nuevo o una actualizacion de acceso a tercero
-    this.esRegistroNuevo = this.data == null ? true : false;
-    this.titulo = this.esRegistroNuevo ? "Nuevo acceso a tercero" : "Ver/Editar acceso a tercero";
+	constructor(
+		private authenticationService: AuthenticationService,
+		private formBuilder: FormBuilder,
+		private snackBar: MatSnackBar,
+		private terceroService: TercerosService,
+		private dialogRef: MatDialogRef<AccesoTercerosEdicionComponent>,
+		@Inject(MAT_DIALOG_DATA) public data: TerceroBasico
+	) {
+		this.usuarioLogueado = <UserAuth>this.authenticationService.usuarioLogueado();
+	}
 
-    // credenciales
-    if (this.data != null) {
-      this.formDatosAccesoGroup = this.formBuilder.group(this.data.credencial);
-    } else {
-      this.formDatosAccesoGroup = this.formBuilder.group({
-        username: [''],
-        password: [''],
-        passwordConfirmacion: ['']
-      });
-    }
+	ngOnInit() {
+		// determinar si es un registro nuevo o una actualizacion de acceso a tercero
+		this.esRegistroNuevo = this.data == null ? true : false;
+		this.titulo = this.esRegistroNuevo ? "Nuevo acceso a tercero" : "Ver/Editar acceso a tercero";
 
-    // informacion adicional del acceso
-    if (this.data != null) {
-      this.formDatosTerceroGroup = this.formBuilder.group(this.data);
-    } else {
-      this.formDatosTerceroGroup = this.formBuilder.group({
-        id: [null],
-        descripcion: ['']
-      });
-    }
-  }
+		// credenciales
+		if (this.data != null) {
+			this.formDatosAccesoGroup = this.formBuilder.group(this.data.credencial);
+			this.formDatosAccesoGroup.addControl('subtipo', new FormControl(this.subtiposTerceros.filter(x => x === (this.data.subtipo != null ? this.data.subtipo : null))[0]));
+		} else {
+			this.formDatosAccesoGroup = this.formBuilder.group({
+				username: [''],
+				password: [''],
+				passwordConfirmacion: [''],
+				subtipo: [null]
+			});
+		}
 
-  // funcion encargada de enviar los datos para su persistencia
-  guardar() {
-    if (!this.guardando) {
-      this.guardando = true;
+		// informacion adicional del acceso
+		if (this.data != null) {
+			this.formDatosTerceroGroup = this.formBuilder.group(this.data);
+		} else {
+			this.formDatosTerceroGroup = this.formBuilder.group({
+				id: [null],
+				descripcion: ['']
+			});
+		}
+	}
 
-      let datosAcceso: TerceroBasicoCredencial = this.formDatosAccesoGroup.getRawValue();
-      let informacionAdicional: TerceroBasico = this.formDatosTerceroGroup.getRawValue();
+	// funcion encargada de enviar los datos para su persistencia
+	guardar() {
+		if (!this.guardando) {
+			this.guardando = true;
 
-      this.terceroBasico = {
-        id: informacionAdicional.id,
-        credencial: datosAcceso,
-        perfilId: this.authenticationService.perfilUsuarioLogueado().informacionPersonal.id,
-        descripcion: informacionAdicional.descripcion
-      };
+			let datosAcceso: TerceroBasicoCredencial = this.formDatosAccesoGroup.getRawValue();
+			let informacionAdicional: TerceroBasico = this.formDatosTerceroGroup.getRawValue();
+			let subtipo: string = this.formDatosAccesoGroup.value.subtipo;
 
-      if (this.esRegistroNuevo) {
-        this.guardarNuevo();
-      } else {
-        this.guardarModificar();
-      }
-    } else {
-      this.openSnackBar("Existe un proceso de registro ejecutándose.", "Registro/Actualización de acceso a terceros");
-    }
-  }
+			this.terceroBasico = {
+				id: informacionAdicional.id,
+				credencial: datosAcceso,
+				perfilId: this.authenticationService.perfilUsuarioLogueado().informacionPersonal.id,
+				descripcion: informacionAdicional.descripcion,
+				subtipo: subtipo
+			};
 
-  // funcion encargada de guardar un nuevo acceso a terceros
-  guardarNuevo() {
-    this.terceroService.registrarNuevo(this.terceroBasico, this.usuarioLogueado.token)
-      .subscribe(respuesta => {
+			if (this.esRegistroNuevo) {
+				this.guardarNuevo();
+			} else {
+				this.guardarModificar();
+			}
+		} else {
+			this.openSnackBar("Existe un proceso de registro ejecutándose.", "Registro/Actualización de acceso a terceros");
+		}
+	}
 
-        this.guardando = false;
+	// funcion encargada de guardar un nuevo acceso a terceros
+	guardarNuevo() {
+		this.terceroService.registrarNuevo(this.terceroBasico, this.usuarioLogueado.token)
+			.subscribe(respuesta => {
 
-        if (respuesta && respuesta.exito == false) {
-          this.openSnackBar(respuesta.mensaje, "Registro del acceso a terceros");
-        } else {
-          this.openSnackBar(respuesta.mensaje, "Registro del acceso a terceros");
-          this.dialogRef.close();
-        }
+				this.guardando = false;
 
-      }, error => {
-        this.guardando = false;
+				if (respuesta && respuesta.exito == false) {
+					this.openSnackBar(respuesta.mensaje, "Registro del acceso a terceros");
+				} else {
+					this.openSnackBar(respuesta.mensaje, "Registro del acceso a terceros");
+					this.dialogRef.close();
+				}
 
-        this.openSnackBar("Error al intentar registrar el acceso a terceros", "Registro del acceso a terceros");
-        console.log(error);
-      });
-  }
+			}, error => {
+				this.guardando = false;
 
-  // funcion encargada de actualizar un acceso a terceros
-  guardarModificar() {
-    this.terceroService.actualizar(this.terceroBasico, this.usuarioLogueado.token)
-      .subscribe(respuesta => {
+				this.openSnackBar("Error al intentar registrar el acceso a terceros", "Registro del acceso a terceros");
+				console.log(error);
+			});
+	}
 
-        this.guardando = false;
+	// funcion encargada de actualizar un acceso a terceros
+	guardarModificar() {
+		this.terceroService.actualizar(this.terceroBasico, this.usuarioLogueado.token)
+			.subscribe(respuesta => {
 
-        if (respuesta && respuesta.exito == false) {
-          this.openSnackBar(respuesta.mensaje, "Actualización del acceso a terceros");
-        } else {
-          this.openSnackBar(respuesta.mensaje, "Actualización del acceso a terceros");
-          this.dialogRef.close();
-        }
+				this.guardando = false;
 
-      }, error => {
-        this.guardando = false;
+				if (respuesta && respuesta.exito == false) {
+					this.openSnackBar(respuesta.mensaje, "Actualización del acceso a terceros");
+				} else {
+					this.openSnackBar(respuesta.mensaje, "Actualización del acceso a terceros");
+					this.dialogRef.close();
+				}
 
-        this.openSnackBar("Error al intentar actualizar el acceso a terceros", "Actualización del acceso a terceros");
-        console.log(error);
-      });
-  }
+			}, error => {
+				this.guardando = false;
 
-  // abre una notificacion
-  openSnackBar(message: string, action: string) {
-    this.snackBar.open(message, action, {
-      duration: 2000,
-    });
-  }
+				this.openSnackBar("Error al intentar actualizar el acceso a terceros", "Actualización del acceso a terceros");
+				console.log(error);
+			});
+	}
+
+	// abre una notificacion
+	openSnackBar(message: string, action: string) {
+		this.snackBar.open(message, action, {
+			duration: 2000,
+		});
+	}
 }

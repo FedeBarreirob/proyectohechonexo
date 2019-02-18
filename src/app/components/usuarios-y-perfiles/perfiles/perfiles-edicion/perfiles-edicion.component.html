@@ -15,7 +15,8 @@
 
 					<div fxFlex="30%">
 						<mat-form-field class="full-width-input">
-							<input [readonly]="esRegistroNuevo == false" matInput placeholder="Usuario" formControlName="username">
+							<input [readonly]="esRegistroNuevo == false" matInput placeholder="Usuario"
+								formControlName="username">
 						</mat-form-field>
 					</div>
 
@@ -27,7 +28,8 @@
 
 					<div fxFlex="30%" *ngIf="esRegistroNuevo">
 						<mat-form-field class="full-width-input">
-							<input matInput type="password" placeholder="Confirmación contraseña" formControlName="passwordConfirmacion">
+							<input matInput type="password" placeholder="Confirmación contraseña"
+								formControlName="passwordConfirmacion">
 						</mat-form-field>
 					</div>
 				</div>
@@ -35,9 +37,23 @@
 				<div fxLayout="row" fxLayoutAlign="space-between center">
 					<div fxFlex="100%">
 						<mat-form-field>
-							<mat-select placeholder="Rol" formControlName="rol" (selectionChange)="limpiarDatosVinculadosAlPerfil()">
+							<mat-select placeholder="Rol" formControlName="rol"
+								(selectionChange)="limpiarDatosVinculadosAlPerfil()">
 								<mat-option *ngFor="let rol of roles" [value]="rol">
 									{{rol.denominacion}}
+								</mat-option>
+							</mat-select>
+						</mat-form-field>
+					</div>
+				</div>
+
+				<div fxLayout="row" fxLayoutAlign="space-between center" *ngIf="authenticationService.correspondeRol(formDatosAccesoGroup.value.rol, 'PRODUCTOR')">
+					<div fxFlex="100%">
+						<mat-form-field>
+							<mat-select placeholder="Subtipo" formControlName="subtipo">
+								<mat-option [value]="null">No definido</mat-option>
+								<mat-option *ngFor="let subtipo of subtiposCliente" [value]="subtipo">
+									{{subtipo}}
 								</mat-option>
 							</mat-select>
 						</mat-form-field>
@@ -77,7 +93,8 @@
 	</mat-card>
 
 	<!-- Cuentas vinculadas -->
-	<mat-card *ngIf="authenticationService.correspondeRol(formDatosAccesoGroup.value.rol, 'PRODUCTOR') || authenticationService.correspondeRol(formDatosAccesoGroup.value.rol, 'COMERCIAL') || authenticationService.esSuadminOComercial()">
+	<mat-card
+		*ngIf="authenticationService.correspondeRol(formDatosAccesoGroup.value.rol, 'PRODUCTOR') || authenticationService.correspondeRol(formDatosAccesoGroup.value.rol, 'COMERCIAL') || authenticationService.esSuadminOComercial()">
 		<mat-card-header>
 			<mat-card-title>Cuentas vinculadas</mat-card-title>
 		</mat-card-header>
@@ -108,7 +125,8 @@
 								<div fxFlex="50%">
 									{{ codigo }}
 								</div>
-								<div fxFlex="50%"><button mat-button (click)="quitarCuenta(codigo)">Desvincular</button></div>
+								<div fxFlex="50%"><button mat-button (click)="quitarCuenta(codigo)">Desvincular</button>
+								</div>
 								<mat-divider></mat-divider>
 							</mat-list-item>
 						</mat-list>
@@ -132,11 +150,13 @@
 					<mat-form-field class="container">
 
 						<!-- input buscador de comerciales -->
-						<input type="text" placeholder="Buscar comerciales ..." matInput [formControl]="buscadorComercial"
-						 [matAutocomplete]="auto" (change)="limpiarSeleccionComercialSiVacio()">
+						<input type="text" placeholder="Buscar comerciales ..." matInput
+							[formControl]="buscadorComercial" [matAutocomplete]="auto"
+							(change)="limpiarSeleccionComercialSiVacio()">
 
 						<!-- panel con el resultado de la busqueda -->
-						<mat-autocomplete #auto="matAutocomplete" [displayWith]="displayComercial" (optionSelected)="seleccionarComercial($event.option.value)">
+						<mat-autocomplete #auto="matAutocomplete" [displayWith]="displayComercial"
+							(optionSelected)="seleccionarComercial($event.option.value)">
 							<mat-option *ngFor="let comercial of listadoComerciales" [value]="comercial">
 								{{ comercial.informacionPersonal.nombre !== null ? comercial.informacionPersonal.nombre :
 								comercial.credencial.username }}
@@ -159,7 +179,8 @@
 								{{ comercial.informacionPersonal.nombre !== null ? comercial.informacionPersonal.nombre :
 								comercial.credencial.username }}
 							</div>
-							<div fxFlex="50%"><button mat-button (click)="quitarComercial(comercial)">Desvincular</button></div>
+							<div fxFlex="50%"><button mat-button
+									(click)="quitarComercial(comercial)">Desvincular</button></div>
 							<mat-divider></mat-divider>
 						</mat-list-item>
 					</mat-list>

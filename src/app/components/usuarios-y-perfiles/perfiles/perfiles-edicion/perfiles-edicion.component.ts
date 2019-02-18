@@ -59,6 +59,9 @@ export class PerfilesEdicionComponent implements OnInit {
 			admin: false
 		}];
 
+	// subtipos para los perfiles
+	public subtiposCliente: Array<string> = ['PRODUCTOR', 'EMPRESA'];
+
 	public perfilBasico: PerfilBasico;
 	selection: any;
 	searchControl: any;
@@ -82,6 +85,7 @@ export class PerfilesEdicionComponent implements OnInit {
 		// credenciales
 		if (this.data != null) {
 			this.formDatosAccesoGroup = this.formBuilder.group(this.data.credencial);
+			this.formDatosAccesoGroup.addControl('subtipo', new FormControl(this.subtiposCliente.filter(x => x === (this.data.subtipo != null ? this.data.subtipo : null))[0]));
 
 			// se establece rol PRODUCTOR por defecto en caso que el usuario que genera el registro se a suadmin o comercial
 			if (this.authenticationService.esSuadminOComercial()) {
@@ -95,14 +99,16 @@ export class PerfilesEdicionComponent implements OnInit {
 					username: [''],
 					password: [''],
 					passwordConfirmacion: [''],
-					rol: new FormControl({ value: this.roles.filter(x => x.id == RoleEnum.PRODUCTOR.valueOf())[0], disabled: true })
+					rol: new FormControl({ value: this.roles.filter(x => x.id == RoleEnum.PRODUCTOR.valueOf())[0], disabled: true }),
+					subtipo: [null]
 				});
 			} else {
 				this.formDatosAccesoGroup = this.formBuilder.group({
 					username: [''],
 					password: [''],
 					passwordConfirmacion: [''],
-					rol: [null]
+					rol: [null],
+					subtipo: [null]
 				});
 			}
 		}
@@ -158,13 +164,15 @@ export class PerfilesEdicionComponent implements OnInit {
 			let datosAcceso: PerfilBasicoCredencial = this.formDatosAccesoGroup.getRawValue();
 			let informacionPersonal: PerfilBasicoInfoPersonal = this.formDatosPersonalesGroup.getRawValue();
 			let rol: Rol = this.formDatosAccesoGroup.value.rol;
+			let subtipo: string = this.formDatosAccesoGroup.value.subtipo;
 
 			this.perfilBasico = {
 				credencial: datosAcceso,
 				informacionPersonal: informacionPersonal,
 				entidadCodigos: this.listadoCodigos,
 				rol: rol,
-				comercialesVinculados: this.listadoComercialesSeleccionados
+				comercialesVinculados: this.listadoComercialesSeleccionados,
+				subtipo: subtipo
 			};
 
 			if (this.esRegistroNuevo) {
