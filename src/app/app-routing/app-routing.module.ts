@@ -20,6 +20,7 @@ import { InformacionDePerfilComponent } from '../components/usuarios-y-perfiles/
 import { ArchivoDeComprobantesComponent } from '../components/listados/archivo-de-comprobantes/archivo-de-comprobantes.component';
 import { RecuperacionPasswordComponent } from '../components/usuarios-y-perfiles/recuperacion-password/recuperacion-password.component';
 import { RestablecimientoPasswordComponent } from '../components/usuarios-y-perfiles/restablecimiento-password/restablecimiento-password.component';
+import { SolicitudAltaComponent } from '../components/usuarios-y-perfiles/solicitud-alta/solicitud-alta.component';
 
 const routes: Routes = [
 	{
@@ -131,6 +132,10 @@ const routes: Routes = [
 		component: RestablecimientoPasswordComponent
 	},
 	{
+		path: 'solicitud-alta',
+		component: SolicitudAltaComponent
+	},
+	{
 		path: '', redirectTo: '/dashboard', pathMatch: 'full'
 	},
 	{
@@ -140,7 +145,7 @@ const routes: Routes = [
 
 @NgModule({
 	imports: [
-		RouterModule.forRoot(routes, {useHash: true})
+		RouterModule.forRoot(routes, { useHash: true })
 	],
 	exports: [
 		RouterModule

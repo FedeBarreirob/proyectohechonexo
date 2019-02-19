@@ -1,0 +1,35 @@
+<div class="content">
+	<mat-card>
+		<img src="assets/logo.png" class="md-card-image" alt="image caption" />
+		<mat-card-title>Solicitud de alta</mat-card-title>
+		<mat-card-subtitle>Ingrese los datos solicitados para poder darlo de alta en el sistema.</mat-card-subtitle>
+		<mat-card-content>
+			<form [formGroup]="frmAlta">
+				<mat-form-field class="full-width-input">
+					<input matInput placeholder="Razón social" formControlName="razonSocial" required>
+				</mat-form-field>
+				<mat-form-field class="full-width-input">
+					<input matInput placeholder="Email" formControlName="email" required>
+				</mat-form-field>
+				<mat-form-field class="full-width-input">
+					<input matInput placeholder="CUIT" formControlName="cuit" required>
+				</mat-form-field>
+				<mat-form-field class="full-width-input">
+					<input matInput placeholder="Código de Cuenta Gaviglio" formControlName="codCuentaAlgoritmo">
+				</mat-form-field>
+				<mat-form-field class="full-width-input">
+					<input matInput placeholder="Teléfono" formControlName="telefono" required>
+				</mat-form-field>
+			</form>
+		</mat-card-content>
+		<mat-card-actions>
+			<button *ngIf="!solicitudEnviada" type="button" mat-raised-button color="primary" (click)="solicitarAlta()"
+				[disabled]="cargando">Continuar</button>
+			<button *ngIf="solicitudEnviada" type="button" mat-raised-button color="primary" (click)="volver()"
+				[disabled]="cargando">Volver</button>
+		</mat-card-actions>
+		<mat-card-footer>
+			<mat-progress-bar *ngIf="cargando" mode="indeterminate"></mat-progress-bar>
+		</mat-card-footer>
+	</mat-card>
+</div>

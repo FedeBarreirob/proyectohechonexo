@@ -9,6 +9,8 @@ import { map } from 'rxjs/internal/operators/map';
 import { BajaPerfil } from '../../interfaces/perfiles/baja-perfil';
 import { EntidadAlg } from '../../interfaces/perfiles/entidad-alg';
 import { EntidadAlgPk } from '../../interfaces/perfiles/entidad-alg-pk';
+import { SolicitudAlta } from '../../interfaces/perfiles/solicitud-alta';
+import { Observable } from 'rxjs';
 
 
 @Injectable({
@@ -24,6 +26,7 @@ export class PerfilesService {
 	private urlSeguridadPerfilDarDeBaja = `${environment.hostSeguridad}/perfiles/darDeBaja`;
 	private urlSeguridadPerfilEliminar = `${environment.hostSeguridad}/perfiles`;
 	private urlSeguridadPerfilEntidadPorId = `${environment.hostSeguridad}/perfiles/entidadPorId`;
+	private urlSeguridadPerfilSolicitudAlta = `${environment.hostSeguridad}/perfiles/solicitudAlta`;
 
 	constructor(private http: HttpClient) { }
 
@@ -166,5 +169,19 @@ export class PerfilesService {
 
 		return this.http.post<EntidadAlg>(
 			this.urlSeguridadPerfilEntidadPorId, entidadPk, httpOptions);
+	}
+
+	// funcion que envia la solicitud de alta
+	solicitudAlta(solicitud: SolicitudAlta): Observable<ResponseServicio> {
+		const httpOptions = {
+			headers: new HttpHeaders({ 'Content-Type': 'application/json' })
+		};
+
+		let solicitudJson = JSON.stringify(solicitud);
+
+		return this.http.post<ResponseServicio>(
+			this.urlSeguridadPerfilSolicitudAlta,
+			solicitudJson,
+			httpOptions);
 	}
 }

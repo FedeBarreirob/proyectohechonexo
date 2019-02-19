@@ -67,6 +67,7 @@ import { ArchivoDeComprobantesComponent } from './components/listados/archivo-de
 import { RecuperacionPasswordComponent } from './components/usuarios-y-perfiles/recuperacion-password/recuperacion-password.component';
 import { RestablecimientoPasswordComponent } from './components/usuarios-y-perfiles/restablecimiento-password/restablecimiento-password.component';
 import { ModalCambioPasswordComponent } from './components/usuarios-y-perfiles/modal-cambio-password/modal-cambio-password.component';
+import { SolicitudAltaComponent } from './components/usuarios-y-perfiles/solicitud-alta/solicitud-alta.component';
 
 registerLocaleData(localeEsAr, 'es-AR');
 
@@ -119,7 +120,8 @@ export function tokenGetter() {
 		ArchivoDeComprobantesComponent,
 		RecuperacionPasswordComponent,
 		RestablecimientoPasswordComponent,
-		ModalCambioPasswordComponent
+		ModalCambioPasswordComponent,
+		SolicitudAltaComponent
 	],
 	imports: [
 		HttpClientModule,
