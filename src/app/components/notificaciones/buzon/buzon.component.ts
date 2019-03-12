@@ -49,10 +49,10 @@ export class BuzonComponent implements OnInit {
 		this.authenticationService.perfilActivo$.subscribe(
 			perfil => {
 				this.perfilBasico = perfil;
-				this.cargarListado();
+				this.cargarListado(this.pageEvent);
 			});
 
-		this.cargarListado();
+		this.cargarListado(this.pageEvent);
 	}
 
 	// funcion encargada de cargar el listado de notificaciones
@@ -86,6 +86,8 @@ export class BuzonComponent implements OnInit {
 					this.cargando = false;
 				}, error => { console.log(error); this.cargando = false });
 		}
+
+		return event;
 	}
 
 	// funcion encargada de limpiar los tags html del cuerpo del mensaje y truncado
