@@ -13,8 +13,6 @@
 				</div>
 
 				<div fxFlexFill fxLayout="row" fxLayoutAlign="space-between center" fxLayoutGap="2px">
-					<div fxFlex="10%">
-					</div>
 
 					<div fxFlex="20%">
 						<strong>Fecha</strong>
@@ -31,15 +29,12 @@
 
 						<div fxFlexFill fxLayout="row" fxLayoutAlign="space-between center" fxLayoutGap="2px">
 
-							<div fxFlex="10%" class="celda">
-								<mat-checkbox></mat-checkbox>
-							</div>
-
 							<div fxFlex="20%" class="celda" (click)="verDetalle(notificacion)">
 								{{notificacion.fechaHora}}
 							</div>
 
-							<div fxFlex class="celda" (click)="verDetalle(notificacion)" [innerHTML]="cuerpoMensajePlano(notificacion.cuerpoMensaje)" >
+							<div fxFlex class="celda" (click)="verDetalle(notificacion)"
+								[innerHTML]="cuerpoMensajePlano(notificacion.cuerpoMensaje)">
 							</div>
 
 						</div>

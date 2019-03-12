@@ -26,6 +26,7 @@ export class AccesoBuzonComponent implements OnInit {
 		this.authenticationService.perfilActivo$.subscribe(
 			perfil => {
 				this.perfilBasico = perfil;
+				this.actualizarIndicador();
 			});
 
 		this.notificacionService.huboCambiosEstadoMensajes$.subscribe(respuesta => this.actualizarIndicador());
@@ -46,11 +47,11 @@ export class AccesoBuzonComponent implements OnInit {
 		if (this.perfilBasico) {
 			perfil = this.perfilBasico;
 		} else {
-			perfil = this.authenticationService.perfilUsuarioLogueado();
+			perfil = this.authenticationService.perfilUsuarioSeleccionado();
 		}
 
 		let usuarioLogueado = <UserAuth>this.authenticationService.usuarioLogueado();
-		if (usuarioLogueado != null) {
+		if (usuarioLogueado != null && perfil != null) {
 
 			this.notificacionService.cantidadMensajesEnEstadoIndicado(
 				perfil.informacionPersonal.id,

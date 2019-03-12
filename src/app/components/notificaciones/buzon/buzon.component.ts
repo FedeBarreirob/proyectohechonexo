@@ -49,6 +49,7 @@ export class BuzonComponent implements OnInit {
 		this.authenticationService.perfilActivo$.subscribe(
 			perfil => {
 				this.perfilBasico = perfil;
+				this.cargarListado();
 			});
 
 		this.cargarListado();
@@ -61,7 +62,7 @@ export class BuzonComponent implements OnInit {
 		if (this.perfilBasico) {
 			perfil = this.perfilBasico;
 		} else {
-			perfil = this.authenticationService.perfilUsuarioLogueado();
+			perfil = this.authenticationService.perfilUsuarioSeleccionado();
 		}
 
 		if (event != null) {

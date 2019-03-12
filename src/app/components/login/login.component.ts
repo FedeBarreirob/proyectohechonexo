@@ -6,6 +6,7 @@ import { UserAuth } from '../../models/security/user';
 import { PerfilesService } from '../../services/perfiles/perfiles.service';
 import { MatSnackBar } from '@angular/material';
 import { Observable } from 'rxjs';
+import { NotificacionesService } from '../../services/notificaciones/notificaciones.service';
 
 @Component({
   selector: 'app-login',
@@ -24,7 +25,8 @@ export class LoginComponent implements OnInit {
     private router: Router,
     private authenticationService: AuthenticationService,
     private perfilService: PerfilesService,
-    private snackBar: MatSnackBar
+    private snackBar: MatSnackBar,
+    private notificacionService: NotificacionesService
   ) { }
 
   ngOnInit() {
@@ -54,6 +56,7 @@ export class LoginComponent implements OnInit {
 
             this.cargarPerfilLogueado(respuesta.token).subscribe(cargoPerfil => {
               if (cargoPerfil == true) {
+                this.notificacionService.huboCambiosEnEstado();
                 this.router.navigate([this.returnUrl]);
               }
             });
