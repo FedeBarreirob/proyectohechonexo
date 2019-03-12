@@ -1,0 +1,18 @@
+<mat-card>
+	<mat-dialog-content class="mat-typography" [innerHTML]="data.cuerpoMensaje">
+	</mat-dialog-content>
+
+	<mat-dialog-content class="mat-typography">
+		<mat-list role="list">
+			<mat-list-item class="comprobante" role="listitem"
+				*ngFor="let comprobante of (data.comprobanteNovedades ? data.comprobanteNovedades : [])"
+				(click)="descargarComprobante(comprobante)">
+				<mat-icon svgIcon="pdf"></mat-icon>{{comprobante.comprobante}}
+			</mat-list-item>
+		</mat-list>
+	</mat-dialog-content>
+
+	<mat-dialog-actions align="end">
+		<button mat-button mat-dialog-close>Cerrar</button>
+	</mat-dialog-actions>
+</mat-card>

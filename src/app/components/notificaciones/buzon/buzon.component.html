@@ -1,0 +1,63 @@
+<div class="container" fxLayout="column" fxLayout.xs="column" fxLayoutWrap fxLayoutGap="0.5%"
+	fxLayoutAlign="space-around stretch">
+	<mat-progress-bar *ngIf="cargando" mode="indeterminate"></mat-progress-bar>
+
+	<!-- Listado -->
+	<div fxLayout="row" fxLayoutAlign="space-between center">
+		<div fxFlex="100%">
+			<mat-card>
+				<div fxFlexFill fxLayout="row" fxLayoutAlign="space-between center">
+					<div fxFlex="100%">
+						<mat-card-title>Notificaciones</mat-card-title>
+					</div>
+				</div>
+
+				<div fxFlexFill fxLayout="row" fxLayoutAlign="space-between center" fxLayoutGap="2px">
+					<div fxFlex="10%">
+					</div>
+
+					<div fxFlex="20%">
+						<strong>Fecha</strong>
+					</div>
+
+					<div fxFlex>
+						<strong>Mensaje</strong>
+					</div>
+				</div>
+
+				<mat-card-content>
+					<mat-nav-list [ngClass]="{'no-leido': notificacion.estado == 1}"
+						*ngFor="let notificacion of (listaPaginada.listado ? listaPaginada.listado : [])">
+
+						<div fxFlexFill fxLayout="row" fxLayoutAlign="space-between center" fxLayoutGap="2px">
+
+							<div fxFlex="10%" class="celda">
+								<mat-checkbox></mat-checkbox>
+							</div>
+
+							<div fxFlex="20%" class="celda" (click)="verDetalle(notificacion)">
+								{{notificacion.fechaHora}}
+							</div>
+
+							<div fxFlex class="celda" (click)="verDetalle(notificacion)" [innerHTML]="cuerpoMensajePlano(notificacion.cuerpoMensaje)" >
+							</div>
+
+						</div>
+
+						<mat-divider></mat-divider>
+
+					</mat-nav-list>
+				</mat-card-content>
+			</mat-card>
+		</div>
+	</div>
+
+	<!-- Paginador -->
+	<div fxLayout="row" fxLayoutAlign="space-between center">
+		<div fxFlex="100%">
+			<mat-paginator [length]="listaPaginada.cantidadTotalRegistros" [pageSize]="filtro.cantPorPagina"
+				(page)="pageEvent = cargarListado($event)" [pageSizeOptions]="pageSizeOptions">
+			</mat-paginator>
+		</div>
+	</div>
+</div>

@@ -28,3 +28,7 @@
 .relleno {
   flex: 1 1 auto;
 }
+
+.contenedorBuzonAcceso {
+  padding-right: 1em;
+}

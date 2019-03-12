@@ -1,0 +1,53 @@
+mat-nav-list {
+    padding-left: .5em;
+    padding-right: .5em;
+}
+
+mat-nav-list:hover {
+    background-color: beige;
+    cursor: pointer;
+}
+
+.tabla-listado {
+    border: none;
+    width: 100%;
+    font-size: 10px;
+}
+
+.tabla-listado td {
+    width: 50%;
+}
+
+.engris {
+    color: dimgray;
+}
+
+.conceptos {
+    font-weight: bold;
+}
+
+.tabla-totales {
+    border: none;
+    width: 100%;
+    font-size: 9px;
+    text-align: right;
+}
+
+.custom-button {
+    position: fixed;
+    right: 30px;
+    bottom: 60px;
+}
+
+mat-form-field {
+    width: 100%;
+}
+
+.no-leido {
+    color: green;
+    font-weight: bold;
+}
+
+.celda {
+    padding: .4em !important;
+}

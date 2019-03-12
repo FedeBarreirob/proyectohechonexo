@@ -68,6 +68,9 @@ import { RecuperacionPasswordComponent } from './components/usuarios-y-perfiles/
 import { RestablecimientoPasswordComponent } from './components/usuarios-y-perfiles/restablecimiento-password/restablecimiento-password.component';
 import { ModalCambioPasswordComponent } from './components/usuarios-y-perfiles/modal-cambio-password/modal-cambio-password.component';
 import { SolicitudAltaComponent } from './components/usuarios-y-perfiles/solicitud-alta/solicitud-alta.component';
+import { BuzonComponent } from './components/notificaciones/buzon/buzon.component';
+import { AccesoBuzonComponent } from './components/notificaciones/acceso-buzon/acceso-buzon.component';
+import { NotificacionDetalleComponent } from './components/notificaciones/notificacion-detalle/notificacion-detalle.component';
 
 registerLocaleData(localeEsAr, 'es-AR');
 
@@ -121,7 +124,10 @@ export function tokenGetter() {
 		RecuperacionPasswordComponent,
 		RestablecimientoPasswordComponent,
 		ModalCambioPasswordComponent,
-		SolicitudAltaComponent
+		SolicitudAltaComponent,
+		BuzonComponent,
+		AccesoBuzonComponent,
+		NotificacionDetalleComponent
 	],
 	imports: [
 		HttpClientModule,
@@ -181,7 +187,8 @@ export function tokenGetter() {
 		OtrosMovimientosDetalleComponent,
 		OtrosMovimientosMasOperacionesComponent,
 		OtrosMovimientosDetalleMasOperacionesComponent,
-		ModalCambioPasswordComponent
+		ModalCambioPasswordComponent,
+		NotificacionDetalleComponent
 	],
 	bootstrap: [AppComponent]
 })
