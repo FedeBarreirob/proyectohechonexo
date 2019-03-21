@@ -18,8 +18,8 @@ export class NotificacionesService {
 
 	private _huboCambiosEstadoMensajes$ = new Subject<boolean>();
 
-	// funcion que retorna un listado de filtros especie cosecha
-	listadoFiltrosEspecieCosecha(perfilId: number, numeroPagina: number, cantPorPagina: number, token: string): Observable<ResponseServicio> {
+	// funcion que retorna un listado de notificaciones
+	listadoNotificaciones(perfilId: number, numeroPagina: number, cantPorPagina: number, token: string): Observable<ResponseServicio> {
 
 		const httpOptions = {
 			headers: new HttpHeaders({

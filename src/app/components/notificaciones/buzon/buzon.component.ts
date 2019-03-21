@@ -71,7 +71,7 @@ export class BuzonComponent implements OnInit {
 		}
 
 		if (this.usuarioLogueado != null) {
-			this.notificacionService.listadoFiltrosEspecieCosecha(
+			this.notificacionService.listadoNotificaciones(
 				perfil.informacionPersonal.id,
 				this.filtro.numeroPagina,
 				this.filtro.cantPorPagina,

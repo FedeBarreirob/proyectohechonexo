@@ -19,7 +19,7 @@
 					</div>
 
 					<div fxFlex>
-						<strong>Mensaje</strong>
+						<strong>Asunto</strong>
 					</div>
 				</div>
 
@@ -33,8 +33,8 @@
 								{{notificacion.fechaHora}}
 							</div>
 
-							<div fxFlex class="celda" (click)="verDetalle(notificacion)"
-								[innerHTML]="cuerpoMensajePlano(notificacion.cuerpoMensaje)">
+							<div fxFlex class="celda" (click)="verDetalle(notificacion)">
+								{{notificacion.asunto}}
 							</div>
 
 						</div>
