@@ -1,4 +1,6 @@
 import { Injectable } from '@angular/core';
+import { AuthenticationService } from '../security/authentication.service';
+import { PerfilBasico } from '../../interfaces/perfiles/perfil-basico';
 
 let OneSignal;
 
@@ -11,7 +13,7 @@ export class OneSignalService {
 	oneSignalId: any;
 	userSession: any;
 
-	constructor() {}
+	constructor(private authenticationService: AuthenticationService) { }
 
 	// inicia el proceso de OneSignal
 	public init() {
@@ -19,6 +21,10 @@ export class OneSignalService {
 			console.log('OneSignal Script Loaded');
 			this.initOneSignal();
 		})
+	}
+
+	public stop() {
+		this.oneSignalInit = null;
 	}
 
 	addScript(fileSrc, callback) {
@@ -31,22 +37,28 @@ export class OneSignalService {
 	}
 
 	initOneSignal() {
-		OneSignal = window['OneSignal'] || [];
-		OneSignal.sendTag('user_id', "perfilId", (tagsSent) => {
-			// Callback called when tags have finished sending
-			console.log('OneSignal Tag Sent', tagsSent);
-		});
-		console.log('Init OneSignal');
-		OneSignal.push(['init', {
-			appId: '39901250-6212-4942-9d7a-413712e251fb',
-			autoRegister: true,
-			allowLocalhostAsSecureOrigin: true,
-			notifyButton: {
-				enable: false,
-			},
-		}]);
-		console.log('OneSignal Initialized');
-		this.checkIfSubscribed();
+		let perfilLogueado: PerfilBasico = this.authenticationService.perfilUsuarioLogueado();
+
+		if (perfilLogueado) {
+			OneSignal = window['OneSignal'] || [];
+			OneSignal.sendTag('perfil_id', perfilLogueado.informacionPersonal.id, (tagsSent) => {
+				// Callback called when tags have finished sending
+				console.log('OneSignal Tag Sent', tagsSent);
+			});
+			console.log('Init OneSignal');
+			OneSignal.push(['init', {
+				appId: '39901250-6212-4942-9d7a-413712e251fb',
+				autoRegister: true,
+				allowLocalhostAsSecureOrigin: true,
+				notifyButton: {
+					enable: false,
+				},
+			}]);
+			console.log('OneSignal Initialized');
+			this.checkIfSubscribed();
+		} else {
+			console.log('Perfil nulo');
+		}
 	}
 
 	subscribe() {
