@@ -27,8 +27,8 @@ export class CtacteComponent implements OnInit {
 
 	public cuenta: string = "";
 	public perfilBasico: PerfilBasico;
-	public fechaDesde: Date = new Date();
-	public fechaHasta: Date = new Date();
+	public fechaDesde: string;
+	public fechaHasta: string = (new Date()).toISOString();
 
 	constructor(
 		private ctacteService: CtacteService,
@@ -37,7 +37,9 @@ export class CtacteComponent implements OnInit {
 		public dialog: MatDialog,
 		private comprobanteDownloaderService: ComprobantesDownloaderService,
 		private snackBar: MatSnackBar
-	) { }
+	) {
+		this.establecerFiltrosPorDefecto();
+	 }
 
 	ngOnInit() {
 		this.cargando = false;
@@ -49,11 +51,12 @@ export class CtacteComponent implements OnInit {
 	// funcion que ejecuta la carga del listado de ctacte
 	cargarListado() {
 		this.cargando = true;
+		this.limpiar();
 
 		let filtro: FiltroListadoCtaCte = {
 			cuenta: this.cuenta,
-			fechaDesde: this.datePipe.transform(this.fechaDesde, 'dd/MM/yyyy'),
-			fechaHasta: this.datePipe.transform(this.fechaHasta, 'dd/MM/yyyy')
+			fechaDesde: this.datePipe.transform(new Date(this.fechaDesde), 'dd/MM/yyyy'),
+			fechaHasta: this.datePipe.transform(new Date(this.fechaHasta), 'dd/MM/yyyy')
 		}
 
 		let usuarioLogueado = <UserAuth>this.authenticationService.usuarioLogueado();
@@ -91,6 +94,8 @@ export class CtacteComponent implements OnInit {
 	// funcion encargada de capturar el valor de la cuenta
 	seleccionarCuenta(cuentaSeleccionada?: string) {
 		this.cuenta = cuentaSeleccionada;
+		this.establecerFiltrosPorDefecto();
+		this.cargarListado();
 	}
 
 	// funcion que inicia la descarga del comprobante
@@ -118,5 +123,20 @@ export class CtacteComponent implements OnInit {
 		this.snackBar.open(message, action, {
 			duration: 2000,
 		});
+	}
+
+	// funcion que acomoda los filtros a default
+	establecerFiltrosPorDefecto() {
+		let sieteDiasAtras: Date = new Date();
+		sieteDiasAtras.setDate(sieteDiasAtras.getDate() - 7);
+		this.fechaDesde = sieteDiasAtras.toISOString();
+
+		this.fechaHasta = (new Date()).toISOString();
+	}
+
+	// funcion encargada de limpiar para nueva generacion
+	limpiar() {
+		this.listadoCtaCte = [];
+		this.saldosTotales = null;
 	}
 }

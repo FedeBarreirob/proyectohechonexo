@@ -24,7 +24,7 @@ export class ArchivoDeComprobantesComponent implements OnInit {
 	esAplicada: boolean = false;
 	cuenta: string;
 	fechaDesde: string;
-	fechaHasta: string;
+	fechaHasta: string = (new Date()).toISOString();
 	filtro: string = "";
 
 	// listado de las referencias a los comprobantes
@@ -37,7 +37,9 @@ export class ArchivoDeComprobantesComponent implements OnInit {
 		private datePipe: DatePipe,
 		private comprobantesDownloaderService: ComprobantesDownloaderService,
 		private snackBar: MatSnackBar
-	) { }
+	) {
+		this.establecerFiltrosPorDefecto();
+	 }
 
 	ngOnInit() {
 	}
@@ -47,12 +49,13 @@ export class ArchivoDeComprobantesComponent implements OnInit {
 		let usuarioLogueado = <UserAuth>this.authenticationService.usuarioLogueado();
 		if (usuarioLogueado != null) {
 			this.cargando = true;
+			this.limpiar();
 
 			let filtroSrv: FiltroCtaCteComprobanteDescarga = {
 				esAplicada: false,
 				cuenta: this.cuenta,
-				fechaDesde: this.datePipe.transform(this.fechaDesde, 'dd/MM/yyyy'),
-				fechaHasta: this.datePipe.transform(this.fechaHasta, 'dd/MM/yyyy'),
+				fechaDesde: this.datePipe.transform(new Date(this.fechaDesde), 'dd/MM/yyyy'),
+				fechaHasta: this.datePipe.transform(new Date(this.fechaHasta), 'dd/MM/yyyy'),
 				filtro: this.filtro
 			};
 
@@ -147,5 +150,26 @@ export class ArchivoDeComprobantesComponent implements OnInit {
 		this.snackBar.open(message, action, {
 			duration: 2000,
 		});
+	}
+
+	// funcion que acomoda los filtros a default
+	establecerFiltrosPorDefecto() {
+		let sieteDiasAtras: Date = new Date();
+		sieteDiasAtras.setDate(sieteDiasAtras.getDate() - 7);
+		this.fechaDesde = sieteDiasAtras.toISOString();
+
+		this.fechaHasta = (new Date()).toISOString();
+	}
+
+	// funcion encargada de limpiar para nueva generacion
+	limpiar() {
+		this.comprobantes = [];
+	}
+
+	// funcion encargada de capturar el valor de la cuenta
+	seleccionarCuenta(cuentaSeleccionada?: string) {
+		this.cuenta = cuentaSeleccionada;
+		this.establecerFiltrosPorDefecto();
+		this.cargarListado();
 	}
 }
