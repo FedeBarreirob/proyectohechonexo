@@ -11,6 +11,7 @@ import { SolicitudRecuperacionPassword } from '../../interfaces/security/solicit
 import { ResponseServicio } from '../../interfaces/varios/response-servicio';
 import { NuevoPassword } from '../../interfaces/security/nuevo-password';
 import { CambioPasswordUsuario } from '../../interfaces/security/cambio-password-usuario';
+import { InfoSesion } from '../../interfaces/security/info-sesion';
 
 @Injectable({
 	providedIn: 'root'
@@ -21,6 +22,8 @@ export class AuthenticationService {
 	private urlSolicitudRecupPassword = `${environment.hostSeguridad}/autentificacion/solicitudRecuperacionPassword`;
 	private urlSolicitudRestablecimientoPassword = `${environment.hostSeguridad}/autentificacion/restablecerPassword`;
 	private urlSolicitudRestablecimientoPasswordPorNombreUsuario = `${environment.hostSeguridad}/autentificacion/restablecerPasswordPorNombreUsuario`;
+	private urlGuardarInformacionDeSesion = `${environment.hostSeguridad}/infoSesion`;
+	private urlObtenerInformacionDeSesion = `${environment.hostSeguridad}/infoSesion`;
 
 	_perfilActivo$ = new Subject<PerfilBasico>();
 
@@ -197,5 +200,36 @@ export class AuthenticationService {
 			this.urlSolicitudRestablecimientoPasswordPorNombreUsuario,
 			cambioPasswordJson,
 			httpOptions);
+	}
+
+	// funcion encargada de guardar la informacion de sesion
+	guardarInformacionDeSesion(informacionSesion: InfoSesion, token: string): Observable<ResponseServicio> {
+		const httpOptions = {
+			headers: new HttpHeaders({
+				'Content-Type': 'application/json',
+				'Authorization': `Bearer ${token}`
+			})
+		};
+
+		let informacionSesionJson = JSON.stringify(informacionSesion);
+
+		return this.http.post<ResponseServicio>(
+			this.urlGuardarInformacionDeSesion,
+			informacionSesionJson,
+			httpOptions);
+	}
+
+	// funcion que retorna la informacion de sesion de un perfil dado
+	informacionDeSesion(perfilId: number, token: string): Observable<ResponseServicio> {
+
+		const httpOptions = {
+			headers: new HttpHeaders({
+				'Content-Type': 'application/json',
+				'Authorization': `Bearer ${token}`
+			})
+		};
+
+		let urlConParametro = `${this.urlObtenerInformacionDeSesion}/${perfilId}`;
+		return this.http.get<ResponseServicio>(urlConParametro, httpOptions);
 	}
 }
