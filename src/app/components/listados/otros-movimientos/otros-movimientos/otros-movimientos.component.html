@@ -1,4 +1,5 @@
-<div class="container" fxLayout="column" fxLayout.xs="column" fxLayoutWrap fxLayoutGap="0.5%" fxLayoutAlign="space-around stretch">
+<div class="container" fxLayout="column" fxLayout.xs="column" fxLayoutWrap fxLayoutGap="0.5%"
+	fxLayoutAlign="space-around stretch">
 	<div fxFlex="100%">
 		<mat-progress-bar *ngIf="cargando" mode="indeterminate"></mat-progress-bar>
 
@@ -7,16 +8,18 @@
 				Filtro
 			</mat-expansion-panel-header>
 
-			<div class="container" fxLayout="row" fxLayout.xs="column" fxLayoutGap="0.5%" fxLayoutAlign="space-around stretch">
+			<div class="container" fxLayout="row" fxLayout.xs="column" fxLayoutGap="0.5%"
+				fxLayoutAlign="space-around stretch">
 
 				<div fxFlex="25%">
-					<app-combo-cuenta [disabled]="cargando==true" (change)="seleccionarCuenta($event)"></app-combo-cuenta>
+					<app-combo-cuenta [disabled]="cargando==true" (change)="seleccionarCuenta($event)">
+					</app-combo-cuenta>
 				</div>
 
 				<div fxFlex="25%">
 					<mat-form-field>
-						<input [disabled]="cargando==true" [(ngModel)]="fechaDesde" matInput [matDatepicker]="desde" placeholder="Fecha desde"
-						 readonly>
+						<input [disabled]="cargando==true" [(ngModel)]="fechaDesde" matInput [matDatepicker]="desde"
+							placeholder="Fecha desde" readonly>
 						<mat-datepicker-toggle matSuffix [for]="desde"></mat-datepicker-toggle>
 						<mat-datepicker touchUi #desde></mat-datepicker>
 					</mat-form-field>
@@ -24,8 +27,8 @@
 
 				<div fxFlex="25%">
 					<mat-form-field>
-						<input [disabled]="cargando==true" [(ngModel)]="fechaHasta" matInput [matDatepicker]="hasta" placeholder="Fecha hasta"
-						 readonly>
+						<input [disabled]="cargando==true" [(ngModel)]="fechaHasta" matInput [matDatepicker]="hasta"
+							placeholder="Fecha hasta" readonly>
 						<mat-datepicker-toggle matSuffix [for]="hasta"></mat-datepicker-toggle>
 						<mat-datepicker touchUi #hasta></mat-datepicker>
 					</mat-form-field>
@@ -33,12 +36,14 @@
 
 				<div fxFlex="25%">
 					<mat-form-field>
-						<mat-select [disabled]="cargando==true || cargandoFiltros==true" [(ngModel)]="filtroEspecieCosechaSeleccionado"
-						 placeholder="Producto" disableRipple>
+						<mat-select [disabled]="cargando==true || cargandoFiltros==true"
+							[(ngModel)]="filtroEspecieCosechaSeleccionado" placeholder="Producto" disableRipple>
 							<mat-option>
 								Quitar filtro
 							</mat-option>
-							<mat-option *ngFor="let filtro of (filtrosEspecieCosecha != null ? filtrosEspecieCosecha : [])" [value]="filtro">
+							<mat-option
+								*ngFor="let filtro of (filtrosEspecieCosecha != null ? filtrosEspecieCosecha : [])"
+								[value]="filtro">
 								{{filtro.descripcion}}
 							</mat-option>
 						</mat-select>
@@ -48,26 +53,30 @@
 			</div>
 
 			<mat-action-row>
-				<button [disabled]="cargando==true || cargandoFiltros==true" mat-button (click)="cargarListado()">Buscar</button>
+				<button [disabled]="cargando==true || cargandoFiltros==true" mat-button
+					(click)="cargarListado()">Buscar</button>
 			</mat-action-row>
 		</mat-expansion-panel>
 
 	</div>
 
 	<div fxFlex="100%">
-		<div *ngIf="totales" class="container" fxLayout="row" fxLayout.xs="column" fxLayoutGap="0.5%" fxLayoutAlign="space-around stretch">
+		<div *ngIf="totales" class="container" fxLayout="row" fxLayout.xs="column" fxLayoutGap="0.5%"
+			fxLayoutAlign="space-around stretch">
 
 			<div fxFlex="50%">
 				<h4 mat-dialog-title align="center">Entrada</h4>
 				<mat-dialog-content class="mat-typography">
-					<p align="center">{{totales.totalKgEntradas | number: '.2'}} Kg</p>
+					<p align="center">{{totales.totalKgEntradas | kilosA: unidadMedida | number: '.2'}}
+						{{unidadMedida | kilosTextoA}}</p>
 				</mat-dialog-content>
 			</div>
 
 			<div fxFlex="50%">
 				<h4 mat-dialog-title align="center">Salida</h4>
 				<mat-dialog-content class="mat-typography">
-					<p align="center">{{totales.totalKgSalidas | number: '.2'}} Kg</p>
+					<p align="center">{{totales.totalKgSalidas | kilosA: unidadMedida | number: '.2'}}
+						{{unidadMedida | kilosTextoA}}</p>
 				</mat-dialog-content>
 			</div>
 
@@ -81,17 +90,20 @@
 			<mat-card-content>
 
 				<!-- Movimiento para panalla chicas -->
-				<div fxHide.lg fxHide.md class="movimiento" *ngFor="let movimiento of (listado ? listado : [])" (click)="verDetalle(movimiento)">
+				<div fxHide.lg fxHide.md class="movimiento" *ngFor="let movimiento of (listado ? listado : [])"
+					(click)="verDetalle(movimiento)">
 
 					<div fxLayout="row" fxLayoutAlign="center space-between">
 						<div fxFlex="50%" class="concepto">{{movimiento.especie}} {{movimiento.cosecha}}</div>
-						<div fxFlex="25%" class="importe" align="right">{{movimiento.kgEntradas | number: '.0'}}</div>
-						<div fxFlex="25%" class="importe" align="right">{{movimiento.kgSalidas | number: '.0'}}</div>
+						<div fxFlex="25%" class="importe" align="right">
+							{{movimiento.kgEntradas | kilosA: unidadMedida | number: '.0'}}</div>
+						<div fxFlex="25%" class="importe" align="right">
+							{{movimiento.kgSalidas | kilosA: unidadMedida | number: '.0'}}</div>
 					</div>
 					<div fxLayout="row" fxLayoutAlign="center space-between">
 						<div fxFlex="50%" class="fecha">{{movimiento.fechaComprobante}}</div>
-						<div fxFlex="25%" class="engris" align="right">Kg Entrada</div>
-						<div fxFlex="25%" class="engris" align="right">Kg Salida</div>
+						<div fxFlex="25%" class="engris" align="right">{{unidadMedida | kilosTextoA}} Entrada</div>
+						<div fxFlex="25%" class="engris" align="right">{{unidadMedida | kilosTextoA}} Salida</div>
 					</div>
 
 					<mat-divider></mat-divider>
@@ -119,16 +131,19 @@
 					</div>
 
 					<!--Movimientos-->
-					<div fxLayout="row" fxLayoutAlign="center space-between" class="movimiento" *ngFor="let movimiento of (listado ? listado : []); index as i"
-					 (click)="verDetalle(movimiento)" [ngClass]="i%2 == 0 ? 'filaPar' : 'filaImpar'">
+					<div fxLayout="row" fxLayoutAlign="center space-between" class="movimiento"
+						*ngFor="let movimiento of (listado ? listado : []); index as i" (click)="verDetalle(movimiento)"
+						[ngClass]="i%2 == 0 ? 'filaPar' : 'filaImpar'">
 
 						<div fxFlex="6%" class="conceptoListaCompleta">{{movimiento.fechaComprobante}}</div>
 						<div fxFlex="12%" class="conceptoListaCompleta">{{movimiento.comprobante}}</div>
 						<div fxFlex="20%" class="conceptoListaCompleta">{{movimiento.productorReceptor}}</div>
 						<div fxFlex="12%" class="conceptoListaCompleta">{{movimiento.comprobanteOrigen}}</div>
 						<div fxFlex="6%" class="conceptoListaCompleta">{{movimiento.fechaComprobanteOrigen}}</div>
-						<div fxFlex="12%" class="importeListaCompleta">{{movimiento.kgEntradas | number: '.0'}}</div>
-						<div fxFlex="12%" class="importeListaCompleta">{{movimiento.kgSalidas | number: '.0'}}</div>
+						<div fxFlex="12%" class="importeListaCompleta">
+							{{movimiento.kgEntradas | kilosA: unidadMedida | number: '.0'}}</div>
+						<div fxFlex="12%" class="importeListaCompleta">
+							{{movimiento.kgSalidas | kilosA: unidadMedida | number: '.0'}}</div>
 						<div fxFlex class="conceptoListaCompleta">{{movimiento.observaciones}}</div>
 
 					</div>
@@ -139,7 +154,8 @@
 		</mat-card>
 	</div>
 
-	<button [disabled]="cargando==true" mat-mini-fab class="custom-button" (click)="verOpcionesExtras()" *ngIf="listado != null">
+	<button [disabled]="cargando==true" mat-mini-fab class="custom-button" (click)="verOpcionesExtras()"
+		*ngIf="listado != null">
 		<mat-icon aria-label="Más opciones">list</mat-icon>
 	</button>
 </div>

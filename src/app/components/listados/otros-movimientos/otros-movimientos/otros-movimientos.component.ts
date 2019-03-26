@@ -28,6 +28,7 @@ export class OtrosMovimientosComponent implements OnInit {
 	public perfilBasico: PerfilBasico;
 	public fechaDesde: string;
 	public fechaHasta: string = (new Date()).toISOString();
+	public unidadMedida: string;
 
 	public filtrosEspecieCosecha: Array<FiltroEspecieCosecha> = [];
 	public filtroEspecieCosechaSeleccionado: FiltroEspecieCosecha = null;
@@ -40,13 +41,25 @@ export class OtrosMovimientosComponent implements OnInit {
 		public dialog: MatDialog
 	) {
 		this.establecerFiltrosPorDefecto();
-	 }
+	}
 
 	ngOnInit() {
 		this.cargando = false;
 
 		this.authenticationService.perfilActivo$.subscribe(
-			perfil => this.perfilBasico = perfil);
+			perfil => {
+				this.perfilBasico = perfil;
+				this.cargarUnidadMedida();
+			});
+
+		this.cargarUnidadMedida();
+	}
+
+	// funcion que carga la unidad de medida desde el perfil 
+	cargarUnidadMedida() {
+		if (this.perfilBasico) {
+			this.unidadMedida = this.perfilBasico.informacionPersonal.unidadMedidaPeso;
+		}
 	}
 
 	// funcion encargada de cargar los filtros de especie cosecha cuando se cambia la seleccion de cuenta

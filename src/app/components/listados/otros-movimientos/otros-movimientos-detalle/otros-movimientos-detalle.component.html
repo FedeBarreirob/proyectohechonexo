@@ -39,13 +39,13 @@
 		</tr>
 
 		<tr>
-			<td>Kg Entrada</td>
-			<td align="end">{{data.kgEntradas | number: '.0'}}</td>
+			<td>{{unidadMedida | kilosTextoA}} Entrada</td>
+			<td align="end">{{data.kgEntradas | kilosA: unidadMedida | number: '.0'}}</td>
 		</tr>
 
 		<tr>
-			<td>Kg Salida</td>
-			<td align="end">{{data.kgSalidas | number: '.0'}}</td>
+			<td>{{unidadMedida | kilosTextoA}} Salida</td>
+			<td align="end">{{data.kgSalidas | kilosA: unidadMedida | number: '.0'}}</td>
 		</tr>
 
 		<tr>
