@@ -24,28 +24,31 @@
     </tr>
 
     <tr>
-      <td>Kg Brutos</td>
-      <td align="end">{{data.kilosBrutos | number: '.0'}}</td>
+      <td>{{unidadMedida | kilosTextoA: 'largo'}} Brutos</td>
+      <td align="end">{{data.kilosBrutos | kilosA: unidadMedida | number: '.0'}}</td>
     </tr>
 
     <tr>
       <td>Humedad</td>
-      <td align="end">{{data.porcentajeHumedad | number: '.2'}} % {{data.kgMermaHumedad | number: '.2'}} Kg</td>
+      <td align="end">{{data.porcentajeHumedad | number: '.2'}} %
+        {{data.kgMermaHumedad | kilosA: unidadMedida | number: '.2'}} {{unidadMedida | kilosTextoA}}</td>
     </tr>
 
     <tr>
       <td>Zarandeo</td>
-      <td align="end">{{data.porcentajeZarandeo | number: '.2'}} % {{data.kgMermaZarandeo | number: '.2'}} Kg</td>
+      <td align="end">{{data.porcentajeZarandeo | number: '.2'}} %
+        {{data.kgMermaZarandeo | kilosA: unidadMedida | number: '.2'}} {{unidadMedida | kilosTextoA}}</td>
     </tr>
 
     <tr>
       <td>Volátil</td>
-      <td align="end">{{data.porcentajeVolatil | number: '.2'}} % {{data.kgMermaVolatil | number: '.2'}} Kg</td>
+      <td align="end">{{data.porcentajeVolatil | number: '.2'}} %
+        {{data.kgMermaVolatil | kilosA: unidadMedida | number: '.2'}} {{unidadMedida | kilosTextoA}}</td>
     </tr>
 
     <tr>
-      <td>Kg Netos</td>
-      <td align="end">{{data.kilosNetos | number: '.0'}}</td>
+      <td>{{unidadMedida | kilosTextoA: 'largo'}} Netos</td>
+      <td align="end">{{data.kilosNetos | kilosA: unidadMedida | number: '.0'}}</td>
     </tr>
 
     <tr>

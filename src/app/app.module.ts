@@ -71,6 +71,8 @@ import { SolicitudAltaComponent } from './components/usuarios-y-perfiles/solicit
 import { BuzonComponent } from './components/notificaciones/buzon/buzon.component';
 import { AccesoBuzonComponent } from './components/notificaciones/acceso-buzon/acceso-buzon.component';
 import { NotificacionDetalleComponent } from './components/notificaciones/notificacion-detalle/notificacion-detalle.component';
+import { KilosAPipe } from './pipes/kilos-a.pipe';
+import { KilosTextoAPipe } from './pipes/kilos-texto-a.pipe';
 
 registerLocaleData(localeEsAr, 'es-AR');
 
@@ -127,7 +129,9 @@ export function tokenGetter() {
 		SolicitudAltaComponent,
 		BuzonComponent,
 		AccesoBuzonComponent,
-		NotificacionDetalleComponent
+		NotificacionDetalleComponent,
+		KilosAPipe,
+		KilosTextoAPipe
 	],
 	imports: [
 		HttpClientModule,

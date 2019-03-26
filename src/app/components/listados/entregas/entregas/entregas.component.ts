@@ -12,110 +12,123 @@ import { PerfilBasico } from '../../../../interfaces/perfiles/perfil-basico';
 import { FiltroEspecieCosecha } from '../../../../interfaces/varios/filtro-especie-cosecha';
 
 @Component({
-  selector: 'app-entregas',
-  templateUrl: './entregas.component.html',
-  styleUrls: ['./entregas.component.css'],
-  providers: [DatePipe]
+	selector: 'app-entregas',
+	templateUrl: './entregas.component.html',
+	styleUrls: ['./entregas.component.css'],
+	providers: [DatePipe]
 })
 export class EntregasComponent implements OnInit {
 
-  public listadoEntregas: Array<MovimientoEntrega>;
-  private movimientoSeleccionado: MovimientoEntrega = null;
-  public totales: EntregasTotales = null;
-  public cargando: boolean;
+	public listadoEntregas: Array<MovimientoEntrega>;
+	private movimientoSeleccionado: MovimientoEntrega = null;
+	public totales: EntregasTotales = null;
+	public cargando: boolean;
 
-  public listadoEntregasAgrupadasPorCampo: Array<MovimientoEntregaAgrupadoPorCampo>;
+	public listadoEntregasAgrupadasPorCampo: Array<MovimientoEntregaAgrupadoPorCampo>;
 
-  public cuenta: string = "";
-  public perfilBasico: PerfilBasico;
-  public fechaDesde: string;
+	public cuenta: string = "";
+	public perfilBasico: PerfilBasico;
+	public fechaDesde: string;
 	public fechaHasta: string = (new Date()).toISOString();
+	public unidadMedida: string;
 
-  public filtrosEspecieCosecha: Array<FiltroEspecieCosecha> = [];
-  public filtroEspecieCosechaSeleccionado: FiltroEspecieCosecha = null;
-  public cargandoFiltros: boolean;
+	public filtrosEspecieCosecha: Array<FiltroEspecieCosecha> = [];
+	public filtroEspecieCosechaSeleccionado: FiltroEspecieCosecha = null;
+	public cargandoFiltros: boolean;
 
-  constructor(private entregasService: EntregasService,
-    private authenticationService: AuthenticationService,
-    private datePipe: DatePipe,
-    public dialog: MatDialog) {
-      this.establecerFiltrosPorDefecto();
-     }
+	constructor(private entregasService: EntregasService,
+		private authenticationService: AuthenticationService,
+		private datePipe: DatePipe,
+		public dialog: MatDialog) {
+		this.establecerFiltrosPorDefecto();
+	}
 
-  ngOnInit() {
-    this.cargando = false;
+	ngOnInit() {
+		this.cargando = false;
 
-    this.authenticationService.perfilActivo$.subscribe(
-      perfil => this.perfilBasico = perfil);
-  }
+		this.authenticationService.perfilActivo$.subscribe(
+			perfil => {
+				this.perfilBasico = perfil;
+				this.cargarUnidadMedida()
+			});
 
-  // funcion encargada de cargar los filtros de especie cosecha cuando se cambia la seleccion de cuenta
-  cargarFiltrosEspecieCosecha() {
-    this.cargandoFiltros = true;
-    this.filtroEspecieCosechaSeleccionado = null;
-    let usuarioLogueado = <UserAuth>this.authenticationService.usuarioLogueado();
-    this.entregasService.listadoFiltrosEspecieCosecha(this.cuenta, usuarioLogueado.token).subscribe(
-      respuesta => {
-        this.filtrosEspecieCosecha = respuesta;
-        this.cargandoFiltros = false;
-      }, error => { console.log("error"); this.cargandoFiltros = true; }
-    );
-  }
+		this.cargarUnidadMedida();
+	}
 
-  // funcion que ejecuta la carga del listado de entregas
-  cargarListado() {
-    this.cargando = true;
-    this.limpiar();
+	// funcion que carga la unidad de medida desde el perfil 
+	cargarUnidadMedida() {
+		if (this.perfilBasico) {
+			this.unidadMedida = this.perfilBasico.informacionPersonal.unidadMedidaPeso;
+		}
+	}
 
-    let filtro: FiltroEntregas = {
-      cuenta: this.cuenta,
-      fechaDesde: this.datePipe.transform(new Date(this.fechaDesde), 'dd/MM/yyyy'),
-      fechaHasta: this.datePipe.transform(new Date(this.fechaHasta), 'dd/MM/yyyy'),
-      filtroEspecieCosechaDTO: this.filtroEspecieCosechaSeleccionado
-    }
+	// funcion encargada de cargar los filtros de especie cosecha cuando se cambia la seleccion de cuenta
+	cargarFiltrosEspecieCosecha() {
+		this.cargandoFiltros = true;
+		this.filtroEspecieCosechaSeleccionado = null;
+		let usuarioLogueado = <UserAuth>this.authenticationService.usuarioLogueado();
+		this.entregasService.listadoFiltrosEspecieCosecha(this.cuenta, usuarioLogueado.token).subscribe(
+			respuesta => {
+				this.filtrosEspecieCosecha = respuesta;
+				this.cargandoFiltros = false;
+			}, error => { console.log("error"); this.cargandoFiltros = true; }
+		);
+	}
 
-    let usuarioLogueado = <UserAuth>this.authenticationService.usuarioLogueado();
-    if (usuarioLogueado != null) {
-      return this.entregasService.listadoEntregas(filtro, usuarioLogueado.token).subscribe(respuesta => {
-        this.listadoEntregas = respuesta.datos.listado;
-        this.listadoEntregasAgrupadasPorCampo = respuesta.datos.listadoAgrupadoPorCampo;
-        this.totales = respuesta.datos.totales;
+	// funcion que ejecuta la carga del listado de entregas
+	cargarListado() {
+		this.cargando = true;
+		this.limpiar();
 
-        this.cargando = false;
-      }, error => {
-        this.cargando = false;
-      });
-    }
-  }
+		let filtro: FiltroEntregas = {
+			cuenta: this.cuenta,
+			fechaDesde: this.datePipe.transform(new Date(this.fechaDesde), 'dd/MM/yyyy'),
+			fechaHasta: this.datePipe.transform(new Date(this.fechaHasta), 'dd/MM/yyyy'),
+			filtroEspecieCosechaDTO: this.filtroEspecieCosechaSeleccionado
+		}
 
-  // funcion que muestra el detalle de un movimiento seleccionado
-  verDetalle(movimiento: MovimientoEntrega) {
-    this.movimientoSeleccionado = movimiento;
+		let usuarioLogueado = <UserAuth>this.authenticationService.usuarioLogueado();
+		if (usuarioLogueado != null) {
+			return this.entregasService.listadoEntregas(filtro, usuarioLogueado.token).subscribe(respuesta => {
+				this.listadoEntregas = respuesta.datos.listado;
+				this.listadoEntregasAgrupadasPorCampo = respuesta.datos.listadoAgrupadoPorCampo;
+				this.totales = respuesta.datos.totales;
 
-    this.dialog.open(EntregasDetalleComponent, {
-      data: movimiento
-    });
-  }
+				this.cargando = false;
+			}, error => {
+				this.cargando = false;
+			});
+		}
+	}
 
-  // funcion que muestra las operaciones extras
-  verOpcionesExtras() {
-    this.dialog.open(EntregasMasOperacionesComponent, {
-      data: {
-        movimientos: this.listadoEntregas,
-        totales: this.totales
-      }
-    });
-  }
+	// funcion que muestra el detalle de un movimiento seleccionado
+	verDetalle(movimiento: MovimientoEntrega) {
+		this.movimientoSeleccionado = movimiento;
 
-  // funcion encargada de capturar el valor de la cuenta
-  seleccionarCuenta(cuentaSeleccionada?: string) {
-    this.cuenta = cuentaSeleccionada;
-    this.cargarFiltrosEspecieCosecha();
-    this.establecerFiltrosPorDefecto();
+		this.dialog.open(EntregasDetalleComponent, {
+			data: movimiento
+		});
+	}
+
+	// funcion que muestra las operaciones extras
+	verOpcionesExtras() {
+		this.dialog.open(EntregasMasOperacionesComponent, {
+			data: {
+				movimientos: this.listadoEntregas,
+				totales: this.totales
+			}
+		});
+	}
+
+	// funcion encargada de capturar el valor de la cuenta
+	seleccionarCuenta(cuentaSeleccionada?: string) {
+		this.cuenta = cuentaSeleccionada;
+		this.cargarFiltrosEspecieCosecha();
+		this.establecerFiltrosPorDefecto();
 		this.cargarListado();
-  }
+	}
 
-  // funcion que acomoda los filtros a default
+	// funcion que acomoda los filtros a default
 	establecerFiltrosPorDefecto() {
 		let sieteDiasAtras: Date = new Date();
 		sieteDiasAtras.setDate(sieteDiasAtras.getDate() - 7);
@@ -126,8 +139,8 @@ export class EntregasComponent implements OnInit {
 
 	// funcion encargada de limpiar para nueva generacion
 	limpiar() {
-    this.listadoEntregas = [];
-    this.listadoEntregasAgrupadasPorCampo = [];
+		this.listadoEntregas = [];
+		this.listadoEntregasAgrupadasPorCampo = [];
 		this.totales = null;
 	}
 }

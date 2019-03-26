@@ -11,6 +11,7 @@ import { EntidadAlg } from '../../interfaces/perfiles/entidad-alg';
 import { EntidadAlgPk } from '../../interfaces/perfiles/entidad-alg-pk';
 import { SolicitudAlta } from '../../interfaces/perfiles/solicitud-alta';
 import { Observable } from 'rxjs';
+import { PerfilBasicoInfoPersonal } from '../../interfaces/perfiles/perfil-basico-informacion-personal';
 
 
 @Injectable({
@@ -27,6 +28,7 @@ export class PerfilesService {
 	private urlSeguridadPerfilEliminar = `${environment.hostSeguridad}/perfiles`;
 	private urlSeguridadPerfilEntidadPorId = `${environment.hostSeguridad}/perfiles/entidadPorId`;
 	private urlSeguridadPerfilSolicitudAlta = `${environment.hostSeguridad}/perfiles/solicitudAlta`;
+	private urlSeguridadPerfilActualizarUnidadMedidaPeso = `${environment.hostSeguridad}/perfiles/actualizarUnidadMedidaPeso`;
 
 	constructor(private http: HttpClient) { }
 
@@ -183,5 +185,21 @@ export class PerfilesService {
 			this.urlSeguridadPerfilSolicitudAlta,
 			solicitudJson,
 			httpOptions);
+	}
+
+	// funcion encargada de actualizar la unidad de medida de peso
+	actualizarUnidadMedidaPeso(perfilInfoPersonal: PerfilBasicoInfoPersonal, token: string) {
+
+		const httpOptions = {
+			headers: new HttpHeaders({
+				'Content-Type': 'application/json',
+				'Authorization': `Bearer ${token}`
+			})
+		};
+
+		let perfilInfoPersonalJson = JSON.stringify(perfilInfoPersonal);
+
+		return this.http.put<ResponseServicio>(
+			this.urlSeguridadPerfilActualizarUnidadMedidaPeso, perfilInfoPersonalJson, httpOptions);
 	}
 }
