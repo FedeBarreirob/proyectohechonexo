@@ -58,6 +58,8 @@ export class BuzonComponent implements OnInit {
 	// funcion encargada de cargar el listado de notificaciones
 	cargarListado(event?: PageEvent) {
 
+		this.cargando = true;
+
 		let perfil = null;
 		if (this.perfilBasico) {
 			perfil = this.perfilBasico;
@@ -76,7 +78,6 @@ export class BuzonComponent implements OnInit {
 				this.filtro.numeroPagina,
 				this.filtro.cantPorPagina,
 				this.usuarioLogueado.token)
-				.pipe(tap(() => this.cargando = true))
 				.subscribe(respuesta => {
 
 					if (respuesta.exito) {
