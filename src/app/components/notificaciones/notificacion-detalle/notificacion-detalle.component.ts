@@ -9,6 +9,7 @@ import { UserAuth } from '../../../models/security/user';
 import { saveAs } from 'file-saver/FileSaver';
 import { PerfilBasico } from '../../../interfaces/perfiles/perfil-basico';
 import { EstadoNotificaciones } from '../../../enums/estado-notificaciones.enum';
+import { ConfirmacionDeVentaNovedad } from '../../../interfaces/notificaciones/confirmacion-de-venta-novedad';
 
 @Component({
 	selector: 'app-notificacion-detalle',
@@ -80,6 +81,25 @@ export class NotificacionDetalleComponent implements OnInit {
 
 					if (respuesta.exito) {
 						this.notificacionService.huboCambiosEnEstado();
+					}
+
+				}, error => console.log(error));
+		}
+	}
+
+	// funcion que inicia la descarga del comprobante de confirmacion de venta
+	descargarConfirmacionVenta(confirmacionVenta: ConfirmacionDeVentaNovedad) {
+		if (this.usuarioLogueado != null) {
+			this.comprobanteDownloaderService.confirmacionVentaDescargado(confirmacionVenta.sucursal, confirmacionVenta.numeroComprobante, this.usuarioLogueado.token)
+				.subscribe(respuesta => {
+					var mediaType = 'application/pdf';
+					var blob = new Blob([respuesta], { type: mediaType });
+					var filename = `${confirmacionVenta.comprobante}.pdf`;
+
+					if (blob.size !== 0) {
+						saveAs(blob, filename);
+					} else {
+						this.openSnackBar("El comprobante no se encuentra disponible para su descarga.", "Descarga de comprobantes");
 					}
 
 				}, error => console.log(error));
