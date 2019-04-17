@@ -15,14 +15,11 @@
             <input class="username" matInput formControlName="username" required>
 
             <p class="password-lbl">CONTRASEÑA</p>
-            <div class="password">
-              <mat-form-field>
-                <input id="password" matInput showHideInput [type]="hidePassword ? 'password' : 'text'"
-                  formControlName="password" required>
-                <mat-icon matSuffix (click)="hidePassword = !hidePassword">
-                  {{hidePassword ? 'visibility_off' : 'visibility'}}</mat-icon>
-              </mat-form-field>
-            </div>
+
+            <input class="password" id="password" matInput showHideInput [type]="hidePassword ? 'password' : 'text'"
+              formControlName="password" required>
+            <mat-icon class="passwordIcon"  (click)="hidePassword = !hidePassword">
+              {{hidePassword ? 'visibility_off' : 'visibility'}}</mat-icon>
 
             <div fxLayout="row" fxLayoutAlign="center center" class="recuerdameContenedor">
               <div fxFlex="50%">

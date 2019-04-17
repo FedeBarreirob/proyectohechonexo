@@ -2,21 +2,21 @@
     display: block;
     margin-left: auto;
     margin-right: auto;
-    padding-top: 17vh;
-    padding-bottom: 2.6vh;
+    padding-top: 118.32px;
+    padding-bottom: 18.096px;
 }
 
 .username {
-    height: 2.5vh;
+    height: 17.4px;
     width: 74.46vw;
     border: 1px solid rgba(45, 164, 66, 0.1);
     border-radius: 4px;
     box-shadow: 0 4px 8px -4px rgba(0, 0, 0, 0.5);
-    padding-top: 1.875vh;
-    padding-bottom: 1.875vh;
+    padding-top: 13.05px;
+    padding-bottom: 13.05px;
     padding-left: 3.88vw;
     padding-right: 3.88vw;
-    margin-top: -1.5625vh;
+    margin-top: -10.875px;
 }
 
 .card-base {
@@ -26,36 +26,43 @@
 }
 
 .correo-o-usuario {
-    height: 2.03vh;
+    height: 14.129px;
     width: 34.16vw;
     color: rgba(51, 51, 51, 1);
     font-family: Rubik;
-    font-size: 1.71vh;
-    letter-spacing: 0.15vh;
-    line-height: 2.03vh;
+    font-size: 12px;
+    letter-spacing: 1px;
+    line-height: 14px;
 }
 
 .password-lbl {
-    height: 2.03vh;
+    height: 14px;
     width: 34.16vw;
     color: rgba(51, 51, 51, 1);
     font-family: Rubik;
-    font-size: 1.71vh;
-    letter-spacing: 0.15vh;
-    line-height: 2.03vh;
-    margin-top: 3.125vh;
+    font-size: 12px;
+    letter-spacing: 1px;
+    line-height: 14px;
+    margin-top: 21.75px;
 }
 
 .password {
-    height: 4.5vh;
+    height: 17.4px;
     width: 74.46vw;
     border: 1px solid rgba(45, 164, 66, 0.1);
     border-radius: 4px;
     box-shadow: 0 4px 8px -4px rgba(0, 0, 0, 0.5);
-    padding-bottom: 2vh;
+    padding-top: 13.05px;
+    padding-bottom: 13.05px;
     padding-left: 3.88vw;
     padding-right: 3.88vw;
-    margin-top: -1.5625vh;
+    margin-top: -10.875px;
+}
+
+.passwordIcon {
+    position: absolute;
+    top: 137px;
+    right: 10%;
 }
 
 .password mat-form-field {
@@ -67,7 +74,7 @@
 }
 
 .botonEntrar {
-    height: 6.25vh;
+    height: 43.5px;
     width: 82.22vw;
     background-color: rgba(45, 164, 66, 0.5);
     outline: none;
@@ -81,11 +88,11 @@
 }
 
 .recuerdameContenedor {
-    padding-top: 1.875vh;
-    padding-bottom: 3vh;
+    padding-top: 13.05px;
+    padding-bottom: 20.88px;
     font-family: Rubik;
-    font-size: 1.71vh;
-    margin-top: 3vh;
+    font-size: 12px;
+    margin-top: 20.88px;
 }
 
 .recuerdameContenedor a {
