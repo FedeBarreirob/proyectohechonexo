@@ -1,27 +1,46 @@
-<div class="signin-content">
-  <mat-card>
-    <mat-card-content>
-      <form [formGroup]="frmLogin">
-        <img src="assets/logo.png" class="md-card-image" alt="image caption" />
-        <mat-form-field class="full-width-input">
-          <input matInput placeholder="Usuario" formControlName="username" required>
-        </mat-form-field>
-        <mat-form-field class="full-width-input">
-          <input matInput type="password" placeholder="Contraseña" formControlName="password" required>
-        </mat-form-field>
-      </form>
-    </mat-card-content>
-    <mat-card-actions>
-      <button [disabled]="logueando" type="button" mat-raised-button color="primary" (click)="login()">Ingresar</button>
-      <p>¿Olvidó su contraseña?
-        <a routerLink="/recuperacion-password">Recuperar</a>
-      </p>
-      <p>¿No tiene cuenta aún?
-        <a routerLink="/solicitud-alta">Crear una gratis</a>
-      </p>
-    </mat-card-actions>
-    <mat-card-footer>
-      <mat-progress-bar *ngIf="logueando" mode="indeterminate"></mat-progress-bar>
-    </mat-card-footer>
-  </mat-card>
+<div class="contenedor">
+  <div fxLayout="row" fxLayoutWrap fxLayoutAlign="space-around center">
+    <div fxFlex.xs="30%">
+      <img src="assets/logo.png" mat-card-image class="logo" alt="Gaviglio" />
+    </div>
+  </div>
+
+  <div fxLayout="row" fxLayoutAlign="center">
+    <div fxFlex.xs="91.67%">
+      <mat-card class="card-base">
+        <mat-card-content>
+          <form [formGroup]="frmLogin">
+
+            <p class="correo-o-usuario">USUARIO</p>
+            <input class="username" matInput formControlName="username" required>
+
+            <p class="password-lbl">CONTRASEÑA</p>
+            <div class="password">
+              <mat-form-field>
+                <input id="password" matInput showHideInput [type]="hidePassword ? 'password' : 'text'"
+                  formControlName="password" required>
+                <mat-icon matSuffix (click)="hidePassword = !hidePassword">
+                  {{hidePassword ? 'visibility_off' : 'visibility'}}</mat-icon>
+              </mat-form-field>
+            </div>
+
+            <div fxLayout="row" fxLayoutAlign="center center" class="recuerdameContenedor">
+              <div fxFlex="50%">
+                <mat-checkbox>Recuérdame</mat-checkbox>
+              </div>
+              <div fxFlex="50%" align="right">
+                <a routerLink="/recuperacion-password">¿Olvidó su contraseña?</a>
+              </div>
+            </div>
+          </form>
+
+          <button class="botonEntrar" [disabled]="logueando" type="button" (click)="login()">Entrar</button>
+
+        </mat-card-content>
+        <mat-card-footer>
+          <mat-progress-bar *ngIf="logueando" mode="indeterminate"></mat-progress-bar>
+        </mat-card-footer>
+      </mat-card>
+    </div>
+  </div>
 </div>

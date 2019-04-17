@@ -1,13 +1,108 @@
-mat-card {
-  max-width: 400px;
-  margin: 2em auto;
-  text-align: center;
+.logo {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    padding-top: 17vh;
+    padding-bottom: 2.6vh;
 }
 
-.signin-content {
-  padding: 60px 1rem;
+.username {
+    height: 2.5vh;
+    width: 74.46vw;
+    border: 1px solid rgba(45, 164, 66, 0.1);
+    border-radius: 4px;
+    box-shadow: 0 4px 8px -4px rgba(0, 0, 0, 0.5);
+    padding-top: 1.875vh;
+    padding-bottom: 1.875vh;
+    padding-left: 3.88vw;
+    padding-right: 3.88vw;
+    margin-top: -1.5625vh;
 }
 
-.full-width-input {
-  width: 100%;
+.card-base {
+    border: 1px solid rgba(35, 185, 80, 0.08);
+    border-radius: 4px;
+    background-color: rgba(255, 255, 255, 1);
+}
+
+.correo-o-usuario {
+    height: 2.03vh;
+    width: 34.16vw;
+    color: rgba(51, 51, 51, 1);
+    font-family: Rubik;
+    font-size: 1.71vh;
+    letter-spacing: 0.15vh;
+    line-height: 2.03vh;
+}
+
+.password-lbl {
+    height: 2.03vh;
+    width: 34.16vw;
+    color: rgba(51, 51, 51, 1);
+    font-family: Rubik;
+    font-size: 1.71vh;
+    letter-spacing: 0.15vh;
+    line-height: 2.03vh;
+    margin-top: 3.125vh;
+}
+
+.password {
+    height: 4.5vh;
+    width: 74.46vw;
+    border: 1px solid rgba(45, 164, 66, 0.1);
+    border-radius: 4px;
+    box-shadow: 0 4px 8px -4px rgba(0, 0, 0, 0.5);
+    padding-bottom: 2vh;
+    padding-left: 3.88vw;
+    padding-right: 3.88vw;
+    margin-top: -1.5625vh;
+}
+
+.password mat-form-field {
+    width: 74.46vw;
+}
+
+::ng-deep .mat-form-field-underline {
+    display: none;
+}
+
+.botonEntrar {
+    height: 6.25vh;
+    width: 82.22vw;
+    background-color: rgba(45, 164, 66, 0.5);
+    outline: none;
+    border-radius: 5px 5px 5px 5px;
+    -moz-border-radius: 5px 5px 5px 5px;
+    -webkit-border-radius: 5px 5px 5px 5px;
+    border: 0px solid #000000;
+    font-family: Rubik;
+    font-weight: bold;
+    color: white;
+}
+
+.recuerdameContenedor {
+    padding-top: 1.875vh;
+    padding-bottom: 3vh;
+    font-family: Rubik;
+    font-size: 1.71vh;
+    margin-top: 3vh;
+}
+
+.recuerdameContenedor a {
+    color: rgba(102,102,102,1);
+}
+
+.contenedor {
+    position: absolute;
+    padding: 0;
+    margin: 0;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-image: url("./../../../assets/logo_icon.jpg");
+    background-repeat: no-repeat;
+    background-color: white;
+    background-position: center bottom;
+    background-size: 100%;
 }

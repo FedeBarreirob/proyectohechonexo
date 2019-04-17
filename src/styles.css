@@ -1,6 +1,11 @@
 @import "~@angular/material/prebuilt-themes/indigo-pink.css";
 @import '~material-design-icons/iconfont/material-icons.css';
 
+@font-face {
+    font-family: Rubik;
+    src: url("assets/fonts/rubik/Rubik-Regular.otf") format("opentype");
+}
+
 html, body {
     height: 100%;
 }

@@ -4,6 +4,7 @@ import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { AppRoutingModule } from './app-routing/app-routing.module';
 import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 import { FlexLayoutModule } from '@angular/flex-layout';
+import { ShowHidePasswordModule } from 'ngx-show-hide-password';
 
 // locale
 import { registerLocaleData, DecimalPipe, CommonModule } from '@angular/common';
@@ -136,6 +137,7 @@ export function tokenGetter() {
 	imports: [
 		HttpClientModule,
 		BrowserModule,
+		ShowHidePasswordModule,
 		BrowserAnimationsModule,
 		MaterialModule,
 		AppRoutingModule,
