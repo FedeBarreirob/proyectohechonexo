@@ -5,26 +5,13 @@
 
 .sidenav {
   box-shadow: 3px 0 6px rgba(0, 0, 0, .24);
+  width: 80%;
+  max-width: 288px;
 }
 
 .mat-toolbar.mat-primary {
   position: sticky;
   top: 0;
-}
-
-.mat-nav-list a {
-  color: #666666;;
-}
-
-.mat-nav-list a.active {
-  border-left: 8px solid#23B950;
-  background-color: rgba(35,185,80,0.1);
-  color: #23B950;
-}
-
-.mat-nav-list a:hover {
-  background-color: rgba(35,185,80,0.1);
-  color: #23B950;
 }
 
 .relleno {

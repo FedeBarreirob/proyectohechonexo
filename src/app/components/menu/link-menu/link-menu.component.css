@@ -1,0 +1,24 @@
+.contenedor-link {
+    width: 100%;
+}
+
+a.link-menu {
+    color: #666666;
+    border-left: 8px solid rgb(255, 255, 255);
+}
+
+a.active.link-menu {
+    border-left: 8px solid#23B950;
+    background-color: rgba(35, 185, 80, 0.1);
+    color: #23B950;
+}
+
+a.link-menu:hover {
+    border-left: 8px solid rgba(35, 185, 80, 0.1);
+    background-color: rgba(35, 185, 80, 0.1);
+    color: #23B950;
+}
+
+.link-nombre {
+    text-indent: 10px;
+}

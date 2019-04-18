@@ -75,6 +75,8 @@ import { NotificacionDetalleComponent } from './components/notificaciones/notifi
 import { KilosAPipe } from './pipes/kilos-a.pipe';
 import { KilosTextoAPipe } from './pipes/kilos-texto-a.pipe';
 import { InfoPerfilComponent } from './components/menu/info-perfil/info-perfil.component';
+import { LinkMenuComponent } from './components/menu/link-menu/link-menu.component';
+import { ToolBarGeneralComponent } from './components/menu/tool-bar-general/tool-bar-general.component';
 
 registerLocaleData(localeEsAr, 'es-AR');
 
@@ -134,7 +136,9 @@ export function tokenGetter() {
 		NotificacionDetalleComponent,
 		KilosAPipe,
 		KilosTextoAPipe,
-		InfoPerfilComponent
+		InfoPerfilComponent,
+		LinkMenuComponent,
+		ToolBarGeneralComponent
 	],
 	imports: [
 		HttpClientModule,

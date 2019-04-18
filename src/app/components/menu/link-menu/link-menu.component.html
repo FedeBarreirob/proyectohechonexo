@@ -1,0 +1,15 @@
+<a *ngIf="link.permitido == true" mat-list-item routerLink="{{link.rutaLink}}" routerLinkActive="active"
+  #rla="routerLinkActive" class="link-menu">
+
+  <div class="contenedor-link" fxLayout="row" fxLayoutAlign="center center">
+
+    <div fxFlex="13%">
+      <img src="{{rla.isActive ? link.imagenActiva : link.imagen }}" alt="{{link.nombre}}" />
+    </div>
+
+    <div fxFlex="87%" class="link-nombre">
+      {{link.nombre}}
+    </div>
+
+  </div>
+</a>

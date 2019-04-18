@@ -37,6 +37,9 @@ export class ComboCuentaComponent implements OnInit {
 
 	// funcion encargada de capturar la cuenta seleccionada
 	seleccionar(cuentaVinculada?: string) {
+
+console.log(cuentaVinculada);
+
 		this.change.emit(cuentaVinculada);
 		this.actualizarEntidadPorDefecto();
 	}

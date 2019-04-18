@@ -9,11 +9,7 @@
 		<mat-nav-list *ngIf="authService.esLogueado">
 
 			<div *ngFor="let link of links">
-				<a *ngIf="link.permitido == true" mat-list-item routerLink="{{link.rutaLink}}"
-					routerLinkActive="active" #rla="routerLinkActive">
-					<img src="{{rla.isActive ? link.imagenActiva : link.imagen }}" alt="{{link.nombre}}" />
-					{{link.nombre}}
-				</a>
+				<app-link-menu [link]="link"></app-link-menu>
 			</div>
 
 		</mat-nav-list>

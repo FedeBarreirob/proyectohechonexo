@@ -3,6 +3,7 @@ import { BreakpointObserver, Breakpoints } from '@angular/cdk/layout';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { AuthenticationService } from '../../../services/security/authentication.service';
+import { ItemLinkMenu } from '../../../interfaces/menu/sidebar/item-link-menu';
 
 @Component({
 	selector: 'app-main-nav',
@@ -13,15 +14,19 @@ import { AuthenticationService } from '../../../services/security/authentication
 export class MainNavComponent {
 
 	// links que aparecen en el sidebar
-	public links: Array<any>;
+	public links: Array<ItemLinkMenu>;
 
 	constructor(
 		private breakpointObserver: BreakpointObserver,
 		public authService: AuthenticationService) {
 
-		this.authService.huboLoginCompleto$.subscribe(
-			() => this.cargarLinks()
-		);
+		if (this.authService.esLogueado) {
+			this.cargarLinks();
+		} else {
+			this.authService.huboLoginCompleto$.subscribe(
+				() => this.cargarLinks()
+			);
+		}
 	}
 
 	isHandset$: Observable<boolean> = this.breakpointObserver.observe(Breakpoints.Handset)
@@ -46,7 +51,7 @@ export class MainNavComponent {
 				nombre: "Entregas",
 				rutaLink: "/entregas",
 				imagen: "assets/sidebar/casa.png",
-				imagenActiva: "assets/sidebar/casa-hot.png",
+				imagenActiva: "assets/sidebar/entrega-hot.png",
 				permitido: true
 			},
 			{
@@ -66,14 +71,14 @@ export class MainNavComponent {
 			{
 				nombre: "Cuenta Corriente",
 				rutaLink: "/ctacte",
-				imagen: "assets/sidebar/casa.png",
+				imagen: "assets/sidebar/cta-cte.png",
 				imagenActiva: "assets/sidebar/casa-hot.png",
 				permitido: true
 			},
 			{
 				nombre: "Cta Cte Aplicada",
 				rutaLink: "/ctacte-aplicada",
-				imagen: "assets/sidebar/casa.png",
+				imagen: "assets/sidebar/cta-cte.png",
 				imagenActiva: "assets/sidebar/casa-hot.png",
 				permitido: true
 			},

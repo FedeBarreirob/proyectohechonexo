@@ -1,10 +1,17 @@
 <mat-form-field>
-  <mat-select [(value)]="cuentaSeleccionada" [disabled]="disabled==true || cargando==true" placeholder="Seleccione una cuenta"
-  (selectionChange)="seleccionar($event.value)"
-    disableRipple>
+  <mat-select [(value)]="cuentaSeleccionada" [disabled]="disabled==true || cargando==true"
+    placeholder="Seleccione una cuenta" (selectionChange)="seleccionar($event.value)" disableRipple>
     <mat-option *ngFor="let cuentaVinculada of (perfilBasico != null ? perfilBasico.entidadCodigos : [])"
       [value]="cuentaVinculada">
       {{cuentaVinculada}}
     </mat-option>
   </mat-select>
 </mat-form-field>
+
+<button mat-button [matMenuTriggerFor]="menu">Cuentas</button>
+<mat-menu #menu="matMenu">
+  <span>TUS CUENTAS</span>
+  <button *ngFor="let cuentaVinculada of (perfilBasico != null ? perfilBasico.entidadCodigos : [])"
+    mat-menu-item
+    (click)="seleccionar(cuentaVinculada)">{{cuentaVinculada}}</button>
+</mat-menu>
