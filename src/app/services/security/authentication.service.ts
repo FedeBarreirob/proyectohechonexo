@@ -27,6 +27,8 @@ export class AuthenticationService {
 
 	_perfilActivo$ = new Subject<PerfilBasico>();
 
+	private _loginCompleto$ = new Subject<boolean>();
+
 	constructor(
 		private http: HttpClient,
 		private jwtHelper: JwtHelperService
@@ -231,5 +233,15 @@ export class AuthenticationService {
 
 		let urlConParametro = `${this.urlObtenerInformacionDeSesion}/${perfilId}`;
 		return this.http.get<ResponseServicio>(urlConParametro, httpOptions);
+	}
+
+	// funcion encargada de notificar que hubo un login completo
+	loginCompleto() {
+		this._loginCompleto$.next(true);
+	}
+
+	// devuelve el observable indicando si hubo un login completo
+	get huboLoginCompleto$(): Observable<boolean> {
+		return this._loginCompleto$.asObservable();
 	}
 }

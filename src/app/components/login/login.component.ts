@@ -61,6 +61,7 @@ export class LoginComponent implements OnInit {
 						this.cargarPerfilLogueado(respuesta.token).subscribe(cargoPerfil => {
 							if (cargoPerfil == true) {
 								this.notificacionService.huboCambiosEnEstado();
+								this.authenticationService.loginCompleto();
 								this.oneSignalService.init();
 								this.router.navigate([this.returnUrl]);
 							}

@@ -1,6 +1,5 @@
 @import "~@angular/material/prebuilt-themes/indigo-pink.css";
 @import '~material-design-icons/iconfont/material-icons.css';
-
 @font-face {
     font-family: Rubik;
     src: url("assets/fonts/rubik/Rubik-Regular.otf") format("opentype");
@@ -16,4 +15,27 @@ body {
 
 .oculto {
     display: none;
+}
+
+/* scroll bar */
+/* width */
+::-webkit-scrollbar {
+    width: 3px;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+    box-shadow: inset 0 0 1px rgb(24, 54, 82);
+    border-radius: 2px;
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+    background: rgb(78, 78, 78);
+    border-radius: 2px;
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+    background: rgb(18, 75, 122);
 }

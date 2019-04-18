@@ -1,9 +1,9 @@
 .sidenav-container {
   height: 100%;
+  font-family: Rubik;
 }
 
 .sidenav {
-  /*width: 250px;*/
   box-shadow: 3px 0 6px rgba(0, 0, 0, .24);
 }
 
@@ -12,17 +12,19 @@
   top: 0;
 }
 
+.mat-nav-list a {
+  color: #666666;;
+}
+
 .mat-nav-list a.active {
-  border-left: 4px solid blue;
+  border-left: 8px solid#23B950;
+  background-color: rgba(35,185,80,0.1);
+  color: #23B950;
 }
 
 .mat-nav-list a:hover {
-  background-color: lightsteelblue;
-}
-
-.logo-sidebar {
-  width: 70%;
-  height: auto;
+  background-color: rgba(35,185,80,0.1);
+  color: #23B950;
 }
 
 .relleno {
@@ -31,4 +33,8 @@
 
 .contenedorBuzonAcceso {
   padding-right: 1em;
+}
+
+mat-nav-list {
+  overflow-x: hidden;
 }

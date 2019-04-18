@@ -74,6 +74,7 @@ import { AccesoBuzonComponent } from './components/notificaciones/acceso-buzon/a
 import { NotificacionDetalleComponent } from './components/notificaciones/notificacion-detalle/notificacion-detalle.component';
 import { KilosAPipe } from './pipes/kilos-a.pipe';
 import { KilosTextoAPipe } from './pipes/kilos-texto-a.pipe';
+import { InfoPerfilComponent } from './components/menu/info-perfil/info-perfil.component';
 
 registerLocaleData(localeEsAr, 'es-AR');
 
@@ -132,7 +133,8 @@ export function tokenGetter() {
 		AccesoBuzonComponent,
 		NotificacionDetalleComponent,
 		KilosAPipe,
-		KilosTextoAPipe
+		KilosTextoAPipe,
+		InfoPerfilComponent
 	],
 	imports: [
 		HttpClientModule,
