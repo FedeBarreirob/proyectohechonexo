@@ -1,1 +1,29 @@
-<app-combo-cuenta></app-combo-cuenta>
+<div fxLayout="row" fxLayoutAlign="space-around center" class="toolbarPrincipal">
+
+    <div fxFlex="48px" *ngIf="mostrarBtnMostrarOcultarSidebar == true">
+        <button mat-icon-button class="boton-sandwich" (click)="mostrarOcultarSidebar()">
+            <mat-icon [ngStyle]="{'color': colorIndicador}">menu</mat-icon>
+        </button>
+    </div>
+
+    <div fxFlex="24px" *ngIf="mostrarBtnMostrarOcultarSidebar != true"></div>
+
+    <div fxFlex="48px" class="selector-cuenta">
+        <app-combo-cuenta [colorIndicador]="colorIndicador" [disabled]="disabled == true"></app-combo-cuenta>
+    </div>
+    <div fxFlex>
+
+        <div fxFlex>
+            <div class="titulo" [ngStyle]="{'color': colorIndicador}">
+                {{titulo}}
+            </div>
+        </div>
+
+        <div fxFlex="96px">
+            <button mat-icon-button class="botonPersonalizado">
+                <img [src]="urlImagenAccionPersonalizada" class="imgAccionPersonalizada" />
+            </button>
+        </div>
+
+    </div>
+</div>

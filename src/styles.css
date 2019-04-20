@@ -5,6 +5,11 @@
     src: url("assets/fonts/rubik/Rubik-Regular.otf") format("opentype");
 }
 
+@font-face {
+    font-family: RubikMedium;
+    src: url("assets/fonts/rubik/Rubik-Medium.otf") format("opentype");
+}
+
 html, body {
     height: 100%;
 }

@@ -65,13 +65,15 @@ export class SelectorCuentasComponent implements OnInit {
 			return {
 				filtro: termino.valueOf(),
 				numeroPagina: 1,
-				cantPorPagina: 10
+				cantPorPagina: 10,
+				fullData: true
 			};
 		} catch (e) {
 			return {
 				filtro: "",
 				numeroPagina: 1,
-				cantPorPagina: 10
+				cantPorPagina: 10,
+				fullData: true
 			};
 		}
 	}

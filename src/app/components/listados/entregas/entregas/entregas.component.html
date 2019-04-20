@@ -1,3 +1,5 @@
+<app-tool-bar-general [titulo] = "'Entregas'" [disabled]="cargando==true"></app-tool-bar-general>
+
 <div class="container" fxLayout="column" fxLayout.xs="column" fxLayoutWrap fxLayoutGap="0.5%"
 	fxLayoutAlign="space-around stretch">
 	<div fxFlex="100%">
@@ -12,8 +14,8 @@
 				fxLayoutAlign="space-around stretch">
 
 				<div fxFlex="25%">
-					<app-combo-cuenta [disabled]="cargando==true" (change)="seleccionarCuenta($event)">
-					</app-combo-cuenta>
+					<!--<app-combo-cuenta [disabled]="cargando==true" (change)="seleccionarCuenta($event)">
+					</app-combo-cuenta>-->
 				</div>
 
 				<div fxFlex="25%">

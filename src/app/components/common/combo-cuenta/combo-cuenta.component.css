@@ -1,0 +1,32 @@
+.tus-cuentas {
+    color: #999999;
+    font-family: Rubik;
+    font-size: 12px;
+    letter-spacing: 1.2px;
+    line-height: 14px;
+    margin-left: 17px;
+}
+
+.activo {
+    color: #23B950;
+    font-family: Rubik;
+    font-size: 14px;
+    height: 48px;
+    min-width: 200px;
+    background-color: rgba(45, 164, 66, 0.1);
+}
+
+.inactivo {
+    height: 17px;
+    color: #333333;
+    font-family: Rubik;
+    font-size: 14px;
+    height: 48px;
+    min-width: 200px;
+    line-height: 17px;
+}
+
+.perfil-avatar {
+    height: 24px;
+    width: 24px;
+}

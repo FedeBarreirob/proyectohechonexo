@@ -1,17 +1,25 @@
-<mat-form-field>
-  <mat-select [(value)]="cuentaSeleccionada" [disabled]="disabled==true || cargando==true"
-    placeholder="Seleccione una cuenta" (selectionChange)="seleccionar($event.value)" disableRipple>
-    <mat-option *ngFor="let cuentaVinculada of (perfilBasico != null ? perfilBasico.entidadCodigos : [])"
-      [value]="cuentaVinculada">
-      {{cuentaVinculada}}
-    </mat-option>
-  </mat-select>
-</mat-form-field>
+<button mat-icon-button [matMenuTriggerFor]="menu">
 
-<button mat-button [matMenuTriggerFor]="menu">Cuentas</button>
+  <div class="contenedor-avatar" fxLayout="row" fxLayoutAlign="center bottom">
+    <div fxFlex="70%">
+      <div class="perfil-avatar">
+        <app-avatar-del-perfil></app-avatar-del-perfil>
+      </div>
+    </div>
+    <div fxFlex="30%">
+      <mat-icon [ngStyle]="{'color': colorIndicador}">keyboard_arrow_down</mat-icon>
+    </div>
+  </div>
+
+</button>
 <mat-menu #menu="matMenu">
-  <span>TUS CUENTAS</span>
-  <button *ngFor="let cuentaVinculada of (perfilBasico != null ? perfilBasico.entidadCodigos : [])"
-    mat-menu-item
-    (click)="seleccionar(cuentaVinculada)">{{cuentaVinculada}}</button>
+  <span class="tus-cuentas">TUS CUENTAS</span>
+  <button *ngFor="let cuentaVinculada of (perfilBasico != null ? perfilBasico.entidadCodigos : [])" mat-menu-item
+    (click)="seleccionar(cuentaVinculada)"
+    [ngClass]="{'activo': cuentaVinculada.id.codigo === codigo, 'inactivo': cuentaVinculada.id.codigo !== codigo }"
+    [disabled] = "disabled == true"
+    >
+    ({{cuentaVinculada.id.codigo}})
+    {{ cuentaVinculada.nombreDeFantasia != null && cuentaVinculada.nombreDeFantasia != "" ? cuentaVinculada.nombreDeFantasia : cuentaVinculada.nombre }}
+  </button>
 </mat-menu>

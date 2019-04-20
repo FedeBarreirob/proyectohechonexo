@@ -1,5 +1,6 @@
 export interface FiltroGenericoLista {
     filtro: string,
     numeroPagina: number,
-    cantPorPagina: number
+    cantPorPagina: number,
+    fullData?: boolean
 }

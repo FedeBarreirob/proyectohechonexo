@@ -1,9 +1,11 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild, AfterViewChecked } from '@angular/core';
 import { BreakpointObserver, Breakpoints } from '@angular/cdk/layout';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { AuthenticationService } from '../../../services/security/authentication.service';
 import { ItemLinkMenu } from '../../../interfaces/menu/sidebar/item-link-menu';
+import { MatSidenav } from '@angular/material';
+import { SidebarService } from '../../../services/observers/sidebar/sidebar.service';
 
 @Component({
 	selector: 'app-main-nav',
@@ -11,14 +13,18 @@ import { ItemLinkMenu } from '../../../interfaces/menu/sidebar/item-link-menu';
 	styleUrls: ['./main-nav.component.css']
 })
 
-export class MainNavComponent implements OnInit {
+export class MainNavComponent implements OnInit, AfterViewChecked {
+
+	@ViewChild('drawer') public sidenav: MatSidenav;
 
 	// links que aparecen en el sidebar
 	public links: Array<ItemLinkMenu>;
 
 	constructor(
 		private breakpointObserver: BreakpointObserver,
-		public authService: AuthenticationService) {
+		public authService: AuthenticationService,
+		private sidebarService: SidebarService
+	) {
 	}
 
 	ngOnInit(): void {
@@ -33,6 +39,31 @@ export class MainNavComponent implements OnInit {
 				}
 			}
 		);
+
+		// escuchar cambios en el toggle del sidebar
+		this.sidebarService.toggle$.subscribe(
+			() => this.sidenav.toggle()
+		);
+
+		// escuchar si debe mostrar el boton del sandwiche
+		this.isHandset$.subscribe(
+			respuesta => {
+				if (respuesta == true && this.authService.esLogueado) {
+					this.sidebarService.notificarVisibilidadBotonSandwiche(true);
+				} else {
+					this.sidebarService.notificarVisibilidadBotonSandwiche(false);
+				}
+			}
+		);
+	}
+
+	ngAfterViewChecked(): void {
+		console.log("entro");
+		if (this.sidenav.opened == true) {
+			this.sidebarService.notificarVisibilidadBotonSandwiche(false);
+		} else {
+			this.sidebarService.notificarVisibilidadBotonSandwiche(true);
+		}
 	}
 
 	isHandset$: Observable<boolean> = this.breakpointObserver.observe(Breakpoints.Handset)

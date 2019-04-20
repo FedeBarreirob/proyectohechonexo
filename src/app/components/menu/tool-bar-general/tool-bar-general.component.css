@@ -1,0 +1,28 @@
+.toolbarPrincipal {
+    margin-top: 82px;
+}
+
+.imgAccionPersonalizada {
+    width: 24px;
+    height: 24px;
+}
+
+.selector-cuenta {
+    padding-top: 14px;
+}
+
+.titulo {
+    font-family: RubikMedium;
+    font-size: 14px;
+    text-align: center;
+    margin-top: 13px;
+}
+
+.botonPersonalizado {
+    float: right;
+    margin-right: 10px;
+}
+
+.boton-sandwich {
+    margin-left: 5px;
+}

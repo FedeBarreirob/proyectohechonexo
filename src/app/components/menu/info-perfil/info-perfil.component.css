@@ -1,18 +1,18 @@
 .contenedor-avatar {
     width: 100%;
-    height: 188px;
+    height: 138px;
 }
 
 .perfil-avatar {
     float: right;
     height: 48px;
     width: 48px;
-    margin-top: 100px;
+    margin-top: 50px;
     margin-right: 4px;
 }
 
 .contenedor-nombres {
-    margin-top: 100px;
+    margin-top: 50px;
     white-space: pre-wrap;
     width: 100%;
 }

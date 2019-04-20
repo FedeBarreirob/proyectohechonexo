@@ -10,6 +10,8 @@ import { EntregasDetalleComponent } from '../entregas-detalle/entregas-detalle.c
 import { EntregasMasOperacionesComponent } from '../entregas-mas-operaciones/entregas-mas-operaciones.component';
 import { PerfilBasico } from '../../../../interfaces/perfiles/perfil-basico';
 import { FiltroEspecieCosecha } from '../../../../interfaces/varios/filtro-especie-cosecha';
+import { EntidadAlg } from 'src/app/interfaces/perfiles/entidad-alg';
+import { CuentaAlgService } from 'src/app/services/observers/cuentas-alg/cuenta-alg.service';
 
 @Component({
 	selector: 'app-entregas',
@@ -26,7 +28,7 @@ export class EntregasComponent implements OnInit {
 
 	public listadoEntregasAgrupadasPorCampo: Array<MovimientoEntregaAgrupadoPorCampo>;
 
-	public cuenta: string = "";
+	public cuenta: EntidadAlg;
 	public perfilBasico: PerfilBasico;
 	public fechaDesde: string;
 	public fechaHasta: string = (new Date()).toISOString();
@@ -39,7 +41,9 @@ export class EntregasComponent implements OnInit {
 	constructor(private entregasService: EntregasService,
 		private authenticationService: AuthenticationService,
 		private datePipe: DatePipe,
-		public dialog: MatDialog) {
+		public dialog: MatDialog,
+		private cuentaAlgService: CuentaAlgService
+	) {
 		this.establecerFiltrosPorDefecto();
 	}
 
@@ -53,6 +57,10 @@ export class EntregasComponent implements OnInit {
 			});
 
 		this.cargarUnidadMedida();
+
+		this.cuentaAlgService.cuentaSeleccionada$.subscribe(
+			cuentaAlg => this.seleccionarCuenta(cuentaAlg)
+		);
 	}
 
 	// funcion que carga la unidad de medida desde el perfil 
@@ -67,7 +75,10 @@ export class EntregasComponent implements OnInit {
 		this.cargandoFiltros = true;
 		this.filtroEspecieCosechaSeleccionado = null;
 		let usuarioLogueado = <UserAuth>this.authenticationService.usuarioLogueado();
-		this.entregasService.listadoFiltrosEspecieCosecha(this.cuenta, usuarioLogueado.token).subscribe(
+
+		let codigoEntidad = (this.cuenta) ? this.cuenta.id.codigo : null;
+
+		this.entregasService.listadoFiltrosEspecieCosecha(codigoEntidad, usuarioLogueado.token).subscribe(
 			respuesta => {
 				this.filtrosEspecieCosecha = respuesta;
 				this.cargandoFiltros = false;
@@ -80,8 +91,10 @@ export class EntregasComponent implements OnInit {
 		this.cargando = true;
 		this.limpiar();
 
+		let codigoEntidad = (this.cuenta) ? this.cuenta.id.codigo : null;
+
 		let filtro: FiltroEntregas = {
-			cuenta: this.cuenta,
+			cuenta: codigoEntidad,
 			fechaDesde: this.datePipe.transform(new Date(this.fechaDesde), 'dd/MM/yyyy'),
 			fechaHasta: this.datePipe.transform(new Date(this.fechaHasta), 'dd/MM/yyyy'),
 			filtroEspecieCosechaDTO: this.filtroEspecieCosechaSeleccionado
@@ -121,7 +134,7 @@ export class EntregasComponent implements OnInit {
 	}
 
 	// funcion encargada de capturar el valor de la cuenta
-	seleccionarCuenta(cuentaSeleccionada?: string) {
+	seleccionarCuenta(cuentaSeleccionada?: EntidadAlg) {
 		this.cuenta = cuentaSeleccionada;
 		this.cargarFiltrosEspecieCosecha();
 		this.establecerFiltrosPorDefecto();
