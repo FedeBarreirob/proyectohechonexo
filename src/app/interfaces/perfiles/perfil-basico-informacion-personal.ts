@@ -3,4 +3,5 @@ export interface PerfilBasicoInfoPersonal {
     nombre?: string,
     email?: string,
     unidadMedidaPeso?: string
+    avatar?: string
 }

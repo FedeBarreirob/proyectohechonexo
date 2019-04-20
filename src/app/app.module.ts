@@ -77,6 +77,7 @@ import { KilosTextoAPipe } from './pipes/kilos-texto-a.pipe';
 import { InfoPerfilComponent } from './components/menu/info-perfil/info-perfil.component';
 import { LinkMenuComponent } from './components/menu/link-menu/link-menu.component';
 import { ToolBarGeneralComponent } from './components/menu/tool-bar-general/tool-bar-general.component';
+import { AvatarDelPerfilComponent } from './components/common/avatar-del-perfil/avatar-del-perfil.component';
 
 registerLocaleData(localeEsAr, 'es-AR');
 
@@ -138,7 +139,8 @@ export function tokenGetter() {
 		KilosTextoAPipe,
 		InfoPerfilComponent,
 		LinkMenuComponent,
-		ToolBarGeneralComponent
+		ToolBarGeneralComponent,
+		AvatarDelPerfilComponent
 	],
 	imports: [
 		HttpClientModule,

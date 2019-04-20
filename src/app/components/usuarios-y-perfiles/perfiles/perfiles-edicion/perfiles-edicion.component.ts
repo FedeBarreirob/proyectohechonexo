@@ -9,6 +9,7 @@ import { Rol } from '../../../../interfaces/security/rol';
 import { AuthenticationService } from '../../../../services/security/authentication.service';
 import { UserAuth } from '../../../../models/security/user';
 import { RoleEnum } from '../../../../enums/role-enum.enum';
+import { EntidadAlg } from '../../../../interfaces/perfiles/entidad-alg';
 
 @Component({
 	selector: 'app-perfiles-edicion',
@@ -35,7 +36,7 @@ export class PerfilesEdicionComponent implements OnInit {
 	public esRegistroNuevo: boolean;
 	public titulo: string;
 
-	public listadoCodigos: string[] = [];
+	public listadoCodigos: Array<EntidadAlg> = [];
 	// TODO: Ver de traer los roles por servicio
 	public roles: Array<Rol> = [
 		{
@@ -65,6 +66,8 @@ export class PerfilesEdicionComponent implements OnInit {
 	public perfilBasico: PerfilBasico;
 	selection: any;
 	searchControl: any;
+	avatar: string;
+	avatarPath;
 
 	constructor(
 		public authenticationService: AuthenticationService,
@@ -93,6 +96,9 @@ export class PerfilesEdicionComponent implements OnInit {
 			} else {
 				this.formDatosAccesoGroup.addControl('rol', new FormControl(this.roles.filter(x => x.id == (this.data.rol != null ? this.data.rol.id : null))[0]));
 			}
+
+			// cargar el avatar
+			this.avatar = this.data.informacionPersonal.avatar;
 		} else {
 			if (this.authenticationService.esSuadminOComercial()) {
 				this.formDatosAccesoGroup = this.formBuilder.group({
@@ -129,7 +135,7 @@ export class PerfilesEdicionComponent implements OnInit {
 
 		// cuentas vinculadas
 		this.formCuentasVinculadasGroup = this.formBuilder.group({
-			entidadCodigo: [''],
+			entidadCodigo: [null],
 		});
 		if (this.data != null && this.data.entidadCodigos != null) {
 			this.listadoCodigos = Object.assign([], this.data.entidadCodigos);
@@ -163,6 +169,7 @@ export class PerfilesEdicionComponent implements OnInit {
 
 			let datosAcceso: PerfilBasicoCredencial = this.formDatosAccesoGroup.getRawValue();
 			let informacionPersonal: PerfilBasicoInfoPersonal = this.formDatosPersonalesGroup.getRawValue();
+			informacionPersonal.avatar = this.avatar;
 			let rol: Rol = this.formDatosAccesoGroup.value.rol;
 			let subtipo: string = this.formDatosAccesoGroup.value.subtipo;
 
@@ -239,9 +246,15 @@ export class PerfilesEdicionComponent implements OnInit {
 	// funcion que agrega una cuenta al listado de cuentas a vincular
 	agregarCuenta() {
 		if (this.formCuentasVinculadasGroup.valid) {
-			const index: number = this.listadoCodigos.indexOf(this.formCuentasVinculadasGroup.value.entidadCodigo);
-			if (index == -1) {
-				this.listadoCodigos.unshift(this.formCuentasVinculadasGroup.value.entidadCodigo);
+
+			let entidadCodigo: EntidadAlg = {
+				id: {
+					codigo: this.formCuentasVinculadasGroup.value.entidadCodigo
+				}
+			};
+
+			if (!this.seIngresoPreviamente(entidadCodigo)) {
+				this.listadoCodigos.unshift(entidadCodigo);
 				this.formCuentasVinculadasGroup.reset();
 			} else {
 				this.openSnackBar("La cuenta se encuentra en el listado", "Vinculación de cuentas");
@@ -251,8 +264,17 @@ export class PerfilesEdicionComponent implements OnInit {
 		}
 	}
 
+	// funcion encargada de verificar si se ingreso previamente una cuenta de entidad
+	private seIngresoPreviamente(entidadCodigo: EntidadAlg): boolean {
+		if (this.listadoCodigos && this.listadoCodigos.length != 0 && entidadCodigo) {
+			return this.listadoCodigos.some(item => item.id.codigo === entidadCodigo.id.codigo);
+		} else {
+			return false;
+		}
+	}
+
 	// funcion encargada de quitar una cuenta del listado
-	quitarCuenta(codigo: string) {
+	quitarCuenta(codigo: EntidadAlg) {
 		try {
 			const index: number = this.listadoCodigos.indexOf(codigo);
 			if (index !== -1) {
@@ -274,7 +296,7 @@ export class PerfilesEdicionComponent implements OnInit {
 	// abre una notificacion
 	openSnackBar(message: string, action: string) {
 		this.snackBar.open(message, action, {
-			duration: 2000,
+			duration: 3000,
 		});
 	}
 
@@ -351,4 +373,40 @@ export class PerfilesEdicionComponent implements OnInit {
 		this.listadoComercialesSeleccionados = [];
 	}
 
+	// funcion encargada de seleccionar un avatar
+	onSelectAvatar(event) {
+		if (event.target.files && event.target.files[0]) {
+			var reader = new FileReader();
+			this.avatarPath = event.target.files;
+
+			if (this.esValidoAvatar(this.avatarPath[0])) {
+				reader.readAsDataURL(event.target.files[0]);
+				reader.onload = (event) => {
+					this.avatar = reader.result.toString();
+				}
+			} else {
+				this.openSnackBar("Seleccione un avatar tipo jpg y tamaño menor a 100kb.", "Avatar")
+			}
+		}
+	}
+
+	// funcion que valida si el avatar es valido tanto en tamano y tipo
+	private esValidoAvatar(fileAvatar: any): boolean {
+		if (fileAvatar) {
+
+			// si la no es imagen error
+			if (fileAvatar.type != 'image/jpeg') {
+				return false;
+			}
+
+			// si la imagen supera los 100Kb error
+			if (fileAvatar.size > 102400) {
+				return false;
+			}
+
+			return true;
+		} else {
+			return false;
+		}
+	}
 }

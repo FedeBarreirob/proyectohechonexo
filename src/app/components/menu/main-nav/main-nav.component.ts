@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { BreakpointObserver, Breakpoints } from '@angular/cdk/layout';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
@@ -11,7 +11,7 @@ import { ItemLinkMenu } from '../../../interfaces/menu/sidebar/item-link-menu';
 	styleUrls: ['./main-nav.component.css']
 })
 
-export class MainNavComponent {
+export class MainNavComponent implements OnInit {
 
 	// links que aparecen en el sidebar
 	public links: Array<ItemLinkMenu>;
@@ -19,14 +19,20 @@ export class MainNavComponent {
 	constructor(
 		private breakpointObserver: BreakpointObserver,
 		public authService: AuthenticationService) {
+	}
 
-		if (this.authService.esLogueado) {
-			this.cargarLinks();
-		} else {
-			this.authService.huboLoginCompleto$.subscribe(
-				() => this.cargarLinks()
-			);
-		}
+	ngOnInit(): void {
+		this.authService.huboLoginCompleto$.subscribe(
+			login => {
+				if (login) {
+					this.cargarLinks();
+				} else {
+					if (this.links) {
+						this.links.splice(0, this.links.length);
+					}
+				}
+			}
+		);
 	}
 
 	isHandset$: Observable<boolean> = this.breakpointObserver.observe(Breakpoints.Handset)

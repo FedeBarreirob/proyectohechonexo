@@ -4,10 +4,9 @@
 }
 
 .perfil-avatar {
+    float: right;
     height: 48px;
     width: 48px;
-    border: 1px solid rgba(46, 91, 255, 0.08);
-    border-radius: 4px;
     margin-top: 100px;
     margin-right: 4px;
 }

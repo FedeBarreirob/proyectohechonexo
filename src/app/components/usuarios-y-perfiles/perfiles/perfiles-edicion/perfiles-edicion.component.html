@@ -3,6 +3,21 @@
 
 <mat-dialog-content class="mat-typography">
 
+	<!-- Avatar -->
+	<mat-card>
+		<mat-card-header>
+			<mat-card-title>Avatar</mat-card-title>
+		</mat-card-header>
+
+		<mat-card-content>
+			<img [src]="avatar" *ngIf="avatar" mat-card-image />
+		</mat-card-content>
+
+		<mat-card-actions>
+			<input type='file' (change)="onSelectAvatar($event)">
+		</mat-card-actions>
+	</mat-card>
+
 	<!-- Datos de acceso al sistema -->
 	<mat-card>
 		<mat-card-header>
@@ -47,7 +62,8 @@
 					</div>
 				</div>
 
-				<div fxLayout="row" fxLayoutAlign="space-between center" *ngIf="authenticationService.correspondeRol(formDatosAccesoGroup.value.rol, 'PRODUCTOR')">
+				<div fxLayout="row" fxLayoutAlign="space-between center"
+					*ngIf="authenticationService.correspondeRol(formDatosAccesoGroup.value.rol, 'PRODUCTOR')">
 					<div fxFlex="100%">
 						<mat-form-field>
 							<mat-select placeholder="Subtipo" formControlName="subtipo">
@@ -123,7 +139,7 @@
 						<mat-list>
 							<mat-list-item *ngFor="let codigo of listadoCodigos">
 								<div fxFlex="50%">
-									{{ codigo }}
+									{{ codigo.id.codigo }}
 								</div>
 								<div fxFlex="50%"><button mat-button (click)="quitarCuenta(codigo)">Desvincular</button>
 								</div>

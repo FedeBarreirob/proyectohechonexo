@@ -56,6 +56,7 @@ export class AuthenticationService {
 		localStorage.removeItem('currentUser');
 		localStorage.removeItem('currentUserPerfil');
 		localStorage.removeItem('seleccionadoUserPerfil');
+		this.logoutCompleto();
 	}
 
 	// funcion que indica si el usuario se encuentra logueado en el sistema
@@ -238,6 +239,11 @@ export class AuthenticationService {
 	// funcion encargada de notificar que hubo un login completo
 	loginCompleto() {
 		this._loginCompleto$.next(true);
+	}
+
+	// funcion encargada de notificar que hubo un logout completo
+	logoutCompleto() {
+		this._loginCompleto$.next(false);
 	}
 
 	// devuelve el observable indicando si hubo un login completo
