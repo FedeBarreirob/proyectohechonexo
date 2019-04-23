@@ -1,0 +1,41 @@
+/* botones de selecctor de especies*/
+
+.grupo-botones-especie {
+    width: 100%;
+    background-color: red;
+
+    display: flex;
+  flex-wrap: wrap;
+}
+
+.boton-especie img {
+    height: 38px;
+    width: 38px;
+}
+
+.boton-especie .mat-button-toggle {
+    flex: 1 1 100%;
+    box-sizing: border-box;
+    align-items: center;
+   /* flex-direction: row;*/
+    display: flex;
+    flex-wrap: wrap;
+
+    height: 89px !important;
+    width: 64px !important;
+    border: 1px solid rgba(35, 185, 80, 0.1);
+    border-radius: 4px;
+    background-color: rgba(45, 164, 66, 0.1);
+}
+
+.boton-especie .mat-button-toggle-disabled {
+    border: 1px solid #c5c0c7;
+    background-color: #e1dde5;
+}
+
+.boton-especie .mat-button-toggle-checked {
+    height: 89px;
+    width: 64px;
+    border-radius: 4px;
+    background-color: #2DA442;
+}

@@ -14,7 +14,7 @@ export class EntregasService {
   private urlEntregasListado = `${environment.hostEntregasYVentas}/Entregas/listado`;
   private urlEntregasFiltrosEspecieCosecha = `${environment.hostEntregasYVentas}/Entregas/filtrosEspecieCosechas`;
 
-  constructor(private http: HttpClient) { 
+  constructor(private http: HttpClient) {
     this.urlEntregasListado = `${environment.hostEntregasYVentas}/Entregas/listado`;
     this.urlEntregasFiltrosEspecieCosecha = `${environment.hostEntregasYVentas}/Entregas/filtrosEspecieCosechas`;
 
@@ -36,7 +36,7 @@ export class EntregasService {
   }
 
   // funcion que retorna un listado de filtros especie cosecha
-  listadoFiltrosEspecieCosecha(cuenta: string, token: string): Observable<Array<FiltroEspecieCosecha>> {
+  listadoFiltrosEspecieCosecha(cuenta: string, token: string): Observable<FiltroEspecieCosecha> {
 
     const httpOptions = {
       headers: new HttpHeaders({
@@ -46,6 +46,6 @@ export class EntregasService {
     };
 
     let urlConParametro = `${this.urlEntregasFiltrosEspecieCosecha}/${cuenta}`;
-    return this.http.get<Array<FiltroEspecieCosecha>>(urlConParametro, httpOptions);
+    return this.http.get<FiltroEspecieCosecha>(urlConParametro, httpOptions);
   }
 }

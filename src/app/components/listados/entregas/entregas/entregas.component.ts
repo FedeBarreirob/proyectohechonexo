@@ -1,17 +1,17 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { EntregasService } from '../../../../services/entregas/entregas.service';
 import { MovimientoEntrega, EntregasTotales, MovimientoEntregaAgrupadoPorCampo } from '../../../../interfaces/entregas/listado-entregas';
 import { FiltroEntregas } from '../../../../interfaces/entregas/filtro-entregas';
 import { UserAuth } from '../../../../models/security/user';
 import { AuthenticationService } from '../../../../services/security/authentication.service';
 import { DatePipe } from '@angular/common';
-import { MatDialog } from '@angular/material';
+import { MatDialog, MatSidenav } from '@angular/material';
 import { EntregasDetalleComponent } from '../entregas-detalle/entregas-detalle.component';
 import { EntregasMasOperacionesComponent } from '../entregas-mas-operaciones/entregas-mas-operaciones.component';
 import { PerfilBasico } from '../../../../interfaces/perfiles/perfil-basico';
 import { FiltroEspecieCosecha } from '../../../../interfaces/varios/filtro-especie-cosecha';
-import { EntidadAlg } from 'src/app/interfaces/perfiles/entidad-alg';
-import { CuentaAlgService } from 'src/app/services/observers/cuentas-alg/cuenta-alg.service';
+import { EntidadAlg } from '../../../../interfaces/perfiles/entidad-alg';
+import { CuentaAlgService } from '../../../../services/observers/cuentas-alg/cuenta-alg.service';
 
 @Component({
 	selector: 'app-entregas',
@@ -20,6 +20,8 @@ import { CuentaAlgService } from 'src/app/services/observers/cuentas-alg/cuenta-
 	providers: [DatePipe]
 })
 export class EntregasComponent implements OnInit {
+
+	@ViewChild('menuFiltro') public sidenav: MatSidenav;
 
 	public listadoEntregas: Array<MovimientoEntrega>;
 	private movimientoSeleccionado: MovimientoEntrega = null;
@@ -34,7 +36,7 @@ export class EntregasComponent implements OnInit {
 	public fechaHasta: string = (new Date()).toISOString();
 	public unidadMedida: string;
 
-	public filtrosEspecieCosecha: Array<FiltroEspecieCosecha> = [];
+	public filtrosEspecieCosecha: FiltroEspecieCosecha;
 	public filtroEspecieCosechaSeleccionado: FiltroEspecieCosecha = null;
 	public cargandoFiltros: boolean;
 
@@ -138,7 +140,7 @@ export class EntregasComponent implements OnInit {
 		this.cuenta = cuentaSeleccionada;
 		this.cargarFiltrosEspecieCosecha();
 		this.establecerFiltrosPorDefecto();
-		this.cargarListado();
+		//this.cargarListado();
 	}
 
 	// funcion que acomoda los filtros a default
@@ -155,5 +157,10 @@ export class EntregasComponent implements OnInit {
 		this.listadoEntregas = [];
 		this.listadoEntregasAgrupadasPorCampo = [];
 		this.totales = null;
+	}
+
+	// funcion encargada de mostrar u ocultar los filtros
+	mostrarOcultarFiltros($event) {
+		this.sidenav.toggle();
 	}
 }

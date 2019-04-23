@@ -1,5 +1,7 @@
+import { Especie } from "./especie";
+import { Cosecha } from "./cosecha";
+
 export interface FiltroEspecieCosecha {
-    codigoEspecie: string,
-    cosecha: string,
-    descripcion: string
+    especies?: Array<Especie>,
+    cosechas?: Array<Cosecha>
 }

@@ -1,5 +1,7 @@
-import { Component, OnInit, Input } from '@angular/core';
-import { SidebarService } from 'src/app/services/observers/sidebar/sidebar.service';
+import { Component, OnInit, Input, Output } from '@angular/core';
+import { SidebarService } from '../../../services/observers/sidebar/sidebar.service';
+import { EventEmitter } from '@angular/core';
+import { BreakpointObserver } from '@angular/cdk/layout';
 
 @Component({
   selector: 'app-tool-bar-general',
@@ -20,16 +22,24 @@ export class ToolBarGeneralComponent implements OnInit {
   @Input()
   disabled: boolean = false;
 
+  @Output()
+  botonPersonalizadoEjecutado: EventEmitter<any> = new EventEmitter<any>();
+
   mostrarBtnMostrarOcultarSidebar: boolean;
 
-  constructor(public sidebarService: SidebarService) { }
+  constructor(
+    public sidebarService: SidebarService,
+    private breakpointObserver: BreakpointObserver
+  ) {
+  }
 
   ngOnInit() {
-
     // suscribir a notificacion de visualizacion del boton sandwiche
     this.sidebarService.mostrarSandwiche$.subscribe(
       mostrar => this.mostrarBtnMostrarOcultarSidebar = mostrar
     );
+
+    this.mostrarBtnMostrarOcultarSidebar = this.isPantallaPequena;
   }
 
   // funcion que oculta o muestra el sidebar
@@ -37,4 +47,12 @@ export class ToolBarGeneralComponent implements OnInit {
     this.sidebarService.notificarToggle();
   }
 
+  // funcion que ejecuta el evento correspondiente al boton personalizado
+  ejecutarBotonPersonalizado() {
+    this.botonPersonalizadoEjecutado.emit(null);
+  }
+
+  get isPantallaPequena(): boolean {
+    return this.breakpointObserver.isMatched('(max-width: 599px)');
+  }
 }

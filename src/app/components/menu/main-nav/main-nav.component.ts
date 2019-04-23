@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild, AfterViewChecked } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { BreakpointObserver, Breakpoints } from '@angular/cdk/layout';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
@@ -13,7 +13,7 @@ import { SidebarService } from '../../../services/observers/sidebar/sidebar.serv
 	styleUrls: ['./main-nav.component.css']
 })
 
-export class MainNavComponent implements OnInit, AfterViewChecked {
+export class MainNavComponent implements OnInit {
 
 	@ViewChild('drawer') public sidenav: MatSidenav;
 
@@ -55,15 +55,17 @@ export class MainNavComponent implements OnInit, AfterViewChecked {
 				}
 			}
 		);
-	}
 
-	ngAfterViewChecked(): void {
-		console.log("entro");
-		if (this.sidenav.opened == true) {
-			this.sidebarService.notificarVisibilidadBotonSandwiche(false);
-		} else {
-			this.sidebarService.notificarVisibilidadBotonSandwiche(true);
-		}
+		// suscribir a la visualizacion del panel para sincronizar con el boton toggle de la barra principal
+		this.isHandset$.subscribe(
+			cerrado => {
+				if (cerrado == true) {
+					this.sidebarService.notificarVisibilidadBotonSandwiche(true);
+				} else {
+					this.sidebarService.notificarVisibilidadBotonSandwiche(false);
+				}
+			}
+		);
 	}
 
 	isHandset$: Observable<boolean> = this.breakpointObserver.observe(Breakpoints.Handset)
@@ -87,7 +89,7 @@ export class MainNavComponent implements OnInit, AfterViewChecked {
 			{
 				nombre: "Entregas",
 				rutaLink: "/entregas",
-				imagen: "assets/sidebar/casa.png",
+				imagen: "assets/sidebar/entrega.png",
 				imagenActiva: "assets/sidebar/entrega-hot.png",
 				permitido: true
 			},
