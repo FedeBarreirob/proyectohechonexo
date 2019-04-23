@@ -17,15 +17,15 @@
 </div>
 
 <mat-button-toggle-group #group="matButtonToggleGroup" class="grupo-botones-especie">
-  
-    <div 
-      *ngFor="let especie of ((filtrosEspecieCosecha && filtrosEspecieCosecha.especies) ? filtrosEspecieCosecha.especies : [])"
-      class="boton-especie">
-      <mat-button-toggle value="especie.codigoEspecie">
-        <img src="{{especie.codigoEspecie | imagenEspecie}}" />
-        {{especie.especieDescripcion}}
-      </mat-button-toggle>
-    </div>
+
+  <div
+    *ngFor="let especie of ((filtrosEspecieCosecha && filtrosEspecieCosecha.especies) ? filtrosEspecieCosecha.especies : [])"
+    class="boton-especie">
+    <mat-button-toggle value="especie.codigoEspecie">
+      <img src="{{especie.codigoEspecie | imagenEspecie}}" />
+      <div class="texto-epecie">{{especie.especieDescripcion}}</div>
+    </mat-button-toggle>
+  </div>
 
 </mat-button-toggle-group>
 
