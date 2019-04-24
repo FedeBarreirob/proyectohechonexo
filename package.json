@@ -37,6 +37,7 @@
     "jspdf": "^1.5.3",
     "jspdf-autotable": "^2.3.5",
     "material-design-icons": "^3.0.1",
+    "ngx-ellipsis": "^2.0.1",
     "ngx-show-hide-password": "^2.0.3",
     "rxjs": "^6.4.0",
     "xlsx": "^0.14.2",

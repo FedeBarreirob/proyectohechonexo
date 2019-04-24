@@ -10,6 +10,11 @@
     src: url("assets/fonts/rubik/Rubik-Medium.otf") format("opentype");
 }
 
+@font-face {
+    font-family: RubikLight;
+    src: url("assets/fonts/rubik/Rubik-Light.otf") format("opentype");
+}
+
 html, body {
     height: 100%;
 }

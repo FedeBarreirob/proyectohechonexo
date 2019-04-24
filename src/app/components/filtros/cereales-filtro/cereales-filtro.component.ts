@@ -1,19 +1,67 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, Output } from '@angular/core';
 import { FiltroEspecieCosecha } from '../../../interfaces/varios/filtro-especie-cosecha';
+import { EventEmitter } from '@angular/core';
+import { DatePipe } from '@angular/common';
 
 @Component({
   selector: 'app-cereales-filtro',
   templateUrl: './cereales-filtro.component.html',
-  styleUrls: ['./cereales-filtro.component.css']
+  styleUrls: ['./cereales-filtro.component.css'],
+  providers: [DatePipe]
 })
 export class CerealesFiltroComponent implements OnInit {
 
   @Input()
   filtrosEspecieCosecha: FiltroEspecieCosecha;
 
-  constructor() { }
+  @Input()
+  cuenta: any;
+
+  @Output()
+  botonCerrar: EventEmitter<any> = new EventEmitter<any>();
+
+  @Output()
+  botonAplicar: EventEmitter<any> = new EventEmitter<any>();
+
+  public especie: string = "";
+  public cosecha: string = "";
+  public fechaDesde: string;
+  public fechaHasta: string = (new Date()).toISOString();
+
+  constructor(private datePipe: DatePipe) { }
 
   ngOnInit() {
   }
 
+  // funcion que dispara la notificacion cuando el boton cerrar se presiona
+  cerrar() {
+    this.botonCerrar.emit(null);
+  }
+
+  // funcion que limpiar 
+  limpiar() {
+    this.especie = "";
+    this.cosecha = "";
+    this.fechaDesde = "";
+    this.fechaHasta = "";
+  }
+
+  // funcion que arma un filtro y lo notifica al llamador 
+  aplicar() {
+    if (this.cuenta && this.cuenta.id && this.cuenta.id.codigo) {
+      let filtro = {
+        cuenta: this.cuenta.id.codigo,
+        fechaDesde: this.datePipe.transform(new Date(this.fechaDesde), 'dd/MM/yyyy'),
+        fechaHasta: this.datePipe.transform(new Date(this.fechaHasta), 'dd/MM/yyyy'),
+        especie: this.especie,
+        cosecha: this.cosecha
+      }
+
+      this.botonAplicar.emit(filtro);
+    } else {
+      this.botonAplicar.emit(null);
+    }
+
+    this.cerrar();
+  }
 }

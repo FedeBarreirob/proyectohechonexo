@@ -5,6 +5,7 @@ import { AppRoutingModule } from './app-routing/app-routing.module';
 import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { ShowHidePasswordModule } from 'ngx-show-hide-password';
+import { EllipsisModule } from 'ngx-ellipsis';
 
 // locale
 import { registerLocaleData, DecimalPipe, CommonModule } from '@angular/common';
@@ -80,6 +81,8 @@ import { ToolBarGeneralComponent } from './components/menu/tool-bar-general/tool
 import { AvatarDelPerfilComponent } from './components/common/avatar-del-perfil/avatar-del-perfil.component';
 import { CerealesFiltroComponent } from './components/filtros/cereales-filtro/cereales-filtro.component';
 import { ImagenEspeciePipe } from './pipes/imagen-especie.pipe';
+import { EntregasListaDesktopComponent } from './components/listados/entregas/entregas-lista-desktop/entregas-lista-desktop.component';
+import { EntregasListaMovilComponent } from './components/listados/entregas/entregas-lista-movil/entregas-lista-movil.component';
 
 registerLocaleData(localeEsAr, 'es-AR');
 
@@ -144,7 +147,9 @@ export function tokenGetter() {
 		ToolBarGeneralComponent,
 		AvatarDelPerfilComponent,
 		CerealesFiltroComponent,
-		ImagenEspeciePipe
+		ImagenEspeciePipe,
+		EntregasListaDesktopComponent,
+		EntregasListaMovilComponent
 	],
 	imports: [
 		HttpClientModule,
@@ -171,7 +176,8 @@ export function tokenGetter() {
 				tokenGetter: tokenGetter,
 				whitelistedDomains: []
 			}
-		})
+		}),
+		EllipsisModule
 	],
 	providers: [
 		{ provide: HTTP_INTERCEPTORS, useClass: ErrorAuthInterceptor, multi: true },

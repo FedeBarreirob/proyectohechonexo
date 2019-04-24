@@ -1,0 +1,95 @@
+.movimiento:hover {
+    cursor: pointer;
+    background-color: beige;
+}
+
+.importe {
+    text-align: right;
+    font-weight: bold;
+    padding: .2rem;
+    font-size: .7rem;
+}
+
+.fecha {
+    color: dimgray;
+    padding: .2rem;
+    font-size: .7rem;
+}
+
+.engris {
+    color: dimgray;
+    padding: .2rem;
+    font-size: .7rem;
+}
+
+.concepto {
+    font-weight: bold;
+    padding: .2rem;
+    font-size: .7rem;
+}
+
+.conceptoEncabezado {
+    font-weight: bold;
+    padding: .2rem;
+    font-size: .7rem;
+    text-align: center;
+}
+
+.importeListaCompleta {
+    text-align: right;
+    padding: .2rem;
+    font-size: .65rem;
+}
+
+.conceptoListaCompleta {
+    padding: .2rem;
+    font-size: .65rem;
+    text-align: center;
+    text-align: left;
+}
+
+.tituloCampo {
+    font-weight: bold;
+    padding: .4rem;
+    font-size: .8rem;
+    text-align: left;
+}
+
+.tituloTotalCampo {
+    padding: .4rem;
+    font-size: .7rem;
+    text-align: left;
+    color: rgb(83, 83, 83);
+    font-style: italic;
+}
+
+.importeTotalCampo {
+    padding: .4rem;
+    font-size: .7rem;
+    text-align: right;
+    color: rgb(83, 83, 83);
+    font-style: italic;
+}
+
+/*saldos*/
+
+.tabla-saldos {
+    border: none;
+    width: 100%;
+    font-size: 12px;
+    text-align: right;
+}
+
+.custom-button {
+    position: fixed;
+    right: 30px;
+    bottom: 30px;
+}
+
+.filaPar {
+    background-color: #d6e4da;
+}
+
+.filaImpar {
+    background-color: #fefffe;
+}

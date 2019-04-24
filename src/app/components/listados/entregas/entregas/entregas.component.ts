@@ -89,18 +89,10 @@ export class EntregasComponent implements OnInit {
 	}
 
 	// funcion que ejecuta la carga del listado de entregas
-	cargarListado() {
+	cargarListado(filtro: any) {
+		console.log(filtro);
 		this.cargando = true;
 		this.limpiar();
-
-		let codigoEntidad = (this.cuenta) ? this.cuenta.id.codigo : null;
-
-		let filtro: FiltroEntregas = {
-			cuenta: codigoEntidad,
-			fechaDesde: this.datePipe.transform(new Date(this.fechaDesde), 'dd/MM/yyyy'),
-			fechaHasta: this.datePipe.transform(new Date(this.fechaHasta), 'dd/MM/yyyy'),
-			filtroEspecieCosechaDTO: this.filtroEspecieCosechaSeleccionado
-		}
 
 		let usuarioLogueado = <UserAuth>this.authenticationService.usuarioLogueado();
 		if (usuarioLogueado != null) {

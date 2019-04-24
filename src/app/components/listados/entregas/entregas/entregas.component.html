@@ -1,10 +1,17 @@
 <mat-sidenav-container class="contenedor-filtro">
 	<mat-sidenav #menuFiltro position="end" class="sidenav-filtro">
-		<app-cereales-filtro [filtrosEspecieCosecha]="filtrosEspecieCosecha"></app-cereales-filtro>
+		<app-cereales-filtro [filtrosEspecieCosecha]="filtrosEspecieCosecha" [cuenta]="cuenta"
+			(botonCerrar)="menuFiltro.toggle()" (botonAplicar)="cargarListado($event)"></app-cereales-filtro>
 	</mat-sidenav>
 	<section>
 		<app-tool-bar-general [titulo]="'Entregas'" [disabled]="cargando==true"
 			(botonPersonalizadoEjecutado)="mostrarOcultarFiltros($event)"
 			[urlImagenAccionPersonalizada]="'assets/toolbar/embudo.png'"></app-tool-bar-general>
+		<mat-progress-bar *ngIf="cargando" mode="indeterminate"></mat-progress-bar>
+
+		<app-entregas-lista-movil fxHide.lg fxHide.md [listadoEntregas]="listadoEntregas"></app-entregas-lista-movil>
+
+		<app-entregas-lista-desktop fxHide.xs fxHide.sm [listadoEntregasAgrupadasPorCampo]="listadoEntregasAgrupadasPorCampo">
+		</app-entregas-lista-desktop>
 	</section>
 </mat-sidenav-container>
