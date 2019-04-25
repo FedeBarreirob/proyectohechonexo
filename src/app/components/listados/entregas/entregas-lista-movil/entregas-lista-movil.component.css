@@ -46,3 +46,8 @@
     text-align: right;
     margin-right: 30px;
 }
+
+.contenedor-listado {
+    height: 70vh;
+    overflow-y: scroll;
+}

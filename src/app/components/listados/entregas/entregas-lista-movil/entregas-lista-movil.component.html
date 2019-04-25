@@ -1,21 +1,28 @@
+<mat-progress-bar *ngIf="cargando" mode="indeterminate"></mat-progress-bar>
+
 <div fxLayout="row" fxLayoutAlign="space-around center" class="titulos">
-    <div fxFlex="50%">Ref. de entrega</div>
-    <div fxFlex="50%">Kg netos</div>
+  <div fxFlex="50%">Ref. de entrega</div>
+  <div fxFlex="50%">Kg netos</div>
 </div>
 
-<div fxLayout="row" fxLayoutAlign="space-around center"
-  *ngFor="let movimiento of (listadoEntregas ? listadoEntregas : [])" class="movimiento-fila">
-  
-  <div fxFlex="20%">
-    <img class="movimiento-icono" src="{{movimiento.especie | imagenEspecie}}" />
+<div class="contenedor-listado" fxLayout="column" fxLayoutWrap fxLayoutAlign="none" infiniteScroll [infiniteScrollDistance]="2"
+  [infiniteScrollThrottle]="50" (scrolled)="onScroll()" [scrollWindow]="false">
+
+  <div fxLayout="row" fxLayoutAlign="space-around center"
+    *ngFor="let movimiento of (listadoEntregas ? listadoEntregas : [])" class="movimiento-fila">
+
+    <div fxFlex="20%">
+      <img class="movimiento-icono" src="{{movimiento.especie | imagenEspecie}}" />
+    </div>
+
+    <div fxFlex="50%">
+      <p class="especie-cosecha">{{movimiento.especie}} {{movimiento.cosecha}}</p>
+      <p class="fecha">{{movimiento.fecha}}</p>
+    </div>
+
+    <div fxFlex="40%" class="kg-netos">
+      {{movimiento.kilosNetos | number: '.0'}}
+    </div>
   </div>
 
-  <div fxFlex="50%">
-    <p class="especie-cosecha">{{movimiento.especie}} {{movimiento.cosecha}}</p>
-    <p class="fecha">{{movimiento.fecha}}</p>
-  </div>
-
-  <div fxFlex="40%" class="kg-netos">
-    {{movimiento.kilosNetos | number: '.0'}}
-  </div>
 </div>

@@ -3,5 +3,9 @@ export interface FiltroEntregas {
     fechaDesde?: string,
     fechaHasta?: string,
     especie: string,
-    cosecha: string
+    cosecha: string,
+    agrupadoPorCampo: boolean,
+    paginado: boolean,
+    pagina: number,
+    cantPorPagina: number
 }

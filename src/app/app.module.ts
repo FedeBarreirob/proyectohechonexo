@@ -6,6 +6,7 @@ import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { ShowHidePasswordModule } from 'ngx-show-hide-password';
 import { EllipsisModule } from 'ngx-ellipsis';
+import { DeviceDetectorModule } from 'ngx-device-detector';
 
 // locale
 import { registerLocaleData, DecimalPipe, CommonModule } from '@angular/common';
@@ -83,6 +84,7 @@ import { CerealesFiltroComponent } from './components/filtros/cereales-filtro/ce
 import { ImagenEspeciePipe } from './pipes/imagen-especie.pipe';
 import { EntregasListaDesktopComponent } from './components/listados/entregas/entregas-lista-desktop/entregas-lista-desktop.component';
 import { EntregasListaMovilComponent } from './components/listados/entregas/entregas-lista-movil/entregas-lista-movil.component';
+import { InfiniteScrollModule } from 'ngx-infinite-scroll';
 
 registerLocaleData(localeEsAr, 'es-AR');
 
@@ -177,7 +179,9 @@ export function tokenGetter() {
 				whitelistedDomains: []
 			}
 		}),
-		EllipsisModule
+		EllipsisModule,
+		DeviceDetectorModule.forRoot(),
+		InfiniteScrollModule
 	],
 	providers: [
 		{ provide: HTTP_INTERCEPTORS, useClass: ErrorAuthInterceptor, multi: true },

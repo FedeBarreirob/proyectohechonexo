@@ -1,4 +1,4 @@
-export interface ListadoEntregas {
+export interface ListadoEntregasAgrupadoPorCampo {
     exito?: boolean,
     mensaje?: string,
     datos?: {
@@ -6,6 +6,12 @@ export interface ListadoEntregas {
         listadoAgrupadoPorCampo?: Array<MovimientoEntregaAgrupadoPorCampo>
         totales?: EntregasTotales
     }
+}
+
+export interface ListadoEntregas {
+    exito?: boolean,
+    mensaje?: string,
+    datos?: Array<MovimientoEntrega>
 }
 
 export interface MovimientoEntrega {

@@ -12,6 +12,8 @@ import { PerfilBasico } from '../../../../interfaces/perfiles/perfil-basico';
 import { FiltroEspecieCosecha } from '../../../../interfaces/varios/filtro-especie-cosecha';
 import { EntidadAlg } from '../../../../interfaces/perfiles/entidad-alg';
 import { CuentaAlgService } from '../../../../services/observers/cuentas-alg/cuenta-alg.service';
+import { DeviceDetectorService } from 'ngx-device-detector';
+import { Subject } from 'rxjs';
 
 @Component({
 	selector: 'app-entregas',
@@ -40,16 +42,22 @@ export class EntregasComponent implements OnInit {
 	public filtroEspecieCosechaSeleccionado: FiltroEspecieCosecha = null;
 	public cargandoFiltros: boolean;
 
+	observerFiltroListadoMovil$ = new Subject<any>();
+	observerFiltroListadoDesktop$ = new Subject<any>();
+	esCelular: boolean;
+
 	constructor(private entregasService: EntregasService,
 		private authenticationService: AuthenticationService,
 		private datePipe: DatePipe,
 		public dialog: MatDialog,
-		private cuentaAlgService: CuentaAlgService
+		private cuentaAlgService: CuentaAlgService,
+		private deviceService: DeviceDetectorService
 	) {
 		this.establecerFiltrosPorDefecto();
 	}
 
 	ngOnInit() {
+		this.esCelular = this.deviceService.isMobile();
 		this.cargando = false;
 
 		this.authenticationService.perfilActivo$.subscribe(
@@ -76,11 +84,9 @@ export class EntregasComponent implements OnInit {
 	cargarFiltrosEspecieCosecha() {
 		this.cargandoFiltros = true;
 		this.filtroEspecieCosechaSeleccionado = null;
-		let usuarioLogueado = <UserAuth>this.authenticationService.usuarioLogueado();
-
 		let codigoEntidad = (this.cuenta) ? this.cuenta.id.codigo : null;
 
-		this.entregasService.listadoFiltrosEspecieCosecha(codigoEntidad, usuarioLogueado.token).subscribe(
+		this.entregasService.listadoFiltrosEspecieCosecha(codigoEntidad).subscribe(
 			respuesta => {
 				this.filtrosEspecieCosecha = respuesta;
 				this.cargandoFiltros = false;
@@ -90,8 +96,15 @@ export class EntregasComponent implements OnInit {
 
 	// funcion que ejecuta la carga del listado de entregas
 	cargarListado(filtro: any) {
-		console.log(filtro);
-		this.cargando = true;
+		
+		if(this.esCelular) {
+			this.observerFiltroListadoMovil$.next(filtro);
+		} else {
+			this.observerFiltroListadoDesktop$.next(filtro);
+		}
+		
+
+		/*this.cargando = true;
 		this.limpiar();
 
 		let usuarioLogueado = <UserAuth>this.authenticationService.usuarioLogueado();
@@ -105,7 +118,7 @@ export class EntregasComponent implements OnInit {
 			}, error => {
 				this.cargando = false;
 			});
-		}
+		}*/
 	}
 
 	// funcion que muestra el detalle de un movimiento seleccionado
