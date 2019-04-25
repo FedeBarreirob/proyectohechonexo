@@ -52,10 +52,11 @@
     left: 5px;
     top: 25px;
     right: 5px;
-    width: "100%";
     font-family: Rubik;
     font-size: 14px;
     text-align: center;
+    text-overflow: ellipsis !important;
+    overflow-x: hidden;
 }
 
 /* titulos */

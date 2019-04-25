@@ -3,6 +3,8 @@ import { MovimientoEntrega } from '../../../../interfaces/entregas/listado-entre
 import { Subject } from 'rxjs';
 import { EntregasService } from '../../../../services/entregas/entregas.service';
 import { FiltroEntregas } from '../../../../interfaces/entregas/filtro-entregas';
+import { PerfilBasico } from '../../../../interfaces/perfiles/perfil-basico';
+import { AuthenticationService } from '../../../../services/security/authentication.service';
 
 @Component({
   selector: 'app-entregas-lista-movil',
@@ -19,16 +21,38 @@ export class EntregasListaMovilComponent implements OnInit {
   cantidadPorPagina: number = 50;
   cargando: boolean = false;
   filtro: FiltroEntregas;
+  unidadMedida: string;
+  perfilBasico: PerfilBasico;
 
-  constructor(private entregasService: EntregasService) { }
+  constructor(
+    private entregasService: EntregasService,
+    private authenticationService: AuthenticationService
+  ) { }
 
   ngOnInit() {
+    // observer del filtro
     this.observerFiltroListadoMovil$.subscribe(
       filtro => {
         this.filtro = filtro;
         this.cargarListado(true);
       }
     );
+
+    // observer de perfil
+    this.authenticationService.perfilActivo$.subscribe(
+      perfil => {
+        this.perfilBasico = perfil;
+        this.cargarUnidadMedida()
+      });
+
+    this.cargarUnidadMedida();
+  }
+
+  // funcion que carga la unidad de medida desde el perfil 
+  cargarUnidadMedida() {
+    if (this.perfilBasico) {
+      this.unidadMedida = this.perfilBasico.informacionPersonal.unidadMedidaPeso;
+    }
   }
 
   // funcion encargada de cargar el listado de entregas

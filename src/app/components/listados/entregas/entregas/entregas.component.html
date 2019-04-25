@@ -9,7 +9,7 @@
 			[urlImagenAccionPersonalizada]="'assets/toolbar/embudo.png'"></app-tool-bar-general>
 		<app-entregas-lista-movil *ngIf="esCelular===true" [observerFiltroListadoMovil$]="observerFiltroListadoMovil$"></app-entregas-lista-movil>
 
-		<app-entregas-lista-desktop *ngIf="esCelular===false" [listadoEntregasAgrupadasPorCampo]="listadoEntregasAgrupadasPorCampo">
+		<app-entregas-lista-desktop *ngIf="esCelular===false" [observerFiltroListadoDesktop$]="observerFiltroListadoDesktop$">
 		</app-entregas-lista-desktop>
 	</section>
 </mat-sidenav-container>

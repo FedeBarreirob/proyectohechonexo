@@ -49,10 +49,14 @@ export class CerealesFiltroComponent implements OnInit {
   // funcion que arma un filtro y lo notifica al llamador 
   aplicar() {
     if (this.cuenta && this.cuenta.id && this.cuenta.id.codigo) {
+
+      let fechaDesdeFiltro = (this.fechaDesde) ? this.datePipe.transform(new Date(this.fechaDesde), 'dd/MM/yyyy') : null;
+      let fechaHastaFiltro = (this.fechaHasta) ? this.datePipe.transform(new Date(this.fechaHasta), 'dd/MM/yyyy') : null;
+
       let filtro = {
         cuenta: this.cuenta.id.codigo,
-        fechaDesde: this.datePipe.transform(new Date(this.fechaDesde), 'dd/MM/yyyy'),
-        fechaHasta: this.datePipe.transform(new Date(this.fechaHasta), 'dd/MM/yyyy'),
+        fechaDesde: fechaDesdeFiltro,
+        fechaHasta: fechaHastaFiltro,
         especie: this.especie,
         cosecha: this.cosecha
       }

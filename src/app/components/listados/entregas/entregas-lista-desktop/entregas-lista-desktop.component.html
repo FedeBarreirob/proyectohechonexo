@@ -1,13 +1,64 @@
+<mat-progress-bar *ngIf="cargando" mode="indeterminate"></mat-progress-bar>
 <div class="container" fxLayout="column" fxLayout.xs="column" fxLayoutWrap fxLayoutGap="0.5%"
   fxLayoutAlign="space-around stretch">
-  
+
+  <div fxFlex="100%">
+    <div *ngIf="totales" class="container" fxLayout="row" fxLayout.xs="column" fxLayoutGap="0.5%"
+      fxLayoutAlign="space-around stretch">
+      <div fxFlex="16%">
+        <h4 mat-dialog-title align="center">{{unidadMedida | kilosTextoA: 'largo'}} brutos</h4>
+        <mat-dialog-content class="mat-typography">
+          <p align="center">{{totales.totalKgBrutos | kilosA: unidadMedida | number: '.2'}}
+            {{unidadMedida | kilosTextoA}}</p>
+        </mat-dialog-content>
+      </div>
+
+      <div fxFlex="16%">
+        <h4 mat-dialog-title align="center">{{unidadMedida | kilosTextoA: 'largo'}} humedad</h4>
+        <mat-dialog-content class="mat-typography">
+          <p align="center">{{totales.totalKgHumedad | kilosA: unidadMedida | number: '.2'}}
+            {{unidadMedida | kilosTextoA}}</p>
+        </mat-dialog-content>
+      </div>
+
+      <div fxFlex="16%">
+        <h4 mat-dialog-title align="center">{{unidadMedida | kilosTextoA: 'largo'}} zarandeo</h4>
+        <mat-dialog-content class="mat-typography">
+          <p align="center">{{totales.totalKgZarandeo | kilosA: unidadMedida | number: '.2'}}
+            {{unidadMedida | kilosTextoA}}</p>
+        </mat-dialog-content>
+      </div>
+
+      <div fxFlex="16%">
+        <h4 mat-dialog-title align="center">{{unidadMedida | kilosTextoA: 'largo'}} volátil</h4>
+        <mat-dialog-content class="mat-typography">
+          <p align="center">{{totales.totalKgVolatil | kilosA: unidadMedida | number: '.2'}}
+            {{unidadMedida | kilosTextoA}}</p>
+        </mat-dialog-content>
+      </div>
+
+      <div fxFlex="16%">
+        <h4 mat-dialog-title align="center">{{unidadMedida | kilosTextoA: 'largo'}} netos</h4>
+        <mat-dialog-content class="mat-typography">
+          <p align="center">{{totales.totalKgNetos | kilosA: unidadMedida | number: '.2'}}
+            {{unidadMedida | kilosTextoA}}</p>
+        </mat-dialog-content>
+      </div>
+
+      <div fxFlex="16%">
+        <h4 mat-dialog-title align="center">Entregas</h4>
+        <mat-dialog-content class="mat-typography">
+          <p align="center">{{ totales.cantidadEntregas }}</p>
+        </mat-dialog-content>
+      </div>
+    </div>
+  </div>
 
   <div fxFlex="100%">
     <mat-card>
+      <mat-card-title>Entregas</mat-card-title>
 
       <mat-card-content>
-
-        <!-- Movimiento para panalla grandes -->
         <!-- Encabezado -->
         <div fxLayout="row" fxLayoutAlign="center space-between">
           <div fxFlex="6%" class="conceptoEncabezado">Fecha</div>
@@ -25,7 +76,7 @@
             <div fxLayout="row" fxLayoutAlign="center space-between">
               <div fxFlex="50%" class="conceptoEncabezado">%</div>
               <mat-divider [vertical]="true"></mat-divider>
-              <div fxFlex="50%" class="conceptoEncabezado">Kg.</div>
+              <div fxFlex="50%" class="conceptoEncabezado">{{unidadMedida | kilosTextoA}}</div>
             </div>
           </div>
 
@@ -39,7 +90,7 @@
             <div fxLayout="row" fxLayoutAlign="center space-between">
               <div fxFlex="50%" class="conceptoEncabezado">%</div>
               <mat-divider [vertical]="true"></mat-divider>
-              <div fxFlex="50%" class="conceptoEncabezado">Kg.</div>
+              <div fxFlex="50%" class="conceptoEncabezado">{{unidadMedida | kilosTextoA}}</div>
             </div>
           </div>
 
@@ -53,7 +104,7 @@
             <div fxLayout="row" fxLayoutAlign="center space-between">
               <div fxFlex="50%" class="conceptoEncabezado">%</div>
               <mat-divider [vertical]="true"></mat-divider>
-              <div fxFlex="50%" class="conceptoEncabezado">Kg.</div>
+              <div fxFlex="50%" class="conceptoEncabezado">{{unidadMedida | kilosTextoA}}</div>
             </div>
           </div>
 
@@ -85,20 +136,33 @@
 
           <!--Listados de movimientos del campo-->
           <div fxLayout="row" fxLayoutAlign="center space-between" class="movimiento"
-            *ngFor="let movimiento of movimientoAgrupado.listado; index as i" 
+            *ngFor="let movimiento of movimientoAgrupado.listado; index as i" (click)="verDetalle(movimiento)"
             [ngClass]="i%2 == 0 ? 'filaPar' : 'filaImpar'" fxLayoutGap="0.5%">
 
             <div fxFlex="6%" class="conceptoListaCompleta">{{movimiento.fecha}}</div>
             <div fxFlex="12%" class="conceptoListaCompleta">{{movimiento.comprobante}}</div>
-            <div fxFlex="6%" class="importeListaCompleta">{{movimiento.kilosBrutos | number: '.0'}}</div>
-            <div fxFlex="3%" class="importeListaCompleta">{{movimiento.porcentajeHumedad | number: '.2'}}</div>
-            <div fxFlex="3%" class="importeListaCompleta">{{movimiento.kgMermaHumedad | number: '.0'}}</div>
-            <div fxFlex="2%" class="importeListaCompleta">{{movimiento.porcentajeZarandeo | number: '.2'}}</div>
-            <div fxFlex="2%" class="importeListaCompleta">{{movimiento.kgMermaZarandeo | number: '.0'}}</div>
-            <div fxFlex="3%" class="importeListaCompleta">{{movimiento.porcentajeVolatil | number: '.2'}}</div>
-            <div fxFlex="3%" class="importeListaCompleta">{{movimiento.kgMermaVolatil | number: '.0'}}</div>
-            <div fxFlex="8%" class="importeListaCompleta">{{movimiento.factor}}/{{movimiento.grado}}</div>
-            <div fxFlex="6%" class="importeListaCompleta">{{movimiento.kilosNetos | number: '.0'}}</div>
+            <div fxFlex="6%" class="importeListaCompleta">
+              {{movimiento.kilosBrutos | kilosA: unidadMedida | number: '.0'}}
+            </div>
+            <div fxFlex="3%" class="importeListaCompleta">
+              {{movimiento.porcentajeHumedad | number: '.2'}}</div>
+            <div fxFlex="3%" class="importeListaCompleta">
+              {{movimiento.kgMermaHumedad | kilosA: unidadMedida | number: '.0'}}
+            </div>
+            <div fxFlex="2%" class="importeListaCompleta">
+              {{movimiento.porcentajeZarandeo | number: '.2'}}</div>
+            <div fxFlex="2%" class="importeListaCompleta">
+              {{movimiento.kgMermaZarandeo | kilosA: unidadMedida | number: '.0'}}
+            </div>
+            <div fxFlex="3%" class="importeListaCompleta">
+              {{movimiento.porcentajeVolatil | number: '.2'}}</div>
+            <div fxFlex="3%" class="importeListaCompleta">
+              {{movimiento.kgMermaVolatil | kilosA: unidadMedida | number: '.0'}}
+            </div>
+            <div fxFlex="8%" class="importeListaCompleta">{{movimiento.factor}}/{{movimiento.grado}}
+            </div>
+            <div fxFlex="6%" class="importeListaCompleta">
+              {{movimiento.kilosNetos | kilosA: unidadMedida | number: '.0'}}</div>
             <div fxFlex="2%" class="importeListaCompleta">{{movimiento.planta}}</div>
             <div fxFlex="7%" class="importeListaCompleta">{{movimiento.n1116A}}</div>
             <div fxFlex="5%" class="importeListaCompleta">{{movimiento.numeroComprobanteExterno}}</div>
@@ -111,21 +175,29 @@
           <div fxLayout="row" fxLayoutAlign="start none">
             <div fxFlex="6%"></div>
             <div fxFlex="12%" class="tituloTotalCampo">TOTAL CAMPO:</div>
-            <div fxFlex="6%" class="importeTotalCampo">{{movimientoAgrupado.totales.totalKgBrutos | number: '.0'}}</div>
-            <div fxFlex="3%"></div>
-            <div fxFlex="3%" class="importeTotalCampo">{{movimientoAgrupado.totales.totalKgHumedad | number: '.0'}}
+            <div fxFlex="6%" class="importeTotalCampo">
+              {{movimientoAgrupado.totales.totalKgBrutos | kilosA: unidadMedida | number: '.0'}}
             </div>
             <div fxFlex="3%"></div>
-            <div fxFlex="3%" class="importeTotalCampo">{{movimientoAgrupado.totales.totalKgZarandeo | number: '.0'}}
+            <div fxFlex="3%" class="importeTotalCampo">
+              {{movimientoAgrupado.totales.totalKgHumedad | kilosA: unidadMedida | number: '.0'}}
             </div>
             <div fxFlex="3%"></div>
-            <div fxFlex="3%" class="importeTotalCampo">{{movimientoAgrupado.totales.totalKgVolatil | number: '.0'}}
+            <div fxFlex="3%" class="importeTotalCampo">
+              {{movimientoAgrupado.totales.totalKgZarandeo | kilosA: unidadMedida | number: '.0'}}
+            </div>
+            <div fxFlex="3%"></div>
+            <div fxFlex="3%" class="importeTotalCampo">
+              {{movimientoAgrupado.totales.totalKgVolatil | kilosA: unidadMedida | number: '.0'}}
             </div>
             <div fxFlex="8%"></div>
-            <div fxFlex="3%" class="importeTotalCampo">{{movimientoAgrupado.totales.totalKgNetos | number: '.0'}}</div>
+            <div fxFlex="3%" class="importeTotalCampo">
+              {{movimientoAgrupado.totales.totalKgNetos | kilosA: unidadMedida | number: '.0'}}
+            </div>
             <div fxFlex="2%"></div>
             <div fxFlex="7%" class="tituloTotalCampo">ENTREGAS:</div>
-            <div fxFlex="5%" class="importeTotalCampo">{{movimientoAgrupado.totales.cantidadEntregas | number: '.0'}}
+            <div fxFlex="5%" class="importeTotalCampo">
+              {{movimientoAgrupado.totales.cantidadEntregas | number: '.0'}}
             </div>
           </div>
 
@@ -136,8 +208,8 @@
     </mat-card>
   </div>
 
-  <button [disabled]="cargando==true" mat-mini-fab class="custom-button" 
-    >
+  <button [disabled]="cargando==true" mat-mini-fab class="custom-button" (click)="verOpcionesExtras()"
+    *ngIf="listadoEntregasAgrupadasPorCampo != null">
     <mat-icon aria-label="Más opciones">list</mat-icon>
   </button>
 </div>
