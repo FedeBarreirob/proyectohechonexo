@@ -47,7 +47,6 @@ import { CtacteDetalleMasOperacionesComponent } from './components/listados/cta-
 import { CtaCteAplicadaMasOperacionesComponent } from './components/listados/cta-cte-aplicada/cta-cte-aplicada-mas-operaciones/cta-cte-aplicada-mas-operaciones.component';
 import { CtaCteAplicadaDetalleMasOperacionesComponent } from './components/listados/cta-cte-aplicada/cta-cte-aplicada-detalle-mas-operaciones/cta-cte-aplicada-detalle-mas-operaciones.component';
 import { EntregasMasOperacionesComponent } from './components/listados/entregas/entregas-mas-operaciones/entregas-mas-operaciones.component';
-import { EntregasDetalleMasOperacionesComponent } from './components/listados/entregas/entregas-detalle-mas-operaciones/entregas-detalle-mas-operaciones.component';
 import { VentasMasOperacionesComponent } from './components/listados/ventas/ventas-mas-operaciones/ventas-mas-operaciones.component';
 import { VentasDetalleMasOperacionesComponent } from './components/listados/ventas/ventas-detalle-mas-operaciones/ventas-detalle-mas-operaciones.component';
 import { MercPendEntregarMasOperacionesComponent } from './components/listados/merc-pend-entregar/merc-pend-entregar-mas-operaciones/merc-pend-entregar-mas-operaciones.component';
@@ -117,7 +116,6 @@ export function tokenGetter() {
 		CtaCteAplicadaMasOperacionesComponent,
 		CtaCteAplicadaDetalleMasOperacionesComponent,
 		EntregasMasOperacionesComponent,
-		EntregasDetalleMasOperacionesComponent,
 		VentasMasOperacionesComponent,
 		VentasDetalleMasOperacionesComponent,
 		MercPendEntregarMasOperacionesComponent,
@@ -205,7 +203,6 @@ export function tokenGetter() {
 		CtaCteAplicadaMasOperacionesComponent,
 		CtaCteAplicadaDetalleMasOperacionesComponent,
 		EntregasMasOperacionesComponent,
-		EntregasDetalleMasOperacionesComponent,
 		VentasMasOperacionesComponent,
 		VentasDetalleMasOperacionesComponent,
 		MercPendEntregarMasOperacionesComponent,

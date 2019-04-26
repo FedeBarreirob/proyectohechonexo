@@ -1,7 +1,6 @@
 import { Component, OnInit, Inject } from '@angular/core';
 import { MAT_DIALOG_DATA, MatDialog, MatDialogRef } from '@angular/material';
 import { MovimientoEntrega } from '../../../../interfaces/entregas/listado-entregas';
-import { EntregasDetalleMasOperacionesComponent } from '../entregas-detalle-mas-operaciones/entregas-detalle-mas-operaciones.component';
 import { PerfilBasico } from '../../../../interfaces/perfiles/perfil-basico';
 import { AuthenticationService } from '../../../../services/security/authentication.service';
 import { EntregasExportacionesService } from '../../../../services/entregas/entregas-exportaciones.service';
@@ -41,13 +40,6 @@ export class EntregasDetalleComponent implements OnInit {
 		if (perfilBasico) {
 			this.unidadMedida = perfilBasico.informacionPersonal.unidadMedidaPeso;
 		}
-	}
-
-	// funcion que muestra las operaciones extras
-	verOpcionesExtras() {
-		this.dialog.open(EntregasDetalleMasOperacionesComponent, {
-			data: this.data
-		});
 	}
 
 	// funcion encargada de cerrar el modal
