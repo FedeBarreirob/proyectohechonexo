@@ -7,9 +7,11 @@
 		<app-tool-bar-general [titulo]="'Entregas'" [disabled]="cargando==true"
 			(botonPersonalizadoEjecutado)="mostrarOcultarFiltros($event)"
 			[urlImagenAccionPersonalizada]="'assets/toolbar/embudo.png'"></app-tool-bar-general>
-		<app-entregas-lista-movil *ngIf="esCelular===true" [observerFiltroListadoMovil$]="observerFiltroListadoMovil$"></app-entregas-lista-movil>
+		<app-entregas-lista-movil *ngIf="esCelular===true" [observerFiltroListadoMovil$]="observerFiltroListadoMovil$"
+			(seleccionMovimiento)="verDetalle($event)"></app-entregas-lista-movil>
 
-		<app-entregas-lista-desktop *ngIf="esCelular===false" [observerFiltroListadoDesktop$]="observerFiltroListadoDesktop$">
+		<app-entregas-lista-desktop *ngIf="esCelular===false"
+			[observerFiltroListadoDesktop$]="observerFiltroListadoDesktop$" (seleccionMovimiento)="verDetalle($event)">
 		</app-entregas-lista-desktop>
 	</section>
 </mat-sidenav-container>

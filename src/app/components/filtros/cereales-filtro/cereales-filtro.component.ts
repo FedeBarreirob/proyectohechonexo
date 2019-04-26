@@ -26,7 +26,7 @@ export class CerealesFiltroComponent implements OnInit {
   public especie: string = "";
   public cosecha: string = "";
   public fechaDesde: string;
-  public fechaHasta: string = (new Date()).toISOString();
+  public fechaHasta: string;
 
   constructor(private datePipe: DatePipe) { }
 

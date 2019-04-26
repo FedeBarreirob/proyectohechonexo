@@ -1,4 +1,4 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { MovimientoEntrega } from '../../../../interfaces/entregas/listado-entregas';
 import { Subject } from 'rxjs';
 import { EntregasService } from '../../../../services/entregas/entregas.service';
@@ -15,6 +15,9 @@ export class EntregasListaMovilComponent implements OnInit {
 
   @Input()
   observerFiltroListadoMovil$: Subject<any>;
+
+  @Output()
+  seleccionMovimiento: EventEmitter<MovimientoEntrega> = new EventEmitter<MovimientoEntrega>();
 
   listadoEntregas: Array<MovimientoEntrega> = [];
   pagina: number = 1;
@@ -98,5 +101,10 @@ export class EntregasListaMovilComponent implements OnInit {
   onScroll() {
     this.pagina = this.pagina + 1;
     this.cargarListado(false);
+  }
+
+  // funcion que muestra el detalle de un movimiento seleccionado
+  verDetalle(movimiento: MovimientoEntrega) {
+    this.seleccionMovimiento.emit(movimiento);
   }
 }

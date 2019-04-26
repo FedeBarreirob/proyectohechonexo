@@ -125,9 +125,22 @@ export class EntregasComponent implements OnInit {
 	verDetalle(movimiento: MovimientoEntrega) {
 		this.movimientoSeleccionado = movimiento;
 
-		this.dialog.open(EntregasDetalleComponent, {
-			data: movimiento
-		});
+		let opciones;
+		if (this.esCelular) {
+			opciones = {
+				data: movimiento,
+				maxWidth: '100vw',
+				maxHeight: '100vh',
+				height: '100%',
+				width: '100%'
+			};
+		} else {
+			opciones = {
+				data: movimiento
+			};
+		}
+
+		this.dialog.open(EntregasDetalleComponent, opciones);
 	}
 
 	// funcion que muestra las operaciones extras

@@ -1,0 +1,45 @@
+.encabezado-entrega {
+    margin-top: 30px;
+    margin-bottom: 10px;
+}
+
+.encabezado-texto-entrega {
+    height: 17px;
+    width: 87px;
+    color: #333333;
+    font-family: Rubik;
+    font-size: 14px;
+    line-height: 17px;
+    width: 100%;
+}
+
+.encabezado-texto-cantidad-producto {
+    height: 38px;
+    width: 219px;
+    color: #333333;
+    font-family: RubikLight;
+    font-size: 32px;
+    line-height: 38px;
+    width: 100%;
+    text-overflow: ellipsis;
+    overflow: hidden;
+}
+
+.encabezado-fecha {
+    height: 17px;
+    width: 184px;
+    color: #666666;
+    font-family: Rubik;
+    font-size: 14px;
+    line-height: 17px;
+    width: 100%;
+}
+
+.encabezado-imagen-especie {
+    margin-right: 20px;
+}
+
+.encabezado-imagen-especie img {
+    height: 38px;
+    width: 38px;
+}

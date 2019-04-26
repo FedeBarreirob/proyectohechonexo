@@ -85,6 +85,7 @@ import { ImagenEspeciePipe } from './pipes/imagen-especie.pipe';
 import { EntregasListaDesktopComponent } from './components/listados/entregas/entregas-lista-desktop/entregas-lista-desktop.component';
 import { EntregasListaMovilComponent } from './components/listados/entregas/entregas-lista-movil/entregas-lista-movil.component';
 import { InfiniteScrollModule } from 'ngx-infinite-scroll';
+import { ToolBarParaModalComponent } from './components/menu/tool-bar-para-modal/tool-bar-para-modal.component';
 
 registerLocaleData(localeEsAr, 'es-AR');
 
@@ -151,7 +152,8 @@ export function tokenGetter() {
 		CerealesFiltroComponent,
 		ImagenEspeciePipe,
 		EntregasListaDesktopComponent,
-		EntregasListaMovilComponent
+		EntregasListaMovilComponent,
+		ToolBarParaModalComponent
 	],
 	imports: [
 		HttpClientModule,

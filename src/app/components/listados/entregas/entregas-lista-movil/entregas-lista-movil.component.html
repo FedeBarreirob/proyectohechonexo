@@ -9,7 +9,8 @@
   [infiniteScrollDistance]="2" [infiniteScrollThrottle]="50" (scrolled)="onScroll()" [scrollWindow]="false">
 
   <div fxLayout="row" fxLayoutAlign="space-around center"
-    *ngFor="let movimiento of (listadoEntregas ? listadoEntregas : [])" class="movimiento-fila">
+    *ngFor="let movimiento of (listadoEntregas ? listadoEntregas : [])" class="movimiento-fila"
+    (click)="verDetalle(movimiento)">
 
     <div fxFlex="20%">
       <img class="movimiento-icono" src="{{movimiento.especie | imagenEspecie}}" />

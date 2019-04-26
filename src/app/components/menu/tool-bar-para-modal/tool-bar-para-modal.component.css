@@ -1,0 +1,29 @@
+.toolbarModal {
+    margin-top: 20px;
+}
+
+.imgAccionPersonalizada {
+    width: 24px;
+    height: 24px;
+}
+
+.perfil-avatar {
+    height: 24px;
+    width: 24px;
+}
+
+.titulo {
+    font-family: RubikMedium;
+    font-size: 14px;
+    text-align: center;
+    margin-top: 13px;
+}
+
+.botonPersonalizado {
+    float: right;
+    margin-right: 10px;
+}
+
+.boton-salir {
+    margin-left: 5px;
+}

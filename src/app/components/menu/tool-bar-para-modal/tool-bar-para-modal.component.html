@@ -1,0 +1,29 @@
+<div fxLayout="row" fxLayoutAlign="space-around center" class="toolbarModal">
+
+    <div fxFlex="48px">
+        <button mat-icon-button class="boton-salir" (click)="salir()">
+            <mat-icon [ngStyle]="{'color': colorIndicador}">keyboard_backspace</mat-icon>
+        </button>
+    </div>
+
+    <div fxFlex="48px" class="perfil-avatar">
+        <app-avatar-del-perfil></app-avatar-del-perfil>
+    </div>
+
+    <div fxFlex>
+
+        <div fxFlex>
+            <div class="titulo" [ngStyle]="{'color': colorIndicador}">
+                {{titulo}}
+            </div>
+        </div>
+
+        <div fxFlex="96px">
+            <button mat-icon-button class="botonPersonalizado" (click)="ejecutarBotonDerechoPersonalizado()"
+                *ngIf="urlImagenDerechoIzquierdo != null">
+                <img [src]="urlImagenDerechoIzquierdo" class="imgAccionPersonalizada" />
+            </button>
+        </div>
+
+    </div>
+</div>

@@ -1,5 +1,5 @@
 import { Component, OnInit, Inject } from '@angular/core';
-import { MAT_DIALOG_DATA, MatDialog } from '@angular/material';
+import { MAT_DIALOG_DATA, MatDialog, MatDialogRef } from '@angular/material';
 import { MovimientoEntrega } from '../../../../interfaces/entregas/listado-entregas';
 import { EntregasDetalleMasOperacionesComponent } from '../entregas-detalle-mas-operaciones/entregas-detalle-mas-operaciones.component';
 import { PerfilBasico } from '../../../../interfaces/perfiles/perfil-basico';
@@ -17,7 +17,8 @@ export class EntregasDetalleComponent implements OnInit {
 	constructor(
 		@Inject(MAT_DIALOG_DATA) public data: MovimientoEntrega,
 		public dialog: MatDialog,
-		private authenticationService: AuthenticationService
+		private authenticationService: AuthenticationService,
+		private dialogRef: MatDialogRef<EntregasDetalleComponent>
 	) { }
 
 	ngOnInit() {
@@ -37,5 +38,10 @@ export class EntregasDetalleComponent implements OnInit {
 		this.dialog.open(EntregasDetalleMasOperacionesComponent, {
 			data: this.data
 		});
+	}
+
+	// funcion encargada de cerrar el modal
+	salir() {
+		this.dialogRef.close();
 	}
 }

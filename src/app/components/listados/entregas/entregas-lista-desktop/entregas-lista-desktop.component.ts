@@ -1,4 +1,4 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { MovimientoEntregaAgrupadoPorCampo, EntregasTotales, MovimientoEntrega } from '../../../../interfaces/entregas/listado-entregas';
 import { Subject } from 'rxjs';
 import { FiltroEntregas } from '../../../../interfaces/entregas/filtro-entregas';
@@ -18,6 +18,9 @@ export class EntregasListaDesktopComponent implements OnInit {
 
   @Input()
   observerFiltroListadoDesktop$: Subject<any>;
+
+  @Output()
+  seleccionMovimiento: EventEmitter<MovimientoEntrega> = new EventEmitter<MovimientoEntrega>();
 
   perfilBasico: PerfilBasico;
   filtro: FiltroEntregas;
@@ -87,9 +90,7 @@ export class EntregasListaDesktopComponent implements OnInit {
 
   // funcion que muestra el detalle de un movimiento seleccionado
   verDetalle(movimiento: MovimientoEntrega) {
-    this.dialog.open(EntregasDetalleComponent, {
-      data: movimiento
-    });
+    this.seleccionMovimiento.emit(movimiento);
   }
 
   // funcion que muestra las operaciones extras

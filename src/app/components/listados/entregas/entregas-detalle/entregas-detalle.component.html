@@ -1,4 +1,29 @@
-<h2 mat-dialog-title>Detalle</h2>
+<app-tool-bar-para-modal [titulo]="'Detalle'" [urlImagenDerechoIzquierdo]="'assets/toolbar/exportar.png'"
+  (botonSalirEjecutado)="salir()"></app-tool-bar-para-modal>
+
+<!--Encabezado-->
+<div fxLayout="row" fxLayoutAlign="space-around center" class="encabezado-entrega">
+  <div fxFlex="10%" class="encabezado-imagen-especie">
+    <img src="{{data.especie | imagenEspecie}}" />
+  </div>
+  <div fxFlex="90%">
+    <div fxLayout="column" fxLayoutAlign="none">
+      <div fxFlex="100%" class="encabezado-texto-entrega">
+        Entrega
+      </div>
+
+      <div fxFlex="100%" class="encabezado-texto-cantidad-producto">
+        {{data.kilosNetos | kilosA: unidadMedida | number: '.0'}} {{unidadMedida | kilosTextoA}} de
+        {{data.especie}}
+      </div>
+
+      <div fxFlex="100%" class="encabezado-fecha">
+        {{data.fecha}}
+      </div>
+    </div>
+  </div>
+</div>
+
 
 <mat-dialog-content class="mat-typography">
 
@@ -63,8 +88,3 @@
   </table>
 
 </mat-dialog-content>
-
-<mat-dialog-actions align="end">
-  <button mat-button (click)="verOpcionesExtras()">Acciones</button>
-  <button mat-button mat-dialog-close>Cerrar</button>
-</mat-dialog-actions>
