@@ -85,6 +85,8 @@ import { EntregasListaDesktopComponent } from './components/listados/entregas/en
 import { EntregasListaMovilComponent } from './components/listados/entregas/entregas-lista-movil/entregas-lista-movil.component';
 import { InfiniteScrollModule } from 'ngx-infinite-scroll';
 import { ToolBarParaModalComponent } from './components/menu/tool-bar-para-modal/tool-bar-para-modal.component';
+import { VentasListaMovilComponent } from './components/listados/ventas/ventas-lista-movil/ventas-lista-movil.component';
+import { VentasListaDesktopComponent } from './components/listados/ventas/ventas-lista-desktop/ventas-lista-desktop.component';
 
 registerLocaleData(localeEsAr, 'es-AR');
 
@@ -151,7 +153,9 @@ export function tokenGetter() {
 		ImagenEspeciePipe,
 		EntregasListaDesktopComponent,
 		EntregasListaMovilComponent,
-		ToolBarParaModalComponent
+		ToolBarParaModalComponent,
+		VentasListaMovilComponent,
+		VentasListaDesktopComponent
 	],
 	imports: [
 		HttpClientModule,
