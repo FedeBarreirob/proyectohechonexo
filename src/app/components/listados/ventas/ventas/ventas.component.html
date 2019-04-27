@@ -4,8 +4,8 @@
 			(botonCerrar)="menuFiltro.toggle()" (botonAplicar)="cargarListado($event)"></app-cereales-filtro>
 	</mat-sidenav>
 	<section>
-		<app-tool-bar-general [titulo]="'Ventas'" [disabled]="cargando==true"
-			(botonPersonalizadoEjecutado)="mostrarOcultarFiltros($event)"
+		<app-tool-bar-general [titulo]="'Ventas'" [disabled]="false"
+			(botonPersonalizadoEjecutado)="mostrarOcultarFiltros()"
 			[urlImagenAccionPersonalizada]="'assets/toolbar/embudo.png'"></app-tool-bar-general>
 
 		<app-ventas-lista-movil *ngIf="esCelular===true" [observerFiltroListadoMovil$]="observerFiltroListadoMovil$"
