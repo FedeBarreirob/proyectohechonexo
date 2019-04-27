@@ -1,8 +1,11 @@
-import { FiltroEspecieCosecha } from "../varios/filtro-especie-cosecha";
-
 export interface FiltroVentas {
     cuenta: string,
-    fechaDesde: string,
-    fechaHasta: string,
-    filtroEspecieCosechaDTO: FiltroEspecieCosecha
+    fechaDesde?: string,
+    fechaHasta?: string,
+    especie: string,
+    cosecha: string,
+    totales: boolean,
+    paginado: boolean,
+    pagina: number,
+    cantPorPagina: number
 }

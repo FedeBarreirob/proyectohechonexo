@@ -1,3 +1,34 @@
-<p>
-  ventas-lista-movil works!
-</p>
+<mat-progress-bar *ngIf="cargando" mode="indeterminate"></mat-progress-bar>
+
+<div fxLayout="row" fxLayoutAlign="space-around center" class="titulos">
+  <div fxFlex="40%">Ref. de entrega</div>
+  <div fxFlex="30%">{{unidadMedida | kilosTextoA}} netos</div>
+  <div fxFlex="30%">$/QQ</div>
+</div>
+
+<div class="contenedor-listado" fxLayout="column" fxLayoutWrap fxLayoutAlign="none" infiniteScroll
+  [infiniteScrollDistance]="2" [infiniteScrollThrottle]="50" (scrolled)="onScroll()" [scrollWindow]="false">
+
+  <div fxLayout="row" fxLayoutAlign="space-around center" *ngFor="let movimiento of (listado ? listado : [])"
+    class="movimiento-fila" (click)="verDetalle(movimiento)">
+
+    <div fxFlex="14%">
+      <img class="movimiento-icono" src="{{movimiento.especie | imagenEspecie}}" />
+    </div>
+
+    <div fxFlex="26%">
+      <p class="especie-cosecha">{{movimiento.especie}} {{movimiento.cosecha}}</p>
+      <p class="fecha">{{movimiento.fecha}}</p>
+    </div>
+
+    <div fxFlex="40%" class="kg-netos" align="right">
+      {{movimiento.kilosNetos | kilosA: unidadMedida | number: '.0'}}
+    </div>
+
+    <div fxFlex="40%" align="right">
+      <span class="precio-qq">${{movimiento.precioPorQuintal | number: '.2'}}</span>
+      <span class="moneda">{{movimiento.moneda | moneda}}</span>
+    </div>
+  </div>
+
+</div>

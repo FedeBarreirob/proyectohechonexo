@@ -6,7 +6,6 @@ import { EntregasService } from '../../../../services/entregas/entregas.service'
 import { MatDialog } from '@angular/material';
 import { PerfilBasico } from '../../../../interfaces/perfiles/perfil-basico';
 import { AuthenticationService } from '../../../../services/security/authentication.service';
-import { EntregasDetalleComponent } from '../entregas-detalle/entregas-detalle.component';
 import { EntregasMasOperacionesComponent } from '../entregas-mas-operaciones/entregas-mas-operaciones.component';
 
 @Component({
@@ -71,12 +70,12 @@ export class EntregasListaDesktopComponent implements OnInit {
       filtroAgrupado.agrupadoPorCampo = true;
       filtroAgrupado.paginado = false;
 
-      return this.entregasService.listadoEntregas(filtroAgrupado).subscribe(respuesta => {
+      this.entregasService.listadoEntregas(filtroAgrupado).subscribe(respuesta => {
         this.listadoEntregasAgrupadasPorCampo = respuesta.datos.listadoAgrupadoPorCampo;
         this.totales = respuesta.datos.totales;
 
         this.cargando = false;
-      }, error => {
+      }, () => {
         this.cargando = false;
       });
     }

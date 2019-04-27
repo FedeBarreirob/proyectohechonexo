@@ -15,10 +15,10 @@ export class EntregasService {
   private urlEntregasListado = `${environment.hostEntregasYVentas}/Entregas/listado`;
   private urlEntregasFiltrosEspecieCosecha = `${environment.hostEntregasYVentas}/Entregas/filtrosEspecieCosechas`;
 
-  constructor(private http: HttpClient, private authenticationService: AuthenticationService) {
-    this.urlEntregasListado = `${environment.hostEntregasYVentas}/Entregas/listado`;
-    this.urlEntregasFiltrosEspecieCosecha = `${environment.hostEntregasYVentas}/Entregas/filtrosEspecieCosechas`;
-
+  constructor(
+    private http: HttpClient,
+    private authenticationService: AuthenticationService
+  ) {
   }
 
   // funcion que retorna un observable del listado con las entregas asociado a una cuenta dada

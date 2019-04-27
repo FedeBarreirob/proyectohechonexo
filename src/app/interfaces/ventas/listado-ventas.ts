@@ -1,10 +1,16 @@
-export interface ListadoVentas {
+export interface ListadoVentasConTotales {
     exito: boolean,
     mensaje: string,
     datos: {
         listado: Array<MovimientoVenta>,
         totales: VentasTotales
     }
+}
+
+export interface ListadoVentas {
+    exito: boolean,
+    mensaje: string,
+    datos: Array<MovimientoVenta>
 }
 
 export interface MovimientoVenta {

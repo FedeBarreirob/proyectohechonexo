@@ -1,15 +1,14 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { VentasService } from '../../../../services/ventas/ventas.service';
-import { MovimientoVenta, VentasTotales } from '../../../../interfaces/ventas/listado-ventas';
-import { FiltroVentas } from '../../../../interfaces/ventas/filtro-ventas';
-import { UserAuth } from '../../../../models/security/user';
-import { AuthenticationService } from '../../../../services/security/authentication.service';
+import { MovimientoVenta } from '../../../../interfaces/ventas/listado-ventas';
 import { DatePipe } from '@angular/common';
-import { MatDialog } from '@angular/material';
-import { VentasDetalleComponent } from '../ventas-detalle/ventas-detalle.component';
-import { VentasMasOperacionesComponent } from '../ventas-mas-operaciones/ventas-mas-operaciones.component';
-import { PerfilBasico } from '../../../../interfaces/perfiles/perfil-basico';
+import { MatDialog, MatSidenav } from '@angular/material';
 import { FiltroEspecieCosecha } from '../../../../interfaces/varios/filtro-especie-cosecha';
+import { EntidadAlg } from '../../../../interfaces/perfiles/entidad-alg';
+import { Subject } from 'rxjs';
+import { DeviceDetectorService } from 'ngx-device-detector';
+import { CuentaAlgService } from '../../../../services/observers/cuentas-alg/cuenta-alg.service';
+import { VentasDetalleComponent } from '../ventas-detalle/ventas-detalle.component';
 
 @Component({
 	selector: 'app-ventas',
@@ -19,124 +18,87 @@ import { FiltroEspecieCosecha } from '../../../../interfaces/varios/filtro-espec
 })
 export class VentasComponent implements OnInit {
 
-	public listadoVentas: Array<MovimientoVenta>;
-	private movimientoSeleccionado: MovimientoVenta = null;
-	public totales: VentasTotales = null;
-	public cargando: boolean;
+	@ViewChild('menuFiltro') public sidenav: MatSidenav;
 
-	public cuenta: string = "";
-	public perfilBasico: PerfilBasico;
-	public fechaDesde: string;
-	public fechaHasta: string = (new Date()).toISOString();
-	public unidadMedida: string;
-
-	public filtrosEspecieCosecha: Array<FiltroEspecieCosecha> = [];
-	public filtroEspecieCosechaSeleccionado: FiltroEspecieCosecha = null;
+	public cuenta: EntidadAlg;
+	public filtrosEspecieCosecha: FiltroEspecieCosecha;
 	public cargandoFiltros: boolean;
 
-	constructor(private ventasService: VentasService,
-		private authenticationService: AuthenticationService,
-		private datePipe: DatePipe,
-		public dialog: MatDialog) {
-		this.establecerFiltrosPorDefecto();
-	}
+	observerFiltroListadoMovil$ = new Subject<any>();
+	observerFiltroListadoDesktop$ = new Subject<any>();
+	esCelular: boolean;
+
+	constructor(
+		private ventasService: VentasService,
+		public dialog: MatDialog,
+		private cuentaAlgService: CuentaAlgService,
+		private deviceService: DeviceDetectorService) { }
 
 	ngOnInit() {
-		this.cargando = false;
+		this.esCelular = this.deviceService.isMobile();
 
-		this.authenticationService.perfilActivo$.subscribe(
-			perfil => {
-				this.perfilBasico = perfil;
-				this.cargarUnidadMedida()
-			});
-
-		this.cargarUnidadMedida();
-	}
-
-	// funcion que carga la unidad de medida desde el perfil 
-	cargarUnidadMedida() {
-		if (this.perfilBasico) {
-			this.unidadMedida = this.perfilBasico.informacionPersonal.unidadMedidaPeso;
-		}
+		this.cuentaAlgService.cuentaSeleccionada$.subscribe(
+			cuentaAlg => this.seleccionarCuenta(cuentaAlg)
+		);
 	}
 
 	// funcion encargada de cargar los filtros de especie cosecha cuando se cambia la seleccion de cuenta
 	cargarFiltrosEspecieCosecha() {
-		this.cargandoFiltros = true;
-		this.filtroEspecieCosechaSeleccionado = null;
-		let usuarioLogueado = <UserAuth>this.authenticationService.usuarioLogueado();
-		this.ventasService.listadoFiltrosEspecieCosecha(this.cuenta, usuarioLogueado.token).subscribe(
-			respuesta => {
-				this.filtrosEspecieCosecha = respuesta;
-				this.cargandoFiltros = false;
-			}, error => { console.log("error"); this.cargandoFiltros = true; }
-		);
+		if (!this.cargandoFiltros) {
+			this.cargandoFiltros = true;
+
+			let codigoEntidad = (this.cuenta) ? this.cuenta.id.codigo : null;
+
+			this.ventasService.listadoFiltrosEspecieCosecha(codigoEntidad).subscribe(
+				respuesta => {
+					this.filtrosEspecieCosecha = respuesta;
+					this.cargandoFiltros = false;
+				}, () => { console.log("error"); this.cargandoFiltros = true; }
+			);
+		}
 	}
 
-	// funcion que ejecuta la carga del listado de ventas
-	cargarListado() {
-		this.cargando = true;
-		this.limpiar();
+	// funcion que ejecuta la carga del listado de entregas
+	cargarListado(filtro: any) {
 
-		let filtro: FiltroVentas = {
-			cuenta: this.cuenta,
-			fechaDesde: this.datePipe.transform(new Date(this.fechaDesde), 'dd/MM/yyyy'),
-			fechaHasta: this.datePipe.transform(new Date(this.fechaHasta), 'dd/MM/yyyy'),
-			filtroEspecieCosechaDTO: this.filtroEspecieCosechaSeleccionado
-		}
-
-		let usuarioLogueado = <UserAuth>this.authenticationService.usuarioLogueado();
-		if (usuarioLogueado != null) {
-			return this.ventasService.listadoVentas(filtro, usuarioLogueado.token).subscribe(respuesta => {
-				this.listadoVentas = respuesta.datos.listado;
-				this.totales = respuesta.datos.totales;
-
-				this.cargando = false;
-			}, error => {
-				this.cargando = false;
-			});
+		if (this.esCelular) {
+			this.observerFiltroListadoMovil$.next(filtro);
+		} else {
+			this.observerFiltroListadoDesktop$.next(filtro);
 		}
 	}
 
 	// funcion que muestra el detalle de un movimiento seleccionado
 	verDetalle(movimiento: MovimientoVenta) {
-		this.movimientoSeleccionado = movimiento;
 
-		this.dialog.open(VentasDetalleComponent, {
-			data: movimiento
-		});
-	}
+		let opciones;
+		if (this.esCelular) {
+			opciones = {
+				data: movimiento,
+				maxWidth: '100vw',
+				maxHeight: '100vh',
+				height: '100%',
+				width: '100%'
+			};
+		} else {
+			opciones = {
+				data: movimiento,
+				height: '90%',
+				width: '500px'
+			};
+		}
 
-	// funcion que muestra las operaciones extras
-	verOpcionesExtras() {
-		this.dialog.open(VentasMasOperacionesComponent, {
-			data: {
-				movimientos: this.listadoVentas,
-				totales: this.totales
-			}
-		});
+		this.dialog.open(VentasDetalleComponent, opciones);
 	}
 
 	// funcion encargada de capturar el valor de la cuenta
-	seleccionarCuenta(cuentaSeleccionada?: string) {
+	seleccionarCuenta(cuentaSeleccionada?: EntidadAlg) {
 		this.cuenta = cuentaSeleccionada;
 		this.cargarFiltrosEspecieCosecha();
-		this.establecerFiltrosPorDefecto();
-		this.cargarListado();
 	}
 
-	// funcion que acomoda los filtros a default
-	establecerFiltrosPorDefecto() {
-		let sieteDiasAtras: Date = new Date();
-		sieteDiasAtras.setDate(sieteDiasAtras.getDate() - 7);
-		this.fechaDesde = sieteDiasAtras.toISOString();
-
-		this.fechaHasta = (new Date()).toISOString();
-	}
-
-	// funcion encargada de limpiar para nueva generacion
-	limpiar() {
-		this.listadoVentas = [];
-		this.totales = null;
+	// funcion encargada de mostrar u ocultar los filtros
+	mostrarOcultarFiltros() {
+		this.sidenav.toggle();
 	}
 }

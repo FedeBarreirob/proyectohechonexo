@@ -48,7 +48,6 @@ import { CtaCteAplicadaMasOperacionesComponent } from './components/listados/cta
 import { CtaCteAplicadaDetalleMasOperacionesComponent } from './components/listados/cta-cte-aplicada/cta-cte-aplicada-detalle-mas-operaciones/cta-cte-aplicada-detalle-mas-operaciones.component';
 import { EntregasMasOperacionesComponent } from './components/listados/entregas/entregas-mas-operaciones/entregas-mas-operaciones.component';
 import { VentasMasOperacionesComponent } from './components/listados/ventas/ventas-mas-operaciones/ventas-mas-operaciones.component';
-import { VentasDetalleMasOperacionesComponent } from './components/listados/ventas/ventas-detalle-mas-operaciones/ventas-detalle-mas-operaciones.component';
 import { MercPendEntregarMasOperacionesComponent } from './components/listados/merc-pend-entregar/merc-pend-entregar-mas-operaciones/merc-pend-entregar-mas-operaciones.component';
 import { MercPendEntregarDetalleMasOperacionesComponent } from './components/listados/merc-pend-entregar/merc-pend-entregar-detalle-mas-operaciones/merc-pend-entregar-detalle-mas-operaciones.component';
 import { ComprobantesPendFacturarMasOperacionesComponent } from './components/listados/comprobantes-pend-facturar/comprobantes-pend-facturar-mas-operaciones/comprobantes-pend-facturar-mas-operaciones.component';
@@ -87,6 +86,7 @@ import { InfiniteScrollModule } from 'ngx-infinite-scroll';
 import { ToolBarParaModalComponent } from './components/menu/tool-bar-para-modal/tool-bar-para-modal.component';
 import { VentasListaMovilComponent } from './components/listados/ventas/ventas-lista-movil/ventas-lista-movil.component';
 import { VentasListaDesktopComponent } from './components/listados/ventas/ventas-lista-desktop/ventas-lista-desktop.component';
+import { MonedaPipe } from './pipes/moneda.pipe';
 
 registerLocaleData(localeEsAr, 'es-AR');
 
@@ -119,7 +119,6 @@ export function tokenGetter() {
 		CtaCteAplicadaDetalleMasOperacionesComponent,
 		EntregasMasOperacionesComponent,
 		VentasMasOperacionesComponent,
-		VentasDetalleMasOperacionesComponent,
 		MercPendEntregarMasOperacionesComponent,
 		MercPendEntregarDetalleMasOperacionesComponent,
 		ComprobantesPendFacturarMasOperacionesComponent,
@@ -155,7 +154,8 @@ export function tokenGetter() {
 		EntregasListaMovilComponent,
 		ToolBarParaModalComponent,
 		VentasListaMovilComponent,
-		VentasListaDesktopComponent
+		VentasListaDesktopComponent,
+		MonedaPipe
 	],
 	imports: [
 		HttpClientModule,
@@ -208,7 +208,6 @@ export function tokenGetter() {
 		CtaCteAplicadaDetalleMasOperacionesComponent,
 		EntregasMasOperacionesComponent,
 		VentasMasOperacionesComponent,
-		VentasDetalleMasOperacionesComponent,
 		MercPendEntregarMasOperacionesComponent,
 		MercPendEntregarDetalleMasOperacionesComponent,
 		ComprobantesPendFacturarMasOperacionesComponent,
