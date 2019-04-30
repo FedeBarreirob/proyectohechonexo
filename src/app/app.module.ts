@@ -87,6 +87,9 @@ import { ToolBarParaModalComponent } from './components/menu/tool-bar-para-modal
 import { VentasListaMovilComponent } from './components/listados/ventas/ventas-lista-movil/ventas-lista-movil.component';
 import { VentasListaDesktopComponent } from './components/listados/ventas/ventas-lista-desktop/ventas-lista-desktop.component';
 import { MonedaPipe } from './pipes/moneda.pipe';
+import { CuentaCorrienteComponent } from './components/listados/cuenta-corriente/cuenta-corriente/cuenta-corriente.component';
+import { CuentaCorrienteListaComponent } from './components/listados/cuenta-corriente/cuenta-corriente-lista/cuenta-corriente-lista.component';
+import { CtaCteFiltroComponent } from './components/filtros/cta-cte-filtro/cta-cte-filtro.component';
 
 registerLocaleData(localeEsAr, 'es-AR');
 
@@ -155,7 +158,10 @@ export function tokenGetter() {
 		ToolBarParaModalComponent,
 		VentasListaMovilComponent,
 		VentasListaDesktopComponent,
-		MonedaPipe
+		MonedaPipe,
+		CuentaCorrienteComponent,
+		CuentaCorrienteListaComponent,
+		CtaCteFiltroComponent
 	],
 	imports: [
 		HttpClientModule,

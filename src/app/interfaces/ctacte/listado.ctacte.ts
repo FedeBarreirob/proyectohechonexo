@@ -1,10 +1,16 @@
-export interface ListadoCuentaCorriente {
+export interface ListadoCuentaCorrienteConSaldos {
     exito?: boolean,
     mensaje?: string,
     datos?: {
         listado?: Array<MovimientoCtaCte>,
         saldosTotales?: SaldosTotales
     }
+}
+
+export interface ListadoCuentaCorriente {
+    exito?: boolean,
+    mensaje?: string,
+    datos?: Array<MovimientoCtaCte>
 }
 
 export interface MovimientoCtaCte {

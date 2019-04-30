@@ -7,8 +7,6 @@ import { AuthGuardGuard } from '../security/auth-guard.guard';
 // componentes
 import { DashboardComponent } from '../components/tablero/dashboard/dashboard.component';
 import { LoginComponent } from '../components/login/login.component';
-import { CtacteComponent } from '../components/listados/cta-cte/ctacte/ctacte.component';
-import { CtacteAplicadaComponent } from '../components/listados/cta-cte-aplicada/ctacte-aplicada/ctacte-aplicada.component';
 import { EntregasComponent } from '../components/listados/entregas/entregas/entregas.component';
 import { VentasComponent } from '../components/listados/ventas/ventas/ventas.component'
 import { MercPendEntregarComponent } from '../components/listados/merc-pend-entregar/merc-pend-entregar/merc-pend-entregar.component'
@@ -22,6 +20,7 @@ import { RecuperacionPasswordComponent } from '../components/usuarios-y-perfiles
 import { RestablecimientoPasswordComponent } from '../components/usuarios-y-perfiles/restablecimiento-password/restablecimiento-password.component';
 import { SolicitudAltaComponent } from '../components/usuarios-y-perfiles/solicitud-alta/solicitud-alta.component';
 import { BuzonComponent } from '../components/notificaciones/buzon/buzon.component';
+import { CuentaCorrienteComponent } from '../components/listados/cuenta-corriente/cuenta-corriente/cuenta-corriente.component';
 
 const routes: Routes = [
 	{
@@ -38,15 +37,7 @@ const routes: Routes = [
 	},
 	{
 		path: 'ctacte',
-		component: CtacteComponent,
-		canActivate: [AuthGuardGuard],
-		data: {
-			rolAdmin: false
-		}
-	},
-	{
-		path: 'ctacte-aplicada',
-		component: CtacteAplicadaComponent,
+		component: CuentaCorrienteComponent,
 		canActivate: [AuthGuardGuard],
 		data: {
 			rolAdmin: false
