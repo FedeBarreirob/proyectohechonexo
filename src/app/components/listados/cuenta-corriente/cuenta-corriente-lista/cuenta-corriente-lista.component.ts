@@ -1,6 +1,6 @@
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { Subject } from 'rxjs';
-import { CtacteService } from 'src/app/services/ctacte/ctacte.service';
+import { CtacteService } from '../../../../services/ctacte/ctacte.service';
 
 @Component({
   selector: 'app-cuenta-corriente-lista',
@@ -13,13 +13,16 @@ export class CuentaCorrienteListaComponent implements OnInit {
   observerFiltro$: Subject<any>;
 
   @Output()
+  seEncuentraCargando: EventEmitter<boolean> = new EventEmitter<boolean>();
+
+  @Output()
   seleccionMovimiento: EventEmitter<any> = new EventEmitter<any>();
 
   listado: Array<any> = [];
   pagina: number = 1;
   cantidadPorPagina: number = 50;
-  cargando: boolean = false;
   filtro: any;
+  cargando: boolean = false;
 
   constructor(
     private ctacteService: CtacteService
@@ -39,6 +42,7 @@ export class CuentaCorrienteListaComponent implements OnInit {
   cargarListado(limpiar: boolean) {
     if (!this.cargando) {
       this.cargando = true;
+      this.seEncuentraCargando.next(true);
 
       if (limpiar) {
         this.limpiar();
@@ -53,8 +57,10 @@ export class CuentaCorrienteListaComponent implements OnInit {
       this.ctacteService.listadoCtaCte(filtroPaginado).subscribe(respuesta => {
         this.agregarMovimientosAlListado(respuesta.datos);
         this.cargando = false;
+        this.seEncuentraCargando.next(false);
       }, () => {
         this.cargando = false;
+        this.seEncuentraCargando.next(false);
       });
     }
   }
@@ -82,6 +88,6 @@ export class CuentaCorrienteListaComponent implements OnInit {
 
   // funcion que muestra el detalle de un movimiento seleccionado
   verDetalle(movimiento: any) {
-    this.seleccionMovimiento.emit(movimiento);
+    //this.seleccionMovimiento.emit(movimiento);
   }
 }

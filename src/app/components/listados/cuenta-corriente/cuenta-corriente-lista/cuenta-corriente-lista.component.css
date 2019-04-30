@@ -1,0 +1,71 @@
+.titulos {
+    color: #666666;
+    font-family: Rubik;
+    font-size: 14px;
+    text-align: center;
+    margin-top: 12px;
+    margin-bottom: 5px;
+}
+
+.movimiento-fila {
+    width: 100%;
+    padding-left: 17px;
+    padding-right: 17px;
+}
+
+.concepto {
+    height: 17px;
+    color: #333333;
+    font-family: Rubik;
+    font-size: 14px;
+    text-overflow: ellipsis;
+    overflow-x: hidden;
+    white-space: nowrap;
+}
+
+.fecha {
+    height: 14px;
+    color: #666666;
+    font-family: Rubik;
+    font-size: 12px;
+    margin-top: -10px;
+}
+
+.monto {
+    height: 17px;
+    color: #333333;
+    font-family: Rubik;
+    font-size: 14px;
+    text-align: right;
+}
+
+.contenedor-listado {
+    height: 55vh;
+    overflow-y: scroll;
+}
+
+.moneda {
+    height: 13px;
+    color: #666666;
+    font-family: Rubik;
+    font-size: 11px;
+    line-height: 13px;
+}
+
+.signo-positivo {
+    color: green;
+    font-weight: bold;
+}
+
+.signo-negativo {
+    color: red;
+    font-weight: bold;
+}
+
+.boton-ver {
+    color: #333333;
+    font-family: Rubik;
+    font-size: 14px;
+    letter-spacing: 1.2px;
+    margin-top: 15px;
+}

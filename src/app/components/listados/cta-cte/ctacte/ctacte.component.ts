@@ -50,7 +50,7 @@ export class CtacteComponent implements OnInit {
 
 	// funcion que ejecuta la carga del listado de ctacte
 	cargarListado() {
-		this.cargando = true;
+		/*this.cargando = true;
 		this.limpiar();
 
 		let filtro: FiltroListadoCtaCte = {
@@ -69,7 +69,7 @@ export class CtacteComponent implements OnInit {
 			}, error => {
 				this.cargando = false;
 			});
-		}
+		}*/
 	}
 
 	// funcion que muestra el detalle de un movimiento seleccionado

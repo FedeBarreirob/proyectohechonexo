@@ -41,7 +41,7 @@
 </div>
 
 <div fxLayout="row" fxLayoutAlign="none" class="contenedores-input">
-  <input readonly [disabled]="cargando==true" [(ngModel)]="fechaDesde" matInput [matDatepicker]="desde"
+  <input readonly [(ngModel)]="fechaDesde" matInput [matDatepicker]="desde"
     class="input-fecha">
   <mat-datepicker-toggle matSuffix [for]="desde"></mat-datepicker-toggle>
   <mat-datepicker touchUi #desde></mat-datepicker>
@@ -53,7 +53,7 @@
 
 <div fxLayout="row" fxLayoutAlign="none" class="contenedores-input">
   <div fxFlex="100%">
-    <input readonly [disabled]="cargando==true" [(ngModel)]="fechaHasta" matInput [matDatepicker]="hasta"
+    <input readonly [(ngModel)]="fechaHasta" matInput [matDatepicker]="hasta"
       class="input-fecha">
     <mat-datepicker-toggle matSuffix [for]="hasta"></mat-datepicker-toggle>
     <mat-datepicker touchUi #hasta></mat-datepicker>

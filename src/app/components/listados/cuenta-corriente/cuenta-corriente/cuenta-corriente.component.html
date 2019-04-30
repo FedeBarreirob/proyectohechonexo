@@ -8,9 +8,11 @@
 			(botonPersonalizadoEjecutado)="mostrarOcultarFiltros()"
 			[urlImagenAccionPersonalizada]="'assets/toolbar/embudo.png'"></app-tool-bar-general>
 
+			<mat-progress-bar *ngIf="cargando" mode="indeterminate"></mat-progress-bar>
+
 		<mat-tab-group mat-align-tabs="center">
 			<mat-tab label="CTA CORRIENTE">
-				<app-cuenta-corriente-lista [observerFiltro$]="observerFiltro$"
+				<app-cuenta-corriente-lista [observerFiltro$]="observerFiltro$" (seEncuentraCargando)="cambiarEstadoCargando($event)"
 					(seleccionMovimiento)="cargarListado($event)"></app-cuenta-corriente-lista>
 			</mat-tab>
 			<mat-tab label="CTA CTE APLICADA">Content 2</mat-tab>

@@ -17,7 +17,8 @@ export class CuentaCorrienteComponent implements OnInit {
   public cuenta: EntidadAlg;
   esCelular: boolean;
   observerFiltro$ = new Subject<any>();
-
+  cargando: Boolean = false;
+  
   constructor(
     public dialog: MatDialog,
     private cuentaAlgService: CuentaAlgService,
@@ -44,5 +45,10 @@ export class CuentaCorrienteComponent implements OnInit {
   // funcion que ejecuta la carga del listado
   cargarListado(filtro: any) {
     this.observerFiltro$.next(filtro);
+  }
+
+  // funcion que se encarga de cambiar el estado de cargando
+  cambiarEstadoCargando(cargando: boolean) {
+    this.cargando = cargando;
   }
 }
