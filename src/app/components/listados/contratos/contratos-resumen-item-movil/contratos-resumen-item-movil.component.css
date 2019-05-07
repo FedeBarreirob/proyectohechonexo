@@ -1,0 +1,73 @@
+.contenedor-info {
+    margin-bottom: 40px;
+}
+
+.movimiento-icono {
+    height: 38px;
+    width: 38px;
+    margin-left: 20px;
+}
+
+.manometro {
+    margin-left: 24px;
+    margin-top: 8px;
+}
+
+.contrato-y-numero {
+    color: #333333;
+    font-family: Rubik;
+    font-size: 14px;
+}
+
+.info-kg-pactados {
+    color: #333333;
+    font-family: RubikLight;
+    font-size: 32px;
+}
+
+.texto-porcentual {
+    color: #FFBC00;
+    font-family: Rubik;
+    font-size: 11px;
+}
+
+.info-kilos-entregados-fijados {
+    color: #333333;
+    font-family: Rubik;
+    font-size: 16px;
+}
+
+.titulo-contrato-contenedor {
+    width: 100%;
+    text-overflow: ellipsis;
+    overflow-x: hidden;
+    white-space: nowrap;
+}
+
+.tipo-contrato {
+    display: inline-block;
+    max-width: 50%;
+    text-overflow: ellipsis;
+    overflow-x: hidden;
+    white-space: nowrap;
+    margin-left: 4px;
+    padding: 1px;
+    font-size: 12px;
+    font-family: Rubik;
+    border: 1px solid #999999;
+    border-radius: 2px;
+}
+
+.rango-fecha {
+    color: #666666;
+    font-family: Rubik;
+    font-size: 11px;
+    margin-left: 4px;
+}
+
+.vencido {
+    color: #E8021D;
+    font-family: Rubik;
+    font-size: 11px;
+    margin-left: 4px;
+}

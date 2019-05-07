@@ -1,3 +1,5 @@
+import { PlazoFijacion } from "./plazo-fijacion";
+
 export interface ResumenContratoCompraVenta {
     numeroSucursalContrato?: number,
     numeroComprobanteContrato?: number,
@@ -11,5 +13,13 @@ export interface ResumenContratoCompraVenta {
     kilosEntregados?: number,
     kilosPendientesEntregar?: number,
     kilosFijados?: number,
-    kilosAFijar?: number
+    kilosAFijar?: number,
+    tipoDescripcion?: string,
+    contratoId?: number,
+    plazosFijacion?: Array<PlazoFijacion>,
+    porcentajeKilosEntregados?: number,
+    porcentajeKilosFijados?: number,
+    fechaHastaFijacion?: Date,
+    fechaDesdeFijacion?: Date,
+    vencidoFijacion?: boolean
 }

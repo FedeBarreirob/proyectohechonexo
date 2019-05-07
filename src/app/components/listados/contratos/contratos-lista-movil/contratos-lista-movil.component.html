@@ -1,0 +1,9 @@
+<mat-progress-bar *ngIf="cargando" mode="indeterminate"></mat-progress-bar>
+
+<div class="contenedor-listado" fxLayout="column" fxLayoutWrap fxLayoutAlign="none" infiniteScroll
+  [infiniteScrollDistance]="2" [infiniteScrollThrottle]="50" (scrolled)="onScroll()" [scrollWindow]="false">
+
+  <app-contratos-resumen-item-movil *ngFor="let movimiento of (listadoContratos ? listadoContratos : [])"
+    (click)="verDetalle(movimiento)" [resumen]="movimiento" [unidadMedida]="unidadMedida"></app-contratos-resumen-item-movil>
+
+</div>

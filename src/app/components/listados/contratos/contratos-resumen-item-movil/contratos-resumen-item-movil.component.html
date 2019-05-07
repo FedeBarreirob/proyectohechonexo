@@ -1,0 +1,70 @@
+<div class="contenedor-info">
+  <!--Info contrato-->
+  <div fxLayout="row" fxLayoutAlign="space-around center">
+
+    <div fxFlex="20%">
+      <img class="movimiento-icono" src="{{resumen.especie | imagenEspecie}}" />
+    </div>
+
+    <div fxFlex="80%">
+      <div fxLayout="column" fxLayoutAlign="none">
+        <div fxFlex="100%" class="titulo-contrato-contenedor">
+          <span class="contrato-y-numero">Contrato {{resumen.numeroComprobanteContrato}}</span>
+          <div class="tipo-contrato" *ngIf="resumen.tipoDescripcion != null">{{resumen.tipoDescripcion}}</div>
+        </div>
+        <div fxFlex="100%" class="info-kg-pactados">{{resumen.kilosPactados | kilosA: unidadMedida | number: '.0-0'}}
+          {{unidadMedida | kilosTextoA}}
+          de {{resumen.especie}}</div>
+      </div>
+    </div>
+
+  </div>
+
+  <!--Info entregas-->
+  <div fxLayout="row" fxLayoutAlign="space-around center">
+    <div fxFlex="20%">
+      <ngx-gauge [value]="resumen.porcentajeKilosEntregados" [type]="'full'" [cap]="'round'" [thick]="4"
+        [foregroundColor]="'#fec300'" [size]="30" class="manometro">
+        <ngx-gauge-value></ngx-gauge-value>
+      </ngx-gauge>
+    </div>
+
+    <div fxFlex="80%">
+      <div fxLayout="column" fxLayoutAlign="none">
+        <div fxFlex="100%">
+          <span class="texto-porcentual">{{resumen.porcentajeKilosEntregados | number: '.2'}}% Entregado</span>
+          <span class="rango-fecha">Del {{resumen.fechaEntregaDesde}} al {{resumen.fechaEntregaHasta}}</span>
+        </div>
+        <div fxFlex="100%" class="info-kilos-entregados-fijados">
+          {{resumen.kilosPendientesEntregar | kilosA: unidadMedida | number: '.0-0'}} {{unidadMedida | kilosTextoA}}
+          Pendientes de entrega
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!--Info fijaciones-->
+  <div fxLayout="row" fxLayoutAlign="space-around center">
+    <div fxFlex="20%">
+      <ngx-gauge [value]="resumen.porcentajeKilosFijados" [type]="'full'" [cap]="'round'" [thick]="4"
+        [foregroundColor]="'#fec300'" [size]="30" class="manometro">
+        <ngx-gauge-value></ngx-gauge-value>
+      </ngx-gauge>
+    </div>
+
+    <div fxFlex="80%">
+      <div fxLayout="column" fxLayoutAlign="none">
+        <div fxFlex="100%">
+          <span class="texto-porcentual">{{resumen.porcentajeKilosFijados | number: '.2'}}% Fijado</span>
+          <span *ngIf="resumen.plazosFijacion != null && resumen.vencidoFijacion == false" class="rango-fecha">Del
+            {{resumen.fechaDesdeFijacion}} al {{resumen.fechaHastaFijacion}}</span>
+          <span *ngIf="resumen.plazosFijacion != null && resumen.vencidoFijacion == true" class="vencido">Vencido</span>
+        </div>
+        <div fxFlex="100%" class="info-kilos-entregados-fijados">
+          {{resumen.kilosAFijar | kilosA: unidadMedida | number: '.0-0'}} {{unidadMedida | kilosTextoA}} Pendientes de
+          fijación
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

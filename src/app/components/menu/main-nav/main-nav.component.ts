@@ -87,6 +87,13 @@ export class MainNavComponent implements OnInit {
 				permitido: true
 			},
 			{
+				nombre: "Contratos",
+				rutaLink: "/contratos",
+				imagen: "assets/sidebar/contratos.png",
+				imagenActiva: "assets/sidebar/contratos-hot.png",
+				permitido: true
+			},
+			{
 				nombre: "Entregas",
 				rutaLink: "/entregas",
 				imagen: "assets/sidebar/entrega.png",

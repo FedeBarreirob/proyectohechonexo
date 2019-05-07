@@ -1,0 +1,14 @@
+<mat-sidenav-container class="contenedor-filtro">
+	<mat-sidenav #menuFiltro position="end" class="sidenav-filtro">
+		<app-cereales-filtro [filtrosEspecieCosecha]="filtrosEspecieCosecha" [cuenta]="cuenta"
+			(botonCerrar)="menuFiltro.toggle()" (botonAplicar)="cargarListado($event)"></app-cereales-filtro>
+	</mat-sidenav>
+	<section>
+		<app-tool-bar-general [titulo]="'Contratos'" [disabled]="false"
+			(botonPersonalizadoEjecutado)="mostrarOcultarFiltros()"
+			[urlImagenAccionPersonalizada]="'assets/toolbar/embudo.png'"></app-tool-bar-general>
+
+		<app-contratos-lista-movil [observerFiltroListadoMovil$]="observerFiltroListadoMovil$"
+			(seleccionMovimiento)="verDetalle($event)"></app-contratos-lista-movil>
+	</section>
+</mat-sidenav-container>

@@ -7,6 +7,7 @@ import { FlexLayoutModule } from '@angular/flex-layout';
 import { ShowHidePasswordModule } from 'ngx-show-hide-password';
 import { EllipsisModule } from 'ngx-ellipsis';
 import { DeviceDetectorModule } from 'ngx-device-detector';
+import { NgxGaugeModule } from 'ngx-gauge';
 
 // locale
 import { registerLocaleData, DecimalPipe, CommonModule } from '@angular/common';
@@ -90,6 +91,10 @@ import { MonedaPipe } from './pipes/moneda.pipe';
 import { CuentaCorrienteComponent } from './components/listados/cuenta-corriente/cuenta-corriente/cuenta-corriente.component';
 import { CuentaCorrienteListaComponent } from './components/listados/cuenta-corriente/cuenta-corriente-lista/cuenta-corriente-lista.component';
 import { CtaCteFiltroComponent } from './components/filtros/cta-cte-filtro/cta-cte-filtro.component';
+import { ContratosComponent } from './components/listados/contratos/contratos/contratos.component';
+import { ContratosListaMovilComponent } from './components/listados/contratos/contratos-lista-movil/contratos-lista-movil.component';
+import { ContratosDetalleComponent } from './components/listados/contratos/contratos-detalle/contratos-detalle.component';
+import { ContratosResumenItemMovilComponent } from './components/listados/contratos/contratos-resumen-item-movil/contratos-resumen-item-movil.component';
 
 registerLocaleData(localeEsAr, 'es-AR');
 
@@ -161,7 +166,11 @@ export function tokenGetter() {
 		MonedaPipe,
 		CuentaCorrienteComponent,
 		CuentaCorrienteListaComponent,
-		CtaCteFiltroComponent
+		CtaCteFiltroComponent,
+		ContratosComponent,
+		ContratosListaMovilComponent,
+		ContratosDetalleComponent,
+		ContratosResumenItemMovilComponent
 	],
 	imports: [
 		HttpClientModule,
@@ -191,7 +200,8 @@ export function tokenGetter() {
 		}),
 		EllipsisModule,
 		DeviceDetectorModule.forRoot(),
-		InfiniteScrollModule
+		InfiniteScrollModule,
+		NgxGaugeModule
 	],
 	providers: [
 		{ provide: HTTP_INTERCEPTORS, useClass: ErrorAuthInterceptor, multi: true },
@@ -224,7 +234,8 @@ export function tokenGetter() {
 		OtrosMovimientosMasOperacionesComponent,
 		OtrosMovimientosDetalleMasOperacionesComponent,
 		ModalCambioPasswordComponent,
-		NotificacionDetalleComponent
+		NotificacionDetalleComponent,
+		ContratosDetalleComponent
 	],
 	bootstrap: [AppComponent]
 })

@@ -21,6 +21,7 @@ import { RestablecimientoPasswordComponent } from '../components/usuarios-y-perf
 import { SolicitudAltaComponent } from '../components/usuarios-y-perfiles/solicitud-alta/solicitud-alta.component';
 import { BuzonComponent } from '../components/notificaciones/buzon/buzon.component';
 import { CuentaCorrienteComponent } from '../components/listados/cuenta-corriente/cuenta-corriente/cuenta-corriente.component';
+import { ContratosComponent } from '../components/listados/contratos/contratos/contratos.component';
 
 const routes: Routes = [
 	{
@@ -118,6 +119,14 @@ const routes: Routes = [
 	{
 		path: 'buzon',
 		component: BuzonComponent,
+		canActivate: [AuthGuardGuard],
+		data: {
+			rolAdmin: false
+		}
+	},
+	{
+		path: 'contratos',
+		component: ContratosComponent,
 		canActivate: [AuthGuardGuard],
 		data: {
 			rolAdmin: false
