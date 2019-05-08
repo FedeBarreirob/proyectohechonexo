@@ -3,6 +3,8 @@ import { environment } from '../../../../environments/environment';
 import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { ComprobanteParaDescarga } from '../../../interfaces/archivo-de-comprobantes/comprobante-para-descarga';
+import { AuthenticationService } from '../../security/authentication.service';
+import { UserAuth } from '../../../models/security/user';
 
 @Injectable({
 	providedIn: 'root'
@@ -13,14 +15,19 @@ export class ComprobantesDownloaderService {
 	private urlCtaCteComprobantesDescargarMasivo = `${environment.hostCtaCte}/Comprobantes/descargarMasivo`;
 	private urlGeneradorComprobanteConfVentaDescargar = `${environment.hostGeneradorComprobantes}/confirmacionesDeVentas/descargar`;
 
-	constructor(private http: HttpClient) { }
+	constructor(
+		private http: HttpClient,
+		private authenticationService: AuthenticationService
+	) { }
 
 	// funcion que devuelve un comprobante pdf a partir del link y nombre de comprobante dado
-	comprobanteDescargado(link: string, comprobante: string, token: string): Observable<Blob> {
+	comprobanteDescargado(link: string, comprobante: string): Observable<Blob> {
+
+		let usuarioLogueado = <UserAuth>this.authenticationService.usuarioLogueado();
 
 		let headers = new HttpHeaders({
 			'Content-Type': 'application/json',
-			'Authorization': `Bearer ${token}`
+			'Authorization': `Bearer ${usuarioLogueado.token}`
 		});
 
 		let params = new HttpParams().set('link', link).set('comprobante', comprobante);
@@ -33,12 +40,14 @@ export class ComprobantesDownloaderService {
 	}
 
 	// funcion que devuelve un zip con comprobantes pdf a partir de un listado de comprobantes a descargar
-	comprobanteDescargadoMasivo(comprobantes: Array<ComprobanteParaDescarga>, token: string): Observable<Blob> {
+	comprobanteDescargadoMasivo(comprobantes: Array<ComprobanteParaDescarga>): Observable<Blob> {
+
+		let usuarioLogueado = <UserAuth>this.authenticationService.usuarioLogueado();
 
 		const httpOptions = {
 			headers: new HttpHeaders({
 				'Content-Type': 'application/json',
-				'Authorization': `Bearer ${token}`
+				'Authorization': `Bearer ${usuarioLogueado.token}`
 			}),
 			responseType: 'blob' as 'blob'
 		};
@@ -47,11 +56,13 @@ export class ComprobantesDownloaderService {
 	}
 
 	// funcion que devuelve un comprobante pdf correspondiente a una confirmacion de venta dada
-	confirmacionVentaDescargado(nroSucursal: number, nroComprobante: number, token: string): Observable<Blob> {
+	confirmacionVentaDescargado(nroSucursal: number, nroComprobante: number): Observable<Blob> {
+
+		let usuarioLogueado = <UserAuth>this.authenticationService.usuarioLogueado();
 
 		let headers = new HttpHeaders({
 			'Content-Type': 'application/json',
-			'Authorization': `Bearer ${token}`
+			'Authorization': `Bearer ${usuarioLogueado.token}`
 		});
 
 		let url = `${this.urlGeneradorComprobanteConfVentaDescargar}/${nroSucursal}/${nroComprobante}`;

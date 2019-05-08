@@ -39,7 +39,7 @@ export class ArchivoDeComprobantesComponent implements OnInit {
 		private snackBar: MatSnackBar
 	) {
 		this.establecerFiltrosPorDefecto();
-	 }
+	}
 
 	ngOnInit() {
 	}
@@ -121,28 +121,25 @@ export class ArchivoDeComprobantesComponent implements OnInit {
 
 	// funcion encargada de ejecutar el proceso de descarga
 	descargar() {
-		let usuarioLogueado = <UserAuth>this.authenticationService.usuarioLogueado();
-		if (usuarioLogueado != null) {
-			this.cargando = true;
+		this.cargando = true;
 
-			this.comprobantesDownloaderService.comprobanteDescargadoMasivo(this.comprobantesSeleccionados, usuarioLogueado.token)
-				.subscribe(respuesta => {
-					var mediaType = 'application/zip';
-					var blob = new Blob([respuesta], { type: mediaType });
-					var filename = 'comprobantes.zip';
+		this.comprobantesDownloaderService.comprobanteDescargadoMasivo(this.comprobantesSeleccionados)
+			.subscribe(respuesta => {
+				var mediaType = 'application/zip';
+				var blob = new Blob([respuesta], { type: mediaType });
+				var filename = 'comprobantes.zip';
 
-					if (blob.size !== 0) {
-						saveAs(blob, filename);
-					} else {
-						this.openSnackBar("Ninguno de los comprobantes indicados se encuentran para su descarga.", "Descarga de comprobantes");
-					}
+				if (blob.size !== 0) {
+					saveAs(blob, filename);
+				} else {
+					this.openSnackBar("Ninguno de los comprobantes indicados se encuentran para su descarga.", "Descarga de comprobantes");
+				}
 
-					this.cargando = false;
-				}, error => {
-					console.log(error);
-					this.cargando = false;
-				});
-		}
+				this.cargando = false;
+			}, error => {
+				console.log(error);
+				this.cargando = false;
+			});
 	}
 
 	// abre una notificacion

@@ -4,7 +4,6 @@ import { MovimientoCtaCte } from '../../../../interfaces/ctacte/listado.ctacte';
 import { CtacteDetalleMasOperacionesComponent } from '../ctacte-detalle-mas-operaciones/ctacte-detalle-mas-operaciones.component';
 import { ComprobantesDownloaderService } from '../../../../services/sharedServices/downloader/comprobantes-downloader.service';
 import { AuthenticationService } from '../../../../services/security/authentication.service';
-import { UserAuth } from '../../../../models/security/user';
 import { saveAs } from 'file-saver/FileSaver';
 
 @Component({
@@ -34,22 +33,19 @@ export class CtacteDetalleComponent implements OnInit {
 
 	// funcion que inicia la descarga del comprobante
 	descargarComprobante(movimiento: MovimientoCtaCte) {
-		let usuarioLogueado = <UserAuth>this.authenticationService.usuarioLogueado();
-		if (usuarioLogueado != null) {
-			this.comprobanteDownloaderService.comprobanteDescargado(movimiento.linkComprobante, movimiento.comprobante, usuarioLogueado.token)
-				.subscribe(respuesta => {
-					var mediaType = 'application/pdf';
-					var blob = new Blob([respuesta], { type: mediaType });
-					var filename = `${movimiento.comprobante}.pdf`;
+		this.comprobanteDownloaderService.comprobanteDescargado(movimiento.linkComprobante, movimiento.comprobante)
+			.subscribe(respuesta => {
+				var mediaType = 'application/pdf';
+				var blob = new Blob([respuesta], { type: mediaType });
+				var filename = `${movimiento.comprobante}.pdf`;
 
-					if (blob.size !== 0) {
-						saveAs(blob, filename);
-					} else {
-						this.openSnackBar("El comprobante no se encuentra disponible para su descarga.", "Descarga de comprobantes");
-					}
+				if (blob.size !== 0) {
+					saveAs(blob, filename);
+				} else {
+					this.openSnackBar("El comprobante no se encuentra disponible para su descarga.", "Descarga de comprobantes");
+				}
 
-				}, error => console.log(error));
-		}
+			}, error => console.log(error));
 	}
 
 	// abre una notificacion

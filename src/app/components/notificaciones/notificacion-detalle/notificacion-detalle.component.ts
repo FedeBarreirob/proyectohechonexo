@@ -42,21 +42,19 @@ export class NotificacionDetalleComponent implements OnInit {
 
 	// funcion que inicia la descarga del comprobante
 	descargarComprobante(comprobante: ComprobanteNovedad) {
-		if (this.usuarioLogueado != null) {
-			this.comprobanteDownloaderService.comprobanteDescargado(comprobante.link, comprobante.comprobante, this.usuarioLogueado.token)
-				.subscribe(respuesta => {
-					var mediaType = 'application/pdf';
-					var blob = new Blob([respuesta], { type: mediaType });
-					var filename = `${comprobante.comprobante}.pdf`;
+		this.comprobanteDownloaderService.comprobanteDescargado(comprobante.link, comprobante.comprobante)
+			.subscribe(respuesta => {
+				var mediaType = 'application/pdf';
+				var blob = new Blob([respuesta], { type: mediaType });
+				var filename = `${comprobante.comprobante}.pdf`;
 
-					if (blob.size !== 0) {
-						saveAs(blob, filename);
-					} else {
-						this.openSnackBar("El comprobante no se encuentra disponible para su descarga.", "Descarga de comprobantes");
-					}
+				if (blob.size !== 0) {
+					saveAs(blob, filename);
+				} else {
+					this.openSnackBar("El comprobante no se encuentra disponible para su descarga.", "Descarga de comprobantes");
+				}
 
-				}, error => console.log(error));
-		}
+			}, error => console.log(error));
 	}
 
 	// abre una notificacion
@@ -89,20 +87,18 @@ export class NotificacionDetalleComponent implements OnInit {
 
 	// funcion que inicia la descarga del comprobante de confirmacion de venta
 	descargarConfirmacionVenta(confirmacionVenta: ConfirmacionDeVentaNovedad) {
-		if (this.usuarioLogueado != null) {
-			this.comprobanteDownloaderService.confirmacionVentaDescargado(confirmacionVenta.sucursal, confirmacionVenta.numeroComprobante, this.usuarioLogueado.token)
-				.subscribe(respuesta => {
-					var mediaType = 'application/pdf';
-					var blob = new Blob([respuesta], { type: mediaType });
-					var filename = `${confirmacionVenta.comprobante}.pdf`;
+		this.comprobanteDownloaderService.confirmacionVentaDescargado(confirmacionVenta.sucursal, confirmacionVenta.numeroComprobante)
+			.subscribe(respuesta => {
+				var mediaType = 'application/pdf';
+				var blob = new Blob([respuesta], { type: mediaType });
+				var filename = `${confirmacionVenta.comprobante}.pdf`;
 
-					if (blob.size !== 0) {
-						saveAs(blob, filename);
-					} else {
-						this.openSnackBar("El comprobante no se encuentra disponible para su descarga.", "Descarga de comprobantes");
-					}
+				if (blob.size !== 0) {
+					saveAs(blob, filename);
+				} else {
+					this.openSnackBar("El comprobante no se encuentra disponible para su descarga.", "Descarga de comprobantes");
+				}
 
-				}, error => console.log(error));
-		}
+			}, error => console.log(error));
 	}
 }

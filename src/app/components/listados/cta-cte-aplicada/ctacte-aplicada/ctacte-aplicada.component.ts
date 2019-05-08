@@ -99,22 +99,19 @@ export class CtacteAplicadaComponent implements OnInit {
 
 	// funcion que inicia la descarga del comprobante
 	descargarComprobante(movimiento: MovimientoCtaCteAplicada) {
-		let usuarioLogueado = <UserAuth>this.authenticationService.usuarioLogueado();
-		if (usuarioLogueado != null) {
-			this.comprobanteDownloaderService.comprobanteDescargado(movimiento.linkComprobante, movimiento.comprobanteAfectado, usuarioLogueado.token)
-				.subscribe(respuesta => {
-					var mediaType = 'application/pdf';
-					var blob = new Blob([respuesta], { type: mediaType });
-					var filename = `${movimiento.comprobanteAfectado}.pdf`;
+		this.comprobanteDownloaderService.comprobanteDescargado(movimiento.linkComprobante, movimiento.comprobanteAfectado)
+			.subscribe(respuesta => {
+				var mediaType = 'application/pdf';
+				var blob = new Blob([respuesta], { type: mediaType });
+				var filename = `${movimiento.comprobanteAfectado}.pdf`;
 
-					if (blob.size !== 0) {
-						saveAs(blob, filename);
-					} else {
-						this.openSnackBar("El comprobante no se encuentra disponible para su descarga.", "Descarga de comprobantes");
-					}
+				if (blob.size !== 0) {
+					saveAs(blob, filename);
+				} else {
+					this.openSnackBar("El comprobante no se encuentra disponible para su descarga.", "Descarga de comprobantes");
+				}
 
-				}, error => console.log(error));
-		}
+			}, error => console.log(error));
 	}
 
 	// abre una notificacion

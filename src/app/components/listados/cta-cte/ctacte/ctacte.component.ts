@@ -39,7 +39,7 @@ export class CtacteComponent implements OnInit {
 		private snackBar: MatSnackBar
 	) {
 		this.establecerFiltrosPorDefecto();
-	 }
+	}
 
 	ngOnInit() {
 		this.cargando = false;
@@ -100,22 +100,19 @@ export class CtacteComponent implements OnInit {
 
 	// funcion que inicia la descarga del comprobante
 	descargarComprobante(movimiento: MovimientoCtaCte) {
-		let usuarioLogueado = <UserAuth>this.authenticationService.usuarioLogueado();
-		if (usuarioLogueado != null) {
-			this.comprobanteDownloaderService.comprobanteDescargado(movimiento.linkComprobante, movimiento.comprobante, usuarioLogueado.token)
-				.subscribe(respuesta => {
-					var mediaType = 'application/pdf';
-					var blob = new Blob([respuesta], { type: mediaType });
-					var filename = `${movimiento.comprobante}.pdf`;
+		this.comprobanteDownloaderService.comprobanteDescargado(movimiento.linkComprobante, movimiento.comprobante)
+			.subscribe(respuesta => {
+				var mediaType = 'application/pdf';
+				var blob = new Blob([respuesta], { type: mediaType });
+				var filename = `${movimiento.comprobante}.pdf`;
 
-					if (blob.size !== 0) {
-						saveAs(blob, filename);
-					} else {
-						this.openSnackBar("El comprobante no se encuentra disponible para su descarga.", "Descarga de comprobantes");
-					}
+				if (blob.size !== 0) {
+					saveAs(blob, filename);
+				} else {
+					this.openSnackBar("El comprobante no se encuentra disponible para su descarga.", "Descarga de comprobantes");
+				}
 
-				}, error => console.log(error));
-		}
+			}, error => console.log(error));
 	}
 
 	// abre una notificacion

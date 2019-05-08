@@ -1,0 +1,125 @@
+/*Encabezado*/
+
+.contenedor-encabezado {
+    margin-top: 30px;
+    width: 100%;
+}
+
+.movimiento-icono {
+    height: 38px;
+    width: 38px;
+    margin-left: 20px;
+}
+
+.titulo-contrato-contenedor {
+    width: 100%;
+    text-overflow: ellipsis;
+    overflow-x: hidden;
+    white-space: nowrap;
+}
+
+.contrato-y-numero {
+    color: #333333;
+    font-family: Rubik;
+    font-size: 14px;
+}
+
+.tipo-contrato {
+    display: inline-block;
+    max-width: 50%;
+    text-overflow: ellipsis;
+    overflow-x: hidden;
+    white-space: nowrap;
+    margin-left: 4px;
+    padding: 1px;
+    font-size: 12px;
+    font-family: Rubik;
+    border: 1px solid #999999;
+    border-radius: 2px;
+}
+
+.info-kg-pactados {
+    color: #333333;
+    font-family: RubikLight;
+    font-size: 32px;
+}
+
+.info-entregas-ventas-pendientes {
+    color: #FFBC00;
+    font-family: Rubik;
+    font-size: 14px;
+}
+
+/*Botonera*/
+
+.botonera {
+    width: 100%;
+}
+
+.boton-descarga-comprobante {
+    height: 40px;
+    width: 100%;
+    background-color: #2DA442;
+    border: 1px solid #2DA442;
+    border-radius: 4px;
+    color: #FFFFFF;
+    font-family: Rubik;
+    font-size: 14px;
+    font-weight: bold;
+    margin-top: 10px;
+}
+
+.titulo-apartados {
+    color: #333333;
+    font-family: Rubik;
+    font-size: 14px;
+    letter-spacing: 1.2px;
+    margin-top: 20px;
+    margin-bottom: 10px;
+}
+
+.subtitulo-apartados {
+    color: #999999;
+    font-family: Rubik;
+    font-size: 12px;
+    letter-spacing: 1.2px;
+    margin-top: 10px;
+}
+
+.dato-apartado {
+    color: #333333;
+    font-family: Rubik;
+    font-size: 14px;
+}
+
+.dato-apartado-elipsis {
+    color: #333333;
+    font-family: Rubik;
+    font-size: 14px;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    white-space: nowrap;
+}
+
+.divisor {
+    margin-top: 10px;
+    margin-bottom: 10px;
+    border: 1px solid rgba(35, 185, 80, 0.08);
+}
+
+.indicador-porcentual {
+    color: #333333;
+    font-family: Rubik;
+    font-size: 16px;
+}
+
+.link-ver-listado {
+    color: #23B950;
+    font-family: Rubik;
+    font-size: 14px;
+    text-align: right;
+}
+
+.link-ver-listado:hover {
+    cursor: pointer;
+}
