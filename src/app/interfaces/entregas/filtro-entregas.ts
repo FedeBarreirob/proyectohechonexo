@@ -7,5 +7,7 @@ export interface FiltroEntregas {
     agrupadoPorCampo: boolean,
     paginado: boolean,
     pagina: number,
-    cantPorPagina: number
+    cantPorPagina: number,
+    aplicado?: boolean,
+    contratoId?: number
 }

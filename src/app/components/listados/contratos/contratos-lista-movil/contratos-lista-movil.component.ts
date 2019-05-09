@@ -73,7 +73,10 @@ export class ContratosListaMovilComponent implements OnInit {
       filtroPaginado.cantPorPagina = this.cantidadPorPagina;
 
       this.contratosService.listadoContratosResumidos(filtroPaginado).subscribe(respuesta => {
-        this.agregarMovimientosAlListado(respuesta.datos);
+
+        if (respuesta.exito == true) {
+          this.agregarMovimientosAlListado(respuesta.datos);
+        }
 
         this.cargando = false;
       }, error => {

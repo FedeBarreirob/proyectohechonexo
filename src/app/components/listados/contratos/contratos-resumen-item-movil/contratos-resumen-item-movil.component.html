@@ -10,7 +10,7 @@
       <div fxLayout="column" fxLayoutAlign="none">
         <div fxFlex="100%" class="titulo-contrato-contenedor">
           <span class="contrato-y-numero">Contrato {{resumen.numeroComprobanteContrato}}</span>
-          <div class="tipo-contrato" *ngIf="resumen.tipoDescripcion != null">{{resumen.tipoDescripcion}}</div>
+          <div class="tipo-contrato" *ngIf="resumen.tipoDescripcion != null">{{resumen.tipoNegocioDescripCorta}}</div>
         </div>
         <div fxFlex="100%" class="info-kg-pactados">{{resumen.kilosPactados | kilosA: unidadMedida | number: '.0-0'}}
           {{unidadMedida | kilosTextoA}}

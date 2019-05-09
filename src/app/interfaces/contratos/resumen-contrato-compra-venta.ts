@@ -21,5 +21,8 @@ export interface ResumenContratoCompraVenta {
     porcentajeKilosFijados?: number,
     fechaHastaFijacion?: Date,
     fechaDesdeFijacion?: Date,
-    vencidoFijacion?: boolean
+    vencidoFijacion?: boolean,
+    aFijar?: number,
+    tipoNegocioDescripCorta?: string,
+    kilosFacturados?: number
 }
