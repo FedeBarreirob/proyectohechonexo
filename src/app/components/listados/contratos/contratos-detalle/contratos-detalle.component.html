@@ -99,7 +99,7 @@
 
     <div fxFlex="60%" class="indicador-porcentual">{{resumenContrato.porcentajeKilosEntregados | number: '.2'}}%
       ENTREGAS</div>
-    <div fxFlex="30%" class="link-ver-listado">Ver listado</div>
+    <div fxFlex="30%" align="right"><button (click)="verDetalleEntregas()" mat-button class="link-ver-listado">Ver listado</button></div>
   </div>
 
   <div fxLayout="row" fxLayoutAlign="space-between none" fxLayoutGap="10px">
@@ -157,7 +157,7 @@
 
     <div fxFlex="60%" class="indicador-porcentual">{{resumenContrato.porcentajeKilosFijados | number: '.2'}}%
       VENTAS</div>
-    <div fxFlex="30%" class="link-ver-listado">Ver listado</div>
+    <div fxFlex="30%" align="right"><button mat-button (click)="verDetalleVentas()" class="link-ver-listado">Ver listado</button></div>
   </div>
 
   <div fxLayout="row" fxLayoutAlign="space-between none" fxLayoutGap="10px">

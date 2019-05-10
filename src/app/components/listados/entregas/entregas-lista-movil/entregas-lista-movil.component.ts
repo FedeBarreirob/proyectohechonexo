@@ -73,7 +73,10 @@ export class EntregasListaMovilComponent implements OnInit {
       filtroPaginado.cantPorPagina = this.cantidadPorPagina;
 
       this.entregasService.listadoEntregas(filtroPaginado).subscribe(respuesta => {
-        this.agregarMovimientosAlListado(respuesta.datos);
+
+        if (respuesta.exito == true && respuesta.datos != null) {
+          this.agregarMovimientosAlListado(respuesta.datos);
+        }
 
         this.cargando = false;
       }, error => {

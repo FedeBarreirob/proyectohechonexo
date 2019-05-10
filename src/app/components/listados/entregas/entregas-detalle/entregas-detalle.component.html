@@ -56,7 +56,12 @@
 
 <div fxLayout="row" fxLayoutAlign="space-between center">
   <div fxFlex="50%" class="dato-apartado-elipsis">{{data.campo}}</div>
-  <div fxFlex="50%">????</div>
+  <div fxFlex="50%">
+    <button class="boton-contrato" mat-button *ngIf="contrato != null" (click)="verDetalleContrato()">Contrato
+      #{{ contrato.numeroComprobanteContrato }}
+      <mat-icon>keyboard_arrow_right</mat-icon>
+    </button>
+  </div>
 </div>
 
 <!--Caracteristicas-->

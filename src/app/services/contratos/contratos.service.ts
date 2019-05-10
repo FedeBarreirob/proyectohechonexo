@@ -16,6 +16,7 @@ export class ContratosService {
   private urlContratosListado = `${environment.hostEntregasYVentas}/contratos/listado`;
   private urlContratosFiltrosEspecieCosecha = `${environment.hostEntregasYVentas}/contratos/filtrosEspecieCosechas`;
   private urlContratosComprobante = `${environment.hostGeneradorComprobantes}/confirmacionesDeVentas/comprobante`;
+  private urlContratosContratoResumenPorTk = `${environment.hostEntregasYVentas}/contratos/contratoResumidoDeTicketAplicado`;
 
   constructor(
     private http: HttpClient,
@@ -76,6 +77,25 @@ export class ContratosService {
     };
 
     let urlConParametro = `${this.urlContratosComprobante}/${nroSucursal}/${nroComprobante}`;
+    return this.http.get<ResponseServicio>(urlConParametro, httpOptions);
+  }
+
+  /**
+   * Función que devuelve el resumen de un contrato vinculado a un ticket indicado
+   * @param tk Identificación completa de un ticket ej: TK 0001 00000232
+   */
+  contratoResumenPorTk(tk: string): Observable<ResponseServicio> {
+
+    let usuarioLogueado = <UserAuth>this.authenticationService.usuarioLogueado();
+
+    const httpOptions = {
+      headers: new HttpHeaders({
+        'Content-Type': 'application/json',
+        'Authorization': `Bearer ${usuarioLogueado.token}`
+      })
+    };
+
+    let urlConParametro = `${this.urlContratosContratoResumenPorTk}/${tk}`;
     return this.http.get<ResponseServicio>(urlConParametro, httpOptions);
   }
 }

@@ -13,7 +13,7 @@
 			</div>
 
 			<div fxFlex="100%" class="encabezado-texto-cantidad-producto">
-				{{data.kilosNetos | kilosA: unidadMedida | number: '.0'}} {{unidadMedida | kilosTextoA}} de
+				{{data.kilosNetos | kilosA: unidadMedida | number: '.0-0'}} {{unidadMedida | kilosTextoA}} de
 				{{data.especie}}
 			</div>
 
@@ -70,7 +70,7 @@
 </div>
 
 <div fxLayout="row" fxLayoutAlign="space-between center">
-	<div fxFlex="50%" class="dato-apartado">{{data.kilosLiquidados | kilosA: unidadMedida | number: '.0'}}
+	<div fxFlex="50%" class="dato-apartado">{{data.kilosLiquidados | kilosA: unidadMedida | number: '.0-0'}}
 		{{unidadMedida | kilosTextoA}}</div>
 	<div fxFlex="50%" class="dato-apartado">{{data.moneda | moneda}} ${{data.precioPorQuintal | number: '.2'}}</div>
 </div>

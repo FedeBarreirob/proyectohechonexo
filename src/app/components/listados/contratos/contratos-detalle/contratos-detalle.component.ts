@@ -1,12 +1,15 @@
 import { Component, OnInit, Inject } from '@angular/core';
 import { ResumenContratoCompraVenta } from '../../../../interfaces/contratos/resumen-contrato-compra-venta';
-import { MAT_DIALOG_DATA, MatDialogRef, MatSnackBar } from '@angular/material';
+import { MAT_DIALOG_DATA, MatDialogRef, MatSnackBar, MatDialog } from '@angular/material';
 import { ContratosService } from '../../../../services/contratos/contratos.service';
 import { BoletoConfirmacionVenta } from '../../../../interfaces/contratos/boleto-confirmacion-venta';
 import { AuthenticationService } from '../../../../services/security/authentication.service';
 import { PerfilBasico } from '../../../../interfaces/perfiles/perfil-basico';
 import { ComprobantesDownloaderService } from '../../../../services/sharedServices/downloader/comprobantes-downloader.service';
 import { saveAs } from 'file-saver/FileSaver';
+import { DeviceDetectorService } from 'ngx-device-detector';
+import { ContratoEntregasDetalleComponent } from '../contrato-entregas-detalle/contrato-entregas-detalle.component';
+import { ContratoVentasDetalleComponent } from '../contrato-ventas-detalle/contrato-ventas-detalle.component';
 
 @Component({
   selector: 'app-contratos-detalle',
@@ -21,6 +24,8 @@ export class ContratosDetalleComponent implements OnInit {
   unidadMedida: string;
   mensajeEntregasVentasPendientes: string = "";
 
+  esCelular: boolean;
+
   constructor(
     @Inject(MAT_DIALOG_DATA)
     private data: ResumenContratoCompraVenta,
@@ -28,10 +33,13 @@ export class ContratosDetalleComponent implements OnInit {
     private contratosService: ContratosService,
     private authenticationService: AuthenticationService,
     private comprobanteDownloaderService: ComprobantesDownloaderService,
-    private snackBar: MatSnackBar
+    private snackBar: MatSnackBar,
+    private dialog: MatDialog,
+    private deviceService: DeviceDetectorService
   ) { }
 
   ngOnInit() {
+    this.esCelular = this.deviceService.isMobile();
     this.resumenContrato = this.data;
     this.crearMensajeEntregasVentasPendientes();
     this.cargarUnidadMedida();
@@ -142,5 +150,57 @@ export class ContratosDetalleComponent implements OnInit {
     this.snackBar.open(message, action, {
       duration: 2000,
     });
+  }
+
+  /**
+   * Función que abre el detalle de las entregas aplicadas al contrato actual
+   */
+  verDetalleEntregas() {
+    let opciones;
+    if (this.esCelular) {
+      opciones = {
+        data: this.resumenContrato,
+        maxWidth: '100vw',
+        maxHeight: '100vh',
+        height: '100%',
+        width: '100%',
+        panelClass: 'modal-sin-padding'
+      };
+    } else {
+      opciones = {
+        data: this.resumenContrato,
+        height: '90%',
+        width: '500px',
+        panelClass: 'modal-sin-padding'
+      };
+    }
+
+    this.dialog.open(ContratoEntregasDetalleComponent, opciones);
+  }
+
+  /**
+   * Función que abre el detalle de las ventas (fijaciones) al contrato actual
+   */
+  verDetalleVentas() {
+    let opciones;
+    if (this.esCelular) {
+      opciones = {
+        data: this.boleto,
+        maxWidth: '100vw',
+        maxHeight: '100vh',
+        height: '100%',
+        width: '100%',
+        panelClass: 'modal-sin-padding'
+      };
+    } else {
+      opciones = {
+        data: this.boleto,
+        height: '90%',
+        width: '500px',
+        panelClass: 'modal-sin-padding'
+      };
+    }
+
+    this.dialog.open(ContratoVentasDetalleComponent, opciones);
   }
 }

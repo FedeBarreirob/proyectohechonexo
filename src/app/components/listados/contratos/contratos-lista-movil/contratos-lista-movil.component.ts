@@ -5,6 +5,7 @@ import { FiltroResumenContratoCompraVenta } from '../../../../interfaces/contrat
 import { PerfilBasico } from '../../../../interfaces/perfiles/perfil-basico';
 import { ContratosService } from '../../../../services/contratos/contratos.service';
 import { AuthenticationService } from '../../../../services/security/authentication.service';
+import { EntidadAlg } from '../../../../interfaces/perfiles/entidad-alg';
 
 @Component({
   selector: 'app-contratos-lista-movil',

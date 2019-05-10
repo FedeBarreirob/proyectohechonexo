@@ -95,6 +95,8 @@ import { ContratosComponent } from './components/listados/contratos/contratos/co
 import { ContratosListaMovilComponent } from './components/listados/contratos/contratos-lista-movil/contratos-lista-movil.component';
 import { ContratosDetalleComponent } from './components/listados/contratos/contratos-detalle/contratos-detalle.component';
 import { ContratosResumenItemMovilComponent } from './components/listados/contratos/contratos-resumen-item-movil/contratos-resumen-item-movil.component';
+import { ContratoEntregasDetalleComponent } from './components/listados/contratos/contrato-entregas-detalle/contrato-entregas-detalle.component';
+import { ContratoVentasDetalleComponent } from './components/listados/contratos/contrato-ventas-detalle/contrato-ventas-detalle.component';
 
 registerLocaleData(localeEsAr, 'es-AR');
 
@@ -170,7 +172,9 @@ export function tokenGetter() {
 		ContratosComponent,
 		ContratosListaMovilComponent,
 		ContratosDetalleComponent,
-		ContratosResumenItemMovilComponent
+		ContratosResumenItemMovilComponent,
+		ContratoEntregasDetalleComponent,
+		ContratoVentasDetalleComponent
 	],
 	imports: [
 		HttpClientModule,
@@ -235,7 +239,9 @@ export function tokenGetter() {
 		OtrosMovimientosDetalleMasOperacionesComponent,
 		ModalCambioPasswordComponent,
 		NotificacionDetalleComponent,
-		ContratosDetalleComponent
+		ContratosDetalleComponent,
+		ContratoEntregasDetalleComponent,
+		ContratoVentasDetalleComponent
 	],
 	bootstrap: [AppComponent]
 })

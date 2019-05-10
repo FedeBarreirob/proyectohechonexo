@@ -1,0 +1,33 @@
+<mat-sidenav-container class="contenedor-filtro">
+  <mat-sidenav #menuFiltro position="end" class="sidenav-filtro">
+    <app-cereales-filtro [filtrosEspecieCosecha]="null" [cuenta]="cuenta" (botonCerrar)="menuFiltro.toggle()"
+      (botonAplicar)="cargarListado($event)" [sePuedeFiltrarEspecieCosecha]="false"></app-cereales-filtro>
+  </mat-sidenav>
+  <section>
+    <app-tool-bar-para-modal [titulo]="titulo" [urlImagenDerechoIzquierdo]="'assets/toolbar/embudo.png'"
+      (botonSalirEjecutado)="salir()" (botonPersonalizadoDerechoEjecutado)="mostrarOcultarFiltros()">
+    </app-tool-bar-para-modal>
+
+    <!--Indicador de cantidades entregadas
+    <div fxLayout="row" fxLayoutAlign="space-between center" fxLayoutGap="10px" class="indicado-cantidades">
+      <div fxFlex="50%">
+        <div fxLayout="row" fxLayoutAlign="space-around center">
+          <div fxFlex="37%">
+            <img class="entrega-icono" src="assets/varios/entregas.png" />
+          </div>
+
+          <div fxFlex="63%">
+            <div fxLayout="column" fxLayoutAlign="center">
+              <div fxFlex="100%" class="cantidad-entregas">8</div>
+              <div fxFlex="100%" class="texto-entregas">Entregas</div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div fxFlex="50%" align="right"><button mat-button class="link-descargar-resumen">Descargar resumen</button></div>
+    </div>-->
+
+    <app-entregas-lista-movil [observerFiltroListadoMovil$]="observerFiltroListadoMovil$"
+      (seleccionMovimiento)="verDetalle($event)"></app-entregas-lista-movil>
+  </section>
+</mat-sidenav-container>

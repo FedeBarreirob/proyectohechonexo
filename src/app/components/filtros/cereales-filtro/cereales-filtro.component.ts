@@ -17,6 +17,9 @@ export class CerealesFiltroComponent implements OnInit {
   @Input()
   cuenta: any;
 
+  @Input()
+  sePuedeFiltrarEspecieCosecha: boolean = true;
+
   @Output()
   botonCerrar: EventEmitter<any> = new EventEmitter<any>();
 

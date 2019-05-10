@@ -74,7 +74,10 @@ export class VentasListaMovilComponent implements OnInit {
       filtroPaginado.cantPorPagina = this.cantidadPorPagina;
 
       this.ventasService.listadoVentas(filtroPaginado).subscribe(respuesta => {
-        this.agregarMovimientosAlListado(respuesta.datos);
+
+        if(respuesta.exito == true) {
+          this.agregarMovimientosAlListado(respuesta.datos);
+        }
 
         this.cargando = false;
       }, error => {

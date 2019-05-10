@@ -7,5 +7,6 @@ export interface FiltroVentas {
     totales: boolean,
     paginado: boolean,
     pagina: number,
-    cantPorPagina: number
+    cantPorPagina: number,
+    comprobante?: string
 }

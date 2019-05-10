@@ -10,48 +10,53 @@
   </div>
 </div>
 
-<mat-progress-bar *ngIf="filtrosEspecieCosecha == null" mode="indeterminate"></mat-progress-bar>
+<mat-progress-bar *ngIf="filtrosEspecieCosecha == null && sePuedeFiltrarEspecieCosecha == true" mode="indeterminate">
+</mat-progress-bar>
 
 <!--Productos-->
-<span *ngIf="filtrosEspecieCosecha != null">
-  <div fxLayout="row" fxLayoutAlign="space-around center">
-    <div fxFlex="100%" class="titulo-filtro">
-      Producto
-    </div>
-  </div>
+<span
+  *ngIf="(filtrosEspecieCosecha != null && sePuedeFiltrarEspecieCosecha == true) || (filtrosEspecieCosecha == null && sePuedeFiltrarEspecieCosecha == false)">
+  <span *ngIf="sePuedeFiltrarEspecieCosecha == true">
 
-  <mat-button-toggle-group class="grupo-botones-especie" [(ngModel)]="especie">
-
-    <div
-      *ngFor="let especie of ((filtrosEspecieCosecha && filtrosEspecieCosecha.especies) ? filtrosEspecieCosecha.especies : [])"
-      class="boton-especie">
-      <mat-button-toggle value="{{especie.codigoEspecie}}">
-        <img src="{{especie.codigoEspecie | imagenEspecie}}" />
-        <div class="texto-epecie">{{especie.especieDescripcion}}</div>
-      </mat-button-toggle>
+    <div fxLayout="row" fxLayoutAlign="space-around center">
+      <div fxFlex="100%" class="titulo-filtro">
+        Producto
+      </div>
     </div>
 
-  </mat-button-toggle-group>
+    <mat-button-toggle-group class="grupo-botones-especie" [(ngModel)]="especie">
 
-  <!--Campanias-->
+      <div
+        *ngFor="let especie of ((filtrosEspecieCosecha && filtrosEspecieCosecha.especies) ? filtrosEspecieCosecha.especies : [])"
+        class="boton-especie">
+        <mat-button-toggle value="{{especie.codigoEspecie}}">
+          <img src="{{especie.codigoEspecie | imagenEspecie}}" />
+          <div class="texto-epecie">{{especie.especieDescripcion}}</div>
+        </mat-button-toggle>
+      </div>
 
-  <div fxLayout="row" fxLayoutAlign="space-around center">
-    <div fxFlex="100%" class="titulo-filtro">
-      Campaña
+    </mat-button-toggle-group>
+
+    <!--Campanias-->
+
+    <div fxLayout="row" fxLayoutAlign="space-around center">
+      <div fxFlex="100%" class="titulo-filtro">
+        Campaña
+      </div>
     </div>
-  </div>
 
-  <mat-button-toggle-group class="grupo-botones-campanias" [(ngModel)]="cosecha">
+    <mat-button-toggle-group class="grupo-botones-campanias" [(ngModel)]="cosecha">
 
-    <div
-      *ngFor="let cosecha of ((filtrosEspecieCosecha && filtrosEspecieCosecha.cosechas) ? filtrosEspecieCosecha.cosechas : [])"
-      class="boton-campania">
-      <mat-button-toggle value="{{cosecha.cosecha}}">
-        <div class="texto-campania">{{cosecha.cosechaDescripcion}}</div>
-      </mat-button-toggle>
-    </div>
+      <div
+        *ngFor="let cosecha of ((filtrosEspecieCosecha && filtrosEspecieCosecha.cosechas) ? filtrosEspecieCosecha.cosechas : [])"
+        class="boton-campania">
+        <mat-button-toggle value="{{cosecha.cosecha}}">
+          <div class="texto-campania">{{cosecha.cosechaDescripcion}}</div>
+        </mat-button-toggle>
+      </div>
 
-  </mat-button-toggle-group>
+    </mat-button-toggle-group>
+  </span>
 
   <!--Fechas-->
 

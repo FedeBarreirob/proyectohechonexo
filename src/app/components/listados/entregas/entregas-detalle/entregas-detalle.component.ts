@@ -6,6 +6,9 @@ import { AuthenticationService } from '../../../../services/security/authenticat
 import { EntregasExportacionesService } from '../../../../services/entregas/entregas-exportaciones.service';
 import { EntidadAlg } from '../../../../interfaces/perfiles/entidad-alg';
 import { CuentaAlgService } from '../../../../services/observers/cuentas-alg/cuenta-alg.service';
+import { ResumenContratoCompraVenta } from '../../../../interfaces/contratos/resumen-contrato-compra-venta';
+import { ContratosService } from '../../../../services/contratos/contratos.service';
+import { ContratosDetalleComponent } from '../../contratos/contratos-detalle/contratos-detalle.component';
 
 @Component({
 	selector: 'app-entregas-detalle',
@@ -14,8 +17,9 @@ import { CuentaAlgService } from '../../../../services/observers/cuentas-alg/cue
 })
 export class EntregasDetalleComponent implements OnInit {
 
-	public unidadMedida: string;
-	public cuenta: EntidadAlg;
+	unidadMedida: string;
+	cuenta: EntidadAlg;
+	contrato: ResumenContratoCompraVenta;
 
 	constructor(
 		@Inject(MAT_DIALOG_DATA) public data: MovimientoEntrega,
@@ -23,11 +27,13 @@ export class EntregasDetalleComponent implements OnInit {
 		private authenticationService: AuthenticationService,
 		private dialogRef: MatDialogRef<EntregasDetalleComponent>,
 		private exportadorService: EntregasExportacionesService,
-		private cuentaAlgService: CuentaAlgService
+		private cuentaAlgService: CuentaAlgService,
+		private contratoServicio: ContratosService
 	) { }
 
 	ngOnInit() {
 		this.cargarUnidadMedida();
+		this.cargarContrato();
 
 		this.cuentaAlgService.cuentaSeleccionada$.subscribe(
 			cuentaAlg => this.cuenta = cuentaAlg
@@ -55,5 +61,34 @@ export class EntregasDetalleComponent implements OnInit {
 	// funcion encargada de exportar a pdf
 	exportarAPDF() {
 		this.exportadorService.exportarEntregasDetallePDF(this.data);
+	}
+
+	/**
+	 * Función encargada de cargar el presupuesto vinculado al ticket
+	 */
+	cargarContrato() {
+		this.contratoServicio.contratoResumenPorTk(this.data.comprobante).subscribe(
+			respuesta => {
+				if (respuesta.exito == true) {
+					this.contrato = respuesta.datos;
+				}
+			},
+			error => console.log(error)
+		);
+	}
+
+	/**
+	 * Función que muestra la info del contrato asociado
+	 */
+	verDetalleContrato() {
+		let opciones = {
+			data: this.contrato,
+			maxWidth: '100vw',
+			maxHeight: '100vh',
+			height: '100%',
+			width: '100%'
+		};
+
+		this.dialog.open(ContratosDetalleComponent, opciones);
 	}
 }

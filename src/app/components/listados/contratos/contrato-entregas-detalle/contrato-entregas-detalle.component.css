@@ -1,0 +1,41 @@
+/*sidebar*/
+
+.contenedor-filtro {
+    height: 100%;
+}
+
+.sidenav-filtro {
+    box-shadow: 3px 0 6px rgba(0, 0, 0, .24);
+    width: 70%;
+    max-width: 270px;
+}
+
+.link-descargar-resumen {
+    color: #23B950;
+    font-family: Rubik;
+    font-size: 16px;
+    text-align: right;
+}
+
+.entrega-icono {
+    height: 40px;
+    width: 40px;
+    margin-left: 20px;
+}
+
+.cantidad-entregas {
+    color: #333333;
+    font-family: RubikLight;
+    font-size: 32px;
+}
+
+.texto-entregas {
+    color: #333333;
+    font-family: RubikLight;
+    font-size: 14px;
+}
+
+.indicado-cantidades {
+    padding-top: 30px;
+    padding-bottom: 25px;
+}
