@@ -1,5 +1,24 @@
 <mat-progress-bar *ngIf="cargando" mode="indeterminate"></mat-progress-bar>
 
+<button mat-button *ngIf="filtrarPorAplicacion" [matMenuTriggerFor]="menu" [disabled]="cargando" class="boton-aplicadas-filtro">{{ leyendaFiltroAplicacion() }} <mat-icon [ngStyle]="{'color': '#2DA442'}">
+    keyboard_arrow_down</mat-icon></button>
+<mat-menu #menu="matMenu">
+  <button mat-menu-item (click)="seleccionarFiltroAplicacion(null)"
+    [ngClass]="{'activo': entregasAplicadas === null, 'inactivo': entregasAplicadas !== null }">
+    Todas
+  </button>
+
+  <button mat-menu-item (click)="seleccionarFiltroAplicacion(false)"
+    [ngClass]="{'activo': entregasAplicadas === false, 'inactivo': entregasAplicadas !== false }">
+    Pendientes de aplicar
+  </button>
+
+  <button mat-menu-item (click)="seleccionarFiltroAplicacion(true)"
+    [ngClass]="{'activo': entregasAplicadas === true, 'inactivo': entregasAplicadas !== true }">
+    Aplicadas
+  </button>
+</mat-menu>
+
 <div fxLayout="row" fxLayoutAlign="space-around center" class="titulos">
   <div fxFlex="50%">Ref. de entrega</div>
   <div fxFlex="50%">{{unidadMedida | kilosTextoA}} netos</div>

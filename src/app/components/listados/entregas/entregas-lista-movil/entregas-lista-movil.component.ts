@@ -16,6 +16,9 @@ export class EntregasListaMovilComponent implements OnInit {
   @Input()
   observerFiltroListadoMovil$: Subject<any>;
 
+  @Input()
+  filtrarPorAplicacion: boolean = true;
+
   @Output()
   seleccionMovimiento: EventEmitter<MovimientoEntrega> = new EventEmitter<MovimientoEntrega>();
 
@@ -26,6 +29,7 @@ export class EntregasListaMovilComponent implements OnInit {
   filtro: FiltroEntregas;
   unidadMedida: string;
   perfilBasico: PerfilBasico;
+  entregasAplicadas: boolean = null;
 
   constructor(
     private entregasService: EntregasService,
@@ -71,6 +75,7 @@ export class EntregasListaMovilComponent implements OnInit {
       filtroPaginado.paginado = true;
       filtroPaginado.pagina = this.pagina;
       filtroPaginado.cantPorPagina = this.cantidadPorPagina;
+      filtroPaginado.aplicado = this.entregasAplicadas;
 
       this.entregasService.listadoEntregas(filtroPaginado).subscribe(respuesta => {
 
@@ -109,5 +114,30 @@ export class EntregasListaMovilComponent implements OnInit {
   // funcion que muestra el detalle de un movimiento seleccionado
   verDetalle(movimiento: MovimientoEntrega) {
     this.seleccionMovimiento.emit(movimiento);
+  }
+
+  /**
+   * Establece el filtro para obtener 
+   * @param aplicado Estado del filtro de aplicación
+   */
+  seleccionarFiltroAplicacion(aplicado?: boolean) {
+    this.entregasAplicadas = aplicado;
+
+    if (this.filtro != null) {
+      this.cargarListado(true);
+    }
+  }
+
+  /**
+   * Devuelve el nombre del filtro de aplicación según el filtro efectuado
+   */
+  leyendaFiltroAplicacion(): string {
+    if (this.entregasAplicadas == null) {
+      return "TODAS";
+    } else if (this.entregasAplicadas == false) {
+      return "PENDIENTES DE APLICAR";
+    } else {
+      return "APLICADAS";
+    }
   }
 }

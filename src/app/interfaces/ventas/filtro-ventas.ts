@@ -4,9 +4,8 @@ export interface FiltroVentas {
     fechaHasta?: string,
     especie: string,
     cosecha: string,
-    totales: boolean,
     paginado: boolean,
     pagina: number,
     cantPorPagina: number,
-    comprobante?: string
+    contrato?: number
 }

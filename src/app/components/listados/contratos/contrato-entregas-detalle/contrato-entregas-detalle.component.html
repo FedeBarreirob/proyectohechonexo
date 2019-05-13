@@ -28,6 +28,7 @@
     </div>-->
 
     <app-entregas-lista-movil [observerFiltroListadoMovil$]="observerFiltroListadoMovil$"
+      [filtrarPorAplicacion]="false"
       (seleccionMovimiento)="verDetalle($event)"></app-entregas-lista-movil>
   </section>
 </mat-sidenav-container>

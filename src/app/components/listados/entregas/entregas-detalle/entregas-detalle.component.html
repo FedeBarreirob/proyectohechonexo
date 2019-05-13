@@ -4,7 +4,7 @@
 <!--Encabezado-->
 <div fxLayout="row" fxLayoutAlign="space-around center" class="encabezado-entrega">
   <div fxFlex="10%" class="encabezado-imagen-especie">
-    <img src="{{data.especie | imagenEspecie}}" />
+    <img src="{{movimiento.especie | imagenEspecie}}" />
   </div>
   <div fxFlex="90%">
     <div fxLayout="column" fxLayoutAlign="none">
@@ -13,12 +13,12 @@
       </div>
 
       <div fxFlex="100%" class="encabezado-texto-cantidad-producto">
-        {{data.kilosNetos | kilosA: unidadMedida | number: '.0'}} {{unidadMedida | kilosTextoA}} de
-        {{data.especie}}
+        {{movimiento.kilosNetos | kilosA: unidadMedida | number: '.0-0'}} {{unidadMedida | kilosTextoA}} de
+        {{movimiento.especie}}
       </div>
 
       <div fxFlex="100%" class="encabezado-fecha">
-        {{data.fecha}}
+        {{movimiento.fecha}}
       </div>
     </div>
   </div>
@@ -35,85 +35,87 @@
 </div>
 
 <!--Datos de la entrega-->
-<div fxLayout="row" fxLayoutAlign="space-between center">
+<div fxLayout="row" fxLayoutAlign="space-between none" fxLayoutGap="10px">
   <div fxFlex="100%" class="titulo-apartados">DATOS DE LA ENTREGA</div>
 </div>
 
-<div fxLayout="row" fxLayoutAlign="space-between center">
+<div fxLayout="row" fxLayoutAlign="space-between none" fxLayoutGap="10px">
   <div fxFlex="50%" class="subtitulo-apartados">CAMPAÑA</div>
   <div fxFlex="50%" class="subtitulo-apartados">CUENTA</div>
 </div>
 
-<div fxLayout="row" fxLayoutAlign="space-between center">
-  <div fxFlex="50%" class="dato-apartado">{{data.cosecha}}</div>
-  <div fxFlex="50%" class="dato-apartado-elipsis">{{cuenta ? cuenta.nombre : '-'}}</div>
+<div fxLayout="row" fxLayoutAlign="space-between none" fxLayoutGap="10px">
+  <div fxFlex="50%" class="dato-apartado">{{movimiento.cosecha}}</div>
+  <div fxFlex="50%" class="dato-apartado">{{cuenta ? cuenta.nombre : '-'}}</div>
 </div>
 
-<div fxLayout="row" fxLayoutAlign="space-between center">
+<div fxLayout="row" fxLayoutAlign="space-between none" fxLayoutGap="10px">
   <div fxFlex="50%" class="subtitulo-apartados">CAMPO</div>
   <div fxFlex="50%" class="subtitulo-apartados">CONTRATO</div>
 </div>
 
-<div fxLayout="row" fxLayoutAlign="space-between center">
-  <div fxFlex="50%" class="dato-apartado-elipsis">{{data.campo}}</div>
-  <div fxFlex="50%">
+<div fxLayout="row" fxLayoutAlign="space-between none" fxLayoutGap="10px">
+  <div fxFlex="50%" class="dato-apartado">{{movimiento.campo}}</div>
+  <div fxFlex="50%" *ngIf="linkContrato == true">
     <button class="boton-contrato" mat-button *ngIf="contrato != null" (click)="verDetalleContrato()">Contrato
-      #{{ contrato.numeroComprobanteContrato }}
+      #{{ contrato ? contrato.numeroComprobanteContrato : '' }}
       <mat-icon>keyboard_arrow_right</mat-icon>
     </button>
   </div>
+  <div fxFlex="50%" *ngIf="linkContrato == false" class="dato-apartado">Contrato
+    #{{ contrato ? contrato.numeroComprobanteContrato : ''}}</div>
 </div>
 
 <!--Caracteristicas-->
-<div fxLayout="row" fxLayoutAlign="space-between center">
+<div fxLayout="row" fxLayoutAlign="space-between none" fxLayoutGap="10px">
   <div fxFlex="100%" class="titulo-apartados">CARACTERISTICAS</div>
 </div>
 
 <!--kilos-->
-<div fxLayout="row" fxLayoutAlign="space-between center">
-  <div fxFlex="50%" class="kilos-datos">{{data.kilosBrutos | kilosA: unidadMedida | number: '.0'}}</div>
-  <div fxFlex="50%" class="kilos-datos">{{data.kilosNetos | kilosA: unidadMedida | number: '.0'}}</div>
+<div fxLayout="row" fxLayoutAlign="space-between none" fxLayoutGap="10px">
+  <div fxFlex="50%" class="kilos-datos">{{movimiento.kilosBrutos | kilosA: unidadMedida | number: '.0-0'}}</div>
+  <div fxFlex="50%" class="kilos-datos">{{movimiento.kilosNetos | kilosA: unidadMedida | number: '.0-0'}}</div>
 </div>
 
-<div fxLayout="row" fxLayoutAlign="space-between center">
+<div fxLayout="row" fxLayoutAlign="space-between none" fxLayoutGap="10px">
   <div fxFlex="50%" class="kilos-titulo">{{unidadMedida | kilosTextoA}} Brutos</div>
   <div fxFlex="50%" class="kilos-titulo">{{unidadMedida | kilosTextoA}} Netos</div>
 </div>
 
 <!--humedad y zarandeo-->
-<div fxLayout="row" fxLayoutAlign="space-between center">
+<div fxLayout="row" fxLayoutAlign="space-between none" fxLayoutGap="10px">
   <div fxFlex="50%" class="subtitulo-apartados">HUMEDAD</div>
   <div fxFlex="50%" class="subtitulo-apartados">ZARANDEO</div>
 </div>
 
-<div fxLayout="row" fxLayoutAlign="space-between center">
-  <div fxFlex="50%" class="dato-apartado">{{data.porcentajeHumedad | number: '.2'}}% -
-    {{data.kgMermaHumedad | kilosA: unidadMedida | number: '.2'}} {{unidadMedida | kilosTextoA}}</div>
-  <div fxFlex="50%" class="dato-apartado">{{data.porcentajeZarandeo | number: '.2'}}% -
-    {{data.kgMermaZarandeo | kilosA: unidadMedida | number: '.2'}} {{unidadMedida | kilosTextoA}}</div>
+<div fxLayout="row" fxLayoutAlign="space-between none" fxLayoutGap="10px">
+  <div fxFlex="50%" class="dato-apartado">{{movimiento.porcentajeHumedad | number: '.2'}}% -
+    {{movimiento.kgMermaHumedad | kilosA: unidadMedida | number: '.2'}} {{unidadMedida | kilosTextoA}}</div>
+  <div fxFlex="50%" class="dato-apartado">{{movimiento.porcentajeZarandeo | number: '.2'}}% -
+    {{movimiento.kgMermaZarandeo | kilosA: unidadMedida | number: '.2'}} {{unidadMedida | kilosTextoA}}</div>
 </div>
 
-<div fxLayout="row" fxLayoutAlign="space-between center">
+<div fxLayout="row" fxLayoutAlign="space-between none" fxLayoutGap="10px">
   <div fxFlex="50%" class="subtitulo-apartados">VOLÁTIL</div>
   <div fxFlex="50%"></div>
 </div>
 
-<div fxLayout="row" fxLayoutAlign="space-between center">
-  <div fxFlex="100%" class="dato-apartado">{{data.porcentajeVolatil | number: '.2'}}% -
-    {{data.kgMermaVolatil | kilosA: unidadMedida | number: '.2'}} {{unidadMedida | kilosTextoA}}</div>
+<div fxLayout="row" fxLayoutAlign="space-between none" fxLayoutGap="10px">
+  <div fxFlex="100%" class="dato-apartado">{{movimiento.porcentajeVolatil | number: '.2'}}% -
+    {{movimiento.kgMermaVolatil | kilosA: unidadMedida | number: '.2'}} {{unidadMedida | kilosTextoA}}</div>
 </div>
 
 <!--identificacion del comprobante-->
-<div fxLayout="row" fxLayoutAlign="space-between center">
+<div fxLayout="row" fxLayoutAlign="space-between none" fxLayoutGap="10px">
   <div fxFlex="100%" class="titulo-apartados">IDENTIFICACIÓN</div>
 </div>
 
-<div fxLayout="row" fxLayoutAlign="space-between center">
+<div fxLayout="row" fxLayoutAlign="space-between none" fxLayoutGap="10px">
   <div fxFlex="50%" class="subtitulo-apartados">TICKET</div>
   <div fxFlex="50%" class="subtitulo-apartados">RM/CP</div>
 </div>
 
-<div fxLayout="row" fxLayoutAlign="space-between center">
-  <div fxFlex="50%" class="dato-apartado">{{data.comprobante}}</div>
-  <div fxFlex="50%" class="dato-apartado">{{data.numeroComprobanteExterno}}</div>
+<div fxLayout="row" fxLayoutAlign="space-between none" fxLayoutGap="10px">
+  <div fxFlex="50%" class="dato-apartado">{{movimiento.comprobante}}</div>
+  <div fxFlex="50%" class="dato-apartado">{{movimiento.numeroComprobanteExterno}}</div>
 </div>

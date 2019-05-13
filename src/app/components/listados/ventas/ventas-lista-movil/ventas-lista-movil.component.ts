@@ -1,10 +1,10 @@
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { Subject } from 'rxjs';
-import { MovimientoVenta } from '../../../../interfaces/ventas/listado-ventas';
 import { FiltroVentas } from '../../../../interfaces/ventas/filtro-ventas';
 import { PerfilBasico } from '../../../../interfaces/perfiles/perfil-basico';
 import { VentasService } from '../../../../services/ventas/ventas.service';
 import { AuthenticationService } from '../../../../services/security/authentication.service';
+import { FijacionVenta } from '../../../../interfaces/ventas/fijacion-venta';
 
 @Component({
   selector: 'app-ventas-lista-movil',
@@ -17,9 +17,9 @@ export class VentasListaMovilComponent implements OnInit {
   observerFiltroListadoMovil$: Subject<any>;
 
   @Output()
-  seleccionMovimiento: EventEmitter<MovimientoVenta> = new EventEmitter<MovimientoVenta>();
+  seleccionMovimiento: EventEmitter<FijacionVenta> = new EventEmitter<FijacionVenta>();
 
-  listado: Array<MovimientoVenta> = [];
+  listado: Array<FijacionVenta> = [];
   pagina: number = 1;
   cantidadPorPagina: number = 50;
   cargando: boolean = false;
@@ -68,19 +68,18 @@ export class VentasListaMovilComponent implements OnInit {
       }
 
       let filtroPaginado: FiltroVentas = this.filtro;
-      filtroPaginado.totales = false;
       filtroPaginado.paginado = true;
       filtroPaginado.pagina = this.pagina;
       filtroPaginado.cantPorPagina = this.cantidadPorPagina;
 
       this.ventasService.listadoVentas(filtroPaginado).subscribe(respuesta => {
 
-        if(respuesta.exito == true) {
+        if (respuesta.exito == true) {
           this.agregarMovimientosAlListado(respuesta.datos);
         }
 
         this.cargando = false;
-      }, error => {
+      }, () => {
         this.cargando = false;
       });
     }
@@ -93,7 +92,7 @@ export class VentasListaMovilComponent implements OnInit {
   }
 
   // funcion encargada de agregar la paginas de datos recuperados al listado
-  private agregarMovimientosAlListado(movimientos: Array<MovimientoVenta>) {
+  private agregarMovimientosAlListado(movimientos: Array<FijacionVenta>) {
     movimientos.forEach(
       movimiento => {
         this.listado.push(movimiento);
@@ -108,7 +107,7 @@ export class VentasListaMovilComponent implements OnInit {
   }
 
   // funcion que muestra el detalle de un movimiento seleccionado
-  verDetalle(movimiento: MovimientoVenta) {
+  verDetalle(movimiento: FijacionVenta) {
     this.seleccionMovimiento.emit(movimiento);
   }
 }

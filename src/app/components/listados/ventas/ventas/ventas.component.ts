@@ -9,6 +9,7 @@ import { Subject } from 'rxjs';
 import { DeviceDetectorService } from 'ngx-device-detector';
 import { CuentaAlgService } from '../../../../services/observers/cuentas-alg/cuenta-alg.service';
 import { VentasDetalleComponent } from '../ventas-detalle/ventas-detalle.component';
+import { FijacionVenta } from 'src/app/interfaces/ventas/fijacion-venta';
 
 @Component({
 	selector: 'app-ventas',
@@ -69,7 +70,7 @@ export class VentasComponent implements OnInit {
 	}
 
 	// funcion que muestra el detalle de un movimiento seleccionado
-	verDetalle(movimiento: MovimientoVenta) {
+	verDetalle(movimiento: FijacionVenta) {
 
 		let opciones;
 		if (this.esCelular) {

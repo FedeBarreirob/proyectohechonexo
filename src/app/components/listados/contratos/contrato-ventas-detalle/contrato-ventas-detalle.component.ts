@@ -46,12 +46,10 @@ export class ContratoVentasDetalleComponent implements OnInit {
    */
   cargarListado(filtro: FiltroVentas) {
 
-    let comprobante = `${this.boleto.encabezado.slipCodComprobante} ${this.boleto.encabezado.slipSucursal} ${this.boleto.encabezado.slipNroComprobante}`;
-
     let filtroParaElContrato = filtro;
     filtroParaElContrato.especie = this.boleto.encabezado.especie;
     filtroParaElContrato.cosecha = this.boleto.encabezado.cosecha;
-    filtroParaElContrato.comprobante = comprobante;
+    filtroParaElContrato.contrato = this.boleto.encabezado.id;
 
     this.observerFiltroListadoMovil$.next(filtro);
   }
@@ -61,17 +59,14 @@ export class ContratoVentasDetalleComponent implements OnInit {
    */
   private filtroPorDefecto(): FiltroVentas {
 
-    let comprobante = `${this.boleto.encabezado.slipCodComprobante} ${this.boleto.encabezado.slipSucursal} ${this.boleto.encabezado.slipNroComprobante}`;
-
     let filtroPorDef: FiltroVentas = {
       especie: this.boleto.encabezado.especie,
       cosecha: this.boleto.encabezado.cosecha,
-      comprobante: comprobante,
+      contrato: this.boleto.encabezado.id,
       cuenta: this.cuenta.id.codigo,
       paginado: true,
       pagina: 0,// el listado agrega los valores de paginación correctos
-      cantPorPagina: 0,
-      totales: false
+      cantPorPagina: 0
     };
 
     return filtroPorDef;

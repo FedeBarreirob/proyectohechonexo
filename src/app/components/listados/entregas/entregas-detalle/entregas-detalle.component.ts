@@ -21,15 +21,21 @@ export class EntregasDetalleComponent implements OnInit {
 	cuenta: EntidadAlg;
 	contrato: ResumenContratoCompraVenta;
 
+	movimiento: MovimientoEntrega;
+	linkContrato: boolean;
+
 	constructor(
-		@Inject(MAT_DIALOG_DATA) public data: MovimientoEntrega,
+		@Inject(MAT_DIALOG_DATA) public data: any,
 		public dialog: MatDialog,
 		private authenticationService: AuthenticationService,
 		private dialogRef: MatDialogRef<EntregasDetalleComponent>,
 		private exportadorService: EntregasExportacionesService,
 		private cuentaAlgService: CuentaAlgService,
 		private contratoServicio: ContratosService
-	) { }
+	) { 
+		this.movimiento = this.data.movimiento;
+		this.linkContrato = this.data.linkContrato;
+	}
 
 	ngOnInit() {
 		this.cargarUnidadMedida();
@@ -55,19 +61,19 @@ export class EntregasDetalleComponent implements OnInit {
 
 	// funcion encargada de exportar a excel
 	exportarAExcel() {
-		this.exportadorService.exportarEntregasDetalleExcel(this.data);
+		this.exportadorService.exportarEntregasDetalleExcel(this.movimiento);
 	}
 
 	// funcion encargada de exportar a pdf
 	exportarAPDF() {
-		this.exportadorService.exportarEntregasDetallePDF(this.data);
+		this.exportadorService.exportarEntregasDetallePDF(this.movimiento);
 	}
 
 	/**
 	 * Función encargada de cargar el presupuesto vinculado al ticket
 	 */
 	cargarContrato() {
-		this.contratoServicio.contratoResumenPorTk(this.data.comprobante).subscribe(
+		this.contratoServicio.contratoResumenPorTk(this.movimiento.comprobante).subscribe(
 			respuesta => {
 				if (respuesta.exito == true) {
 					this.contrato = respuesta.datos;

@@ -52,6 +52,8 @@ export class ContratosComponent implements OnInit {
         respuesta => {
           this.filtrosEspecieCosecha = respuesta;
           this.cargandoFiltros = false;
+
+          this.cargarListadoPorDefecto();
         }, () => { console.log("error"); this.cargandoFiltros = true; }
       );
     }
@@ -97,5 +99,25 @@ export class ContratosComponent implements OnInit {
     }
 
     this.dialog.open(ContratosDetalleComponent, opciones);
+  }
+
+  /**
+   * Arma un filtro por defecto y ejecuta el listado
+   * Cuando es ejecutado, debe haber una cuenta seleccionada y los filtros de especie cosechas obtenidos
+   */
+  cargarListadoPorDefecto() {
+    if (this.filtrosEspecieCosecha != null && this.filtrosEspecieCosecha.cosechas != null && this.filtrosEspecieCosecha.cosechas.length > 0) {
+      // obtener la ultima cosecha
+      let ultimaCosecha = this.filtrosEspecieCosecha.cosechas[0];
+      let filtro = {
+        cuenta: this.cuenta.id.codigo,
+        fechaDesde: null,
+        fechaHasta: null,
+        especie: null,
+        cosecha: ultimaCosecha.cosecha
+      }
+
+      this.cargarListado(filtro);
+    }
   }
 }
