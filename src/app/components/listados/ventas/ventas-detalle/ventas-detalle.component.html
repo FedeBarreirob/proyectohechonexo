@@ -4,21 +4,21 @@
 <!--Encabezado-->
 <div fxLayout="row" fxLayoutAlign="space-around center" class="encabezado-venta">
 	<div fxFlex="10%" class="encabezado-imagen-especie">
-		<img src="{{data.especie | imagenEspecie}}" />
+		<img src="{{movimiento.especie | imagenEspecie}}" />
 	</div>
 	<div fxFlex="90%">
 		<div fxLayout="column" fxLayoutAlign="none">
 			<div fxFlex="100%" class="encabezado-texto-venta">
-				Venta <span class="a-fijar" *ngIf="data.tc != 0">A fijar</span>
+				Venta
 			</div>
 
 			<div fxFlex="100%" class="encabezado-texto-cantidad-producto">
-				{{data.kilosNetos | kilosA: unidadMedida | number: '.0-0'}} {{unidadMedida | kilosTextoA}} de
-				{{data.especie}}
+				{{movimiento.kilos | kilosA: unidadMedida | number: '.0-0'}} {{unidadMedida | kilosTextoA}} de
+				{{movimiento.especie}}
 			</div>
 
 			<div fxFlex="100%" class="encabezado-fecha">
-				{{data.fecha}}
+				{{movimiento.fecha}}
 			</div>
 		</div>
 	</div>
@@ -35,52 +35,60 @@
 </div>
 
 <!--Datos de la venta-->
-<div fxLayout="row" fxLayoutAlign="space-between center">
+<div fxLayout="row" fxLayoutAlign="space-between none" fxLayoutGap="10px">
 	<div fxFlex="100%" class="titulo-apartados">DATOS DE LA VENTA</div>
 </div>
 
-<div fxLayout="row" fxLayoutAlign="space-between center">
+<div fxLayout="row" fxLayoutAlign="space-between none" fxLayoutGap="10px">
 	<div fxFlex="50%" class="subtitulo-apartados">CONTRATO</div>
 	<div fxFlex="50%" class="subtitulo-apartados">COSECHA</div>
 </div>
 
-<div fxLayout="row" fxLayoutAlign="space-between center">
-	<div fxFlex="50%" class="dato-apartado">????</div>
-	<div fxFlex="50%" class="dato-apartado">{{data.cosecha}}</div>
+<div fxLayout="row" fxLayoutAlign="space-between none" fxLayoutGap="10px">
+	<div fxFlex="50%" *ngIf="linkContrato == true">
+		<button class="boton-contrato" mat-button *ngIf="contrato != null" (click)="verDetalleContrato()">Contrato
+			#{{ contrato ? contrato.numeroComprobanteContrato : '' }}
+			<mat-icon>keyboard_arrow_right</mat-icon>
+		</button>
+	</div>
+	<div fxFlex="50%" *ngIf="linkContrato == false" class="dato-apartado">Contrato
+		#{{ contrato ? contrato.numeroComprobanteContrato : ''}}</div>
+	<div fxFlex="50%" class="dato-apartado">{{movimiento.cosecha}}</div>
 </div>
 
-<div fxLayout="row" fxLayoutAlign="space-between center">
+<div fxLayout="row" fxLayoutAlign="space-between none" fxLayoutGap="10px">
 	<div fxFlex="50%" class="subtitulo-apartados">MERCADO</div>
-	<div fxFlex="50%" class="subtitulo-apartados">FECHA DE VENCIMIENTO</div>
+	<div fxFlex="50%" class="subtitulo-apartados-elipsis">FECHA DE VENCIMIENTO</div>
 </div>
 
-<div fxLayout="row" fxLayoutAlign="space-between center">
-	<div fxFlex="50%" class="dato-apartado-elipsis">{{data.puertoDestino}}</div>
-	<div fxFlex="50%" class="dato-apartado">{{data.entregaHasta}}</div>
+<div fxLayout="row" fxLayoutAlign="space-between none" fxLayoutGap="10px">
+	<div fxFlex="50%" class="dato-apartado">{{movimiento.puertoDestino}}</div>
+	<div fxFlex="50%" class="dato-apartado">{{contrato ? contrato.fechaHastaFijacion : ''}}</div>
 </div>
 
 <!--Precios de fijacion-->
-<div fxLayout="row" fxLayoutAlign="space-between center">
+<div fxLayout="row" fxLayoutAlign="space-between none" fxLayoutGap="10px">
 	<div fxFlex="100%" class="titulo-apartados">PRECIOS DE FIJACIÓN</div>
 </div>
 
-<div fxLayout="row" fxLayoutAlign="space-between center">
+<div fxLayout="row" fxLayoutAlign="space-between none" fxLayoutGap="10px">
 	<div fxFlex="50%" class="subtitulo-apartados">FIJADO</div>
 	<div fxFlex="50%" class="subtitulo-apartados">PRECIO</div>
 </div>
 
-<div fxLayout="row" fxLayoutAlign="space-between center">
-	<div fxFlex="50%" class="dato-apartado">{{data.kilosLiquidados | kilosA: unidadMedida | number: '.0-0'}}
+<div fxLayout="row" fxLayoutAlign="space-between none" fxLayoutGap="10px">
+	<div fxFlex="50%" class="dato-apartado">{{movimiento.kilos | kilosA: unidadMedida | number: '.0-0'}}
 		{{unidadMedida | kilosTextoA}}</div>
-	<div fxFlex="50%" class="dato-apartado">{{data.moneda | moneda}} ${{data.precioPorQuintal | number: '.2'}}</div>
+	<div fxFlex="50%" class="dato-apartado">{{movimiento.moneda | moneda}}
+		${{movimiento.precioPorQuintal | number: '.2'}}</div>
 </div>
 
-<div fxLayout="row" fxLayoutAlign="space-between center">
+<div fxLayout="row" fxLayoutAlign="space-between none" fxLayoutGap="10px">
 	<div fxFlex="50%" class="subtitulo-apartados">TASA DE CAMBIO</div>
 	<div fxFlex="50%" class="subtitulo-apartados">TOTAL</div>
 </div>
 
-<div fxLayout="row" fxLayoutAlign="space-between center">
-	<div fxFlex="50%" class="dato-apartado">ARS $????</div>
-	<div fxFlex="50%" class="dato-apartado">?????</div>
+<div fxLayout="row" fxLayoutAlign="space-between none" fxLayoutGap="10px" *ngIf="movimiento.tipoDeCambio != null">
+	<div fxFlex="50%" class="dato-apartado">ARS ${{movimiento.tipoDeCambio | number: '.2'}}</div>
+	<div fxFlex="50%" class="dato-apartado">ARS ${{movimiento.precioQQPesificado | number: '.2'}}</div>
 </div>

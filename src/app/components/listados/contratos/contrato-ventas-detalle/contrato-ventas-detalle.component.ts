@@ -79,7 +79,10 @@ export class ContratoVentasDetalleComponent implements OnInit {
   verDetalle(movimiento: MovimientoVenta) {
 
     let opciones = {
-      data: movimiento,
+      data: {
+        movimiento: movimiento,
+        linkContrato: false
+      },
       maxWidth: '100vw',
       maxHeight: '100vh',
       height: '100%',

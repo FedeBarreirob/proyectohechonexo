@@ -113,9 +113,9 @@ export class EntregasComponent implements OnInit {
 	}
 
 	/**
-   * Arma un filtro por defecto y ejecuta el listado
-   * Cuando es ejecutado, debe haber una cuenta seleccionada y los filtros de especie cosechas obtenidos
-   */
+	 * Arma un filtro por defecto y ejecuta el listado
+	 * Cuando es ejecutado, debe haber una cuenta seleccionada y los filtros de especie cosechas obtenidos
+	 */
 	cargarListadoPorDefecto() {
 		if (this.filtrosEspecieCosecha != null && this.filtrosEspecieCosecha.cosechas != null && this.filtrosEspecieCosecha.cosechas.length > 0) {
 			// obtener la ultima cosecha

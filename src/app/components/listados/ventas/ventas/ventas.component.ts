@@ -9,7 +9,7 @@ import { Subject } from 'rxjs';
 import { DeviceDetectorService } from 'ngx-device-detector';
 import { CuentaAlgService } from '../../../../services/observers/cuentas-alg/cuenta-alg.service';
 import { VentasDetalleComponent } from '../ventas-detalle/ventas-detalle.component';
-import { FijacionVenta } from 'src/app/interfaces/ventas/fijacion-venta';
+import { FijacionVenta } from '../../../../interfaces/ventas/fijacion-venta';
 
 @Component({
 	selector: 'app-ventas',
@@ -54,6 +54,8 @@ export class VentasComponent implements OnInit {
 				respuesta => {
 					this.filtrosEspecieCosecha = respuesta;
 					this.cargandoFiltros = false;
+
+					this.cargarListadoPorDefecto();
 				}, () => { console.log("error"); this.cargandoFiltros = true; }
 			);
 		}
@@ -75,7 +77,10 @@ export class VentasComponent implements OnInit {
 		let opciones;
 		if (this.esCelular) {
 			opciones = {
-				data: movimiento,
+				data: {
+					movimiento: movimiento,
+					linkContrato: true
+				},
 				maxWidth: '100vw',
 				maxHeight: '100vh',
 				height: '100%',
@@ -83,7 +88,10 @@ export class VentasComponent implements OnInit {
 			};
 		} else {
 			opciones = {
-				data: movimiento,
+				data: {
+					movimiento: movimiento,
+					linkContrato: true
+				},
 				height: '90%',
 				width: '500px'
 			};
@@ -101,5 +109,25 @@ export class VentasComponent implements OnInit {
 	// funcion encargada de mostrar u ocultar los filtros
 	mostrarOcultarFiltros() {
 		this.sidenav.toggle();
+	}
+
+	/**
+	 * Arma un filtro por defecto y ejecuta el listado
+	 * Cuando es ejecutado, debe haber una cuenta seleccionada y los filtros de especie cosechas obtenidos
+	 */
+	cargarListadoPorDefecto() {
+		if (this.filtrosEspecieCosecha != null && this.filtrosEspecieCosecha.cosechas != null && this.filtrosEspecieCosecha.cosechas.length > 0) {
+			// obtener la ultima cosecha
+			let ultimaCosecha = this.filtrosEspecieCosecha.cosechas[0];
+			let filtro = {
+				cuenta: this.cuenta.id.codigo,
+				fechaDesde: null,
+				fechaHasta: null,
+				especie: null,
+				cosecha: ultimaCosecha.cosecha
+			}
+
+			this.cargarListado(filtro);
+		}
 	}
 }

@@ -7,5 +7,6 @@ export interface FiltroVentas {
     paginado: boolean,
     pagina: number,
     cantPorPagina: number,
-    contrato?: number
+    contrato?: number,
+    pesificado?: boolean
 }

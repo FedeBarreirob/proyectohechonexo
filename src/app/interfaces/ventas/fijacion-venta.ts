@@ -11,5 +11,6 @@ export interface FijacionVenta {
     moneda: string,
     tipoDeCambio?: number,
     contratoId: number,
-    numeroComprobanteContrato: number
+    numeroComprobanteContrato: number,
+    precioQQPesificado?: number
 }

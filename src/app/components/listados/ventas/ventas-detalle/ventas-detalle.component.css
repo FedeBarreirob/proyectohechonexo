@@ -78,61 +78,55 @@
 /* detalle */
 
 .titulo-apartados {
-    height: 17px;
-    width: 175px;
     color: #333333;
     font-family: Rubik;
     font-size: 14px;
     letter-spacing: 1.2px;
-    line-height: 17px;
     margin-top: 20px;
     margin-bottom: 10px;
 }
 
 .subtitulo-apartados {
-    height: 14px;
-    width: 66px;
     color: #999999;
     font-family: Rubik;
     font-size: 12px;
     letter-spacing: 1.2px;
-    line-height: 14px;
     margin-top: 10px;
 }
 
 .dato-apartado {
-    height: 17px;
-    width: 79px;
     color: #333333;
     font-family: Rubik;
     font-size: 14px;
-    line-height: 17px;
+}
+
+.subtitulo-apartados-elipsis {
+    color: #999999;
+    font-family: Rubik;
+    font-size: 12px;
+    letter-spacing: 1.2px;
+    margin-top: 10px;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    white-space: nowrap;
 }
 
 .dato-apartado-elipsis {
-    height: 17px;
-    width: 79px;
     color: #333333;
     font-family: Rubik;
     font-size: 14px;
-    line-height: 17px;
     text-overflow: ellipsis;
     overflow: hidden;
     white-space: nowrap;
 }
 
 .kilos-titulo {
-    height: 17px;
-    width: 61px;
     color: #333333;
     font-family: RubikLight;
     font-size: 14px;
-    line-height: 17px;
 }
 
 .kilos-datos {
-    height: 24px;
-    width: 66px;
     color: #333333;
     font-family: Rubik;
     font-size: 20px;
@@ -149,4 +143,10 @@
     font-size: 11px;
     line-height: 13px;
     padding: 3px;
+}
+
+.boton-contrato {
+    color: rgba(45, 164, 66, 1);
+    font-family: Rubik;
+    font-size: 14px;
 }

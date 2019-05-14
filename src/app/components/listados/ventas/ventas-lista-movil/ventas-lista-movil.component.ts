@@ -16,6 +16,9 @@ export class VentasListaMovilComponent implements OnInit {
   @Input()
   observerFiltroListadoMovil$: Subject<any>;
 
+  @Input()
+  filtrarPorPesificacion: boolean = true;
+
   @Output()
   seleccionMovimiento: EventEmitter<FijacionVenta> = new EventEmitter<FijacionVenta>();
 
@@ -26,6 +29,7 @@ export class VentasListaMovilComponent implements OnInit {
   filtro: FiltroVentas;
   unidadMedida: string;
   perfilBasico: PerfilBasico;
+  ventasPesificadas: boolean = null;
 
   constructor(
     private ventasService: VentasService,
@@ -71,6 +75,7 @@ export class VentasListaMovilComponent implements OnInit {
       filtroPaginado.paginado = true;
       filtroPaginado.pagina = this.pagina;
       filtroPaginado.cantPorPagina = this.cantidadPorPagina;
+      filtroPaginado.pesificado = this.ventasPesificadas;
 
       this.ventasService.listadoVentas(filtroPaginado).subscribe(respuesta => {
 
@@ -109,5 +114,30 @@ export class VentasListaMovilComponent implements OnInit {
   // funcion que muestra el detalle de un movimiento seleccionado
   verDetalle(movimiento: FijacionVenta) {
     this.seleccionMovimiento.emit(movimiento);
+  }
+
+  /**
+   * Establece el filtro para obtener 
+   * @param pesificado Estado del filtro de aplicación
+   */
+  seleccionarFiltroPesificacion(pesificado?: boolean) {
+    this.ventasPesificadas = pesificado;
+
+    if (this.filtro != null) {
+      this.cargarListado(true);
+    }
+  }
+
+  /**
+   * Devuelve el nombre del filtro de pesificacion según el filtro efectuado
+   */
+  leyendaFiltroPesificacion(): string {
+    if (this.ventasPesificadas == null) {
+      return "TODAS";
+    } else if (this.ventasPesificadas == false) {
+      return "PENDIENTE DE PESIFICAR";
+    } else {
+      return "PESIFICADO";
+    }
   }
 }

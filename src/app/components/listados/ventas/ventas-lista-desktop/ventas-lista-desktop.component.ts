@@ -67,7 +67,7 @@ export class VentasListaDesktopComponent implements OnInit {
       this.limpiar();
 
       let filtroConTotales: FiltroVentas = this.filtro;
-      filtroConTotales.totales = true;
+      //filtroConTotales.totales = true;
       filtroConTotales.paginado = false;
 
       this.ventasService.listadoVentas(filtroConTotales).subscribe(respuesta => {

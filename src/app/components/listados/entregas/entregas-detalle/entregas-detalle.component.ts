@@ -70,7 +70,7 @@ export class EntregasDetalleComponent implements OnInit {
 	}
 
 	/**
-	 * Función encargada de cargar el presupuesto vinculado al ticket
+	 * Función encargada de cargar el contrato vinculado al ticket
 	 */
 	cargarContrato() {
 		this.contratoServicio.contratoResumenPorTk(this.movimiento.comprobante).subscribe(

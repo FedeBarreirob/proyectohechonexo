@@ -8,7 +8,7 @@
       (botonSalirEjecutado)="salir()" (botonPersonalizadoDerechoEjecutado)="mostrarOcultarFiltros()">
     </app-tool-bar-para-modal>
 
-    <app-ventas-lista-movil [observerFiltroListadoMovil$]="observerFiltroListadoMovil$"
+    <app-ventas-lista-movil [observerFiltroListadoMovil$]="observerFiltroListadoMovil$" [filtrarPorPesificacion]="false"
       (seleccionMovimiento)="verDetalle($event)"></app-ventas-lista-movil>
   </section>
 </mat-sidenav-container>

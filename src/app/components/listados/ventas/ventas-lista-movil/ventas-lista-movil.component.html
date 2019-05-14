@@ -1,5 +1,26 @@
 <mat-progress-bar *ngIf="cargando" mode="indeterminate"></mat-progress-bar>
 
+<button mat-button *ngIf="filtrarPorPesificacion" [matMenuTriggerFor]="menu" [disabled]="cargando"
+  class="boton-pesificacion-filtro">{{ leyendaFiltroPesificacion() }} <mat-icon [ngStyle]="{'color': '#2DA442'}">
+    keyboard_arrow_down</mat-icon></button>
+<mat-menu #menu="matMenu">
+  <button mat-menu-item (click)="seleccionarFiltroPesificacion(null)"
+    [ngClass]="{'activo': ventasPesificadas === null, 'inactivo': ventasPesificadas !== null }">
+    Todas
+  </button>
+
+  <button mat-menu-item (click)="seleccionarFiltroPesificacion(true)"
+    [ngClass]="{'activo': ventasPesificadas === true, 'inactivo': ventasPesificadas !== true }">
+    Pesificado
+  </button>
+
+  <button mat-menu-item (click)="seleccionarFiltroPesificacion(false)"
+    [ngClass]="{'activo': ventasPesificadas === false, 'inactivo': ventasPesificadas !== false }">
+    Pendientes de pesificar
+  </button>
+
+</mat-menu>
+
 <div fxLayout="row" fxLayoutAlign="space-around center" class="titulos">
   <div fxFlex="40%">Ref. de entrega</div>
   <div fxFlex="30%">{{unidadMedida | kilosTextoA}} netos</div>
