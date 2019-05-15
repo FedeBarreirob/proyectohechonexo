@@ -1,0 +1,42 @@
+<div fxLayout="row" fxLayoutAlign="space-between center">
+  <div fxFill></div>
+  <div fxFlex="20%">
+    TC ${{ saldoGlobal.tipoDeCambio | number: '.2' }}
+  </div>
+</div>
+
+<div fxLayout="row" fxLayoutAlign="space-between center">
+
+  <div fxLayout="row" fxLayoutAlign="space-between center">
+    <div fxFlex="100%">DISPONIBLE A COBRAR</div>
+  </div>
+
+  <div fxLayout="row" fxLayoutAlign="space-between center">
+    <div fxFlex="50%">{{ saldoGlobal.aCobrarVencido | number: '.2' }} ARS</div>
+    <div fxFlex="50%">{{ saldoGlobal.aCobrarAVencer | number: '.2' }} ARS</div>
+  </div>
+
+  <div fxLayout="row" fxLayoutAlign="space-between center">
+    <div fxFlex="50%">Vencido</div>
+    <div fxFlex="50%">A vencer</div>
+  </div>
+
+</div>
+
+<div fxLayout="row" fxLayoutAlign="space-between center">
+
+  <div fxLayout="row" fxLayoutAlign="space-between center">
+    <div fxFlex="100%">A PAGAR</div>
+  </div>
+
+  <div fxLayout="row" fxLayoutAlign="space-between center">
+    <div fxFlex="50%">{{ saldoGlobal.aPagarVencido | number: '.2' }} ARS</div>
+    <div fxFlex="50%">{{ saldoGlobal.aPagarAVencer | number: '.2' }} ARS</div>
+  </div>
+
+  <div fxLayout="row" fxLayoutAlign="space-between center">
+    <div fxFlex="50%">Vencido</div>
+    <div fxFlex="50%">A vencer</div>
+  </div>
+
+</div>
