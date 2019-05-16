@@ -98,6 +98,7 @@ import { ContratosResumenItemMovilComponent } from './components/listados/contra
 import { ContratoEntregasDetalleComponent } from './components/listados/contratos/contrato-entregas-detalle/contrato-entregas-detalle.component';
 import { ContratoVentasDetalleComponent } from './components/listados/contratos/contrato-ventas-detalle/contrato-ventas-detalle.component';
 import { SaldoCtaCteAplicadaGlobalComponent } from './components/tablero/saldo-cta-cte-aplicada-global/saldo-cta-cte-aplicada-global.component';
+import { FechaHoraComponent } from './components/tablero/fecha-hora/fecha-hora.component';
 
 registerLocaleData(localeEsAr, 'es-AR');
 
@@ -176,7 +177,8 @@ export function tokenGetter() {
 		ContratosResumenItemMovilComponent,
 		ContratoEntregasDetalleComponent,
 		ContratoVentasDetalleComponent,
-		SaldoCtaCteAplicadaGlobalComponent
+		SaldoCtaCteAplicadaGlobalComponent,
+		FechaHoraComponent
 	],
 	imports: [
 		HttpClientModule,

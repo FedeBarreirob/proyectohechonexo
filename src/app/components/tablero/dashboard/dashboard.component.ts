@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
+import { MatSidenav } from '@angular/material';
 
 @Component({
   selector: 'app-dashboard',
@@ -7,9 +8,17 @@ import { Component, OnInit } from '@angular/core';
 })
 export class DashboardComponent implements OnInit {
 
+  @ViewChild('menuNotificaciones') public sidenav: MatSidenav;
+
   constructor() { }
 
   ngOnInit() {
   }
 
+  /**
+   * Funcion encargada de mostrar u ocultar el sidebar que contiene las notificaciones
+   */
+  mostrarOcultarNotificaciones() {
+    this.sidenav.toggle();
+  }
 }

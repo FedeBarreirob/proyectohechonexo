@@ -1,3 +1,16 @@
-<app-tool-bar-general [titulo]="'Inicio'"></app-tool-bar-general>
+<mat-sidenav-container class="contenedor-notificaciones">
+	<mat-sidenav #menuNotificaciones position="end" class="sidenav-filtro">
 
-<app-saldo-cta-cte-aplicada-global></app-saldo-cta-cte-aplicada-global>
+		<!--Aqui va el sidebar de las notificaciones-->
+
+	</mat-sidenav>
+	<section>
+
+		<app-tool-bar-general [titulo]="'Inicio'" [disabled]="false" [colorIndicador]="'#FFFFFFFF'"
+			(botonPersonalizadoEjecutado)="mostrarOcultarNotificaciones()"
+			[urlImagenAccionPersonalizada]="'assets/toolbar/Campana.png'"></app-tool-bar-general>
+
+		<app-saldo-cta-cte-aplicada-global></app-saldo-cta-cte-aplicada-global>
+
+	</section>
+</mat-sidenav-container>
