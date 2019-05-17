@@ -1,0 +1,17 @@
+<div fxLayout="row" fxLayoutAlign="none">
+  <div fxFlex="100%" class="titulo-principal">
+    ENTREGAS
+  </div>
+</div>
+
+<div class="swiper-container" [swiper]="config">
+  <div class="swiper-wrapper">
+    <div class="swiper-slide" *ngFor="let indicador of indicadores">
+      <app-contrato-indicador-entrega [indicador]="indicador" [unidadMedida]="unidadMedida">
+      </app-contrato-indicador-entrega>
+    </div>
+  </div>
+
+  <div class="swiper-pagination"></div>
+
+</div>

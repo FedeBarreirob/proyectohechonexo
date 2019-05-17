@@ -2,14 +2,28 @@
 
 .contenedor-notificaciones {
     height: 100%;
-    background: url("./../../../../assets/varios/fondo-verde.png");
-    background-position: center top;
-    background-repeat: no-repeat;
-    background-size: 100%;
 }
 
 .sidenav-notificaciones {
     box-shadow: 3px 0 6px rgba(0, 0, 0, .24);
     width: 70%;
     max-width: 270px;
+}
+
+.fondo-verde {
+    background: url("./../../../../assets/varios/fondo-verde.png");
+    background-position: center top;
+    background-repeat: no-repeat;
+    background-size: 100%;
+    position: absolute;
+    top: 0px;
+    left: 0px;
+    right: 0px;
+}
+
+.fondo-blanco {
+    position: absolute;
+    top: 400px;
+    left: 0px;
+    right: 0px;
 }

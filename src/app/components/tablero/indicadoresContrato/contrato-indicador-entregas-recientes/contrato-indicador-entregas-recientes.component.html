@@ -1,0 +1,13 @@
+<div fxLayout="row" fxLayoutAlign="space-between center">
+  <div fxFlex="60%" class="titulo-principal">
+    ENTREGAS RECIENTES
+  </div>
+
+  <div fxFlex="40%" class="titulo-principal" align="end">
+    <button (click)="irAEntregas()" mat-button class="link-ver-todas">Ver todas</button>
+  </div>
+</div>
+
+<app-entregas-lista-movil [observerFiltroListadoMovil$]="observerFiltroListadoMovil$" [filtrarPorAplicacion]="false"
+  [cantidadPorPagina]="5">
+</app-entregas-lista-movil>

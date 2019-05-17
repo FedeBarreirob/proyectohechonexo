@@ -18,6 +18,7 @@ export class ContratosService {
   private urlContratosComprobante = `${environment.hostGeneradorComprobantes}/confirmacionesDeVentas/comprobante`;
   private urlContratosContratoResumenPorTk = `${environment.hostEntregasYVentas}/contratos/contratoResumidoDeTicketAplicado`;
   private urlContratosContratoResumenPorID = `${environment.hostEntregasYVentas}/contratos/contratoResumidoPorId`;
+  private urlContratosIndicadoresPorEspecie = `${environment.hostEntregasYVentas}/contratos/indicadoresPorEspecie`;
 
   constructor(
     private http: HttpClient,
@@ -116,6 +117,25 @@ export class ContratosService {
     };
 
     let urlConParametro = `${this.urlContratosContratoResumenPorID}/${id}`;
+    return this.http.get<ResponseServicio>(urlConParametro, httpOptions);
+  }
+
+  /**
+   * Función que devuelve los totales entregados, pendiente de entrgar, fijados, etc de una cuenta dada
+   * @param cuenta Identificador de la cuenta del productor
+   */
+  indicadoresPorEspecie(cuenta: string): Observable<ResponseServicio> {
+
+    let usuarioLogueado = <UserAuth>this.authenticationService.usuarioLogueado();
+
+    const httpOptions = {
+      headers: new HttpHeaders({
+        'Content-Type': 'application/json',
+        'Authorization': `Bearer ${usuarioLogueado.token}`
+      })
+    };
+
+    let urlConParametro = `${this.urlContratosIndicadoresPorEspecie}/${cuenta}`;
     return this.http.get<ResponseServicio>(urlConParametro, httpOptions);
   }
 }

@@ -9,6 +9,16 @@ import { EllipsisModule } from 'ngx-ellipsis';
 import { DeviceDetectorModule } from 'ngx-device-detector';
 import { NgxGaugeModule } from 'ngx-gauge';
 
+// swiper
+import { SwiperModule } from 'ngx-swiper-wrapper';
+import { SWIPER_CONFIG } from 'ngx-swiper-wrapper';
+import { SwiperConfigInterface } from 'ngx-swiper-wrapper';
+
+const DEFAULT_SWIPER_CONFIG: SwiperConfigInterface = {
+	direction: 'horizontal',
+	slidesPerView: 'auto'
+};
+
 // locale
 import { registerLocaleData, DecimalPipe, CommonModule } from '@angular/common';
 import localeEsAr from '@angular/common/locales/es-AR';
@@ -99,6 +109,13 @@ import { ContratoEntregasDetalleComponent } from './components/listados/contrato
 import { ContratoVentasDetalleComponent } from './components/listados/contratos/contrato-ventas-detalle/contrato-ventas-detalle.component';
 import { SaldoCtaCteAplicadaGlobalComponent } from './components/tablero/saldo-cta-cte-aplicada-global/saldo-cta-cte-aplicada-global.component';
 import { FechaHoraComponent } from './components/tablero/fecha-hora/fecha-hora.component';
+import { ContratoIndicadorEntregasYVentasComponent } from './components/tablero/indicadoresContrato/contrato-indicador-entregas-yventas/contrato-indicador-entregas-yventas.component';
+import { ContratoIndicadorEntregaComponent } from './components/tablero/indicadoresContrato/contrato-indicador-entrega/contrato-indicador-entrega.component';
+import { ContratoIndicadorVentaComponent } from './components/tablero/indicadoresContrato/contrato-indicador-venta/contrato-indicador-venta.component';
+import { ContratoIndicadorSwiperEntregaComponent } from './components/tablero/indicadoresContrato/contrato-indicador-swiper-entrega/contrato-indicador-swiper-entrega.component';
+import { ContratoIndicadorSwiperVentasComponent } from './components/tablero/indicadoresContrato/contrato-indicador-swiper-ventas/contrato-indicador-swiper-ventas.component';
+import { ContratoIndicadorEntregasRecientesComponent } from './components/tablero/indicadoresContrato/contrato-indicador-entregas-recientes/contrato-indicador-entregas-recientes.component';
+import { ContratoIndicadorVentasRecientesComponent } from './components/tablero/indicadoresContrato/contrato-indicador-ventas-recientes/contrato-indicador-ventas-recientes.component';
 
 registerLocaleData(localeEsAr, 'es-AR');
 
@@ -178,7 +195,14 @@ export function tokenGetter() {
 		ContratoEntregasDetalleComponent,
 		ContratoVentasDetalleComponent,
 		SaldoCtaCteAplicadaGlobalComponent,
-		FechaHoraComponent
+		FechaHoraComponent,
+		ContratoIndicadorEntregasYVentasComponent,
+		ContratoIndicadorEntregaComponent,
+		ContratoIndicadorVentaComponent,
+		ContratoIndicadorSwiperEntregaComponent,
+		ContratoIndicadorSwiperVentasComponent,
+		ContratoIndicadorEntregasRecientesComponent,
+		ContratoIndicadorVentasRecientesComponent
 	],
 	imports: [
 		HttpClientModule,
@@ -209,7 +233,8 @@ export function tokenGetter() {
 		EllipsisModule,
 		DeviceDetectorModule.forRoot(),
 		InfiniteScrollModule,
-		NgxGaugeModule
+		NgxGaugeModule,
+		SwiperModule
 	],
 	providers: [
 		{ provide: HTTP_INTERCEPTORS, useClass: ErrorAuthInterceptor, multi: true },
@@ -217,7 +242,8 @@ export function tokenGetter() {
 		{ provide: LOCALE_ID, useValue: 'es-AR' },
 		DecimalPipe,
 		{ provide: MatPaginatorIntl, useClass: CustomPaginatorEspanol },
-		JwtHelperService
+		JwtHelperService,
+		{ provide: SWIPER_CONFIG, useValue: DEFAULT_SWIPER_CONFIG }
 	],
 	entryComponents: [
 		CtacteDetalleComponent,

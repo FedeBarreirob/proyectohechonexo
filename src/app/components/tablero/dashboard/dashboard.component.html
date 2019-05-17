@@ -6,11 +6,19 @@
 	</mat-sidenav>
 	<section>
 
-		<app-tool-bar-general [titulo]="'Inicio'" [disabled]="false" [colorIndicador]="'#FFFFFFFF'"
-			(botonPersonalizadoEjecutado)="mostrarOcultarNotificaciones()"
-			[urlImagenAccionPersonalizada]="'assets/toolbar/Campana.png'"></app-tool-bar-general>
+		<div class="fondo-verde">
+			<app-tool-bar-general [titulo]="'Inicio'" [disabled]="false" [colorIndicador]="'#FFFFFFFF'"
+				(botonPersonalizadoEjecutado)="mostrarOcultarNotificaciones()"
+				[urlImagenAccionPersonalizada]="'assets/toolbar/Campana.png'"></app-tool-bar-general>
 
-		<app-saldo-cta-cte-aplicada-global></app-saldo-cta-cte-aplicada-global>
+			<app-saldo-cta-cte-aplicada-global></app-saldo-cta-cte-aplicada-global>
+		</div>
+
+		<div class="fondo-blanco">
+			<app-contrato-indicador-entregas-yventas></app-contrato-indicador-entregas-yventas>
+			<app-contrato-indicador-entregas-recientes></app-contrato-indicador-entregas-recientes>
+			<app-contrato-indicador-ventas-recientes></app-contrato-indicador-ventas-recientes>
+		</div>
 
 	</section>
 </mat-sidenav-container>

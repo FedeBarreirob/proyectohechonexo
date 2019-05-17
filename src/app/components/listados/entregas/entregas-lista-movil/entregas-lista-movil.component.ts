@@ -24,7 +24,10 @@ export class EntregasListaMovilComponent implements OnInit {
 
   listadoEntregas: Array<MovimientoEntrega> = [];
   pagina: number = 1;
+  
+  @Input()
   cantidadPorPagina: number = 50;
+
   cargando: boolean = false;
   filtro: FiltroEntregas;
   unidadMedida: string;

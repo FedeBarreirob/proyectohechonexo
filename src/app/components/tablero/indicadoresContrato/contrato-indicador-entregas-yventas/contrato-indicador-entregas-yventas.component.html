@@ -1,0 +1,21 @@
+<div fxLayout="row" fxLayoutAlign="none">
+    <div fxFlex="100%" class="titulo-principal">
+        RESUMEN DE CONTRATOS
+    </div>
+</div>
+
+<div fxLayout="row" fxLayoutAlign="center center" *ngIf="cargando == true">
+    <div fxFlex="24px">
+        <mat-spinner [diameter]="24"></mat-spinner>
+    </div>
+</div>
+
+<app-contrato-indicador-swiper-entrega
+    *ngIf="resumenDeContratos != null && resumenDeContratos.indicadoresEntregas != null && cargando == false"
+    [indicadores]="resumenDeContratos.indicadoresEntregas" [unidadMedida]="unidadMedida">
+</app-contrato-indicador-swiper-entrega>
+
+<app-contrato-indicador-swiper-ventas
+    *ngIf="resumenDeContratos != null && resumenDeContratos.indicadoresFijaciones != null && cargando == false"
+    [indicadores]="resumenDeContratos.indicadoresFijaciones" [unidadMedida]="unidadMedida">
+</app-contrato-indicador-swiper-ventas>

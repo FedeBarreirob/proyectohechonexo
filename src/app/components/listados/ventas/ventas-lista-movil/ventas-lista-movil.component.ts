@@ -24,7 +24,10 @@ export class VentasListaMovilComponent implements OnInit {
 
   listado: Array<FijacionVenta> = [];
   pagina: number = 1;
+
+  @Input()
   cantidadPorPagina: number = 50;
+  
   cargando: boolean = false;
   filtro: FiltroVentas;
   unidadMedida: string;
