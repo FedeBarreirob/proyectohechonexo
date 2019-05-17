@@ -24,7 +24,7 @@ export class EntregasListaMovilComponent implements OnInit {
 
   listadoEntregas: Array<MovimientoEntrega> = [];
   pagina: number = 1;
-  
+
   @Input()
   cantidadPorPagina: number = 50;
 
@@ -32,7 +32,6 @@ export class EntregasListaMovilComponent implements OnInit {
   filtro: FiltroEntregas;
   unidadMedida: string;
   perfilBasico: PerfilBasico;
-  entregasAplicadas: boolean = null;
 
   constructor(
     private entregasService: EntregasService,
@@ -74,13 +73,11 @@ export class EntregasListaMovilComponent implements OnInit {
         this.limpiar();
       }
 
-      let filtroPaginado: FiltroEntregas = this.filtro;
-      filtroPaginado.paginado = true;
-      filtroPaginado.pagina = this.pagina;
-      filtroPaginado.cantPorPagina = this.cantidadPorPagina;
-      filtroPaginado.aplicado = this.entregasAplicadas;
+      this.filtro.paginado = true;
+      this.filtro.pagina = this.pagina;
+      this.filtro.cantPorPagina = this.cantidadPorPagina;
 
-      this.entregasService.listadoEntregas(filtroPaginado).subscribe(respuesta => {
+      this.entregasService.listadoEntregas(this.filtro).subscribe(respuesta => {
 
         if (respuesta.exito == true && respuesta.datos != null) {
           this.agregarMovimientosAlListado(respuesta.datos);
@@ -124,9 +121,8 @@ export class EntregasListaMovilComponent implements OnInit {
    * @param aplicado Estado del filtro de aplicación
    */
   seleccionarFiltroAplicacion(aplicado?: boolean) {
-    this.entregasAplicadas = aplicado;
-
     if (this.filtro != null) {
+      this.filtro.aplicado = aplicado;
       this.cargarListado(true);
     }
   }
@@ -135,12 +131,18 @@ export class EntregasListaMovilComponent implements OnInit {
    * Devuelve el nombre del filtro de aplicación según el filtro efectuado
    */
   leyendaFiltroAplicacion(): string {
-    if (this.entregasAplicadas == null) {
-      return "TODAS";
-    } else if (this.entregasAplicadas == false) {
-      return "PENDIENTES DE APLICAR";
+    if (this.filtro != null) {
+
+      if (this.filtro.aplicado == null) {
+        return "TODAS";
+      } else if (this.filtro.aplicado == false) {
+        return "PENDIENTES DE APLICAR";
+      } else {
+        return "APLICADAS";
+      }
+      
     } else {
-      return "APLICADAS";
+      return "-";
     }
   }
 }

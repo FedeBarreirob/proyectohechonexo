@@ -3,18 +3,18 @@
 <button mat-button *ngIf="filtrarPorAplicacion" [matMenuTriggerFor]="menu" [disabled]="cargando" class="boton-aplicadas-filtro">{{ leyendaFiltroAplicacion() }} <mat-icon [ngStyle]="{'color': '#2DA442'}">
     keyboard_arrow_down</mat-icon></button>
 <mat-menu #menu="matMenu">
-  <button mat-menu-item (click)="seleccionarFiltroAplicacion(null)"
-    [ngClass]="{'activo': entregasAplicadas === null, 'inactivo': entregasAplicadas !== null }">
+  <button *ngIf="filtro != null" mat-menu-item (click)="seleccionarFiltroAplicacion(null)"
+    [ngClass]="{'activo': filtro.aplicado === null, 'inactivo': filtro.aplicado !== null }">
     Todas
   </button>
 
-  <button mat-menu-item (click)="seleccionarFiltroAplicacion(false)"
-    [ngClass]="{'activo': entregasAplicadas === false, 'inactivo': entregasAplicadas !== false }">
+  <button *ngIf="filtro != null" mat-menu-item (click)="seleccionarFiltroAplicacion(false)"
+    [ngClass]="{'activo': filtro.aplicado === false, 'inactivo': filtro.aplicado !== false }">
     Pendientes de aplicar
   </button>
 
-  <button mat-menu-item (click)="seleccionarFiltroAplicacion(true)"
-    [ngClass]="{'activo': entregasAplicadas === true, 'inactivo': entregasAplicadas !== true }">
+  <button *ngIf="filtro != null" mat-menu-item (click)="seleccionarFiltroAplicacion(true)"
+    [ngClass]="{'activo': filtro.aplicado === true, 'inactivo': filtro.aplicado !== true }">
     Aplicadas
   </button>
 </mat-menu>
