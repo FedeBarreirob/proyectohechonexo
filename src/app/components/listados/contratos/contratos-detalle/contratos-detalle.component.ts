@@ -1,4 +1,4 @@
-import { Component, OnInit, Inject } from '@angular/core';
+import { Component, OnInit, Inject, OnDestroy } from '@angular/core';
 import { ResumenContratoCompraVenta } from '../../../../interfaces/contratos/resumen-contrato-compra-venta';
 import { MAT_DIALOG_DATA, MatDialogRef, MatSnackBar, MatDialog } from '@angular/material';
 import { ContratosService } from '../../../../services/contratos/contratos.service';
@@ -10,19 +10,22 @@ import { saveAs } from 'file-saver/FileSaver';
 import { DeviceDetectorService } from 'ngx-device-detector';
 import { ContratoEntregasDetalleComponent } from '../contrato-entregas-detalle/contrato-entregas-detalle.component';
 import { ContratoVentasDetalleComponent } from '../contrato-ventas-detalle/contrato-ventas-detalle.component';
+import { Subject } from 'rxjs';
+import { takeUntil } from 'rxjs/operators';
 
 @Component({
   selector: 'app-contratos-detalle',
   templateUrl: './contratos-detalle.component.html',
   styleUrls: ['./contratos-detalle.component.css']
 })
-export class ContratosDetalleComponent implements OnInit {
+export class ContratosDetalleComponent implements OnInit, OnDestroy {
 
   boleto: BoletoConfirmacionVenta;
   resumenContrato: ResumenContratoCompraVenta;
   cargando: boolean = false;
   unidadMedida: string;
   mensajeEntregasVentasPendientes: string = "";
+  destroy$: Subject<any> = new Subject<any>();
 
   esCelular: boolean;
 
@@ -46,6 +49,11 @@ export class ContratosDetalleComponent implements OnInit {
     this.cargarBoleto();
   }
 
+  ngOnDestroy(): void {
+    this.destroy$.next();
+    this.destroy$.unsubscribe();
+  }
+
   /**
    * Función que carga la unidad de medida desde el perfil
    */
@@ -64,6 +72,7 @@ export class ContratosDetalleComponent implements OnInit {
       this.cargando = true;
 
       this.contratosService.contrato(this.resumenContrato.numeroSucursalContrato, this.resumenContrato.numeroComprobanteContrato)
+        .pipe(takeUntil(this.destroy$))
         .subscribe(
           respuesta => {
             if (respuesta.exito == true) {
@@ -122,6 +131,7 @@ export class ContratosDetalleComponent implements OnInit {
       this.cargando = true;
 
       this.comprobanteDownloaderService.confirmacionVentaDescargado(this.resumenContrato.numeroSucursalContrato, this.resumenContrato.numeroComprobanteContrato)
+        .pipe(takeUntil(this.destroy$))
         .subscribe(respuesta => {
           var mediaType = 'application/pdf';
           var blob = new Blob([respuesta], { type: mediaType });

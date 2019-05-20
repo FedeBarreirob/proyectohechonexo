@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, OnInit, ViewChild, OnDestroy } from '@angular/core';
 import { MatSidenav, MatDialog } from '@angular/material';
 import { EntidadAlg } from '../../../../interfaces/perfiles/entidad-alg';
 import { FiltroEspecieCosecha } from '../../../../interfaces/varios/filtro-especie-cosecha';
@@ -8,13 +8,14 @@ import { CuentaAlgService } from '../../../../services/observers/cuentas-alg/cue
 import { DeviceDetectorService } from 'ngx-device-detector';
 import { ContratosDetalleComponent } from '../contratos-detalle/contratos-detalle.component';
 import { ResumenContratoCompraVenta } from '../../../../interfaces/contratos/resumen-contrato-compra-venta';
+import { takeUntil } from 'rxjs/operators';
 
 @Component({
   selector: 'app-contratos',
   templateUrl: './contratos.component.html',
   styleUrls: ['./contratos.component.css']
 })
-export class ContratosComponent implements OnInit {
+export class ContratosComponent implements OnInit, OnDestroy {
 
   @ViewChild('menuFiltro') public sidenav: MatSidenav;
 
@@ -25,6 +26,7 @@ export class ContratosComponent implements OnInit {
   observerFiltroListadoMovil$ = new Subject<any>();
   observerFiltroListadoDesktop$ = new Subject<any>();
   esCelular: boolean;
+  destroy$: Subject<any> = new Subject<any>();
 
   constructor(
     private contratosService: ContratosService,
@@ -36,9 +38,16 @@ export class ContratosComponent implements OnInit {
   ngOnInit() {
     this.esCelular = this.deviceService.isMobile();
 
-    this.cuentaAlgService.cuentaSeleccionada$.subscribe(
-      cuentaAlg => this.seleccionarCuenta(cuentaAlg)
-    );
+    this.cuentaAlgService.cuentaSeleccionada$
+      .pipe(takeUntil(this.destroy$))
+      .subscribe(
+        cuentaAlg => this.seleccionarCuenta(cuentaAlg)
+      );
+  }
+
+  ngOnDestroy(): void {
+    this.destroy$.next();
+    this.destroy$.unsubscribe();
   }
 
   // funcion encargada de cargar los filtros de especie cosecha cuando se cambia la seleccion de cuenta
@@ -48,14 +57,16 @@ export class ContratosComponent implements OnInit {
 
       let codigoEntidad = (this.cuenta) ? this.cuenta.id.codigo : null;
 
-      this.contratosService.listadoFiltrosEspecieCosecha(codigoEntidad).subscribe(
-        respuesta => {
-          this.filtrosEspecieCosecha = respuesta;
-          this.cargandoFiltros = false;
+      this.contratosService.listadoFiltrosEspecieCosecha(codigoEntidad)
+        .pipe(takeUntil(this.destroy$))
+        .subscribe(
+          respuesta => {
+            this.filtrosEspecieCosecha = respuesta;
+            this.cargandoFiltros = false;
 
-          this.cargarListadoPorDefecto();
-        }, () => { console.log("error"); this.cargandoFiltros = true; }
-      );
+            this.cargarListadoPorDefecto();
+          }, () => { console.log("error"); this.cargandoFiltros = true; }
+        );
     }
   }
 

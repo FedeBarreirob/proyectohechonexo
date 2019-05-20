@@ -1,17 +1,19 @@
-import { Component, OnInit, Output, EventEmitter, Input } from '@angular/core';
+import { Component, OnInit, Output, EventEmitter, Input, OnDestroy } from '@angular/core';
 import { AuthenticationService } from '../../../services/security/authentication.service';
 import { PerfilBasico } from '../../../interfaces/perfiles/perfil-basico';
 import { UserAuth } from '../../../models/security/user';
 import { InfoSesion } from '../../../interfaces/security/info-sesion';
 import { EntidadAlg } from '../../../interfaces/perfiles/entidad-alg';
 import { CuentaAlgService } from '../../../services/observers/cuentas-alg/cuenta-alg.service';
+import { Subject } from 'rxjs';
+import { takeUntil } from 'rxjs/operators';
 
 @Component({
 	selector: 'app-combo-cuenta',
 	templateUrl: './combo-cuenta.component.html',
 	styleUrls: ['./combo-cuenta.component.css']
 })
-export class ComboCuentaComponent implements OnInit {
+export class ComboCuentaComponent implements OnInit, OnDestroy {
 
 	@Output()
 	change: EventEmitter<EntidadAlg> = new EventEmitter<EntidadAlg>();
@@ -26,6 +28,7 @@ export class ComboCuentaComponent implements OnInit {
 	cuentaSeleccionada: EntidadAlg;
 	cargando: boolean = false;
 	codigo: string;
+	destroy$: Subject<any> = new Subject<any>();
 
 	constructor(
 		private authenticationService: AuthenticationService,
@@ -33,13 +36,20 @@ export class ComboCuentaComponent implements OnInit {
 	) { }
 
 	ngOnInit() {
-		this.authenticationService.perfilActivo$.subscribe(
-			perfil => {
-				this.perfilBasico = perfil;
-				this.seleccionarUltimaEntidad();
-			});
+		this.authenticationService.perfilActivo$
+			.pipe(takeUntil(this.destroy$))
+			.subscribe(
+				perfil => {
+					this.perfilBasico = perfil;
+					this.seleccionarUltimaEntidad();
+				});
 
 		this.authenticationService.setPerfilActivo(this.authenticationService.perfilUsuarioSeleccionado());
+	}
+
+	ngOnDestroy(): void {
+		this.destroy$.next();
+		this.destroy$.unsubscribe();
 	}
 
 	// funcion encargada de capturar la cuenta seleccionada
@@ -60,6 +70,7 @@ export class ComboCuentaComponent implements OnInit {
 
 			if (usuarioLogueado) {
 				this.authenticationService.informacionDeSesion(this.perfilBasico.informacionPersonal.id, usuarioLogueado.token)
+					.pipe(takeUntil(this.destroy$))
 					.subscribe(
 						respuesta => {
 							if (respuesta.exito) {
@@ -95,6 +106,7 @@ export class ComboCuentaComponent implements OnInit {
 				};
 
 				this.authenticationService.guardarInformacionDeSesion(infoSesion, usuarioLogueado.token)
+					.pipe(takeUntil(this.destroy$))
 					.subscribe(
 						respuesta => {
 							this.cargando = false;

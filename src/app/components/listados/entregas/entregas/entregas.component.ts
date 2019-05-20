@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, OnInit, ViewChild, OnDestroy } from '@angular/core';
 import { EntregasService } from '../../../../services/entregas/entregas.service';
 import { MovimientoEntrega } from '../../../../interfaces/entregas/listado-entregas';
 import { DatePipe } from '@angular/common';
@@ -9,6 +9,7 @@ import { EntidadAlg } from '../../../../interfaces/perfiles/entidad-alg';
 import { CuentaAlgService } from '../../../../services/observers/cuentas-alg/cuenta-alg.service';
 import { DeviceDetectorService } from 'ngx-device-detector';
 import { Subject } from 'rxjs';
+import { takeUntil } from 'rxjs/operators';
 
 @Component({
 	selector: 'app-entregas',
@@ -16,7 +17,7 @@ import { Subject } from 'rxjs';
 	styleUrls: ['./entregas.component.css'],
 	providers: [DatePipe]
 })
-export class EntregasComponent implements OnInit {
+export class EntregasComponent implements OnInit, OnDestroy {
 
 	@ViewChild('menuFiltro') public sidenav: MatSidenav;
 
@@ -27,6 +28,7 @@ export class EntregasComponent implements OnInit {
 	observerFiltroListadoMovil$ = new Subject<any>();
 	observerFiltroListadoDesktop$ = new Subject<any>();
 	esCelular: boolean;
+	destroy$: Subject<any> = new Subject<any>();
 
 	constructor(
 		private entregasService: EntregasService,
@@ -39,9 +41,16 @@ export class EntregasComponent implements OnInit {
 	ngOnInit() {
 		this.esCelular = this.deviceService.isMobile();
 
-		this.cuentaAlgService.cuentaSeleccionada$.subscribe(
-			cuentaAlg => this.seleccionarCuenta(cuentaAlg)
-		);
+		this.cuentaAlgService.cuentaSeleccionada$
+			.pipe(takeUntil(this.destroy$))
+			.subscribe(
+				cuentaAlg => this.seleccionarCuenta(cuentaAlg)
+			);
+	}
+
+	ngOnDestroy(): void {
+		this.destroy$.next();
+		this.destroy$.unsubscribe();
 	}
 
 	// funcion encargada de cargar los filtros de especie cosecha cuando se cambia la seleccion de cuenta
@@ -51,20 +60,21 @@ export class EntregasComponent implements OnInit {
 
 			let codigoEntidad = (this.cuenta) ? this.cuenta.id.codigo : null;
 
-			this.entregasService.listadoFiltrosEspecieCosecha(codigoEntidad).subscribe(
-				respuesta => {
-					this.filtrosEspecieCosecha = respuesta;
-					this.cargandoFiltros = false;
+			this.entregasService.listadoFiltrosEspecieCosecha(codigoEntidad)
+				.pipe(takeUntil(this.destroy$))
+				.subscribe(
+					respuesta => {
+						this.filtrosEspecieCosecha = respuesta;
+						this.cargandoFiltros = false;
 
-					this.cargarListadoPorDefecto();
-				}, () => { console.log("error"); this.cargandoFiltros = true; }
-			);
+						this.cargarListadoPorDefecto();
+					}, () => { console.log("error"); this.cargandoFiltros = true; }
+				);
 		}
 	}
 
 	// funcion que ejecuta la carga del listado de entregas
 	cargarListado(filtro: any) {
-
 		if (this.esCelular) {
 			this.observerFiltroListadoMovil$.next(filtro);
 		} else {

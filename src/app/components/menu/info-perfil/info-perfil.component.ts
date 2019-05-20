@@ -1,19 +1,22 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { PerfilBasico } from '../../../interfaces/perfiles/perfil-basico';
 import { AuthenticationService } from '../../../services/security/authentication.service';
 import { CuentaAlgService } from '../../../services/observers/cuentas-alg/cuenta-alg.service';
-import { EntidadAlg } from 'src/app/interfaces/perfiles/entidad-alg';
+import { EntidadAlg } from '../../../interfaces/perfiles/entidad-alg';
+import { Subject } from 'rxjs';
+import { takeUntil } from 'rxjs/operators';
 
 @Component({
   selector: 'app-info-perfil',
   templateUrl: './info-perfil.component.html',
   styleUrls: ['./info-perfil.component.css']
 })
-export class InfoPerfilComponent implements OnInit {
+export class InfoPerfilComponent implements OnInit, OnDestroy {
 
   perfilBasico: PerfilBasico;
   nombre: string;
   nombreEntidad: string;
+  destroy$: Subject<any> = new Subject<any>();
 
   constructor(
     private authenticationService: AuthenticationService,
@@ -21,11 +24,13 @@ export class InfoPerfilComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-    this.authenticationService.perfilActivo$.subscribe(
-      perfil => {
-        this.perfilBasico = perfil;
-        this.cargarNombreUsuario();
-      });
+    this.authenticationService.perfilActivo$
+      .pipe(takeUntil(this.destroy$))
+      .subscribe(
+        perfil => {
+          this.perfilBasico = perfil;
+          this.cargarNombreUsuario();
+        });
 
     this.cuentaAlgService.cuentaSeleccionada$.subscribe(
       cuentaAlg => this.cargarDatosCuentaSeleccionada(cuentaAlg)
@@ -33,6 +38,11 @@ export class InfoPerfilComponent implements OnInit {
 
     this.authenticationService.setPerfilActivo(this.authenticationService.perfilUsuarioSeleccionado());
     this.cargarNombreUsuario();
+  }
+
+  ngOnDestroy(): void {
+    this.destroy$.next();
+    this.destroy$.unsubscribe();
   }
 
   // funcion encargada de cargar los datos del perfil junto al avatar

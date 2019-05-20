@@ -1,18 +1,18 @@
-import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter, OnDestroy } from '@angular/core';
 import { ResumenContratoCompraVenta } from '../../../../interfaces/contratos/resumen-contrato-compra-venta';
 import { Subject } from 'rxjs';
 import { FiltroResumenContratoCompraVenta } from '../../../../interfaces/contratos/filtro-resumen-contrato-compra-venta';
 import { PerfilBasico } from '../../../../interfaces/perfiles/perfil-basico';
 import { ContratosService } from '../../../../services/contratos/contratos.service';
 import { AuthenticationService } from '../../../../services/security/authentication.service';
-import { EntidadAlg } from '../../../../interfaces/perfiles/entidad-alg';
+import { takeUntil } from 'rxjs/operators';
 
 @Component({
   selector: 'app-contratos-lista-movil',
   templateUrl: './contratos-lista-movil.component.html',
   styleUrls: ['./contratos-lista-movil.component.css']
 })
-export class ContratosListaMovilComponent implements OnInit {
+export class ContratosListaMovilComponent implements OnInit, OnDestroy {
 
   @Input()
   observerFiltroListadoMovil$: Subject<any>;
@@ -27,6 +27,7 @@ export class ContratosListaMovilComponent implements OnInit {
   filtro: FiltroResumenContratoCompraVenta;
   unidadMedida: string;
   perfilBasico: PerfilBasico;
+  destroy$: Subject<any> = new Subject<any>();
 
   constructor(
     private contratosService: ContratosService,
@@ -35,21 +36,30 @@ export class ContratosListaMovilComponent implements OnInit {
 
   ngOnInit() {
     // observer del filtro
-    this.observerFiltroListadoMovil$.subscribe(
-      filtro => {
-        this.filtro = filtro;
-        this.cargarListado(true);
-      }
-    );
+    this.observerFiltroListadoMovil$
+      .pipe(takeUntil(this.destroy$))
+      .subscribe(
+        filtro => {
+          this.filtro = filtro;
+          this.cargarListado(true);
+        }
+      );
 
     // observer de perfil
-    this.authenticationService.perfilActivo$.subscribe(
-      perfil => {
-        this.perfilBasico = perfil;
-        this.cargarUnidadMedida()
-      });
+    this.authenticationService.perfilActivo$
+      .pipe(takeUntil(this.destroy$))
+      .subscribe(
+        perfil => {
+          this.perfilBasico = perfil;
+          this.cargarUnidadMedida()
+        });
 
     this.cargarUnidadMedida();
+  }
+
+  ngOnDestroy(): void {
+    this.destroy$.next();
+    this.destroy$.unsubscribe();
   }
 
   // funcion que carga la unidad de medida desde el perfil 
@@ -73,16 +83,18 @@ export class ContratosListaMovilComponent implements OnInit {
       filtroPaginado.pagina = this.pagina;
       filtroPaginado.cantPorPagina = this.cantidadPorPagina;
 
-      this.contratosService.listadoContratosResumidos(filtroPaginado).subscribe(respuesta => {
+      this.contratosService.listadoContratosResumidos(filtroPaginado)
+        .pipe(takeUntil(this.destroy$))
+        .subscribe(respuesta => {
 
-        if (respuesta.exito == true) {
-          this.agregarMovimientosAlListado(respuesta.datos);
-        }
+          if (respuesta.exito == true) {
+            this.agregarMovimientosAlListado(respuesta.datos);
+          }
 
-        this.cargando = false;
-      }, error => {
-        this.cargando = false;
-      });
+          this.cargando = false;
+        }, () => {
+          this.cargando = false;
+        });
     }
   }
 

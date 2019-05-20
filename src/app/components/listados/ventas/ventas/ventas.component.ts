@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, OnInit, ViewChild, OnDestroy } from '@angular/core';
 import { VentasService } from '../../../../services/ventas/ventas.service';
 import { MovimientoVenta } from '../../../../interfaces/ventas/listado-ventas';
 import { DatePipe } from '@angular/common';
@@ -10,6 +10,7 @@ import { DeviceDetectorService } from 'ngx-device-detector';
 import { CuentaAlgService } from '../../../../services/observers/cuentas-alg/cuenta-alg.service';
 import { VentasDetalleComponent } from '../ventas-detalle/ventas-detalle.component';
 import { FijacionVenta } from '../../../../interfaces/ventas/fijacion-venta';
+import { takeUntil } from 'rxjs/operators';
 
 @Component({
 	selector: 'app-ventas',
@@ -17,7 +18,7 @@ import { FijacionVenta } from '../../../../interfaces/ventas/fijacion-venta';
 	styleUrls: ['./ventas.component.css'],
 	providers: [DatePipe]
 })
-export class VentasComponent implements OnInit {
+export class VentasComponent implements OnInit, OnDestroy {
 
 	@ViewChild('menuFiltro') public sidenav: MatSidenav;
 
@@ -28,6 +29,7 @@ export class VentasComponent implements OnInit {
 	observerFiltroListadoMovil$ = new Subject<any>();
 	observerFiltroListadoDesktop$ = new Subject<any>();
 	esCelular: boolean;
+	destroy$: Subject<any> = new Subject<any>();
 
 	constructor(
 		private ventasService: VentasService,
@@ -38,9 +40,16 @@ export class VentasComponent implements OnInit {
 	ngOnInit() {
 		this.esCelular = this.deviceService.isMobile();
 
-		this.cuentaAlgService.cuentaSeleccionada$.subscribe(
-			cuentaAlg => this.seleccionarCuenta(cuentaAlg)
-		);
+		this.cuentaAlgService.cuentaSeleccionada$
+			.pipe(takeUntil(this.destroy$))
+			.subscribe(
+				cuentaAlg => this.seleccionarCuenta(cuentaAlg)
+			);
+	}
+
+	ngOnDestroy(): void {
+		this.destroy$.next();
+		this.destroy$.unsubscribe();
 	}
 
 	// funcion encargada de cargar los filtros de especie cosecha cuando se cambia la seleccion de cuenta
@@ -50,14 +59,16 @@ export class VentasComponent implements OnInit {
 
 			let codigoEntidad = (this.cuenta) ? this.cuenta.id.codigo : null;
 
-			this.ventasService.listadoFiltrosEspecieCosecha(codigoEntidad).subscribe(
-				respuesta => {
-					this.filtrosEspecieCosecha = respuesta;
-					this.cargandoFiltros = false;
+			this.ventasService.listadoFiltrosEspecieCosecha(codigoEntidad)
+				.pipe(takeUntil(this.destroy$))
+				.subscribe(
+					respuesta => {
+						this.filtrosEspecieCosecha = respuesta;
+						this.cargandoFiltros = false;
 
-					this.cargarListadoPorDefecto();
-				}, () => { console.log("error"); this.cargandoFiltros = true; }
-			);
+						this.cargarListadoPorDefecto();
+					}, () => { console.log("error"); this.cargandoFiltros = true; }
+				);
 		}
 	}
 

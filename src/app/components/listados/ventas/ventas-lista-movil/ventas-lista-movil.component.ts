@@ -1,17 +1,18 @@
-import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter, OnDestroy } from '@angular/core';
 import { Subject } from 'rxjs';
 import { FiltroVentas } from '../../../../interfaces/ventas/filtro-ventas';
 import { PerfilBasico } from '../../../../interfaces/perfiles/perfil-basico';
 import { VentasService } from '../../../../services/ventas/ventas.service';
 import { AuthenticationService } from '../../../../services/security/authentication.service';
 import { FijacionVenta } from '../../../../interfaces/ventas/fijacion-venta';
+import { takeUntil } from 'rxjs/operators';
 
 @Component({
   selector: 'app-ventas-lista-movil',
   templateUrl: './ventas-lista-movil.component.html',
   styleUrls: ['./ventas-lista-movil.component.css']
 })
-export class VentasListaMovilComponent implements OnInit {
+export class VentasListaMovilComponent implements OnInit, OnDestroy {
 
   @Input()
   observerFiltroListadoMovil$: Subject<any>;
@@ -27,12 +28,13 @@ export class VentasListaMovilComponent implements OnInit {
 
   @Input()
   cantidadPorPagina: number = 50;
-  
+
   cargando: boolean = false;
   filtro: FiltroVentas;
   unidadMedida: string;
   perfilBasico: PerfilBasico;
   ventasPesificadas: boolean = null;
+  destroy$: Subject<any> = new Subject<any>();
 
   constructor(
     private ventasService: VentasService,
@@ -41,21 +43,30 @@ export class VentasListaMovilComponent implements OnInit {
 
   ngOnInit() {
     // observer del filtro
-    this.observerFiltroListadoMovil$.subscribe(
-      filtro => {
-        this.filtro = filtro;
-        this.cargarListado(true);
-      }
-    );
+    this.observerFiltroListadoMovil$
+      .pipe(takeUntil(this.destroy$))
+      .subscribe(
+        filtro => {
+          this.filtro = filtro;
+          this.cargarListado(true);
+        }
+      );
 
     // observer de perfil
-    this.authenticationService.perfilActivo$.subscribe(
-      perfil => {
-        this.perfilBasico = perfil;
-        this.cargarUnidadMedida()
-      });
+    this.authenticationService.perfilActivo$
+      .pipe(takeUntil(this.destroy$))
+      .subscribe(
+        perfil => {
+          this.perfilBasico = perfil;
+          this.cargarUnidadMedida()
+        });
 
     this.cargarUnidadMedida();
+  }
+
+  ngOnDestroy(): void {
+    this.destroy$.next();
+    this.destroy$.unsubscribe();
   }
 
   // funcion que carga la unidad de medida desde el perfil 
@@ -80,16 +91,18 @@ export class VentasListaMovilComponent implements OnInit {
       filtroPaginado.cantPorPagina = this.cantidadPorPagina;
       filtroPaginado.pesificado = this.ventasPesificadas;
 
-      this.ventasService.listadoVentas(filtroPaginado).subscribe(respuesta => {
+      this.ventasService.listadoVentas(filtroPaginado)
+        .pipe(takeUntil(this.destroy$))
+        .subscribe(respuesta => {
 
-        if (respuesta.exito == true) {
-          this.agregarMovimientosAlListado(respuesta.datos);
-        }
+          if (respuesta.exito == true) {
+            this.agregarMovimientosAlListado(respuesta.datos);
+          }
 
-        this.cargando = false;
-      }, () => {
-        this.cargando = false;
-      });
+          this.cargando = false;
+        }, () => {
+          this.cargando = false;
+        });
     }
   }
 

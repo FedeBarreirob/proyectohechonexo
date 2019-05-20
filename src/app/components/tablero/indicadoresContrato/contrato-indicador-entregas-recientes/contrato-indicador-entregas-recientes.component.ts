@@ -1,9 +1,10 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { Subject } from 'rxjs';
 import { FiltroEntregas } from '../../../../interfaces/entregas/filtro-entregas';
 import { CuentaAlgService } from '../../../../services/observers/cuentas-alg/cuenta-alg.service';
 import { DatePipe } from '@angular/common';
 import { Router } from '@angular/router';
+import { takeUntil } from 'rxjs/operators';
 
 @Component({
   selector: 'app-contrato-indicador-entregas-recientes',
@@ -11,9 +12,10 @@ import { Router } from '@angular/router';
   styleUrls: ['./contrato-indicador-entregas-recientes.component.css'],
   providers: [DatePipe]
 })
-export class ContratoIndicadorEntregasRecientesComponent implements OnInit {
+export class ContratoIndicadorEntregasRecientesComponent implements OnInit, OnDestroy {
 
   observerFiltroListadoMovil$ = new Subject<FiltroEntregas>();
+  destroy$: Subject<any> = new Subject<any>();
 
   constructor(
     private cuentaAlgService: CuentaAlgService,
@@ -22,11 +24,18 @@ export class ContratoIndicadorEntregasRecientesComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-    this.cuentaAlgService.cuentaSeleccionada$.subscribe(
-      cuenta => {
-        this.cargarListado(cuenta.id.codigo);
-      }
-    );
+    this.cuentaAlgService.cuentaSeleccionada$
+      .pipe(takeUntil(this.destroy$))
+      .subscribe(
+        cuenta => {
+          this.cargarListado(cuenta.id.codigo);
+        }
+      );
+  }
+
+  ngOnDestroy(): void {
+    this.destroy$.next();
+    this.destroy$.unsubscribe();
   }
 
   /**

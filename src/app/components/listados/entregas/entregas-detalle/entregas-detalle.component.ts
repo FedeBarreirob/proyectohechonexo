@@ -1,4 +1,4 @@
-import { Component, OnInit, Inject } from '@angular/core';
+import { Component, OnInit, Inject, OnDestroy } from '@angular/core';
 import { MAT_DIALOG_DATA, MatDialog, MatDialogRef } from '@angular/material';
 import { MovimientoEntrega } from '../../../../interfaces/entregas/listado-entregas';
 import { PerfilBasico } from '../../../../interfaces/perfiles/perfil-basico';
@@ -9,13 +9,15 @@ import { CuentaAlgService } from '../../../../services/observers/cuentas-alg/cue
 import { ResumenContratoCompraVenta } from '../../../../interfaces/contratos/resumen-contrato-compra-venta';
 import { ContratosService } from '../../../../services/contratos/contratos.service';
 import { ContratosDetalleComponent } from '../../contratos/contratos-detalle/contratos-detalle.component';
+import { Subject } from 'rxjs';
+import { takeUntil } from 'rxjs/operators';
 
 @Component({
 	selector: 'app-entregas-detalle',
 	templateUrl: './entregas-detalle.component.html',
 	styleUrls: ['./entregas-detalle.component.css']
 })
-export class EntregasDetalleComponent implements OnInit {
+export class EntregasDetalleComponent implements OnInit, OnDestroy {
 
 	unidadMedida: string;
 	cuenta: EntidadAlg;
@@ -23,6 +25,7 @@ export class EntregasDetalleComponent implements OnInit {
 
 	movimiento: MovimientoEntrega;
 	linkContrato: boolean;
+	destroy$: Subject<any> = new Subject<any>();
 
 	constructor(
 		@Inject(MAT_DIALOG_DATA) public data: any,
@@ -32,7 +35,7 @@ export class EntregasDetalleComponent implements OnInit {
 		private exportadorService: EntregasExportacionesService,
 		private cuentaAlgService: CuentaAlgService,
 		private contratoServicio: ContratosService
-	) { 
+	) {
 		this.movimiento = this.data.movimiento;
 		this.linkContrato = this.data.linkContrato;
 	}
@@ -44,6 +47,11 @@ export class EntregasDetalleComponent implements OnInit {
 		this.cuentaAlgService.cuentaSeleccionada$.subscribe(
 			cuentaAlg => this.cuenta = cuentaAlg
 		);
+	}
+
+	ngOnDestroy(): void {
+		this.destroy$.next();
+		this.destroy$.unsubscribe();
 	}
 
 	// funcion que carga la unidad de medida desde el perfil 
@@ -73,14 +81,16 @@ export class EntregasDetalleComponent implements OnInit {
 	 * Función encargada de cargar el contrato vinculado al ticket
 	 */
 	cargarContrato() {
-		this.contratoServicio.contratoResumenPorTk(this.movimiento.comprobante).subscribe(
-			respuesta => {
-				if (respuesta.exito == true) {
-					this.contrato = respuesta.datos;
-				}
-			},
-			error => console.log(error)
-		);
+		this.contratoServicio.contratoResumenPorTk(this.movimiento.comprobante)
+			.pipe(takeUntil(this.destroy$))
+			.subscribe(
+				respuesta => {
+					if (respuesta.exito == true) {
+						this.contrato = respuesta.datos;
+					}
+				},
+				error => console.log(error)
+			);
 	}
 
 	/**

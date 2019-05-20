@@ -1,4 +1,4 @@
-import { Component, OnInit, Inject, ViewChild, Input } from '@angular/core';
+import { Component, OnInit, Inject, ViewChild, Input, OnDestroy } from '@angular/core';
 import { MAT_DIALOG_DATA, MatDialogRef, MatSidenav, MatDialog } from '@angular/material';
 import { ResumenContratoCompraVenta } from '../../../../interfaces/contratos/resumen-contrato-compra-venta';
 import { Subject } from 'rxjs';
@@ -7,19 +7,21 @@ import { EntregasDetalleComponent } from '../../entregas/entregas-detalle/entreg
 import { EntidadAlg } from '../../../../interfaces/perfiles/entidad-alg';
 import { CuentaAlgService } from '../../../../services/observers/cuentas-alg/cuenta-alg.service';
 import { FiltroEntregas } from '../../../../interfaces/entregas/filtro-entregas';
+import { takeUntil } from 'rxjs/operators';
 
 @Component({
   selector: 'app-contrato-entregas-detalle',
   templateUrl: './contrato-entregas-detalle.component.html',
   styleUrls: ['./contrato-entregas-detalle.component.css']
 })
-export class ContratoEntregasDetalleComponent implements OnInit {
+export class ContratoEntregasDetalleComponent implements OnInit, OnDestroy {
 
   @ViewChild('menuFiltro') public sidenav: MatSidenav;
 
   observerFiltroListadoMovil$ = new Subject<FiltroEntregas>();
   cuenta: EntidadAlg;
   titulo: string;
+  destroy$: Subject<any> = new Subject<any>();
 
   constructor(
     @Inject(MAT_DIALOG_DATA)
@@ -32,12 +34,19 @@ export class ContratoEntregasDetalleComponent implements OnInit {
   ngOnInit() {
     this.titulo = `Contrato ${this.resumenContrato.numeroComprobanteContrato}`;
 
-    this.cuentaAlgService.cuentaSeleccionada$.subscribe(
-      cuentaAlg => {
-        this.cuenta = cuentaAlg;
-        this.cargarListado(this.filtroPorDefecto());
-      }
-    );
+    this.cuentaAlgService.cuentaSeleccionada$
+      .pipe(takeUntil(this.destroy$))
+      .subscribe(
+        cuentaAlg => {
+          this.cuenta = cuentaAlg;
+          this.cargarListado(this.filtroPorDefecto());
+        }
+      );
+  }
+
+  ngOnDestroy(): void {
+    this.destroy$.next();
+    this.destroy$.unsubscribe();
   }
 
   /**

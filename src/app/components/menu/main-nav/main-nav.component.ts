@@ -1,7 +1,7 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, OnInit, ViewChild, OnDestroy } from '@angular/core';
 import { BreakpointObserver, Breakpoints } from '@angular/cdk/layout';
-import { Observable } from 'rxjs';
-import { map } from 'rxjs/operators';
+import { Observable, Subject } from 'rxjs';
+import { map, takeUntil } from 'rxjs/operators';
 import { AuthenticationService } from '../../../services/security/authentication.service';
 import { ItemLinkMenu } from '../../../interfaces/menu/sidebar/item-link-menu';
 import { MatSidenav } from '@angular/material';
@@ -13,9 +13,11 @@ import { SidebarService } from '../../../services/observers/sidebar/sidebar.serv
 	styleUrls: ['./main-nav.component.css']
 })
 
-export class MainNavComponent implements OnInit {
+export class MainNavComponent implements OnInit, OnDestroy {
 
 	@ViewChild('drawer') public sidenav: MatSidenav;
+
+	destroy$: Subject<any> = new Subject<any>();
 
 	// links que aparecen en el sidebar
 	public links: Array<ItemLinkMenu>;
@@ -28,44 +30,57 @@ export class MainNavComponent implements OnInit {
 	}
 
 	ngOnInit(): void {
-		this.authService.huboLoginCompleto$.subscribe(
-			login => {
-				if (login) {
-					this.cargarLinks();
-				} else {
-					if (this.links) {
-						this.links.splice(0, this.links.length);
+		this.authService.huboLoginCompleto$
+			.pipe(takeUntil(this.destroy$))
+			.subscribe(
+				login => {
+					if (login) {
+						this.cargarLinks();
+					} else {
+						if (this.links) {
+							this.links.splice(0, this.links.length);
+						}
 					}
 				}
-			}
-		);
+			);
 
 		// escuchar cambios en el toggle del sidebar
-		this.sidebarService.toggle$.subscribe(
-			() => this.sidenav.toggle()
-		);
+		this.sidebarService.toggle$
+			.pipe(takeUntil(this.destroy$))
+			.subscribe(
+				() => this.sidenav.toggle()
+			);
 
 		// escuchar si debe mostrar el boton del sandwiche
-		this.isHandset$.subscribe(
-			respuesta => {
-				if (respuesta == true && this.authService.esLogueado) {
-					this.sidebarService.notificarVisibilidadBotonSandwiche(true);
-				} else {
-					this.sidebarService.notificarVisibilidadBotonSandwiche(false);
+		this.isHandset$
+			.pipe(takeUntil(this.destroy$))
+			.subscribe(
+				respuesta => {
+					if (respuesta == true && this.authService.esLogueado) {
+						this.sidebarService.notificarVisibilidadBotonSandwiche(true);
+					} else {
+						this.sidebarService.notificarVisibilidadBotonSandwiche(false);
+					}
 				}
-			}
-		);
+			);
 
 		// suscribir a la visualizacion del panel para sincronizar con el boton toggle de la barra principal
-		this.isHandset$.subscribe(
-			cerrado => {
-				if (cerrado == true) {
-					this.sidebarService.notificarVisibilidadBotonSandwiche(true);
-				} else {
-					this.sidebarService.notificarVisibilidadBotonSandwiche(false);
+		this.isHandset$
+			.pipe(takeUntil(this.destroy$))
+			.subscribe(
+				cerrado => {
+					if (cerrado == true) {
+						this.sidebarService.notificarVisibilidadBotonSandwiche(true);
+					} else {
+						this.sidebarService.notificarVisibilidadBotonSandwiche(false);
+					}
 				}
-			}
-		);
+			);
+	}
+
+	ngOnDestroy(): void {
+		this.destroy$.next();
+		this.destroy$.unsubscribe();
 	}
 
 	isHandset$: Observable<boolean> = this.breakpointObserver.observe(Breakpoints.Handset)

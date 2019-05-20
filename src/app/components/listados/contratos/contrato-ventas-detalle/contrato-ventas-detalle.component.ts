@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild, Inject } from '@angular/core';
+import { Component, OnInit, ViewChild, Inject, OnDestroy } from '@angular/core';
 import { MatSidenav, MAT_DIALOG_DATA, MatDialogRef, MatDialog } from '@angular/material';
 import { Subject } from 'rxjs';
 import { FiltroVentas } from '../../../../interfaces/ventas/filtro-ventas';
@@ -7,19 +7,21 @@ import { CuentaAlgService } from '../../../../services/observers/cuentas-alg/cue
 import { MovimientoVenta } from '../../../../interfaces/ventas/listado-ventas';
 import { BoletoConfirmacionVenta } from '../../../../interfaces/contratos/boleto-confirmacion-venta';
 import { VentasDetalleComponent } from '../../ventas/ventas-detalle/ventas-detalle.component';
+import { takeUntil } from 'rxjs/operators';
 
 @Component({
   selector: 'app-contrato-ventas-detalle',
   templateUrl: './contrato-ventas-detalle.component.html',
   styleUrls: ['./contrato-ventas-detalle.component.css']
 })
-export class ContratoVentasDetalleComponent implements OnInit {
+export class ContratoVentasDetalleComponent implements OnInit, OnDestroy {
 
   @ViewChild('menuFiltro') public sidenav: MatSidenav;
 
   observerFiltroListadoMovil$ = new Subject<FiltroVentas>();
   cuenta: EntidadAlg;
   titulo: string;
+  destroy$: Subject<any> = new Subject<any>();
 
   constructor(
     @Inject(MAT_DIALOG_DATA)
@@ -32,12 +34,19 @@ export class ContratoVentasDetalleComponent implements OnInit {
   ngOnInit() {
     this.titulo = `Contrato ${Number(this.boleto.encabezado.slipNroComprobante)}`;
 
-    this.cuentaAlgService.cuentaSeleccionada$.subscribe(
-      cuentaAlg => {
-        this.cuenta = cuentaAlg;
-        this.cargarListado(this.filtroPorDefecto());
-      }
-    );
+    this.cuentaAlgService.cuentaSeleccionada$
+      .pipe(takeUntil(this.destroy$))
+      .subscribe(
+        cuentaAlg => {
+          this.cuenta = cuentaAlg;
+          this.cargarListado(this.filtroPorDefecto());
+        }
+      );
+  }
+
+  ngOnDestroy(): void {
+    this.destroy$.next();
+    this.destroy$.unsubscribe();
   }
 
   /**

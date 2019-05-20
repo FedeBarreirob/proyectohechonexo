@@ -1,19 +1,20 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { FormControl } from '@angular/forms';
 import { PerfilBasico } from '../../../interfaces/perfiles/perfil-basico';
 import { PerfilesService } from '../../../services/perfiles/perfiles.service';
 import { UserAuth } from '../../../models/security/user';
 import { AuthenticationService } from '../../../services/security/authentication.service';
 import { FiltroGenericoLista } from '../../../interfaces/varios/filtro-generico-lista';
-import { debounceTime, tap } from 'rxjs/operators';
+import { debounceTime, tap, takeUntil } from 'rxjs/operators';
 import { isUndefined } from 'util';
+import { Subject } from 'rxjs';
 
 @Component({
 	selector: 'app-selector-cuentas',
 	templateUrl: './selector-cuentas.component.html',
 	styleUrls: ['./selector-cuentas.component.css']
 })
-export class SelectorCuentasComponent implements OnInit {
+export class SelectorCuentasComponent implements OnInit, OnDestroy {
 
 	private usuarioLogueado: UserAuth;
 	isLoading = false;
@@ -22,6 +23,7 @@ export class SelectorCuentasComponent implements OnInit {
 	public buscadorPerfiles: FormControl = new FormControl();
 	public listadoPerfiles = <any>[];
 	public perfilSeleccionado: PerfilBasico = null;
+	destroy$: Subject<any> = new Subject<any>();
 
 	constructor(
 		private perfilService: PerfilesService,
@@ -34,7 +36,8 @@ export class SelectorCuentasComponent implements OnInit {
 		this.buscadorPerfiles.valueChanges
 			.pipe(
 				debounceTime(500),
-				tap(() => {this.isLoading = true; this.listadoPerfiles = []})
+				tap(() => { this.isLoading = true; this.listadoPerfiles = [] }),
+				takeUntil(this.destroy$)
 			)
 			.subscribe(
 				termino => {
@@ -57,6 +60,11 @@ export class SelectorCuentasComponent implements OnInit {
 					}
 				}
 			);
+	}
+
+	ngOnDestroy(): void {
+		this.destroy$.next();
+		this.destroy$.unsubscribe();
 	}
 
 	// funcion encargada de armar el filtro a partir del termino ingresado
@@ -106,12 +114,12 @@ export class SelectorCuentasComponent implements OnInit {
 		if (!this.isLoading) {
 			this.perfilSeleccionado = perfil;
 
-			if(!isUndefined(perfil)) {
+			if (!isUndefined(perfil)) {
 				this.authenticationService.setPerfilActivo(perfil);
 			} else {
 				this.limpiarPerfilSeleccionado();
 			}
-			
+
 		} else {
 			this.limpiarPerfilSeleccionado();
 		}

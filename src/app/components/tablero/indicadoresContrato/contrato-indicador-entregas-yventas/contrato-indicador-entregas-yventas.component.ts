@@ -1,20 +1,23 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { ContratosTotalesPorEspecie } from '../../../../interfaces/contratos/indicadores/contratos-totales-por-especie';
 import { ContratosService } from '../../../../services/contratos/contratos.service';
 import { CuentaAlgService } from '../../../../services/observers/cuentas-alg/cuenta-alg.service';
 import { AuthenticationService } from '../../../../services/security/authentication.service';
 import { PerfilBasico } from '../../../../interfaces/perfiles/perfil-basico';
+import { Subject } from 'rxjs';
+import { takeUntil } from 'rxjs/operators';
 
 @Component({
   selector: 'app-contrato-indicador-entregas-yventas',
   templateUrl: './contrato-indicador-entregas-yventas.component.html',
   styleUrls: ['./contrato-indicador-entregas-yventas.component.css']
 })
-export class ContratoIndicadorEntregasYVentasComponent implements OnInit {
+export class ContratoIndicadorEntregasYVentasComponent implements OnInit, OnDestroy {
 
   resumenDeContratos: ContratosTotalesPorEspecie;
   cargando: boolean = false;
   unidadMedida: string;
+  destroy$: Subject<any> = new Subject<any>();
 
   constructor(
     private contratosService: ContratosService,
@@ -24,9 +27,16 @@ export class ContratoIndicadorEntregasYVentasComponent implements OnInit {
 
   ngOnInit() {
     this.cargarUnidadMedida();
-    this.cuentasService.cuentaSeleccionada$.subscribe(
-      cuenta => this.cargarIndicadores(cuenta.id.codigo)
-    );
+    this.cuentasService.cuentaSeleccionada$
+      .pipe(takeUntil(this.destroy$))
+      .subscribe(
+        cuenta => this.cargarIndicadores(cuenta.id.codigo)
+      );
+  }
+
+  ngOnDestroy(): void {
+    this.destroy$.next();
+    this.destroy$.unsubscribe();
   }
 
   /**
@@ -48,20 +58,22 @@ export class ContratoIndicadorEntregasYVentasComponent implements OnInit {
 
       this.cargando = true;
 
-      this.contratosService.indicadoresPorEspecie(cuenta).subscribe(
-        respuesta => {
+      this.contratosService.indicadoresPorEspecie(cuenta)
+        .pipe(takeUntil(this.destroy$))
+        .subscribe(
+          respuesta => {
 
-          if (respuesta.exito == true) {
-            this.resumenDeContratos = respuesta.datos;
+            if (respuesta.exito == true) {
+              this.resumenDeContratos = respuesta.datos;
+            }
+
+            this.cargando = false;
+          },
+          error => {
+            console.log(error);
+            this.cargando = false;
           }
-
-          this.cargando = false;
-        },
-        error => {
-          console.log(error);
-          this.cargando = false;
-        }
-      );
+        );
     }
   }
 
