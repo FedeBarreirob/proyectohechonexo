@@ -14,7 +14,7 @@
         <div fxFlex="100%" class="mensaje" [innerHTML]="notificacion.cuerpoMensaje">
         </div>
         <div fxFlex="100%" class="tiempo">
-          {{notificacion.fechaHora}}
+          {{notificacion.haceCuanto ? notificacion.haceCuanto : notificacion.fechaHora}}
         </div>
       </div>
 

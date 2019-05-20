@@ -8,5 +8,6 @@ export interface Notificacion {
 	estado?: number,
 	fechaHora?: Date
 	comprobanteNovedades?: Array<ComprobanteNovedad>,
-	confirmacionesVentasNovedades?: ConfirmacionDeVentaNovedad
+	confirmacionesVentasNovedades?: ConfirmacionDeVentaNovedad,
+	haceCuanto?: string
 }
