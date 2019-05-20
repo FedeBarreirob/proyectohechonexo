@@ -1,7 +1,7 @@
 <mat-sidenav-container class="contenedor-notificaciones">
-	<mat-sidenav #menuNotificaciones position="end" class="sidenav-filtro">
+	<mat-sidenav #menuNotificaciones position="end" class="sidenav-notificaciones">
 
-		<!--Aqui va el sidebar de las notificaciones-->
+		<app-panel-notificaciones (botonCerrar)="menuNotificaciones.toggle()"></app-panel-notificaciones>
 
 	</mat-sidenav>
 	<section>

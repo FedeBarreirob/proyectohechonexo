@@ -73,8 +73,7 @@ export class NotificacionDetalleComponent implements OnInit {
 
 		if (this.usuarioLogueado != null) {
 			this.notificacionService.marcarNotificacion(
-				notificacionModificada,
-				this.usuarioLogueado.token)
+				notificacionModificada)
 				.subscribe(respuesta => {
 
 					if (respuesta.exito) {

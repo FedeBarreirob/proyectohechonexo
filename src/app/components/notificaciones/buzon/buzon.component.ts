@@ -76,8 +76,7 @@ export class BuzonComponent implements OnInit {
 			this.notificacionService.listadoNotificaciones(
 				perfil.informacionPersonal.id,
 				this.filtro.numeroPagina,
-				this.filtro.cantPorPagina,
-				this.usuarioLogueado.token)
+				this.filtro.cantPorPagina)
 				.subscribe(respuesta => {
 
 					if (respuesta.exito) {

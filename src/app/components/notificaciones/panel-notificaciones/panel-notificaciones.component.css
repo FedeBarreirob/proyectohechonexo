@@ -1,0 +1,22 @@
+.contenedor-listado {
+    height: 70vh;
+    overflow-y: scroll;
+}
+
+/* encabezado */
+
+.encabezado-notificaciones {
+    padding-top: 94px;
+}
+
+.texto-notificaciones {
+    color: #999999;
+    font-family: Rubik;
+    font-size: 12px;
+    letter-spacing: 1.2px;
+    padding-left: 20px;
+}
+
+.boton-close {
+    margin-top: -35px;
+}

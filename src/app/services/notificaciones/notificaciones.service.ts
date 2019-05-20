@@ -4,6 +4,8 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { ResponseServicio } from '../../interfaces/varios/response-servicio';
 import { Observable, Subject } from 'rxjs';
 import { Notificacion } from '../../interfaces/notificaciones/notificacion';
+import { AuthenticationService } from '../security/authentication.service';
+import { UserAuth } from '../../models/security/user';
 
 @Injectable({
 	providedIn: 'root'
@@ -14,17 +16,22 @@ export class NotificacionesService {
 	private urlNotificacionesCantidadConEstadoDado = `${environment.hostComunicaciones}/Notificaciones/cantidadConEstadoDado`;
 	private urlNotificacionesCambiarEstado = `${environment.hostComunicaciones}/Notificaciones/cambiarEstado`;
 
-	constructor(private http: HttpClient) { }
+	constructor(
+		private http: HttpClient,
+		private authenticationService: AuthenticationService
+	) { }
 
 	private _huboCambiosEstadoMensajes$ = new Subject<boolean>();
 
 	// funcion que retorna un listado de notificaciones
-	listadoNotificaciones(perfilId: number, numeroPagina: number, cantPorPagina: number, token: string): Observable<ResponseServicio> {
+	listadoNotificaciones(perfilId: number, numeroPagina: number, cantPorPagina: number): Observable<ResponseServicio> {
+
+		let usuarioLogueado = <UserAuth>this.authenticationService.usuarioLogueado();
 
 		const httpOptions = {
 			headers: new HttpHeaders({
 				'Content-Type': 'application/json',
-				'Authorization': `Bearer ${token}`
+				'Authorization': `Bearer ${usuarioLogueado.token}`
 			})
 		};
 
@@ -33,12 +40,14 @@ export class NotificacionesService {
 	}
 
 	// funcion que retorna la cantidad de mensajes en un estado indicado
-	cantidadMensajesEnEstadoIndicado(perfilId: number, estado: number, token: string): Observable<ResponseServicio> {
+	cantidadMensajesEnEstadoIndicado(perfilId: number, estado: number): Observable<ResponseServicio> {
+
+		let usuarioLogueado = <UserAuth>this.authenticationService.usuarioLogueado();
 
 		const httpOptions = {
 			headers: new HttpHeaders({
 				'Content-Type': 'application/json',
-				'Authorization': `Bearer ${token}`
+				'Authorization': `Bearer ${usuarioLogueado.token}`
 			})
 		};
 
@@ -47,11 +56,14 @@ export class NotificacionesService {
 	}
 
 	// funcion encargada de marcar un mensaje segun estado dado
-	marcarNotificacion(notificacion: Notificacion, token: string): Observable<ResponseServicio> {
+	marcarNotificacion(notificacion: Notificacion): Observable<ResponseServicio> {
+
+		let usuarioLogueado = <UserAuth>this.authenticationService.usuarioLogueado();
+
 		const httpOptions = {
 			headers: new HttpHeaders({
 				'Content-Type': 'application/json',
-				'Authorization': `Bearer ${token}`
+				'Authorization': `Bearer ${usuarioLogueado.token}`
 			})
 		};
 

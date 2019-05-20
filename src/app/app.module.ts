@@ -116,6 +116,8 @@ import { ContratoIndicadorSwiperEntregaComponent } from './components/tablero/in
 import { ContratoIndicadorSwiperVentasComponent } from './components/tablero/indicadoresContrato/contrato-indicador-swiper-ventas/contrato-indicador-swiper-ventas.component';
 import { ContratoIndicadorEntregasRecientesComponent } from './components/tablero/indicadoresContrato/contrato-indicador-entregas-recientes/contrato-indicador-entregas-recientes.component';
 import { ContratoIndicadorVentasRecientesComponent } from './components/tablero/indicadoresContrato/contrato-indicador-ventas-recientes/contrato-indicador-ventas-recientes.component';
+import { PanelNotificacionesComponent } from './components/notificaciones/panel-notificaciones/panel-notificaciones.component';
+import { PanelNotificacionesItemComponent } from './components/notificaciones/panel-notificaciones-item/panel-notificaciones-item.component';
 
 registerLocaleData(localeEsAr, 'es-AR');
 
@@ -202,7 +204,9 @@ export function tokenGetter() {
 		ContratoIndicadorSwiperEntregaComponent,
 		ContratoIndicadorSwiperVentasComponent,
 		ContratoIndicadorEntregasRecientesComponent,
-		ContratoIndicadorVentasRecientesComponent
+		ContratoIndicadorVentasRecientesComponent,
+		PanelNotificacionesComponent,
+		PanelNotificacionesItemComponent
 	],
 	imports: [
 		HttpClientModule,

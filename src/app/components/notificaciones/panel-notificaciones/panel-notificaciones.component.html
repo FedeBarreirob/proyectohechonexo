@@ -1,0 +1,21 @@
+<div fxLayout="row" fxLayoutAlign="center" class="encabezado-notificaciones">
+  <div fxFlex="80%" class="texto-notificaciones">
+    NOTIFICACIONES
+  </div>
+
+  <div fxFlex="20%">
+    <button mat-icon-button class="boton-close" (click)="cerrar()">
+      <mat-icon>close</mat-icon>
+    </button>
+  </div>
+</div>
+
+<mat-progress-bar *ngIf="cargando" mode="indeterminate"></mat-progress-bar>
+
+<div class="contenedor-listado" fxLayout="column" fxLayoutWrap fxLayoutAlign="none" infiniteScroll
+  [infiniteScrollDistance]="2" [infiniteScrollThrottle]="50" (scrolled)="onScroll()" [scrollWindow]="false">
+
+  <app-panel-notificaciones-item *ngFor="let notificacion of (listadoNotificaciones ? listadoNotificaciones : [])"
+    [notificacion]="notificacion"></app-panel-notificaciones-item>
+
+</div>

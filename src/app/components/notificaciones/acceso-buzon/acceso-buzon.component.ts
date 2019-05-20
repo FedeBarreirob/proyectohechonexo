@@ -55,8 +55,7 @@ export class AccesoBuzonComponent implements OnInit {
 
 			this.notificacionService.cantidadMensajesEnEstadoIndicado(
 				perfil.informacionPersonal.id,
-				EstadoNotificaciones.NO_LEIDO,
-				usuarioLogueado.token)
+				EstadoNotificaciones.NO_LEIDO)
 				.subscribe(respuesta => {
 
 					if (respuesta.exito) {

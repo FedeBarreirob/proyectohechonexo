@@ -1,0 +1,25 @@
+<mat-card>
+
+  <div fxLayout="row" fxLayoutAlign="space-around center">
+
+    <div fxFlex="24px">
+    </div>
+
+    <div fxFlex>
+
+      <div fxLayout="column" fxLayoutAlign="center">
+        <div fxFlex="100%" class="titulo">
+          {{notificacion.asunto | uppercase}}
+        </div>
+        <div fxFlex="100%" class="mensaje" [innerHTML]="notificacion.cuerpoMensaje">
+        </div>
+        <div fxFlex="100%" class="tiempo">
+          {{notificacion.fechaHora}}
+        </div>
+      </div>
+
+    </div>
+
+  </div>
+
+</mat-card>
