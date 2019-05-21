@@ -1,7 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { FiltroCtacteAplicada } from '../../interfaces/ctacte-aplicada/filtro-ctacte-aplicada';
-import { ListadoCtacteAplicada } from '../../interfaces/ctacte-aplicada/listado-ctacte-aplicada';
 import { environment } from '../../../environments/environment';
 import { Observable } from 'rxjs';
 import { ResponseServicio } from '../../interfaces/varios/response-servicio';
@@ -33,7 +32,7 @@ export class CtacteAplicadaService {
       })
     };
 
-    return this.http.post<ListadoCtacteAplicada>(this.urlCuentaCorrienteAplicadaListado,
+    return this.http.post<any>(this.urlCuentaCorrienteAplicadaListado,
       JSON.stringify(filtro),
       httpOptions);
   }

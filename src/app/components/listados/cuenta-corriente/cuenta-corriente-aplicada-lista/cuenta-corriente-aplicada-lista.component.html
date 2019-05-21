@@ -1,0 +1,38 @@
+<button mat-button [matMenuTriggerFor]="menu" class="boton-ver">Ver <mat-icon [ngStyle]="{'color': '#2DA442'}">keyboard_arrow_down</mat-icon></button>
+<mat-menu #menu="matMenu">
+  <mat-checkbox class="mat-menu-item" (click)="$event.stopPropagation();">A cobrar</mat-checkbox>
+  <mat-checkbox class="mat-menu-item" (click)="$event.stopPropagation();">A pagar</mat-checkbox>
+  <mat-checkbox class="mat-menu-item" (click)="$event.stopPropagation();">Vencido</mat-checkbox>
+  <mat-checkbox class="mat-menu-item" (click)="$event.stopPropagation();">A Vencer</mat-checkbox>
+</mat-menu>
+
+<div fxLayout="row" fxLayoutAlign="space-around center" class="titulos">
+  <div fxFlex="60%">Concepto y fecha</div>
+  <div fxFlex></div>
+  <div fxFlex="35%">Monto</div>
+</div>
+
+<div class="contenedor-listado" fxLayout="column" fxLayoutWrap fxLayoutAlign="none" infiniteScroll
+  [infiniteScrollDistance]="2" [infiniteScrollThrottle]="50" (scrolled)="onScroll()" [scrollWindow]="false">
+
+  <div fxLayout="row" fxLayoutAlign="space-around center" *ngFor="let movimiento of (listado ? listado : [])"
+    class="movimiento-fila" (click)="verDetalle(movimiento)">
+
+    <div fxFlex="60%">
+      <p class="concepto">{{movimiento.concepto}}</p>
+      <p class="fecha">{{movimiento.fechaCtaCte}}</p>
+    </div>
+
+    <div fxFlex></div>
+
+    <div fxFlex="35%" class="monto">
+      <span
+        [ngClass]="{'signo-positivo': movimiento.importeComprobantePesos > 0, 'signo-negativo': movimiento.importeComprobantePesos < 0 }">
+        {{ (movimiento.importeComprobantePesos < 0) ? '-' : (movimiento.importeComprobantePesos > 0) ? '+' : ''}}
+      </span>
+      {{ ((movimiento.importeComprobantePesos > 0) ? movimiento.importeComprobantePesos : movimiento.importeComprobantePesos * (-1)) | number: '.2'}}
+      <span class="moneda">{{ movimiento.moneda | moneda }}</span>
+    </div>
+  </div>
+
+</div>

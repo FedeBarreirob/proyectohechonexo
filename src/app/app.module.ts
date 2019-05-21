@@ -118,6 +118,7 @@ import { ContratoIndicadorEntregasRecientesComponent } from './components/tabler
 import { ContratoIndicadorVentasRecientesComponent } from './components/tablero/indicadoresContrato/contrato-indicador-ventas-recientes/contrato-indicador-ventas-recientes.component';
 import { PanelNotificacionesComponent } from './components/notificaciones/panel-notificaciones/panel-notificaciones.component';
 import { PanelNotificacionesItemComponent } from './components/notificaciones/panel-notificaciones-item/panel-notificaciones-item.component';
+import { CuentaCorrienteAplicadaListaComponent } from './components/listados/cuenta-corriente/cuenta-corriente-aplicada-lista/cuenta-corriente-aplicada-lista.component';
 
 registerLocaleData(localeEsAr, 'es-AR');
 
@@ -206,7 +207,8 @@ export function tokenGetter() {
 		ContratoIndicadorEntregasRecientesComponent,
 		ContratoIndicadorVentasRecientesComponent,
 		PanelNotificacionesComponent,
-		PanelNotificacionesItemComponent
+		PanelNotificacionesItemComponent,
+		CuentaCorrienteAplicadaListaComponent
 	],
 	imports: [
 		HttpClientModule,

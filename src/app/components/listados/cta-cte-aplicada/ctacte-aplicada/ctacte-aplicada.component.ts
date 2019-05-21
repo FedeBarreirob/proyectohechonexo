@@ -56,7 +56,9 @@ export class CtacteAplicadaComponent implements OnInit {
 			let filtro: FiltroCtacteAplicada = {
 				cuenta: this.cuenta,
 				fechaDesde: this.datePipe.transform(new Date(this.fechaDesde), 'dd/MM/yyyy'),
-				fechaHasta: this.datePipe.transform(new Date(this.fechaHasta), 'dd/MM/yyyy')
+				fechaHasta: this.datePipe.transform(new Date(this.fechaHasta), 'dd/MM/yyyy'),
+				totales: true,
+				paginado: false
 			}
 
 			return this.ctacteService.listadoCtaCte(filtro).subscribe(respuesta => {

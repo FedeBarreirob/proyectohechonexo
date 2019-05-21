@@ -1,14 +1,14 @@
 import { Component, OnInit, Input, Output, EventEmitter, OnDestroy } from '@angular/core';
 import { Subject } from 'rxjs';
-import { CtacteService } from '../../../../services/ctacte/ctacte.service';
+import { CtacteAplicadaService } from '../../../../services/ctacte-aplicada/ctacte-aplicada.service';
 import { takeUntil } from 'rxjs/operators';
 
 @Component({
-  selector: 'app-cuenta-corriente-lista',
-  templateUrl: './cuenta-corriente-lista.component.html',
-  styleUrls: ['./cuenta-corriente-lista.component.css']
+  selector: 'app-cuenta-corriente-aplicada-lista',
+  templateUrl: './cuenta-corriente-aplicada-lista.component.html',
+  styleUrls: ['./cuenta-corriente-aplicada-lista.component.css']
 })
-export class CuentaCorrienteListaComponent implements OnInit, OnDestroy {
+export class CuentaCorrienteAplicadaListaComponent implements OnInit, OnDestroy {
 
   @Input()
   observerFiltro$: Subject<any>;
@@ -27,7 +27,7 @@ export class CuentaCorrienteListaComponent implements OnInit, OnDestroy {
   destroy$: Subject<any> = new Subject<any>();
 
   constructor(
-    private ctacteService: CtacteService
+    private ctacteAplicadaService: CtacteAplicadaService
   ) { }
 
   ngOnInit() {
@@ -63,7 +63,7 @@ export class CuentaCorrienteListaComponent implements OnInit, OnDestroy {
       filtroPaginado.pagina = this.pagina;
       filtroPaginado.cantPorPagina = this.cantidadPorPagina;
 
-      this.ctacteService.listadoCtaCte(filtroPaginado)
+      this.ctacteAplicadaService.listadoCtaCte(filtroPaginado)
         .pipe(takeUntil(this.destroy$))
         .subscribe(respuesta => {
           this.agregarMovimientosAlListado(respuesta.datos);
