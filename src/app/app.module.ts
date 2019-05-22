@@ -119,6 +119,7 @@ import { ContratoIndicadorVentasRecientesComponent } from './components/tablero/
 import { PanelNotificacionesComponent } from './components/notificaciones/panel-notificaciones/panel-notificaciones.component';
 import { PanelNotificacionesItemComponent } from './components/notificaciones/panel-notificaciones-item/panel-notificaciones-item.component';
 import { CuentaCorrienteAplicadaListaComponent } from './components/listados/cuenta-corriente/cuenta-corriente-aplicada-lista/cuenta-corriente-aplicada-lista.component';
+import { CuentaCorrienteDetalleComponent } from './components/listados/cuenta-corriente/cuenta-corriente-detalle/cuenta-corriente-detalle.component';
 
 registerLocaleData(localeEsAr, 'es-AR');
 
@@ -208,7 +209,8 @@ export function tokenGetter() {
 		ContratoIndicadorVentasRecientesComponent,
 		PanelNotificacionesComponent,
 		PanelNotificacionesItemComponent,
-		CuentaCorrienteAplicadaListaComponent
+		CuentaCorrienteAplicadaListaComponent,
+		CuentaCorrienteDetalleComponent
 	],
 	imports: [
 		HttpClientModule,
@@ -277,7 +279,8 @@ export function tokenGetter() {
 		NotificacionDetalleComponent,
 		ContratosDetalleComponent,
 		ContratoEntregasDetalleComponent,
-		ContratoVentasDetalleComponent
+		ContratoVentasDetalleComponent,
+		CuentaCorrienteDetalleComponent
 	],
 	bootstrap: [AppComponent]
 })

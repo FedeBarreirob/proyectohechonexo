@@ -26,6 +26,12 @@ export class CuentaCorrienteListaComponent implements OnInit, OnDestroy {
   cargando: boolean = false;
   destroy$: Subject<any> = new Subject<any>();
 
+  // filtros extendidos
+  aCobrar: boolean = false;
+  aPagar: boolean = false;
+  vencido: boolean = false;
+  AVencer: boolean = false;
+
   constructor(
     private ctacteService: CtacteService
   ) { }
@@ -62,6 +68,11 @@ export class CuentaCorrienteListaComponent implements OnInit, OnDestroy {
       filtroPaginado.paginado = true;
       filtroPaginado.pagina = this.pagina;
       filtroPaginado.cantPorPagina = this.cantidadPorPagina;
+      filtroPaginado.ordenado = true;
+      filtroPaginado.aCobrar = this.aCobrar;
+      filtroPaginado.aPagar = this.aPagar;
+      filtroPaginado.vencido = this.vencido;
+      filtroPaginado.AVencer = this.AVencer;
 
       this.ctacteService.listadoCtaCte(filtroPaginado)
         .pipe(takeUntil(this.destroy$))
@@ -99,6 +110,6 @@ export class CuentaCorrienteListaComponent implements OnInit, OnDestroy {
 
   // funcion que muestra el detalle de un movimiento seleccionado
   verDetalle(movimiento: any) {
-    //this.seleccionMovimiento.emit(movimiento);
+    this.seleccionMovimiento.emit(movimiento);
   }
 }

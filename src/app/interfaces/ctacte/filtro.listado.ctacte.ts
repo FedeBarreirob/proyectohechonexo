@@ -4,6 +4,11 @@ export interface FiltroListadoCtaCte {
     fechaHasta: string,
     totales: boolean,
     paginado: boolean,
-    pagina: number,
-    cantPorPagina: number
+    pagina?: number,
+    cantPorPagina?: number,
+    ordenado?: boolean,
+    aCobrar?: boolean,
+    aPagar?: boolean,
+    vencido?: boolean,
+    AVencer?: boolean
 }

@@ -6,6 +6,7 @@ import { DeviceDetectorService } from 'ngx-device-detector';
 import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
 import { DatePipe } from '@angular/common';
+import { CuentaCorrienteDetalleComponent } from '../cuenta-corriente-detalle/cuenta-corriente-detalle.component';
 
 @Component({
   selector: 'app-cuenta-corriente',
@@ -38,8 +39,10 @@ export class CuentaCorrienteComponent implements OnInit, OnDestroy {
       .pipe(takeUntil(this.destroy$))
       .subscribe(
         cuentaAlg => {
-          this.seleccionarCuenta(cuentaAlg);
-          this.cargarListado(this.filtroPorDefecto(cuentaAlg.id.codigo));
+          if (!this.cuenta || (this.cuenta && this.cuenta.id.codigo != cuentaAlg.id.codigo)) {
+            this.seleccionarCuenta(cuentaAlg);
+            this.cargarListado(this.filtroPorDefecto(cuentaAlg.id.codigo));
+          }
         }
       );
   }
@@ -93,7 +96,22 @@ export class CuentaCorrienteComponent implements OnInit, OnDestroy {
       fechaDesde: fechaDesde,
       fechaHasta: fechaHasta,
       totales: false,
-      paginado: true
+      paginado: true,
+      ordenado: true
     }
+  }
+
+  /**
+   * Función encargada de abrir el dialogo con el detalle del movimiento
+   * @param movimiento Movimiento seleccionado
+   */
+  verDetalle(movimiento: any) {
+    this.dialog.open(CuentaCorrienteDetalleComponent, {
+      data: movimiento,
+      maxWidth: '100vw',
+      maxHeight: '100vh',
+      height: '100%',
+      width: '100%'
+    });
   }
 }

@@ -1,9 +1,10 @@
-<button mat-button [matMenuTriggerFor]="menu" class="boton-ver">Ver <mat-icon [ngStyle]="{'color': '#2DA442'}">keyboard_arrow_down</mat-icon></button>
-<mat-menu #menu="matMenu">
-  <mat-checkbox class="mat-menu-item" (click)="$event.stopPropagation();">A cobrar</mat-checkbox>
-  <mat-checkbox class="mat-menu-item" (click)="$event.stopPropagation();">A pagar</mat-checkbox>
-  <mat-checkbox class="mat-menu-item" (click)="$event.stopPropagation();">Vencido</mat-checkbox>
-  <mat-checkbox class="mat-menu-item" (click)="$event.stopPropagation();">A Vencer</mat-checkbox>
+<button mat-button [matMenuTriggerFor]="menu" class="boton-ver" [disabled]="cargando == true">Ver <mat-icon
+    [ngStyle]="{'color': '#2DA442'}">keyboard_arrow_down</mat-icon></button>
+<mat-menu #menu="matMenu" (closed)="cargarListado(true)">
+  <mat-checkbox [(ngModel)]="aCobrar" class="mat-menu-item" (click)="$event.stopPropagation();">A cobrar</mat-checkbox>
+  <mat-checkbox [(ngModel)]="aPagar" class="mat-menu-item" (click)="$event.stopPropagation();">A pagar</mat-checkbox>
+  <mat-checkbox [(ngModel)]="vencido" class="mat-menu-item" (click)="$event.stopPropagation();">Vencido</mat-checkbox>
+  <mat-checkbox [(ngModel)]="AVencer" class="mat-menu-item" (click)="$event.stopPropagation();">A Vencer</mat-checkbox>
 </mat-menu>
 
 <div fxLayout="row" fxLayoutAlign="space-around center" class="titulos">
@@ -26,11 +27,25 @@
     <div fxFlex></div>
 
     <div fxFlex="35%" class="monto">
-      <span
-        [ngClass]="{'signo-positivo': movimiento.importeComprobantePesos > 0, 'signo-negativo': movimiento.importeComprobantePesos < 0 }">
-        {{ (movimiento.importeComprobantePesos < 0) ? '-' : (movimiento.importeComprobantePesos > 0) ? '+' : ''}}
+
+      <!--Pesos-->
+      <span *ngIf="movimiento.moneda == 'P'">
+        <span
+          [ngClass]="{'signo-positivo': movimiento.importeComprobantePesos > 0, 'signo-negativo': movimiento.importeComprobantePesos < 0 }">
+          {{ (movimiento.importeComprobantePesos < 0) ? '-' : (movimiento.importeComprobantePesos > 0) ? '+' : ''}}
+        </span>
+        {{ ((movimiento.importeComprobantePesos > 0) ? movimiento.importeComprobantePesos : movimiento.importeComprobantePesos * (-1)) | number: '.2'}}
       </span>
-      {{ ((movimiento.importeComprobantePesos > 0) ? movimiento.importeComprobantePesos : movimiento.importeComprobantePesos * (-1)) | number: '.2'}}
+
+      <!--Dolares-->
+      <span *ngIf="movimiento.moneda != 'P'">
+        <span
+          [ngClass]="{'signo-positivo': movimiento.importeComprobanteDolares > 0, 'signo-negativo': movimiento.importeComprobanteDolares < 0 }">
+          {{ (movimiento.importeComprobanteDolares < 0) ? '-' : (movimiento.importeComprobanteDolares > 0) ? '+' : ''}}
+        </span>
+        {{ ((movimiento.importeComprobanteDolares > 0) ? movimiento.importeComprobanteDolares : movimiento.importeComprobanteDolares * (-1)) | number: '.2'}}
+      </span>
+
       <span class="moneda">{{ movimiento.moneda | moneda }}</span>
     </div>
   </div>

@@ -13,11 +13,13 @@
 		<mat-tab-group mat-align-tabs="center">
 			<mat-tab label="CTA CORRIENTE">
 				<app-cuenta-corriente-lista [observerFiltro$]="observerFiltro$"
-					(seEncuentraCargando)="cambiarEstadoCargandoCtaCte($event)"></app-cuenta-corriente-lista>
+					(seEncuentraCargando)="cambiarEstadoCargandoCtaCte($event)"
+					(seleccionMovimiento)="verDetalle($event)"></app-cuenta-corriente-lista>
 			</mat-tab>
 			<mat-tab label="CTA CTE APLICADA">
 				<app-cuenta-corriente-aplicada-lista [observerFiltro$]="observerFiltro$"
-					(seEncuentraCargando)="cambiarEstadoCargandoCtaCteAplicado($event)">
+					(seEncuentraCargando)="cambiarEstadoCargandoCtaCteAplicado($event)"
+					(seleccionMovimiento)="verDetalle($event)">
 				</app-cuenta-corriente-aplicada-lista>
 			</mat-tab>
 		</mat-tab-group>

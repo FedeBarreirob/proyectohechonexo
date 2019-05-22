@@ -5,5 +5,10 @@ export interface FiltroCtacteAplicada {
     totales: boolean,
     paginado: boolean,
     pagina?: number,
-    cantPorPagina?: number
+    cantPorPagina?: number,
+    ordenado?: boolean,
+    aCobrar?: boolean,
+    aPagar?: boolean,
+    vencido?: boolean,
+    AVencer?: boolean
 }
