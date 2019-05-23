@@ -84,17 +84,14 @@ export class CuentaCorrienteComponent implements OnInit, OnDestroy {
   }
 
   /**
-   * Carga el filtro por defecto el cual indica como rango de fecha 01-01-2000 - hoy
+   * Carga el filtro por defecto, no se indica rango de fecha, tomará la correspondiente al ejercicio
    * @param cuenta Identificador del productor
    */
   private filtroPorDefecto(cuenta: string): any {
-    let fechaDesde = this.datePipe.transform(new Date(2000, 1), 'dd/MM/yyyy');
-    let fechaHasta = this.datePipe.transform(new Date(), 'dd/MM/yyyy');
-
     return {
       cuenta: cuenta,
-      fechaDesde: fechaDesde,
-      fechaHasta: fechaHasta,
+      fechaDesde: null,
+      fechaHasta: null,
       totales: false,
       paginado: true,
       ordenado: true

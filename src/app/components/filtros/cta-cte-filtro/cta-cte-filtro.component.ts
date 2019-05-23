@@ -35,13 +35,8 @@ export class CtaCteFiltroComponent implements OnInit {
     },
     {
       codigo: "balanceado",
-      texto: "Balanceados",
+      texto: "Nutrición Animal",
       imagen: "assets/cta-cte-filtro/balanceado.png"
-    },
-    {
-      codigo: "servicios",
-      texto: "Servicios",
-      imagen: "assets/cta-cte-filtro/servicios.png"
     }
   ];
 
@@ -72,9 +67,10 @@ export class CtaCteFiltroComponent implements OnInit {
       let filtro = {
         cuenta: this.cuenta.id.codigo,
         fechaDesde: fechaDesdeFiltro,
-        fechaHasta: fechaHastaFiltro,
-        rubro: this.rubro
+        fechaHasta: fechaHastaFiltro
       }
+
+      filtro = this.filtroConFiltroRubros(filtro);
 
       this.botonAplicar.emit(filtro);
     } else {
@@ -82,5 +78,30 @@ export class CtaCteFiltroComponent implements OnInit {
     }
 
     this.cerrar();
+  }
+
+  /**
+   * Agrega filtros según rubros
+   * @param filtro Filtro sin rubros
+   */
+  filtroConFiltroRubros(filtro: any): any {
+
+    let filtroConRubros = filtro;
+
+    switch (this.rubro) {
+      case "granos":
+        filtroConRubros.granos = true;
+        break;
+
+      case "agroinsumos":
+        filtroConRubros.agroinsumos = true;
+        break;
+
+      case "balanceado":
+        filtroConRubros.nutricionAnimal = true;
+        break;
+    }
+
+    return filtroConRubros;
   }
 }

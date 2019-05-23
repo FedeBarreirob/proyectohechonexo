@@ -10,5 +10,8 @@ export interface FiltroCtacteAplicada {
     aCobrar?: boolean,
     aPagar?: boolean,
     vencido?: boolean,
-    AVencer?: boolean
+    AVencer?: boolean,
+    granos?: boolean,
+    agroinsumos?: boolean,
+    nutricionAnimal?: boolean
 }
