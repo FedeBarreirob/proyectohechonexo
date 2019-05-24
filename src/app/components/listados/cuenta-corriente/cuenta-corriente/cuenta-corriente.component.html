@@ -8,7 +8,7 @@
 			(botonPersonalizadoEjecutado)="mostrarOcultarFiltros()"
 			[urlImagenAccionPersonalizada]="'assets/toolbar/embudo.png'"></app-tool-bar-general>
 
-		<mat-progress-bar *ngIf="cargandoCtaCte || cargandoCtaCteAplicada" mode="indeterminate"></mat-progress-bar>
+		<mat-progress-bar *ngIf="cargandoCtaCte || cargandoCtaCteAplicada || cargandoCotizacionMoneda" mode="indeterminate"></mat-progress-bar>
 
 		<mat-tab-group mat-align-tabs="center">
 			<mat-tab label="CTA CORRIENTE">

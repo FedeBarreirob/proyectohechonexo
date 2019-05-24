@@ -1,5 +1,5 @@
 import { Component, OnInit, ViewChild, OnDestroy } from '@angular/core';
-import { MatSidenav, MatDialog } from '@angular/material';
+import { MatSidenav, MatDialog, MatSnackBar } from '@angular/material';
 import { EntidadAlg } from '../../../../interfaces/perfiles/entidad-alg';
 import { CuentaAlgService } from '../../../../services/observers/cuentas-alg/cuenta-alg.service';
 import { DeviceDetectorService } from 'ngx-device-detector';
@@ -7,6 +7,7 @@ import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
 import { DatePipe } from '@angular/common';
 import { CuentaCorrienteDetalleComponent } from '../cuenta-corriente-detalle/cuenta-corriente-detalle.component';
+import { MonedaService } from '../../../../services/moneda/moneda.service';
 
 @Component({
   selector: 'app-cuenta-corriente',
@@ -24,12 +25,16 @@ export class CuentaCorrienteComponent implements OnInit, OnDestroy {
   cargandoCtaCte: Boolean = false;
   cargandoCtaCteAplicada: Boolean = false;
   destroy$: Subject<any> = new Subject<any>();
+  cargandoCotizacionMoneda: Boolean = false;
+  cotizacionMoneda: number;
 
   constructor(
     public dialog: MatDialog,
     private cuentaAlgService: CuentaAlgService,
     private deviceService: DeviceDetectorService,
-    private datePipe: DatePipe
+    private datePipe: DatePipe,
+    private monedaService: MonedaService,
+    private snackBar: MatSnackBar
   ) { }
 
   ngOnInit() {
@@ -41,6 +46,7 @@ export class CuentaCorrienteComponent implements OnInit, OnDestroy {
         cuentaAlg => {
           if (!this.cuenta || (this.cuenta && this.cuenta.id.codigo != cuentaAlg.id.codigo)) {
             this.seleccionarCuenta(cuentaAlg);
+            this.cargarCotizacionMoneda();
             this.cargarListado(this.filtroPorDefecto(cuentaAlg.id.codigo));
           }
         }
@@ -55,6 +61,33 @@ export class CuentaCorrienteComponent implements OnInit, OnDestroy {
   // funcion encargada de capturar el valor de la cuenta
   seleccionarCuenta(cuentaSeleccionada?: EntidadAlg) {
     this.cuenta = cuentaSeleccionada;
+  }
+
+  /**
+   * Carga la cotización del dolar de hoy
+   */
+  private cargarCotizacionMoneda() {
+    if (this.cargandoCotizacionMoneda == false) {
+      this.cargandoCotizacionMoneda = true;
+
+      this.monedaService.cotizacionHoy('D')
+        .pipe(takeUntil(this.destroy$))
+        .subscribe(
+          respuesta => {
+            if (respuesta.exito == true) {
+              this.cotizacionMoneda = respuesta.datos;
+            } else {
+              this.cotizacionMoneda = null;
+            }
+
+            this.cargandoCotizacionMoneda = false;
+          },
+          error => {
+            console.log(error);
+            this.cargandoCotizacionMoneda = false;
+          }
+        );
+    }
   }
 
   // funcion encargada de mostrar u ocultar los filtros
@@ -103,12 +136,29 @@ export class CuentaCorrienteComponent implements OnInit, OnDestroy {
    * @param movimiento Movimiento seleccionado
    */
   verDetalle(movimiento: any) {
-    this.dialog.open(CuentaCorrienteDetalleComponent, {
-      data: movimiento,
-      maxWidth: '100vw',
-      maxHeight: '100vh',
-      height: '100%',
-      width: '100%'
+    if (this.cotizacionMoneda != null) {
+      this.dialog.open(CuentaCorrienteDetalleComponent, {
+        data: {
+          movimiento: movimiento,
+          tc: this.cotizacionMoneda
+        },
+        maxWidth: '100vw',
+        maxHeight: '100vh',
+        height: '100%',
+        width: '100%'
+      });
+    } else {
+      this.openSnackBar("No se ha cargado la cotización del dólar de hoy, intente mas tarde.");
+    }
+  }
+
+  /**
+   * Muestra una notificación
+   * @param message Mensaje a mostrar
+   */
+  openSnackBar(message: string) {
+    this.snackBar.open(message, null, {
+      duration: 2000,
     });
   }
 }

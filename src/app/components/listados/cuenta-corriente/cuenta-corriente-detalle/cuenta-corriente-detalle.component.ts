@@ -4,6 +4,7 @@ import { ComprobantesDownloaderService } from '../../../../services/sharedServic
 import { saveAs } from 'file-saver/FileSaver';
 import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
+import { formatNumber } from '@angular/common';
 
 @Component({
   selector: 'app-cuenta-corriente-detalle',
@@ -14,6 +15,8 @@ export class CuentaCorrienteDetalleComponent implements OnInit, OnDestroy {
 
   movimiento: any;
   destroy$: Subject<any> = new Subject<any>();
+  tcHoy: number;
+  ivaDiff: number;
 
   constructor(
     @Inject(MAT_DIALOG_DATA) public data: any,
@@ -21,11 +24,12 @@ export class CuentaCorrienteDetalleComponent implements OnInit, OnDestroy {
     private snackBar: MatSnackBar,
     private dialogRef: MatDialogRef<CuentaCorrienteDetalleComponent>
   ) {
-    this.movimiento = this.data;
+    this.movimiento = this.data.movimiento;
+    this.tcHoy = this.data.tc;
   }
 
   ngOnInit() {
-    console.log(this.movimiento);
+    this.calcularIvaDiff();
   }
 
   ngOnDestroy(): void {
@@ -70,5 +74,20 @@ export class CuentaCorrienteDetalleComponent implements OnInit, OnDestroy {
    */
   salir() {
     this.dialogRef.close();
+  }
+
+  /**
+   * Calcula el iva de la diferencia de cambio
+   */
+  calcularIvaDiff() {
+    if (this.movimiento.moneda != 'P') {
+
+      let pesificadoAHoy = this.movimiento.importeComprobanteDolares * this.tcHoy;
+      let pesificadoFechaComprobante = this.movimiento.importeComprobanteDolares * this.movimiento.tipoDeCambio;
+
+      this.ivaDiff = (pesificadoAHoy - pesificadoFechaComprobante) * 21 / 100;
+    } else {
+      this.ivaDiff = null;
+    }
   }
 }

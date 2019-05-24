@@ -122,13 +122,13 @@ export class MainNavComponent implements OnInit, OnDestroy {
 				imagenActiva: "assets/sidebar/casa-hot.png",
 				permitido: true
 			},
-			{
+			/*{
 				nombre: "Otros movimientos",
 				rutaLink: "/otros-movimientos",
 				imagen: "assets/sidebar/casa.png",
 				imagenActiva: "assets/sidebar/casa-hot.png",
 				permitido: true
-			},
+			},*/
 			{
 				nombre: "Cuenta Corriente",
 				rutaLink: "/ctacte",
@@ -136,14 +136,7 @@ export class MainNavComponent implements OnInit, OnDestroy {
 				imagenActiva: "assets/sidebar/casa-hot.png",
 				permitido: true
 			},
-			{
-				nombre: "Cta Cte Aplicada",
-				rutaLink: "/ctacte-aplicada",
-				imagen: "assets/sidebar/cta-cte.png",
-				imagenActiva: "assets/sidebar/casa-hot.png",
-				permitido: true
-			},
-			{
+			/*{
 				nombre: "Merc. Pend. Entregar",
 				rutaLink: "/mercaderia-pendiente-entregar",
 				imagen: "assets/sidebar/casa.png",
@@ -156,7 +149,7 @@ export class MainNavComponent implements OnInit, OnDestroy {
 				imagen: "assets/sidebar/casa.png",
 				imagenActiva: "assets/sidebar/casa-hot.png",
 				permitido: true
-			},
+			},*/
 			{
 				nombre: "Administrador de cuentas",
 				rutaLink: "/administrador-de-cuentas",

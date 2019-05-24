@@ -4,7 +4,8 @@
 <!--Encabezado-->
 <div fxLayout="row" fxLayoutAlign="space-around center" class="encabezado-ctacte">
 	<div fxFlex="10%" class="encabezado-imagen">
-		<img src="assets/varios/entrada24.png" />
+		<img *ngIf="movimiento.tipoMovimiento == 'C'" src="assets/varios/entrada24.png" />
+		<img *ngIf="movimiento.tipoMovimiento == 'D'" src="assets/varios/salida24.png" />
 	</div>
 	<div fxFlex="90%">
 		<div fxLayout="column" fxLayoutAlign="none">
@@ -21,7 +22,7 @@
 						{{ (movimiento.importeComprobantePesos < 0) ? '-' : (movimiento.importeComprobantePesos > 0) ? '+' : ''}}
 					</span>
 					<span class="moneda">{{ movimiento.moneda | moneda }}</span>
-					{{ ((movimiento.importeComprobantePesos > 0) ? movimiento.importeComprobantePesos : movimiento.importeComprobantePesos * (-1)) | number: '.2'}}
+					{{ ((movimiento.importeComprobantePesos > 0) ? movimiento.importeComprobantePesos : movimiento.importeComprobantePesos * (-1)) | number: '.2-2'}}
 				</span>
 
 				<!--Dolares-->
@@ -31,7 +32,7 @@
 						{{ (movimiento.importeComprobanteDolares < 0) ? '-' : (movimiento.importeComprobanteDolares > 0) ? '+' : ''}}
 					</span>
 					<span class="moneda">{{ movimiento.moneda | moneda }}</span>
-					{{ ((movimiento.importeComprobanteDolares > 0) ? movimiento.importeComprobanteDolares : movimiento.importeComprobanteDolares * (-1)) | number: '.2'}}
+					{{ ((movimiento.importeComprobanteDolares > 0) ? movimiento.importeComprobanteDolares : movimiento.importeComprobanteDolares * (-1)) | number: '.2-2'}}
 				</span>
 			</div>
 
@@ -58,25 +59,25 @@
 </div>
 
 <div fxLayout="row" fxLayoutAlign="space-between none" fxLayoutGap="10px">
-	<div fxFlex="50%" class="subtitulo-apartados">MONEDA</div>
-	<div fxFlex="50%" class="subtitulo-apartados">TASA DE CAMBIO</div>
+	<div fxFlex="50%" class="subtitulo-apartados">TC EMISIÓN</div>
+	<div fxFlex="50%" class="subtitulo-apartados">FECHA VENCIMIENTO</div>
 </div>
 
 <div fxLayout="row" fxLayoutAlign="space-between none" fxLayoutGap="10px">
-	<div fxFlex="50%" class="dato-apartado">{{movimiento.moneda}}</div>
-	<div fxFlex="50%" class="dato-apartado">AR${{movimiento.tipoDeCambio | number: '.2'}}</div>
+	<div fxFlex="50%" class="dato-apartado" *ngIf="movimiento.tipoDeCambio != null">
+		AR${{movimiento.tipoDeCambio | number: '.2-2'}}</div>
+	<div fxFlex="50%" class="dato-apartado" *ngIf="movimiento.tipoDeCambio == null">-</div>
+	<div fxFlex="50%" class="dato-apartado">{{movimiento.fechaVencimiento}}</div>
 </div>
 
-<div fxLayout="row" fxLayoutAlign="space-between none" fxLayoutGap="10px">
-	<div fxFlex="50%" class="subtitulo-apartados">DÓLARES</div>
-	<div fxFlex="50%" class="subtitulo-apartados-elipsis">TCC</div>
-</div>
+<span *ngIf="movimiento.moneda != 'P'">
+	<div fxLayout="row" fxLayoutAlign="space-between none" fxLayoutGap="10px">
+		<div fxFlex="50%" class="subtitulo-apartados">TC A LA FECHA</div>
+		<div fxFlex="50%" class="subtitulo-apartados">IVA DIF. TC</div>
+	</div>
 
-<div fxLayout="row" fxLayoutAlign="space-between none" fxLayoutGap="10px">
-	<div fxFlex="50%" class="dato-apartado">-</div>
-	<div fxFlex="50%" class="dato-apartado">-</div>
-</div>
-
-<div fxLayout="row" fxLayoutAlign="space-between none" fxLayoutGap="10px">
-	<div fxFlex="50%" class="subtitulo-apartados">IVA DIF. TC</div>
-</div>
+	<div fxLayout="row" fxLayoutAlign="space-between none" fxLayoutGap="10px">
+		<div fxFlex="50%" class="dato-apartado">AR${{tcHoy | number: '.2-2'}}</div>
+		<div fxFlex="50%" class="dato-apartado">AR${{ivaDiff | number: '.2-2'}}</div>
+	</div>
+</span>
