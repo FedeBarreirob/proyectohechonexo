@@ -2,20 +2,18 @@
     color: #666666;
     font-family: Rubik;
     font-size: 14px;
-    text-align: center;
     margin-top: 30px;
+    padding-left: 17px;
+    padding-right: 17px;
 }
 
 .movimiento-fila {
     width: 100%;
-    padding-left: 17px;
-    padding-right: 17px;
 }
 
 .movimiento-icono {
     height: 38px;
     width: 38px;
-    margin-left: 20px;
 }
 
 .especie-cosecha {
@@ -44,12 +42,13 @@
     font-size: 20px;
     line-height: 24px;
     text-align: right;
-    margin-right: 30px;
 }
 
 .contenedor-listado {
     height: 70vh;
     overflow-y: scroll;
+    padding-left: 17px;
+    padding-right: 17px;
 }
 
 .activo {
@@ -73,4 +72,10 @@
     font-family: Rubik;
     font-size: 14px;
     letter-spacing: 1.2px;
+}
+
+.cp {
+    color: #666666;
+    font-family: Rubik;
+    font-size: 11px;
 }

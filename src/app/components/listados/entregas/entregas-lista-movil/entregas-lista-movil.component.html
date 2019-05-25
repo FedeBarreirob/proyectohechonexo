@@ -1,6 +1,8 @@
 <mat-progress-bar *ngIf="cargando" mode="indeterminate"></mat-progress-bar>
 
-<button mat-button *ngIf="filtrarPorAplicacion" [matMenuTriggerFor]="menu" [disabled]="cargando" class="boton-aplicadas-filtro">{{ leyendaFiltroAplicacion() }} <mat-icon [ngStyle]="{'color': '#2DA442'}">
+<!--
+<button mat-button *ngIf="filtrarPorAplicacion" [matMenuTriggerFor]="menu" [disabled]="cargando"
+  class="boton-aplicadas-filtro">{{ leyendaFiltroAplicacion() }} <mat-icon [ngStyle]="{'color': '#2DA442'}">
     keyboard_arrow_down</mat-icon></button>
 <mat-menu #menu="matMenu">
   <button *ngIf="filtro != null" mat-menu-item (click)="seleccionarFiltroAplicacion(null)"
@@ -18,29 +20,35 @@
     Aplicadas
   </button>
 </mat-menu>
+-->
 
-<div fxLayout="row" fxLayoutAlign="space-around center" class="titulos">
-  <div fxFlex="50%">Ref. de entrega</div>
-  <div fxFlex="50%">{{unidadMedida | kilosTextoA}} netos</div>
+<div fxLayout="row" fxLayoutAlign="space-between center" class="titulos">
+  <div fxFlex="140px">Ref. de entrega</div>
+  <div fxFlex="20px">RM/CP</div>
+  <div fxFlex align="end">{{unidadMedida | kilosTextoA}} netos</div>
 </div>
 
 <div class="contenedor-listado" fxLayout="column" fxLayoutWrap fxLayoutAlign="none" infiniteScroll
   [infiniteScrollDistance]="2" [infiniteScrollThrottle]="50" (scrolled)="onScroll()" [scrollWindow]="false">
 
-  <div fxLayout="row" fxLayoutAlign="space-around center"
+  <div fxLayout="row" fxLayoutAlign="space-between center"
     *ngFor="let movimiento of (listadoEntregas ? listadoEntregas : [])" class="movimiento-fila"
     (click)="verDetalle(movimiento)">
 
-    <div fxFlex="20%">
+    <div fxFlex="40px">
       <img class="movimiento-icono" src="{{movimiento.especie | imagenEspecie}}" />
     </div>
 
-    <div fxFlex="50%">
+    <div fxFlex="100px">
       <p class="especie-cosecha">{{movimiento.especie}} {{movimiento.cosecha}}</p>
       <p class="fecha">{{movimiento.fecha}}</p>
     </div>
 
-    <div fxFlex="40%" class="kg-netos">
+    <div fxFlex="20px" class="cp">
+      {{movimiento.numeroComprobanteExterno}}
+    </div>
+
+    <div fxFlex class="kg-netos" align="end">
       {{movimiento.kilosNetos | kilosA: unidadMedida | number: '.0-0'}}
     </div>
   </div>
