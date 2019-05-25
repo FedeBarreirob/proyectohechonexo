@@ -1,6 +1,14 @@
-<div fxLayout="row" fxLayoutAlign="none">
-    <div fxFlex="100%" class="titulo-principal">
-        RESUMEN DE CONTRATOS
+<div fxLayout="row" fxLayoutAlign="space-between center">
+    <div fxFlex="80%" class="titulo-principal">
+        RESUMEN DE CONTRATOS <br /> <span *ngIf="cargando == false"
+            class="texto-filtro">{{descripcionFiltroCosecha}}</span>
+    </div>
+
+    <div fxFlex="20%" class="filtro-cosecha" align="end">
+        <button mat-icon-button *ngIf="cargandoFiltrosCosecha == false && filtrosEspecieCosecha != null"
+            (click)="verFiltroCosecha()" [disabled]="cargando == true">
+            <mat-icon aria-label="Filtro de cosechas">filter_list</mat-icon>
+        </button>
     </div>
 </div>
 

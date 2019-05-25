@@ -123,8 +123,9 @@ export class ContratosService {
   /**
    * Función que devuelve los totales entregados, pendiente de entrgar, fijados, etc de una cuenta dada
    * @param cuenta Identificador de la cuenta del productor
+   * @param cosecha Identificador de la cosecha en formato xxyy, si no se indica, se suma desde 1718 en adelante
    */
-  indicadoresPorEspecie(cuenta: string): Observable<ResponseServicio> {
+  indicadoresPorEspecie(cuenta: string, cosecha?: string): Observable<ResponseServicio> {
 
     let usuarioLogueado = <UserAuth>this.authenticationService.usuarioLogueado();
 
@@ -135,7 +136,9 @@ export class ContratosService {
       })
     };
 
-    let urlConParametro = `${this.urlContratosIndicadoresPorEspecie}/${cuenta}`;
+    let paramCosecha = cosecha ? cosecha : "pordefecto";
+
+    let urlConParametro = `${this.urlContratosIndicadoresPorEspecie}/${cuenta}/${paramCosecha}`;
     return this.http.get<ResponseServicio>(urlConParametro, httpOptions);
   }
 }

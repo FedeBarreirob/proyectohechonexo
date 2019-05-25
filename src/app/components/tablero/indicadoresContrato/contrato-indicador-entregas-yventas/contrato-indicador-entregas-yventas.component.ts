@@ -6,6 +6,9 @@ import { AuthenticationService } from '../../../../services/security/authenticat
 import { PerfilBasico } from '../../../../interfaces/perfiles/perfil-basico';
 import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
+import { FiltroEspecieCosecha } from '../../../../interfaces/varios/filtro-especie-cosecha';
+import { MatDialog } from '@angular/material';
+import { FiltroCosechaComponent } from '../../../../components/filtros/filtro-cosecha/filtro-cosecha.component';
 
 @Component({
   selector: 'app-contrato-indicador-entregas-yventas',
@@ -18,19 +21,30 @@ export class ContratoIndicadorEntregasYVentasComponent implements OnInit, OnDest
   cargando: boolean = false;
   unidadMedida: string;
   destroy$: Subject<any> = new Subject<any>();
+  cargandoFiltrosCosecha: boolean = false;
+  filtrosEspecieCosecha: FiltroEspecieCosecha;
+  cuenta: string;
+  cosecha: string;
+  descripcionFiltroCosecha: string;
 
   constructor(
     private contratosService: ContratosService,
     private cuentasService: CuentaAlgService,
-    private authenticationService: AuthenticationService
+    private authenticationService: AuthenticationService,
+    public dialog: MatDialog
   ) { }
 
   ngOnInit() {
     this.cargarUnidadMedida();
+
     this.cuentasService.cuentaSeleccionada$
       .pipe(takeUntil(this.destroy$))
       .subscribe(
-        cuenta => this.cargarIndicadores(cuenta.id.codigo)
+        cuenta => {
+          this.cuenta = cuenta.id.codigo;
+          this.cargarFiltrosCosecha(cuenta.id.codigo);
+          this.cargarIndicadores(cuenta.id.codigo);
+        }
       );
   }
 
@@ -50,15 +64,39 @@ export class ContratoIndicadorEntregasYVentasComponent implements OnInit, OnDest
   }
 
   /**
+   * Función encagada de cargar los filtros de cosecha
+   */
+  cargarFiltrosCosecha(cuenta: string) {
+    if (this.cargandoFiltrosCosecha == false) {
+      this.cargandoFiltrosCosecha = true;
+
+      this.contratosService.listadoFiltrosEspecieCosecha(cuenta)
+        .pipe(takeUntil(this.destroy$))
+        .subscribe(
+          resultado => {
+            this.filtrosEspecieCosecha = resultado;
+            this.cargandoFiltrosCosecha = false;
+          },
+          error => {
+            console.log(error);
+            this.cargandoFiltrosCosecha = false;
+          }
+        );
+    }
+  }
+
+  /**
    * Función encargada de cargar los indicadores
    */
-  private cargarIndicadores(cuenta: string) {
+  private cargarIndicadores(cuenta: string, cosecha?: string) {
 
     if (this.cargando == false) {
 
       this.cargando = true;
 
-      this.contratosService.indicadoresPorEspecie(cuenta)
+      let paramCosecha = cosecha && cosecha != "" ? cosecha : null;
+
+      this.contratosService.indicadoresPorEspecie(cuenta, paramCosecha)
         .pipe(takeUntil(this.destroy$))
         .subscribe(
           respuesta => {
@@ -67,14 +105,50 @@ export class ContratoIndicadorEntregasYVentasComponent implements OnInit, OnDest
               this.resumenDeContratos = respuesta.datos;
             }
 
+            this.actualizarCosechaFiltradaDescripcion();
             this.cargando = false;
           },
           error => {
             console.log(error);
+            this.actualizarCosechaFiltradaDescripcion();
             this.cargando = false;
           }
         );
     }
   }
 
+  /**
+   * Muestra el filtro de cosechas
+   */
+  verFiltroCosecha() {
+    let opciones = {
+      data: this.filtrosEspecieCosecha,
+      maxWidth: '100vw',
+      maxHeight: '100vh',
+      height: '100%',
+      width: '100%'
+    };
+
+    let dialogRef = this.dialog.open(FiltroCosechaComponent, opciones);
+
+    dialogRef.afterClosed().subscribe(
+      respuesta => {
+        if (respuesta != null) {
+          this.cosecha = respuesta;
+          this.cargarIndicadores(this.cuenta, respuesta);
+        }
+      }
+    );
+  }
+
+  /**
+   * Actualiza la descripción del filtro que se esta utilizando para filtrar los indicadores
+   */
+  actualizarCosechaFiltradaDescripcion() {
+    if (this.cosecha && this.cosecha != "") {
+      this.descripcionFiltroCosecha = `COSECHA ${this.cosecha}`;
+    } else {
+      this.descripcionFiltroCosecha = "COSECHA 1718 EN ADELANTE";
+    }
+  }
 }
