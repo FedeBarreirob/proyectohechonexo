@@ -6,5 +6,6 @@ export interface FiltroResumenContratoCompraVenta {
     cosecha: string,
     paginado: boolean,
     pagina: number,
-    cantPorPagina: number
+    cantPorPagina: number,
+    cumplido?: boolean
 }

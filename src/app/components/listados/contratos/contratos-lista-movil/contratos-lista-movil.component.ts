@@ -123,4 +123,36 @@ export class ContratosListaMovilComponent implements OnInit, OnDestroy {
   verDetalle(movimiento: ResumenContratoCompraVenta) {
     this.seleccionMovimiento.emit(movimiento);
   }
+
+  /**
+   * Establece el filtro para obtener 
+   * @param cumplido Estado del filtro de cumplido
+   */
+  seleccionarFiltroCumplido(cumplido?: boolean) {
+    if (this.filtro != null) {
+      if (this.filtro.cumplido != cumplido) {
+        this.filtro.cumplido = cumplido;
+        this.cargarListado(true);
+      }
+    }
+  }
+
+  /**
+   * Devuelve el nombre del filtro de cumplido según el filtro efectuado
+   */
+  leyendaFiltroCumplido(): string {
+    if (this.filtro != null) {
+
+      if (this.filtro.cumplido == null) {
+        return "TODAS";
+      } else if (this.filtro.cumplido == false) {
+        return "NO CUMPLIDOS";
+      } else {
+        return "CUMPLIDOS";
+      }
+
+    } else {
+      return "-";
+    }
+  }
 }

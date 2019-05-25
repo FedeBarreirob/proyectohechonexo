@@ -1,5 +1,24 @@
 <mat-progress-bar *ngIf="cargando" mode="indeterminate"></mat-progress-bar>
 
+<button mat-button [matMenuTriggerFor]="menu" [disabled]="cargando" class="boton-cumplido-filtro">{{ leyendaFiltroCumplido() }} <mat-icon [ngStyle]="{'color': '#2DA442'}">
+    keyboard_arrow_down</mat-icon></button>
+<mat-menu #menu="matMenu">
+  <button *ngIf="filtro != null" mat-menu-item (click)="seleccionarFiltroCumplido(null)"
+    [ngClass]="{'activo': filtro.cumplido === null, 'inactivo': filtro.cumplido !== null }">
+    Todas
+  </button>
+
+  <button *ngIf="filtro != null" mat-menu-item (click)="seleccionarFiltroCumplido(false)"
+    [ngClass]="{'activo': filtro.cumplido === false, 'inactivo': filtro.cumplido !== false }">
+    No cumplidos
+  </button>
+
+  <button *ngIf="filtro != null" mat-menu-item (click)="seleccionarFiltroCumplido(true)"
+    [ngClass]="{'activo': filtro.cumplido === true, 'inactivo': filtro.cumplido !== true }">
+    Cumplidos
+  </button>
+</mat-menu>
+
 <div class="contenedor-listado" fxLayout="column" fxLayoutWrap fxLayoutAlign="none" infiniteScroll
   [infiniteScrollDistance]="2" [infiniteScrollThrottle]="50" (scrolled)="onScroll()" [scrollWindow]="false">
 
