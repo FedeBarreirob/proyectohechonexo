@@ -8,6 +8,7 @@ import { ShowHidePasswordModule } from 'ngx-show-hide-password';
 import { EllipsisModule } from 'ngx-ellipsis';
 import { DeviceDetectorModule } from 'ngx-device-detector';
 import { NgxGaugeModule } from 'ngx-gauge';
+import { NgxSpinnerModule } from 'ngx-spinner';
 
 // swiper
 import { SwiperModule } from 'ngx-swiper-wrapper';
@@ -121,6 +122,7 @@ import { PanelNotificacionesItemComponent } from './components/notificaciones/pa
 import { CuentaCorrienteAplicadaListaComponent } from './components/listados/cuenta-corriente/cuenta-corriente-aplicada-lista/cuenta-corriente-aplicada-lista.component';
 import { CuentaCorrienteDetalleComponent } from './components/listados/cuenta-corriente/cuenta-corriente-detalle/cuenta-corriente-detalle.component';
 import { FiltroCosechaComponent } from './components/filtros/filtro-cosecha/filtro-cosecha.component';
+import { LoadingComponent } from './components/common/loading/loading.component';
 
 registerLocaleData(localeEsAr, 'es-AR');
 
@@ -212,7 +214,8 @@ export function tokenGetter() {
 		PanelNotificacionesItemComponent,
 		CuentaCorrienteAplicadaListaComponent,
 		CuentaCorrienteDetalleComponent,
-		FiltroCosechaComponent
+		FiltroCosechaComponent,
+		LoadingComponent
 	],
 	imports: [
 		HttpClientModule,
@@ -244,7 +247,8 @@ export function tokenGetter() {
 		DeviceDetectorModule.forRoot(),
 		InfiniteScrollModule,
 		NgxGaugeModule,
-		SwiperModule
+		SwiperModule,
+		NgxSpinnerModule
 	],
 	providers: [
 		{ provide: HTTP_INTERCEPTORS, useClass: ErrorAuthInterceptor, multi: true },

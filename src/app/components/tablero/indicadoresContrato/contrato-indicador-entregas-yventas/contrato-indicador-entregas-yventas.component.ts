@@ -1,4 +1,4 @@
-import { Component, OnInit, OnDestroy } from '@angular/core';
+import { Component, OnInit, OnDestroy, Output, EventEmitter } from '@angular/core';
 import { ContratosTotalesPorEspecie } from '../../../../interfaces/contratos/indicadores/contratos-totales-por-especie';
 import { ContratosService } from '../../../../services/contratos/contratos.service';
 import { CuentaAlgService } from '../../../../services/observers/cuentas-alg/cuenta-alg.service';
@@ -16,6 +16,9 @@ import { FiltroCosechaComponent } from '../../../../components/filtros/filtro-co
   styleUrls: ['./contrato-indicador-entregas-yventas.component.css']
 })
 export class ContratoIndicadorEntregasYVentasComponent implements OnInit, OnDestroy {
+
+  @Output()
+  cargandoChange: EventEmitter<boolean> = new EventEmitter<boolean>();
 
   resumenDeContratos: ContratosTotalesPorEspecie;
   cargando: boolean = false;
@@ -93,6 +96,7 @@ export class ContratoIndicadorEntregasYVentasComponent implements OnInit, OnDest
     if (this.cargando == false) {
 
       this.cargando = true;
+      this.cargandoChange.emit(true);
 
       let paramCosecha = cosecha && cosecha != "" ? cosecha : null;
 
@@ -107,11 +111,13 @@ export class ContratoIndicadorEntregasYVentasComponent implements OnInit, OnDest
 
             this.actualizarCosechaFiltradaDescripcion();
             this.cargando = false;
+            this.cargandoChange.emit(false);
           },
           error => {
             console.log(error);
             this.actualizarCosechaFiltradaDescripcion();
             this.cargando = false;
+            this.cargandoChange.emit(false);
           }
         );
     }

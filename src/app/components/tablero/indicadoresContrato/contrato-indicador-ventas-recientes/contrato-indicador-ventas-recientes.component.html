@@ -1,12 +1,12 @@
 <div fxLayout="row" fxLayoutAlign="space-between center">
-    <div fxFlex="60%" class="titulo-principal">
-      VENTAS RECIENTES
-    </div>
-  
-    <div fxFlex="40%" class="titulo-principal" align="end">
-      <button (click)="irAVentas()" mat-button class="link-ver-todas">Ver todas</button>
-    </div>
+  <div fxFlex="60%" class="titulo-principal">
+    VENTAS RECIENTES
   </div>
 
-  <app-ventas-lista-movil [observerFiltroListadoMovil$]="observerFiltroListadoMovil$" [filtrarPorPesificacion]="false"
-  [cantidadPorPagina]="5"></app-ventas-lista-movil>
+  <div fxFlex="40%" class="titulo-principal" align="end">
+    <button (click)="irAVentas()" mat-button class="link-ver-todas">Ver todas</button>
+  </div>
+</div>
+
+<app-ventas-lista-movil [observerFiltroListadoMovil$]="observerFiltroListadoMovil$" [filtrarPorPesificacion]="false"
+  [cantidadPorPagina]="5" (cargandoChange)="cargandoListado($event)"></app-ventas-lista-movil>

@@ -9,10 +9,13 @@
 			[urlImagenAccionPersonalizada]="'assets/toolbar/embudo.png'"></app-tool-bar-general>
 
 		<app-ventas-lista-movil [observerFiltroListadoMovil$]="observerFiltroListadoMovil$"
-			(seleccionMovimiento)="verDetalle($event)"></app-ventas-lista-movil>
+			(seleccionMovimiento)="verDetalle($event)" (cargandoChange)="mostrarIndicadorLoading($event)">
+		</app-ventas-lista-movil>
 
 		<!--<app-ventas-lista-desktop *ngIf="esCelular===false"
 			[observerFiltroListadoDesktop$]="observerFiltroListadoDesktop$" (seleccionMovimiento)="verDetalle($event)">
 		</app-ventas-lista-desktop>-->
 	</section>
 </mat-sidenav-container>
+
+<app-loading [cargando$]="cargando$"></app-loading>

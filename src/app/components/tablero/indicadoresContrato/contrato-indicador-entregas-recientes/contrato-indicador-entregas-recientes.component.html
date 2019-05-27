@@ -9,5 +9,5 @@
 </div>
 
 <app-entregas-lista-movil [observerFiltroListadoMovil$]="observerFiltroListadoMovil$" [filtrarPorAplicacion]="false"
-  [cantidadPorPagina]="5">
+  [cantidadPorPagina]="5" (cargandoChange)="cargandoListado($event)">
 </app-entregas-lista-movil>

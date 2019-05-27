@@ -1,5 +1,3 @@
-<mat-progress-bar *ngIf="cargando" mode="indeterminate"></mat-progress-bar>
-
 <button mat-button *ngIf="filtrarPorPesificacion" [matMenuTriggerFor]="menu" [disabled]="cargando"
   class="boton-pesificacion-filtro">{{ leyendaFiltroPesificacion() }} <mat-icon [ngStyle]="{'color': '#2DA442'}">
     keyboard_arrow_down</mat-icon></button>

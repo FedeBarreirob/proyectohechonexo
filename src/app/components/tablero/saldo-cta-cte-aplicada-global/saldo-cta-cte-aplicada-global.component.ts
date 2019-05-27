@@ -1,4 +1,4 @@
-import { Component, OnInit, OnDestroy } from '@angular/core';
+import { Component, OnInit, OnDestroy, Output, EventEmitter } from '@angular/core';
 import { CuentaAlgService } from '../../../services/observers/cuentas-alg/cuenta-alg.service';
 import { CtacteAplicadaService } from '../../../services/ctacte-aplicada/ctacte-aplicada.service';
 import { SaldoGlobalCtaCteAplicada } from '../../../interfaces/ctacte-aplicada/saldo-global-cta-cte-aplicada';
@@ -11,6 +11,9 @@ import { takeUntil } from 'rxjs/operators';
   styleUrls: ['./saldo-cta-cte-aplicada-global.component.css']
 })
 export class SaldoCtaCteAplicadaGlobalComponent implements OnInit, OnDestroy {
+
+  @Output()
+  cargandoChange: EventEmitter<boolean> = new EventEmitter<boolean>();
 
   saldoGlobal: SaldoGlobalCtaCteAplicada;
   cargando: boolean = false;
@@ -42,6 +45,7 @@ export class SaldoCtaCteAplicadaGlobalComponent implements OnInit, OnDestroy {
     if (this.cargando == false) {
 
       this.cargando = true;
+      this.cargandoChange.emit(true);
 
       this.ctacteAplicadaService.saldoGlobal(cuenta)
         .pipe(takeUntil(this.destroy$))
@@ -53,10 +57,12 @@ export class SaldoCtaCteAplicadaGlobalComponent implements OnInit, OnDestroy {
             }
 
             this.cargando = false;
+            this.cargandoChange.emit(false);
           },
           error => {
             console.log(error);
             this.cargando = false;
+            this.cargandoChange.emit(false);
           }
         );
     }

@@ -5,7 +5,7 @@ import { AuthenticationService } from '../../services/security/authentication.se
 import { UserAuth } from '../../models/security/user';
 import { PerfilesService } from '../../services/perfiles/perfiles.service';
 import { MatSnackBar } from '@angular/material';
-import { Observable } from 'rxjs';
+import { Observable, Subject } from 'rxjs';
 import { NotificacionesService } from '../../services/notificaciones/notificaciones.service';
 import { OneSignalService } from 'src/app/services/push/one-signal.service';
 
@@ -20,6 +20,7 @@ export class LoginComponent implements OnInit {
 	logueando: boolean = false;
 	returnUrl: string;
 	hidePassword = true;
+	cargando$: Subject<boolean> = new Subject<boolean>();
 
 	constructor(
 		private formBuilder: FormBuilder,
@@ -49,6 +50,9 @@ export class LoginComponent implements OnInit {
 	login() {
 		if (!this.logueando) {
 			this.logueando = true;
+
+			this.cargando$.next(true);
+
 			const frm = this.frmLogin.value;
 			this.authenticationService.login(frm.username, frm.password).subscribe(
 				respuesta => {
@@ -67,11 +71,13 @@ export class LoginComponent implements OnInit {
 							}
 						});
 					} else {
+						this.cargando$.next(false);
 						this.logueando = false;
 						this.openSnackBar((respuesta.mensaje) ? respuesta.mensaje : 'Acceso denegado', "Login");
 					}
 				},
 				error => {
+					this.cargando$.next(false);
 					this.logueando = false;
 					this.openSnackBar(error, "Login");
 				});

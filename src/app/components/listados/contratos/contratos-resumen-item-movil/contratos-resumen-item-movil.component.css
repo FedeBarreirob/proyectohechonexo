@@ -1,3 +1,16 @@
+.contenedor-encabezado {
+    padding: 5px;
+}
+
+.contenedor-entregas-fijaciones {
+    padding: 5px;
+}
+
+.contenedor-entregas-fijaciones-ok {
+    padding: 5px;
+    background-color: rgba(35,185,80,0.1);
+}
+
 .contenedor-info {
     margin-bottom: 5px;
 }
@@ -5,7 +18,6 @@
 .movimiento-icono {
     height: 38px;
     width: 38px;
-    margin-left: 20px;
 }
 
 .manometro {
@@ -25,8 +37,14 @@
     font-size: 32px;
 }
 
-.texto-porcentual {
+.texto-porcentual-alert {
     color: #FFBC00;
+    font-family: Rubik;
+    font-size: 11px;
+}
+
+.texto-porcentual-ok {
+    color: #23B950;
     font-family: Rubik;
     font-size: 11px;
 }
@@ -62,7 +80,11 @@
     color: #666666;
     font-family: Rubik;
     font-size: 11px;
-    margin-left: 4px;
+}
+
+.icon-calendar {
+    height: 12px;
+    margin-right: 5px;
 }
 
 .vencido {
@@ -70,4 +92,34 @@
     font-family: Rubik;
     font-size: 11px;
     margin-left: 4px;
+}
+
+/* Barra de progreso alert */
+
+::ng-deep .barra-progreso-alert .mat-progress-bar-fill::after {
+    background-color: #fec300;
+}
+
+::ng-deep .barra-progreso-alert .mat-progress-bar-buffer {
+    background: #ebebeb;
+}
+
+::ng-deep .barra-progreso-alert .mat-progress-bar {
+    border-radius: 3px;
+    height: 5px !important;
+}
+
+/* Barra de progreso ok */
+
+::ng-deep .barra-progreso-ok .mat-progress-bar-fill::after {
+    background-color: #00c850;
+}
+
+::ng-deep .barra-progreso-ok .mat-progress-bar-buffer {
+    background: #ebebeb;
+}
+
+::ng-deep .barra-progreso-ok .mat-progress-bar {
+    border-radius: 3px;
+    height: 5px !important;
 }

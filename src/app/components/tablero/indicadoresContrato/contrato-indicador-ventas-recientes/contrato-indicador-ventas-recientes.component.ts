@@ -1,4 +1,4 @@
-import { Component, OnInit, OnDestroy } from '@angular/core';
+import { Component, OnInit, OnDestroy, Output, EventEmitter } from '@angular/core';
 import { CuentaAlgService } from '../../../../services/observers/cuentas-alg/cuenta-alg.service';
 import { DatePipe } from '@angular/common';
 import { Router } from '@angular/router';
@@ -13,6 +13,9 @@ import { takeUntil } from 'rxjs/operators';
   providers: [DatePipe]
 })
 export class ContratoIndicadorVentasRecientesComponent implements OnInit, OnDestroy {
+
+  @Output()
+  cargandoChange: EventEmitter<boolean> = new EventEmitter<boolean>();
 
   observerFiltroListadoMovil$ = new Subject<FiltroVentas>();
   destroy$: Subject<any> = new Subject<any>();
@@ -68,5 +71,13 @@ export class ContratoIndicadorVentasRecientesComponent implements OnInit, OnDest
    */
   irAVentas() {
     this.router.navigate(["ventas"]);
+  }
+
+  /**
+   * Actualiza el estado de carga según el estado del listado
+   * @param cargando Indica el estado de carga
+   */
+  cargandoListado(cargando: boolean) {
+    this.cargandoChange.emit(cargando);
   }
 }

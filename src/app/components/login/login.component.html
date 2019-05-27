@@ -18,7 +18,7 @@
 
             <input class="password" id="password" matInput showHideInput [type]="hidePassword ? 'password' : 'text'"
               formControlName="password" required>
-            <mat-icon class="passwordIcon"  (click)="hidePassword = !hidePassword">
+            <mat-icon class="passwordIcon" (click)="hidePassword = !hidePassword">
               {{hidePassword ? 'visibility_off' : 'visibility'}}</mat-icon>
 
             <div fxLayout="row" fxLayoutAlign="center center" class="recuerdameContenedor">
@@ -34,10 +34,9 @@
           <button class="botonEntrar" [disabled]="logueando" type="button" (click)="login()">Entrar</button>
 
         </mat-card-content>
-        <mat-card-footer>
-          <mat-progress-bar *ngIf="logueando" mode="indeterminate"></mat-progress-bar>
-        </mat-card-footer>
       </mat-card>
     </div>
   </div>
 </div>
+
+<app-loading [cargando$]="cargando$"></app-loading>

@@ -20,6 +20,9 @@ export class ContratosListaMovilComponent implements OnInit, OnDestroy {
   @Output()
   seleccionMovimiento: EventEmitter<ResumenContratoCompraVenta> = new EventEmitter<ResumenContratoCompraVenta>();
 
+  @Output()
+  cargandoChange: EventEmitter<boolean> = new EventEmitter<boolean>();
+
   listadoContratos: Array<ResumenContratoCompraVenta> = [];
   pagina: number = 1;
   cantidadPorPagina: number = 50;
@@ -73,6 +76,7 @@ export class ContratosListaMovilComponent implements OnInit, OnDestroy {
   cargarListado(limpiar: boolean) {
     if (!this.cargando) {
       this.cargando = true;
+      this.cargandoChange.emit(true);
 
       if (limpiar) {
         this.limpiar();
@@ -92,8 +96,10 @@ export class ContratosListaMovilComponent implements OnInit, OnDestroy {
           }
 
           this.cargando = false;
+          this.cargandoChange.emit(false);
         }, () => {
           this.cargando = false;
+          this.cargandoChange.emit(false);
         });
     }
   }

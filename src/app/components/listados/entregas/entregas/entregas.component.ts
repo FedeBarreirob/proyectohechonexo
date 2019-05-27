@@ -24,6 +24,7 @@ export class EntregasComponent implements OnInit, OnDestroy {
 	public cuenta: EntidadAlg;
 	public filtrosEspecieCosecha: FiltroEspecieCosecha;
 	public cargandoFiltros: boolean;
+	cargando$: Subject<boolean> = new Subject<boolean>();
 
 	observerFiltroListadoMovil$ = new Subject<any>();
 	observerFiltroListadoDesktop$ = new Subject<any>();
@@ -138,5 +139,16 @@ export class EntregasComponent implements OnInit, OnDestroy {
 		}
 
 		this.cargarListado(filtro);
+	}
+
+	/**
+	 * Muestra el indicador de carga mientras haya un proceso ejecutándose
+	 */
+	mostrarIndicadorLoading(cargando: boolean) {
+		if (cargando == true) {
+			this.cargando$.next(true);
+		} else {
+			this.cargando$.next(false);
+		}
 	}
 }

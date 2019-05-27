@@ -1,8 +1,8 @@
 <mat-card class="contenedor-info">
   <!--Info contrato-->
-  <div fxLayout="row" fxLayoutAlign="space-around center">
+  <div fxLayout="row" fxLayoutAlign="sart center" class="contenedor-encabezado">
 
-    <div fxFlex="20%">
+    <div fxFlex="48px">
       <img class="movimiento-icono" src="{{resumen.especie | imagenEspecie}}" />
     </div>
 
@@ -21,48 +21,65 @@
   </div>
 
   <!--Info entregas-->
-  <div fxLayout="row" fxLayoutAlign="space-around center">
-    <div fxFlex="20%">
-      <ngx-gauge [value]="resumen.porcentajeKilosEntregados" [type]="'full'" [cap]="'round'" [thick]="4"
-        [foregroundColor]="'#fec300'" [size]="30" class="manometro">
-        <ngx-gauge-value></ngx-gauge-value>
-      </ngx-gauge>
-    </div>
-
-    <div fxFlex="80%">
+  <div fxLayout="row" fxLayoutAlign="space-around center"
+    [ngClass]="{'contenedor-entregas-fijaciones': resumen.porcentajeKilosEntregados < 100, 'contenedor-entregas-fijaciones-ok': resumen.porcentajeKilosEntregados == 100}">
+    <div fxFlex="100%">
       <div fxLayout="column" fxLayoutAlign="none">
         <div fxFlex="100%">
-          <span class="texto-porcentual">{{resumen.porcentajeKilosEntregados | number: '.2'}}% Entregado</span>
-          <span class="rango-fecha">Del {{resumen.fechaEntregaDesde}} al {{resumen.fechaEntregaHasta}}</span>
+          <img src="assets/varios/calendario.png" class="icon-calendar"> <span class="rango-fecha">Del
+            {{resumen.fechaEntregaDesde}} al {{resumen.fechaEntregaHasta}}</span>
         </div>
         <div fxFlex="100%" class="info-kilos-entregados-fijados">
           {{resumen.kilosPendientesEntregar | kilosA: unidadMedida | number: '.0-0'}} {{unidadMedida | kilosTextoA}}
           Pendientes de entrega
+        </div>
+        <div fxFlex="100%">
+          <div fxLayout="row" fxLayoutAlign="start center">
+            <div fxFlex="110px">
+              <span
+                [ngClass]="{'texto-porcentual-alert': resumen.porcentajeKilosEntregados < 100, 'texto-porcentual-ok': resumen.porcentajeKilosEntregados == 100}">{{resumen.porcentajeKilosEntregados | number: '.2'}}%
+                Entregado</span>
+            </div>
+            <div fxFlex="50px"
+              [ngClass]="{'barra-progreso-alert': resumen.porcentajeKilosEntregados < 100, 'barra-progreso-ok': resumen.porcentajeKilosEntregados == 100}">
+              <mat-progress-bar mode="determinate" [value]="resumen.porcentajeKilosEntregados"></mat-progress-bar>
+            </div>
+          </div>
         </div>
       </div>
     </div>
   </div>
 
   <!--Info fijaciones-->
-  <div fxLayout="row" fxLayoutAlign="space-around center">
-    <div fxFlex="20%">
-      <ngx-gauge [value]="resumen.porcentajeKilosFijados" [type]="'full'" [cap]="'round'" [thick]="4"
-        [foregroundColor]="'#fec300'" [size]="30" class="manometro">
-        <ngx-gauge-value></ngx-gauge-value>
-      </ngx-gauge>
-    </div>
-
-    <div fxFlex="80%">
+  <div fxLayout="row" fxLayoutAlign="space-around center"
+    [ngClass]="{'contenedor-entregas-fijaciones': resumen.porcentajeKilosFijados < 100, 'contenedor-entregas-fijaciones-ok': resumen.porcentajeKilosFijados == 100}">
+    <div fxFlex="100%">
       <div fxLayout="column" fxLayoutAlign="none">
         <div fxFlex="100%">
-          <span class="texto-porcentual">{{resumen.porcentajeKilosFijados | number: '.2'}}% Fijado</span>
-          <span *ngIf="resumen.plazosFijacion != null && resumen.vencidoFijacion == false" class="rango-fecha">Del
-            {{resumen.fechaDesdeFijacion}} al {{resumen.fechaHastaFijacion}}</span>
-          <span *ngIf="resumen.plazosFijacion != null && resumen.vencidoFijacion == true" class="vencido">Vencido</span>
+          <div fxFlex="100%">
+            <img src="assets/varios/calendario.png" class="icon-calendar">
+            <span *ngIf="resumen.plazosFijacion != null && resumen.vencidoFijacion == false" class="rango-fecha">Del
+              {{resumen.fechaDesdeFijacion}} al {{resumen.fechaHastaFijacion}}</span>
+            <span *ngIf="resumen.plazosFijacion != null && resumen.vencidoFijacion == true"
+              class="vencido">Vencido</span>
+          </div>
         </div>
         <div fxFlex="100%" class="info-kilos-entregados-fijados">
           {{resumen.kilosAFijar | kilosA: unidadMedida | number: '.0-0'}} {{unidadMedida | kilosTextoA}} Pendientes de
           fijación
+        </div>
+        <div fxFlex="100%">
+          <div fxLayout="row" fxLayoutAlign="start center">
+            <div fxFlex="110px">
+              <span
+                [ngClass]="{'texto-porcentual-alert': resumen.porcentajeKilosFijados < 100, 'texto-porcentual-ok': resumen.porcentajeKilosFijados == 100}">{{resumen.porcentajeKilosFijados | number: '.2'}}%
+                Fijado</span>
+            </div>
+            <div fxFlex="50px"
+              [ngClass]="{'barra-progreso-alert': resumen.porcentajeKilosFijados < 100, 'barra-progreso-ok': resumen.porcentajeKilosFijados == 100}">
+              <mat-progress-bar mode="determinate" [value]="resumen.porcentajeKilosFijados"></mat-progress-bar>
+            </div>
+          </div>
         </div>
       </div>
     </div>

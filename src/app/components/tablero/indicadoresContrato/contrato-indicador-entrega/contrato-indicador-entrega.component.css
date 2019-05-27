@@ -48,3 +48,10 @@
     margin-top: -25px;
     margin-bottom: 15px;
 }
+
+.subtitulo-cantidad-pendiente {
+    color: #E8021D;
+    font-family: Rubik;
+    font-size: 14px;
+    text-align: center;
+}

@@ -8,8 +8,6 @@
 			(botonPersonalizadoEjecutado)="mostrarOcultarFiltros()"
 			[urlImagenAccionPersonalizada]="'assets/toolbar/embudo.png'"></app-tool-bar-general>
 
-		<mat-progress-bar *ngIf="cargandoCtaCte || cargandoCtaCteAplicada || cargandoCotizacionMoneda" mode="indeterminate"></mat-progress-bar>
-
 		<mat-tab-group mat-align-tabs="center">
 			<mat-tab label="CTA CORRIENTE">
 				<app-cuenta-corriente-lista [observerFiltro$]="observerFiltro$"
@@ -26,3 +24,5 @@
 
 	</section>
 </mat-sidenav-container>
+
+<app-loading [cargando$]="cargando$"></app-loading>

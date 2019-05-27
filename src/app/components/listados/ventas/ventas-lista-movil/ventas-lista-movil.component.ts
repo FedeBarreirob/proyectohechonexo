@@ -23,6 +23,9 @@ export class VentasListaMovilComponent implements OnInit, OnDestroy {
   @Output()
   seleccionMovimiento: EventEmitter<FijacionVenta> = new EventEmitter<FijacionVenta>();
 
+  @Output()
+  cargandoChange: EventEmitter<boolean> = new EventEmitter<boolean>();
+
   listado: Array<FijacionVenta> = [];
   pagina: number = 1;
 
@@ -80,6 +83,7 @@ export class VentasListaMovilComponent implements OnInit, OnDestroy {
   cargarListado(limpiar: boolean) {
     if (!this.cargando) {
       this.cargando = true;
+      this.cargandoChange.emit(true);
 
       if (limpiar) {
         this.limpiar();
@@ -100,8 +104,10 @@ export class VentasListaMovilComponent implements OnInit, OnDestroy {
           }
 
           this.cargando = false;
+          this.cargandoChange.emit(false);
         }, () => {
           this.cargando = false;
+          this.cargandoChange.emit(false);
         });
     }
   }

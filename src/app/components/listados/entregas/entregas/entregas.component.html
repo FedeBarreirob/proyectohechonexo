@@ -8,10 +8,12 @@
 			(botonPersonalizadoEjecutado)="mostrarOcultarFiltros()"
 			[urlImagenAccionPersonalizada]="'assets/toolbar/embudo.png'"></app-tool-bar-general>
 		<app-entregas-lista-movil *ngIf="esCelular===true" [observerFiltroListadoMovil$]="observerFiltroListadoMovil$"
-			(seleccionMovimiento)="verDetalle($event)"></app-entregas-lista-movil>
+			(seleccionMovimiento)="verDetalle($event)" (cargandoChange)="mostrarIndicadorLoading($event)"></app-entregas-lista-movil>
 
 		<app-entregas-lista-desktop *ngIf="esCelular===false"
 			[observerFiltroListadoDesktop$]="observerFiltroListadoDesktop$" (seleccionMovimiento)="verDetalle($event)">
 		</app-entregas-lista-desktop>
 	</section>
 </mat-sidenav-container>
+
+<app-loading [cargando$]="cargando$"></app-loading>

@@ -23,6 +23,9 @@ export class EntregasListaMovilComponent implements OnInit, OnDestroy {
   @Output()
   seleccionMovimiento: EventEmitter<MovimientoEntrega> = new EventEmitter<MovimientoEntrega>();
 
+  @Output()
+  cargandoChange: EventEmitter<boolean> = new EventEmitter<boolean>();
+
   listadoEntregas: Array<MovimientoEntrega> = [];
   pagina: number = 1;
 
@@ -79,6 +82,7 @@ export class EntregasListaMovilComponent implements OnInit, OnDestroy {
   cargarListado(limpiar: boolean) {
     if (!this.cargando) {
       this.cargando = true;
+      this.cargandoChange.emit(true);
 
       if (limpiar) {
         this.limpiar();
@@ -97,8 +101,10 @@ export class EntregasListaMovilComponent implements OnInit, OnDestroy {
           }
 
           this.cargando = false;
+          this.cargandoChange.emit(false);
         }, error => {
           this.cargando = false;
+          this.cargandoChange.emit(false);
         });
     }
   }

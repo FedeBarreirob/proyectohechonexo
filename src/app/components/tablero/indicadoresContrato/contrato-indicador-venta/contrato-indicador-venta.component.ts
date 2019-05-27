@@ -14,6 +14,12 @@ export class ContratoIndicadorVentaComponent implements OnInit {
   @Input()
   unidadMedida: string;
 
+  thresholdConfig = {
+    '0': { color: '#f9951e' },
+    '50': { color: '#fec300' },
+    '100': { color: '#00c850' }
+  };
+
   constructor() { }
 
   ngOnInit() {

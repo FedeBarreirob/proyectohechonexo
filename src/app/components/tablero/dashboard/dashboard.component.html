@@ -11,14 +11,16 @@
 				(botonPersonalizadoEjecutado)="mostrarOcultarNotificaciones()"
 				[urlImagenAccionPersonalizada]="'assets/toolbar/Campana.png'"></app-tool-bar-general>
 
-			<app-saldo-cta-cte-aplicada-global></app-saldo-cta-cte-aplicada-global>
+			<app-saldo-cta-cte-aplicada-global (cargandoChange)="esCargandoCtaCte($event)"></app-saldo-cta-cte-aplicada-global>
 		</div>
 
 		<div class="fondo-blanco">
-			<app-contrato-indicador-entregas-yventas></app-contrato-indicador-entregas-yventas>
-			<app-contrato-indicador-entregas-recientes></app-contrato-indicador-entregas-recientes>
-			<app-contrato-indicador-ventas-recientes></app-contrato-indicador-ventas-recientes>
+			<app-contrato-indicador-entregas-yventas (cargandoChange)="esCargandoIndicadorContratos($event)"></app-contrato-indicador-entregas-yventas>
+			<app-contrato-indicador-entregas-recientes (cargandoChange)="esCargandoIndicadorEntregasRecientes($event)"></app-contrato-indicador-entregas-recientes>
+			<app-contrato-indicador-ventas-recientes (cargandoChange)="esCargandoIndicadorVentasRecientes($event)"></app-contrato-indicador-ventas-recientes>
 		</div>
 
 	</section>
 </mat-sidenav-container>
+
+<app-loading [cargando$]="cargando$"></app-loading>

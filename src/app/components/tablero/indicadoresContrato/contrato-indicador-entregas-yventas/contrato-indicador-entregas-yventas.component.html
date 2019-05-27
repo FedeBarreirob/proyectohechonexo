@@ -12,12 +12,6 @@
     </div>
 </div>
 
-<div fxLayout="row" fxLayoutAlign="center center" *ngIf="cargando == true">
-    <div fxFlex="24px">
-        <mat-spinner [diameter]="24"></mat-spinner>
-    </div>
-</div>
-
 <app-contrato-indicador-swiper-entrega
     *ngIf="resumenDeContratos != null && resumenDeContratos.indicadoresEntregas != null && cargando == false"
     [indicadores]="resumenDeContratos.indicadoresEntregas" [unidadMedida]="unidadMedida">

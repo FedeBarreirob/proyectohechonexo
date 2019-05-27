@@ -20,12 +20,6 @@
 <!--Disponible a cobrar-->
 <mat-card class="tarjeta">
 
-  <div fxLayout="row" fxLayoutAlign="center center" *ngIf="cargando == true">
-    <div fxFlex="24px">
-      <mat-spinner [diameter]="24"></mat-spinner>
-    </div>
-  </div>
-
   <span *ngIf="saldoGlobal != null && cargando == false">
     <div fxLayout="row" fxLayoutAlign="space-between center">
       <div fxFlex="100%" class="titulo-card">DISPONIBLE A COBRAR <img src="assets/varios/entrada.png"
@@ -51,12 +45,6 @@
 
 <!--A pagar-->
 <mat-card class="tarjeta">
-
-  <div fxLayout="row" fxLayoutAlign="center center" *ngIf="cargando == true">
-    <div fxFlex="24px">
-      <mat-spinner [diameter]="24"></mat-spinner>
-    </div>
-  </div>
 
   <span *ngIf="saldoGlobal != null && cargando == false">
     <div fxLayout="row" fxLayoutAlign="space-between center">

@@ -24,6 +24,7 @@ export class CuentaCorrienteComponent implements OnInit, OnDestroy {
   observerFiltro$ = new Subject<any>();
   cargandoCtaCte: Boolean = false;
   cargandoCtaCteAplicada: Boolean = false;
+  cargando$: Subject<boolean> = new Subject<boolean>();
   destroy$: Subject<any> = new Subject<any>();
   cargandoCotizacionMoneda: Boolean = false;
   cotizacionMoneda: number;
@@ -69,6 +70,7 @@ export class CuentaCorrienteComponent implements OnInit, OnDestroy {
   private cargarCotizacionMoneda() {
     if (this.cargandoCotizacionMoneda == false) {
       this.cargandoCotizacionMoneda = true;
+      this.mostrarIndicadorLoading();
 
       this.monedaService.cotizacionHoy('D')
         .pipe(takeUntil(this.destroy$))
@@ -81,10 +83,12 @@ export class CuentaCorrienteComponent implements OnInit, OnDestroy {
             }
 
             this.cargandoCotizacionMoneda = false;
+            this.mostrarIndicadorLoading();
           },
           error => {
             console.log(error);
             this.cargandoCotizacionMoneda = false;
+            this.mostrarIndicadorLoading();
           }
         );
     }
@@ -106,6 +110,7 @@ export class CuentaCorrienteComponent implements OnInit, OnDestroy {
    */
   cambiarEstadoCargandoCtaCte(cargando: boolean) {
     this.cargandoCtaCte = cargando;
+    this.mostrarIndicadorLoading();
   }
 
   /**
@@ -114,6 +119,7 @@ export class CuentaCorrienteComponent implements OnInit, OnDestroy {
    */
   cambiarEstadoCargandoCtaCteAplicado(cargando: boolean) {
     this.cargandoCtaCteAplicada = cargando;
+    this.mostrarIndicadorLoading();
   }
 
   /**
@@ -160,5 +166,20 @@ export class CuentaCorrienteComponent implements OnInit, OnDestroy {
     this.snackBar.open(message, null, {
       duration: 2000,
     });
+  }
+
+  /**
+   * Muestra el indicador de carga mientras haya un proceso ejecutándose
+   */
+  private mostrarIndicadorLoading() {
+
+    let hayProcesosEnEjecucion = this.cargandoCtaCte == true ||
+      this.cargandoCtaCteAplicada == true || this.cargandoCotizacionMoneda == true;
+
+    if (hayProcesosEnEjecucion == true) {
+      this.cargando$.next(true);
+    } else {
+      this.cargando$.next(false);
+    }
   }
 }
