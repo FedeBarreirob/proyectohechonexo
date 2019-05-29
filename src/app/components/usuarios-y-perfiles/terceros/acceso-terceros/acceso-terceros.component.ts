@@ -8,6 +8,7 @@ import { AuthenticationService } from '../../../../services/security/authenticat
 import { AccesoTercerosEdicionComponent } from '../acceso-terceros-edicion/acceso-terceros-edicion.component';
 import { TerceroBasico } from '../../../../interfaces/acceso-terceros/tercero-basico';
 import { ModalCambioPasswordComponent } from '../../modal-cambio-password/modal-cambio-password.component';
+import { Subject } from 'rxjs';
 
 @Component({
 	selector: 'app-acceso-terceros',
@@ -15,6 +16,8 @@ import { ModalCambioPasswordComponent } from '../../modal-cambio-password/modal-
 	styleUrls: ['./acceso-terceros.component.css']
 })
 export class AccesoTercerosComponent implements OnInit {
+
+	observerListadoMovil$: Subject<void> = new Subject<void>();
 
 	public listaPaginada: ListadoPaginado = {
 		listado: [],
@@ -56,7 +59,11 @@ export class AccesoTercerosComponent implements OnInit {
 
 	// despliega el formulario para crear un nuevo acceso a tercero
 	nuevoAccesoATercero() {
-		this.dialog.open(AccesoTercerosEdicionComponent);
+		let dialorRef = this.dialog.open(AccesoTercerosEdicionComponent);
+
+		dialorRef.afterClosed().subscribe(
+			() => this.observerListadoMovil$.next()
+		);
 	}
 
 	// lista los accesos a terceros registrados en el sistema
@@ -68,7 +75,7 @@ export class AccesoTercerosComponent implements OnInit {
 			this.filtro.cantPorPagina = event.pageSize;
 		}
 
-		this.terceroService.listadoPaginado(this.filtro, this.usuarioLogueado.token).subscribe(
+		this.terceroService.listadoPaginado(this.filtro).subscribe(
 			respuesta => {
 				this.listaPaginada = <ListadoPaginado>respuesta.datos;
 				this.cargando = false;
@@ -86,25 +93,22 @@ export class AccesoTercerosComponent implements OnInit {
 		const dialogRef = this.dialog.open(AccesoTercerosEdicionComponent, { data: tercero });
 
 		dialogRef.afterClosed().subscribe(
-			data => this.cargarListado(this.pageEvent)
+			() => this.observerListadoMovil$.next()
 		);
 	}
 
 	// funcion encargada de habilitar deshabilitar un tercero dado
-	habilitacion(tercero: TerceroBasico, $event: MatSlideToggleChange) {
+	habilitacion(tercero: TerceroBasico) {
 		this.terceroService.darDeBajaTercero(
 			tercero.id,
-			!$event.checked,
-			this.usuarioLogueado.token
+			tercero.credencial.baja
 		).subscribe(
 			respuesta => {
-				if (respuesta.exito == true) {
-					tercero.credencial.baja = !$event.checked;
-				} else {
-					this.cargarListado(this.pageEvent);
+				if (respuesta.exito == false) {
+					this.observerListadoMovil$.next();
 				}
 
-				this.openSnackBar(respuesta.mensaje, "Habilitación/Baja Tercero");
+				this.openSnackBar(respuesta.mensaje, "");
 			},
 			error => console.log(error)
 		);
@@ -126,8 +130,7 @@ export class AccesoTercerosComponent implements OnInit {
 		if (confirm(mensaje)) {
 
 			this.terceroService.eliminarTercero(
-				tercero.id,
-				this.usuarioLogueado.token
+				tercero.id
 			).subscribe(
 				respuesta => {
 					if (respuesta.exito == true) {

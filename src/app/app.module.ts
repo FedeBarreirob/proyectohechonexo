@@ -123,6 +123,7 @@ import { CuentaCorrienteAplicadaListaComponent } from './components/listados/cue
 import { CuentaCorrienteDetalleComponent } from './components/listados/cuenta-corriente/cuenta-corriente-detalle/cuenta-corriente-detalle.component';
 import { FiltroCosechaComponent } from './components/filtros/filtro-cosecha/filtro-cosecha.component';
 import { LoadingComponent } from './components/common/loading/loading.component';
+import { TercerosListaMovilComponent } from './components/usuarios-y-perfiles/terceros/terceros-lista-movil/terceros-lista-movil.component';
 
 registerLocaleData(localeEsAr, 'es-AR');
 
@@ -215,7 +216,8 @@ export function tokenGetter() {
 		CuentaCorrienteAplicadaListaComponent,
 		CuentaCorrienteDetalleComponent,
 		FiltroCosechaComponent,
-		LoadingComponent
+		LoadingComponent,
+		TercerosListaMovilComponent
 	],
 	imports: [
 		HttpClientModule,

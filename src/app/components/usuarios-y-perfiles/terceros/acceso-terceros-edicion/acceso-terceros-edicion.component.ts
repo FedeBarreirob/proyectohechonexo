@@ -98,7 +98,7 @@ export class AccesoTercerosEdicionComponent implements OnInit {
 
 	// funcion encargada de guardar un nuevo acceso a terceros
 	guardarNuevo() {
-		this.terceroService.registrarNuevo(this.terceroBasico, this.usuarioLogueado.token)
+		this.terceroService.registrarNuevo(this.terceroBasico)
 			.subscribe(respuesta => {
 
 				this.guardando = false;
@@ -120,7 +120,7 @@ export class AccesoTercerosEdicionComponent implements OnInit {
 
 	// funcion encargada de actualizar un acceso a terceros
 	guardarModificar() {
-		this.terceroService.actualizar(this.terceroBasico, this.usuarioLogueado.token)
+		this.terceroService.actualizar(this.terceroBasico)
 			.subscribe(respuesta => {
 
 				this.guardando = false;
