@@ -5,6 +5,7 @@ import { AuthenticationService } from '../security/authentication.service';
 import { Observable } from 'rxjs';
 import { ResponseServicio } from '../../interfaces/varios/response-servicio';
 import { UserAuth } from '../../models/security/user';
+import { Cacheable } from 'ngx-cacheable';
 
 @Injectable({
   providedIn: 'root'
@@ -22,6 +23,7 @@ export class MonedaService {
    * Devuelve la cotización de la moneda indicada a la fecha de hoy
    * @param codMoneda Código de la moneda
    */
+  @Cacheable()
   cotizacionHoy(codMoneda: string): Observable<ResponseServicio> {
 
     let usuarioLogueado = <UserAuth>this.authenticationService.usuarioLogueado();

@@ -7,6 +7,7 @@ import { UserAuth } from '../../models/security/user';
 import { Observable } from 'rxjs';
 import { FiltroEspecieCosecha } from '../../interfaces/varios/filtro-especie-cosecha';
 import { ResponseServicio } from '../../interfaces/varios/response-servicio';
+import { Cacheable } from 'ngx-cacheable';
 
 @Injectable({
   providedIn: 'root'
@@ -29,6 +30,7 @@ export class ContratosService {
    * Devuelve un listado de contratos resumido con información de entregas y fijaciones básicas
    * @param filtro
    */
+  @Cacheable()
   listadoContratosResumidos(filtro: FiltroResumenContratoCompraVenta) {
 
     let usuarioLogueado = <UserAuth>this.authenticationService.usuarioLogueado();
@@ -47,6 +49,7 @@ export class ContratosService {
    * Función que retorna un listado de filtros especie cosecha
    * @param cuenta 
    */
+  @Cacheable()
   listadoFiltrosEspecieCosecha(cuenta: string): Observable<FiltroEspecieCosecha> {
 
     let usuarioLogueado = <UserAuth>this.authenticationService.usuarioLogueado();
@@ -67,6 +70,7 @@ export class ContratosService {
    * @param nroSucursal Número de sucursal asociado al boleto
    * @param nroComprobante Número de comprobante asociado al boleto
    */
+  @Cacheable()
   contrato(nroSucursal: number, nroComprobante: number): Observable<ResponseServicio> {
 
     let usuarioLogueado = <UserAuth>this.authenticationService.usuarioLogueado();
@@ -86,6 +90,7 @@ export class ContratosService {
    * Función que devuelve el resumen de un contrato vinculado a un ticket indicado
    * @param tk Identificación completa de un ticket ej: TK 0001 00000232
    */
+  @Cacheable()
   contratoResumenPorTk(tk: string): Observable<ResponseServicio> {
 
     let usuarioLogueado = <UserAuth>this.authenticationService.usuarioLogueado();
@@ -105,6 +110,7 @@ export class ContratosService {
    * Función que devuelve el resumen de un contrato a partir del id del contrato
    * @param id Identificador del contrato
    */
+  @Cacheable()
   contratoResumenPorId(id: number): Observable<ResponseServicio> {
 
     let usuarioLogueado = <UserAuth>this.authenticationService.usuarioLogueado();
@@ -125,6 +131,7 @@ export class ContratosService {
    * @param cuenta Identificador de la cuenta del productor
    * @param cosecha Identificador de la cosecha en formato xxyy, si no se indica, se suma desde 1718 en adelante
    */
+  @Cacheable()
   indicadoresPorEspecie(cuenta: string, cosecha?: string): Observable<ResponseServicio> {
 
     let usuarioLogueado = <UserAuth>this.authenticationService.usuarioLogueado();

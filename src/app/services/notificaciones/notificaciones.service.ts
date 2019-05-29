@@ -6,6 +6,7 @@ import { Observable, Subject } from 'rxjs';
 import { Notificacion } from '../../interfaces/notificaciones/notificacion';
 import { AuthenticationService } from '../security/authentication.service';
 import { UserAuth } from '../../models/security/user';
+import { Cacheable } from 'ngx-cacheable';
 
 @Injectable({
 	providedIn: 'root'
@@ -24,6 +25,7 @@ export class NotificacionesService {
 	private _huboCambiosEstadoMensajes$ = new Subject<boolean>();
 
 	// funcion que retorna un listado de notificaciones
+	@Cacheable()
 	listadoNotificaciones(perfilId: number, numeroPagina: number, cantPorPagina: number): Observable<ResponseServicio> {
 
 		let usuarioLogueado = <UserAuth>this.authenticationService.usuarioLogueado();

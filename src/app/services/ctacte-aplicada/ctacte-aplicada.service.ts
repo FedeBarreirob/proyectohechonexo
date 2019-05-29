@@ -6,6 +6,7 @@ import { Observable } from 'rxjs';
 import { ResponseServicio } from '../../interfaces/varios/response-servicio';
 import { AuthenticationService } from '../security/authentication.service';
 import { UserAuth } from '../../models/security/user';
+import { Cacheable } from 'ngx-cacheable';
 
 @Injectable({
   providedIn: 'root'
@@ -21,6 +22,7 @@ export class CtacteAplicadaService {
   ) { }
 
   // funcion que retorna un observable del listado con la ctacte corriente aplicada asociado a una cuenta dada
+  @Cacheable()
   listadoCtaCte(filtro: FiltroCtacteAplicada) {
 
     let usuarioLogueado = <UserAuth>this.authenticationService.usuarioLogueado();
@@ -41,6 +43,7 @@ export class CtacteAplicadaService {
    * Devuelve el saldo global calculado
    * @param cuenta Identificador del productor
    */
+  @Cacheable()
   saldoGlobal(cuenta: string): Observable<ResponseServicio> {
 
     let usuarioLogueado = <UserAuth>this.authenticationService.usuarioLogueado();

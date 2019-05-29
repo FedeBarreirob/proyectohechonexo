@@ -12,6 +12,7 @@ import { ResponseServicio } from '../../interfaces/varios/response-servicio';
 import { NuevoPassword } from '../../interfaces/security/nuevo-password';
 import { CambioPasswordUsuario } from '../../interfaces/security/cambio-password-usuario';
 import { InfoSesion } from '../../interfaces/security/info-sesion';
+import { share } from 'rxjs/operators';
 
 @Injectable({
 	providedIn: 'root'
@@ -233,7 +234,7 @@ export class AuthenticationService {
 		};
 
 		let urlConParametro = `${this.urlObtenerInformacionDeSesion}/${perfilId}`;
-		return this.http.get<ResponseServicio>(urlConParametro, httpOptions);
+		return this.http.get<ResponseServicio>(urlConParametro, httpOptions).pipe(share());
 	}
 
 	// funcion encargada de notificar que hubo un login completo

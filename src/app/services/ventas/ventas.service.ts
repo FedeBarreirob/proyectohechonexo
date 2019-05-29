@@ -6,6 +6,7 @@ import { FiltroEspecieCosecha } from '../../interfaces/varios/filtro-especie-cos
 import { Observable } from 'rxjs';
 import { AuthenticationService } from '../security/authentication.service';
 import { UserAuth } from '../../models/security/user';
+import { Cacheable } from 'ngx-cacheable';
 
 @Injectable({
   providedIn: 'root'
@@ -21,6 +22,7 @@ export class VentasService {
   ) { }
 
   // funcion que retorna un observable del listado con las ventas asociado a una cuenta dada
+  @Cacheable()
   listadoVentas(filtro: FiltroVentas) {
 
     let usuarioLogueado = <UserAuth>this.authenticationService.usuarioLogueado();
@@ -36,6 +38,7 @@ export class VentasService {
   }
 
   // funcion que retorna un listado de filtros especie cosecha
+  @Cacheable()
   listadoFiltrosEspecieCosecha(cuenta: string): Observable<FiltroEspecieCosecha> {
 
     let usuarioLogueado = <UserAuth>this.authenticationService.usuarioLogueado();
