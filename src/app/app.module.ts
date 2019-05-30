@@ -289,7 +289,8 @@ export function tokenGetter() {
 		ContratoEntregasDetalleComponent,
 		ContratoVentasDetalleComponent,
 		CuentaCorrienteDetalleComponent,
-		FiltroCosechaComponent
+		FiltroCosechaComponent,
+		AccesoTercerosComponent
 	],
 	bootstrap: [AppComponent]
 })

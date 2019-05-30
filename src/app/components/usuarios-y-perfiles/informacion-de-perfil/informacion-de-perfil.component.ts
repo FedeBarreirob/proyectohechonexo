@@ -2,118 +2,116 @@ import { Component, OnInit } from '@angular/core';
 import { PerfilesService } from '../../../services/perfiles/perfiles.service';
 import { AuthenticationService } from '../../../services/security/authentication.service';
 import { PerfilBasico } from '../../../interfaces/perfiles/perfil-basico';
-import { UserAuth } from '../../../models/security/user';
 import { EntidadAlg } from '../../../interfaces/perfiles/entidad-alg';
-import { MatSnackBar } from '@angular/material';
+import { MatSnackBar, MatDialog } from '@angular/material';
 import { PerfilBasicoInfoPersonal } from '../../../interfaces/perfiles/perfil-basico-informacion-personal';
+import { AccesoTercerosComponent } from '../terceros/acceso-terceros/acceso-terceros.component';
+import { Subject } from 'rxjs';
 
 @Component({
-	selector: 'app-informacion-de-perfil',
-	templateUrl: './informacion-de-perfil.component.html',
-	styleUrls: ['./informacion-de-perfil.component.css']
+  selector: 'app-informacion-de-perfil',
+  templateUrl: './informacion-de-perfil.component.html',
+  styleUrls: ['./informacion-de-perfil.component.css']
 })
 export class InformacionDePerfilComponent implements OnInit {
 
-	public cargando: boolean;
+  cargando: boolean;
+  perfilBasico: PerfilBasico;
+  avatar: string;
+  cargando$: Subject<boolean> = new Subject<boolean>();
 
-	public cuenta: string = "";
-	public perfilBasico: PerfilBasico;
-	public detalleCuenta: EntidadAlg;
+  unidadMedidaPesoSeleccionado: string;
 
-	unidadMedidaPesoSeleccionado: string;
+  constructor(
+    private authenticationService: AuthenticationService,
+    private perfilesService: PerfilesService,
+    private snackBar: MatSnackBar,
+    public dialog: MatDialog
+  ) { }
 
-	constructor(
-		private authenticationService: AuthenticationService,
-		private perfilesService: PerfilesService,
-		private snackBar: MatSnackBar
-	) { }
+  ngOnInit() {
+    this.cargando = false;
 
-	ngOnInit() {
-		this.cargando = false;
+    this.authenticationService.perfilActivo$.subscribe(
+      perfil => {
+        this.perfilBasico = perfil;
+        this.seleccionarAvatar();
+        this.unidadMedidaPesoSeleccionado = this.perfilBasico.informacionPersonal.unidadMedidaPeso;
+      });
 
-		this.authenticationService.perfilActivo$.subscribe(
-			perfil => {
-				this.perfilBasico = perfil;
-				this.unidadMedidaPesoSeleccionado = this.perfilBasico.informacionPersonal.unidadMedidaPeso;
-			});
+    this.unidadMedidaPesoSeleccionado = this.perfilBasico.informacionPersonal.unidadMedidaPeso;
+  }
 
-		this.unidadMedidaPesoSeleccionado = this.perfilBasico.informacionPersonal.unidadMedidaPeso;
-	}
+  // funcion encargada de seleccionar la imagen en funcion del perfil activo
+  private seleccionarAvatar() {
+    if (this.perfilBasico && this.perfilBasico.informacionPersonal && this.perfilBasico.informacionPersonal.avatar && this.perfilBasico.informacionPersonal.avatar !== "") {
+      this.avatar = this.perfilBasico.informacionPersonal.avatar;
+    } else {
+      this.avatar = "assets/perfil/sin-foto.jpg";
+    }
+  }
 
-	// funcion que ejecuta el proceso de carga de la informacion
-	cargarDetalle() {
-		this.cargando = true;
+  // abre una notificacion
+  openSnackBar(message: string) {
+    this.snackBar.open(message, null, {
+      duration: 3000,
+    });
+  }
 
-		let usuarioLogueado = <UserAuth>this.authenticationService.usuarioLogueado();
+  // funcion encargada de actualizar la unidad de medida
+  actualizarUnidadDeMedidaPeso(nuevaUnidad: string) {
+    if (this.cargando == false) {
 
-		if (usuarioLogueado != null) {
-			this.perfilesService.datosCuenta(this.cuenta, usuarioLogueado.token).subscribe(
-				datos => {
-					if (datos) {
-						this.detalleCuenta = datos;
-					} else {
-						this.detalleCuenta = null;
-					}
-					this.cargando = false;
-				},
-				error => {
-					console.log(error);
-					this.cargando = false;
-				}
-			);
-		}
-	}
+      this.cargando = true;
+      this.cargando$.next(true);
 
-	// funcion encargada de capturar el valor de la cuenta
-	seleccionarCuenta(cuentaSeleccionada?: string) {
-		this.cuenta = cuentaSeleccionada;
-		this.cargarDetalle();
-	}
+      let perfilBasicoInfoPersonal: PerfilBasicoInfoPersonal = {
+        id: this.perfilBasico.informacionPersonal.id,
+        unidadMedidaPeso: nuevaUnidad
+      };
 
-	// abre una notificacion
-	openSnackBar(message: string, action: string) {
-		this.snackBar.open(message, action, {
-			duration: 3000,
-		});
-	}
+      this.perfilesService.actualizarUnidadMedidaPeso(perfilBasicoInfoPersonal)
+        .subscribe(
+          respuesta => {
+            if (respuesta.exito) {
+              this.unidadMedidaPesoSeleccionado = nuevaUnidad;
 
-	// funcion encargada de actualizar la unidad de medida
-	actualizarUnidadDeMedidaPeso(nuevaUnidad: string) {
-		this.cargando = true;
+              let mensaje = `${respuesta.mensaje} - Deberá salir y volver a entrar al sistema para que los cambios surtan efecto.`;
 
-		let usuarioLogueado = <UserAuth>this.authenticationService.usuarioLogueado();
+              this.openSnackBar(mensaje);
+            } else {
+              this.openSnackBar(respuesta.mensaje);
+            }
 
-		if (usuarioLogueado != null) {
+            this.cargando = false;
+            this.cargando$.next(false);
+          },
+          error => {
+            console.log(error);
+            this.openSnackBar("Error al intentar actualizar la unidad de medida.");
+            this.cargando = false;
+            this.cargando$.next(false);
+          }
+        );
+    }
+  }
 
-			let perfilBasicoInfoPersonal: PerfilBasicoInfoPersonal = {
-				id: this.perfilBasico.informacionPersonal.id,
-				unidadMedidaPeso: nuevaUnidad
-			};
+	/**
+	 * Abre el modal para editar el perfil
+	 */
+  editar() {
+  }
 
-			this.perfilesService.actualizarUnidadMedidaPeso(perfilBasicoInfoPersonal, usuarioLogueado.token)
-				.subscribe(
-					respuesta => {
-						if (respuesta.exito) {
-							this.unidadMedidaPesoSeleccionado = nuevaUnidad;
-
-							let mensaje = `${respuesta.mensaje} - Deberá salir y volver a entrar al sistema para que los cambios surtan efecto.`;
-
-							this.openSnackBar(mensaje, "");
-						} else {
-							this.openSnackBar(respuesta.mensaje, "Error");
-						}
-
-						this.cargando = false;
-					},
-					error => {
-						console.log(error);
-						this.openSnackBar("Error al intentar actualizar la unidad de medida.", "Error");
-						this.cargando = false;
-					}
-				);
-		} else {
-			this.cargando = false;
-		}
-
-	}
+	/**
+	 * Abre modal para la edición de accesos a terceros
+	 */
+  accesoATerceros() {
+    this.dialog.open(AccesoTercerosComponent, {
+      maxWidth: '100vw',
+      maxHeight: '100vh',
+      height: '100%',
+      width: '100%',
+      panelClass: 'modal-sin-padding'
+    });
+  }
 }

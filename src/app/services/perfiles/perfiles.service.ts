@@ -12,6 +12,8 @@ import { EntidadAlgPk } from '../../interfaces/perfiles/entidad-alg-pk';
 import { SolicitudAlta } from '../../interfaces/perfiles/solicitud-alta';
 import { Observable } from 'rxjs';
 import { PerfilBasicoInfoPersonal } from '../../interfaces/perfiles/perfil-basico-informacion-personal';
+import { AuthenticationService } from '../security/authentication.service';
+import { UserAuth } from 'src/app/models/security/user';
 
 
 @Injectable({
@@ -30,7 +32,10 @@ export class PerfilesService {
 	private urlSeguridadPerfilSolicitudAlta = `${environment.hostSeguridad}/perfiles/solicitudAlta`;
 	private urlSeguridadPerfilActualizarUnidadMedidaPeso = `${environment.hostSeguridad}/perfiles/actualizarUnidadMedidaPeso`;
 
-	constructor(private http: HttpClient) { }
+	constructor(
+		private http: HttpClient,
+		private authenticationService: AuthenticationService
+	) { }
 
 	// funcion encargada de registrar un nuevo perfil
 	registrarNuevo(nuevoPerfil: PerfilBasico, token: string) {
@@ -188,12 +193,14 @@ export class PerfilesService {
 	}
 
 	// funcion encargada de actualizar la unidad de medida de peso
-	actualizarUnidadMedidaPeso(perfilInfoPersonal: PerfilBasicoInfoPersonal, token: string) {
+	actualizarUnidadMedidaPeso(perfilInfoPersonal: PerfilBasicoInfoPersonal) {
+
+		let usuarioLogueado = <UserAuth>this.authenticationService.usuarioLogueado();
 
 		const httpOptions = {
 			headers: new HttpHeaders({
 				'Content-Type': 'application/json',
-				'Authorization': `Bearer ${token}`
+				'Authorization': `Bearer ${usuarioLogueado.token}`
 			})
 		};
 

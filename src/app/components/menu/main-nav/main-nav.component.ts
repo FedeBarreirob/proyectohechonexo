@@ -157,18 +157,18 @@ export class MainNavComponent implements OnInit, OnDestroy {
 				imagenActiva: "assets/sidebar/casa-hot.png",
 				permitido: this.authService.esAdmin || this.authService.esRol('SUB_ADMINISTRADOR') || this.authService.esRol('COMERCIAL')
 			},
-			{
+			/*{
 				nombre: "Accesos a terceros",
 				rutaLink: "/acceso-terceros",
 				imagen: "assets/sidebar/casa.png",
 				imagenActiva: "assets/sidebar/casa-hot.png",
 				permitido: this.authService.esAdmin || this.authService.esRol('PRODUCTOR')
-			},
+			},*/
 			{
-				nombre: "Información del perfil",
+				nombre: "Perfil",
 				rutaLink: "/informacion-de-perfil",
-				imagen: "assets/sidebar/casa.png",
-				imagenActiva: "assets/sidebar/casa-hot.png",
+				imagen: "assets/sidebar/perfil.png",
+				imagenActiva: "assets/sidebar/perfil-hot.png",
 				permitido: true
 			},
 			{

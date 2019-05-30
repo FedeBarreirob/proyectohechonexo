@@ -5,5 +5,67 @@
 }
 
 .radio-button {
-    margin: 5px;
+    margin-top: 10px;
+    color: #333333;
+    font-family: Rubik;
+    font-size: 14px;
+}
+
+.contenedor-avatar {
+    margin-top: 20px;
+    margin-bottom: 20px;
+}
+
+.avatar {
+    width: 96px;
+    height: 96px;
+    border: 2px solid rgba(45, 164, 66, 0.1);
+    border-radius: 4px;
+}
+
+.titulo-apartado {
+    color: #999999;
+    font-family: Rubik;
+    font-size: 12px;
+    letter-spacing: 1.2px;
+}
+
+.info-apartado {
+    color: #333333;
+    font-family: Rubik;
+    font-size: 14px;
+}
+
+.contenedor-datos-personales {
+    border-bottom: 1px solid rgba(35, 185, 80, 0.08);
+    padding-bottom: 40px;
+    padding-top: 20px;
+    margin-left: 17px;
+    margin-right: 17px;
+    overflow-x: hidden;
+}
+
+.contenedor-boton-menu {
+    margin-left: 17px;
+    margin-right: 17px;
+    border-bottom: 1px solid rgba(35, 185, 80, 0.08);
+    border-top: 1px solid rgba(35, 185, 80, 0.08);
+    padding-top: 20px;
+    padding-bottom: 20px;
+}
+
+.boton-menu {
+    width: 100%;
+    color: #333333;
+    font-family: Rubik;
+    font-size: 14px;
+    text-align: left;
+}
+
+.contenedor-selector-cantidades {
+    margin-left: 17px;
+    margin-right: 17px;
+    border-top: 1px solid rgba(35, 185, 80, 0.08);
+    padding-top: 20px;
+    padding-bottom: 20px;
 }

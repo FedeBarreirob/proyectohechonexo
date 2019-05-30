@@ -1,184 +1,79 @@
-<div class="container" fxLayout="column" fxLayout.xs="column" fxLayoutWrap fxLayoutGap="0.5%"
-	fxLayoutAlign="space-around stretch">
-	<div fxFlex="100%">
-		<mat-progress-bar *ngIf="cargando" mode="indeterminate"></mat-progress-bar>
+<app-tool-bar-general titulo="Perfil" [disabled]="false" (botonPersonalizadoEjecutado)="editar()"
+	[urlImagenAccionPersonalizada]="'assets/toolbar/editar.png'"></app-tool-bar-general>
 
-		<mat-expansion-panel [expanded]="true">
-			<mat-expansion-panel-header>
-				Filtro
-			</mat-expansion-panel-header>
+<!--Foto de perfil-->
+<div fxLayout="row" fxLayoutAlign="center center" *ngIf="avatar != null" class="contenedor-avatar">
+	<div fxFlex="96px">
+		<img [src]="avatar" class="avatar" />
+	</div>
+</div>
 
-			<div class="container" fxLayout="row" fxLayout.xs="column" fxLayoutGap="0.5%"
-				fxLayoutAlign="space-around stretch">
-				<div fxFlex="100%">
-					<app-combo-cuenta [disabled]="cargando==true" (change)="seleccionarCuenta($event)">
-					</app-combo-cuenta>
-				</div>
-			</div>
+<!--Datos personales-->
+<div *ngIf="perfilBasico != null" class="contenedor-datos-personales">
 
-			<mat-action-row>
-				<button mat-button (click)="cargarDetalle()" [disabled]="cargando==true">Buscar</button>
-			</mat-action-row>
-		</mat-expansion-panel>
+	<div fxLayout="row" fxLayoutAlign="space-between center">
+		<div fxFlex="50%" class="titulo-apartado">
+			EMPRESA
+		</div>
 
+		<div fxFlex="50%" class="titulo-apartado">
+			E-MAIL
+		</div>
 	</div>
 
-	<!-- Informacion del perfil activo (seleccionado) -->
-	<mat-card>
-		<mat-card-title>Información del perfil activo / seleccionado</mat-card-title>
+	<div fxLayout="row" fxLayoutAlign="space-between center">
+		<div fxFlex="50%" class="info-apartado">
+			{{perfilBasico.informacionPersonal.nombre}}
+		</div>
 
-		<mat-card-content *ngIf="perfilBasico">
-			<div class="container" fxLayout="row" fxLayout.xs="column" fxLayoutGap="0.5%"
-				fxLayoutAlign="space-around stretch">
-				<div fxFlex="50%">
-					<strong>Usuario</strong>
-				</div>
-				<div fxFlex="50%">
-					{{perfilBasico.credencial.username}}
-				</div>
-			</div>
+		<div fxFlex="50%" class="info-apartado">
+			{{perfilBasico.informacionPersonal.email}}
+		</div>
+	</div>
 
-			<div class="container" fxLayout="row" fxLayout.xs="column" fxLayoutGap="0.5%"
-				fxLayoutAlign="space-around stretch">
-				<div fxFlex="50%">
-					<strong>Rol</strong>
-				</div>
-				<div fxFlex="50%">
-					{{perfilBasico.rol.denominacion}}
-				</div>
-			</div>
-
-			<div class="container" fxLayout="row" fxLayout.xs="column" fxLayoutGap="0.5%"
-				fxLayoutAlign="space-around stretch">
-				<div fxFlex="50%">
-					<strong>Nombre</strong>
-				</div>
-				<div fxFlex="50%">
-					{{perfilBasico.informacionPersonal.nombre}}
-				</div>
-			</div>
-
-			<div class="container" fxLayout="row" fxLayout.xs="column" fxLayoutGap="0.5%"
-				fxLayoutAlign="space-around stretch">
-				<div fxFlex="50%">
-					<strong>Email</strong>
-				</div>
-				<div fxFlex="50%">
-					{{perfilBasico.informacionPersonal.email}}
-				</div>
-			</div>
-
-			<div class="container" fxLayout="row" fxLayout.xs="column" fxLayoutGap="0.5%"
-				fxLayoutAlign="space-around stretch">
-				<div fxFlex="50%">
-					<strong>Cuentas vinculadas</strong>
-				</div>
-				<div fxFlex="50%">
-					{{(perfilBasico.entidadCodigos || []).toString()}}
-				</div>
-			</div>
-
-			<div class="container" fxLayout="row" fxLayout.xs="column" fxLayoutGap="0.5%"
-				fxLayoutAlign="space-around stretch" style="padding-top:10px;">
-				<div fxFlex="100%">
-					<label id="unidad-medida-label">Unidad de medida</label>
-					<mat-radio-group aria-labelledby="unidad-medida-label" class="radio-group"
-						[(ngModel)]="unidadMedidaPesoSeleccionado" [disabled]="cargando==true">
-
-						<mat-radio-button class="radio-button" [value]="'kg'" (click)="actualizarUnidadDeMedidaPeso('kg')">
-							Kilogramos
-						</mat-radio-button>
-
-						<mat-radio-button class="radio-button" [value]="'tn'" (click)="actualizarUnidadDeMedidaPeso('tn')">
-							Toneladas
-						</mat-radio-button>
-
-						<mat-radio-button class="radio-button" [value]="'qq'" (click)="actualizarUnidadDeMedidaPeso('qq')">
-							Quintales
-						</mat-radio-button>
-
-					</mat-radio-group>
-				</div>
-			</div>
-		</mat-card-content>
-	</mat-card>
-
-	<!-- Informacion de la cuenta seleccionada -->
-	<mat-card>
-		<mat-card-title>Información de la cuenta seleccionada</mat-card-title>
-
-		<mat-card-content *ngIf="detalleCuenta">
-			<div class="container" fxLayout="row" fxLayout.xs="column" fxLayoutGap="0.5%"
-				fxLayoutAlign="space-around stretch">
-				<div fxFlex="50%">
-					<strong>Cuenta</strong>
-				</div>
-				<div fxFlex="50%">
-					{{cuenta}}
-				</div>
-			</div>
-
-			<div class="container" fxLayout="row" fxLayout.xs="column" fxLayoutGap="0.5%"
-				fxLayoutAlign="space-around stretch">
-				<div fxFlex="50%">
-					<strong>Productor</strong>
-				</div>
-				<div fxFlex="50%">
-					{{detalleCuenta.nombre}}
-				</div>
-			</div>
-
-			<div class="container" fxLayout="row" fxLayout.xs="column" fxLayoutGap="0.5%"
-				fxLayoutAlign="space-around stretch">
-				<div fxFlex="50%">
-					<strong>Domicilio</strong>
-				</div>
-				<div fxFlex="50%">
-					{{detalleCuenta.domicilioCalle}} {{detalleCuenta.domicilioNro}} {{detalleCuenta.domicilioPiso}}
-					{{detalleCuenta.domicilioDepto}} {{detalleCuenta.localidad.localidad}}
-					{{detalleCuenta.localidad.departamento.provincia.nombre}}
-				</div>
-			</div>
-
-			<div class="container" fxLayout="row" fxLayout.xs="column" fxLayoutGap="0.5%"
-				fxLayoutAlign="space-around stretch">
-				<div fxFlex="50%">
-					<strong>Teléfono</strong>
-				</div>
-				<div fxFlex="50%">
-					{{detalleCuenta.telefonos}}
-				</div>
-			</div>
-
-			<div class="container" fxLayout="row" fxLayout.xs="column" fxLayoutGap="0.5%"
-				fxLayoutAlign="space-around stretch">
-				<div fxFlex="50%">
-					<strong>Email</strong>
-				</div>
-				<div fxFlex="50%">
-					{{detalleCuenta.email}}
-				</div>
-			</div>
-
-			<div class="container" fxLayout="row" fxLayout.xs="column" fxLayoutGap="0.5%"
-				fxLayoutAlign="space-around stretch">
-				<div fxFlex="50%">
-					<strong>CUIT</strong>
-				</div>
-				<div fxFlex="50%">
-					{{detalleCuenta.cuit}}
-				</div>
-			</div>
-
-			<div class="container" fxLayout="row" fxLayout.xs="column" fxLayoutGap="0.5%"
-				fxLayoutAlign="space-around stretch">
-				<div fxFlex="50%">
-					<strong>CBU</strong>
-				</div>
-				<div fxFlex="50%">
-					{{detalleCuenta.cbu}}
-				</div>
-			</div>
-		</mat-card-content>
-	</mat-card>
 </div>
+
+<!--Menu-->
+<div fxLayout="row" fxLayoutAlign="space-between center" class="contenedor-boton-menu">
+	<div fxFlex="100%" class="titulo-apartado">
+		<button mat-button class="boton-menu" (click)="accesoATerceros()">Acceso a terceros</button>
+	</div>
+</div>
+
+<div fxLayout="row" fxLayoutAlign="space-between center" class="contenedor-boton-menu">
+	<div fxFlex="100%" class="titulo-apartado">
+		<button mat-button class="boton-menu">Cambiar contraseña</button>
+	</div>
+</div>
+
+<!--Selector de cantidades-->
+<div class="contenedor-selector-cantidades">
+	<div fxLayout="row" fxLayoutAlign="space-between center">
+		<div fxFlex="100%" class="titulo-apartado">
+			MOSTRAR CANTIDADES EN:
+		</div>
+	</div>
+
+	<div fxLayout="row" fxLayoutAlign="space-between center">
+		<div fxFlex="100%">
+			<mat-radio-group aria-labelledby="unidad-medida-label" class="radio-group"
+				[(ngModel)]="unidadMedidaPesoSeleccionado" [disabled]="cargando==true">
+
+				<mat-radio-button class="radio-button" [value]="'kg'" (click)="actualizarUnidadDeMedidaPeso('kg')">
+					Kilogramos
+				</mat-radio-button>
+
+				<mat-radio-button class="radio-button" [value]="'tn'" (click)="actualizarUnidadDeMedidaPeso('tn')">
+					Toneladas
+				</mat-radio-button>
+
+				<mat-radio-button class="radio-button" [value]="'qq'" (click)="actualizarUnidadDeMedidaPeso('qq')">
+					Quintales
+				</mat-radio-button>
+
+			</mat-radio-group>
+		</div>
+	</div>
+</div>
+
+<app-loading [cargando$]="cargando$"></app-loading>

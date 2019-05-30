@@ -1,6 +1,6 @@
 <app-tool-bar-para-modal titulo="Acceso a colaborador" [urlImagenDerechoIzquierdo]="'assets/toolbar/more.png'"
-   (botonPersonalizadoDerechoEjecutado)="nuevoAccesoATercero()">
+   (botonPersonalizadoDerechoEjecutado)="nuevoAccesoATercero()" (botonSalirEjecutado)="salir()">
 </app-tool-bar-para-modal>
 
 <app-terceros-lista-movil (clickAgregar)="nuevoAccesoATercero()" [observerListado$]="observerListadoMovil$"
-  (clickHabilitacion)="habilitacion($event)" (clickVerEditar)="verEditar($event)"></app-terceros-lista-movil>
+   (clickHabilitacion)="habilitacion($event)" (clickVerEditar)="verEditar($event)"></app-terceros-lista-movil>

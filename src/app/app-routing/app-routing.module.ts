@@ -12,7 +12,6 @@ import { VentasComponent } from '../components/listados/ventas/ventas/ventas.com
 import { MercPendEntregarComponent } from '../components/listados/merc-pend-entregar/merc-pend-entregar/merc-pend-entregar.component'
 import { ComprobantesPendFacturarComponent } from '../components/listados/comprobantes-pend-facturar/comprobantes-pend-facturar/comprobantes-pend-facturar.component'
 import { PerfilesListadoComponent } from '../components/usuarios-y-perfiles/perfiles/perfiles-listado/perfiles-listado.component'
-import { AccesoTercerosComponent } from '../components/usuarios-y-perfiles/terceros/acceso-terceros/acceso-terceros.component';
 import { OtrosMovimientosComponent } from '../components/listados/otros-movimientos/otros-movimientos/otros-movimientos.component';
 import { InformacionDePerfilComponent } from '../components/usuarios-y-perfiles/informacion-de-perfil/informacion-de-perfil.component';
 import { ArchivoDeComprobantesComponent } from '../components/listados/archivo-de-comprobantes/archivo-de-comprobantes.component';
@@ -87,14 +86,6 @@ const routes: Routes = [
 	{
 		path: 'administrador-de-cuentas',
 		component: PerfilesListadoComponent,
-		canActivate: [AuthGuardGuard],
-		data: {
-			rolAdmin: false
-		}
-	},
-	{
-		path: 'acceso-terceros',
-		component: AccesoTercerosComponent,
 		canActivate: [AuthGuardGuard],
 		data: {
 			rolAdmin: false
