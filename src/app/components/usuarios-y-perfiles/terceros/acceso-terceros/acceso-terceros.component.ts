@@ -59,7 +59,13 @@ export class AccesoTercerosComponent implements OnInit {
 
 	// despliega el formulario para crear un nuevo acceso a tercero
 	nuevoAccesoATercero() {
-		let dialorRef = this.dialog.open(AccesoTercerosEdicionComponent);
+		let dialorRef = this.dialog.open(AccesoTercerosEdicionComponent, {
+			maxWidth: '100vw',
+			maxHeight: '100vh',
+			height: '100%',
+			width: '100%',
+			panelClass: 'modal-sin-padding'
+		});
 
 		dialorRef.afterClosed().subscribe(
 			() => this.observerListadoMovil$.next()
@@ -90,7 +96,13 @@ export class AccesoTercerosComponent implements OnInit {
 
 	// funcion que muestra el dialogo de edicion 
 	verEditar(tercero: TerceroBasico) {
-		const dialogRef = this.dialog.open(AccesoTercerosEdicionComponent, { data: tercero });
+		const dialogRef = this.dialog.open(AccesoTercerosEdicionComponent, {
+			data: tercero, maxWidth: '100vw',
+			maxHeight: '100vh',
+			height: '100%',
+			width: '100%',
+			panelClass: 'modal-sin-padding'
+		});
 
 		dialogRef.afterClosed().subscribe(
 			() => this.observerListadoMovil$.next()
@@ -122,27 +134,7 @@ export class AccesoTercerosComponent implements OnInit {
 		});
 	}
 
-	// funcion encargada de eliminar un tercero dado
-	eliminar(tercero: TerceroBasico) {
 
-		let mensaje = `¿Está seguro de borrar el tercero ${tercero.credencial.username}?`;
-
-		if (confirm(mensaje)) {
-
-			this.terceroService.eliminarTercero(
-				tercero.id
-			).subscribe(
-				respuesta => {
-					if (respuesta.exito == true) {
-						this.cargarListado(this.pageEvent);
-					}
-
-					this.openSnackBar(respuesta.mensaje, "Eliminación de Tercero");
-				},
-				error => console.log(error)
-			);
-		}
-	}
 
 	// funcion que muestra el dialogo de cambio de password
 	cambiarPassword(tercero: TerceroBasico) {

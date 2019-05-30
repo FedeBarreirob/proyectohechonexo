@@ -8,7 +8,7 @@
   [infiniteScrollDistance]="2" [infiniteScrollThrottle]="50" (scrolled)="onScroll()" [scrollWindow]="false">
 
   <!--Registros-->
-  <div fxLayout="row" fxLayoutAlign="space-between center" fxLayoutGap="10px"
+  <div fxLayout="row" fxLayoutAlign="space-between center" fxLayoutGap="10px" class="contenedor-item"
     *ngFor="let tercero of (listadoTerceros ? listadoTerceros : [])">
 
     <div fxFlex class="nombre">
@@ -37,7 +37,8 @@
 </div>
 
 <!--Leyenda si es vacio-->
-<div *ngIf="(listadoTerceros == null || listadoTerceros.length == 0) && cargando == false" class="contenedor-leyenda-vacio">
+<div *ngIf="(listadoTerceros == null || listadoTerceros.length == 0) && cargando == false"
+  class="contenedor-leyenda-vacio">
   <div fxLayout="column" fxLayoutAlign="center center">
     <div fxFlex="100%" class="leyenda-vacio">
       Un “colaborador” es una persona a la que podés darle acceso parcial a tu cuenta

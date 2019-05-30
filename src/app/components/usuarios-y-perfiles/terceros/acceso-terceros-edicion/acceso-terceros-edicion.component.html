@@ -1,79 +1,90 @@
-<mat-progress-bar *ngIf="guardando" mode="indeterminate"></mat-progress-bar>
-<h2 mat-dialog-title>{{titulo}}</h2>
+<app-tool-bar-para-modal titulo="Acceso a colaborador" (botonSalirEjecutado)="salir()" *ngIf="esRegistroNuevo">
+</app-tool-bar-para-modal>
 
-<mat-dialog-content class="mat-typography">
+<app-tool-bar-para-modal *ngIf="!esRegistroNuevo" titulo="Acceso a colaborador"
+	[urlImagenDerechoIzquierdo]="'assets/toolbar/delete.png'" (botonPersonalizadoDerechoEjecutado)="borrar()"
+	(botonSalirEjecutado)="salir()">
+</app-tool-bar-para-modal>
 
-	<!-- Datos de acceso al sistema -->
-	<mat-card>
-		<mat-card-header>
-			<mat-card-title>Datos de acceso al sistema</mat-card-title>
-		</mat-card-header>
+<div fxLayout="row" fxLayoutAlign="start center">
+	<div fxFlex="100%" class="titulo">
+		CREA UNA CUENTA A UN COLABORADOR
+	</div>
+</div>
 
-		<mat-card-content>
-			<form [formGroup]="formDatosAccesoGroup">
-				<div fxLayout="row" fxLayoutAlign="space-between center">
+<form [formGroup]="formGroup">
 
-					<div fxFlex="30%">
-						<mat-form-field class="full-width-input">
-							<input [readonly]="esRegistroNuevo == false" matInput placeholder="Usuario"
-								formControlName="username">
-						</mat-form-field>
-					</div>
+	<div fxLayout="row" fxLayoutAlign="start center">
+		<div fxFlex="100%" class="etiqueta-input">
+			USUARIO
+		</div>
+	</div>
 
-					<div fxFlex="30%" *ngIf="esRegistroNuevo">
-						<mat-form-field class="full-width-input">
-							<input matInput type="password" placeholder="Contraseña" formControlName="password">
-						</mat-form-field>
-					</div>
+	<div fxLayout="row" fxLayoutAlign="start center" class="contenedor-control">
+		<div fxFlex="100%">
+			<input class="input" [readonly]="esRegistroNuevo == false" matInput formControlName="username">
+		</div>
+	</div>
 
-					<div fxFlex="30%" *ngIf="esRegistroNuevo">
-						<mat-form-field class="full-width-input">
-							<input matInput type="password" placeholder="Confirmación contraseña"
-								formControlName="passwordConfirmacion">
-						</mat-form-field>
-					</div>
-				</div>
+	<div fxLayout="row" fxLayoutAlign="start center">
+		<div fxFlex="100%" class="etiqueta-input">
+			ROL
+		</div>
+	</div>
 
-				<div fxLayout="row" fxLayoutAlign="space-between center">
-					<div fxFlex="100%">
-						<mat-form-field>
-							<mat-select placeholder="Subtipo" formControlName="subtipo">
-								<mat-option [value]="null">No definido</mat-option>
-								<mat-option *ngFor="let subtipo of subtiposTerceros" [value]="subtipo">
-									{{subtipo}}
-								</mat-option>
-							</mat-select>
-						</mat-form-field>
-					</div>
-				</div>
-			</form>
-		</mat-card-content>
+	<div fxLayout="row" fxLayoutAlign="start center" class="contenedor-control">
+		<div fxFlex="100%">
+			<mat-select formControlName="subtipo" class="select">
+				<mat-option [value]="null">No definido</mat-option>
+				<mat-option *ngFor="let subtipo of subtiposTerceros" [value]="subtipo">
+					{{subtipo}}
+				</mat-option>
+			</mat-select>
+		</div>
+	</div>
 
-	</mat-card>
+	<div fxLayout="row" fxLayoutAlign="start center">
+		<div fxFlex="100%" class="etiqueta-input">
+			DESCRIPCION
+		</div>
+	</div>
 
-	<!-- Datos adicionales -->
-	<mat-card>
-		<mat-card-header>
-			<mat-card-title>Datos adicionales</mat-card-title>
-		</mat-card-header>
+	<div fxLayout="row" fxLayoutAlign="start center" class="contenedor-control">
+		<div fxFlex="100%">
+			<input class="input" matInput formControlName="descripcion">
+		</div>
+	</div>
 
-		<mat-card-content>
-			<form [formGroup]="formDatosTerceroGroup">
-				<div fxLayout="row" fxLayoutAlign="space-between center">
-					<div fxFlex="100%">
-						<mat-form-field class="full-width-input">
-							<input matInput placeholder="Descripción" formControlName="descripcion">
-						</mat-form-field>
-					</div>
-				</div>
+	<div fxLayout="row" fxLayoutAlign="start center">
+		<div fxFlex="100%" class="etiqueta-input">
+			NUEVA CONTRASEÑA PARA EL COLABORADOR
+		</div>
+	</div>
 
-			</form>
-		</mat-card-content>
-	</mat-card>
+	<div fxLayout="row" fxLayoutAlign="start center" class="contenedor-control">
+		<div fxFlex="100%">
+			<input class="input" matInput type="password" formControlName="password">
+		</div>
+	</div>
 
-</mat-dialog-content>
+	<div fxLayout="row" fxLayoutAlign="start center">
+		<div fxFlex="100%" class="etiqueta-input">
+			CONFIRMA LA NUEVA CONTRASEÑA
+		</div>
+	</div>
 
-<mat-dialog-actions align="end">
-	<button [disabled]="guardando" mat-raised-button color="primary" (click)="guardar()">Guardar</button>
-	<button [disabled]="guardando" mat-dialog-close mat-raised-button>Cancelar</button>
-</mat-dialog-actions>
+	<div fxLayout="row" fxLayoutAlign="start center" class="contenedor-control">
+		<div fxFlex="100%">
+			<input class="input" matInput type="password" formControlName="passwordConfirmacion">
+		</div>
+	</div>
+
+</form>
+
+<div fxLayout="row" fxLayoutAlign="center center">
+	<div fxFlex="100%" class="contenedor-boton">
+		<button class="boton-guardar" [disabled]="guardando" mat-raised-button (click)="guardar()">Guardar</button>
+	</div>
+</div>
+
+<app-loading [cargando$]="guardando$"></app-loading>
