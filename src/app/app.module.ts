@@ -124,6 +124,7 @@ import { CuentaCorrienteDetalleComponent } from './components/listados/cuenta-co
 import { FiltroCosechaComponent } from './components/filtros/filtro-cosecha/filtro-cosecha.component';
 import { LoadingComponent } from './components/common/loading/loading.component';
 import { TercerosListaMovilComponent } from './components/usuarios-y-perfiles/terceros/terceros-lista-movil/terceros-lista-movil.component';
+import { InfoPerfilCambioPasswordComponent } from './components/usuarios-y-perfiles/info-perfil-cambio-password/info-perfil-cambio-password.component';
 
 registerLocaleData(localeEsAr, 'es-AR');
 
@@ -217,7 +218,8 @@ export function tokenGetter() {
 		CuentaCorrienteDetalleComponent,
 		FiltroCosechaComponent,
 		LoadingComponent,
-		TercerosListaMovilComponent
+		TercerosListaMovilComponent,
+		InfoPerfilCambioPasswordComponent
 	],
 	imports: [
 		HttpClientModule,
@@ -290,7 +292,8 @@ export function tokenGetter() {
 		ContratoVentasDetalleComponent,
 		CuentaCorrienteDetalleComponent,
 		FiltroCosechaComponent,
-		AccesoTercerosComponent
+		AccesoTercerosComponent,
+		InfoPerfilCambioPasswordComponent
 	],
 	bootstrap: [AppComponent]
 })

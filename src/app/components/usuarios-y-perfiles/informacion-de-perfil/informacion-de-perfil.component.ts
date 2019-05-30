@@ -2,11 +2,11 @@ import { Component, OnInit } from '@angular/core';
 import { PerfilesService } from '../../../services/perfiles/perfiles.service';
 import { AuthenticationService } from '../../../services/security/authentication.service';
 import { PerfilBasico } from '../../../interfaces/perfiles/perfil-basico';
-import { EntidadAlg } from '../../../interfaces/perfiles/entidad-alg';
 import { MatSnackBar, MatDialog } from '@angular/material';
 import { PerfilBasicoInfoPersonal } from '../../../interfaces/perfiles/perfil-basico-informacion-personal';
 import { AccesoTercerosComponent } from '../terceros/acceso-terceros/acceso-terceros.component';
 import { Subject } from 'rxjs';
+import { InfoPerfilCambioPasswordComponent } from '../info-perfil-cambio-password/info-perfil-cambio-password.component';
 
 @Component({
   selector: 'app-informacion-de-perfil',
@@ -38,8 +38,6 @@ export class InformacionDePerfilComponent implements OnInit {
         this.seleccionarAvatar();
         this.unidadMedidaPesoSeleccionado = this.perfilBasico.informacionPersonal.unidadMedidaPeso;
       });
-
-    this.unidadMedidaPesoSeleccionado = this.perfilBasico.informacionPersonal.unidadMedidaPeso;
   }
 
   // funcion encargada de seleccionar la imagen en funcion del perfil activo
@@ -107,6 +105,19 @@ export class InformacionDePerfilComponent implements OnInit {
 	 */
   accesoATerceros() {
     this.dialog.open(AccesoTercerosComponent, {
+      maxWidth: '100vw',
+      maxHeight: '100vh',
+      height: '100%',
+      width: '100%',
+      panelClass: 'modal-sin-padding'
+    });
+  }
+
+  /**
+   * Función que abre un modal 
+   */
+  cambiarPassword() {
+    this.dialog.open(InfoPerfilCambioPasswordComponent, {
       maxWidth: '100vw',
       maxHeight: '100vh',
       height: '100%',

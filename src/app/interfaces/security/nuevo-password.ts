@@ -1,4 +1,5 @@
 export interface NuevoPassword {
     password: string,
-    passwordConfirmacion: string
+    passwordConfirmacion: string,
+    passwordActual?: string
 }

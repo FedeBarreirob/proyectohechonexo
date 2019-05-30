@@ -13,6 +13,7 @@ import { NuevoPassword } from '../../interfaces/security/nuevo-password';
 import { CambioPasswordUsuario } from '../../interfaces/security/cambio-password-usuario';
 import { InfoSesion } from '../../interfaces/security/info-sesion';
 import { share } from 'rxjs/operators';
+import { UserAuth } from 'src/app/models/security/user';
 
 @Injectable({
 	providedIn: 'root'
@@ -25,6 +26,7 @@ export class AuthenticationService {
 	private urlSolicitudRestablecimientoPasswordPorNombreUsuario = `${environment.hostSeguridad}/autentificacion/restablecerPasswordPorNombreUsuario`;
 	private urlGuardarInformacionDeSesion = `${environment.hostSeguridad}/infoSesion`;
 	private urlObtenerInformacionDeSesion = `${environment.hostSeguridad}/infoSesion`;
+	private urlCambiarPassword = `${environment.hostSeguridad}/autentificacion/restablecerPasswordPorUsuario`;
 
 	_perfilActivo$ = new Subject<PerfilBasico>();
 
@@ -250,5 +252,28 @@ export class AuthenticationService {
 	// devuelve el observable indicando si hubo un login completo
 	get huboLoginCompleto$(): Observable<boolean> {
 		return this._loginCompleto$.asObservable();
+	}
+
+	/**
+	 * Función que cambia el password del usuario logueado validando password actual
+	 * @param nuevoPassword Nuevo pasword
+	 */
+	cambiarPassword(nuevoPassword: NuevoPassword): Observable<ResponseServicio> {
+
+		let usuarioLogueado = <UserAuth>this.usuarioLogueado();
+
+		const httpOptions = {
+			headers: new HttpHeaders({
+				'Content-Type': 'application/json',
+				'Authorization': `Bearer ${usuarioLogueado.token}`
+			})
+		};
+
+		let nuevoPasswordJson = JSON.stringify(nuevoPassword);
+
+		return this.http.post<ResponseServicio>(
+			this.urlCambiarPassword,
+			nuevoPasswordJson,
+			httpOptions);
 	}
 }
