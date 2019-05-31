@@ -9,7 +9,7 @@
 
   <button *ngIf="filtro != null" mat-menu-item (click)="seleccionarFiltroCumplido(false)"
     [ngClass]="{'activo': filtro.cumplido === false, 'inactivo': filtro.cumplido !== false }">
-    No cumplidos
+    Pendientes
   </button>
 
   <button *ngIf="filtro != null" mat-menu-item (click)="seleccionarFiltroCumplido(true)"
