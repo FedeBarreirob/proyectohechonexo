@@ -1,4 +1,5 @@
-<button mat-button [matMenuTriggerFor]="menu" [disabled]="cargando" class="boton-cumplido-filtro">{{ leyendaFiltroCumplido() }} <mat-icon [ngStyle]="{'color': '#2DA442'}">
+<button mat-button [matMenuTriggerFor]="menu" [disabled]="cargando"
+  class="boton-cumplido-filtro">{{ leyendaFiltroCumplido() }} <mat-icon [ngStyle]="{'color': '#2DA442'}">
     keyboard_arrow_down</mat-icon></button>
 <mat-menu #menu="matMenu">
   <button *ngIf="filtro != null" mat-menu-item (click)="seleccionarFiltroCumplido(null)"
@@ -21,6 +22,12 @@
   [infiniteScrollDistance]="2" [infiniteScrollThrottle]="50" (scrolled)="onScroll()" [scrollWindow]="false">
 
   <app-contratos-resumen-item-movil *ngFor="let movimiento of (listadoContratos ? listadoContratos : [])"
-    (click)="verDetalle(movimiento)" [resumen]="movimiento" [unidadMedida]="unidadMedida"></app-contratos-resumen-item-movil>
+    (click)="verDetalle(movimiento)" [resumen]="movimiento" [unidadMedida]="unidadMedida">
+  </app-contratos-resumen-item-movil>
+
+  <!--Spinner-->
+  <div fxLayout="row" fxLayoutAlign="center center" *ngIf="cargando == true" style="margin-top: 10px">
+    <mat-spinner diameter="24"></mat-spinner>
+  </div>
 
 </div>
