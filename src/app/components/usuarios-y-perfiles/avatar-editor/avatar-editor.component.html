@@ -1,0 +1,8 @@
+<div class="contenedor-imagen">
+  <img [src]="avatar ? avatar : null || 'assets/perfil/sin-foto.jpg'" alt="Avatar" class="imagen" />
+
+  <button mat-icon-button (click)="fileInput.click()" class="boton-upload">
+    <img src="assets/varios/agregar.png" />
+    <input #fileInput type='file' (change)="onSelectAvatar($event)" style="display:none;" />
+  </button>
+</div>

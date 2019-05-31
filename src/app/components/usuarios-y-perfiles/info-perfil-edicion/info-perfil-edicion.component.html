@@ -1,0 +1,44 @@
+<app-tool-bar-para-modal titulo="Perfil" (botonSalirEjecutado)="salir()"></app-tool-bar-para-modal>
+
+<!--Foto de perfil-->
+<div fxLayout="row" fxLayoutAlign="center center" class="contenedor-avatar">
+    <div fxFlex="96px">
+        <app-avatar-editor [(avatar)]="avatar"></app-avatar-editor>
+    </div>
+</div>
+
+<!--Datos personales-->
+<form [formGroup]="formGroup">
+
+    <div fxLayout="row" fxLayoutAlign="start center">
+        <div fxFlex="100%" class="etiqueta-input">
+            EMPRESA
+        </div>
+    </div>
+
+    <div fxLayout="row" fxLayoutAlign="start center" class="contenedor-control">
+        <div fxFlex="100%">
+            <input class="input" matInput formControlName="nombre">
+        </div>
+    </div>
+
+    <div fxLayout="row" fxLayoutAlign="start center">
+        <div fxFlex="100%" class="etiqueta-input">
+            E-MAIL
+        </div>
+    </div>
+
+    <div fxLayout="row" fxLayoutAlign="start center" class="contenedor-control">
+        <div fxFlex="50%">
+            <input class="input" matInput formControlName="email">
+        </div>
+    </div>
+</form>
+
+<div fxLayout="row" fxLayoutAlign="center center">
+    <div fxFlex="100%" class="contenedor-boton">
+        <button class="boton-guardar" [disabled]="guardando" mat-raised-button (click)="guardar()">Guardar</button>
+    </div>
+</div>
+
+<app-loading [cargando$]="guardando$"></app-loading>

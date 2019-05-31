@@ -7,6 +7,7 @@ import { PerfilBasicoInfoPersonal } from '../../../interfaces/perfiles/perfil-ba
 import { AccesoTercerosComponent } from '../terceros/acceso-terceros/acceso-terceros.component';
 import { Subject } from 'rxjs';
 import { InfoPerfilCambioPasswordComponent } from '../info-perfil-cambio-password/info-perfil-cambio-password.component';
+import { InfoPerfilEdicionComponent } from '../info-perfil-edicion/info-perfil-edicion.component';
 
 @Component({
   selector: 'app-informacion-de-perfil',
@@ -74,15 +75,25 @@ export class InformacionDePerfilComponent implements OnInit {
             if (respuesta.exito) {
               this.unidadMedidaPesoSeleccionado = nuevaUnidad;
 
-              let mensaje = `${respuesta.mensaje} - Deberá salir y volver a entrar al sistema para que los cambios surtan efecto.`;
+              let mensaje = `${respuesta.mensaje}`;
+
+              this.perfilesService.reCargarPerfilLogueado().subscribe(
+                () => {
+                  this.cargando = false;
+                  this.cargando$.next(false);
+                },
+                () => {
+                  this.cargando = false;
+                  this.cargando$.next(false);
+                }
+              );
 
               this.openSnackBar(mensaje);
             } else {
               this.openSnackBar(respuesta.mensaje);
+              this.cargando = false;
+              this.cargando$.next(false);
             }
-
-            this.cargando = false;
-            this.cargando$.next(false);
           },
           error => {
             console.log(error);
@@ -98,6 +109,31 @@ export class InformacionDePerfilComponent implements OnInit {
 	 * Abre el modal para editar el perfil
 	 */
   editar() {
+    let dialogEditarRef = this.dialog.open(InfoPerfilEdicionComponent, {
+      maxWidth: '100vw',
+      maxHeight: '100vh',
+      height: '100%',
+      width: '100%',
+      panelClass: 'modal-sin-padding',
+      data: this.perfilBasico
+    });
+
+    dialogEditarRef.afterClosed().subscribe(
+      () => {
+        this.cargando = true;
+        this.cargando$.next(true);
+        this.perfilesService.reCargarPerfilLogueado().subscribe(
+          () => {
+            this.cargando = false;
+            this.cargando$.next(false);
+          },
+          () => {
+            this.cargando = false;
+            this.cargando$.next(false);
+          }
+        );
+      }
+    );
   }
 
 	/**

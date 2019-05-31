@@ -125,6 +125,8 @@ import { FiltroCosechaComponent } from './components/filtros/filtro-cosecha/filt
 import { LoadingComponent } from './components/common/loading/loading.component';
 import { TercerosListaMovilComponent } from './components/usuarios-y-perfiles/terceros/terceros-lista-movil/terceros-lista-movil.component';
 import { InfoPerfilCambioPasswordComponent } from './components/usuarios-y-perfiles/info-perfil-cambio-password/info-perfil-cambio-password.component';
+import { InfoPerfilEdicionComponent } from './components/usuarios-y-perfiles/info-perfil-edicion/info-perfil-edicion.component';
+import { AvatarEditorComponent } from './components/usuarios-y-perfiles/avatar-editor/avatar-editor.component';
 
 registerLocaleData(localeEsAr, 'es-AR');
 
@@ -219,7 +221,9 @@ export function tokenGetter() {
 		FiltroCosechaComponent,
 		LoadingComponent,
 		TercerosListaMovilComponent,
-		InfoPerfilCambioPasswordComponent
+		InfoPerfilCambioPasswordComponent,
+		InfoPerfilEdicionComponent,
+		AvatarEditorComponent
 	],
 	imports: [
 		HttpClientModule,
@@ -293,7 +297,8 @@ export function tokenGetter() {
 		CuentaCorrienteDetalleComponent,
 		FiltroCosechaComponent,
 		AccesoTercerosComponent,
-		InfoPerfilCambioPasswordComponent
+		InfoPerfilCambioPasswordComponent,
+		InfoPerfilEdicionComponent
 	],
 	bootstrap: [AppComponent]
 })

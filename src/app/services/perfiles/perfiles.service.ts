@@ -13,7 +13,7 @@ import { SolicitudAlta } from '../../interfaces/perfiles/solicitud-alta';
 import { Observable } from 'rxjs';
 import { PerfilBasicoInfoPersonal } from '../../interfaces/perfiles/perfil-basico-informacion-personal';
 import { AuthenticationService } from '../security/authentication.service';
-import { UserAuth } from 'src/app/models/security/user';
+import { UserAuth } from '../../models/security/user';
 
 
 @Injectable({
@@ -31,6 +31,7 @@ export class PerfilesService {
 	private urlSeguridadPerfilEntidadPorId = `${environment.hostSeguridad}/perfiles/entidadPorId`;
 	private urlSeguridadPerfilSolicitudAlta = `${environment.hostSeguridad}/perfiles/solicitudAlta`;
 	private urlSeguridadPerfilActualizarUnidadMedidaPeso = `${environment.hostSeguridad}/perfiles/actualizarUnidadMedidaPeso`;
+	private urlSeguridadPerfilModificarDatosPersonales = `${environment.hostSeguridad}/perfiles/modificarDatosPersonales`;
 
 	constructor(
 		private http: HttpClient,
@@ -208,5 +209,52 @@ export class PerfilesService {
 
 		return this.http.put<ResponseServicio>(
 			this.urlSeguridadPerfilActualizarUnidadMedidaPeso, perfilInfoPersonalJson, httpOptions);
+	}
+
+	/**
+	 * Función encargada de actualizar los datos personales de un perfil
+	 * @param perfil Perfil a actualizar
+	 */
+	actualizarDatosPersonales(perfil: PerfilBasico) {
+
+		let usuarioLogueado = <UserAuth>this.authenticationService.usuarioLogueado();
+
+		const httpOptions = {
+			headers: new HttpHeaders({
+				'Content-Type': 'application/json',
+				'Authorization': `Bearer ${usuarioLogueado.token}`
+			})
+		};
+
+		let perfilJson = JSON.stringify(perfil);
+
+		return this.http.put<ResponseServicio>(
+			this.urlSeguridadPerfilModificarDatosPersonales, perfilJson, httpOptions);
+	}
+
+	/**
+	 * Función encargada de recargar el perfil logueado
+	 */
+	reCargarPerfilLogueado(): Observable<boolean> {
+
+		let usuarioLogueado = <UserAuth>this.authenticationService.usuarioLogueado();
+
+		return new Observable<boolean>(observer => {
+			this.perfilLogueado(usuarioLogueado.token).subscribe(respuesta => {
+
+				if (respuesta != null && respuesta.exito == true) {
+					localStorage.setItem('currentUserPerfil', JSON.stringify(respuesta.datos));
+					this.authenticationService.setPerfilActivo(respuesta.datos);
+
+					observer.next(true);
+				} else {
+					console.log(respuesta);
+					observer.next(false);
+				}
+			}, error => {
+				observer.next(false);
+			});
+
+		});
 	}
 }
