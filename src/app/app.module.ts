@@ -127,6 +127,10 @@ import { TercerosListaMovilComponent } from './components/usuarios-y-perfiles/te
 import { InfoPerfilCambioPasswordComponent } from './components/usuarios-y-perfiles/info-perfil-cambio-password/info-perfil-cambio-password.component';
 import { InfoPerfilEdicionComponent } from './components/usuarios-y-perfiles/info-perfil-edicion/info-perfil-edicion.component';
 import { AvatarEditorComponent } from './components/usuarios-y-perfiles/avatar-editor/avatar-editor.component';
+import { ContratoIndicadorVentaPesificadasComponent } from './components/tablero/indicadoresContrato/contrato-indicador-venta-pesificadas/contrato-indicador-venta-pesificadas.component';
+import { ContratoIndicadorSwiperVentasPesificadasComponent } from './components/tablero/indicadoresContrato/contrato-indicador-swiper-ventas-pesificadas/contrato-indicador-swiper-ventas-pesificadas.component';
+import { ContratoIndicadorVentaLiquidadasComponent } from './components/tablero/indicadoresContrato/contrato-indicador-venta-liquidadas/contrato-indicador-venta-liquidadas.component';
+import { ContratoIndicadorSwiperVentasLiquidadasComponent } from './components/tablero/indicadoresContrato/contrato-indicador-swiper-ventas-liquidadas/contrato-indicador-swiper-ventas-liquidadas.component';
 
 registerLocaleData(localeEsAr, 'es-AR');
 
@@ -223,7 +227,11 @@ export function tokenGetter() {
 		TercerosListaMovilComponent,
 		InfoPerfilCambioPasswordComponent,
 		InfoPerfilEdicionComponent,
-		AvatarEditorComponent
+		AvatarEditorComponent,
+		ContratoIndicadorVentaPesificadasComponent,
+		ContratoIndicadorSwiperVentasPesificadasComponent,
+		ContratoIndicadorVentaLiquidadasComponent,
+		ContratoIndicadorSwiperVentasLiquidadasComponent
 	],
 	imports: [
 		HttpClientModule,

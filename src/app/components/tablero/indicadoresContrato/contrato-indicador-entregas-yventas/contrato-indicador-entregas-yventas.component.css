@@ -8,6 +8,15 @@
     letter-spacing: 1.2px;
 }
 
+.sub-titulo-principal {
+    padding-left: 15px;
+    margin-bottom: 12px;
+    color: #666666;
+    font-family: Rubik;
+    font-size: 12px;
+    letter-spacing: 1.2px;
+}
+
 .texto-filtro {
     color: #4e4e4e;
     font-family: Rubik;

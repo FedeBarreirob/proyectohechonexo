@@ -130,7 +130,7 @@ export class MainNavComponent implements OnInit, OnDestroy {
 				permitido: true
 			},*/
 			{
-				nombre: "Cuenta Corriente",
+				nombre: "Cuenta",
 				rutaLink: "/ctacte",
 				imagen: "assets/sidebar/cta-cte.png",
 				imagenActiva: "assets/sidebar/casa-hot.png",
