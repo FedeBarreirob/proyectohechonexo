@@ -1,22 +1,22 @@
 <mat-sidenav-container class="contenedor-filtro">
 	<mat-sidenav #menuFiltro position="end" class="sidenav-filtro">
 		<app-cta-cte-filtro [cuenta]="cuenta" (botonCerrar)="menuFiltro.toggle()"
-			(botonAplicar)="cargarListado($event)"></app-cta-cte-filtro>
+			(botonAplicar)="cargarListado($event, false)" [ctacteInfoActivo$]="ctacteInfoActivo$"></app-cta-cte-filtro>
 	</mat-sidenav>
 	<section>
 		<app-tool-bar-general [titulo]="'Cuenta Corrientes'" [disabled]="false"
 			(botonPersonalizadoEjecutado)="mostrarOcultarFiltros()"
 			[urlImagenAccionPersonalizada]="'assets/toolbar/embudo.png'"></app-tool-bar-general>
 
-		<mat-tab-group mat-align-tabs="center">
+		<mat-tab-group mat-align-tabs="center" (selectedTabChange) ="seleccionTab($event)">
 			<mat-tab label="CTA CTE APLICADA">
-				<app-cuenta-corriente-aplicada-lista [observerFiltro$]="observerFiltro$"
+				<app-cuenta-corriente-aplicada-lista [observerFiltro$]="observerFiltroCtaCteAplicada$"
 					(seEncuentraCargando)="cambiarEstadoCargandoCtaCteAplicado($event)"
 					(seleccionMovimiento)="verDetalle($event)">
 				</app-cuenta-corriente-aplicada-lista>
 			</mat-tab>
 			<mat-tab label="CTA CORRIENTE">
-				<app-cuenta-corriente-lista [observerFiltro$]="observerFiltro$"
+				<app-cuenta-corriente-lista [observerFiltro$]="observerFiltroCtaCte$"
 					(seEncuentraCargando)="cambiarEstadoCargandoCtaCte($event)"
 					(seleccionMovimiento)="verDetalle($event)"></app-cuenta-corriente-lista>
 			</mat-tab>

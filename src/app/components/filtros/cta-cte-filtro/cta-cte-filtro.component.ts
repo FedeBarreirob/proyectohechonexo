@@ -1,5 +1,7 @@
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { DatePipe } from '@angular/common';
+import { Subject } from 'rxjs';
+import { InfoCtaCte } from '../../../enums/info-cta-cte.enum';
 
 @Component({
   selector: 'app-cta-cte-filtro',
@@ -12,6 +14,9 @@ export class CtaCteFiltroComponent implements OnInit {
   @Input()
   cuenta: any;
 
+  @Input()
+  ctacteInfoActivo$: Subject<number>;
+
   @Output()
   botonCerrar: EventEmitter<any> = new EventEmitter<any>();
 
@@ -21,6 +26,8 @@ export class CtaCteFiltroComponent implements OnInit {
   rubro: any;
   fechaDesde: string;
   fechaHasta: string;
+  infoCtaCteActivo: InfoCtaCte = InfoCtaCte.CUENTA_CORRIENTE_APLICADA;
+  infoCtaCte: any = InfoCtaCte;
 
   rubros: Array<any> = [
     {
@@ -43,6 +50,11 @@ export class CtaCteFiltroComponent implements OnInit {
   constructor(private datePipe: DatePipe) { }
 
   ngOnInit() {
+    if(this.ctacteInfoActivo$ != null) {
+      this.ctacteInfoActivo$.subscribe(
+        infoCtaCte => this.infoCtaCteActivo = infoCtaCte
+      );
+    }
   }
 
   // funcion que dispara la notificacion cuando el boton cerrar se presiona

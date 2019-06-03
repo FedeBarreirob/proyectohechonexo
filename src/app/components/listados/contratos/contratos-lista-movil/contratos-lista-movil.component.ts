@@ -121,8 +121,10 @@ export class ContratosListaMovilComponent implements OnInit, OnDestroy {
 
   // funcion que carga mas datos cuando hace scroll
   onScroll() {
-    this.pagina = this.pagina + 1;
-    this.cargarListado(false);
+    if (this.cargando == false) {
+      this.pagina = this.pagina + 1;
+      this.cargarListado(false);
+    }
   }
 
   // funcion que muestra el detalle de un movimiento seleccionado

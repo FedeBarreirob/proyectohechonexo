@@ -28,37 +28,38 @@
 
 </mat-button-toggle-group>
 
-<!--Fechas-->
-
-<div fxLayout="row" fxLayoutAlign="space-around center">
-  <div fxFlex="100%" class="titulo-filtro">
-    Fechas
+<!--Rango de fechas-->
+<span *ngIf="infoCtaCteActivo === infoCtaCte.CUENTA_CORRIENTE">
+  <div fxLayout="row" fxLayoutAlign="space-around center">
+    <div fxFlex="100%" class="titulo-filtro">
+      Fechas
+    </div>
   </div>
-</div>
-
-<div fxLayout="row" fxLayoutAlign="none" class="contenedores-input">
-  <p class="input-label">DESDE</p>
-</div>
-
-<div fxLayout="row" fxLayoutAlign="none" class="contenedores-input">
-  <input readonly [(ngModel)]="fechaDesde" matInput [matDatepicker]="desde"
-    class="input-fecha">
-  <mat-datepicker-toggle matSuffix [for]="desde"></mat-datepicker-toggle>
-  <mat-datepicker touchUi #desde></mat-datepicker>
-</div>
-
-<div fxLayout="row" fxLayoutAlign="none" class="contenedores-input">
-  <p class="input-label">HASTA</p>
-</div>
-
-<div fxLayout="row" fxLayoutAlign="none" class="contenedores-input">
-  <div fxFlex="100%">
-    <input readonly [(ngModel)]="fechaHasta" matInput [matDatepicker]="hasta"
+  
+  <div fxLayout="row" fxLayoutAlign="none" class="contenedores-input">
+    <p class="input-label">DESDE</p>
+  </div>
+  
+  <div fxLayout="row" fxLayoutAlign="none" class="contenedores-input">
+    <input readonly [(ngModel)]="fechaDesde" matInput [matDatepicker]="desde"
       class="input-fecha">
-    <mat-datepicker-toggle matSuffix [for]="hasta"></mat-datepicker-toggle>
-    <mat-datepicker touchUi #hasta></mat-datepicker>
+    <mat-datepicker-toggle matSuffix [for]="desde"></mat-datepicker-toggle>
+    <mat-datepicker touchUi #desde></mat-datepicker>
   </div>
-</div>
+  
+  <div fxLayout="row" fxLayoutAlign="none" class="contenedores-input">
+    <p class="input-label">HASTA</p>
+  </div>
+  
+  <div fxLayout="row" fxLayoutAlign="none" class="contenedores-input">
+    <div fxFlex="100%">
+      <input readonly [(ngModel)]="fechaHasta" matInput [matDatepicker]="hasta"
+        class="input-fecha">
+      <mat-datepicker-toggle matSuffix [for]="hasta"></mat-datepicker-toggle>
+      <mat-datepicker touchUi #hasta></mat-datepicker>
+    </div>
+  </div>
+</span>
 
 <!--botones-->
 <div fxLayout="row" fxLayoutAlign="space-between center" class="contenedor-botones">

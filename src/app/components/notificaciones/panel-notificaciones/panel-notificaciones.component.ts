@@ -15,7 +15,7 @@ export class PanelNotificacionesComponent implements OnInit, OnDestroy {
 
   @Output()
   botonCerrar: EventEmitter<any> = new EventEmitter<any>();
-  
+
   destroy$: Subject<any> = new Subject<any>();
   listadoNotificaciones: Array<Notificacion> = [];
   pagina: number = 1;
@@ -93,8 +93,10 @@ export class PanelNotificacionesComponent implements OnInit, OnDestroy {
 
   // funcion que carga mas datos cuando hace scroll
   onScroll() {
-    this.pagina = this.pagina + 1;
-    this.cargarListado(false);
+    if (this.cargando == false) {
+      this.pagina = this.pagina + 1;
+      this.cargarListado(false);
+    }
   }
 
   // funcion que dispara la notificacion cuando el boton cerrar se presiona

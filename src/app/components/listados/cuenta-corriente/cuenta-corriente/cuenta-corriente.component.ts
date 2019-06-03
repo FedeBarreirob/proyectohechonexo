@@ -1,5 +1,5 @@
 import { Component, OnInit, ViewChild, OnDestroy } from '@angular/core';
-import { MatSidenav, MatDialog, MatSnackBar } from '@angular/material';
+import { MatSidenav, MatDialog, MatSnackBar, MatTabChangeEvent } from '@angular/material';
 import { EntidadAlg } from '../../../../interfaces/perfiles/entidad-alg';
 import { CuentaAlgService } from '../../../../services/observers/cuentas-alg/cuenta-alg.service';
 import { DeviceDetectorService } from 'ngx-device-detector';
@@ -8,6 +8,7 @@ import { takeUntil } from 'rxjs/operators';
 import { DatePipe } from '@angular/common';
 import { CuentaCorrienteDetalleComponent } from '../cuenta-corriente-detalle/cuenta-corriente-detalle.component';
 import { MonedaService } from '../../../../services/moneda/moneda.service';
+import { InfoCtaCte } from 'src/app/enums/info-cta-cte.enum';
 
 @Component({
   selector: 'app-cuenta-corriente',
@@ -21,13 +22,20 @@ export class CuentaCorrienteComponent implements OnInit, OnDestroy {
 
   public cuenta: EntidadAlg;
   esCelular: boolean;
-  observerFiltro$ = new Subject<any>();
+
+  observerFiltroCtaCte$ = new Subject<any>();
+  observerFiltroCtaCteAplicada$ = new Subject<any>();
+  observerFiltroTenenciasImpositivas$ = new Subject<any>();
+
   cargandoCtaCte: Boolean = false;
   cargandoCtaCteAplicada: Boolean = false;
   cargando$: Subject<boolean> = new Subject<boolean>();
   destroy$: Subject<any> = new Subject<any>();
   cargandoCotizacionMoneda: Boolean = false;
   cotizacionMoneda: number;
+
+  ctacteInfoActivo$: Subject<InfoCtaCte> = new Subject<InfoCtaCte>();
+  ctacteInfoActivo: InfoCtaCte = InfoCtaCte.CUENTA_CORRIENTE_APLICADA;
 
   constructor(
     public dialog: MatDialog,
@@ -48,7 +56,7 @@ export class CuentaCorrienteComponent implements OnInit, OnDestroy {
           if (!this.cuenta || (this.cuenta && this.cuenta.id.codigo != cuentaAlg.id.codigo)) {
             this.seleccionarCuenta(cuentaAlg);
             this.cargarCotizacionMoneda();
-            this.cargarListado(this.filtroPorDefecto(cuentaAlg.id.codigo));
+            this.cargarListado(this.filtroPorDefecto(cuentaAlg.id.codigo), true);
           }
         }
       );
@@ -100,8 +108,26 @@ export class CuentaCorrienteComponent implements OnInit, OnDestroy {
   }
 
   // funcion que ejecuta la carga del listado
-  cargarListado(filtro: any) {
-    this.observerFiltro$.next(filtro);
+  cargarListado(filtro: any, todos: boolean) {
+    if (todos == true) {
+      this.observerFiltroCtaCteAplicada$.next(filtro);
+      this.observerFiltroCtaCte$.next(filtro);
+      this.observerFiltroTenenciasImpositivas$.next(filtro);
+    } else {
+      switch (this.ctacteInfoActivo) {
+        case InfoCtaCte.CUENTA_CORRIENTE_APLICADA:
+          this.observerFiltroCtaCteAplicada$.next(filtro);
+          break;
+
+        case InfoCtaCte.CUENTA_CORRIENTE:
+          this.observerFiltroCtaCte$.next(filtro);
+          break;
+
+        case InfoCtaCte.TENENCIA_IMPOSITIVA:
+          this.observerFiltroTenenciasImpositivas$.next(filtro);
+          break;
+      }
+    }
   }
 
   /**
@@ -180,6 +206,25 @@ export class CuentaCorrienteComponent implements OnInit, OnDestroy {
       this.cargando$.next(true);
     } else {
       this.cargando$.next(false);
+    }
+  }
+
+  /**
+   * Función que se ejecuta cuando se cambia el indice del tab
+   */
+  seleccionTab(tabEvent: MatTabChangeEvent) {
+    switch (tabEvent.index) {
+      case 0:
+        this.ctacteInfoActivo$.next(InfoCtaCte.CUENTA_CORRIENTE_APLICADA);
+        break;
+
+      case 1:
+        this.ctacteInfoActivo$.next(InfoCtaCte.CUENTA_CORRIENTE);
+        break;
+
+      case 2:
+        this.ctacteInfoActivo$.next(InfoCtaCte.TENENCIA_IMPOSITIVA);
+        break;
     }
   }
 }

@@ -23,6 +23,7 @@ export class CuentaCorrienteListaComponent implements OnInit, OnDestroy {
   pagina: number = 1;
   cantidadPorPagina: number = 50;
   filtro: any;
+  filtroAnterior: any;
   cargando: boolean = false;
   destroy$: Subject<any> = new Subject<any>();
 
@@ -55,35 +56,63 @@ export class CuentaCorrienteListaComponent implements OnInit, OnDestroy {
 
   // funcion encargada de cargar el listado de entregas
   cargarListado(limpiar: boolean) {
-    if (!this.cargando) {
-      this.cargando = true;
-      this.seEncuentraCargando.next(true);
+    if (!this.esFiltroSinCambios()) {
+      if (!this.cargando) {
+        this.cargando = true;
+        this.seEncuentraCargando.next(true);
 
-      if (limpiar) {
-        this.limpiar();
+        if (limpiar) {
+          this.limpiar();
+        }
+
+        let filtroPaginado: any = this.filtro;
+        filtroPaginado.totales = false;
+        filtroPaginado.paginado = true;
+        filtroPaginado.pagina = this.pagina;
+        filtroPaginado.cantPorPagina = this.cantidadPorPagina;
+        filtroPaginado.ordenado = true;
+        filtroPaginado.aCobrar = this.aCobrar;
+        filtroPaginado.aPagar = this.aPagar;
+        filtroPaginado.vencido = this.vencido;
+        filtroPaginado.AVencer = this.AVencer;
+        this.filtroAnterior = filtroPaginado;
+
+        this.ctacteService.listadoCtaCte(filtroPaginado)
+          .pipe(takeUntil(this.destroy$))
+          .subscribe(respuesta => {
+            this.agregarMovimientosAlListado(respuesta.datos);
+            this.cargando = false;
+            this.seEncuentraCargando.next(false);
+          }, () => {
+            this.cargando = false;
+            this.seEncuentraCargando.next(false);
+          });
       }
+    }
+  }
 
-      let filtroPaginado: any = this.filtro;
-      filtroPaginado.totales = false;
-      filtroPaginado.paginado = true;
-      filtroPaginado.pagina = this.pagina;
-      filtroPaginado.cantPorPagina = this.cantidadPorPagina;
-      filtroPaginado.ordenado = true;
-      filtroPaginado.aCobrar = this.aCobrar;
-      filtroPaginado.aPagar = this.aPagar;
-      filtroPaginado.vencido = this.vencido;
-      filtroPaginado.AVencer = this.AVencer;
-
-      this.ctacteService.listadoCtaCte(filtroPaginado)
-        .pipe(takeUntil(this.destroy$))
-        .subscribe(respuesta => {
-          this.agregarMovimientosAlListado(respuesta.datos);
-          this.cargando = false;
-          this.seEncuentraCargando.next(false);
-        }, () => {
-          this.cargando = false;
-          this.seEncuentraCargando.next(false);
-        });
+  /**
+   * Verifica si hubo cambios en el filtro para evitar rebusquedas
+   */
+  private esFiltroSinCambios(): boolean {
+    if (this.filtroAnterior) {
+      if (this.filtroAnterior.cuenta == this.filtro.cuenta &&
+        this.filtroAnterior.aCobrar == this.aCobrar &&
+        this.filtroAnterior.aPagar == this.aPagar &&
+        this.filtroAnterior.vencido == this.vencido &&
+        this.filtroAnterior.AVencer == this.AVencer &&
+        this.filtroAnterior.granos == this.filtro.granos &&
+        this.filtroAnterior.agroinsumos == this.filtro.agroinsumos &&
+        this.filtroAnterior.nutricionAnimal == this.filtro.nutricionAnimal &&
+        this.filtroAnterior.fechaDesde == this.filtro.fechaDesde &&
+        this.filtroAnterior.fechaHasta == this.filtro.fechaHasta &&
+        this.filtroAnterior.pagina == this.pagina) {
+        return true;
+      } else {
+        return false;
+      }
+    } else {
+      return false;
     }
   }
 
@@ -104,8 +133,10 @@ export class CuentaCorrienteListaComponent implements OnInit, OnDestroy {
 
   // funcion que carga mas datos cuando hace scroll
   onScroll() {
-    this.pagina = this.pagina + 1;
-    this.cargarListado(false);
+    if (this.cargando == false) {
+      this.pagina = this.pagina + 1;
+      this.cargarListado(false);
+    }
   }
 
   // funcion que muestra el detalle de un movimiento seleccionado
