@@ -11,6 +11,7 @@ import { Cacheable } from 'ngx-cacheable';
 export class CtacteService {
 
   private urlCuentaCorrienteListado = `${environment.hostCtaCte}/CuentaCorriente/listado`;
+  private urlCuentaCorrienteSaldo = `${environment.hostCtaCte}/CuentaCorriente/saldo`;
 
   constructor(
     private http: HttpClient,
@@ -31,6 +32,27 @@ export class CtacteService {
     };
 
     return this.http.post<any>(this.urlCuentaCorrienteListado,
+      JSON.stringify(filtro),
+      httpOptions);
+  }
+
+  /**
+   * Devuelve el saldo
+   * @param filtro 
+   */
+  @Cacheable()
+  saldoCtaCte(filtro: any) {
+
+    let usuarioLogueado = <UserAuth>this.authenticationService.usuarioLogueado();
+
+    const httpOptions = {
+      headers: new HttpHeaders({
+        'Content-Type': 'application/json',
+        'Authorization': `Bearer ${usuarioLogueado.token}`
+      })
+    };
+
+    return this.http.post<any>(this.urlCuentaCorrienteSaldo,
       JSON.stringify(filtro),
       httpOptions);
   }

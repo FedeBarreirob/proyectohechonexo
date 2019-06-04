@@ -1,0 +1,21 @@
+<div *ngIf="saldo != null">
+
+  <div fxLayout="row" fxLayoutAlign="space-between none" fxLayoutGap="10px">
+    <div fxFlex="50%" class="subtitulo-apartados">Saldo ARS</div>
+    <div fxFlex="50%" class="subtitulo-apartados">Saldo USD</div>
+  </div>
+
+  <div fxLayout="row" fxLayoutAlign="space-between none" fxLayoutGap="10px">
+    <div fxFlex="50%" class="dato-apartado">{{saldo.saldoPesos}}</div>
+    <div fxFlex="50%" class="dato-apartado">{{saldo.saldoDolares}}</div>
+  </div>
+
+  <div fxLayout="row" fxLayoutAlign="space-between none" fxLayoutGap="10px">
+    <div fxFlex="50%" class="subtitulo-apartados">Saldo Contable</div>
+  </div>
+
+  <div fxLayout="row" fxLayoutAlign="space-between none" fxLayoutGap="10px">
+    <div fxFlex="50%" class="dato-apartado">{{saldo.saldoContable}}</div>
+  </div>
+
+</div>

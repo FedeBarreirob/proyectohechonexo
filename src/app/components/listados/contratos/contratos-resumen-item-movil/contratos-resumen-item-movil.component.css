@@ -1,3 +1,17 @@
+.contenedor-info {
+    border: 1px solid rgba(35, 185, 80, 0.08);
+    border-radius: 4px;
+    padding: 7px;
+    margin: 10px;
+}
+
+.contenedor-indicadores {
+    border-left: 4px solid #D8D8D8;
+    margin-left: 23px;
+    padding-left: 7px;
+    margin-right: 10px;
+}
+
 .contenedor-encabezado {
     padding: 5px;
 }
@@ -8,11 +22,7 @@
 
 .contenedor-entregas-fijaciones-ok {
     padding: 5px;
-    background-color: rgba(35,185,80,0.1);
-}
-
-.contenedor-info {
-    margin-bottom: 5px;
+    background-color: rgba(35, 185, 80, 0.1);
 }
 
 .movimiento-icono {
@@ -62,18 +72,19 @@
     white-space: nowrap;
 }
 
-.tipo-contrato {
+.etiqueta {
     display: inline-block;
     max-width: 50%;
     text-overflow: ellipsis;
     overflow-x: hidden;
     white-space: nowrap;
     margin-left: 4px;
-    padding: 1px;
-    font-size: 12px;
+    padding: 3px;
+    border-radius: 4px;
+    background-color: #ECECEC;
+    color: #666666;
     font-family: Rubik;
-    border: 1px solid #999999;
-    border-radius: 2px;
+    font-size: 11px;
 }
 
 .rango-fecha {

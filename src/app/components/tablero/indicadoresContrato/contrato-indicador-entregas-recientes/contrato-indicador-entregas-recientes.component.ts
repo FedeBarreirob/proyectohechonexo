@@ -47,16 +47,11 @@ export class ContratoIndicadorEntregasRecientesComponent implements OnInit, OnDe
    */
   cargarListado(cuenta: string) {
 
-    let sieteDiasAtras: Date = new Date();
-    sieteDiasAtras.setDate(sieteDiasAtras.getDate() - 7);
-    let fechaDesde = sieteDiasAtras.toISOString();
-    let fechaHasta = (new Date()).toISOString();
-
     let filtroPorDef: FiltroEntregas = {
       especie: null,
       cosecha: null,
-      fechaDesde: this.datePipe.transform(new Date(fechaDesde), 'dd/MM/yyyy'),
-      fechaHasta: this.datePipe.transform(new Date(fechaHasta), 'dd/MM/yyyy'),
+      fechaDesde: null,
+      fechaHasta: null,
       cuenta: cuenta,
       agrupadoPorCampo: false,
       paginado: true,

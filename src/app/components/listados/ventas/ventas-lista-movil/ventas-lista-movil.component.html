@@ -31,20 +31,20 @@
   <div fxLayout="row" fxLayoutAlign="space-around center" *ngFor="let movimiento of (listado ? listado : [])"
     class="movimiento-fila" (click)="verDetalle(movimiento)">
 
-    <div fxFlex="14%">
+    <div fxFlex="40px">
       <img class="movimiento-icono" src="{{movimiento.especie | imagenEspecie}}" />
     </div>
 
-    <div fxFlex="26%">
+    <div fxFlex="100px">
       <p class="especie-cosecha">{{movimiento.especie}} {{movimiento.cosecha}}</p>
       <p class="fecha">{{movimiento.fecha}}</p>
     </div>
 
-    <div fxFlex="40%" class="kg-netos" align="right">
+    <div fxFlex="80px" class="kg-netos" align="right">
       {{movimiento.kilos | kilosA: unidadMedida | number: '.0-0'}}
     </div>
 
-    <div fxFlex="40%" align="right">
+    <div fxFlex="80px" align="right">
       <span class="precio-qq">${{movimiento.precioPorQuintal | number: '.2'}}</span>
       <span class="moneda">{{movimiento.moneda | moneda}}</span>
     </div>

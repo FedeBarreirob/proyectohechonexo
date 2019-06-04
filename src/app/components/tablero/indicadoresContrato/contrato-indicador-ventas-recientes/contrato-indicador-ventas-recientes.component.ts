@@ -47,16 +47,11 @@ export class ContratoIndicadorVentasRecientesComponent implements OnInit, OnDest
    */
   cargarListado(cuenta: string) {
 
-    let sieteDiasAtras: Date = new Date();
-    sieteDiasAtras.setDate(sieteDiasAtras.getDate() - 7);
-    let fechaDesde = sieteDiasAtras.toISOString();
-    let fechaHasta = (new Date()).toISOString();
-
     let filtroPorDef: FiltroVentas = {
       especie: null,
       cosecha: null,
-      fechaDesde: this.datePipe.transform(new Date(fechaDesde), 'dd/MM/yyyy'),
-      fechaHasta: this.datePipe.transform(new Date(fechaHasta), 'dd/MM/yyyy'),
+      fechaDesde: null,
+      fechaHasta: null,
       cuenta: cuenta,
       paginado: true,
       pagina: 0,// el listado agrega los valores de paginación correctos

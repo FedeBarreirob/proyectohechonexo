@@ -24,5 +24,11 @@ export interface ResumenContratoCompraVenta {
     vencidoFijacion?: boolean,
     aFijar?: number,
     tipoNegocioDescripCorta?: string,
-    kilosFacturados?: number
+    kilosFacturados?: number,
+    moneda?: string,
+    kilosPendientesPesificar?: number,
+    fechaVencimientoVenta?: Date,
+    porcentajeKilosPesificados?: number,
+    porcentajeKilosFacturados?: number,
+    pendienteFacturar?: number
 }
