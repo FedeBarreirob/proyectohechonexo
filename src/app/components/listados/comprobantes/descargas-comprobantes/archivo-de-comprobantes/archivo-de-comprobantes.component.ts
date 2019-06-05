@@ -1,12 +1,12 @@
 import { Component, OnInit } from '@angular/core';
-import { FiltroCtaCteComprobanteDescarga } from '../../../interfaces/archivo-de-comprobantes/filtro-cta-cte-comprobante-descarga';
-import { ArchivoDeComprobantesService } from '../../../services/archivo-de-comprobantes/archivo-de-comprobantes.service';
-import { AuthenticationService } from '../../../services/security/authentication.service';
-import { UserAuth } from '../../../models/security/user';
+import { FiltroCtaCteComprobanteDescarga } from '../../../../../interfaces/archivo-de-comprobantes/filtro-cta-cte-comprobante-descarga';
+import { ArchivoDeComprobantesService } from '../../../../../services/archivo-de-comprobantes/archivo-de-comprobantes.service';
+import { AuthenticationService } from '../../../../../services/security/authentication.service';
+import { UserAuth } from '../../../../../models/security/user';
 import { DatePipe } from '@angular/common';
-import { ComprobanteParaDescarga } from '../../../interfaces/archivo-de-comprobantes/comprobante-para-descarga';
+import { ComprobanteParaDescarga } from '../../../../../interfaces/archivo-de-comprobantes/comprobante-para-descarga';
 import { MatSlideToggleChange, MatSnackBar } from '@angular/material';
-import { ComprobantesDownloaderService } from '../../../services/sharedServices/downloader/comprobantes-downloader.service';
+import { ComprobantesDownloaderService } from '../../../../../services/sharedServices/downloader/comprobantes-downloader.service';
 import { saveAs } from 'file-saver/FileSaver';
 
 @Component({

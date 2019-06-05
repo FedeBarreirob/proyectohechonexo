@@ -1,0 +1,200 @@
+/* botones de selector de especies*/
+
+.grupo-botones-especie {
+    width: 100%;
+    display: flex;
+    flex-wrap: wrap;
+    padding: 15px;
+    border: 0 !important;
+}
+
+.boton-especie img {
+    height: 38px;
+    width: 38px;
+    margin-top: -25px;
+}
+
+.boton-especie .mat-button-toggle {
+    flex: 1 1 100%;
+    box-sizing: border-box;
+    align-items: center;
+    display: flex;
+    height: 89px !important;
+    width: 64px !important;
+    border: 1px solid rgba(35, 185, 80, 0.1);
+    border-radius: 4px;
+    background-color: rgba(45, 164, 66, 0.1);
+    margin: 6px;
+}
+
+.boton-especie .mat-button-toggle-disabled {
+    border: 1px solid #c5c0c7;
+    background-color: #e1dde5;
+}
+
+.boton-especie .mat-button-toggle-checked {
+    height: 89px;
+    width: 64px;
+    border-radius: 4px;
+    background-color: #2DA442;
+}
+
+.boton-especie .mat-button-toggle-checked .texto-epecie {
+    color: white !important;
+}
+
+.boton-especie .mat-button-toggle .texto-epecie {
+    color: #333333;
+}
+
+.texto-epecie {
+    position: absolute;
+    left: 5px;
+    top: 25px;
+    right: 5px;
+    font-family: Rubik;
+    font-size: 14px;
+    text-align: center;
+    text-overflow: ellipsis !important;
+    overflow-x: hidden;
+}
+
+/* titulos */
+
+.titulo-filtro {
+    height: 17px;
+    width: 60px;
+    color: #111111;
+    font-family: Rubik;
+    font-size: 14px;
+    line-height: 17px;
+    padding-left: 20px;
+}
+
+/* encabezado */
+
+.encabezado-filtro {
+    padding-top: 94px;
+}
+
+.texto-filtrar {
+    color: #999999;
+    font-family: Rubik;
+    font-size: 12px;
+    letter-spacing: 1.2px;
+    padding-left: 20px;
+}
+
+.boton-close {
+    margin-top: -35px;
+}
+
+/*campanias*/
+
+.grupo-botones-campanias {
+    width: 100%;
+    display: flex;
+    flex-wrap: wrap;
+    padding: 15px;
+    border: 0 !important;
+}
+
+.boton-campania .mat-button-toggle {
+    flex: 1 1 100%;
+    box-sizing: border-box;
+    align-items: center;
+    display: flex;
+    height: 32px !important;
+    width: 64px !important;
+    border: 1px solid rgba(45, 164, 66, 0.1);
+    border-radius: 4px;
+    background-color: rgba(45, 164, 66, 0.1);
+    margin: 6px;
+}
+
+.boton-campania .mat-button-toggle-disabled {
+    border: 1px solid #c5c0c7;
+    background-color: #e1dde5;
+}
+
+.boton-campania .mat-button-toggle-checked {
+    height: 32px;
+    width: 64px;
+    border-radius: 4px;
+    background-color: #2DA442;
+}
+
+.boton-campania .mat-button-toggle-checked {
+    color: white !important;
+}
+
+.boton-campania .mat-button-toggle {
+    color: #333333;
+}
+
+.texto-campania {
+    position: absolute;
+    left: -14px;
+    top: -27px;
+    width: "100%";
+    font-family: Rubik;
+    font-size: 13px;
+}
+
+/*fechas*/
+
+.input-fecha {
+    height: 40px;
+    width: 176px;
+    border: 1px solid #2DA442;
+    border-radius: 4px;
+    box-shadow: 0 4px 8px -4px rgba(0, 0, 0, 0.5);
+    padding-left: 10px;
+    color: #333333;
+    font-family: Rubik;
+    font-size: 14px;
+}
+
+.input-label {
+    height: 13px;
+    width: 42px;
+    color: #333333;
+    font-family: Rubik;
+    font-size: 11px;
+    letter-spacing: 1.2px;
+    line-height: 13px;
+}
+
+.contenedores-input {
+    margin-left: 20px;
+}
+
+/*botones*/
+
+.boton-limpiar {
+    height: 40px;
+    width: 104px;
+    border: 1px solid #2DA442;
+    border-radius: 4px;
+    color: #2DA442;
+    font-family: Rubik;
+    font-size: 14px;
+}
+
+.boton-aplicar {
+    height: 40px;
+    width: 104px;
+    background-color: #2DA442;
+    border: 1px solid #2DA442;
+    border-radius: 4px;
+    color: #FFFFFF;
+    font-family: Rubik;
+    font-size: 14px;
+    font-weight: bold;
+}
+
+.contenedor-botones {
+    margin-left: 20px;
+    margin-top: 26px;
+    margin-bottom: 25px;
+}

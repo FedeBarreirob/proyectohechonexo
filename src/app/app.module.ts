@@ -76,7 +76,7 @@ import { OtrosMovimientosDetalleMasOperacionesComponent } from './components/lis
 import { SelectorCuentasComponent } from './components/menu/selector-cuentas/selector-cuentas.component';
 import { ComboCuentaComponent } from './components/common/combo-cuenta/combo-cuenta.component';
 import { InformacionDePerfilComponent } from './components/usuarios-y-perfiles/informacion-de-perfil/informacion-de-perfil.component';
-import { ArchivoDeComprobantesComponent } from './components/listados/archivo-de-comprobantes/archivo-de-comprobantes.component';
+import { ArchivoDeComprobantesComponent } from './components/listados/comprobantes/descargas-comprobantes/archivo-de-comprobantes/archivo-de-comprobantes.component';
 import { RecuperacionPasswordComponent } from './components/usuarios-y-perfiles/recuperacion-password/recuperacion-password.component';
 import { RestablecimientoPasswordComponent } from './components/usuarios-y-perfiles/restablecimiento-password/restablecimiento-password.component';
 import { ModalCambioPasswordComponent } from './components/usuarios-y-perfiles/modal-cambio-password/modal-cambio-password.component';
@@ -133,6 +133,9 @@ import { ContratoIndicadorVentaLiquidadasComponent } from './components/tablero/
 import { ContratoIndicadorSwiperVentasLiquidadasComponent } from './components/tablero/indicadoresContrato/contrato-indicador-swiper-ventas-liquidadas/contrato-indicador-swiper-ventas-liquidadas.component';
 import { CuentaCorrienteSaldosComponent } from './components/listados/cuenta-corriente/cuenta-corriente-saldos/cuenta-corriente-saldos.component';
 import { CuentaCorrienteAplicadaSaldoComponent } from './components/listados/cuenta-corriente/cuenta-corriente-aplicada-saldo/cuenta-corriente-aplicada-saldo.component';
+import { ComprobantesComponent } from './components/listados/comprobantes/comprobantes/comprobantes.component';
+import { SelectorArchivoComponent } from './components/listados/comprobantes/selector-archivo/selector-archivo.component';
+import { FiltroArchivosComprobantesComponent } from './components/listados/comprobantes/descargas-comprobantes/filtro-archivos-comprobantes/filtro-archivos-comprobantes.component';
 
 registerLocaleData(localeEsAr, 'es-AR');
 
@@ -235,7 +238,10 @@ export function tokenGetter() {
 		ContratoIndicadorVentaLiquidadasComponent,
 		ContratoIndicadorSwiperVentasLiquidadasComponent,
 		CuentaCorrienteSaldosComponent,
-		CuentaCorrienteAplicadaSaldoComponent
+		CuentaCorrienteAplicadaSaldoComponent,
+		ComprobantesComponent,
+		SelectorArchivoComponent,
+		FiltroArchivosComprobantesComponent
 	],
 	imports: [
 		HttpClientModule,

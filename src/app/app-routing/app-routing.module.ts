@@ -14,13 +14,13 @@ import { ComprobantesPendFacturarComponent } from '../components/listados/compro
 import { PerfilesListadoComponent } from '../components/usuarios-y-perfiles/perfiles/perfiles-listado/perfiles-listado.component'
 import { OtrosMovimientosComponent } from '../components/listados/otros-movimientos/otros-movimientos/otros-movimientos.component';
 import { InformacionDePerfilComponent } from '../components/usuarios-y-perfiles/informacion-de-perfil/informacion-de-perfil.component';
-import { ArchivoDeComprobantesComponent } from '../components/listados/archivo-de-comprobantes/archivo-de-comprobantes.component';
 import { RecuperacionPasswordComponent } from '../components/usuarios-y-perfiles/recuperacion-password/recuperacion-password.component';
 import { RestablecimientoPasswordComponent } from '../components/usuarios-y-perfiles/restablecimiento-password/restablecimiento-password.component';
 import { SolicitudAltaComponent } from '../components/usuarios-y-perfiles/solicitud-alta/solicitud-alta.component';
 import { BuzonComponent } from '../components/notificaciones/buzon/buzon.component';
 import { CuentaCorrienteComponent } from '../components/listados/cuenta-corriente/cuenta-corriente/cuenta-corriente.component';
 import { ContratosComponent } from '../components/listados/contratos/contratos/contratos.component';
+import { ComprobantesComponent } from '../components/listados/comprobantes/comprobantes/comprobantes.component';
 
 const routes: Routes = [
 	{
@@ -101,7 +101,7 @@ const routes: Routes = [
 	},
 	{
 		path: 'archivo-de-comprobantes',
-		component: ArchivoDeComprobantesComponent,
+		component: ComprobantesComponent,
 		canActivate: [AuthGuardGuard],
 		data: {
 			rolAdmin: false

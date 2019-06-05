@@ -41,7 +41,7 @@
     </div>
 
     <div fxFlex="50%"
-      [ngClass]="{'subtitulo-cantidad': indicador.kgAFijar == 0, 'subtitulo-cantidad-pendiente': indicador.kgAFijar != 0}">
+      [ngClass]="{'subtitulo-cantidad': indicador.pendienteFacturar == 0, 'subtitulo-cantidad-pendiente': indicador.pendienteFacturar != 0}">
       {{indicador.pendienteFacturar | kilosA: unidadMedida | number: '.0-0'}}{{unidadMedida | kilosTextoA}}
     </div>
   </div>

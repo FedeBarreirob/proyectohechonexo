@@ -1,0 +1,73 @@
+<!--<div fxLayout="row" fxLayoutAlign="center" class="encabezado-filtro">
+  <div fxFlex="80%" class="texto-filtrar">
+    FILTRAR
+  </div>
+
+  <div fxFlex="20%">
+    <button mat-icon-button class="boton-close" (click)="cerrar()">
+      <mat-icon>close</mat-icon>
+    </button>
+  </div>
+</div>
+
+<!-Origenes de comprobantes->
+<div fxLayout="row" fxLayoutAlign="space-around center">
+  <div fxFlex="100%" class="titulo-filtro">
+    Origen
+  </div>
+</div>
+
+<mat-button-toggle-group class="grupo-botones-campanias" [(ngModel)]="cosecha">
+
+  <div
+    *ngFor="let cosecha of ((filtrosEspecieCosecha && filtrosEspecieCosecha.cosechas) ? filtrosEspecieCosecha.cosechas : [])"
+    class="boton-campania">
+    <mat-button-toggle value="{{cosecha.cosecha}}">
+      <div class="texto-campania">{{cosecha.cosechaDescripcion}}</div>
+    </mat-button-toggle>
+  </div>
+
+</mat-button-toggle-group>
+
+<!-Fechas->
+
+<div fxLayout="row" fxLayoutAlign="space-around center">
+  <div fxFlex="100%" class="titulo-filtro">
+    Fechas
+  </div>
+</div>
+
+<div fxLayout="row" fxLayoutAlign="none" class="contenedores-input">
+  <p class="input-label">DESDE</p>
+</div>
+
+<div fxLayout="row" fxLayoutAlign="none" class="contenedores-input">
+  <input readonly [disabled]="cargando==true" [(ngModel)]="fechaDesde" matInput [matDatepicker]="desde"
+    class="input-fecha">
+  <mat-datepicker-toggle matSuffix [for]="desde"></mat-datepicker-toggle>
+  <mat-datepicker touchUi #desde></mat-datepicker>
+</div>
+
+<div fxLayout="row" fxLayoutAlign="none" class="contenedores-input">
+  <p class="input-label">HASTA</p>
+</div>
+
+<div fxLayout="row" fxLayoutAlign="none" class="contenedores-input">
+  <div fxFlex="100%">
+    <input readonly [disabled]="cargando==true" [(ngModel)]="fechaHasta" matInput [matDatepicker]="hasta"
+      class="input-fecha">
+    <mat-datepicker-toggle matSuffix [for]="hasta"></mat-datepicker-toggle>
+    <mat-datepicker touchUi #hasta></mat-datepicker>
+  </div>
+</div>
+
+<!-botones->
+<div fxLayout="row" fxLayoutAlign="space-between center" class="contenedor-botones">
+  <div fxFlex="50%">
+    <button mat-button class="boton-limpiar" (click)="limpiar()">Limpiar</button>
+  </div>
+
+  <div fxFlex="50%">
+    <button mat-button class="boton-aplicar" (click)="aplicar()">Aplicar</button>
+  </div>
+</div>-->
