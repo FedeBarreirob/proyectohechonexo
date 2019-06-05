@@ -132,6 +132,7 @@ import { ContratoIndicadorSwiperVentasPesificadasComponent } from './components/
 import { ContratoIndicadorVentaLiquidadasComponent } from './components/tablero/indicadoresContrato/contrato-indicador-venta-liquidadas/contrato-indicador-venta-liquidadas.component';
 import { ContratoIndicadorSwiperVentasLiquidadasComponent } from './components/tablero/indicadoresContrato/contrato-indicador-swiper-ventas-liquidadas/contrato-indicador-swiper-ventas-liquidadas.component';
 import { CuentaCorrienteSaldosComponent } from './components/listados/cuenta-corriente/cuenta-corriente-saldos/cuenta-corriente-saldos.component';
+import { CuentaCorrienteAplicadaSaldoComponent } from './components/listados/cuenta-corriente/cuenta-corriente-aplicada-saldo/cuenta-corriente-aplicada-saldo.component';
 
 registerLocaleData(localeEsAr, 'es-AR');
 
@@ -233,7 +234,8 @@ export function tokenGetter() {
 		ContratoIndicadorSwiperVentasPesificadasComponent,
 		ContratoIndicadorVentaLiquidadasComponent,
 		ContratoIndicadorSwiperVentasLiquidadasComponent,
-		CuentaCorrienteSaldosComponent
+		CuentaCorrienteSaldosComponent,
+		CuentaCorrienteAplicadaSaldoComponent
 	],
 	imports: [
 		HttpClientModule,

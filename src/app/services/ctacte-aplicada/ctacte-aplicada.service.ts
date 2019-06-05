@@ -15,6 +15,7 @@ export class CtacteAplicadaService {
 
   private urlCuentaCorrienteAplicadaListado = `${environment.hostCtaCte}/CuentaAplicadaCorriente/listado`;
   private urlCuentaCorrienteAplicadaSaldoGlobal = `${environment.hostCtaCte}/CuentaAplicadaCorriente/saldoGlobal`;
+  private urlCuentaCorrienteAplicadaSaldo = `${environment.hostCtaCte}/CuentaAplicadaCorriente/saldo`;
 
   constructor(
     private http: HttpClient,
@@ -57,5 +58,26 @@ export class CtacteAplicadaService {
 
     let urlConParametro = `${this.urlCuentaCorrienteAplicadaSaldoGlobal}/${cuenta}`;
     return this.http.get<ResponseServicio>(urlConParametro, httpOptions);
+  }
+
+  /**
+   * Devuelve el saldo de la cuenta corriente aplicada
+   * @param filtro 
+   */
+  @Cacheable()
+  saldoCtaCte(filtro: any) {
+
+    let usuarioLogueado = <UserAuth>this.authenticationService.usuarioLogueado();
+
+    const httpOptions = {
+      headers: new HttpHeaders({
+        'Content-Type': 'application/json',
+        'Authorization': `Bearer ${usuarioLogueado.token}`
+      })
+    };
+
+    return this.http.post<any>(this.urlCuentaCorrienteAplicadaSaldo,
+      JSON.stringify(filtro),
+      httpOptions);
   }
 }

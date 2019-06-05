@@ -61,3 +61,8 @@ body {
 .modal-sin-padding .mat-dialog-container {
     padding: 0px !important;
 }
+
+/*color de fondo a las tarjetas*/
+.mat-drawer-content {
+    background-color: #f7f8f8;
+}

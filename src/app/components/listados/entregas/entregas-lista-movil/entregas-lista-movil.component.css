@@ -5,10 +5,18 @@
     margin-top: 30px;
     padding-left: 17px;
     padding-right: 17px;
+    padding-bottom: 10px;
 }
 
 .movimiento-fila {
     width: 100%;
+    border: 1px solid rgba(35, 185, 80, 0.08);
+    border-radius: 4px;
+    margin-bottom: 3px;
+    background-color: white;
+    margin-top: 3px;
+    padding-left: 9px;
+    padding-right: 9px;
 }
 
 .movimiento-icono {
@@ -45,7 +53,7 @@
 }
 
 .contenedor-listado {
-    height: 70vh;
+    height: 65vh;
     overflow-y: scroll;
     padding-left: 17px;
     padding-right: 17px;

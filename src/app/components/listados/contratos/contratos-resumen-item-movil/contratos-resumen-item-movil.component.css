@@ -1,8 +1,12 @@
 .contenedor-info {
     border: 1px solid rgba(35, 185, 80, 0.08);
     border-radius: 4px;
-    padding: 7px;
-    margin: 10px;
+    padding: 20px;
+    margin-left: 10px;
+    margin-right: 10px;
+    margin-bottom: 20px;
+    margin-top: 20px;
+    background-color: white;
 }
 
 .contenedor-indicadores {

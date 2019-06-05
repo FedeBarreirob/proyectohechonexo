@@ -22,19 +22,4 @@
     </div>
   </div>
 
-  <div fxLayout="row" fxLayoutAlign="space-between center" style="margin-top: 5px;">
-    <div fxFlex class="subtitulo-apartados">Saldo Contable</div>
-  </div>
-
-  <div fxLayout="row" fxLayoutAlign="space-between center" class="monto">
-    <div fxFlex class="dato-apartado">
-
-      <span [ngClass]="{'signo-positivo': saldo.saldoContable > 0, 'signo-negativo': saldo.saldoContable < 0 }">
-        {{ (saldo.saldoContable < 0) ? '-' : (saldo.saldoContable > 0) ? '+' : ''}}
-      </span>
-      {{ ((saldo.saldoContable > 0) ? saldo.saldoContable : saldo.saldoContable * (-1)) | number: '.2'}}
-      <span class="moneda">ARS</span>
-    </div>
-  </div>
-
 </div>

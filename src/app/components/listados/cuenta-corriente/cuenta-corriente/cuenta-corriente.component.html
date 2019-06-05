@@ -10,6 +10,7 @@
 
 		<mat-tab-group mat-align-tabs="center" (selectedTabChange) ="seleccionTab($event)">
 			<mat-tab label="CTA CTE APLICADA">
+				<app-cuenta-corriente-aplicada-saldo [observerFiltro$]="observerFiltroCtaCteAplicada$"></app-cuenta-corriente-aplicada-saldo>
 				<app-cuenta-corriente-aplicada-lista [observerFiltro$]="observerFiltroCtaCteAplicada$"
 					(seEncuentraCargando)="cambiarEstadoCargandoCtaCteAplicado($event)"
 					(seleccionMovimiento)="verDetalle($event)">

@@ -122,10 +122,6 @@ export class CuentaCorrienteComponent implements OnInit, OnDestroy {
         case InfoCtaCte.CUENTA_CORRIENTE:
           this.observerFiltroCtaCte$.next(filtro);
           break;
-
-        case InfoCtaCte.TENENCIA_IMPOSITIVA:
-          this.observerFiltroTenenciasImpositivas$.next(filtro);
-          break;
       }
     }
   }
@@ -216,14 +212,12 @@ export class CuentaCorrienteComponent implements OnInit, OnDestroy {
     switch (tabEvent.index) {
       case 0:
         this.ctacteInfoActivo$.next(InfoCtaCte.CUENTA_CORRIENTE_APLICADA);
+        this.ctacteInfoActivo = InfoCtaCte.CUENTA_CORRIENTE_APLICADA;
         break;
 
       case 1:
         this.ctacteInfoActivo$.next(InfoCtaCte.CUENTA_CORRIENTE);
-        break;
-
-      case 2:
-        this.ctacteInfoActivo$.next(InfoCtaCte.TENENCIA_IMPOSITIVA);
+        this.ctacteInfoActivo = InfoCtaCte.CUENTA_CORRIENTE;
         break;
     }
   }
