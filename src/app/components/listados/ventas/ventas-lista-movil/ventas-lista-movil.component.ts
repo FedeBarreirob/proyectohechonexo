@@ -20,6 +20,9 @@ export class VentasListaMovilComponent implements OnInit, OnDestroy {
   @Input()
   filtrarPorPesificacion: boolean = true;
 
+  @Input()
+  cargarOnScroll: boolean = true;
+
   @Output()
   seleccionMovimiento: EventEmitter<FijacionVenta> = new EventEmitter<FijacionVenta>();
 
@@ -129,7 +132,7 @@ export class VentasListaMovilComponent implements OnInit, OnDestroy {
 
   // funcion que carga mas datos cuando hace scroll
   onScroll() {
-    if (this.cargando == false) {
+    if (this.cargando == false && this.cargarOnScroll == true) {
       this.pagina = this.pagina + 1;
       this.cargarListado(false);
     }

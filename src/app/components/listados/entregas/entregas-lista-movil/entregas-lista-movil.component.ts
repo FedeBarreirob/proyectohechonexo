@@ -20,6 +20,9 @@ export class EntregasListaMovilComponent implements OnInit, OnDestroy {
   @Input()
   filtrarPorAplicacion: boolean = true;
 
+  @Input()
+  cargarOnScroll: boolean = true;
+
   @Output()
   seleccionMovimiento: EventEmitter<MovimientoEntrega> = new EventEmitter<MovimientoEntrega>();
 
@@ -126,7 +129,7 @@ export class EntregasListaMovilComponent implements OnInit, OnDestroy {
 
   // funcion que carga mas datos cuando hace scroll
   onScroll() {
-    if (this.cargando == false) {
+    if (this.cargando == false && this.cargarOnScroll == true) {
       this.pagina = this.pagina + 1;
       this.cargarListado(false);
     }

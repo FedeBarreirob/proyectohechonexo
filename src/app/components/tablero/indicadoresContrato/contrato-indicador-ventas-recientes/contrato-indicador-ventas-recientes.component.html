@@ -8,5 +8,5 @@
   </div>
 </div>
 
-<app-ventas-lista-movil [observerFiltroListadoMovil$]="observerFiltroListadoMovil$" [filtrarPorPesificacion]="false"
+<app-ventas-lista-movil [observerFiltroListadoMovil$]="observerFiltroListadoMovil$" [cargarOnScroll]="false" [filtrarPorPesificacion]="false"
   [cantidadPorPagina]="5" (cargandoChange)="cargandoListado($event)"></app-ventas-lista-movil>

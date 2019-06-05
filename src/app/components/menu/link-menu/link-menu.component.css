@@ -8,8 +8,8 @@ a.link-menu {
     background-color: white !important;
 }
 
-a.active.link-menu {
-    border-left: 8px solid#23B950 !important;
+a.active {
+    border-left: 8px solid rgba(35, 185, 80, 1) !important;
     background-color: rgba(35, 185, 80, 0.1) !important;
     color: #23B950;
 }
