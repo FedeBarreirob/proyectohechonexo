@@ -4,7 +4,7 @@
   <div class="contenedor-link" fxLayout="row" fxLayoutAlign="center center">
 
     <div fxFlex="13%">
-      <img src="{{rla.isActive ? link.imagenActiva : link.imagen }}" alt="{{link.nombre}}" />
+      <img *ngIf="link.imagenActiva != null && link.imagen != null" src="{{rla.isActive ? link.imagenActiva : link.imagen }}" alt="{{link.nombre}}" />
     </div>
 
     <div fxFlex="87%" class="link-nombre">

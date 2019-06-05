@@ -153,8 +153,8 @@ export class MainNavComponent implements OnInit, OnDestroy {
 			{
 				nombre: "Administrador de cuentas",
 				rutaLink: "/administrador-de-cuentas",
-				imagen: "assets/sidebar/casa.png",
-				imagenActiva: "assets/sidebar/casa-hot.png",
+				imagen: "assets/sidebar/perfil.png",
+				imagenActiva: "assets/sidebar/perfil-hot.png",
 				permitido: this.authService.esAdmin || this.authService.esRol('SUB_ADMINISTRADOR') || this.authService.esRol('COMERCIAL')
 			},
 			/*{
@@ -172,17 +172,17 @@ export class MainNavComponent implements OnInit, OnDestroy {
 				permitido: true
 			},
 			{
-				nombre: "Archivo de comprobantes",
+				nombre: "Comprobantes",
 				rutaLink: "/archivo-de-comprobantes",
-				imagen: "assets/sidebar/casa.png",
-				imagenActiva: "assets/sidebar/casa-hot.png",
+				imagen: "assets/sidebar/folder.png",
+				imagenActiva: "assets/sidebar/folder-hot.png",
 				permitido: true
 			},
 			{
 				nombre: "Cerrar Sersión",
 				rutaLink: "/login",
-				imagen: "assets/sidebar/casa.png",
-				imagenActiva: "assets/sidebar/casa-hot.png",
+				imagen: null,
+				imagenActiva: null,
 				permitido: true
 			}
 		];

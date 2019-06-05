@@ -9,7 +9,7 @@ a.link-menu {
 }
 
 a.active.link-menu {
-    border-left: 8px solid#23B950;
+    border-left: 8px solid#23B950 !important;
     background-color: rgba(35, 185, 80, 0.1) !important;
     color: #23B950;
 }
