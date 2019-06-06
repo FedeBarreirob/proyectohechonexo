@@ -136,6 +136,7 @@ import { CuentaCorrienteAplicadaSaldoComponent } from './components/listados/cue
 import { ComprobantesComponent } from './components/listados/comprobantes/comprobantes/comprobantes.component';
 import { SelectorArchivoComponent } from './components/listados/comprobantes/selector-archivo/selector-archivo.component';
 import { FiltroArchivosComprobantesComponent } from './components/listados/comprobantes/descargas-comprobantes/filtro-archivos-comprobantes/filtro-archivos-comprobantes.component';
+import { PrecioQQAPipe } from './pipes/precio-qqa.pipe';
 
 registerLocaleData(localeEsAr, 'es-AR');
 
@@ -241,7 +242,8 @@ export function tokenGetter() {
 		CuentaCorrienteAplicadaSaldoComponent,
 		ComprobantesComponent,
 		SelectorArchivoComponent,
-		FiltroArchivosComprobantesComponent
+		FiltroArchivosComprobantesComponent,
+		PrecioQQAPipe
 	],
 	imports: [
 		HttpClientModule,

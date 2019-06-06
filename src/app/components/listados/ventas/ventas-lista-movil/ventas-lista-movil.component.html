@@ -22,14 +22,14 @@
 <div fxLayout="row" fxLayoutAlign="space-around center" class="titulos">
   <div fxFlex="40%">Ref. de entrega</div>
   <div fxFlex="30%">{{unidadMedida | kilosTextoA}} netos</div>
-  <div fxFlex="30%">$/QQ</div>
+  <div fxFlex="30%">$/{{unidadMedida | kilosTextoA}}</div>
 </div>
 
 <div class="contenedor-listado" fxLayout="column" fxLayoutWrap fxLayoutAlign="none" infiniteScroll
   [infiniteScrollDistance]="2" [infiniteScrollThrottle]="50" (scrolled)="onScroll()" [scrollWindow]="false">
 
   <div fxLayout="row" fxLayoutAlign="space-around center" *ngFor="let movimiento of (listado ? listado : [])"
-    class="movimiento-fila" (click)="verDetalle(movimiento)">
+    class="movimiento-fila" (click)="verDetalle(movimiento)" fxLayoutGap="5px">
 
     <div fxFlex="40px">
       <img class="movimiento-icono" src="{{movimiento.especie | imagenEspecie}}" />
@@ -40,12 +40,12 @@
       <p class="fecha">{{movimiento.fecha}}</p>
     </div>
 
-    <div fxFlex="80px" class="kg-netos" align="right">
+    <div fxFlex="60px" class="kg-netos" align="right">
       {{movimiento.kilos | kilosA: unidadMedida | number: '.0-0'}}
     </div>
 
     <div fxFlex="80px" align="right">
-      <span class="precio-qq">${{movimiento.precioPorQuintal | number: '.2'}}</span>
+      <span class="precio-qq">${{movimiento.precioPorQuintal | precioQQA: unidadMedida | number: '.2'}}</span>
       <span class="moneda">{{movimiento.moneda | moneda}}</span>
     </div>
   </div>

@@ -78,6 +78,9 @@ export class EntregasListaMovilComponent implements OnInit, OnDestroy {
   cargarUnidadMedida() {
     if (this.perfilBasico) {
       this.unidadMedida = this.perfilBasico.informacionPersonal.unidadMedidaPeso;
+    } else {
+      this.perfilBasico = this.authenticationService.perfilUsuarioSeleccionado();
+      this.unidadMedida = this.perfilBasico.informacionPersonal.unidadMedidaPeso;
     }
   }
 
