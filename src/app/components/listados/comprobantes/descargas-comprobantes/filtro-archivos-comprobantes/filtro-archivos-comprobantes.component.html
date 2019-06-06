@@ -1,4 +1,4 @@
-<!--<div fxLayout="row" fxLayoutAlign="center" class="encabezado-filtro">
+<div fxLayout="row" fxLayoutAlign="center" class="encabezado-filtro">
   <div fxFlex="80%" class="texto-filtrar">
     FILTRAR
   </div>
@@ -10,26 +10,43 @@
   </div>
 </div>
 
-<!-Origenes de comprobantes->
+<!--Origenes de comprobantes-->
 <div fxLayout="row" fxLayoutAlign="space-around center">
   <div fxFlex="100%" class="titulo-filtro">
     Origen
   </div>
 </div>
 
-<mat-button-toggle-group class="grupo-botones-campanias" [(ngModel)]="cosecha">
-
-  <div
-    *ngFor="let cosecha of ((filtrosEspecieCosecha && filtrosEspecieCosecha.cosechas) ? filtrosEspecieCosecha.cosechas : [])"
-    class="boton-campania">
-    <mat-button-toggle value="{{cosecha.cosecha}}">
-      <div class="texto-campania">{{cosecha.cosechaDescripcion}}</div>
+<mat-button-toggle-group class="grupo-botones-origen" [(ngModel)]="origenSeleccionado">
+  <div class="boton-origen">
+    <mat-button-toggle [value]="origenComprobante.CUENTA_CORRIENTE">
+      <div class="texto-campania">Cuenta corriente</div>
     </mat-button-toggle>
   </div>
 
+  <div class="boton-origen">
+    <mat-button-toggle [value]="origenComprobante.CUENTA_CORRIENTE_APLICADA">
+      <div class="texto-campania">Cta. Cte. Aplicada</div>
+    </mat-button-toggle>
+  </div>
 </mat-button-toggle-group>
 
-<!-Fechas->
+<!-- Filtro de nombre de comprobante -->
+<div fxLayout="row" fxLayoutAlign="space-around center">
+  <div fxFlex="100%" class="titulo-filtro">
+    Filtro por comprobante
+  </div>
+</div>
+
+<div fxLayout="row" fxLayoutAlign="none" class="contenedores-input">
+  <p class="input-label">QUE CONTENGA</p>
+</div>
+
+<div fxLayout="row" fxLayoutAlign="none" class="contenedores-input" style="margin-bottom: 10px;">
+  <input [(ngModel)]="filtroIdentificacionComprobante" matInput class="input">
+</div>
+
+<!--Fechas-->
 
 <div fxLayout="row" fxLayoutAlign="space-around center">
   <div fxFlex="100%" class="titulo-filtro">
@@ -42,8 +59,7 @@
 </div>
 
 <div fxLayout="row" fxLayoutAlign="none" class="contenedores-input">
-  <input readonly [disabled]="cargando==true" [(ngModel)]="fechaDesde" matInput [matDatepicker]="desde"
-    class="input-fecha">
+  <input readonly [(ngModel)]="fechaDesde" matInput [matDatepicker]="desde" class="input-fecha">
   <mat-datepicker-toggle matSuffix [for]="desde"></mat-datepicker-toggle>
   <mat-datepicker touchUi #desde></mat-datepicker>
 </div>
@@ -54,14 +70,13 @@
 
 <div fxLayout="row" fxLayoutAlign="none" class="contenedores-input">
   <div fxFlex="100%">
-    <input readonly [disabled]="cargando==true" [(ngModel)]="fechaHasta" matInput [matDatepicker]="hasta"
-      class="input-fecha">
+    <input readonly [(ngModel)]="fechaHasta" matInput [matDatepicker]="hasta" class="input-fecha">
     <mat-datepicker-toggle matSuffix [for]="hasta"></mat-datepicker-toggle>
     <mat-datepicker touchUi #hasta></mat-datepicker>
   </div>
 </div>
 
-<!-botones->
+<!--botones-->
 <div fxLayout="row" fxLayoutAlign="space-between center" class="contenedor-botones">
   <div fxFlex="50%">
     <button mat-button class="boton-limpiar" (click)="limpiar()">Limpiar</button>
@@ -70,4 +85,4 @@
   <div fxFlex="50%">
     <button mat-button class="boton-aplicar" (click)="aplicar()">Aplicar</button>
   </div>
-</div>-->
+</div>

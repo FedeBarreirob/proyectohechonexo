@@ -2,61 +2,6 @@
 	<div fxLayout="row" fxLayoutAlign="center space-between">
 		<div fxFlex="100%">
 			<mat-progress-bar *ngIf="cargando" mode="indeterminate"></mat-progress-bar>
-
-			<mat-expansion-panel [expanded]="true">
-				<mat-expansion-panel-header>
-					Filtro
-				</mat-expansion-panel-header>
-
-				<div fxLayout="row" fxLayoutGap="5%" fxLayoutAlign="space-between center">
-
-					<div fxFlex="100%" fxFlex.xs="100%">
-						<app-combo-cuenta [disabled]="cargando==true" (change)="seleccionarCuenta($event)"></app-combo-cuenta>
-					</div>
-
-				</div>
-
-				<div fxLayout="row" fxLayoutGap="5%" fxLayoutAlign="space-between center">
-					<div fxFlex="50%" fxFlex.xs="100%">
-						<mat-form-field>
-							<input [disabled]="cargando==true" [(ngModel)]="fechaDesde" matInput [matDatepicker]="desde" placeholder="Fecha desde"
-							 readonly>
-							<mat-datepicker-toggle matSuffix [for]="desde"></mat-datepicker-toggle>
-							<mat-datepicker touchUi #desde></mat-datepicker>
-						</mat-form-field>
-					</div>
-
-					<div fxFlex="50%" fxFlex.xs="100%">
-						<mat-form-field>
-							<input [disabled]="cargando==true" [(ngModel)]="fechaHasta" matInput [matDatepicker]="hasta" placeholder="Fecha hasta"
-							 readonly>
-							<mat-datepicker-toggle matSuffix [for]="hasta"></mat-datepicker-toggle>
-							<mat-datepicker touchUi #hasta></mat-datepicker>
-						</mat-form-field>
-					</div>
-				</div>
-
-				<div fxLayout="row" fxLayoutGap="5%" fxLayoutAlign="space-between center">
-					<div fxFlex="33%" fxFlex.xs="100%">
-						<mat-radio-group class="radio-group" [(ngModel)]="esAplicada" [disabled]="cargando==true">
-							<mat-radio-button class="radio-button" [value]="false">Cuenta Corriente</mat-radio-button>
-							<mat-radio-button class="radio-button" [value]="true">Cuenta Corriente Aplicada</mat-radio-button>
-						</mat-radio-group>
-					</div>
-
-					<div fxFlex="67%" fxFlex.xs="100%">
-						<mat-form-field>
-							<input [disabled]="cargando==true" matInput placeholder="Filtro" [(ngModel)]="filtro">
-						</mat-form-field>
-					</div>
-
-				</div>
-
-				<mat-action-row>
-					<button mat-button mat-raised-button color="primary" (click)="cargarListado()" [disabled]="cargando==true || !esFiltroCompleto()">Buscar</button>
-				</mat-action-row>
-			</mat-expansion-panel>
-
 		</div>
 	</div>
 

@@ -1,7 +1,10 @@
 <mat-sidenav-container class="contenedor-filtro">
   <mat-sidenav #menuFiltro position="end" class="sidenav-filtro">
 
-    <app-filtro-archivos-comprobantes *ngIf="seccionComprobanteSeleccionado == seccionComprobante.COMPROBANTES">
+    <app-filtro-archivos-comprobantes
+      *ngIf="seccionComprobanteSeleccionado == seccionComprobante.COMPROBANTES && cuenta != null"
+      [cuenta]="cuenta.id.codigo" (botonCerrar)="mostrarOcultarFiltros()"
+      (botonAplicar)="cargarListadoArchivosComprobantes($event)">
     </app-filtro-archivos-comprobantes>
 
   </mat-sidenav>
@@ -11,7 +14,8 @@
 
     <app-selector-archivo (seleccion)="seleccionarSeccion($event)"></app-selector-archivo>
 
-    <app-archivo-de-comprobantes *ngIf="seccionComprobanteSeleccionado == seccionComprobante.COMPROBANTES">
+    <app-archivo-de-comprobantes *ngIf="seccionComprobanteSeleccionado == seccionComprobante.COMPROBANTES"
+      [filtroArchivosComprobantes$]="filtroArchivosComprobantes$">
     </app-archivo-de-comprobantes>
   </section>
 </mat-sidenav-container>

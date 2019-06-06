@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input, OnDestroy } from '@angular/core';
 import { FiltroCtaCteComprobanteDescarga } from '../../../../../interfaces/archivo-de-comprobantes/filtro-cta-cte-comprobante-descarga';
 import { ArchivoDeComprobantesService } from '../../../../../services/archivo-de-comprobantes/archivo-de-comprobantes.service';
 import { AuthenticationService } from '../../../../../services/security/authentication.service';
@@ -8,6 +8,8 @@ import { ComprobanteParaDescarga } from '../../../../../interfaces/archivo-de-co
 import { MatSlideToggleChange, MatSnackBar } from '@angular/material';
 import { ComprobantesDownloaderService } from '../../../../../services/sharedServices/downloader/comprobantes-downloader.service';
 import { saveAs } from 'file-saver/FileSaver';
+import { Subject } from 'rxjs';
+import { takeUntil } from 'rxjs/operators';
 
 @Component({
 	selector: 'app-archivo-de-comprobantes',
@@ -15,8 +17,12 @@ import { saveAs } from 'file-saver/FileSaver';
 	styleUrls: ['./archivo-de-comprobantes.component.css'],
 	providers: [DatePipe]
 })
-export class ArchivoDeComprobantesComponent implements OnInit {
+export class ArchivoDeComprobantesComponent implements OnInit, OnDestroy {
 
+	@Input()
+	filtroArchivosComprobantes$: Subject<FiltroCtaCteComprobanteDescarga> = new Subject<FiltroCtaCteComprobanteDescarga>();
+
+	destroy$: Subject<any> = new Subject<any>();
 	cargando: boolean = false;
 	toggleSeleccionTodo: boolean = false;
 
@@ -41,25 +47,26 @@ export class ArchivoDeComprobantesComponent implements OnInit {
 		this.establecerFiltrosPorDefecto();
 	}
 
+	ngOnDestroy(): void {
+		this.destroy$.next();
+		this.destroy$.unsubscribe();
+	}
+
 	ngOnInit() {
+		this.filtroArchivosComprobantes$.subscribe(
+			filtro => this.cargarListado(filtro)
+		);
 	}
 
 	// funcion encargada de cargar el listado de comprobantes
-	cargarListado() {
-		let usuarioLogueado = <UserAuth>this.authenticationService.usuarioLogueado();
-		if (usuarioLogueado != null) {
-			this.cargando = true;
-			this.limpiar();
+	cargarListado(filtro: FiltroCtaCteComprobanteDescarga) {
 
-			let filtroSrv: FiltroCtaCteComprobanteDescarga = {
-				esAplicada: false,
-				cuenta: this.cuenta,
-				fechaDesde: this.datePipe.transform(new Date(this.fechaDesde), 'dd/MM/yyyy'),
-				fechaHasta: this.datePipe.transform(new Date(this.fechaHasta), 'dd/MM/yyyy'),
-				filtro: this.filtro
-			};
+		this.cargando = true;
+		this.limpiar();
 
-			this.archivoDeComprobantesService.comprobantesFiltrados(filtroSrv, usuarioLogueado.token).subscribe(
+		this.archivoDeComprobantesService.comprobantesFiltrados(filtro)
+			.pipe(takeUntil(this.destroy$))
+			.subscribe(
 				respuesta => {
 					if (respuesta.exito) {
 						this.comprobantes = respuesta.datos;
@@ -76,7 +83,6 @@ export class ArchivoDeComprobantesComponent implements OnInit {
 					this.cargando = false;
 				}
 			);
-		}
 	}
 
 	// funcion que actualiza el listado de comprobantes seleccionados
@@ -167,6 +173,6 @@ export class ArchivoDeComprobantesComponent implements OnInit {
 	seleccionarCuenta(cuentaSeleccionada?: string) {
 		this.cuenta = cuentaSeleccionada;
 		this.establecerFiltrosPorDefecto();
-		this.cargarListado();
+		
 	}
 }
