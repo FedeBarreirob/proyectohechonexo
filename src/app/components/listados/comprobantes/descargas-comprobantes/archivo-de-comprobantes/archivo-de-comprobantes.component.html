@@ -1,44 +1,42 @@
-<div class="container" fxLayout="column" fxLayout.xs="column" fxLayoutWrap fxLayoutGap="0.5%" fxLayoutAlign="space-around stretch">
-	<div fxLayout="row" fxLayoutAlign="center space-between">
-		<div fxFlex="100%">
-			<mat-progress-bar *ngIf="cargando" mode="indeterminate"></mat-progress-bar>
-		</div>
+<div class="contenedor-listado" fxLayout="column" fxLayoutWrap fxLayoutAlign="none" infiniteScroll
+	[infiniteScrollDistance]="2" [infiniteScrollThrottle]="50" (scrolled)="onScroll()" [scrollWindow]="false">
+
+	<mat-selection-list (ngModelChange)="actualizarSeleccion($event)" [(ngModel)]="comprobantesSeleccionados">
+		<mat-list-option *ngFor="let comprobante of comprobantes" [value]="comprobante" class="comprobante-fila" [disabled]="comprobante.existeArchivo == false">
+
+			<div fxLayout="row" fxLayoutAlign="space-between center">
+
+				<div fxFlex="24px">
+					<mat-icon svgIcon="pdf"></mat-icon>
+				</div>
+
+				<div fxFlex class="identificacion-comprobante">
+					{{comprobante.comprobante}}
+				</div>
+
+			</div>
+
+			<div fxLayout="row" fxLayoutAlign="space-between center">
+				<div fxFlexOffset="24px" fxFlex [ngClass]="(comprobante.existeArchivo)?'ok':'bad'">
+					{{ comprobante.existeArchivo ? 'Disponible para su descarga' : 'No disponible para su descarga' }}
+				</div>
+			</div>
+		</mat-list-option>
+	</mat-selection-list>
+
+	<!--Spinner-->
+	<div fxLayout="row" fxLayoutAlign="center center" *ngIf="cargando == true" style="margin-top: 10px">
+		<mat-spinner diameter="24"></mat-spinner>
 	</div>
 
-	<div fxLayout="row" fxLayoutAlign="center space-between">
+</div>
 
-		<div fxFlex="100%">
-			<mat-card>
-				<mat-card-title>Archivo de comprobantes</mat-card-title>
-
-				<mat-card-content *ngIf="cargando==false && comprobantes.length != 0">
-
-					<div align="right">
-						<mat-slide-toggle [color]="primary" [(ngModel)]="toggleSeleccionTodo" (change)="seleccionarTodoONada($event)">
-							Todos
-						</mat-slide-toggle>
-					</div>
-
-					<mat-selection-list (ngModelChange)="actualizarSeleccion($event)" [(ngModel)]="comprobantesSeleccionados">
-						<mat-list-option *ngFor="let comprobante of comprobantes" [value]="comprobante">
-							<h4 mat-line>
-								<mat-icon svgIcon="pdf"></mat-icon> {{comprobante.comprobante}}
-							</h4>
-							<p mat-line><span [ngClass]="(comprobante.existeArchivo)?'ok':'bad'">{{ comprobante.existeArchivo ? 'Disponible
-									para
-									su descarga' : 'No disponible para su descarga' }}</span></p>
-						</mat-list-option>
-					</mat-selection-list>
-
-				</mat-card-content>
-			</mat-card>
-		</div>
-
+<!--Boton de descarga del comprobante-->
+<div fxLayout="row" fxLayoutAlign="space-between center" class="botonera">
+	<div fxFlex="100%">
+		<button mat-button class="boton-descarga-comprobante" (click)="descargar()"
+			[disabled]="cargando==true || comprobantesSeleccionados.length == 0 || comprobantes.length == 0">
+			Descargar seleccionados
+		</button>
 	</div>
-
-	<button color="primary" *ngIf="comprobantesSeleccionados.length != 0" [disabled]="cargando==true" mat-mini-fab class="custom-button"
-	 (click)="descargar()">
-		<mat-icon aria-label="Descargar">cloud_download</mat-icon>
-	</button>
-
 </div>

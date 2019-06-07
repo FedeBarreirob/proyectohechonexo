@@ -14,8 +14,9 @@
 
     <app-selector-archivo (seleccion)="seleccionarSeccion($event)"></app-selector-archivo>
 
-    <app-archivo-de-comprobantes *ngIf="seccionComprobanteSeleccionado == seccionComprobante.COMPROBANTES"
-      [filtroArchivosComprobantes$]="filtroArchivosComprobantes$">
+    <app-archivo-de-comprobantes
+      *ngIf="seccionComprobanteSeleccionado == seccionComprobante.COMPROBANTES && cuenta != null"
+      [filtroArchivosComprobantes$]="filtroArchivosComprobantes$" [cuenta]="cuenta.id.codigo">
     </app-archivo-de-comprobantes>
   </section>
 </mat-sidenav-container>

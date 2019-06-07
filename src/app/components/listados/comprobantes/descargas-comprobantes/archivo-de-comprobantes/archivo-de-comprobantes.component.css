@@ -1,26 +1,54 @@
-mat-form-field {
-    width: 100%;
+.contenedor-listado {
+    height: 60vh;
+    overflow-y: scroll;
+    padding-left: 17px;
+    padding-right: 17px;
 }
 
-.custom-button {
-    position: fixed;
-    right: 30px;
-    bottom: 30px;
-}
-
-.radio-group {
-    display: inline-flex;
-    flex-direction: column;
-}
-
-.radio-button {
-    margin: 5px;
+.identificacion-comprobante {
+    color: #333333;
+    font-family: Rubik;
+    font-size: 16px;
 }
 
 .ok {
-    color: green !important;
+    color: #23B950;
+    font-family: Rubik;
+    font-size: 11px;
 }
 
 .bad {
-    color: red !important;
+    color: #E8021D;
+    font-family: Rubik;
+    font-size: 11px;
+}
+
+.comprobante-fila {
+    width: 100%;
+    border: 1px solid rgba(35, 185, 80, 0.08);
+    border-radius: 4px;
+    margin-bottom: 3px;
+    background-color: white;
+    margin-top: 3px;
+    padding-top: 10px;
+    padding-bottom: 10px;
+}
+
+.boton-descarga-comprobante {
+    height: 40px;
+    width: 100%;
+    background-color: #2DA442;
+    border: 1px solid #2DA442;
+    border-radius: 4px;
+    color: #FFFFFF;
+    font-family: Rubik;
+    font-size: 14px;
+    font-weight: bold;
+    margin-top: 10px;
+}
+
+.botonera {
+    width: 100%;
+    padding-left: 17px;
+    padding-right: 17px;
 }

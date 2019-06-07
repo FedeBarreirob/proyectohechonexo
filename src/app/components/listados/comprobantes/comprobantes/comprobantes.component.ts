@@ -52,7 +52,6 @@ export class ComprobantesComponent implements OnInit {
    * @param filtro Filtro para la busqueda de comprobantes
    */
   cargarListadoArchivosComprobantes(filtro: FiltroCtaCteComprobanteDescarga) {
-    console.log(filtro);
     this.filtroArchivosComprobantes$.next(filtro);
   }
 }

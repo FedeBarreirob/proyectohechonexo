@@ -1,9 +1,6 @@
 import { Component, OnInit, Input, OnDestroy } from '@angular/core';
 import { FiltroCtaCteComprobanteDescarga } from '../../../../../interfaces/archivo-de-comprobantes/filtro-cta-cte-comprobante-descarga';
 import { ArchivoDeComprobantesService } from '../../../../../services/archivo-de-comprobantes/archivo-de-comprobantes.service';
-import { AuthenticationService } from '../../../../../services/security/authentication.service';
-import { UserAuth } from '../../../../../models/security/user';
-import { DatePipe } from '@angular/common';
 import { ComprobanteParaDescarga } from '../../../../../interfaces/archivo-de-comprobantes/comprobante-para-descarga';
 import { MatSlideToggleChange, MatSnackBar } from '@angular/material';
 import { ComprobantesDownloaderService } from '../../../../../services/sharedServices/downloader/comprobantes-downloader.service';
@@ -12,167 +9,176 @@ import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
 
 @Component({
-	selector: 'app-archivo-de-comprobantes',
-	templateUrl: './archivo-de-comprobantes.component.html',
-	styleUrls: ['./archivo-de-comprobantes.component.css'],
-	providers: [DatePipe]
+  selector: 'app-archivo-de-comprobantes',
+  templateUrl: './archivo-de-comprobantes.component.html',
+  styleUrls: ['./archivo-de-comprobantes.component.css']
 })
 export class ArchivoDeComprobantesComponent implements OnInit, OnDestroy {
 
-	@Input()
-	filtroArchivosComprobantes$: Subject<FiltroCtaCteComprobanteDescarga> = new Subject<FiltroCtaCteComprobanteDescarga>();
+  @Input()
+  filtroArchivosComprobantes$: Subject<FiltroCtaCteComprobanteDescarga> = new Subject<FiltroCtaCteComprobanteDescarga>();
 
-	destroy$: Subject<any> = new Subject<any>();
-	cargando: boolean = false;
-	toggleSeleccionTodo: boolean = false;
+  @Input()
+  cuenta: string
 
-	// filtros
-	esAplicada: boolean = false;
-	cuenta: string;
-	fechaDesde: string;
-	fechaHasta: string = (new Date()).toISOString();
-	filtro: string = "";
+  pagina: number = 1;
+  cantidadPorPagina: number = 50;
+  filtro: FiltroCtaCteComprobanteDescarga;
 
-	// listado de las referencias a los comprobantes
-	comprobantes: Array<ComprobanteParaDescarga> = [];
-	comprobantesSeleccionados: Array<ComprobanteParaDescarga> = [];
+  destroy$: Subject<any> = new Subject<any>();
+  cargando: boolean = false;
+  toggleSeleccionTodo: boolean = false;
 
-	constructor(
-		private archivoDeComprobantesService: ArchivoDeComprobantesService,
-		private authenticationService: AuthenticationService,
-		private datePipe: DatePipe,
-		private comprobantesDownloaderService: ComprobantesDownloaderService,
-		private snackBar: MatSnackBar
-	) {
-		this.establecerFiltrosPorDefecto();
-	}
+  // listado de las referencias a los comprobantes
+  comprobantes: Array<ComprobanteParaDescarga> = [];
+  comprobantesSeleccionados: Array<ComprobanteParaDescarga> = [];
 
-	ngOnDestroy(): void {
-		this.destroy$.next();
-		this.destroy$.unsubscribe();
-	}
+  constructor(
+    private archivoDeComprobantesService: ArchivoDeComprobantesService,
+    private comprobantesDownloaderService: ComprobantesDownloaderService,
+    private snackBar: MatSnackBar
+  ) { }
 
-	ngOnInit() {
-		this.filtroArchivosComprobantes$.subscribe(
-			filtro => this.cargarListado(filtro)
-		);
-	}
+  ngOnDestroy(): void {
+    this.destroy$.next();
+    this.destroy$.unsubscribe();
+  }
 
-	// funcion encargada de cargar el listado de comprobantes
-	cargarListado(filtro: FiltroCtaCteComprobanteDescarga) {
+  ngOnInit() {
+    this.filtroArchivosComprobantes$.subscribe(
+      filtro => {
+        this.filtro = filtro;
+        this.cargarListado(true);
+      }
+    );
 
-		this.cargando = true;
-		this.limpiar();
+    this.cargarFiltroPorDefecto();
+    this.cargarListado(true);
+  }
 
-		this.archivoDeComprobantesService.comprobantesFiltrados(filtro)
-			.pipe(takeUntil(this.destroy$))
-			.subscribe(
-				respuesta => {
-					if (respuesta.exito) {
-						this.comprobantes = respuesta.datos;
-					} else {
-						this.comprobantes = [];
-					}
+  /**
+   * Función encargada de cargar el filtro por defecto
+   */
+  cargarFiltroPorDefecto() {
+    this.filtro = {
+      esAplicada: false,
+      cuenta: this.cuenta,
+      paginado: true
+    }
+  }
 
-					this.comprobantesSeleccionados = [];
-					this.toggleSeleccionTodo = false;
-					this.cargando = false;
-				},
-				error => {
-					console.log(error);
-					this.cargando = false;
-				}
-			);
-	}
+  // funcion encargada de cargar el listado de comprobantes
+  cargarListado(limpiar: boolean) {
+    if (!this.cargando) {
+      this.cargando = true;
 
-	// funcion que actualiza el listado de comprobantes seleccionados
-	actualizarSeleccion($event) {
-		this.comprobantesSeleccionados = $event;
+      if (limpiar) {
+        this.limpiar();
+      }
 
-		// actualizar estado del seleccionador de todos
-		this.toggleSeleccionTodo = this.sonTodosSeleccionados();
-	}
+      this.filtro.paginado = true;
+      this.filtro.pagina = this.pagina;
+      this.filtro.cantPorPagina = this.cantidadPorPagina;
 
-	// funcion que determina si todos los item se encuentran seleccionados
-	private sonTodosSeleccionados(): boolean {
-		try {
-			if (this.comprobantes.length == this.comprobantesSeleccionados.length) {
-				return true;
-			} else {
-				return false;
-			}
-		} catch (e) {
-			console.log(e);
-			return false;
-		}
-	}
+      this.archivoDeComprobantesService.comprobantesFiltrados(this.filtro)
+        .pipe(takeUntil(this.destroy$))
+        .subscribe(respuesta => {
 
-	// funcion encargada de seleccionar todos o ningun comprobante
-	seleccionarTodoONada($event: MatSlideToggleChange) {
-		if ($event.checked) {
-			this.comprobantesSeleccionados = this.comprobantes;
-		} else {
-			this.comprobantesSeleccionados = [];
-		}
-	}
+          if (respuesta.exito == true && respuesta.datos != null) {
+            this.agregarAlListado(respuesta.datos);
+          }
 
-	// funcion que verifica si se encuentra los filtros completos para efectuar la busqueda de comprobantes
-	esFiltroCompleto(): boolean {
-		if (this.cuenta && this.fechaDesde && this.fechaHasta) {
-			return true;
-		} else {
-			return false;
-		}
-	}
+          this.cargando = false;
+        }, () => {
+          this.cargando = false;
+        });
+    }
+  }
 
-	// funcion encargada de ejecutar el proceso de descarga
-	descargar() {
-		this.cargando = true;
+  // funcion encargada de agregar la paginas de datos recuperados al listado
+  private agregarAlListado(comprobantesPagina: Array<ComprobanteParaDescarga>) {
+    comprobantesPagina.forEach(
+      comprobante => {
+        this.comprobantes.push(comprobante);
+      }
+    );
+  }
 
-		this.comprobantesDownloaderService.comprobanteDescargadoMasivo(this.comprobantesSeleccionados)
-			.subscribe(respuesta => {
-				var mediaType = 'application/zip';
-				var blob = new Blob([respuesta], { type: mediaType });
-				var filename = 'comprobantes.zip';
+  // funcion que actualiza el listado de comprobantes seleccionados
+  actualizarSeleccion($event) {
+    this.comprobantesSeleccionados = $event;
 
-				if (blob.size !== 0) {
-					saveAs(blob, filename);
-				} else {
-					this.openSnackBar("Ninguno de los comprobantes indicados se encuentran para su descarga.", "Descarga de comprobantes");
-				}
+    // actualizar estado del seleccionador de todos
+    this.toggleSeleccionTodo = this.sonTodosSeleccionados();
+  }
 
-				this.cargando = false;
-			}, error => {
-				console.log(error);
-				this.cargando = false;
-			});
-	}
+  // funcion que determina si todos los item se encuentran seleccionados
+  private sonTodosSeleccionados(): boolean {
+    try {
+      if (this.comprobantes.length == this.comprobantesSeleccionados.length) {
+        return true;
+      } else {
+        return false;
+      }
+    } catch (e) {
+      console.log(e);
+      return false;
+    }
+  }
 
-	// abre una notificacion
-	openSnackBar(message: string, action: string) {
-		this.snackBar.open(message, action, {
-			duration: 2000,
-		});
-	}
+  // funcion encargada de seleccionar todos o ningun comprobante
+  seleccionarTodoONada($event: MatSlideToggleChange) {
+    if ($event.checked) {
+      this.comprobantesSeleccionados = this.comprobantes;
+    } else {
+      this.comprobantesSeleccionados = [];
+    }
+  }
 
-	// funcion que acomoda los filtros a default
-	establecerFiltrosPorDefecto() {
-		let sieteDiasAtras: Date = new Date();
-		sieteDiasAtras.setDate(sieteDiasAtras.getDate() - 7);
-		this.fechaDesde = sieteDiasAtras.toISOString();
+  // funcion encargada de ejecutar el proceso de descarga
+  descargar() {
+    if (this.cargando == false) {
+      this.cargando = true;
 
-		this.fechaHasta = (new Date()).toISOString();
-	}
+      this.comprobantesDownloaderService.comprobanteDescargadoMasivo(this.comprobantesSeleccionados)
+        .subscribe(respuesta => {
+          var mediaType = 'application/zip';
+          var blob = new Blob([respuesta], { type: mediaType });
+          var filename = 'comprobantes.zip';
 
-	// funcion encargada de limpiar para nueva generacion
-	limpiar() {
-		this.comprobantes = [];
-	}
+          if (blob.size !== 0) {
+            saveAs(blob, filename);
+          } else {
+            this.openSnackBar("Ninguno de los comprobantes indicados se encuentran para su descarga.");
+          }
 
-	// funcion encargada de capturar el valor de la cuenta
-	seleccionarCuenta(cuentaSeleccionada?: string) {
-		this.cuenta = cuentaSeleccionada;
-		this.establecerFiltrosPorDefecto();
-		
-	}
+          this.cargando = false;
+        }, error => {
+          console.log(error);
+          this.cargando = false;
+        });
+    }
+  }
+
+  // abre una notificacion
+  openSnackBar(message: string) {
+    this.snackBar.open(message, null, {
+      duration: 2000,
+    });
+  }
+
+  // funcion encargada de limpiar para nueva generacion
+  limpiar() {
+    this.comprobantes = [];
+    this.pagina = 1;
+    this.comprobantes.splice(0, this.comprobantes.length);
+  }
+
+  // funcion que carga mas datos cuando hace scroll
+  onScroll() {
+    if (this.cargando == false) {
+      this.pagina = this.pagina + 1;
+      this.cargarListado(false);
+    }
+  }
 }
