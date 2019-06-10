@@ -18,5 +18,10 @@
       *ngIf="seccionComprobanteSeleccionado == seccionComprobante.COMPROBANTES && cuenta != null"
       [filtroArchivosComprobantes$]="filtroArchivosComprobantes$" [cuenta]="cuenta.id.codigo">
     </app-archivo-de-comprobantes>
+
+    <app-tenencias-impositivas
+      *ngIf="seccionComprobanteSeleccionado == seccionComprobante.TENENCIAS_IMPOSITIVAS && cuenta != null"
+      [cuenta]="cuenta.id.codigo">
+    </app-tenencias-impositivas>
   </section>
 </mat-sidenav-container>

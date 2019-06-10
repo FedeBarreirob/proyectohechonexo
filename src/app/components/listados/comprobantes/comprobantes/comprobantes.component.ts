@@ -44,7 +44,11 @@ export class ComprobantesComponent implements OnInit {
    * Muestra u oculta el panel de filtros
    */
   mostrarOcultarFiltros() {
-    this.sidenav.toggle();
+    if (this.seccionComprobanteSeleccionado == SeccionComprobantes.COMPROBANTES) {
+      this.sidenav.toggle();
+    } else {
+      this.sidenav.close();
+    }
   }
 
   /**

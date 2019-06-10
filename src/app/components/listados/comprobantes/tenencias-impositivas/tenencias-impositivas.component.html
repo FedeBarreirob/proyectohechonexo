@@ -1,0 +1,21 @@
+<div fxLayout="row" fxLayoutAlign="none" class="contenedores-input">
+  <p class="input-label">Fecha</p>
+</div>
+
+<div fxLayout="row" fxLayoutAlign="none" class="contenedores-input">
+  <input readonly [(ngModel)]="fecha" matInput [matDatepicker]="fechaReporte" class="input-fecha">
+  <mat-datepicker-toggle matSuffix [for]="fechaReporte"></mat-datepicker-toggle>
+  <mat-datepicker touchUi #fechaReporte></mat-datepicker>
+</div>
+
+<!--Boton de descarga del comprobante-->
+<div fxLayout="row" fxLayoutAlign="space-between center" class="botonera">
+  <div fxFlex="100%">
+    <button mat-button class="boton-descarga-comprobante" (click)="descargar()"
+      [disabled]="cargando==true">
+      Descargar archivo de Excel
+    </button>
+  </div>
+</div>
+
+<app-loading [cargando$]="cargando$"></app-loading>

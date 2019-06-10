@@ -137,6 +137,7 @@ import { ComprobantesComponent } from './components/listados/comprobantes/compro
 import { SelectorArchivoComponent } from './components/listados/comprobantes/selector-archivo/selector-archivo.component';
 import { FiltroArchivosComprobantesComponent } from './components/listados/comprobantes/descargas-comprobantes/filtro-archivos-comprobantes/filtro-archivos-comprobantes.component';
 import { PrecioQQAPipe } from './pipes/precio-qqa.pipe';
+import { TenenciasImpositivasComponent } from './components/listados/comprobantes/tenencias-impositivas/tenencias-impositivas.component';
 
 registerLocaleData(localeEsAr, 'es-AR');
 
@@ -243,7 +244,8 @@ export function tokenGetter() {
 		ComprobantesComponent,
 		SelectorArchivoComponent,
 		FiltroArchivosComprobantesComponent,
-		PrecioQQAPipe
+		PrecioQQAPipe,
+		TenenciasImpositivasComponent
 	],
 	imports: [
 		HttpClientModule,
