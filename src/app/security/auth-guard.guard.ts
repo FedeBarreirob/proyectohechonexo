@@ -19,14 +19,22 @@ export class AuthGuardGuard implements CanActivate {
 
     // si existe, esta logueado
     if (this.authenticationService.esLogueado && this.elRolPermiteIngresar(next.data)) {
-      
+
       // indicamos que el login es ok para que carge las opciones del menu
       this.authenticationService.loginCompleto();
-      
+
       return true;
     } else {
-      this.router.navigate(['/login'], { queryParams: { returnUrl: state.url } });
-      return false;
+      this.authenticationService.renovarToken().subscribe(
+        exito => {
+          if (exito == true) {
+            return true;
+          } else {
+            this.router.navigate(['/login'], { queryParams: { returnUrl: state.url } });
+            return false;
+          }
+        }
+      );
     }
   }
 

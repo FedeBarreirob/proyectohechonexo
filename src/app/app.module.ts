@@ -31,8 +31,6 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations'
 // Material
 import { MaterialModule } from './material';
 
-// Interceptadores
-import { ErrorAuthInterceptor } from './interceptors/security/error.auth.interceptor'
 import { JwtInterceptor } from './interceptors/security/jwt.interceptor'
 
 // Componentes
@@ -281,7 +279,6 @@ export function tokenGetter() {
 		NgxSpinnerModule
 	],
 	providers: [
-		{ provide: HTTP_INTERCEPTORS, useClass: ErrorAuthInterceptor, multi: true },
 		{ provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true },
 		{ provide: LOCALE_ID, useValue: 'es-AR' },
 		DecimalPipe,

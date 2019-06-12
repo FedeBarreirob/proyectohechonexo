@@ -62,6 +62,36 @@ export class AuthenticationService {
 		this.logoutCompleto();
 	}
 
+	/**
+	 * Renueva el token si corresponde, devuelve true si se renovó correctamente sino false
+	 */
+	renovarToken(): Observable<boolean> {
+		return new Observable<boolean>(observable => {
+
+			let credencialesRecordadas = this.credencialesRecordadas();
+			if (credencialesRecordadas != null) {
+
+				this.login(credencialesRecordadas.username, credencialesRecordadas.password)
+					.pipe(share())
+					.subscribe(
+						respuesta => {
+							if (respuesta.exito == true) {
+								this.guardarTokenUsuarioLogueado(credencialesRecordadas.username, respuesta.token);
+								observable.next(true);
+							} else {
+								observable.next(false);
+							}
+						},
+						error => observable.next(false)
+					);
+
+			} else {
+				observable.next(false);
+			}
+
+		});
+	}
+
 	// funcion que indica si el usuario se encuentra logueado en el sistema
 	// no se verifica validez del token asociado
 	get esLogueado() {
