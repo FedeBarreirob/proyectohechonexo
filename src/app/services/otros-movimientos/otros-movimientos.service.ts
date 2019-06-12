@@ -17,12 +17,11 @@ export class OtrosMovimientosService {
 	constructor(private http: HttpClient) { }
 
 	// funcion que retorna un observable del listado con los otros movimientos asociado a una cuenta dada
-	listado(filtro: FiltroOtrosMovimientos, token: string) {
+	listado(filtro: FiltroOtrosMovimientos) {
 
 		const httpOptions = {
 			headers: new HttpHeaders({
-				'Content-Type': 'application/json',
-				'Authorization': `Bearer ${token}`
+				'Content-Type': 'application/json'
 			})
 		};
 
@@ -32,12 +31,11 @@ export class OtrosMovimientosService {
 	}
 
 	// funcion que retorna un listado de filtros especie cosecha
-	listadoFiltrosEspecieCosecha(cuenta: string, token: string): Observable<Array<FiltroEspecieCosecha>> {
+	listadoFiltrosEspecieCosecha(cuenta: string): Observable<Array<FiltroEspecieCosecha>> {
 
 		const httpOptions = {
 			headers: new HttpHeaders({
-				'Content-Type': 'application/json',
-				'Authorization': `Bearer ${token}`
+				'Content-Type': 'application/json'
 			})
 		};
 

@@ -152,7 +152,7 @@ export class PerfilesEdicionComponent implements OnInit {
 		this.buscadorComercial.valueChanges.subscribe(
 			termino => {
 				if (termino != '') {
-					this.perfilService.perfilesDeUnRolDado(RoleEnum['COMERCIAL'], termino, this.usuarioLogueado.token).subscribe(
+					this.perfilService.perfilesDeUnRolDado(RoleEnum['COMERCIAL'], termino).subscribe(
 						respuesta => {
 							this.listadoComerciales = respuesta;
 						}
@@ -194,7 +194,7 @@ export class PerfilesEdicionComponent implements OnInit {
 
 	// funcion encargada de guardar un nuevo perfil
 	guardarNuevo() {
-		this.perfilService.registrarNuevo(this.perfilBasico, this.usuarioLogueado.token)
+		this.perfilService.registrarNuevo(this.perfilBasico)
 			.subscribe(respuesta => {
 
 				this.guardando = false;
@@ -216,7 +216,7 @@ export class PerfilesEdicionComponent implements OnInit {
 
 	// funcion encargada de actualizar un perfil
 	guardarModificar() {
-		this.perfilService.actualizar(this.perfilBasico, this.usuarioLogueado.token)
+		this.perfilService.actualizar(this.perfilBasico)
 			.subscribe(respuesta => {
 
 				this.guardando = false;

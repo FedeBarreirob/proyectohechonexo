@@ -4,8 +4,6 @@ import { FiltroEntregas } from '../../interfaces/entregas/filtro-entregas';
 import { environment } from '../../../environments/environment';
 import { Observable } from 'rxjs';
 import { FiltroEspecieCosecha } from '../../interfaces/varios/filtro-especie-cosecha';
-import { AuthenticationService } from '../security/authentication.service';
-import { UserAuth } from '../../models/security/user';
 import { Cacheable } from 'ngx-cacheable';
 
 @Injectable({
@@ -17,8 +15,7 @@ export class EntregasService {
   private urlEntregasFiltrosEspecieCosecha = `${environment.hostEntregasYVentas}/Entregas/filtrosEspecieCosechas`;
 
   constructor(
-    private http: HttpClient,
-    private authenticationService: AuthenticationService
+    private http: HttpClient
   ) {
   }
 
@@ -26,12 +23,9 @@ export class EntregasService {
   @Cacheable()
   listadoEntregas(filtro: FiltroEntregas) {
 
-    let usuarioLogueado = <UserAuth>this.authenticationService.usuarioLogueado();
-
     const httpOptions = {
       headers: new HttpHeaders({
-        'Content-Type': 'application/json',
-        'Authorization': `Bearer ${usuarioLogueado.token}`
+        'Content-Type': 'application/json'
       })
     };
 
@@ -44,12 +38,9 @@ export class EntregasService {
   @Cacheable()
   listadoFiltrosEspecieCosecha(cuenta: string): Observable<FiltroEspecieCosecha> {
 
-    let usuarioLogueado = <UserAuth>this.authenticationService.usuarioLogueado();
-
     const httpOptions = {
       headers: new HttpHeaders({
-        'Content-Type': 'application/json',
-        'Authorization': `Bearer ${usuarioLogueado.token}`
+        'Content-Type': 'application/json'
       })
     };
 

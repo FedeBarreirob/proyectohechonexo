@@ -14,12 +14,11 @@ export class ComprobantesPendFacturarService {
   constructor(private http: HttpClient) { }
 
   // funcion que retorna un observable del listado con los comprobantes pendientes de facturar asociado a una cuenta dada
-  listadoComprobPendFact(filtro: FiltroComprobantesPendFacturar, token: string) {
+  listadoComprobPendFact(filtro: FiltroComprobantesPendFacturar) {
 
     const httpOptions = {
       headers: new HttpHeaders({
-        'Content-Type': 'application/json',
-        'Authorization': `Bearer ${token}`
+        'Content-Type': 'application/json'
       })
     };
 

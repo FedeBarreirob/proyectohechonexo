@@ -1,9 +1,7 @@
 import { Injectable } from '@angular/core';
 import { environment } from '../../../environments/environment';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { AuthenticationService } from '../security/authentication.service';
 import { FiltroResumenContratoCompraVenta } from '../../interfaces/contratos/filtro-resumen-contrato-compra-venta';
-import { UserAuth } from '../../models/security/user';
 import { Observable } from 'rxjs';
 import { FiltroEspecieCosecha } from '../../interfaces/varios/filtro-especie-cosecha';
 import { ResponseServicio } from '../../interfaces/varios/response-servicio';
@@ -22,8 +20,7 @@ export class ContratosService {
   private urlContratosIndicadoresPorEspecie = `${environment.hostEntregasYVentas}/contratos/indicadoresPorEspecie`;
 
   constructor(
-    private http: HttpClient,
-    private authenticationService: AuthenticationService
+    private http: HttpClient
   ) { }
 
   /**
@@ -33,12 +30,9 @@ export class ContratosService {
   @Cacheable()
   listadoContratosResumidos(filtro: FiltroResumenContratoCompraVenta) {
 
-    let usuarioLogueado = <UserAuth>this.authenticationService.usuarioLogueado();
-
     const httpOptions = {
       headers: new HttpHeaders({
-        'Content-Type': 'application/json',
-        'Authorization': `Bearer ${usuarioLogueado.token}`
+        'Content-Type': 'application/json'
       })
     };
 
@@ -52,12 +46,9 @@ export class ContratosService {
   @Cacheable()
   listadoFiltrosEspecieCosecha(cuenta: string): Observable<FiltroEspecieCosecha> {
 
-    let usuarioLogueado = <UserAuth>this.authenticationService.usuarioLogueado();
-
     const httpOptions = {
       headers: new HttpHeaders({
-        'Content-Type': 'application/json',
-        'Authorization': `Bearer ${usuarioLogueado.token}`
+        'Content-Type': 'application/json'
       })
     };
 
@@ -73,12 +64,9 @@ export class ContratosService {
   @Cacheable()
   contrato(nroSucursal: number, nroComprobante: number): Observable<ResponseServicio> {
 
-    let usuarioLogueado = <UserAuth>this.authenticationService.usuarioLogueado();
-
     const httpOptions = {
       headers: new HttpHeaders({
-        'Content-Type': 'application/json',
-        'Authorization': `Bearer ${usuarioLogueado.token}`
+        'Content-Type': 'application/json'
       })
     };
 
@@ -93,12 +81,9 @@ export class ContratosService {
   @Cacheable()
   contratoResumenPorTk(tk: string): Observable<ResponseServicio> {
 
-    let usuarioLogueado = <UserAuth>this.authenticationService.usuarioLogueado();
-
     const httpOptions = {
       headers: new HttpHeaders({
-        'Content-Type': 'application/json',
-        'Authorization': `Bearer ${usuarioLogueado.token}`
+        'Content-Type': 'application/json'
       })
     };
 
@@ -113,12 +98,9 @@ export class ContratosService {
   @Cacheable()
   contratoResumenPorId(id: number): Observable<ResponseServicio> {
 
-    let usuarioLogueado = <UserAuth>this.authenticationService.usuarioLogueado();
-
     const httpOptions = {
       headers: new HttpHeaders({
-        'Content-Type': 'application/json',
-        'Authorization': `Bearer ${usuarioLogueado.token}`
+        'Content-Type': 'application/json'
       })
     };
 
@@ -134,12 +116,9 @@ export class ContratosService {
   @Cacheable()
   indicadoresPorEspecie(cuenta: string, cosecha?: string): Observable<ResponseServicio> {
 
-    let usuarioLogueado = <UserAuth>this.authenticationService.usuarioLogueado();
-
     const httpOptions = {
       headers: new HttpHeaders({
-        'Content-Type': 'application/json',
-        'Authorization': `Bearer ${usuarioLogueado.token}`
+        'Content-Type': 'application/json'
       })
     };
 

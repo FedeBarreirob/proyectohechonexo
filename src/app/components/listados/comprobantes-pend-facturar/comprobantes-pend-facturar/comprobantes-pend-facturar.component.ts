@@ -2,7 +2,6 @@ import { Component, OnInit } from '@angular/core';
 import { ComprobantesPendFacturarService } from '../../../../services/comprobantes-pend-facturar/comprobantes-pend-facturar.service';
 import { MovimientoComprobantesPendFact, ComprobantesPendFactTotales } from '../../../../interfaces/comprobantes-pend-facturar/listado-comp-pend-fact';
 import { FiltroComprobantesPendFacturar } from '../../../../interfaces/comprobantes-pend-facturar/filtro-comp-pend-fact';
-import { UserAuth } from '../../../../models/security/user';
 import { AuthenticationService } from '../../../../services/security/authentication.service';
 import { DatePipe } from '@angular/common';
 import { MatDialog } from '@angular/material';
@@ -19,48 +18,46 @@ import { PerfilBasico } from '../../../../interfaces/perfiles/perfil-basico';
 export class ComprobantesPendFacturarComponent implements OnInit {
 
   public listadoCompPendFact: Array<MovimientoComprobantesPendFact>;
-  private movimientoSeleccionado: MovimientoComprobantesPendFact = null;
   public totales: ComprobantesPendFactTotales = null;
   public cargando: boolean;
 
   public cuenta: string = "";
   public perfilBasico: PerfilBasico;
   public fechaDesde: string;
-	public fechaHasta: string = (new Date()).toISOString();
+  public fechaHasta: string = (new Date()).toISOString();
 
   constructor(private compPendFactService: ComprobantesPendFacturarService,
     private authenticationService: AuthenticationService,
     private datePipe: DatePipe,
-    public dialog: MatDialog) { 
-      this.establecerFiltrosPorDefecto();
-    }
+    public dialog: MatDialog) {
+    this.establecerFiltrosPorDefecto();
+  }
 
   ngOnInit() {
     this.cargando = false;
-    
+
     this.authenticationService.perfilActivo$.subscribe(
       perfil => this.perfilBasico = perfil);
   }
 
   // funcion que ejecuta la carga del listado de comprobantes pendientes de facturar
   cargarListado() {
-    this.cargando = true;
-    this.limpiar();
+    if (this.cargando == false) {
+      this.cargando = true;
+      this.limpiar();
 
-    let filtro: FiltroComprobantesPendFacturar = {
-      cuenta: this.cuenta,
-      fechaDesde: this.datePipe.transform(new Date(this.fechaDesde), 'dd/MM/yyyy'),
-      fechaHasta: this.datePipe.transform(new Date(this.fechaHasta), 'dd/MM/yyyy')
-    }
+      let filtro: FiltroComprobantesPendFacturar = {
+        cuenta: this.cuenta,
+        fechaDesde: this.datePipe.transform(new Date(this.fechaDesde), 'dd/MM/yyyy'),
+        fechaHasta: this.datePipe.transform(new Date(this.fechaHasta), 'dd/MM/yyyy')
+      }
 
-    let usuarioLogueado = <UserAuth>this.authenticationService.usuarioLogueado();
-    if (usuarioLogueado != null) {
-      return this.compPendFactService.listadoComprobPendFact(filtro, usuarioLogueado.token).subscribe(respuesta => {
+      return this.compPendFactService.listadoComprobPendFact(filtro).subscribe(respuesta => {
         this.listadoCompPendFact = respuesta.datos.listado;
         this.totales = respuesta.datos.totales;
 
         this.cargando = false;
-      }, error => {
+      }, () => {
         this.cargando = false;
       });
     }
@@ -68,7 +65,6 @@ export class ComprobantesPendFacturarComponent implements OnInit {
 
   // funcion que muestra el detalle de un movimiento seleccionado
   verDetalle(movimiento: MovimientoComprobantesPendFact) {
-    this.movimientoSeleccionado = movimiento;
 
     this.dialog.open(ComprobantesPendFacturarDetalleComponent, {
       data: movimiento
@@ -89,21 +85,21 @@ export class ComprobantesPendFacturarComponent implements OnInit {
   seleccionarCuenta(cuentaSeleccionada?: string) {
     this.cuenta = cuentaSeleccionada;
     this.establecerFiltrosPorDefecto();
-		this.cargarListado();
+    this.cargarListado();
   }
 
   // funcion que acomoda los filtros a default
-	establecerFiltrosPorDefecto() {
-		let sieteDiasAtras: Date = new Date();
-		sieteDiasAtras.setDate(sieteDiasAtras.getDate() - 7);
-		this.fechaDesde = sieteDiasAtras.toISOString();
+  establecerFiltrosPorDefecto() {
+    let sieteDiasAtras: Date = new Date();
+    sieteDiasAtras.setDate(sieteDiasAtras.getDate() - 7);
+    this.fechaDesde = sieteDiasAtras.toISOString();
 
-		this.fechaHasta = (new Date()).toISOString();
-	}
+    this.fechaHasta = (new Date()).toISOString();
+  }
 
-	// funcion encargada de limpiar para nueva generacion
-	limpiar() {
-		this.listadoCompPendFact = [];
-		this.totales = null;
-	}
+  // funcion encargada de limpiar para nueva generacion
+  limpiar() {
+    this.listadoCompPendFact = [];
+    this.totales = null;
+  }
 }

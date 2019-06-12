@@ -13,7 +13,6 @@ import { SolicitudAlta } from '../../interfaces/perfiles/solicitud-alta';
 import { Observable } from 'rxjs';
 import { PerfilBasicoInfoPersonal } from '../../interfaces/perfiles/perfil-basico-informacion-personal';
 import { AuthenticationService } from '../security/authentication.service';
-import { UserAuth } from '../../models/security/user';
 
 
 @Injectable({
@@ -39,12 +38,11 @@ export class PerfilesService {
 	) { }
 
 	// funcion encargada de registrar un nuevo perfil
-	registrarNuevo(nuevoPerfil: PerfilBasico, token: string) {
+	registrarNuevo(nuevoPerfil: PerfilBasico) {
 
 		const httpOptions = {
 			headers: new HttpHeaders({
-				'Content-Type': 'application/json',
-				'Authorization': `Bearer ${token}`
+				'Content-Type': 'application/json'
 			})
 		};
 
@@ -55,12 +53,11 @@ export class PerfilesService {
 	}
 
 	// funcion que devuelve un listado paginado
-	listadoPaginado(filtro: FiltroGenericoLista, token: string) {
+	listadoPaginado(filtro: FiltroGenericoLista) {
 
 		const httpOptions = {
 			headers: new HttpHeaders({
-				'Content-Type': 'application/json',
-				'Authorization': `Bearer ${token}`
+				'Content-Type': 'application/json'
 			})
 		};
 
@@ -71,12 +68,11 @@ export class PerfilesService {
 	}
 
 	// funcion encargada de actualizar la informacion personal y cuentas de un perfil existente
-	actualizar(perfil: PerfilBasico, token: string) {
+	actualizar(perfil: PerfilBasico) {
 
 		const httpOptions = {
 			headers: new HttpHeaders({
-				'Content-Type': 'application/json',
-				'Authorization': `Bearer ${token}`
+				'Content-Type': 'application/json'
 			})
 		};
 
@@ -87,12 +83,11 @@ export class PerfilesService {
 	}
 
 	// funcion que devuelve los datos del perfil que se encuentra vinculado al token actual
-	perfilLogueado(token: string) {
+	perfilLogueado() {
 
 		const httpOptions = {
 			headers: new HttpHeaders({
-				'Content-Type': 'application/json',
-				'Authorization': `Bearer ${token}`
+				'Content-Type': 'application/json'
 			})
 		};
 
@@ -101,11 +96,10 @@ export class PerfilesService {
 	}
 
 	// funcion que devuelve un listado de perfiles correspondiente a un rol dado
-	perfilesDeUnRolDado(rolId: any, filtro: string, token: string) {
+	perfilesDeUnRolDado(rolId: any, filtro: string) {
 
 		let httpHeaders = new HttpHeaders()
-			.set('Content-Type', 'application/json')
-			.set('Authorization', `Bearer ${token}`);
+			.set('Content-Type', 'application/json');
 
 		let httpParams = new HttpParams()
 			.set('rolId', rolId)
@@ -128,12 +122,11 @@ export class PerfilesService {
 	}
 
 	// funcion encargada de dar de baja un perfil
-	darDeBajaPerfil(perfilId: number, baja: boolean, token: string) {
+	darDeBajaPerfil(perfilId: number, baja: boolean) {
 
 		const httpOptions = {
 			headers: new HttpHeaders({
-				'Content-Type': 'application/json',
-				'Authorization': `Bearer ${token}`
+				'Content-Type': 'application/json'
 			})
 		};
 
@@ -147,12 +140,11 @@ export class PerfilesService {
 	}
 
 	// funcion encargada de eliminar un perfil
-	eliminarPerfil(perfilId: number, token: string) {
+	eliminarPerfil(perfilId: number) {
 
 		const httpOptions = {
 			headers: new HttpHeaders({
-				'Content-Type': 'application/json',
-				'Authorization': `Bearer ${token}`
+				'Content-Type': 'application/json'
 			})
 		};
 
@@ -161,12 +153,11 @@ export class PerfilesService {
 	}
 
 	// funcion que devuelve los datos de una entidad a partir del codigo de algoritmo
-	datosCuenta(cuenta: string, token: string) {
+	datosCuenta(cuenta: string) {
 
 		const httpOptions = {
 			headers: new HttpHeaders({
-				'Content-Type': 'application/json',
-				'Authorization': `Bearer ${token}`
+				'Content-Type': 'application/json'
 			})
 		};
 
@@ -181,6 +172,7 @@ export class PerfilesService {
 
 	// funcion que envia la solicitud de alta
 	solicitudAlta(solicitud: SolicitudAlta): Observable<ResponseServicio> {
+
 		const httpOptions = {
 			headers: new HttpHeaders({ 'Content-Type': 'application/json' })
 		};
@@ -196,12 +188,9 @@ export class PerfilesService {
 	// funcion encargada de actualizar la unidad de medida de peso
 	actualizarUnidadMedidaPeso(perfilInfoPersonal: PerfilBasicoInfoPersonal) {
 
-		let usuarioLogueado = <UserAuth>this.authenticationService.usuarioLogueado();
-
 		const httpOptions = {
 			headers: new HttpHeaders({
-				'Content-Type': 'application/json',
-				'Authorization': `Bearer ${usuarioLogueado.token}`
+				'Content-Type': 'application/json'
 			})
 		};
 
@@ -217,12 +206,9 @@ export class PerfilesService {
 	 */
 	actualizarDatosPersonales(perfil: PerfilBasico) {
 
-		let usuarioLogueado = <UserAuth>this.authenticationService.usuarioLogueado();
-
 		const httpOptions = {
 			headers: new HttpHeaders({
-				'Content-Type': 'application/json',
-				'Authorization': `Bearer ${usuarioLogueado.token}`
+				'Content-Type': 'application/json'
 			})
 		};
 
@@ -237,10 +223,8 @@ export class PerfilesService {
 	 */
 	reCargarPerfilLogueado(): Observable<boolean> {
 
-		let usuarioLogueado = <UserAuth>this.authenticationService.usuarioLogueado();
-
 		return new Observable<boolean>(observer => {
-			this.perfilLogueado(usuarioLogueado.token).subscribe(respuesta => {
+			this.perfilLogueado().subscribe(respuesta => {
 
 				if (respuesta != null && respuesta.exito == true) {
 					localStorage.setItem('currentUserPerfil', JSON.stringify(respuesta.datos));
@@ -251,7 +235,7 @@ export class PerfilesService {
 					console.log(respuesta);
 					observer.next(false);
 				}
-			}, error => {
+			}, () => {
 				observer.next(false);
 			});
 

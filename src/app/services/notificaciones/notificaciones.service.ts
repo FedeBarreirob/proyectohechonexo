@@ -4,8 +4,6 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { ResponseServicio } from '../../interfaces/varios/response-servicio';
 import { Observable, Subject } from 'rxjs';
 import { Notificacion } from '../../interfaces/notificaciones/notificacion';
-import { AuthenticationService } from '../security/authentication.service';
-import { UserAuth } from '../../models/security/user';
 import { Cacheable } from 'ngx-cacheable';
 
 @Injectable({
@@ -18,8 +16,7 @@ export class NotificacionesService {
 	private urlNotificacionesCambiarEstado = `${environment.hostComunicaciones}/Notificaciones/cambiarEstado`;
 
 	constructor(
-		private http: HttpClient,
-		private authenticationService: AuthenticationService
+		private http: HttpClient
 	) { }
 
 	private _huboCambiosEstadoMensajes$ = new Subject<boolean>();
@@ -28,12 +25,9 @@ export class NotificacionesService {
 	@Cacheable()
 	listadoNotificaciones(perfilId: number, numeroPagina: number, cantPorPagina: number): Observable<ResponseServicio> {
 
-		let usuarioLogueado = <UserAuth>this.authenticationService.usuarioLogueado();
-
 		const httpOptions = {
 			headers: new HttpHeaders({
-				'Content-Type': 'application/json',
-				'Authorization': `Bearer ${usuarioLogueado.token}`
+				'Content-Type': 'application/json'
 			})
 		};
 
@@ -44,12 +38,9 @@ export class NotificacionesService {
 	// funcion que retorna la cantidad de mensajes en un estado indicado
 	cantidadMensajesEnEstadoIndicado(perfilId: number, estado: number): Observable<ResponseServicio> {
 
-		let usuarioLogueado = <UserAuth>this.authenticationService.usuarioLogueado();
-
 		const httpOptions = {
 			headers: new HttpHeaders({
-				'Content-Type': 'application/json',
-				'Authorization': `Bearer ${usuarioLogueado.token}`
+				'Content-Type': 'application/json'
 			})
 		};
 
@@ -60,12 +51,9 @@ export class NotificacionesService {
 	// funcion encargada de marcar un mensaje segun estado dado
 	marcarNotificacion(notificacion: Notificacion): Observable<ResponseServicio> {
 
-		let usuarioLogueado = <UserAuth>this.authenticationService.usuarioLogueado();
-
 		const httpOptions = {
 			headers: new HttpHeaders({
-				'Content-Type': 'application/json',
-				'Authorization': `Bearer ${usuarioLogueado.token}`
+				'Content-Type': 'application/json'
 			})
 		};
 

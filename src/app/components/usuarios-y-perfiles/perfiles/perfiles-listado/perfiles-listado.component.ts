@@ -70,7 +70,7 @@ export class PerfilesListadoComponent implements OnInit {
 			this.filtro.cantPorPagina = event.pageSize;
 		}
 
-		this.perfilService.listadoPaginado(this.filtro, this.usuarioLogueado.token).subscribe(
+		this.perfilService.listadoPaginado(this.filtro).subscribe(
 			respuesta => {
 				this.listaPaginada = <ListadoPaginado>respuesta.datos;
 				this.cargando = false;
@@ -87,8 +87,7 @@ export class PerfilesListadoComponent implements OnInit {
 	habilitacion(perfil: PerfilBasico, $event: MatSlideToggleChange) {
 		this.perfilService.darDeBajaPerfil(
 			perfil.informacionPersonal.id,
-			!$event.checked,
-			this.usuarioLogueado.token
+			!$event.checked
 		).subscribe(
 			respuesta => {
 				if (respuesta.exito == true) {
@@ -119,8 +118,7 @@ export class PerfilesListadoComponent implements OnInit {
 		if (confirm(mensaje)) {
 
 			this.perfilService.eliminarPerfil(
-				perfil.informacionPersonal.id,
-				this.usuarioLogueado.token
+				perfil.informacionPersonal.id
 			).subscribe(
 				respuesta => {
 					if (respuesta.exito == true) {

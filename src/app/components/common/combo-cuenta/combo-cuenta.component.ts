@@ -1,7 +1,6 @@
 import { Component, OnInit, Output, EventEmitter, Input, OnDestroy } from '@angular/core';
 import { AuthenticationService } from '../../../services/security/authentication.service';
 import { PerfilBasico } from '../../../interfaces/perfiles/perfil-basico';
-import { UserAuth } from '../../../models/security/user';
 import { InfoSesion } from '../../../interfaces/security/info-sesion';
 import { EntidadAlg } from '../../../interfaces/perfiles/entidad-alg';
 import { CuentaAlgService } from '../../../services/observers/cuentas-alg/cuenta-alg.service';
@@ -63,60 +62,50 @@ export class ComboCuentaComponent implements OnInit, OnDestroy {
 
 	// funcion encargada de seleccionar la ultima cuenta que el usuario utilizo
 	seleccionarUltimaEntidad() {
-		if (this.perfilBasico) {
+		if (this.perfilBasico && this.cargando == false) {
 
 			this.cargando = true;
-			let usuarioLogueado: UserAuth = this.authenticationService.usuarioLogueado();
 
-			if (usuarioLogueado) {
-				this.authenticationService.informacionDeSesion(this.perfilBasico.informacionPersonal.id, usuarioLogueado.token)
-					.pipe(takeUntil(this.destroy$))
-					.subscribe(
-						respuesta => {
-							if (respuesta.exito) {
-								let infoSesion: InfoSesion = respuesta.datos;
-								this.cuentaSeleccionada = this.cuentaAlgCompleto(infoSesion.entidadCodigo);
-								this.cuentaAlgService.notificarSeleccion(this.cuentaSeleccionada);
-								this.change.emit(this.cuentaSeleccionada);
-								this.codigo = (this.cuentaSeleccionada) ? this.cuentaSeleccionada.id.codigo : null;
-							}
-
-							this.cargando = false;
-						},
-						error => {
-							this.cargando = false;
+			this.authenticationService.informacionDeSesion(this.perfilBasico.informacionPersonal.id)
+				.pipe(takeUntil(this.destroy$))
+				.subscribe(
+					respuesta => {
+						if (respuesta.exito) {
+							let infoSesion: InfoSesion = respuesta.datos;
+							this.cuentaSeleccionada = this.cuentaAlgCompleto(infoSesion.entidadCodigo);
+							this.cuentaAlgService.notificarSeleccion(this.cuentaSeleccionada);
+							this.change.emit(this.cuentaSeleccionada);
+							this.codigo = (this.cuentaSeleccionada) ? this.cuentaSeleccionada.id.codigo : null;
 						}
-					);
-			} else {
-				this.cargando = false;
-			}
+
+						this.cargando = false;
+					},
+					() => {
+						this.cargando = false;
+					}
+				);
 		}
 	}
 
 	// funcion encargada de actualizar la entidad por defecto
 	actualizarEntidadPorDefecto() {
-		if (this.perfilBasico) {
+		if (this.perfilBasico && this.cargando == false) {
 			this.cargando = true;
-			let usuarioLogueado: UserAuth = this.authenticationService.usuarioLogueado();
 
-			if (usuarioLogueado) {
-				let infoSesion: InfoSesion = {
-					entidadCodigo: this.cuentaSeleccionada.id.codigo,
-					perfil: this.perfilBasico.informacionPersonal
-				};
+			let infoSesion: InfoSesion = {
+				entidadCodigo: this.cuentaSeleccionada.id.codigo,
+				perfil: this.perfilBasico.informacionPersonal
+			};
 
-				this.authenticationService.guardarInformacionDeSesion(infoSesion, usuarioLogueado.token)
-					.pipe(takeUntil(this.destroy$))
-					.subscribe(
-						respuesta => {
-							this.cargando = false;
-						},
-						error => {
-							this.cargando = false;
-						});
-			} else {
-				this.cargando = false;
-			}
+			this.authenticationService.guardarInformacionDeSesion(infoSesion)
+				.pipe(takeUntil(this.destroy$))
+				.subscribe(
+					() => {
+						this.cargando = false;
+					},
+					() => {
+						this.cargando = false;
+					});
 		}
 	}
 

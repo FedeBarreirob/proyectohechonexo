@@ -1,10 +1,8 @@
 import { Injectable } from '@angular/core';
 import { environment } from '../../../environments/environment';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { AuthenticationService } from '../security/authentication.service';
 import { ResponseServicio } from '../../interfaces/varios/response-servicio';
 import { Observable } from 'rxjs';
-import { UserAuth } from '../../models/security/user';
 
 @Injectable({
   providedIn: 'root'
@@ -14,8 +12,7 @@ export class InformacionTributariaService {
   private urlTenenciaImpositiva = `${environment.hostCtaCte}/informacionTributaria/tenenciaImpositiva`;
 
   constructor(
-    private http: HttpClient,
-    private authenticationService: AuthenticationService
+    private http: HttpClient
   ) { }
 
   /**
@@ -26,12 +23,9 @@ export class InformacionTributariaService {
    */
   reporte(cuenta: string, fecha: string): Observable<ResponseServicio> {
 
-    let usuarioLogueado = <UserAuth>this.authenticationService.usuarioLogueado();
-
     const httpOptions = {
       headers: new HttpHeaders({
-        'Content-Type': 'application/json',
-        'Authorization': `Bearer ${usuarioLogueado.token}`
+        'Content-Type': 'application/json'
       })
     };
 

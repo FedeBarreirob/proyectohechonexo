@@ -14,12 +14,11 @@ export class MercPendEntregarService {
   constructor(private http: HttpClient) { }
 
   // funcion que retorna un observable del listado con las mercaderias pendientes de entregar asociado a una cuenta dada
-  listadoMercPendEntregar(filtro: FiltroMercaderiaPendEntregar, token: string) {
+  listadoMercPendEntregar(filtro: FiltroMercaderiaPendEntregar) {
 
     const httpOptions = {
       headers: new HttpHeaders({
-        'Content-Type': 'application/json',
-        'Authorization': `Bearer ${token}`
+        'Content-Type': 'application/json'
       })
     };
 

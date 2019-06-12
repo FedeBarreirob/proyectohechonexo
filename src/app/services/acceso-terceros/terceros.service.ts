@@ -5,8 +5,6 @@ import { ResponseServicio } from '../../interfaces/varios/response-servicio';
 import { environment } from '../../../environments/environment';
 import { FiltroGenericoListaConFiltroId } from '../../interfaces/varios/filtro-generico-lista-con-filtroid';
 import { BajaTercero } from '../../interfaces/acceso-terceros/baja-tercero';
-import { AuthenticationService } from '../security/authentication.service';
-import { UserAuth } from '../../models/security/user';
 
 @Injectable({
 	providedIn: 'root'
@@ -20,19 +18,15 @@ export class TercerosService {
 	private urlSeguridadTerceroEliminar = `${environment.hostSeguridad}/terceros`;
 
 	constructor(
-		private http: HttpClient,
-		private authenticationService: AuthenticationService
+		private http: HttpClient
 	) { }
 
 	// funcion encargada de registrar un nuevo acceso a tercero
 	registrarNuevo(nuevoAccesoTercero: TerceroBasico) {
 
-		let usuarioLogueado = <UserAuth>this.authenticationService.usuarioLogueado();
-
 		const httpOptions = {
 			headers: new HttpHeaders({
-				'Content-Type': 'application/json',
-				'Authorization': `Bearer ${usuarioLogueado.token}`
+				'Content-Type': 'application/json'
 			})
 		};
 
@@ -45,12 +39,9 @@ export class TercerosService {
 	// funcion que devuelve un listado paginado
 	listadoPaginado(filtro: FiltroGenericoListaConFiltroId) {
 
-		let usuarioLogueado = <UserAuth>this.authenticationService.usuarioLogueado();
-
 		const httpOptions = {
 			headers: new HttpHeaders({
-				'Content-Type': 'application/json',
-				'Authorization': `Bearer ${usuarioLogueado.token}`
+				'Content-Type': 'application/json'
 			})
 		};
 
@@ -63,12 +54,9 @@ export class TercerosService {
 	// funcion encargada de actualizar la informacion de un acceso a tercero existente
 	actualizar(accesoTercero: TerceroBasico) {
 
-		let usuarioLogueado = <UserAuth>this.authenticationService.usuarioLogueado();
-
 		const httpOptions = {
 			headers: new HttpHeaders({
-				'Content-Type': 'application/json',
-				'Authorization': `Bearer ${usuarioLogueado.token}`
+				'Content-Type': 'application/json'
 			})
 		};
 
@@ -81,12 +69,9 @@ export class TercerosService {
 	// funcion encargada de dar de baja un tercero
 	darDeBajaTercero(terceroId: number, baja: boolean) {
 
-		let usuarioLogueado = <UserAuth>this.authenticationService.usuarioLogueado();
-
 		const httpOptions = {
 			headers: new HttpHeaders({
-				'Content-Type': 'application/json',
-				'Authorization': `Bearer ${usuarioLogueado.token}`
+				'Content-Type': 'application/json'
 			})
 		};
 
@@ -102,12 +87,9 @@ export class TercerosService {
 	// funcion encargada de eliminar un terceri
 	eliminarTercero(terceroId: number) {
 
-		let usuarioLogueado = <UserAuth>this.authenticationService.usuarioLogueado();
-
 		const httpOptions = {
 			headers: new HttpHeaders({
-				'Content-Type': 'application/json',
-				'Authorization': `Bearer ${usuarioLogueado.token}`
+				'Content-Type': 'application/json'
 			})
 		};
 

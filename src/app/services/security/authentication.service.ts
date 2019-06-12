@@ -192,11 +192,11 @@ export class AuthenticationService {
 	}
 
 	// funcion encargada de restablecer la contrasena a traves del nombre de usuario
-	restablecerPasswordPorNombreDeUsuario(cambioPassword: CambioPasswordUsuario, token: string): Observable<ResponseServicio> {
+	restablecerPasswordPorNombreDeUsuario(cambioPassword: CambioPasswordUsuario): Observable<ResponseServicio> {
+
 		const httpOptions = {
 			headers: new HttpHeaders({
-				'Content-Type': 'application/json',
-				'Authorization': `Bearer ${token}`
+				'Content-Type': 'application/json'
 			})
 		};
 
@@ -209,11 +209,11 @@ export class AuthenticationService {
 	}
 
 	// funcion encargada de guardar la informacion de sesion
-	guardarInformacionDeSesion(informacionSesion: InfoSesion, token: string): Observable<ResponseServicio> {
+	guardarInformacionDeSesion(informacionSesion: InfoSesion): Observable<ResponseServicio> {
+
 		const httpOptions = {
 			headers: new HttpHeaders({
-				'Content-Type': 'application/json',
-				'Authorization': `Bearer ${token}`
+				'Content-Type': 'application/json'
 			})
 		};
 
@@ -226,12 +226,11 @@ export class AuthenticationService {
 	}
 
 	// funcion que retorna la informacion de sesion de un perfil dado
-	informacionDeSesion(perfilId: number, token: string): Observable<ResponseServicio> {
+	informacionDeSesion(perfilId: number): Observable<ResponseServicio> {
 
 		const httpOptions = {
 			headers: new HttpHeaders({
-				'Content-Type': 'application/json',
-				'Authorization': `Bearer ${token}`
+				'Content-Type': 'application/json'
 			})
 		};
 
@@ -260,12 +259,9 @@ export class AuthenticationService {
 	 */
 	cambiarPassword(nuevoPassword: NuevoPassword): Observable<ResponseServicio> {
 
-		let usuarioLogueado = <UserAuth>this.usuarioLogueado();
-
 		const httpOptions = {
 			headers: new HttpHeaders({
-				'Content-Type': 'application/json',
-				'Authorization': `Bearer ${usuarioLogueado.token}`
+				'Content-Type': 'application/json'
 			})
 		};
 

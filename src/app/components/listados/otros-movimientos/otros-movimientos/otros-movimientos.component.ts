@@ -6,7 +6,6 @@ import { FiltroEspecieCosecha } from '../../../../interfaces/varios/filtro-espec
 import { MatDialog } from '@angular/material';
 import { AuthenticationService } from '../../../../services/security/authentication.service';
 import { OtrosMovimientosService } from '../../../../services/otros-movimientos/otros-movimientos.service';
-import { UserAuth } from '../../../../models/security/user';
 import { FiltroOtrosMovimientos } from '../../../../interfaces/otros-movimientos/filtro-otros-movimientos';
 import { OtrosMovimientosDetalleComponent } from '../otros-movimientos-detalle/otros-movimientos-detalle.component';
 import { OtrosMovimientosMasOperacionesComponent } from '../otros-movimientos-mas-operaciones/otros-movimientos-mas-operaciones.component';
@@ -20,7 +19,6 @@ import { OtrosMovimientosMasOperacionesComponent } from '../otros-movimientos-ma
 export class OtrosMovimientosComponent implements OnInit {
 
 	public listado: Array<MovimientoOtroMovimiento>;
-	private movimientoSeleccionado: MovimientoOtroMovimiento = null;
 	public totales: TotalOtrosMovimientos = null;
 	public cargando: boolean;
 
@@ -64,37 +62,37 @@ export class OtrosMovimientosComponent implements OnInit {
 
 	// funcion encargada de cargar los filtros de especie cosecha cuando se cambia la seleccion de cuenta
 	cargarFiltrosEspecieCosecha() {
-		this.cargandoFiltros = true;
-		this.filtroEspecieCosechaSeleccionado = null;
-		let usuarioLogueado = <UserAuth>this.authenticationService.usuarioLogueado();
-		this.otrosMovimientosService.listadoFiltrosEspecieCosecha(this.cuenta, usuarioLogueado.token).subscribe(
-			respuesta => {
-				this.filtrosEspecieCosecha = respuesta;
-				this.cargandoFiltros = false;
-			}, error => { console.log("error"); this.cargandoFiltros = true; }
-		);
+		if (this.cargandoFiltros == false) {
+			this.cargandoFiltros = true;
+			this.filtroEspecieCosechaSeleccionado = null;
+			this.otrosMovimientosService.listadoFiltrosEspecieCosecha(this.cuenta).subscribe(
+				respuesta => {
+					this.filtrosEspecieCosecha = respuesta;
+					this.cargandoFiltros = false;
+				}, () => { console.log("error"); this.cargandoFiltros = true; }
+			);
+		}
 	}
 
 	// funcion que ejecuta la carga del listado de ventas
 	cargarListado() {
-		this.cargando = true;
-		this.limpiar();
+		if (this.cargando == false) {
+			this.cargando = true;
+			this.limpiar();
 
-		let filtro: FiltroOtrosMovimientos = {
-			cuenta: this.cuenta,
-			fechaDesde: this.datePipe.transform(new Date(this.fechaDesde), 'dd/MM/yyyy'),
-			fechaHasta: this.datePipe.transform(new Date(this.fechaHasta), 'dd/MM/yyyy'),
-			filtroEspecieCosechaDTO: this.filtroEspecieCosechaSeleccionado
-		}
+			let filtro: FiltroOtrosMovimientos = {
+				cuenta: this.cuenta,
+				fechaDesde: this.datePipe.transform(new Date(this.fechaDesde), 'dd/MM/yyyy'),
+				fechaHasta: this.datePipe.transform(new Date(this.fechaHasta), 'dd/MM/yyyy'),
+				filtroEspecieCosechaDTO: this.filtroEspecieCosechaSeleccionado
+			}
 
-		let usuarioLogueado = <UserAuth>this.authenticationService.usuarioLogueado();
-		if (usuarioLogueado != null) {
-			return this.otrosMovimientosService.listado(filtro, usuarioLogueado.token).subscribe(respuesta => {
+			return this.otrosMovimientosService.listado(filtro).subscribe(respuesta => {
 				this.listado = respuesta.datos.listado;
 				this.totales = respuesta.datos.totales;
 
 				this.cargando = false;
-			}, error => {
+			}, () => {
 				this.cargando = false;
 			});
 		}
@@ -102,7 +100,6 @@ export class OtrosMovimientosComponent implements OnInit {
 
 	// funcion que muestra el detalle de un movimiento seleccionado
 	verDetalle(movimiento: MovimientoOtroMovimiento) {
-		this.movimientoSeleccionado = movimiento;
 
 		this.dialog.open(OtrosMovimientosDetalleComponent, {
 			data: movimiento

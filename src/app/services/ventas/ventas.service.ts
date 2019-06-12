@@ -4,8 +4,6 @@ import { FiltroVentas } from '../../interfaces/ventas/filtro-ventas';
 import { environment } from '../../../environments/environment';
 import { FiltroEspecieCosecha } from '../../interfaces/varios/filtro-especie-cosecha';
 import { Observable } from 'rxjs';
-import { AuthenticationService } from '../security/authentication.service';
-import { UserAuth } from '../../models/security/user';
 import { Cacheable } from 'ngx-cacheable';
 
 @Injectable({
@@ -17,20 +15,16 @@ export class VentasService {
   private urlVentasFiltrosEspecieCosecha = `${environment.hostEntregasYVentas}/Ventas/filtrosEspecieCosechas`;
 
   constructor(
-    private http: HttpClient,
-    private authenticationService: AuthenticationService
+    private http: HttpClient
   ) { }
 
   // funcion que retorna un observable del listado con las ventas asociado a una cuenta dada
   @Cacheable()
   listadoVentas(filtro: FiltroVentas) {
 
-    let usuarioLogueado = <UserAuth>this.authenticationService.usuarioLogueado();
-
     const httpOptions = {
       headers: new HttpHeaders({
-        'Content-Type': 'application/json',
-        'Authorization': `Bearer ${usuarioLogueado.token}`
+        'Content-Type': 'application/json'
       })
     };
 
@@ -41,12 +35,9 @@ export class VentasService {
   @Cacheable()
   listadoFiltrosEspecieCosecha(cuenta: string): Observable<FiltroEspecieCosecha> {
 
-    let usuarioLogueado = <UserAuth>this.authenticationService.usuarioLogueado();
-
     const httpOptions = {
       headers: new HttpHeaders({
-        'Content-Type': 'application/json',
-        'Authorization': `Bearer ${usuarioLogueado.token}`
+        'Content-Type': 'application/json'
       })
     };
 

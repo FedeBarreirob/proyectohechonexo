@@ -4,8 +4,6 @@ import { FiltroCtacteAplicada } from '../../interfaces/ctacte-aplicada/filtro-ct
 import { environment } from '../../../environments/environment';
 import { Observable } from 'rxjs';
 import { ResponseServicio } from '../../interfaces/varios/response-servicio';
-import { AuthenticationService } from '../security/authentication.service';
-import { UserAuth } from '../../models/security/user';
 import { Cacheable } from 'ngx-cacheable';
 
 @Injectable({
@@ -18,20 +16,16 @@ export class CtacteAplicadaService {
   private urlCuentaCorrienteAplicadaSaldo = `${environment.hostCtaCte}/CuentaAplicadaCorriente/saldo`;
 
   constructor(
-    private http: HttpClient,
-    private authenticationService: AuthenticationService
+    private http: HttpClient
   ) { }
 
   // funcion que retorna un observable del listado con la ctacte corriente aplicada asociado a una cuenta dada
   @Cacheable()
   listadoCtaCte(filtro: FiltroCtacteAplicada) {
 
-    let usuarioLogueado = <UserAuth>this.authenticationService.usuarioLogueado();
-
     const httpOptions = {
       headers: new HttpHeaders({
-        'Content-Type': 'application/json',
-        'Authorization': `Bearer ${usuarioLogueado.token}`
+        'Content-Type': 'application/json'
       })
     };
 
@@ -47,12 +41,9 @@ export class CtacteAplicadaService {
   @Cacheable()
   saldoGlobal(cuenta: string): Observable<ResponseServicio> {
 
-    let usuarioLogueado = <UserAuth>this.authenticationService.usuarioLogueado();
-
     const httpOptions = {
       headers: new HttpHeaders({
-        'Content-Type': 'application/json',
-        'Authorization': `Bearer ${usuarioLogueado.token}`
+        'Content-Type': 'application/json'
       })
     };
 
@@ -67,12 +58,9 @@ export class CtacteAplicadaService {
   @Cacheable()
   saldoCtaCte(filtro: any) {
 
-    let usuarioLogueado = <UserAuth>this.authenticationService.usuarioLogueado();
-
     const httpOptions = {
       headers: new HttpHeaders({
-        'Content-Type': 'application/json',
-        'Authorization': `Bearer ${usuarioLogueado.token}`
+        'Content-Type': 'application/json'
       })
     };
 

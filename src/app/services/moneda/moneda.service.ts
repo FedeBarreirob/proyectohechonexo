@@ -1,10 +1,8 @@
 import { Injectable } from '@angular/core';
 import { environment } from '../../../environments/environment';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { AuthenticationService } from '../security/authentication.service';
 import { Observable } from 'rxjs';
 import { ResponseServicio } from '../../interfaces/varios/response-servicio';
-import { UserAuth } from '../../models/security/user';
 import { Cacheable } from 'ngx-cacheable';
 
 @Injectable({
@@ -15,8 +13,7 @@ export class MonedaService {
   private urlMonedaCotizacion = `${environment.hostCtaCte}/moneda/cotizacion`;
 
   constructor(
-    private http: HttpClient,
-    private authenticationService: AuthenticationService
+    private http: HttpClient
   ) { }
 
   /**
@@ -26,12 +23,9 @@ export class MonedaService {
   @Cacheable()
   cotizacionHoy(codMoneda: string): Observable<ResponseServicio> {
 
-    let usuarioLogueado = <UserAuth>this.authenticationService.usuarioLogueado();
-
     const httpOptions = {
       headers: new HttpHeaders({
-        'Content-Type': 'application/json',
-        'Authorization': `Bearer ${usuarioLogueado.token}`
+        'Content-Type': 'application/json'
       })
     };
 

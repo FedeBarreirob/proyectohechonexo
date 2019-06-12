@@ -2,7 +2,6 @@ import { Component, OnInit, OnDestroy } from '@angular/core';
 import { FormControl } from '@angular/forms';
 import { PerfilBasico } from '../../../interfaces/perfiles/perfil-basico';
 import { PerfilesService } from '../../../services/perfiles/perfiles.service';
-import { UserAuth } from '../../../models/security/user';
 import { AuthenticationService } from '../../../services/security/authentication.service';
 import { FiltroGenericoLista } from '../../../interfaces/varios/filtro-generico-lista';
 import { debounceTime, tap, takeUntil } from 'rxjs/operators';
@@ -16,7 +15,6 @@ import { Subject } from 'rxjs';
 })
 export class SelectorCuentasComponent implements OnInit, OnDestroy {
 
-	private usuarioLogueado: UserAuth;
 	isLoading = false;
 
 	// busqueda de perfiles
@@ -28,9 +26,7 @@ export class SelectorCuentasComponent implements OnInit, OnDestroy {
 	constructor(
 		private perfilService: PerfilesService,
 		private authenticationService: AuthenticationService
-	) {
-		this.usuarioLogueado = <UserAuth>this.authenticationService.usuarioLogueado();
-	}
+	) { }
 
 	ngOnInit() {
 		this.buscadorPerfiles.valueChanges
@@ -46,7 +42,7 @@ export class SelectorCuentasComponent implements OnInit, OnDestroy {
 
 						let filtro = this.filtroSegunTermino(termino);
 
-						this.perfilService.listadoPaginado(filtro, this.usuarioLogueado.token).subscribe(
+						this.perfilService.listadoPaginado(filtro).subscribe(
 							respuesta => {
 								if (respuesta.exito == true) {
 									this.listadoPerfiles = respuesta.datos.listado;

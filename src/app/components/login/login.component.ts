@@ -81,7 +81,7 @@ export class LoginComponent implements OnInit {
 							this.authenticationService.noRecordarCredenciales();
 						}
 
-						this.cargarPerfilLogueado(respuesta.token).subscribe(cargoPerfil => {
+						this.cargarPerfilLogueado().subscribe(cargoPerfil => {
 							if (cargoPerfil == true) {
 								this.notificacionService.huboCambiosEnEstado();
 								this.authenticationService.loginCompleto();
@@ -106,9 +106,9 @@ export class LoginComponent implements OnInit {
 	}
 
 	// funcion encargada de cargar el perfil
-	private cargarPerfilLogueado(token: string): Observable<boolean> {
+	private cargarPerfilLogueado(): Observable<boolean> {
 		return new Observable<boolean>(observer => {
-			this.perfilService.perfilLogueado(token).subscribe(respuesta => {
+			this.perfilService.perfilLogueado().subscribe(respuesta => {
 
 				if (respuesta != null && respuesta.exito == true) {
 					localStorage.setItem('currentUserPerfil', JSON.stringify(respuesta.datos));
