@@ -13,7 +13,7 @@ import { NuevoPassword } from '../../interfaces/security/nuevo-password';
 import { CambioPasswordUsuario } from '../../interfaces/security/cambio-password-usuario';
 import { InfoSesion } from '../../interfaces/security/info-sesion';
 import { share } from 'rxjs/operators';
-import { UserAuth } from 'src/app/models/security/user';
+import { UserAuth } from '../../models/security/user';
 
 @Injectable({
 	providedIn: 'root'
@@ -275,5 +275,49 @@ export class AuthenticationService {
 			this.urlCambiarPassword,
 			nuevoPasswordJson,
 			httpOptions);
+	}
+
+	/**
+	 * Guarda las credenciales en cookies para ingresar automáticamente al sistem
+	 * @param username 
+	 * @param password 
+	 */
+	guardarCredencialesParaIngresoAutomatico(username: string, password: string) {
+		let credenciales = {
+			username: username,
+			password: password
+		};
+
+		localStorage.setItem("credencialesRecordadas", JSON.stringify(credenciales));
+	}
+
+	/**
+	 * Borra las cookies que almacenan las credenciales
+	 */
+	noRecordarCredenciales() {
+		localStorage.removeItem("credencialesRecordadas");
+	}
+
+	/**
+	 * Devuelve las credenciales recordadas
+	 */
+	credencialesRecordadas(): any {
+		if (localStorage.getItem("credencialesRecordadas")) {
+			return JSON.parse(localStorage.getItem("credencialesRecordadas"));
+		} else {
+			return null;
+		}
+	}
+
+	/**
+	 * Almacena en el cookie currentUser el usuario y token para uso con servicios
+	 * @param username 
+	 * @param token 
+	 */
+	guardarTokenUsuarioLogueado(username: string, token: string) {
+		let user = new UserAuth();
+		user.username = username;
+		user.token = token;
+		localStorage.setItem('currentUser', JSON.stringify(user));
 	}
 }

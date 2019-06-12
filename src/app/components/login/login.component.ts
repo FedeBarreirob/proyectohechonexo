@@ -2,12 +2,11 @@ import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { AuthenticationService } from '../../services/security/authentication.service';
-import { UserAuth } from '../../models/security/user';
 import { PerfilesService } from '../../services/perfiles/perfiles.service';
 import { MatSnackBar } from '@angular/material';
 import { Observable, Subject } from 'rxjs';
 import { NotificacionesService } from '../../services/notificaciones/notificaciones.service';
-import { OneSignalService } from 'src/app/services/push/one-signal.service';
+import { OneSignalService } from '../../services/push/one-signal.service';
 
 @Component({
 	selector: 'app-login',
@@ -34,10 +33,7 @@ export class LoginComponent implements OnInit {
 	) { }
 
 	ngOnInit() {
-		this.frmLogin = this.formBuilder.group({
-			username: [''],
-			password: ['']
-		});
+		this.inicializarFormulario();
 
 		// reset login status
 		this.authenticationService.logout();
@@ -47,20 +43,43 @@ export class LoginComponent implements OnInit {
 		this.returnUrl = this.route.snapshot.queryParams['returnUrl'] || '/';
 	}
 
+	/**
+	 * Inicializa el formulario cargando datos recordados de ingreso si corresponde
+	 */
+	inicializarFormulario() {
+		let credencialesRecordadas = this.authenticationService.credencialesRecordadas();
+
+		if (credencialesRecordadas != null) {
+			this.frmLogin = this.formBuilder.group({
+				username: [credencialesRecordadas.username],
+				password: [credencialesRecordadas.password],
+				recuerdame: [true]
+			});
+		} else {
+			this.frmLogin = this.formBuilder.group({
+				username: [''],
+				password: [''],
+				recuerdame: [false]
+			});
+		}
+	}
+
 	login() {
 		if (!this.logueando) {
 			this.logueando = true;
-
 			this.cargando$.next(true);
 
 			const frm = this.frmLogin.value;
 			this.authenticationService.login(frm.username, frm.password).subscribe(
 				respuesta => {
 					if (respuesta && respuesta.exito == true) {
-						let user = new UserAuth();
-						user.username = frm.username;
-						user.token = respuesta.token;
-						localStorage.setItem('currentUser', JSON.stringify(user));
+						this.authenticationService.guardarTokenUsuarioLogueado(frm.username, respuesta.token);
+
+						if (frm.recuerdame == true) {
+							this.authenticationService.guardarCredencialesParaIngresoAutomatico(frm.username, frm.password);
+						} else {
+							this.authenticationService.noRecordarCredenciales();
+						}
 
 						this.cargarPerfilLogueado(respuesta.token).subscribe(cargoPerfil => {
 							if (cargoPerfil == true) {
@@ -98,7 +117,7 @@ export class LoginComponent implements OnInit {
 					console.log(respuesta);
 					observer.next(false);
 				}
-			}, error => {
+			}, () => {
 				this.openSnackBar("Error al intentar obtener los datos del perfil", "Login");
 				observer.next(false);
 			});
