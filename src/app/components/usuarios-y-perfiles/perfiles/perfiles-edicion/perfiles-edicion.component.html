@@ -31,7 +31,7 @@
 					<div fxFlex="30%">
 						<mat-form-field class="full-width-input">
 							<input [readonly]="esRegistroNuevo == false" matInput placeholder="Usuario"
-								formControlName="username">
+								formControlName="username" #inputUsername [value]="inputUsername.value.toLowerCase()">
 						</mat-form-field>
 					</div>
 
