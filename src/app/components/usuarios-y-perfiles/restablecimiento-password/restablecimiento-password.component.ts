@@ -4,6 +4,7 @@ import { FormGroup, FormBuilder } from '@angular/forms';
 import { MatSnackBar } from '@angular/material';
 import { AuthenticationService } from '../../../services/security/authentication.service';
 import { NuevoPassword } from '../../../interfaces/security/nuevo-password';
+import { Subject } from 'rxjs';
 
 @Component({
 	selector: 'app-restablecimiento-password',
@@ -16,6 +17,7 @@ export class RestablecimientoPasswordComponent implements OnInit {
 	frmRecup: FormGroup;
 	cargando: boolean = false;
 	passwordActualizado: boolean = false;
+	cargando$: Subject<boolean> = new Subject<boolean>();
 
 	constructor(
 		private activatedRouter: ActivatedRoute,
@@ -42,29 +44,34 @@ export class RestablecimientoPasswordComponent implements OnInit {
 
 	// funcion encargada de actualizar la contrasena
 	guardar() {
-		this.cargando = true;
+		if (this.cargando == false) {
+			this.cargando = true;
+			this.cargando$.next(true);
 
-		let nuevoPassword: NuevoPassword = {
-			password: this.frmRecup.value.password,
-			passwordConfirmacion: this.frmRecup.value.confirmacionPassword
-		};
+			let nuevoPassword: NuevoPassword = {
+				password: this.frmRecup.value.password,
+				passwordConfirmacion: this.frmRecup.value.confirmacionPassword
+			};
 
-		this.authenticationService.restablecerPassword(nuevoPassword, this.token).subscribe(
-			respuesta => {
+			this.authenticationService.restablecerPassword(nuevoPassword, this.token).subscribe(
+				respuesta => {
 
-				if (respuesta.exito) {
-					this.passwordActualizado = true;
+					if (respuesta.exito) {
+						this.passwordActualizado = true;
+					}
+
+					this.openSnackBar(respuesta.mensaje);
+					this.cargando = false;
+					this.cargando$.next(false);
+					console.log(this.passwordActualizado);
+				},
+				error => {
+					console.log(error);
+					this.cargando = false;
+					this.cargando$.next(false);
 				}
-
-				this.openSnackBar(respuesta.mensaje);
-				this.cargando = false;
-				console.log(this.passwordActualizado);
-			},
-			error => {
-				console.log(error);
-				this.cargando = false;
-			}
-		);
+			);
+		}
 	}
 
 	// funcion encargada de volver al login
@@ -74,7 +81,7 @@ export class RestablecimientoPasswordComponent implements OnInit {
 
 	// abre una notificacion
 	openSnackBar(message: string) {
-		this.snackBar.open(message, "Recuperación de contraseña", {
+		this.snackBar.open(message, null, {
 			duration: 3000,
 		});
 	}

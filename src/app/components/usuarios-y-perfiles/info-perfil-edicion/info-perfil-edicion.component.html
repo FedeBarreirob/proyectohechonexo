@@ -30,7 +30,7 @@
 
     <div fxLayout="row" fxLayoutAlign="start center" class="contenedor-control">
         <div fxFlex="50%">
-            <input class="input" matInput formControlName="email">
+            <input class="input" matInput formControlName="email" #inputEmail [value]="inputEmail.value.toLowerCase()">
         </div>
     </div>
 </form>

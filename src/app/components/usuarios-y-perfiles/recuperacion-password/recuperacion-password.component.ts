@@ -3,8 +3,9 @@ import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { MatSnackBar } from '@angular/material';
 import { AuthenticationService } from '../../../services/security/authentication.service';
-import { SolicitudRecuperacionPassword } from 'src/app/interfaces/security/solicitud-recuperacion-password';
+import { SolicitudRecuperacionPassword } from '../../../interfaces/security/solicitud-recuperacion-password';
 import { environment } from '../../../../environments/environment';
+import { Subject } from 'rxjs';
 
 @Component({
 	selector: 'app-recuperacion-password',
@@ -16,6 +17,7 @@ export class RecuperacionPasswordComponent implements OnInit {
 	frmRecup: FormGroup;
 	cargando: boolean = false;
 	solicitudEnviada: boolean = false;
+	cargando$: Subject<boolean> = new Subject<boolean>();
 
 	constructor(
 		private formBuilder: FormBuilder,
@@ -32,28 +34,33 @@ export class RecuperacionPasswordComponent implements OnInit {
 
 	// funcion encargada de ejecutar el proceso de solicitud de link para recuperar la contrasena
 	solicitarLink() {
-		this.cargando = true;
+		if (this.cargando == false) {
+			this.cargando = true;
+			this.cargando$.next(true);
 
-		let solicitud: SolicitudRecuperacionPassword = {
-			email: this.frmRecup.value.email,
-			urlCallback: `${environment.baseUrl}/restablecer-password`
-		};
+			let solicitud: SolicitudRecuperacionPassword = {
+				email: this.frmRecup.value.email,
+				urlCallback: `${environment.baseUrl}/restablecer-password`
+			};
 
-		this.authenticationService.solicitudRecuperacionPassword(solicitud).subscribe(
-			respuesta => {
+			this.authenticationService.solicitudRecuperacionPassword(solicitud).subscribe(
+				respuesta => {
 
-				if (respuesta.exito) {
-					this.solicitudEnviada = true;
+					if (respuesta.exito) {
+						this.solicitudEnviada = true;
+					}
+
+					this.openSnackBar(respuesta.mensaje);
+					this.cargando = false;
+					this.cargando$.next(false);
+				},
+				error => {
+					console.log(error);
+					this.cargando = false;
+					this.cargando$.next(false);
 				}
-
-				this.openSnackBar(respuesta.mensaje);
-				this.cargando = false;
-			},
-			error => {
-				console.log(error);
-				this.cargando = false;
-			}
-		);
+			);
+		}
 	}
 
 	// funcion encargada de volver al login
@@ -63,7 +70,7 @@ export class RecuperacionPasswordComponent implements OnInit {
 
 	// abre una notificacion
 	openSnackBar(message: string) {
-		this.snackBar.open(message, "Recuperación de contraseña", {
+		this.snackBar.open(message, null, {
 			duration: 3000,
 		});
 	}
