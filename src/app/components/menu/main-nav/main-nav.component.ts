@@ -118,8 +118,8 @@ export class MainNavComponent implements OnInit, OnDestroy {
 			{
 				nombre: "Ventas",
 				rutaLink: "/ventas",
-				imagen: "assets/sidebar/casa.png",
-				imagenActiva: "assets/sidebar/casa-hot.png",
+				imagen: "assets/sidebar/ventas.png",
+				imagenActiva: "assets/sidebar/ventas-hot.png",
 				permitido: true
 			},
 			/*{
