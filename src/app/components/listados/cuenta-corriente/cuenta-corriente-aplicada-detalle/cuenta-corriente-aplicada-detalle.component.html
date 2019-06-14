@@ -1,0 +1,83 @@
+<app-tool-bar-para-modal [titulo]="'Movimiento'" [urlImagenDerechoIzquierdo]="'assets/toolbar/exportar.png'"
+	(botonSalirEjecutado)="salir()"></app-tool-bar-para-modal>
+
+<!--Encabezado-->
+<div fxLayout="row" fxLayoutAlign="space-around center" class="encabezado-ctacte">
+	<div fxFlex="10%" class="encabezado-imagen">
+		<img *ngIf="movimiento.tipoMovimiento == 'C'" src="assets/varios/entrada24.png" />
+		<img *ngIf="movimiento.tipoMovimiento == 'D'" src="assets/varios/salida24.png" />
+	</div>
+	<div fxFlex="90%">
+		<div fxLayout="column" fxLayoutAlign="none">
+			<div fxFlex="100%" class="encabezado-texto-ctacte">
+				{{movimiento.concepto}}
+			</div>
+
+			<div fxFlex="100%" class="encabezado-texto-importe">
+
+				<!--Pesos-->
+				<span *ngIf="movimiento.moneda == 'P'">
+					<span
+						[ngClass]="{'signo-positivo': movimiento.saldoPesos > 0, 'signo-negativo': movimiento.saldoPesos < 0 }">
+						{{ (movimiento.saldoPesos < 0) ? '-' : (movimiento.saldoPesos > 0) ? '+' : ''}}
+					</span>
+					<span class="moneda">{{ movimiento.moneda | moneda }}</span>
+					{{ ((movimiento.saldoPesos > 0) ? movimiento.saldoPesos : movimiento.saldoPesos * (-1)) | number: '.2-2'}}
+				</span>
+
+				<!--Dolares-->
+				<span *ngIf="movimiento.moneda != 'P'">
+					<span
+						[ngClass]="{'signo-positivo': movimiento.saldoDolares > 0, 'signo-negativo': movimiento.saldoDolares < 0 }">
+						{{ (movimiento.saldoDolares < 0) ? '-' : (movimiento.saldoDolares > 0) ? '+' : ''}}
+					</span>
+					<span class="moneda">{{ movimiento.moneda | moneda }}</span>
+					{{ ((movimiento.saldoDolares > 0) ? movimiento.saldoDolares : movimiento.saldoDolares * (-1)) | number: '.2-2'}}
+				</span>
+			</div>
+
+			<div fxFlex="100%" class="encabezado-fecha">
+				{{movimiento.fechaCtaCte}}
+			</div>
+		</div>
+	</div>
+</div>
+
+<!--Boton de descarga del comprobante-->
+<div fxLayout="row" fxLayoutAlign="space-between center" class="botonera">
+	<div fxFlex="100%">
+		<button mat-button class="boton-descarga-comprobante" (click)="descargarComprobante()">
+			<img src="assets/varios/pdf.png" />
+			Descargar comprobante
+		</button>
+	</div>
+</div>
+
+<!--Datos de la venta-->
+<div fxLayout="row" fxLayoutAlign="space-between none" fxLayoutGap="10px">
+	<div fxFlex="100%" class="titulo-apartados">DATOS DEL MOVIMIENTO</div>
+</div>
+
+<div fxLayout="row" fxLayoutAlign="space-between none" fxLayoutGap="10px">
+	<div fxFlex="50%" class="subtitulo-apartados">TC EMISIÓN</div>
+	<div fxFlex="50%" class="subtitulo-apartados">FECHA VENCIMIENTO</div>
+</div>
+
+<div fxLayout="row" fxLayoutAlign="space-between none" fxLayoutGap="10px">
+	<div fxFlex="50%" class="dato-apartado" *ngIf="movimiento.tipoDeCambio != null">
+		AR${{movimiento.tipoDeCambio | number: '.2-2'}}</div>
+	<div fxFlex="50%" class="dato-apartado" *ngIf="movimiento.tipoDeCambio == null">-</div>
+	<div fxFlex="50%" class="dato-apartado">{{movimiento.fechaVencimiento}}</div>
+</div>
+
+<span *ngIf="movimiento.moneda != 'P'">
+	<div fxLayout="row" fxLayoutAlign="space-between none" fxLayoutGap="10px">
+		<div fxFlex="50%" class="subtitulo-apartados">TC A LA FECHA</div>
+		<div fxFlex="50%" class="subtitulo-apartados">IVA DIF. TC</div>
+	</div>
+
+	<div fxLayout="row" fxLayoutAlign="space-between none" fxLayoutGap="10px">
+		<div fxFlex="50%" class="dato-apartado">AR${{tcHoy | number: '.2-2'}}</div>
+		<div fxFlex="50%" class="dato-apartado">AR${{ivaDiff | number: '.2-2'}}</div>
+	</div>
+</span>

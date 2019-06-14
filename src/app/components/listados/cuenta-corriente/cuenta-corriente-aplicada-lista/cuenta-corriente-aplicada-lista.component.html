@@ -30,20 +30,19 @@
 
       <!--Pesos-->
       <span *ngIf="movimiento.moneda == 'P'">
-        <span
-          [ngClass]="{'signo-positivo': movimiento.importeComprobantePesos > 0, 'signo-negativo': movimiento.importeComprobantePesos < 0 }">
-          {{ (movimiento.importeComprobantePesos < 0) ? '-' : (movimiento.importeComprobantePesos > 0) ? '+' : ''}}
+        <span [ngClass]="{'signo-positivo': movimiento.saldoPesos > 0, 'signo-negativo': movimiento.saldoPesos < 0 }">
+          {{(movimiento.saldoPesos < 0) ? '-' : (movimiento.saldoPesos > 0) ? '+' : ''}}
         </span>
-        {{ ((movimiento.importeComprobantePesos > 0) ? movimiento.importeComprobantePesos : movimiento.importeComprobantePesos * (-1)) | number: '.2'}}
+          {{((movimiento.saldoPesos > 0) ? movimiento.saldoPesos : movimiento.saldoPesos * (-1)) | number: '.2'}}
       </span>
 
       <!--Dolares-->
       <span *ngIf="movimiento.moneda != 'P'">
         <span
-          [ngClass]="{'signo-positivo': movimiento.importeComprobanteDolares > 0, 'signo-negativo': movimiento.importeComprobanteDolares < 0 }">
-          {{ (movimiento.importeComprobanteDolares < 0) ? '-' : (movimiento.importeComprobanteDolares > 0) ? '+' : ''}}
+          [ngClass]="{'signo-positivo': movimiento.saldoDolares > 0, 'signo-negativo': movimiento.saldoDolares < 0 }">
+          {{ (movimiento.saldoDolares < 0) ? '-' : (movimiento.saldoDolares > 0) ? '+' : ''}}
         </span>
-        {{ ((movimiento.importeComprobanteDolares > 0) ? movimiento.importeComprobanteDolares : movimiento.importeComprobanteDolares * (-1)) | number: '.2'}}
+        {{ ((movimiento.saldoDolares > 0) ? movimiento.saldoDolares : movimiento.saldoDolares * (-1)) | number: '.2'}}
       </span>
 
       <span class="moneda">{{ movimiento.moneda | moneda }}</span>
@@ -54,5 +53,5 @@
   <div fxLayout="row" fxLayoutAlign="center center" *ngIf="cargando == true" style="margin-top: 10px">
     <mat-spinner diameter="24"></mat-spinner>
   </div>
-  
+
 </div>

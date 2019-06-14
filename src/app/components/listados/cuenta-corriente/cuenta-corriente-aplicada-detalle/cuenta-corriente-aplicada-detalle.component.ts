@@ -1,16 +1,17 @@
-import { Component, OnInit, Inject, OnDestroy } from '@angular/core';
-import { MAT_DIALOG_DATA, MatSnackBar, MatDialogRef } from '@angular/material';
-import { ComprobantesDownloaderService } from '../../../../services/sharedServices/downloader/comprobantes-downloader.service';
-import { saveAs } from 'file-saver/FileSaver';
+import { Component, OnInit, OnDestroy, Inject } from '@angular/core';
 import { Subject } from 'rxjs';
+import { MAT_DIALOG_DATA, MatSnackBar, MatDialogRef } from '@angular/material';
+import { ComprobantesDownloaderService } from 'src/app/services/sharedServices/downloader/comprobantes-downloader.service';
+import { CuentaCorrienteDetalleComponent } from '../cuenta-corriente-detalle/cuenta-corriente-detalle.component';
 import { takeUntil } from 'rxjs/operators';
+import { saveAs } from 'file-saver/FileSaver';
 
 @Component({
-  selector: 'app-cuenta-corriente-detalle',
-  templateUrl: './cuenta-corriente-detalle.component.html',
-  styleUrls: ['./cuenta-corriente-detalle.component.css']
+  selector: 'app-cuenta-corriente-aplicada-detalle',
+  templateUrl: './cuenta-corriente-aplicada-detalle.component.html',
+  styleUrls: ['./cuenta-corriente-aplicada-detalle.component.css']
 })
-export class CuentaCorrienteDetalleComponent implements OnInit, OnDestroy {
+export class CuentaCorrienteAplicadaDetalleComponent implements OnInit, OnDestroy {
 
   movimiento: any;
   destroy$: Subject<any> = new Subject<any>();
@@ -81,12 +82,13 @@ export class CuentaCorrienteDetalleComponent implements OnInit, OnDestroy {
   calcularIvaDiff() {
     if (this.movimiento.moneda != 'P') {
 
-      let pesificadoAHoy = this.movimiento.importeComprobanteDolares * this.tcHoy;
-      let pesificadoFechaComprobante = this.movimiento.importeComprobanteDolares * this.movimiento.tipoDeCambio;
+      let pesificadoAHoy = this.movimiento.saldoDolares * this.tcHoy;
+      let pesificadoFechaComprobante = this.movimiento.saldoDolares * this.movimiento.tipoDeCambio;
 
       this.ivaDiff = (pesificadoAHoy - pesificadoFechaComprobante) * 21 / 100;
     } else {
       this.ivaDiff = null;
     }
   }
+
 }

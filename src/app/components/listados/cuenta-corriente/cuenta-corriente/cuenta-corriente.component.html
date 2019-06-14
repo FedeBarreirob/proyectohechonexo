@@ -13,7 +13,7 @@
 				<app-cuenta-corriente-aplicada-saldo [observerFiltro$]="observerFiltroCtaCteAplicada$"></app-cuenta-corriente-aplicada-saldo>
 				<app-cuenta-corriente-aplicada-lista [observerFiltro$]="observerFiltroCtaCteAplicada$"
 					(seEncuentraCargando)="cambiarEstadoCargandoCtaCteAplicado($event)"
-					(seleccionMovimiento)="verDetalle($event)">
+					(seleccionMovimiento)="verDetalleAplicado($event)">
 				</app-cuenta-corriente-aplicada-lista>
 			</mat-tab>
 			<mat-tab label="CTA CORRIENTE">

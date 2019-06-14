@@ -1,0 +1,152 @@
+/*encabezado*/
+
+.encabezado-ctacte {
+    margin-top: 30px;
+    margin-bottom: 10px;
+}
+
+.encabezado-texto-ctacte {
+    height: 17px;
+    width: 87px;
+    color: #333333;
+    font-family: Rubik;
+    font-size: 14px;
+    line-height: 17px;
+    width: 100%;
+}
+
+.encabezado-texto-importe {
+    height: 38px;
+    width: 219px;
+    color: #333333;
+    font-family: RubikLight;
+    font-size: 32px;
+    line-height: 38px;
+    width: 100%;
+    text-overflow: ellipsis;
+    overflow: hidden;
+}
+
+.encabezado-fecha {
+    height: 17px;
+    width: 184px;
+    color: #666666;
+    font-family: Rubik;
+    font-size: 14px;
+    line-height: 17px;
+    width: 100%;
+}
+
+.encabezado-imagen {
+    margin-right: 20px;
+}
+
+.encabezado-imagen img {
+    height: 38px;
+    width: 38px;
+}
+
+.signo-positivo {
+    color: green;
+    font-weight: bold;
+}
+
+.signo-negativo {
+    color: red;
+    font-weight: bold;
+}
+
+/*botones*/
+
+.boton-descarga-comprobante {
+    height: 40px;
+    width: 100%;
+    background-color: #2DA442;
+    border: 1px solid #2DA442;
+    border-radius: 4px;
+    color: #FFFFFF;
+    font-family: Rubik;
+    font-size: 14px;
+    font-weight: bold;
+    margin-top: 10px;
+}
+
+.botonera {
+    width: 100%;
+}
+
+/* detalle */
+
+.titulo-apartados {
+    color: #333333;
+    font-family: Rubik;
+    font-size: 14px;
+    letter-spacing: 1.2px;
+    margin-top: 20px;
+    margin-bottom: 10px;
+}
+
+.subtitulo-apartados {
+    color: #999999;
+    font-family: Rubik;
+    font-size: 12px;
+    letter-spacing: 1.2px;
+    margin-top: 10px;
+}
+
+.dato-apartado {
+    color: #333333;
+    font-family: Rubik;
+    font-size: 14px;
+}
+
+.subtitulo-apartados-elipsis {
+    color: #999999;
+    font-family: Rubik;
+    font-size: 12px;
+    letter-spacing: 1.2px;
+    margin-top: 10px;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    white-space: nowrap;
+}
+
+.dato-apartado-elipsis {
+    color: #333333;
+    font-family: Rubik;
+    font-size: 14px;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    white-space: nowrap;
+}
+
+.kilos-titulo {
+    color: #333333;
+    font-family: RubikLight;
+    font-size: 14px;
+}
+
+.kilos-datos {
+    color: #333333;
+    font-family: Rubik;
+    font-size: 20px;
+    line-height: 24px;
+}
+
+.a-fijar {
+    height: 16px;
+    width: 40px;
+    border: 1px solid #999999;
+    border-radius: 2px;
+    color: #666666;
+    font-family: Rubik;
+    font-size: 11px;
+    line-height: 13px;
+    padding: 3px;
+}
+
+.boton-contrato {
+    color: rgba(45, 164, 66, 1);
+    font-family: Rubik;
+    font-size: 14px;
+}

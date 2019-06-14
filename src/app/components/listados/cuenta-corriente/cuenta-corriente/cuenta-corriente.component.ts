@@ -8,7 +8,8 @@ import { takeUntil } from 'rxjs/operators';
 import { DatePipe } from '@angular/common';
 import { CuentaCorrienteDetalleComponent } from '../cuenta-corriente-detalle/cuenta-corriente-detalle.component';
 import { MonedaService } from '../../../../services/moneda/moneda.service';
-import { InfoCtaCte } from 'src/app/enums/info-cta-cte.enum';
+import { InfoCtaCte } from '../../../../enums/info-cta-cte.enum';
+import { CuentaCorrienteAplicadaDetalleComponent } from '../cuenta-corriente-aplicada-detalle/cuenta-corriente-aplicada-detalle.component';
 
 @Component({
   selector: 'app-cuenta-corriente',
@@ -166,6 +167,27 @@ export class CuentaCorrienteComponent implements OnInit, OnDestroy {
   verDetalle(movimiento: any) {
     if (this.cotizacionMoneda != null) {
       this.dialog.open(CuentaCorrienteDetalleComponent, {
+        data: {
+          movimiento: movimiento,
+          tc: this.cotizacionMoneda
+        },
+        maxWidth: '100vw',
+        maxHeight: '100vh',
+        height: '100%',
+        width: '100%'
+      });
+    } else {
+      this.openSnackBar("No se ha cargado la cotización del dólar de hoy, intente mas tarde.");
+    }
+  }
+
+  /**
+   * Función encargada de abrir el dialogo con el detalle del movimiento de cuenta corriente aplicada
+   * @param movimiento Movimiento seleccionado
+   */
+  verDetalleAplicado(movimiento: any) {
+    if (this.cotizacionMoneda != null) {
+      this.dialog.open(CuentaCorrienteAplicadaDetalleComponent, {
         data: {
           movimiento: movimiento,
           tc: this.cotizacionMoneda
