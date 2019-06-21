@@ -1,18 +1,20 @@
 <!--Tipo de cambio-->
 
-<div class="contenedor-fecha-tipocambio" fxLayout="row" fxLayoutAlign="space-between center"
-  *ngIf="saldoGlobal != null && cargando == false">
-  <div fxFlex class="contenedor-fecha-hora">
+<div class="contenedor-fecha-tipocambio" fxLayout="row" fxLayoutAlign="space-between center" *ngIf="cargando == false">
+  <div fxFlex="50%" class="contenedor-fecha-hora">
     <app-fecha-hora></app-fecha-hora>
   </div>
-  <div fxFlex="90px">
-    <div fxLayout="row" fxLayoutAlign="end center">
-      <div fxFlex="16px" class="contenedor-tipo-cambio">
-        <img src="assets/varios/tc.png" class="img-tc" />
-      </div>
-      <div fxFlex class="contenedor-tipo-cambio">
-        TC ${{ saldoGlobal.tipoDeCambio | number: '.2' }}
-      </div>
+  <div fxFlex="50%">
+    <div fxFlex class="contenedor-tipo-cambio">
+      <img src="assets/varios/tc.png" class="img-tc" />
+      <span *ngIf="saldoGlobal != null && seObtuvoSaldoExito == true && saldoGlobal.esTipoCambioDeHoy == true">TC
+        ${{ saldoGlobal.tipoDeCambio | number: '.2' }}</span>
+
+      <span *ngIf="saldoGlobal != null && seObtuvoSaldoExito == true && saldoGlobal.esTipoCambioDeHoy == false">TC
+        ${{ saldoGlobal.tipoDeCambio | number: '.2' }} <span class="fecha-tc">al
+          {{saldoGlobal.fechaTipoCambio}}</span></span>
+
+      <span *ngIf="saldoGlobal == null || seObtuvoSaldoExito == false">TC no disp.</span>
     </div>
   </div>
 </div>
@@ -20,18 +22,25 @@
 <!--Disponible a cobrar-->
 <mat-card class="tarjeta">
 
-  <span *ngIf="saldoGlobal != null && cargando == false">
+  <span *ngIf="cargando == false">
     <div fxLayout="row" fxLayoutAlign="space-between center">
       <div fxFlex="100%" class="titulo-card">DISPONIBLE A COBRAR <img src="assets/varios/entrada.png"
           class="img-indicador" /></div>
     </div>
 
     <div fxLayout="row" fxLayoutAlign="space-between center">
-      <div fxFlex="50%" class="contenedor-importe"><span
+      <div fxFlex="50%" class="contenedor-importe" *ngIf="saldoGlobal != null && seObtuvoSaldoExito == true"><span
           class="importe-cobrar">{{ saldoGlobal.aCobrarVencido | number: '.0-0' }}</span> <span class="ars">ARS</span>
       </div>
-      <div fxFlex="50%" class="contenedor-importe"><span
+      <div fxFlex="50%" class="contenedor-importe" *ngIf="saldoGlobal != null && seObtuvoSaldoExito == true"><span
           class="importe-cobrar">{{ saldoGlobal.aCobrarAVencer | number: '.0-0' }}</span> <span class="ars">ARS</span>
+      </div>
+
+      <div fxFlex="50%" class="contenedor-importe" *ngIf="seObtuvoSaldoExito == false"><span
+          class="importe-cobrar">-</span> <span class="ars">ARS</span>
+      </div>
+      <div fxFlex="50%" class="contenedor-importe" *ngIf="seObtuvoSaldoExito == false"><span
+          class="importe-cobrar">-</span> <span class="ars">ARS</span>
       </div>
     </div>
 
@@ -46,17 +55,24 @@
 <!--A pagar-->
 <mat-card class="tarjeta">
 
-  <span *ngIf="saldoGlobal != null && cargando == false">
+  <span *ngIf="cargando == false">
     <div fxLayout="row" fxLayoutAlign="space-between center">
       <div fxFlex="100%" class="titulo-card">A PAGAR <img src="assets/varios/salida.png" class="img-indicador" /></div>
     </div>
 
     <div fxLayout="row" fxLayoutAlign="space-between center">
-      <div fxFlex="50%" class="contenedor-importe"><span
+      <div fxFlex="50%" class="contenedor-importe" *ngIf="saldoGlobal != null && seObtuvoSaldoExito == true"><span
           class="importe-pagar">{{ saldoGlobal.aPagarVencido | number: '.0-0' }}</span> <span class="ars">ARS</span>
       </div>
-      <div fxFlex="50%" class="contenedor-importe"><span
+      <div fxFlex="50%" class="contenedor-importe" *ngIf="saldoGlobal != null && seObtuvoSaldoExito == true"><span
           class="importe-pagar">{{ saldoGlobal.aPagarAVencer | number: '.0-0' }}</span> <span class="ars">ARS</span>
+      </div>
+
+      <div fxFlex="50%" class="contenedor-importe" *ngIf="seObtuvoSaldoExito == false"><span
+          class="importe-pagar">-</span> <span class="ars">ARS</span>
+      </div>
+      <div fxFlex="50%" class="contenedor-importe" *ngIf="seObtuvoSaldoExito == false"><span
+          class="importe-pagar">-</span> <span class="ars">ARS</span>
       </div>
     </div>
 

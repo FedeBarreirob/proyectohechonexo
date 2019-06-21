@@ -53,6 +53,13 @@
     font-family: Rubik;
     font-size: 14px;
     text-align: right;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+}
+
+.contenedor-tipo-cambio span {
+    vertical-align: middle;
 }
 
 .contenedor-fecha-tipocambio {
@@ -63,5 +70,11 @@
 }
 
 .img-tc {
-    margin-top: 3px;
+    vertical-align: middle;
+    margin-top: 2px;
+    margin-right: 2px;
+}
+
+.fecha-tc {
+    font-size: 10px !important;
 }

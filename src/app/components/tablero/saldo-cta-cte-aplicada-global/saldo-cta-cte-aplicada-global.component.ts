@@ -18,6 +18,7 @@ export class SaldoCtaCteAplicadaGlobalComponent implements OnInit, OnDestroy {
   saldoGlobal: SaldoGlobalCtaCteAplicada;
   cargando: boolean = false;
   destroy$: Subject<any> = new Subject<any>();
+  seObtuvoSaldoExito: boolean;
 
   constructor(
     private cuentaService: CuentaAlgService,
@@ -54,6 +55,9 @@ export class SaldoCtaCteAplicadaGlobalComponent implements OnInit, OnDestroy {
 
             if (respuesta.exito == true) {
               this.saldoGlobal = respuesta.datos;
+              this.seObtuvoSaldoExito = true;
+            } else {
+              this.seObtuvoSaldoExito = false;
             }
 
             this.cargando = false;

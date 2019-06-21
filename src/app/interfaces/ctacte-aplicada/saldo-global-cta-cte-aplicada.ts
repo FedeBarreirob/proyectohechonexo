@@ -3,5 +3,7 @@ export interface SaldoGlobalCtaCteAplicada {
     aCobrarAVencer: number,
     aPagarVencido: number,
     aPagarAVencer: number,
-    tipoDeCambio: number
+    tipoDeCambio: number,
+    esTipoCambioDeHoy: boolean,
+    fechaTipoCambio: Date
 }
