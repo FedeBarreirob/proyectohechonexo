@@ -37,7 +37,7 @@ export class ContratosComponent implements OnInit, OnDestroy {
   ) { }
 
   ngOnInit() {
-    this.esCelular = this.deviceService.isMobile();
+    this.esCelular = true;//this.deviceService.isMobile();
 
     this.cuentaAlgService.cuentaSeleccionada$
       .pipe(takeUntil(this.destroy$))

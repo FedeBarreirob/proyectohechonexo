@@ -39,7 +39,7 @@ export class VentasComponent implements OnInit, OnDestroy {
 		private deviceService: DeviceDetectorService) { }
 
 	ngOnInit() {
-		this.esCelular = this.deviceService.isMobile();
+		this.esCelular = true;// this.deviceService.isMobile();
 
 		this.cuentaAlgService.cuentaSeleccionada$
 			.pipe(takeUntil(this.destroy$))
