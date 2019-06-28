@@ -22,6 +22,7 @@
     <div fxFlex="60%">
       <p class="concepto">{{movimiento.concepto}}</p>
       <p class="fecha">{{movimiento.fechaCtaCte}}</p>
+      <p class="comprobante">{{movimiento.comprobanteAfectado}}</p>
     </div>
 
     <div fxFlex></div>
@@ -33,7 +34,7 @@
         <span [ngClass]="{'signo-positivo': movimiento.saldoPesos > 0, 'signo-negativo': movimiento.saldoPesos < 0 }">
           {{(movimiento.saldoPesos < 0) ? '-' : (movimiento.saldoPesos > 0) ? '+' : ''}}
         </span>
-          {{((movimiento.saldoPesos > 0) ? movimiento.saldoPesos : movimiento.saldoPesos * (-1)) | number: '.2'}}
+        {{((movimiento.saldoPesos > 0) ? movimiento.saldoPesos : movimiento.saldoPesos * (-1)) | number: '.2'}}
       </span>
 
       <!--Dolares-->

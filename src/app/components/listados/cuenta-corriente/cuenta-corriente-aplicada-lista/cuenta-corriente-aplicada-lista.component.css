@@ -37,6 +37,14 @@
     margin-top: -10px;
 }
 
+.comprobante {
+    height: 14px;
+    color: #666666;
+    font-family: Rubik;
+    font-size: 12px;
+    margin-top: -10px;
+}
+
 .monto {
     height: 17px;
     color: #333333;

@@ -80,6 +80,12 @@ export class CuentaCorrienteListaComponent implements OnInit, OnDestroy {
         this.ctacteService.listadoCtaCte(filtroPaginado)
           .pipe(takeUntil(this.destroy$))
           .subscribe(respuesta => {
+
+            // si no hay datos, reestablecer la pagina
+            if (respuesta.datos == null || respuesta.datos.length == 0) {
+              this.pagina = this.pagina - 1;
+            }
+
             this.agregarMovimientosAlListado(respuesta.datos);
             this.cargando = false;
             this.seEncuentraCargando.next(false);
