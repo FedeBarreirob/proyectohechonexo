@@ -105,6 +105,11 @@ export class VentasListaMovilComponent implements OnInit, OnDestroy {
         .pipe(takeUntil(this.destroy$))
         .subscribe(respuesta => {
 
+          // si no hay datos, reestablecer la pagina
+          if (respuesta.datos == null || respuesta.datos.length == 0) {
+            this.pagina = this.pagina - 1;
+          }
+
           if (respuesta.exito == true) {
             this.agregarMovimientosAlListado(respuesta.datos);
           }
