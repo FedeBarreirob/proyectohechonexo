@@ -7,7 +7,5 @@ export interface StockGranosNoLiquidado {
     zona: number,
     descripcion: string,
     kgNetos: number,
-    kgPendCertificar: number,
-    codComercialSecundario: string,
-    nombreComercialSecundario: string
+    kgPendCertificar: number
 }

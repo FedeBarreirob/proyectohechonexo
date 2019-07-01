@@ -4,6 +4,5 @@ export interface SaldoCtaCte {
     saldoPesos: number,
     saldoDolar: number,
     saldoContable: number,
-    zona: string,
-    comercial: string
+    zona: string
 }

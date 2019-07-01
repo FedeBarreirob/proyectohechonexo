@@ -4,6 +4,9 @@ import { InformacionTributariaExportacionesService } from '../../../../services/
 import { DatePipe } from '@angular/common';
 import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
+import { TenenciaImpositiva } from '../../../../interfaces/informacion-tributaria/tenencia-impositiva/tenencia-impositiva';
+import { PerfilBasico } from '../../../../interfaces/perfiles/perfil-basico';
+import { AuthenticationService } from '../../../../services/security/authentication.service';
 
 @Component({
   selector: 'app-tenencias-impositivas',
@@ -20,15 +23,30 @@ export class TenenciasImpositivasComponent implements OnInit, OnDestroy {
   cargando: boolean = false;
   destroy$: Subject<any> = new Subject<any>();
   cargando$: Subject<boolean> = new Subject<boolean>();
+  tenenciaImpositiva: TenenciaImpositiva = null;
+  unidadMedida: string;
+  perfilBasico: PerfilBasico;
 
   constructor(
     private informacionTributariaService: InformacionTributariaService,
     private informacionTributariaExpService: InformacionTributariaExportacionesService,
-    private datePipe: DatePipe
+    private datePipe: DatePipe,
+    private authenticationService: AuthenticationService
   ) { }
 
   ngOnInit() {
     this.fecha = (new Date()).toISOString();
+
+    // observer de perfil
+    this.authenticationService.perfilActivo$
+      .pipe(takeUntil(this.destroy$))
+      .subscribe(
+        perfil => {
+          this.perfilBasico = perfil;
+          this.cargarUnidadMedida()
+        });
+
+    this.cargarUnidadMedida();
   }
 
   ngOnDestroy(): void {
@@ -37,9 +55,21 @@ export class TenenciasImpositivasComponent implements OnInit, OnDestroy {
   }
 
   /**
-   * Descarga el reporte de tenencias impositivas
+   * Función que carga la unidad de medida desde el perfil
    */
-  descargar() {
+  cargarUnidadMedida() {
+    if (this.perfilBasico) {
+      this.unidadMedida = this.perfilBasico.informacionPersonal.unidadMedidaPeso;
+    } else {
+      this.perfilBasico = this.authenticationService.perfilUsuarioSeleccionado();
+      this.unidadMedida = this.perfilBasico.informacionPersonal.unidadMedidaPeso;
+    }
+  }
+
+  /**
+   * Función encargada de generar el reporte de tenencias impositivas
+   */
+  generar() {
     if (this.cargando == false) {
       this.cargando = true;
       this.cargando$.next(true);
@@ -50,7 +80,9 @@ export class TenenciasImpositivasComponent implements OnInit, OnDestroy {
         .subscribe(
           respuesta => {
             if (respuesta.exito == true) {
-              this.informacionTributariaExpService.exportarTenenciasImpositiva(respuesta.datos);
+              this.tenenciaImpositiva = respuesta.datos;
+            } else {
+              this.tenenciaImpositiva = null;
             }
 
             this.cargando = false;
@@ -62,6 +94,21 @@ export class TenenciasImpositivasComponent implements OnInit, OnDestroy {
             this.cargando$.next(false);
           }
         );
+    }
+  }
+
+  /**
+   * Descarga el reporte de tenencias impositivas
+   */
+  descargarExcel() {
+    if (this.cargando == false && this.tenenciaImpositiva != null) {
+      this.cargando = true;
+      this.cargando$.next(true);
+
+      this.informacionTributariaExpService.exportarTenenciasImpositiva(this.tenenciaImpositiva);
+
+      this.cargando = false;
+      this.cargando$.next(false);
     }
   }
 }
