@@ -98,14 +98,31 @@ export class TenenciasImpositivasComponent implements OnInit, OnDestroy {
   }
 
   /**
-   * Descarga el reporte de tenencias impositivas
+   * Descarga el reporte de tenencias impositivas en formato Excel
    */
   descargarExcel() {
     if (this.cargando == false && this.tenenciaImpositiva != null) {
       this.cargando = true;
       this.cargando$.next(true);
 
-      this.informacionTributariaExpService.exportarTenenciasImpositiva(this.tenenciaImpositiva);
+      let fechaImpresion = this.datePipe.transform(new Date(this.fecha), 'dd-MM-yy');
+      this.informacionTributariaExpService.exportarTenenciasImpositivaAExcel(this.tenenciaImpositiva, fechaImpresion);
+
+      this.cargando = false;
+      this.cargando$.next(false);
+    }
+  }
+
+  /**
+   * Descarga el reporte de tenencias impositivas en PDF
+   */
+  descargarPDF() {
+    if (this.cargando == false && this.tenenciaImpositiva != null) {
+      this.cargando = true;
+      this.cargando$.next(true);
+
+      let fechaImpresion = this.datePipe.transform(new Date(this.fecha), 'dd/MM/yyyy');
+      this.informacionTributariaExpService.exportarTenenciasImpositivaAPDF(this.tenenciaImpositiva, fechaImpresion);
 
       this.cargando = false;
       this.cargando$.next(false);

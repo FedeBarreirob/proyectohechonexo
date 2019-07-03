@@ -18,8 +18,13 @@
     <button mat-button class="boton" (click)="generar()" [disabled]="cargando==true">
       Generar
     </button>
-    <button mat-button *ngIf="tenenciaImpositiva != null" class="boton" (click)="descargarExcel()" [disabled]="cargando==true">
+    <button mat-button *ngIf="tenenciaImpositiva != null" class="boton" (click)="descargarExcel()"
+      [disabled]="cargando==true">
       Descargar archivo de Excel
+    </button>
+    <button mat-button *ngIf="tenenciaImpositiva != null" class="boton" (click)="descargarPDF()"
+      [disabled]="cargando==true">
+      Descargar archivo PDF
     </button>
   </div>
 </div>
