@@ -16,7 +16,7 @@ export class ToolBarGeneralComponent implements OnInit, OnDestroy {
   titulo: string = "titulo";
 
   @Input()
-  urlImagenAccionPersonalizada: string = "assets/toolbar/Campana.png";
+  urlImagenAccionPersonalizada: string = null;
 
   @Input()
   colorIndicador: string = "#666666";

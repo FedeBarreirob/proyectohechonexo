@@ -1,5 +1,5 @@
 import { Component, OnInit, Input } from '@angular/core';
-import { TenenciaImpositiva } from '../../../../interfaces/informacion-tributaria/tenencia-impositiva/tenencia-impositiva';
+import { TenenciaImpositiva } from '../../../../../interfaces/informacion-tributaria/tenencia-impositiva/tenencia-impositiva';
 
 @Component({
   selector: 'app-tenencia-impositiva-detalle',

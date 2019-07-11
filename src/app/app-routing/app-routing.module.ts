@@ -21,6 +21,7 @@ import { BuzonComponent } from '../components/notificaciones/buzon/buzon.compone
 import { CuentaCorrienteComponent } from '../components/listados/cuenta-corriente/cuenta-corriente/cuenta-corriente.component';
 import { ContratosComponent } from '../components/listados/contratos/contratos/contratos.component';
 import { ComprobantesComponent } from '../components/listados/comprobantes/comprobantes/comprobantes.component';
+import { ReportesComponent } from '../components/listados/reportes/reportes/reportes.component';
 
 const routes: Routes = [
 	{
@@ -118,6 +119,14 @@ const routes: Routes = [
 	{
 		path: 'contratos',
 		component: ContratosComponent,
+		canActivate: [AuthGuardGuard],
+		data: {
+			rolAdmin: false
+		}
+	},
+	{
+		path: 'reportes',
+		component: ReportesComponent,
 		canActivate: [AuthGuardGuard],
 		data: {
 			rolAdmin: false

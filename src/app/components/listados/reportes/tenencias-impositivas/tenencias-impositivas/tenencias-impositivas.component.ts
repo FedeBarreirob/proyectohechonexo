@@ -1,12 +1,12 @@
 import { Component, OnInit, Input, OnDestroy } from '@angular/core';
-import { InformacionTributariaService } from '../../../../services/informacion-tributaria/informacion-tributaria.service';
-import { InformacionTributariaExportacionesService } from '../../../../services/informacion-tributaria/informacion-tributaria-exportaciones.service';
+import { InformacionTributariaService } from '../../../../../services/informacion-tributaria/informacion-tributaria.service';
+import { InformacionTributariaExportacionesService } from '../../../../../services/informacion-tributaria/informacion-tributaria-exportaciones.service';
 import { DatePipe } from '@angular/common';
 import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
-import { TenenciaImpositiva } from '../../../../interfaces/informacion-tributaria/tenencia-impositiva/tenencia-impositiva';
-import { PerfilBasico } from '../../../../interfaces/perfiles/perfil-basico';
-import { AuthenticationService } from '../../../../services/security/authentication.service';
+import { TenenciaImpositiva } from '../../../../../interfaces/informacion-tributaria/tenencia-impositiva/tenencia-impositiva';
+import { PerfilBasico } from '../../../../../interfaces/perfiles/perfil-basico';
+import { AuthenticationService } from '../../../../../services/security/authentication.service';
 
 @Component({
   selector: 'app-tenencias-impositivas',

@@ -14,6 +14,12 @@
     margin-top: 13px;
 }
 
+.titulo-sin-boton-personalizado {
+    font-family: RubikMedium;
+    font-size: 14px;
+    text-align: center;
+}
+
 .botonPersonalizado {
     float: right;
     margin-right: 10px;

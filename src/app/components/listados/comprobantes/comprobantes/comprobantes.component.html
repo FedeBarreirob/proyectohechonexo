@@ -1,10 +1,8 @@
 <mat-sidenav-container class="contenedor-filtro">
   <mat-sidenav #menuFiltro position="end" class="sidenav-filtro">
 
-    <app-filtro-archivos-comprobantes
-      *ngIf="seccionComprobanteSeleccionado == seccionComprobante.COMPROBANTES && cuenta != null"
-      [cuenta]="cuenta.id.codigo" (botonCerrar)="mostrarOcultarFiltros()"
-      (botonAplicar)="cargarListadoArchivosComprobantes($event)">
+    <app-filtro-archivos-comprobantes *ngIf="cuenta != null" [cuenta]="cuenta.id.codigo"
+      (botonCerrar)="mostrarOcultarFiltros()" (botonAplicar)="cargarListadoArchivosComprobantes($event)">
     </app-filtro-archivos-comprobantes>
 
   </mat-sidenav>
@@ -12,16 +10,9 @@
     <app-tool-bar-general titulo="Comprobantes" (botonPersonalizadoEjecutado)="mostrarOcultarFiltros()"
       urlImagenAccionPersonalizada="assets/toolbar/embudo.png"></app-tool-bar-general>
 
-    <app-selector-archivo (seleccion)="seleccionarSeccion($event)"></app-selector-archivo>
-
-    <app-archivo-de-comprobantes
-      *ngIf="seccionComprobanteSeleccionado == seccionComprobante.COMPROBANTES && cuenta != null"
-      [filtroArchivosComprobantes$]="filtroArchivosComprobantes$" [cuenta]="cuenta.id.codigo">
+    <app-archivo-de-comprobantes *ngIf="cuenta != null" [filtroArchivosComprobantes$]="filtroArchivosComprobantes$"
+      [cuenta]="cuenta.id.codigo">
     </app-archivo-de-comprobantes>
 
-    <app-tenencias-impositivas
-      *ngIf="seccionComprobanteSeleccionado == seccionComprobante.TENENCIAS_IMPOSITIVAS && cuenta != null"
-      [cuenta]="cuenta.id.codigo">
-    </app-tenencias-impositivas>
   </section>
 </mat-sidenav-container>

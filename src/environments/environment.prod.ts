@@ -12,5 +12,5 @@ export const environment = {
   hostEntregasYVentas: 'http://digital.gaviglio.com:8080/DigitalEntregasYVentas-1.0-SNAPSHOT/api',
   hostComunicaciones: 'http://digital.gaviglio.com:8080/Comunicaciones-1.0-SNAPSHOT/api',
   hostGeneradorComprobantes: 'http://digital.gaviglio.com:8080/GeneradorComprobantes-1.0-SNAPSHOT/api',
-  baseUrl: 'http://digital.gaviglio.com/#'
+  baseUrl: 'http://digital.gaviglio.com/DigitalUIClientes/#'
 };

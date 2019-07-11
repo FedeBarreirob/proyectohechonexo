@@ -14,13 +14,15 @@
     <div fxFlex>
 
         <div fxFlex>
-            <div class="titulo" [ngStyle]="{'color': colorIndicador}">
+            <div [ngClass]="{'titulo': urlImagenAccionPersonalizada != null, 'titulo-sin-boton-personalizado': urlImagenAccionPersonalizada == null}"
+                [ngStyle]="{'color': colorIndicador}">
                 {{titulo}}
             </div>
         </div>
 
         <div fxFlex="96px">
-            <button mat-icon-button class="botonPersonalizado" (click)="ejecutarBotonPersonalizado()">
+            <button mat-icon-button *ngIf="urlImagenAccionPersonalizada != null" class="botonPersonalizado"
+                (click)="ejecutarBotonPersonalizado()">
                 <img [src]="urlImagenAccionPersonalizada" class="imgAccionPersonalizada" />
             </button>
         </div>

@@ -13,7 +13,8 @@
     <div fxFlex>
 
         <div fxFlex>
-            <div class="titulo" [ngStyle]="{'color': colorIndicador}">
+            <div [ngStyle]="{'color': colorIndicador}"
+                [ngClass]="{'titulo': urlImagenDerechoIzquierdo != null, 'titulo-sin-boton-personalizado': urlImagenDerechoIzquierdo == null}">
                 {{titulo}}
             </div>
         </div>
