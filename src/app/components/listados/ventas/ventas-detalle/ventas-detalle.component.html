@@ -46,10 +46,10 @@
 
 <div fxLayout="row" fxLayoutAlign="space-between none" fxLayoutGap="10px">
 	<div fxFlex="50%" *ngIf="linkContrato == true">
-		<button class="boton-contrato" mat-button *ngIf="contrato != null" (click)="verDetalleContrato()">Contrato
-			#{{ contrato ? contrato.numeroComprobanteContrato : '' }}
+		<a class="boton-contrato"  *ngIf="contrato != null" (click)="verDetalleContrato()">
+			Contrato #{{ contrato ? contrato.numeroComprobanteContrato : '' }}
 			<mat-icon>keyboard_arrow_right</mat-icon>
-		</button>
+		</a>
 	</div>
 	<div fxFlex="50%" *ngIf="linkContrato == false" class="dato-apartado">Contrato
 		#{{ contrato ? contrato.numeroComprobanteContrato : ''}}</div>
@@ -80,7 +80,7 @@
 	<div fxFlex="50%" class="dato-apartado">{{movimiento.kilos | kilosA: unidadMedida | number: '.0-0'}}
 		{{unidadMedida | kilosTextoA}}</div>
 	<div fxFlex="50%" class="dato-apartado">{{movimiento.moneda | moneda}}
-		${{movimiento.precioPorQuintal | precioQQA: unidadMedida | number: '.2'}}</div>
+		${{movimiento.precioPorQuintal | precioQQA: unidadMedida | number: '.0-0'}}</div>
 </div>
 
 <div fxLayout="row" fxLayoutAlign="space-between none" fxLayoutGap="10px">
@@ -89,6 +89,6 @@
 </div>
 
 <div fxLayout="row" fxLayoutAlign="space-between none" fxLayoutGap="10px" *ngIf="movimiento.tipoDeCambio != null">
-	<div fxFlex="50%" class="dato-apartado">ARS ${{movimiento.tipoDeCambio | number: '.2'}}</div>
-	<div fxFlex="50%" class="dato-apartado">ARS ${{movimiento.precioQQPesificado | precioQQA: unidadMedida | number: '.2'}}</div>
+	<div fxFlex="50%" class="dato-apartado">ARS ${{movimiento.tipoDeCambio | number: '.2-2'}}</div>
+	<div fxFlex="50%" class="dato-apartado">ARS ${{movimiento.precioQQPesificado | precioQQA: unidadMedida | number: '.0-0'}}</div>
 </div>

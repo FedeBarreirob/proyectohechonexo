@@ -10,12 +10,15 @@
   </div>
 </div>
 
-<mat-progress-bar *ngIf="cargando" mode="indeterminate"></mat-progress-bar>
-
 <div class="contenedor-listado" fxLayout="column" fxLayoutWrap fxLayoutAlign="none" infiniteScroll
   [infiniteScrollDistance]="2" [infiniteScrollThrottle]="50" (scrolled)="onScroll()" [scrollWindow]="false">
 
   <app-panel-notificaciones-item *ngFor="let notificacion of (listadoNotificaciones ? listadoNotificaciones : [])"
     [notificacion]="notificacion"></app-panel-notificaciones-item>
+
+  <!--Spinner-->
+  <div fxLayout="row" fxLayoutAlign="center center" *ngIf="cargando == true" style="margin-top: 10px">
+    <mat-spinner diameter="24"></mat-spinner>
+  </div>
 
 </div>

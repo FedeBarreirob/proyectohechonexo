@@ -111,8 +111,8 @@ export class MainNavComponent implements OnInit, OnDestroy {
 			{
 				nombre: "Entregas",
 				rutaLink: "/entregas",
-				imagen: "assets/sidebar/entrega.png",
-				imagenActiva: "assets/sidebar/entrega-hot.png",
+				imagen: "assets/sidebar/truck.png",
+				imagenActiva: "assets/sidebar/truck-hot.png",
 				permitido: true
 			},
 			{
@@ -181,8 +181,8 @@ export class MainNavComponent implements OnInit, OnDestroy {
 			{
 				nombre: "Cerrar Sersión",
 				rutaLink: "/login",
-				imagen: null,
-				imagenActiva: null,
+				imagen: "assets/sidebar/close-session.png",
+				imagenActiva: "assets/sidebar/close-session-hot.png",
 				permitido: true
 			}
 		];

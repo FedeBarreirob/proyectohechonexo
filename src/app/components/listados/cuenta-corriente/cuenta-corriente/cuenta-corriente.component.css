@@ -9,3 +9,15 @@
     width: 70%;
     max-width: 270px;
 }
+
+/* active tab */
+
+::ng-deep .mat-tab-list .mat-tab-labels .mat-tab-label-active {
+    color: #00cb75;
+}
+
+/* ink bar tab */
+
+:host ::ng-deep .mat-ink-bar {
+    background-color: #00cb75 !important;
+}

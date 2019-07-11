@@ -57,10 +57,11 @@
 <div fxLayout="row" fxLayoutAlign="space-between none" fxLayoutGap="10px">
   <div fxFlex="50%" class="dato-apartado">{{movimiento.campo}}</div>
   <div fxFlex="50%" *ngIf="linkContrato == true">
-    <button class="boton-contrato" mat-button *ngIf="contrato != null" (click)="verDetalleContrato()">Contrato
+
+    <a class="boton-contrato" *ngIf="contrato != null" (click)="verDetalleContrato()">Contrato
       #{{ contrato ? contrato.numeroComprobanteContrato : '' }}
       <mat-icon>keyboard_arrow_right</mat-icon>
-    </button>
+    </a>
   </div>
   <div fxFlex="50%" *ngIf="linkContrato == false" class="dato-apartado">Contrato
     #{{ contrato ? contrato.numeroComprobanteContrato : ''}}</div>

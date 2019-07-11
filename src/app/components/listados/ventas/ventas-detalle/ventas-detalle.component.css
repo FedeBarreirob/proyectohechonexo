@@ -149,4 +149,10 @@
     color: rgba(45, 164, 66, 1);
     font-family: Rubik;
     font-size: 14px;
+    display: flex;
+	flex-direction: row;
+	flex-wrap: nowrap;
+	justify-content: flex-start;
+	align-items: center;
+	align-content: center;
 }

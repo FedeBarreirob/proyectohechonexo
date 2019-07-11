@@ -53,7 +53,13 @@
 }
 
 .contenedor-listado {
-    height: 65vh;
+    height: 82vh;
+    overflow-y: scroll;
+    padding-left: 17px;
+    padding-right: 17px;
+}
+
+.contenedor-listado-sin-alto {
     overflow-y: scroll;
     padding-left: 17px;
     padding-right: 17px;

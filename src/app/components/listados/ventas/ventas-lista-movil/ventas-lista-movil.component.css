@@ -42,7 +42,6 @@
 
 .kg-netos {
     height: 17px;
-    width: 73px;
     color: #333333;
     font-family: Rubik;
     font-size: 14px;
@@ -66,8 +65,13 @@
 }
 
 .contenedor-listado {
-    height: 65vh;
+    height: 78vh;
     overflow-y: scroll;
+}
+
+.contenedor-listado-sin-alto {
+    overflow-y: scroll;
+    margin-bottom: 20px;
 }
 
 .activo {

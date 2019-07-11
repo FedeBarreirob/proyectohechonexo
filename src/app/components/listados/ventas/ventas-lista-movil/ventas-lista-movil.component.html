@@ -25,8 +25,9 @@
   <div fxFlex="30%">$/{{unidadMedida | kilosTextoA}}</div>
 </div>
 
-<div class="contenedor-listado" fxLayout="column" fxLayoutWrap fxLayoutAlign="none" infiniteScroll
-  [infiniteScrollDistance]="2" [infiniteScrollThrottle]="50" (scrolled)="onScroll()" [scrollWindow]="false">
+<div fxLayout="column" fxLayoutWrap fxLayoutAlign="none" infiniteScroll [infiniteScrollDistance]="2"
+  [infiniteScrollThrottle]="50" (scrolled)="onScroll()" [scrollWindow]="false"
+  [ngClass]="{'contenedor-listado' : cargarOnScroll == true, 'contenedor-listado-sin-alto' : cargarOnScroll == false}">
 
   <div fxLayout="row" fxLayoutAlign="space-around center" *ngFor="let movimiento of (listado ? listado : [])"
     class="movimiento-fila" (click)="verDetalle(movimiento)" fxLayoutGap="5px">
@@ -45,7 +46,7 @@
     </div>
 
     <div fxFlex="80px" align="right">
-      <span class="precio-qq">${{movimiento.precioPorQuintal | precioQQA: unidadMedida | number: '.2'}}</span>
+      <span class="precio-qq">${{movimiento.precioPorQuintal | precioQQA: unidadMedida | number: '.0-0'}}</span>
       <span class="moneda">{{movimiento.moneda | moneda}}</span>
     </div>
   </div>
@@ -54,5 +55,5 @@
   <div fxLayout="row" fxLayoutAlign="center center" *ngIf="cargando == true" style="margin-top: 10px">
     <mat-spinner diameter="24"></mat-spinner>
   </div>
-  
+
 </div>

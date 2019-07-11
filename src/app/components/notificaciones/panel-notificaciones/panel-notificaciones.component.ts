@@ -67,6 +67,8 @@ export class PanelNotificacionesComponent implements OnInit, OnDestroy {
 
           if (respuesta.exito == true && respuesta.datos != null) {
             this.agregarMovimientosAlListado(respuesta.datos.listado);
+          } else {
+            this.pagina = this.pagina - 1;
           }
 
           this.cargando = false;

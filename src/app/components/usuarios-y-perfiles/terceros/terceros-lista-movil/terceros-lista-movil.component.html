@@ -17,7 +17,7 @@
 
     <div fxFlex="100px;" align="end">
       <span class="indicador-activo">Activo</span>
-      <mat-slide-toggle color="primary" [checked]="!tercero.credencial.baja" (change)="habilitacion(tercero, $event)">
+      <mat-slide-toggle [checked]="!tercero.credencial.baja" (change)="habilitacion(tercero, $event)">
       </mat-slide-toggle>
     </div>
 

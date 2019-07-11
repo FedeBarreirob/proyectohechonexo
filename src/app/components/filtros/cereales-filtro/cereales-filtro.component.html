@@ -10,8 +10,11 @@
   </div>
 </div>
 
-<mat-progress-bar *ngIf="filtrosEspecieCosecha == null && sePuedeFiltrarEspecieCosecha == true" mode="indeterminate">
-</mat-progress-bar>
+<!--Spinner-->
+<div fxLayout="row" fxLayoutAlign="center center"
+  *ngIf="filtrosEspecieCosecha == null && sePuedeFiltrarEspecieCosecha == true" style="margin-top: 10px">
+  <mat-spinner diameter="24"></mat-spinner>
+</div>
 
 <!--Productos-->
 <span

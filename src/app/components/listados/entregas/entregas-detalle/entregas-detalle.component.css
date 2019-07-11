@@ -78,8 +78,6 @@
 /* detalle */
 
 .titulo-apartados {
-    height: 17px;
-    width: 175px;
     color: #333333;
     font-family: Rubik;
     font-size: 14px;
@@ -90,8 +88,6 @@
 }
 
 .subtitulo-apartados {
-    height: 14px;
-    width: 66px;
     color: #999999;
     font-family: Rubik;
     font-size: 12px;
@@ -101,8 +97,6 @@
 }
 
 .dato-apartado {
-    height: 17px;
-    width: 79px;
     color: #333333;
     font-family: Rubik;
     font-size: 14px;
@@ -110,8 +104,6 @@
 }
 
 .dato-apartado-elipsis {
-    height: 17px;
-    width: 79px;
     color: #333333;
     font-family: Rubik;
     font-size: 14px;
@@ -122,8 +114,6 @@
 }
 
 .kilos-titulo {
-    height: 17px;
-    width: 61px;
     color: #333333;
     font-family: RubikLight;
     font-size: 14px;
@@ -131,8 +121,6 @@
 }
 
 .kilos-datos {
-    height: 24px;
-    width: 66px;
     color: #333333;
     font-family: Rubik;
     font-size: 20px;
@@ -143,4 +131,10 @@
     color: rgba(45, 164, 66, 1);
     font-family: Rubik;
     font-size: 14px;
+    display: flex;
+	flex-direction: row;
+	flex-wrap: nowrap;
+	justify-content: flex-start;
+	align-items: center;
+	align-content: center;
 }

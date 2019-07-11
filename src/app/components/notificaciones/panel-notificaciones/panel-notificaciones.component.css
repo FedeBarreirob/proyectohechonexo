@@ -1,12 +1,12 @@
 .contenedor-listado {
-    height: 70vh;
+    height: 90vh;
     overflow-y: scroll;
 }
 
 /* encabezado */
 
 .encabezado-notificaciones {
-    padding-top: 94px;
+    padding-top: 20px;
 }
 
 .texto-notificaciones {
