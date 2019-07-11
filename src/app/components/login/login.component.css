@@ -84,6 +84,20 @@
     color: white;
 }
 
+.botonEntrarHot {
+    height: 43.5px;
+    width: 82.22vw;
+    background-color: #00cb75;
+    outline: none;
+    border-radius: 5px 5px 5px 5px;
+    -moz-border-radius: 5px 5px 5px 5px;
+    -webkit-border-radius: 5px 5px 5px 5px;
+    border: 0px solid #000000;
+    font-family: Rubik;
+    font-weight: bold;
+    color: white;
+}
+
 .recuerdameContenedor {
     padding-top: 13.05px;
     padding-bottom: 20.88px;
@@ -102,11 +116,16 @@
     margin: 0;
     top: 0;
     left: 0;
-    width: 100%;
-    height: 100%;
+    width: 100vw;
+    height: 100vh;
+    height: calc(var(--vh, 1vh) * 100);
     background-image: url("./../../../assets/login/fondo-globo-verde.png");
     background-repeat: no-repeat;
     background-color: white;
-    background-position: center bottom;
+    background-position: center 300px;
     background-size: 100%;
+}
+
+:host /deep/.mat-checkbox-checked.mat-accent .mat-checkbox-background, .mat-checkbox-indeterminate.mat-accent .mat-checkbox-background {
+    background-color: #00cb75;
 }

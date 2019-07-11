@@ -32,11 +32,13 @@
 </div>
 
 <!--Boton de descarga del comprobante-->
-<div fxLayout="row" fxLayoutAlign="space-between center" class="botonera">
-	<div fxFlex="100%">
-		<button mat-button class="boton-descarga-comprobante" (click)="descargar()"
-			[disabled]="cargando==true || comprobantesSeleccionados.length == 0 || comprobantes.length == 0">
-			Descargar seleccionados
-		</button>
+<div class="boton-flotante-contenedor">
+	<div fxLayout="row" fxLayoutAlign="space-between center" class="botonera">
+		<div fxFlex="100%">
+			<button mat-button class="boton-descarga-comprobante" (click)="descargar()"
+				[disabled]="cargando==true || comprobantesSeleccionados.length == 0 || comprobantes.length == 0">
+				Descargar seleccionados
+			</button>
+		</div>
 	</div>
 </div>

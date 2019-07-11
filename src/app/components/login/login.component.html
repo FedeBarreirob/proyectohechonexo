@@ -9,10 +9,11 @@
     <div fxFlex.xs="91.67%">
       <mat-card class="card-base">
         <mat-card-content>
-          <form [formGroup]="frmLogin">
+          <form [formGroup]="frmLogin" #formLogin="ngForm">
 
             <p class="correo-o-usuario">USUARIO</p>
-            <input class="username" matInput formControlName="username" required #inputUsername [value]="inputUsername.value.toLowerCase()">
+            <input class="username" matInput formControlName="username" required #inputUsername
+              [value]="inputUsername.value.toLowerCase()">
 
             <p class="password-lbl">CONTRASEÑA</p>
 
@@ -31,7 +32,8 @@
             </div>
           </form>
 
-          <button class="botonEntrar" [disabled]="logueando" type="button" (click)="login()">Entrar</button>
+          <button [ngClass]="{'botonEntrar': !formLogin.valid, 'botonEntrarHot': formLogin.valid }"
+            [disabled]="logueando || !formLogin.valid" type="button" (click)="login()">Entrar</button>
 
         </mat-card-content>
       </mat-card>

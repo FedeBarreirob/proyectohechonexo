@@ -52,3 +52,9 @@
     padding-left: 17px;
     padding-right: 17px;
 }
+
+.boton-flotante-contenedor {
+    position: fixed;
+    bottom: 30px;
+    width: 100%;
+}

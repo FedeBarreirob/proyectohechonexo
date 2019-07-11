@@ -1,6 +1,7 @@
 .sidenav-container {
   height: 100%;
   font-family: Rubik;
+  overflow-y: auto;
 }
 
 .sidenav {
