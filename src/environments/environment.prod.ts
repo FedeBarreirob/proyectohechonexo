@@ -5,12 +5,14 @@ export const environment = {
   hostEntregasYVentas: 'http://192.168.20.63:8080/DigitalEntregasYVentas-1.0-SNAPSHOT/api',
   hostComunicaciones: 'http://192.168.20.63:8080/Comunicaciones-1.0-SNAPSHOT/api',
   hostGeneradorComprobantes: 'http://192.168.20.63:8080/GeneradorComprobantes-1.0-SNAPSHOT/api',
-  baseUrl: 'http://192.168.20.63/DigitalUIClientes/#'*/
+  baseUrl: 'http://192.168.20.63/DigitalUIClientes/#',
+  urlClientesDesktopActual: 'http://clientes.gaviglio.com/'*/
 
   hostSeguridad: 'http://digital.gaviglio.com:8080/DigitalSeguridad-1.0-SNAPSHOT/api',
   hostCtaCte: 'http://digital.gaviglio.com:8080/DigitalCuentaCorriente-1.0-SNAPSHOT/api',
   hostEntregasYVentas: 'http://digital.gaviglio.com:8080/DigitalEntregasYVentas-1.0-SNAPSHOT/api',
   hostComunicaciones: 'http://digital.gaviglio.com:8080/Comunicaciones-1.0-SNAPSHOT/api',
   hostGeneradorComprobantes: 'http://digital.gaviglio.com:8080/GeneradorComprobantes-1.0-SNAPSHOT/api',
-  baseUrl: 'http://digital.gaviglio.com/DigitalUIClientes/#'
+  baseUrl: 'http://digital.gaviglio.com/DigitalUIClientes/#',
+  urlClientesDesktopActual: 'http://clientes.gaviglio.com/'
 };

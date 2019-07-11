@@ -132,7 +132,6 @@ import { ContratoIndicadorSwiperVentasLiquidadasComponent } from './components/t
 import { CuentaCorrienteSaldosComponent } from './components/listados/cuenta-corriente/cuenta-corriente-saldos/cuenta-corriente-saldos.component';
 import { CuentaCorrienteAplicadaSaldoComponent } from './components/listados/cuenta-corriente/cuenta-corriente-aplicada-saldo/cuenta-corriente-aplicada-saldo.component';
 import { ComprobantesComponent } from './components/listados/comprobantes/comprobantes/comprobantes.component';
-import { SelectorArchivoComponent } from './components/listados/comprobantes/selector-archivo/selector-archivo.component';
 import { FiltroArchivosComprobantesComponent } from './components/listados/comprobantes/descargas-comprobantes/filtro-archivos-comprobantes/filtro-archivos-comprobantes.component';
 import { PrecioQQAPipe } from './pipes/precio-qqa.pipe';
 import { TenenciasImpositivasComponent } from './components/listados/reportes/tenencias-impositivas/tenencias-impositivas/tenencias-impositivas.component';
@@ -243,7 +242,6 @@ export function tokenGetter() {
 		CuentaCorrienteSaldosComponent,
 		CuentaCorrienteAplicadaSaldoComponent,
 		ComprobantesComponent,
-		SelectorArchivoComponent,
 		FiltroArchivosComprobantesComponent,
 		PrecioQQAPipe,
 		TenenciasImpositivasComponent,

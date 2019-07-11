@@ -30,9 +30,9 @@ export class KilosTextoAPipe implements PipeTransform {
 
 			default:
 				if (args && args == 'largo') {
-					return 'Kilogramos';
+					return 'Toneladas';
 				} else {
-					return 'Kg';
+					return 'Tn';
 				}
 		}
 	}

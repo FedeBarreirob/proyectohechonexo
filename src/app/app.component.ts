@@ -13,8 +13,7 @@ export class AppComponent {
 
 	constructor(
 		private matIconRegistry: MatIconRegistry,
-		private domSanitizer: DomSanitizer
-	) {
+		private domSanitizer: DomSanitizer) {
 		this.matIconRegistry.addSvgIcon(
 			"pdf",
 			this.domSanitizer.bypassSecurityTrustResourceUrl("assets/pdf.svg")

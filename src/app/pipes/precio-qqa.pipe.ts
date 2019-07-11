@@ -21,8 +21,11 @@ export class PrecioQQAPipe implements PipeTransform {
         case 'kg':
           return this.precioPorKg(value);
 
-        default:
+        case 'qq':
           return value;
+
+        default:
+          return this.precioPorTn(value);
       }
 
     } else {

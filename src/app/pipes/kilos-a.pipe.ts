@@ -19,8 +19,11 @@ export class KilosAPipe implements PipeTransform {
 				case 'qq':
 					return this.quintales(value);
 
-				default:
+				case 'kg':
 					return value;
+
+				default:
+					return this.toneladas(value);
 			}
 
 		} else {

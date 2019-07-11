@@ -25,7 +25,7 @@ export class ContratosListaMovilComponent implements OnInit, OnDestroy {
 
   listadoContratos: Array<ResumenContratoCompraVenta> = [];
   pagina: number = 1;
-  cantidadPorPagina: number = 50;
+  cantidadPorPagina: number = 20;
   cargando: boolean = false;
   filtro: FiltroResumenContratoCompraVenta;
   unidadMedida: string;
