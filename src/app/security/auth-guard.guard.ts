@@ -17,24 +17,40 @@ export class AuthGuardGuard implements CanActivate {
     next: ActivatedRouteSnapshot,
     state: RouterStateSnapshot): Observable<boolean> | Promise<boolean> | boolean {
 
-    // si existe, esta logueado
-    if (this.authenticationService.esLogueado && this.elRolPermiteIngresar(next.data)) {
+    if (this.authenticationService.esLogueado) {
 
-      // indicamos que el login es ok para que carge las opciones del menu
-      this.authenticationService.loginCompleto();
+      if (this.elRolPermiteIngresar(next.data)) {
+        this.authenticationService.loginCompleto();
+        return true;
+      } else {
+        this.router.navigate(['/login']);
+        return false;
+      }
 
-      return true;
     } else {
-      this.authenticationService.renovarToken().subscribe(
-        exito => {
-          if (exito == true) {
-            return true;
-          } else {
-            this.router.navigate(['/login'], { queryParams: { returnUrl: state.url } });
-            return false;
-          }
+      let tokenOk: boolean;
+
+      let response = this.authenticationService.renovarToken();
+      response.then((renovacionOk: boolean) => {
+        if (renovacionOk == true) {
+          tokenOk = true;
+        } else {
+          tokenOk = false;
         }
-      );
+      });
+
+      if (tokenOk == false) {
+        this.router.navigate(['/login'], { queryParams: { returnUrl: state.url } });
+        return false;
+      } else {
+        if (this.elRolPermiteIngresar(next.data)) {
+          this.authenticationService.loginCompleto();
+          return true;
+        } else {
+          this.router.navigate(['/login']);
+          return false;
+        }
+      }
     }
   }
 

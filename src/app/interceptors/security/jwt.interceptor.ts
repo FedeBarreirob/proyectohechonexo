@@ -12,7 +12,7 @@ export class JwtInterceptor implements HttpInterceptor {
         private authenticationService: AuthenticationService,
         private router: Router
     ) { }
-    
+
     intercept(request: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
 
         let currentUser = JSON.parse(localStorage.getItem('currentUser'));
@@ -25,21 +25,31 @@ export class JwtInterceptor implements HttpInterceptor {
         }
 
         return next.handle(request).pipe(catchError(err => {
-            
+
             if (err.status === 401) {
 
-                this.authenticationService.renovarToken().subscribe(
-                    exito => {
-                        if(exito == true) {
-                            return next.handle(request);
-                        } else {
-                            this.router.navigate(['/login']);
-                        }      
+                let tokenOk: boolean;
+
+                let response = this.authenticationService.renovarToken();
+                response.then((renovacionOk: boolean) => {
+                    if (renovacionOk == true) {
+                        this.authenticationService.loginCompleto();
+                        tokenOk = true;
+                    } else {
+                        tokenOk = false;
                     }
-                );
+                });
+
+                if (tokenOk == true) {
+                    return next.handle(request);
+                } else {
+                    this.authenticationService.logout();
+                    location.reload(true);
+                }
             }
 
-            return Observable.throw(err);
+            const error = err.error.message || err.statusText;
+            return throwError(error);
         }));
     }
 }

@@ -65,8 +65,8 @@ export class AuthenticationService {
 	/**
 	 * Renueva el token si corresponde, devuelve true si se renovó correctamente sino false
 	 */
-	renovarToken(): Observable<boolean> {
-		return new Observable<boolean>(observable => {
+	async renovarToken(): Promise<boolean> {
+		const response = await new Observable<boolean>(observable => {
 
 			let credencialesRecordadas = this.credencialesRecordadas();
 			if (credencialesRecordadas != null) {
@@ -89,7 +89,9 @@ export class AuthenticationService {
 				observable.next(false);
 			}
 
-		});
+		}).toPromise();
+
+		return response;
 	}
 
 	// funcion que indica si el usuario se encuentra logueado en el sistema
