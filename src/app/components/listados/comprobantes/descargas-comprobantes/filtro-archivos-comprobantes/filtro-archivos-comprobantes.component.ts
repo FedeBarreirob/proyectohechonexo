@@ -30,6 +30,18 @@ export class FiltroArchivosComprobantesComponent implements OnInit {
   constructor(private datePipe: DatePipe) { }
 
   ngOnInit() {
+    this.cargarFiltroPorDefecto();
+  }
+
+  /**
+  * Función encargada de cargar el filtro por defecto
+  */
+  cargarFiltroPorDefecto() {
+    let hace3Meses: Date = new Date();
+    hace3Meses.setMonth(hace3Meses.getMonth() - 3);
+
+    this.fechaDesde = hace3Meses.toISOString();
+    this.fechaHasta = (new Date()).toISOString()
   }
 
   /**

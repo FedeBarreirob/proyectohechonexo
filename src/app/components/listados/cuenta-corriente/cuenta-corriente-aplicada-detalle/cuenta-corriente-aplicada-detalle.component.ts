@@ -42,7 +42,7 @@ export class CuentaCorrienteAplicadaDetalleComponent implements OnInit, OnDestro
    * @param movimiento Movimiento que contiene el identificador del comprobante a descargar
    */
   descargarComprobante() {
-    this.comprobanteDownloaderService.comprobanteDescargado(this.movimiento.linkComprobante, this.movimiento.comprobante)
+    this.comprobanteDownloaderService.comprobanteDescargado(this.movimiento.linkComprobante, this.movimiento.comprobanteAfectado)
       .pipe(takeUntil(this.destroy$))
       .subscribe(respuesta => {
         var mediaType = 'application/pdf';

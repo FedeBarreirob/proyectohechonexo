@@ -7,11 +7,13 @@ import { ComprobantesDownloaderService } from '../../../../../services/sharedSer
 import { saveAs } from 'file-saver/FileSaver';
 import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
+import { DatePipe } from '@angular/common';
 
 @Component({
   selector: 'app-archivo-de-comprobantes',
   templateUrl: './archivo-de-comprobantes.component.html',
-  styleUrls: ['./archivo-de-comprobantes.component.css']
+  styleUrls: ['./archivo-de-comprobantes.component.css'],
+  providers: [DatePipe]
 })
 export class ArchivoDeComprobantesComponent implements OnInit, OnDestroy {
 
@@ -36,7 +38,8 @@ export class ArchivoDeComprobantesComponent implements OnInit, OnDestroy {
   constructor(
     private archivoDeComprobantesService: ArchivoDeComprobantesService,
     private comprobantesDownloaderService: ComprobantesDownloaderService,
-    private snackBar: MatSnackBar
+    private snackBar: MatSnackBar,
+    private datePipe: DatePipe
   ) { }
 
   ngOnDestroy(): void {
@@ -60,10 +63,18 @@ export class ArchivoDeComprobantesComponent implements OnInit, OnDestroy {
    * Función encargada de cargar el filtro por defecto
    */
   cargarFiltroPorDefecto() {
+    let hace3Meses: Date = new Date();
+    hace3Meses.setMonth(hace3Meses.getMonth() - 3);
+
+    let fechaDesdeFiltro = this.datePipe.transform(hace3Meses, 'dd/MM/yyyy');
+    let fechaHastaFiltro = this.datePipe.transform(new Date(), 'dd/MM/yyyy');
+
     this.filtro = {
       esAplicada: false,
       cuenta: this.cuenta,
-      paginado: true
+      paginado: true,
+      fechaDesde: fechaDesdeFiltro,
+      fechaHasta: fechaHastaFiltro
     }
   }
 
