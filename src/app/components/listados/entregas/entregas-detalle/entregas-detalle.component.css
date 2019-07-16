@@ -75,6 +75,19 @@
     width: 100%;
 }
 
+.boton-descarga-comprobante {
+    height: 40px;
+    width: 100%;
+    background-color: #2DA442;
+    border: 1px solid #2DA442;
+    border-radius: 4px;
+    color: #FFFFFF;
+    font-family: Rubik;
+    font-size: 14px;
+    font-weight: bold;
+    margin-top: 10px;
+}
+
 /* detalle */
 
 .titulo-apartados {

@@ -1,5 +1,5 @@
 import { Component, OnInit, Inject, OnDestroy } from '@angular/core';
-import { MAT_DIALOG_DATA, MatDialog, MatDialogRef } from '@angular/material';
+import { MAT_DIALOG_DATA, MatDialog, MatDialogRef, MatSnackBar } from '@angular/material';
 import { MovimientoEntrega } from '../../../../interfaces/entregas/listado-entregas';
 import { PerfilBasico } from '../../../../interfaces/perfiles/perfil-basico';
 import { AuthenticationService } from '../../../../services/security/authentication.service';
@@ -11,6 +11,8 @@ import { ContratosService } from '../../../../services/contratos/contratos.servi
 import { ContratosDetalleComponent } from '../../contratos/contratos-detalle/contratos-detalle.component';
 import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
+import { saveAs } from 'file-saver/FileSaver';
+import { ComprobantesDownloaderService } from '../../../../services/sharedServices/downloader/comprobantes-downloader.service';
 
 @Component({
 	selector: 'app-entregas-detalle',
@@ -22,6 +24,7 @@ export class EntregasDetalleComponent implements OnInit, OnDestroy {
 	unidadMedida: string;
 	cuenta: EntidadAlg;
 	contrato: ResumenContratoCompraVenta;
+	cargando: boolean = false;
 
 	movimiento: MovimientoEntrega;
 	linkContrato: boolean;
@@ -34,7 +37,9 @@ export class EntregasDetalleComponent implements OnInit, OnDestroy {
 		private dialogRef: MatDialogRef<EntregasDetalleComponent>,
 		private exportadorService: EntregasExportacionesService,
 		private cuentaAlgService: CuentaAlgService,
-		private contratoServicio: ContratosService
+		private contratoServicio: ContratosService,
+		private comprobanteDownloaderService: ComprobantesDownloaderService,
+		private snackBar: MatSnackBar
 	) {
 		this.movimiento = this.data.movimiento;
 		this.linkContrato = this.data.linkContrato;
@@ -106,5 +111,43 @@ export class EntregasDetalleComponent implements OnInit, OnDestroy {
 		};
 
 		this.dialog.open(ContratosDetalleComponent, opciones);
+	}
+
+	/**
+	 * Descarga el certificado desde afip
+	 */
+	descargarCertificado() {
+		if (this.cargando == false) {
+			this.cargando = true;
+
+			this.comprobanteDownloaderService.certificadoAfipDescargado(this.movimiento.n1116A)
+				.pipe(takeUntil(this.destroy$))
+				.subscribe(respuesta => {
+					var mediaType = 'application/pdf';
+					var blob = new Blob([respuesta], { type: mediaType });
+					var filename = `certificado.pdf`;
+
+					if (blob.size !== 0) {
+						saveAs(blob, filename);
+					} else {
+						this.openSnackBar("El comprobante no se encuentra disponible para su descarga.");
+					}
+
+					this.cargando = false;
+				}, error => {
+					console.log(error);
+					this.cargando = false;
+				});
+		}
+	}
+
+	/**
+   * Muestra un mensaje en pantalla
+   * @param message Mensaje a mostrar
+   */
+	openSnackBar(message: string) {
+		this.snackBar.open(message, null, {
+			duration: 2000,
+		});
 	}
 }

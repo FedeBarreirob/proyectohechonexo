@@ -12,6 +12,7 @@ export class ComprobantesDownloaderService {
 	private urlCtaCteComprobantesDescargar = `${environment.hostCtaCte}/Comprobantes/descargar`;
 	private urlCtaCteComprobantesDescargarMasivo = `${environment.hostCtaCte}/Comprobantes/descargarMasivo`;
 	private urlGeneradorComprobanteConfVentaDescargar = `${environment.hostGeneradorComprobantes}/confirmacionesDeVentas/descargar`;
+	private urlGeneradorComprobanteCertificado1116ADescargar = `${environment.hostGeneradorComprobantes}/afip/certificado1116A`;
 
 	constructor(
 		private http: HttpClient
@@ -54,6 +55,25 @@ export class ComprobantesDownloaderService {
 		});
 
 		let url = `${this.urlGeneradorComprobanteConfVentaDescargar}/${nroSucursal}/${nroComprobante}`;
+
+		const options = {
+			headers, responseType: 'blob' as 'blob'
+		}
+
+		return this.http.get(url, options);
+	}
+
+	/**
+	 * Descarga pdf del certificado desde Afip
+	 * @param nro1116A Identificador del certificado
+	 */
+	certificadoAfipDescargado(nro1116A): Observable<Blob> {
+
+		let headers = new HttpHeaders({
+			'Content-Type': 'application/json'
+		});
+
+		let url = `${this.urlGeneradorComprobanteCertificado1116ADescargar}/${nro1116A}`;
 
 		const options = {
 			headers, responseType: 'blob' as 'blob'
