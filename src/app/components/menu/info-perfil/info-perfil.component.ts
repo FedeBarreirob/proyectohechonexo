@@ -57,7 +57,7 @@ export class InfoPerfilComponent implements OnInit, OnDestroy {
   // funcion encargada de cargar el nombre de la entidad
   cargarDatosCuentaSeleccionada(cuentaAlg: EntidadAlg) {
     if (cuentaAlg) {
-      let nombreEntidadSeleccionada: string = (cuentaAlg.nombreDeFantasia != null && cuentaAlg.nombreDeFantasia != "") ? cuentaAlg.nombreDeFantasia : cuentaAlg.nombre;
+      let nombreEntidadSeleccionada: string = cuentaAlg.nombre;
       this.nombreEntidad = `(${cuentaAlg.id.codigo}) ${nombreEntidadSeleccionada}`;
     } else {
       this.nombreEntidad = "";
