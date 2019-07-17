@@ -19,7 +19,7 @@
   </div>
 
   <div fxLayout="column" fxLayoutAlign="center center" class="contenedor-realizado">
-    <div fxFlex="100%" class="realizado-titulo">Realizadas</div>
+    <div fxFlex="100%" class="realizado-titulo">Liquidado</div>
     <div fxFlex="100%" class="realizado-cantidad">
       {{indicador.kgFacturados | kilosA: unidadMedida | number: '.0-0'}}{{unidadMedida | kilosTextoA}}
     </div>
@@ -27,11 +27,11 @@
 
   <div fxLayout="row" fxLayoutAlign="space-between center">
     <div fxFlex="50%" class="subtitulo">
-      Pactadas
+      Pactado
     </div>
 
     <div fxFlex="50%" class="subtitulo">
-      Pendientes
+      Pendiente
     </div>
   </div>
 

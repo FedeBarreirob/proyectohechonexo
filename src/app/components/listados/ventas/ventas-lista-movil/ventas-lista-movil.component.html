@@ -20,7 +20,7 @@
 </mat-menu>
 
 <div fxLayout="row" fxLayoutAlign="space-around center" class="titulos">
-  <div fxFlex="40%">Ref. de entrega</div>
+  <div fxFlex="40%">Venta</div>
   <div fxFlex="30%" align="end">{{unidadMedida | kilosTextoA}} netos</div>
   <div fxFlex="30%">$/{{unidadMedida | kilosTextoA}}</div>
 </div>
@@ -45,10 +45,34 @@
       {{movimiento.kilos | kilosA: unidadMedida | number: '.0-0'}}
     </div>
 
-    <div fxFlex="80px" align="right">
+    <!--Pesificadas-->
+    <div fxFlex="80px" align="right" *ngIf="ventasPesificadas!=null && ventasPesificadas == true">
+      <span *ngIf="movimiento.precioQQPesificado!=null"
+        class="precio-qq">${{movimiento.precioQQPesificado | precioQQA: unidadMedida | number: '.0-0'}}</span>
+      <span *ngIf="movimiento.precioQQPesificado==null && movimiento.moneda =='P'"
+        class="precio-qq">${{movimiento.precioPorQuintal | precioQQA: unidadMedida | number: '.0-0'}}</span>
+      <span class="moneda">{{'P' | moneda}}</span>
+    </div>
+
+    <!--Pendientes de pesificar-->
+    <div fxFlex="80px" align="right" *ngIf="ventasPesificadas!=null && ventasPesificadas == false">
       <span class="precio-qq">${{movimiento.precioPorQuintal | precioQQA: unidadMedida | number: '.0-0'}}</span>
       <span class="moneda">{{movimiento.moneda | moneda}}</span>
     </div>
+
+    <!--Todas-->
+    <div fxFlex="80px" align="right" *ngIf="ventasPesificadas == null">
+
+      <span *ngIf="movimiento.precioQQPesificado!=null"
+        class="precio-qq">${{movimiento.precioQQPesificado | precioQQA: unidadMedida | number: '.0-0'}}</span>
+
+      <span *ngIf="movimiento.precioQQPesificado==null"
+        class="precio-qq">${{movimiento.precioPorQuintal | precioQQA: unidadMedida | number: '.0-0'}}</span>
+
+      <span *ngIf="movimiento.precioQQPesificado!=null" class="moneda">{{'P' | moneda}}</span>
+      <span *ngIf="movimiento.precioQQPesificado==null" class="moneda">{{movimiento.moneda | moneda}}</span>
+    </div>
+
   </div>
 
   <!--Spinner-->

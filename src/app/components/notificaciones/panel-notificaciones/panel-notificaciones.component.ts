@@ -65,7 +65,7 @@ export class PanelNotificacionesComponent implements OnInit, OnDestroy {
         .pipe(takeUntil(this.destroy$))
         .subscribe(respuesta => {
 
-          if (respuesta.exito == true && respuesta.datos != null) {
+          if (respuesta.exito == true && respuesta.datos != null && respuesta.datos.cantidadTotalRegistros > 0) {
             this.agregarMovimientosAlListado(respuesta.datos.listado);
           } else {
             this.pagina = this.pagina - 1;

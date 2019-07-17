@@ -30,7 +30,7 @@
 </div>
 
 <mat-tab-group mat-stretch-tabs mat-align-tabs="center">
-    <mat-tab label="Fijadas">
+    <mat-tab label="Fijaciones">
         <ng-template matTabContent>
             <app-contrato-indicador-swiper-ventas
                 *ngIf="resumenDeContratos != null && resumenDeContratos.indicadoresFijaciones != null && cargando == false"
@@ -39,7 +39,7 @@
         </ng-template>
     </mat-tab>
 
-    <mat-tab label="Pesificadas">
+    <mat-tab label="Pesificaciones">
         <ng-template matTabContent>
             <app-contrato-indicador-swiper-ventas-pesificadas
                 *ngIf="resumenDeContratos != null && resumenDeContratos.indicadoresPesificacion != null && cargando == false"
@@ -48,7 +48,7 @@
         </ng-template>
     </mat-tab>
 
-    <mat-tab label="Liquidadas">
+    <mat-tab label="Liquidaciones">
         <ng-template matTabContent>
             <app-contrato-indicador-swiper-ventas-liquidadas
                 *ngIf="resumenDeContratos != null && resumenDeContratos.indicadoresLiquidacion != null && cargando == false"

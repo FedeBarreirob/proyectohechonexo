@@ -129,7 +129,7 @@
               <div fxFlex="110px">
                 <span
                   [ngClass]="{'texto-porcentual-alert': resumen.porcentajeKilosFacturados < 100, 'texto-porcentual-ok': resumen.porcentajeKilosFacturados == 100}">{{resumen.porcentajeKilosFacturados | number: '.2'}}%
-                  Liquidados</span>
+                  Liquidado</span>
               </div>
               <div fxFlex="50px"
                 [ngClass]="{'barra-progreso-alert': resumen.porcentajeKilosFacturados < 100, 'barra-progreso-ok': resumen.porcentajeKilosFacturados == 100}">
