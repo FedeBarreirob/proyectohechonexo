@@ -4,7 +4,7 @@
 <mat-menu #menu="matMenu">
   <button *ngIf="filtro != null" mat-menu-item (click)="seleccionarFiltroCumplido(null)"
     [ngClass]="{'activo': filtro.cumplido === null, 'inactivo': filtro.cumplido !== null }">
-    Todas
+    Todos
   </button>
 
   <button *ngIf="filtro != null" mat-menu-item (click)="seleccionarFiltroCumplido(false)"

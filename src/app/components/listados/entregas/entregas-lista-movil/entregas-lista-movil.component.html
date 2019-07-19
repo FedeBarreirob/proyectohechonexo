@@ -23,7 +23,7 @@
 <div fxLayout="row" fxLayoutAlign="space-between center" class="titulos">
   <div fxFlex="140px">Entrega</div>
   <div fxFlex="60px" align="end">RM/CP</div>
-  <div fxFlex align="end">{{unidadMedida | kilosTextoA}} netos</div>
+  <div fxFlex align="end">{{unidadMedida | kilosTextoA}} {{unidadMedida | netasA }}</div>
 </div>
 
 <div fxLayout="column" fxLayoutWrap fxLayoutAlign="none" infiniteScroll [infiniteScrollDistance]="2"
@@ -39,7 +39,7 @@
     </div>
 
     <div fxFlex="100px">
-      <p class="especie-cosecha">{{movimiento.especie}} {{movimiento.cosecha}}</p>
+      <p class="especie-cosecha">{{movimiento.especieDescripcion}} {{movimiento.cosecha}}</p>
       <p class="fecha">{{movimiento.fecha}}</p>
     </div>
 

@@ -21,7 +21,7 @@
 
 <div fxLayout="row" fxLayoutAlign="space-around center" class="titulos">
   <div fxFlex="40%">Venta</div>
-  <div fxFlex="30%" align="end">{{unidadMedida | kilosTextoA}} netos</div>
+  <div fxFlex="30%" align="end">{{unidadMedida | kilosTextoA}} {{unidadMedida | netasA }}</div>
   <div fxFlex="30%">$/{{unidadMedida | kilosTextoA}}</div>
 </div>
 
@@ -37,7 +37,7 @@
     </div>
 
     <div fxFlex="100px">
-      <p class="especie-cosecha">{{movimiento.especie}} {{movimiento.cosecha}}</p>
+      <p class="especie-cosecha">{{movimiento.especieDescripcion}} {{movimiento.cosecha}}</p>
       <p class="fecha">{{movimiento.fecha}}</p>
     </div>
 

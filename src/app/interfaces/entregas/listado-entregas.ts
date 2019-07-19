@@ -35,7 +35,8 @@ export interface MovimientoEntrega {
     numeroComprobanteExterno?: string,
     acarreo?: string,
     empresaTransporte?: string,
-    indicador?: number
+    indicador?: number,
+    especieDescripcion?: string
 }
 
 export interface EntregasTotales {

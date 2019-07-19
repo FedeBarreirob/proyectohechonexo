@@ -138,6 +138,7 @@ import { TenenciasImpositivasComponent } from './components/listados/reportes/te
 import { CuentaCorrienteAplicadaDetalleComponent } from './components/listados/cuenta-corriente/cuenta-corriente-aplicada-detalle/cuenta-corriente-aplicada-detalle.component';
 import { TenenciaImpositivaDetalleComponent } from './components/listados/reportes/tenencias-impositivas/tenencia-impositiva-detalle/tenencia-impositiva-detalle.component';
 import { ReportesComponent } from './components/listados/reportes/reportes/reportes.component';
+import { NetasAPipe } from './pipes/netas-a.pipe';
 
 registerLocaleData(localeEsAr, 'es-AR');
 
@@ -247,7 +248,8 @@ export function tokenGetter() {
 		TenenciasImpositivasComponent,
 		CuentaCorrienteAplicadaDetalleComponent,
 		TenenciaImpositivaDetalleComponent,
-		ReportesComponent
+		ReportesComponent,
+		NetasAPipe
 	],
 	imports: [
 		HttpClientModule,

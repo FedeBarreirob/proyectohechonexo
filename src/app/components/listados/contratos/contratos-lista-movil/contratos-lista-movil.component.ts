@@ -157,7 +157,7 @@ export class ContratosListaMovilComponent implements OnInit, OnDestroy {
     if (this.filtro != null) {
 
       if (this.filtro.cumplido == null) {
-        return "TODAS";
+        return "TODOS";
       } else if (this.filtro.cumplido == false) {
         return "PENDIENTES";
       } else {

@@ -8,6 +8,7 @@ export interface ResumenContratoCompraVenta {
     fechaEntregaDesde?: Date,
     fechaEntregaHasta?: Date,
     especie?: string,
+    especieDescripcion?: string,
     cosecha?: string,
     kilosPactados?: number,
     kilosEntregados?: number,
