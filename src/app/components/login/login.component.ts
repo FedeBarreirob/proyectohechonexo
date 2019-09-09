@@ -7,6 +7,7 @@ import { MatSnackBar } from '@angular/material';
 import { Observable, Subject } from 'rxjs';
 import { NotificacionesService } from '../../services/notificaciones/notificaciones.service';
 import { OneSignalService } from '../../services/push/one-signal.service';
+import { DeviceDetectorService } from 'ngx-device-detector';
 
 @Component({
 	selector: 'app-login',
@@ -20,6 +21,7 @@ export class LoginComponent implements OnInit {
 	returnUrl: string;
 	hidePassword = true;
 	cargando$: Subject<boolean> = new Subject<boolean>();
+	esCelular: boolean;
 
 	constructor(
 		private formBuilder: FormBuilder,
@@ -29,10 +31,12 @@ export class LoginComponent implements OnInit {
 		private perfilService: PerfilesService,
 		private snackBar: MatSnackBar,
 		private notificacionService: NotificacionesService,
-		private oneSignalService: OneSignalService
+		private oneSignalService: OneSignalService,
+		private deviceService: DeviceDetectorService
 	) { }
 
 	ngOnInit() {
+		this.esCelular = this.deviceService.isMobile();
 		this.inicializarFormulario();
 
 		// reset login status

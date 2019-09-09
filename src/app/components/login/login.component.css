@@ -16,12 +16,6 @@
     margin-top: -10.875px;
 }
 
-.card-base {
-    border: 1px solid rgba(35, 185, 80, 0.08);
-    border-radius: 4px;
-    background-color: rgba(255, 255, 255, 1);
-}
-
 .correo-o-usuario {
     height: 14.129px;
     width: 34.16vw;
@@ -64,6 +58,23 @@
 
 .password mat-form-field {
     width: 74.46vw;
+}
+
+.password-desktop {
+    height: 17.4px;
+    width: 284px;
+    border: 1px solid rgba(45, 164, 66, 0.1);
+    border-radius: 4px;
+    box-shadow: 0 4px 8px -4px rgba(0, 0, 0, 0.5);
+    padding-top: 13.05px;
+    padding-bottom: 13.05px;
+    padding-left: 20px;
+    padding-right: 20px;
+    margin-top: -10.875px;
+}
+
+.password-desktop mat-form-field {
+    width: 284px;
 }
 
 ::ng-deep .mat-form-field-underline {
@@ -126,6 +137,89 @@
     background-size: 100%;
 }
 
+.contenedor-desktop {
+    position: absolute;
+    padding: 0;
+    margin: 0;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-image: url("./../../../assets/login/fondo-globo-verde.png");
+    background-repeat: no-repeat;
+    background-color: white;
+    background-position: center -40vw; 
+    background-size: 100%;
+}
+
 :host /deep/.mat-checkbox-checked.mat-accent .mat-checkbox-background, .mat-checkbox-indeterminate.mat-accent .mat-checkbox-background {
     background-color: #00cb75;
+}
+
+.card-base {
+    width: 91.67%;
+    border: 1px solid rgba(35, 185, 80, 0.08);
+    border-radius: 4px;
+    background-color: rgba(255, 255, 255, 1);
+}
+
+.card-base-desktop {
+    width: 330px;
+    border: 1px solid rgba(35, 185, 80, 0.08);
+    border-radius: 4px;
+    background-color: rgba(255, 255, 255, 1);
+}
+
+.username {
+    height: 17.4px;
+    width: 74.46vw;
+    border: 1px solid rgba(45, 164, 66, 0.1);
+    border-radius: 4px;
+    box-shadow: 0 4px 8px -4px rgba(0, 0, 0, 0.5);
+    padding-top: 13.05px;
+    padding-bottom: 13.05px;
+    padding-left: 3.88vw;
+    padding-right: 3.88vw;
+    margin-top: -10.875px;
+}
+
+.username-desktop {
+    height: 17.4px;
+    width: 284px;
+    border: 1px solid rgba(45, 164, 66, 0.1);
+    border-radius: 4px;
+    box-shadow: 0 4px 8px -4px rgba(0, 0, 0, 0.5);
+    padding-top: 13.05px;
+    padding-bottom: 13.05px;
+    padding-left: 20px;
+    padding-right: 20px;
+    margin-top: -10.875px;
+}
+
+.botonEntrar-desktop {
+    height: 43.5px;
+    width: 330px;
+    background-color: rgba(45, 164, 66, 0.5);
+    outline: none;
+    border-radius: 5px 5px 5px 5px;
+    -moz-border-radius: 5px 5px 5px 5px;
+    -webkit-border-radius: 5px 5px 5px 5px;
+    border: 0px solid #000000;
+    font-family: Rubik;
+    font-weight: bold;
+    color: white;
+}
+
+.botonEntrarHot-desktop {
+    height: 43.5px;
+    width: 330px;
+    background-color: #00cb75;
+    outline: none;
+    border-radius: 5px 5px 5px 5px;
+    -moz-border-radius: 5px 5px 5px 5px;
+    -webkit-border-radius: 5px 5px 5px 5px;
+    border: 0px solid #000000;
+    font-family: Rubik;
+    font-weight: bold;
+    color: white;
 }
