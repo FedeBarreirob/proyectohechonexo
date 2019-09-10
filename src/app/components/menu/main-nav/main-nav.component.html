@@ -1,10 +1,49 @@
+<mat-toolbar class="main-toolbar" *ngIf="authService.esLogueado && !esCelular">
+	<button type="button" aria-label="Toggle sidenav" mat-icon-button (click)="drawer.toggle()"
+		*ngIf="(isHandset$ | async) && authService.esLogueado">
+		<mat-icon aria-label="Side nav toggle icon">menu</mat-icon>
+	</button>
+
+	<span>
+		<img src="assets/logo.png" class="logo" alt="Gaviglio" />
+	</span>
+
+	<span class="relleno"></span>
+
+	<span class="relleno"
+		*ngIf="authService.esAdmin || authService.esRol('SUB_ADMINISTRADOR') || authService.esRol('COMERCIAL')">
+		<app-selector-cuentas></app-selector-cuentas>
+	</span>
+
+	<span class="notificaciones-container">
+		<button mat-icon-button (click)="mostrarOcultarNotificaciones()">
+			<mat-icon svgIcon="bell" matBadge="15" matBadgeColor="warn"></mat-icon>
+		</button>
+	</span>
+
+	<span class="info-perfil-container">
+		<app-info-perfil modoParaToolbar="true"></app-info-perfil>
+	</span>
+
+	<span class="selector-combo-container">
+		<app-combo-cuenta [showAvatar]="false" sizeArrow="36px"></app-combo-cuenta>
+	</span>
+</mat-toolbar>
+
 <mat-sidenav-container class="sidenav-container">
 
-	<mat-sidenav (click)="isPantallaPequena && drawer.toggle()" #drawer class="sidenav" fixedInViewport="true"
+	<mat-sidenav #menuNotificaciones position="end" class="sidenav-notificaciones" *ngIf="!esCelular">
+		<app-panel-notificaciones (botonCerrar)="menuNotificaciones.toggle()"></app-panel-notificaciones>
+	</mat-sidenav>
+
+	<mat-sidenav (click)="isPantallaPequena && drawer.toggle()" #drawer
+		[ngClass]="{'sidenav': esCelular, 'sidenav-desktop': !esCelular}" fixedInViewport="true"
 		[attr.role]="(isHandset$ | async) ? 'dialog' : 'navigation'" [mode]="(isHandset$ | async) ? 'over' : 'side'"
 		[opened]="!(isHandset$ | async) && authService.esLogueado">
 
-		<app-info-perfil></app-info-perfil>
+		<app-info-perfil *ngIf="esCelular"></app-info-perfil>
+
+		<p class="menu-text" *ngIf="!esCelular">MENÚ</p>
 
 		<mat-nav-list *ngIf="authService.esLogueado">
 
@@ -16,26 +55,6 @@
 	</mat-sidenav>
 
 	<mat-sidenav-content>
-		<!--
-		<mat-toolbar color="primary" *ngIf="authService.esLogueado">
-			<button type="button" aria-label="Toggle sidenav" mat-icon-button (click)="drawer.toggle()"
-				*ngIf="(isHandset$ | async) && authService.esLogueado">
-				<mat-icon aria-label="Side nav toggle icon">menu</mat-icon>
-			</button>
-			<span>Gaviglio Digital - Clientes</span>
-
-			<span class="relleno"></span>
-
-			<span class="relleno"
-				*ngIf="authService.esAdmin || authService.esRol('SUB_ADMINISTRADOR') || authService.esRol('COMERCIAL')">
-				<app-selector-cuentas></app-selector-cuentas>
-			</span>
-
-			<span class="contenedorBuzonAcceso" *ngIf="authService.esLogueado">
-				<app-acceso-buzon></app-acceso-buzon>
-			</span>
-		</mat-toolbar>
-		-->
 
 		<ng-content></ng-content>
 

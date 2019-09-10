@@ -1,0 +1,29 @@
+<mat-card class="tarjeta">
+
+  <div fxLayout="row" fxLayoutAlign="space-between center">
+    <div fxFlex="100%" class="titulo-card">A COBRAR <img src="assets/varios/entrada.png" class="img-indicador" />
+    </div>
+  </div>
+
+  <div fxLayout="row" fxLayoutAlign="space-between center">
+    <div fxFlex="50%" class="contenedor-importe" *ngIf="saldoGlobal != null && seObtuvoSaldoExito == true"><span
+        class="importe-cobrar">{{ saldoGlobal.aCobrarVencido | number: '.0-0' }}</span> <span class="ars">ARS</span>
+    </div>
+    <div fxFlex="50%" class="contenedor-importe" *ngIf="saldoGlobal != null && seObtuvoSaldoExito == true"><span
+        class="importe-cobrar">{{ saldoGlobal.aCobrarAVencer | number: '.0-0' }}</span> <span class="ars">ARS</span>
+    </div>
+
+    <div fxFlex="50%" class="contenedor-importe" *ngIf="seObtuvoSaldoExito == false"><span
+        class="importe-cobrar">-</span> <span class="ars">ARS</span>
+    </div>
+    <div fxFlex="50%" class="contenedor-importe" *ngIf="seObtuvoSaldoExito == false"><span
+        class="importe-cobrar">-</span> <span class="ars">ARS</span>
+    </div>
+  </div>
+
+  <div fxLayout="row" fxLayoutAlign="space-between center">
+    <div fxFlex="50%" class="vencido-vencer">Disponible</div>
+    <div fxFlex="50%" class="vencido-vencer">Por vencer</div>
+  </div>
+
+</mat-card>

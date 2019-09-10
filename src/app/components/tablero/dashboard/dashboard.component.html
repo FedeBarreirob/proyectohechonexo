@@ -1,23 +1,27 @@
 <mat-sidenav-container class="contenedor-notificaciones">
-	<mat-sidenav #menuNotificaciones position="end" class="sidenav-notificaciones">
+	<mat-sidenav #menuNotificaciones position="end" class="sidenav-notificaciones" *ngIf="esCelular">
 
 		<app-panel-notificaciones (botonCerrar)="menuNotificaciones.toggle()"></app-panel-notificaciones>
 
 	</mat-sidenav>
 	<section>
 
-		<div class="fondo-verde">
-			<app-tool-bar-general [titulo]="'Inicio'" [disabled]="false" [colorIndicador]="'#FFFFFFFF'"
+		<div class="fondo-verde" [ngClass]="{'fondo-verde': esCelular, 'fondo-verde-desktop': !esCelular}">
+			<app-tool-bar-general *ngIf="esCelular" [titulo]="'Inicio'" [disabled]="false" [colorIndicador]="'#FFFFFFFF'"
 				(botonPersonalizadoEjecutado)="mostrarOcultarNotificaciones()"
 				[urlImagenAccionPersonalizada]="'assets/toolbar/Campana.png'"></app-tool-bar-general>
 
-			<app-saldo-cta-cte-aplicada-global (cargandoChange)="esCargandoCtaCte($event)"></app-saldo-cta-cte-aplicada-global>
+			<app-saldo-cta-cte-aplicada-global (cargandoChange)="esCargandoCtaCte($event)">
+			</app-saldo-cta-cte-aplicada-global>
 		</div>
 
 		<div class="fondo-blanco">
-			<app-contrato-indicador-entregas-yventas (cargandoChange)="esCargandoIndicadorContratos($event)"></app-contrato-indicador-entregas-yventas>
-			<app-contrato-indicador-entregas-recientes (cargandoChange)="esCargandoIndicadorEntregasRecientes($event)"></app-contrato-indicador-entregas-recientes>
-			<app-contrato-indicador-ventas-recientes (cargandoChange)="esCargandoIndicadorVentasRecientes($event)"></app-contrato-indicador-ventas-recientes>
+			<app-contrato-indicador-entregas-yventas (cargandoChange)="esCargandoIndicadorContratos($event)">
+			</app-contrato-indicador-entregas-yventas>
+			<app-contrato-indicador-entregas-recientes (cargandoChange)="esCargandoIndicadorEntregasRecientes($event)">
+			</app-contrato-indicador-entregas-recientes>
+			<app-contrato-indicador-ventas-recientes (cargandoChange)="esCargandoIndicadorVentasRecientes($event)">
+			</app-contrato-indicador-ventas-recientes>
 		</div>
 
 	</section>

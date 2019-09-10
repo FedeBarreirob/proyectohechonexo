@@ -1,4 +1,4 @@
-import { Component, OnInit, OnDestroy } from '@angular/core';
+import { Component, OnInit, OnDestroy, Input } from '@angular/core';
 import { PerfilBasico } from '../../../interfaces/perfiles/perfil-basico';
 import { AuthenticationService } from '../../../services/security/authentication.service';
 import { CuentaAlgService } from '../../../services/observers/cuentas-alg/cuenta-alg.service';
@@ -12,6 +12,9 @@ import { takeUntil } from 'rxjs/operators';
   styleUrls: ['./info-perfil.component.css']
 })
 export class InfoPerfilComponent implements OnInit, OnDestroy {
+
+  @Input()
+  modoParaToolbar: boolean = false;
 
   perfilBasico: PerfilBasico;
   nombre: string;

@@ -35,6 +35,11 @@ export class AppComponent {
 			"pdf",
 			this.domSanitizer.bypassSecurityTrustResourceUrl("assets/pdf.svg")
 		);
+
+		this.matIconRegistry.addSvgIcon(
+			"bell",
+			this.domSanitizer.bypassSecurityTrustResourceUrl("assets/toolbar/bell.svg")
+		);
 	}
 
 	/**

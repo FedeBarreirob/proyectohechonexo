@@ -1,16 +1,25 @@
 <div class="contenedor-avatar" fxLayout="row" fxLayoutAlign="center center">
 
   <div fxFlex="20%">
-    <div class="perfil-avatar">
+    <div [ngClass]="{'perfil-avatar': !modoParaToolbar, 'perfil-avatar-modo-toolbar': modoParaToolbar}">
       <app-avatar-del-perfil></app-avatar-del-perfil>
     </div>
   </div>
 
   <div fxFlex="70%">
-    <div class="contenedor-nombres">
-      <span class="nombre">{{nombre}}</span>
-      <br />
-      <span class="nombre-fantasia">{{nombreEntidad}}</span>
+    <div [ngClass]="{'contenedor-nombres': !modoParaToolbar, 'contenedor-nombres-modo-toolbar': modoParaToolbar}">
+
+      <span *ngIf="!modoParaToolbar">
+        <span class="nombre">{{nombre}}</span>
+        <br />
+        <span class="nombre-fantasia">{{nombreEntidad}}</span>
+      </span>
+
+      <span *ngIf="modoParaToolbar">
+        <p class="nombre-modo-toolbar">{{nombre}}</p>
+        <p class="nombre-fantasia-modo-toolbar">{{nombreEntidad}}</p>
+      </span>
+
     </div>
   </div>
 

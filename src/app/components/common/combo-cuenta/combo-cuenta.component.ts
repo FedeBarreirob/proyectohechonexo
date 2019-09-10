@@ -23,6 +23,12 @@ export class ComboCuentaComponent implements OnInit, OnDestroy {
 	@Input()
 	colorIndicador: string = "#666666";
 
+	@Input()
+	sizeArrow: string = '24px';
+
+	@Input()
+	showAvatar: boolean = true;
+
 	perfilBasico: PerfilBasico;
 	cuentaSeleccionada: EntidadAlg;
 	cargando: boolean = false;

@@ -1,5 +1,4 @@
 <!--Tipo de cambio-->
-
 <div class="contenedor-fecha-tipocambio" fxLayout="row" fxLayoutAlign="space-between center" *ngIf="cargando == false">
   <div fxFlex="50%" class="contenedor-fecha-hora">
     <app-fecha-hora></app-fecha-hora>
@@ -19,67 +18,24 @@
   </div>
 </div>
 
-<!--Disponible a cobrar-->
-<mat-card class="tarjeta">
+<span *ngIf="esCelular">
+  <app-saldo-cta-cte-aplicada-global-acobrar *ngIf="cargando == false" [seObtuvoSaldoExito]="seObtuvoSaldoExito"
+    [saldoGlobal]="saldoGlobal"></app-saldo-cta-cte-aplicada-global-acobrar>
 
-  <span *ngIf="cargando == false">
-    <div fxLayout="row" fxLayoutAlign="space-between center">
-      <div fxFlex="100%" class="titulo-card">A COBRAR <img src="assets/varios/entrada.png"
-          class="img-indicador" /></div>
-    </div>
+  <app-saldo-cta-cte-aplicada-global-apagar *ngIf="cargando == false" [seObtuvoSaldoExito]="seObtuvoSaldoExito"
+    [saldoGlobal]="saldoGlobal"></app-saldo-cta-cte-aplicada-global-apagar>
+</span>
 
-    <div fxLayout="row" fxLayoutAlign="space-between center">
-      <div fxFlex="50%" class="contenedor-importe" *ngIf="saldoGlobal != null && seObtuvoSaldoExito == true"><span
-          class="importe-cobrar">{{ saldoGlobal.aCobrarVencido | number: '.0-0' }}</span> <span class="ars">ARS</span>
-      </div>
-      <div fxFlex="50%" class="contenedor-importe" *ngIf="saldoGlobal != null && seObtuvoSaldoExito == true"><span
-          class="importe-cobrar">{{ saldoGlobal.aCobrarAVencer | number: '.0-0' }}</span> <span class="ars">ARS</span>
-      </div>
+<div *ngIf="!esCelular" fxLayout="row" fxLayoutAlign="space-around center" class="saldos-container">
 
-      <div fxFlex="50%" class="contenedor-importe" *ngIf="seObtuvoSaldoExito == false"><span
-          class="importe-cobrar">-</span> <span class="ars">ARS</span>
-      </div>
-      <div fxFlex="50%" class="contenedor-importe" *ngIf="seObtuvoSaldoExito == false"><span
-          class="importe-cobrar">-</span> <span class="ars">ARS</span>
-      </div>
-    </div>
+  <div fxflex="50%">
+    <app-saldo-cta-cte-aplicada-global-acobrar *ngIf="cargando == false" [seObtuvoSaldoExito]="seObtuvoSaldoExito"
+      [saldoGlobal]="saldoGlobal"></app-saldo-cta-cte-aplicada-global-acobrar>
+  </div>
 
-    <div fxLayout="row" fxLayoutAlign="space-between center">
-      <div fxFlex="50%" class="vencido-vencer">Disponible</div>
-      <div fxFlex="50%" class="vencido-vencer">Por vencer</div>
-    </div>
-  </span>
+  <div fxflex="50%">
+    <app-saldo-cta-cte-aplicada-global-apagar *ngIf="cargando == false" [seObtuvoSaldoExito]="seObtuvoSaldoExito"
+      [saldoGlobal]="saldoGlobal"></app-saldo-cta-cte-aplicada-global-apagar>
+  </div>
 
-</mat-card>
-
-<!--A pagar-->
-<mat-card class="tarjeta">
-
-  <span *ngIf="cargando == false">
-    <div fxLayout="row" fxLayoutAlign="space-between center">
-      <div fxFlex="100%" class="titulo-card">A PAGAR <img src="assets/varios/salida.png" class="img-indicador" /></div>
-    </div>
-
-    <div fxLayout="row" fxLayoutAlign="space-between center">
-      <div fxFlex="50%" class="contenedor-importe" *ngIf="saldoGlobal != null && seObtuvoSaldoExito == true"><span
-          class="importe-pagar">{{ saldoGlobal.aPagarVencido | number: '.0-0' }}</span> <span class="ars">ARS</span>
-      </div>
-      <div fxFlex="50%" class="contenedor-importe" *ngIf="saldoGlobal != null && seObtuvoSaldoExito == true"><span
-          class="importe-pagar">{{ saldoGlobal.aPagarAVencer | number: '.0-0' }}</span> <span class="ars">ARS</span>
-      </div>
-
-      <div fxFlex="50%" class="contenedor-importe" *ngIf="seObtuvoSaldoExito == false"><span
-          class="importe-pagar">-</span> <span class="ars">ARS</span>
-      </div>
-      <div fxFlex="50%" class="contenedor-importe" *ngIf="seObtuvoSaldoExito == false"><span
-          class="importe-pagar">-</span> <span class="ars">ARS</span>
-      </div>
-    </div>
-
-    <div fxLayout="row" fxLayoutAlign="space-between center">
-      <div fxFlex="50%" class="vencido-vencer">Vencido</div>
-      <div fxFlex="50%" class="vencido-vencer">Por vencer</div>
-    </div>
-  </span>
-
-</mat-card>
+</div>

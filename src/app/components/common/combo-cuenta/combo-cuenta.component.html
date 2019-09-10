@@ -1,24 +1,28 @@
 <button mat-icon-button [matMenuTriggerFor]="menu">
-
-  <div class="contenedor-avatar" fxLayout="row" fxLayoutAlign="center bottom">
+  <div fxLayout="row" fxLayoutAlign="center bottom" *ngIf="showAvatar">
     <div fxFlex="70%">
       <div class="perfil-avatar">
         <app-avatar-del-perfil></app-avatar-del-perfil>
       </div>
     </div>
     <div fxFlex="30%">
-      <mat-icon [ngStyle]="{'color': colorIndicador}">keyboard_arrow_down</mat-icon>
+      <mat-icon [ngStyle]="{'color': colorIndicador, 'font-size': sizeArrow}">keyboard_arrow_down</mat-icon>
     </div>
   </div>
-
+  <div fxLayout="row" fxLayoutAlign="center center" *ngIf="!showAvatar">
+    <div fxFlex="nogrow">
+      <mat-icon [ngStyle]="{'color': colorIndicador, 'font-size': sizeArrow}">keyboard_arrow_down
+      </mat-icon>
+    </div>
+  </div>
 </button>
+
 <mat-menu #menu="matMenu">
   <span class="tus-cuentas">TUS CUENTAS</span>
   <button *ngFor="let cuentaVinculada of (perfilBasico != null ? perfilBasico.entidadCodigos : [])" mat-menu-item
     (click)="seleccionar(cuentaVinculada)"
     [ngClass]="{'activo': cuentaVinculada.id.codigo === codigo, 'inactivo': cuentaVinculada.id.codigo !== codigo }"
-    [disabled] = "disabled == true"
-    >
+    [disabled]="disabled == true">
     ({{cuentaVinculada.id.codigo}})
     {{ cuentaVinculada.nombre }}
   </button>

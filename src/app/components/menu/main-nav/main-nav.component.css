@@ -10,9 +10,20 @@
   max-width: 288px;
 }
 
-.mat-toolbar.mat-primary {
+.sidenav-desktop {
+  box-shadow: 3px 0 6px rgba(0, 0, 0, .24);
+  width: 80%;
+  max-width: 288px;
+  margin-top: 100px;
+}
+
+.main-toolbar {
+  height: 100px;
   position: sticky;
+  position: -webkit-sticky;
   top: 0;
+  z-index: 1000;
+  background-color: white;
 }
 
 .relleno {
@@ -25,4 +36,37 @@
 
 mat-nav-list {
   overflow-x: hidden;
+}
+
+.logo {
+  height: auto;
+  margin-left: 12px;
+  margin-top: 20px !important;
+  width: 170px;
+}
+
+.menu-text {
+  color: #666666;
+  font-family: Rubik;
+  font-size: 12px;
+  letter-spacing: 1.2px;
+  margin-left: 24px;
+}
+
+.selector-combo-container {
+  margin-top: 15px;
+}
+
+.info-perfil-container {
+  margin-top: -5px;
+}
+
+.notificaciones-container {
+  margin-right: 25px;
+}
+
+.sidenav-notificaciones {
+  box-shadow: 3px 0 6px rgba(0, 0, 0, .24);
+  width: 70%;
+  max-width: 270px;
 }

@@ -1,0 +1,28 @@
+<mat-card class="tarjeta">
+
+  <div fxLayout="row" fxLayoutAlign="space-between center">
+    <div fxFlex="100%" class="titulo-card">A PAGAR <img src="assets/varios/salida.png" class="img-indicador" /></div>
+  </div>
+
+  <div fxLayout="row" fxLayoutAlign="space-between center">
+    <div fxFlex="50%" class="contenedor-importe" *ngIf="saldoGlobal != null && seObtuvoSaldoExito == true"><span
+        class="importe-pagar">{{ saldoGlobal.aPagarVencido | number: '.0-0' }}</span> <span class="ars">ARS</span>
+    </div>
+    <div fxFlex="50%" class="contenedor-importe" *ngIf="saldoGlobal != null && seObtuvoSaldoExito == true"><span
+        class="importe-pagar">{{ saldoGlobal.aPagarAVencer | number: '.0-0' }}</span> <span class="ars">ARS</span>
+    </div>
+
+    <div fxFlex="50%" class="contenedor-importe" *ngIf="seObtuvoSaldoExito == false"><span
+        class="importe-pagar">-</span> <span class="ars">ARS</span>
+    </div>
+    <div fxFlex="50%" class="contenedor-importe" *ngIf="seObtuvoSaldoExito == false"><span
+        class="importe-pagar">-</span> <span class="ars">ARS</span>
+    </div>
+  </div>
+
+  <div fxLayout="row" fxLayoutAlign="space-between center">
+    <div fxFlex="50%" class="vencido-vencer">Vencido</div>
+    <div fxFlex="50%" class="vencido-vencer">Por vencer</div>
+  </div>
+
+</mat-card>

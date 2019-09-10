@@ -10,8 +10,22 @@
     margin-right: 4px;
 }
 
+.perfil-avatar-modo-toolbar {
+    float: right;
+    height: 48px;
+    width: 48px;
+    margin-top: 4px;
+    margin-right: 4px;
+}
+
 .contenedor-nombres {
     margin-top: 50px;
+    white-space: pre-wrap;
+    width: 100%;
+}
+
+.contenedor-nombres-modo-toolbar {
+    margin-top: 4px;
     white-space: pre-wrap;
     width: 100%;
 }
@@ -28,4 +42,18 @@
     font-family: Rubik;
     font-size: 12px;
     line-height: 14px;
+}
+
+.nombre-modo-toolbar {
+    color: #333333;
+    font-family: Rubik;
+    font-size: 16px;
+    margin-top: 15px;
+}
+
+.nombre-fantasia-modo-toolbar {
+    color: #666666;
+    font-family: Rubik;
+    font-size: 12px;
+    margin-top: -30px;
 }

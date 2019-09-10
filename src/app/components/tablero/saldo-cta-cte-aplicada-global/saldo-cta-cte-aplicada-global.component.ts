@@ -4,6 +4,7 @@ import { CtacteAplicadaService } from '../../../services/ctacte-aplicada/ctacte-
 import { SaldoGlobalCtaCteAplicada } from '../../../interfaces/ctacte-aplicada/saldo-global-cta-cte-aplicada';
 import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
+import { DeviceDetectorService } from 'ngx-device-detector';
 
 @Component({
   selector: 'app-saldo-cta-cte-aplicada-global',
@@ -19,13 +20,17 @@ export class SaldoCtaCteAplicadaGlobalComponent implements OnInit, OnDestroy {
   cargando: boolean = false;
   destroy$: Subject<any> = new Subject<any>();
   seObtuvoSaldoExito: boolean;
+  esCelular: boolean;
 
   constructor(
     private cuentaService: CuentaAlgService,
-    private ctacteAplicadaService: CtacteAplicadaService
+    private ctacteAplicadaService: CtacteAplicadaService,
+    private deviceService: DeviceDetectorService
   ) { }
 
   ngOnInit() {
+    this.esCelular = this.deviceService.isMobile();
+
     this.cuentaService.cuentaSeleccionada$
       .pipe(takeUntil(this.destroy$))
       .subscribe(

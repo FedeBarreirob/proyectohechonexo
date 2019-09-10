@@ -6,6 +6,7 @@ import { AuthenticationService } from '../../../services/security/authentication
 import { ItemLinkMenu } from '../../../interfaces/menu/sidebar/item-link-menu';
 import { MatSidenav } from '@angular/material';
 import { SidebarService } from '../../../services/observers/sidebar/sidebar.service';
+import { DeviceDetectorService } from 'ngx-device-detector';
 
 @Component({
 	selector: 'app-main-nav',
@@ -16,8 +17,10 @@ import { SidebarService } from '../../../services/observers/sidebar/sidebar.serv
 export class MainNavComponent implements OnInit, OnDestroy {
 
 	@ViewChild('drawer') public sidenav: MatSidenav;
+	@ViewChild('menuNotificaciones') public sidenavNotificaciones: MatSidenav;
 
 	destroy$: Subject<any> = new Subject<any>();
+	esCelular: boolean;
 
 	// links que aparecen en el sidebar
 	public links: Array<ItemLinkMenu>;
@@ -25,11 +28,14 @@ export class MainNavComponent implements OnInit, OnDestroy {
 	constructor(
 		private breakpointObserver: BreakpointObserver,
 		public authService: AuthenticationService,
-		private sidebarService: SidebarService
+		private sidebarService: SidebarService,
+		private deviceService: DeviceDetectorService
 	) {
 	}
 
 	ngOnInit(): void {
+		this.esCelular = this.deviceService.isMobile();
+
 		this.authService.huboLoginCompleto$
 			.pipe(takeUntil(this.destroy$))
 			.subscribe(
@@ -193,6 +199,15 @@ export class MainNavComponent implements OnInit, OnDestroy {
 				permitido: true
 			}
 		];
+	}
+
+	/**
+	 * Funcion encargada de mostrar u ocultar el sidebar que contiene las notificaciones
+	 */
+	mostrarOcultarNotificaciones() {
+		if (this.sidenavNotificaciones) {
+			this.sidenavNotificaciones.toggle();
+		}
 	}
 }
 

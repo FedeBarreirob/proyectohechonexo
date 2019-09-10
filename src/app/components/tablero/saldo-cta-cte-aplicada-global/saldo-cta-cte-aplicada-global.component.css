@@ -1,52 +1,3 @@
-.tarjeta {
-    margin-left: 15px;
-    margin-right: 15px;
-    margin-bottom: 10px;
-}
-
-.img-indicador {
-    float: right;
-    margin-top: -5px;
-}
-
-.titulo-card {
-    color: #666666;
-    font-family: Rubik;
-    font-size: 12px;
-    letter-spacing: 1.2px;
-    text-align: center;
-}
-
-.importe-cobrar {
-    color: #23B950;
-    font-family: RubikLight;
-    font-size: 20px;
-}
-
-.ars {
-    color: #666666;
-    font-family: Rubik;
-    font-size: 16px;
-}
-
-.contenedor-importe {
-    text-align: center;
-    margin-top: 12px;
-}
-
-.vencido-vencer {
-    color: #666666;
-    font-family: Rubik;
-    font-size: 11px;
-    text-align: center;
-}
-
-.importe-pagar {
-    color: #FFBC00;
-    font-family: RubikLight;
-    font-size: 20px;
-}
-
 .contenedor-tipo-cambio {
     font-size: 24px;
     color: #FFFFFF;
@@ -76,4 +27,8 @@
 
 .fecha-tc {
     font-size: 10px !important;
+}
+
+.saldos-container {
+    width: 100%;
 }

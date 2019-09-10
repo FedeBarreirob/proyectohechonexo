@@ -1,6 +1,7 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { MatSidenav } from '@angular/material';
 import { Subject } from 'rxjs';
+import { DeviceDetectorService } from 'ngx-device-detector';
 
 @Component({
   selector: 'app-dashboard',
@@ -16,10 +17,14 @@ export class DashboardComponent implements OnInit {
   cargandoIndicadorContratos: boolean = false;
   cargandoIndicadorEntregasRecientes: boolean = false;
   cargandoIndicadorVentasRecientes: boolean = false;
+  esCelular: boolean;
 
-  constructor() { }
+  constructor(
+    private deviceService: DeviceDetectorService
+  ) { }
 
   ngOnInit() {
+    this.esCelular = this.deviceService.isMobile();
   }
 
   /**

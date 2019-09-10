@@ -139,6 +139,8 @@ import { CuentaCorrienteAplicadaDetalleComponent } from './components/listados/c
 import { TenenciaImpositivaDetalleComponent } from './components/listados/reportes/tenencias-impositivas/tenencia-impositiva-detalle/tenencia-impositiva-detalle.component';
 import { ReportesComponent } from './components/listados/reportes/reportes/reportes.component';
 import { NetasAPipe } from './pipes/netas-a.pipe';
+import { SaldoCtaCteAplicadaGlobalACobrarComponent } from './components/tablero/saldo-cta-cte-aplicada-global-acobrar/saldo-cta-cte-aplicada-global-acobrar.component';
+import { SaldoCtaCteAplicadaGlobalAPagarComponent } from './components/tablero/saldo-cta-cte-aplicada-global-apagar/saldo-cta-cte-aplicada-global-apagar.component';
 
 registerLocaleData(localeEsAr, 'es-AR');
 
@@ -249,7 +251,9 @@ export function tokenGetter() {
 		CuentaCorrienteAplicadaDetalleComponent,
 		TenenciaImpositivaDetalleComponent,
 		ReportesComponent,
-		NetasAPipe
+		NetasAPipe,
+		SaldoCtaCteAplicadaGlobalACobrarComponent,
+		SaldoCtaCteAplicadaGlobalAPagarComponent
 	],
 	imports: [
 		HttpClientModule,

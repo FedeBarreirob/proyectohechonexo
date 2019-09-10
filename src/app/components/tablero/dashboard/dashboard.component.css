@@ -21,6 +21,17 @@
     right: 0px;
 }
 
+.fondo-verde-desktop {
+    background: url("./../../../../assets/varios/fondo-verde-desktop.png");
+    background-position: center top;
+    background-repeat: no-repeat;
+    background-size: 100%;
+    position: absolute;
+    top: 0px;
+    left: 0px;
+    right: 0px;
+}
+
 .fondo-blanco {
     position: absolute;
     top: 310px;
