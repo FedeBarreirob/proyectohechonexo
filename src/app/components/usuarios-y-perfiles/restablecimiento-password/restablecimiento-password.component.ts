@@ -5,6 +5,7 @@ import { MatSnackBar } from '@angular/material';
 import { AuthenticationService } from '../../../services/security/authentication.service';
 import { NuevoPassword } from '../../../interfaces/security/nuevo-password';
 import { Subject } from 'rxjs';
+import { DeviceDetectorService } from 'ngx-device-detector';
 
 @Component({
 	selector: 'app-restablecimiento-password',
@@ -18,13 +19,15 @@ export class RestablecimientoPasswordComponent implements OnInit {
 	cargando: boolean = false;
 	passwordActualizado: boolean = false;
 	cargando$: Subject<boolean> = new Subject<boolean>();
+	esCelular: boolean;
 
 	constructor(
 		private activatedRouter: ActivatedRoute,
 		private router: Router,
 		private formBuilder: FormBuilder,
 		private snackBar: MatSnackBar,
-		private authenticationService: AuthenticationService
+		private authenticationService: AuthenticationService,
+		private deviceService: DeviceDetectorService
 	) {
 		this.activatedRouter.params.subscribe(params => {
 			if (params.token) {
@@ -36,6 +39,8 @@ export class RestablecimientoPasswordComponent implements OnInit {
 	}
 
 	ngOnInit() {
+		this.esCelular = this.deviceService.isMobile();
+		
 		this.frmRecup = this.formBuilder.group({
 			password: [''],
 			confirmacionPassword: ['']

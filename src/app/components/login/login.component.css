@@ -145,11 +145,11 @@
     left: 0;
     width: 100%;
     height: 100%;
-    background-image: url("./../../../assets/login/fondo-globo-verde.png");
+    background-image: url("./../../../assets/login/fondo-globo-verde.svg");
     background-repeat: no-repeat;
     background-color: white;
-    background-position: center -40vw; 
-    background-size: 100%;
+    background-position: center center;
+    background-size: cover;
 }
 
 :host /deep/.mat-checkbox-checked.mat-accent .mat-checkbox-background, .mat-checkbox-indeterminate.mat-accent .mat-checkbox-background {

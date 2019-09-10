@@ -6,6 +6,7 @@ import { AuthenticationService } from '../../../services/security/authentication
 import { SolicitudRecuperacionPassword } from '../../../interfaces/security/solicitud-recuperacion-password';
 import { environment } from '../../../../environments/environment';
 import { Subject } from 'rxjs';
+import { DeviceDetectorService } from 'ngx-device-detector';
 
 @Component({
 	selector: 'app-recuperacion-password',
@@ -18,15 +19,19 @@ export class RecuperacionPasswordComponent implements OnInit {
 	cargando: boolean = false;
 	solicitudEnviada: boolean = false;
 	cargando$: Subject<boolean> = new Subject<boolean>();
+	esCelular: boolean;
 
 	constructor(
 		private formBuilder: FormBuilder,
 		private router: Router,
 		private snackBar: MatSnackBar,
 		private authenticationService: AuthenticationService,
+		private deviceService: DeviceDetectorService
 	) { }
 
 	ngOnInit() {
+		this.esCelular = this.deviceService.isMobile();
+		
 		this.frmRecup = this.formBuilder.group({
 			email: ['', Validators.email]
 		});
