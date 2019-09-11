@@ -141,6 +141,7 @@ import { ReportesComponent } from './components/listados/reportes/reportes/repor
 import { NetasAPipe } from './pipes/netas-a.pipe';
 import { SaldoCtaCteAplicadaGlobalACobrarComponent } from './components/tablero/saldo-cta-cte-aplicada-global-acobrar/saldo-cta-cte-aplicada-global-acobrar.component';
 import { SaldoCtaCteAplicadaGlobalAPagarComponent } from './components/tablero/saldo-cta-cte-aplicada-global-apagar/saldo-cta-cte-aplicada-global-apagar.component';
+import { ContratosListaDesktopComponent } from './components/listados/contratos/contratos-lista-desktop/contratos-lista-desktop.component';
 
 registerLocaleData(localeEsAr, 'es-AR');
 
@@ -253,7 +254,8 @@ export function tokenGetter() {
 		ReportesComponent,
 		NetasAPipe,
 		SaldoCtaCteAplicadaGlobalACobrarComponent,
-		SaldoCtaCteAplicadaGlobalAPagarComponent
+		SaldoCtaCteAplicadaGlobalAPagarComponent,
+		ContratosListaDesktopComponent
 	],
 	imports: [
 		HttpClientModule,
