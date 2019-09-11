@@ -1,5 +1,6 @@
-<!--Tipo de cambio-->
-<div class="contenedor-fecha-tipocambio" fxLayout="row" fxLayoutAlign="space-between center" *ngIf="cargando == false">
+<!--Tipo de cambio modo celular-->
+<div class="contenedor-fecha-tipocambio" fxLayout="row" fxLayoutAlign="space-between center"
+  *ngIf="cargando == false && esCelular">
   <div fxFlex="50%" class="contenedor-fecha-hora">
     <app-fecha-hora></app-fecha-hora>
   </div>
@@ -18,6 +19,7 @@
   </div>
 </div>
 
+<!--Saldos modo celular-->
 <span *ngIf="esCelular">
   <app-saldo-cta-cte-aplicada-global-acobrar *ngIf="cargando == false" [seObtuvoSaldoExito]="seObtuvoSaldoExito"
     [saldoGlobal]="saldoGlobal"></app-saldo-cta-cte-aplicada-global-acobrar>
@@ -26,16 +28,47 @@
     [saldoGlobal]="saldoGlobal"></app-saldo-cta-cte-aplicada-global-apagar>
 </span>
 
-<div *ngIf="!esCelular" fxLayout="row" fxLayoutAlign="space-around center" class="saldos-container">
-
-  <div fxflex="50%">
-    <app-saldo-cta-cte-aplicada-global-acobrar *ngIf="cargando == false" [seObtuvoSaldoExito]="seObtuvoSaldoExito"
-      [saldoGlobal]="saldoGlobal"></app-saldo-cta-cte-aplicada-global-acobrar>
+<!--Tipo de cambio modo desktop-->
+<div class="contenedor-fecha-tipocambio-desktop" fxLayout="row" fxLayoutAlign="space-between center"
+  *ngIf="cargando == false && !esCelular">
+  <div fxFlex="50%" class="contenedor-saludo-desktop">
+    Hola {{nombre}}
   </div>
+  <div fxFlex="50%">
+    <div fxLayout="column" fxLayoutAlign="space-between end" class="tc-y-fecha-desktop-container">
 
-  <div fxflex="50%">
-    <app-saldo-cta-cte-aplicada-global-apagar *ngIf="cargando == false" [seObtuvoSaldoExito]="seObtuvoSaldoExito"
-      [saldoGlobal]="saldoGlobal"></app-saldo-cta-cte-aplicada-global-apagar>
+      <div fxFlex="100%" class="contenedor-tipo-cambio">
+        <img src="assets/varios/tc.png" class="img-tc" />
+        <span *ngIf="saldoGlobal != null && seObtuvoSaldoExito == true && saldoGlobal.esTipoCambioDeHoy == true">TC
+          ${{ saldoGlobal.tipoDeCambio | number: '.2' }}</span>
+
+        <span *ngIf="saldoGlobal != null && seObtuvoSaldoExito == true && saldoGlobal.esTipoCambioDeHoy == false">TC
+          ${{ saldoGlobal.tipoDeCambio | number: '.2' }} <span class="fecha-tc">al
+            {{saldoGlobal.fechaTipoCambio}}</span></span>
+
+        <span *ngIf="saldoGlobal == null || seObtuvoSaldoExito == false">TC no disp.</span>
+      </div>
+
+      <div fxFlex="100%">
+        <app-fecha-hora></app-fecha-hora>
+      </div>
+
+    </div>
   </div>
+</div>
 
+<!--Saldos modo desktop-->
+<div style="padding: 10px;" *ngIf="!esCelular">
+  <table width="100%">
+    <tr>
+      <td style="width: 50%;">
+        <app-saldo-cta-cte-aplicada-global-acobrar *ngIf="cargando == false" [seObtuvoSaldoExito]="seObtuvoSaldoExito"
+          [saldoGlobal]="saldoGlobal"></app-saldo-cta-cte-aplicada-global-acobrar>
+      </td>
+      <td style="width: 50%;">
+        <app-saldo-cta-cte-aplicada-global-apagar *ngIf="cargando == false" [seObtuvoSaldoExito]="seObtuvoSaldoExito"
+          [saldoGlobal]="saldoGlobal"></app-saldo-cta-cte-aplicada-global-apagar>
+      </td>
+    </tr>
+  </table>
 </div>

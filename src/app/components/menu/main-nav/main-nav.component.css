@@ -59,10 +59,12 @@ mat-nav-list {
 
 .info-perfil-container {
   margin-top: -5px;
+  min-width: 300px;
 }
 
 .notificaciones-container {
-  margin-right: 25px;
+  width: 40px;
+  margin-left: 25px;
 }
 
 .sidenav-notificaciones {

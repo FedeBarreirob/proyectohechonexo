@@ -9,6 +9,7 @@ import { takeUntil } from 'rxjs/operators';
 import { FiltroEspecieCosecha } from '../../../../interfaces/varios/filtro-especie-cosecha';
 import { MatDialog } from '@angular/material';
 import { FiltroCosechaComponent } from '../../../../components/filtros/filtro-cosecha/filtro-cosecha.component';
+import { DeviceDetectorService } from 'ngx-device-detector';
 
 @Component({
   selector: 'app-contrato-indicador-entregas-yventas',
@@ -29,15 +30,18 @@ export class ContratoIndicadorEntregasYVentasComponent implements OnInit, OnDest
   cuenta: string;
   cosecha: string;
   descripcionFiltroCosecha: string;
+  esCelular: boolean;
 
   constructor(
     private contratosService: ContratosService,
     private cuentasService: CuentaAlgService,
     private authenticationService: AuthenticationService,
-    public dialog: MatDialog
+    public dialog: MatDialog,
+    private deviceService: DeviceDetectorService
   ) { }
 
   ngOnInit() {
+    this.esCelular = this.deviceService.isMobile();
     this.cargarUnidadMedida();
 
     this.cuentasService.cuentaSeleccionada$
@@ -127,13 +131,22 @@ export class ContratoIndicadorEntregasYVentasComponent implements OnInit, OnDest
    * Muestra el filtro de cosechas
    */
   verFiltroCosecha() {
-    let opciones = {
-      data: this.filtrosEspecieCosecha,
-      maxWidth: '100vw',
-      maxHeight: '100vh',
-      height: '100%',
-      width: '100%'
-    };
+
+    let opciones;
+
+    if (this.esCelular) {
+      opciones = {
+        data: this.filtrosEspecieCosecha,
+        maxWidth: '100vw',
+        maxHeight: '100vh',
+        height: '100%',
+        width: '100%'
+      };
+    } else {
+      opciones = {
+        data: this.filtrosEspecieCosecha
+      };
+    }
 
     let dialogRef = this.dialog.open(FiltroCosechaComponent, opciones);
 

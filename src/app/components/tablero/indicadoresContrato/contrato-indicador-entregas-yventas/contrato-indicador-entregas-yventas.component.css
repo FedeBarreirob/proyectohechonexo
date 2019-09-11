@@ -44,3 +44,7 @@
 :host ::ng-deep .mat-ink-bar {
     background-color: #00cb75 !important;
 }
+
+.extra-padding-desktop {
+    padding: 10px;
+}

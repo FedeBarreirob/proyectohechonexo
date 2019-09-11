@@ -34,14 +34,20 @@
     color: #333333;
     font-family: Rubik;
     font-size: 16px;
-    line-height: 19px;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    white-space: nowrap;
+    margin-bottom: -10px;
+    padding-top: 13px;
 }
 
 .nombre-fantasia {
     color: #666666;
     font-family: Rubik;
     font-size: 12px;
-    line-height: 14px;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    white-space: nowrap;
 }
 
 .nombre-modo-toolbar {
@@ -49,6 +55,9 @@
     font-family: Rubik;
     font-size: 16px;
     margin-top: 15px;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    white-space: nowrap;
 }
 
 .nombre-fantasia-modo-toolbar {
@@ -56,4 +65,7 @@
     font-family: Rubik;
     font-size: 12px;
     margin-top: -30px;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    white-space: nowrap;
 }

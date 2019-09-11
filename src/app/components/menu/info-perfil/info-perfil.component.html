@@ -10,9 +10,8 @@
     <div [ngClass]="{'contenedor-nombres': !modoParaToolbar, 'contenedor-nombres-modo-toolbar': modoParaToolbar}">
 
       <span *ngIf="!modoParaToolbar">
-        <span class="nombre">{{nombre}}</span>
-        <br />
-        <span class="nombre-fantasia">{{nombreEntidad}}</span>
+        <p class="nombre">{{nombre}}</p>
+        <p class="nombre-fantasia">{{nombreEntidad}}</p>
       </span>
 
       <span *ngIf="modoParaToolbar">

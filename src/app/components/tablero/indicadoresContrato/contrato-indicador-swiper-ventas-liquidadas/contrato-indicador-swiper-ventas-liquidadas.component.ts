@@ -1,6 +1,7 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { ContratosIndicadorLiquidaciones } from '../../../../interfaces/contratos/indicadores/contratos-indicador-liquidaciones';
 import { SwiperConfigInterface, SwiperPaginationInterface } from 'ngx-swiper-wrapper';
+import { DeviceDetectorService } from 'ngx-device-detector';
 
 @Component({
   selector: 'app-contrato-indicador-swiper-ventas-liquidadas',
@@ -16,10 +17,12 @@ export class ContratoIndicadorSwiperVentasLiquidadasComponent implements OnInit 
   unidadMedida: string;
 
   public config: SwiperConfigInterface;
+  esCelular: boolean;
 
-  constructor() { }
+  constructor(private deviceService: DeviceDetectorService) { }
 
   ngOnInit() {
+    this.esCelular = this.deviceService.isMobile();
     this.configurarSwiper();
   }
 
@@ -29,7 +32,7 @@ export class ContratoIndicadorSwiperVentasLiquidadasComponent implements OnInit 
   private configurarSwiper() {
     this.config = {
       direction: 'horizontal',
-      slidesPerView: 2,
+      slidesPerView: (this.esCelular) ? 2 : 3,
       keyboard: true,
       mousewheel: true,
       scrollbar: false,

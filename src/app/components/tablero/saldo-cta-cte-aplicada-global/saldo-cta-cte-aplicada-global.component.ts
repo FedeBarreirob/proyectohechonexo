@@ -5,6 +5,8 @@ import { SaldoGlobalCtaCteAplicada } from '../../../interfaces/ctacte-aplicada/s
 import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
 import { DeviceDetectorService } from 'ngx-device-detector';
+import { AuthenticationService } from '../../../services/security/authentication.service';
+import { PerfilBasico } from '../../../interfaces/perfiles/perfil-basico';
 
 @Component({
   selector: 'app-saldo-cta-cte-aplicada-global',
@@ -21,14 +23,25 @@ export class SaldoCtaCteAplicadaGlobalComponent implements OnInit, OnDestroy {
   destroy$: Subject<any> = new Subject<any>();
   seObtuvoSaldoExito: boolean;
   esCelular: boolean;
+  nombre: string;
+  perfilBasico: PerfilBasico;
 
   constructor(
     private cuentaService: CuentaAlgService,
     private ctacteAplicadaService: CtacteAplicadaService,
-    private deviceService: DeviceDetectorService
+    private deviceService: DeviceDetectorService,
+    private authenticationService: AuthenticationService
   ) { }
 
   ngOnInit() {
+    this.authenticationService.perfilActivo$
+      .pipe(takeUntil(this.destroy$))
+      .subscribe(
+        perfil => {
+          this.perfilBasico = perfil;
+          this.cargarNombreUsuario();
+        });
+
     this.esCelular = this.deviceService.isMobile();
 
     this.cuentaService.cuentaSeleccionada$
@@ -36,6 +49,9 @@ export class SaldoCtaCteAplicadaGlobalComponent implements OnInit, OnDestroy {
       .subscribe(
         cuenta => this.cargarSaldoGlobal(cuenta.id.codigo)
       );
+
+    this.authenticationService.setPerfilActivo(this.authenticationService.perfilUsuarioSeleccionado());
+    this.cargarNombreUsuario();
   }
 
   ngOnDestroy(): void {
@@ -74,6 +90,17 @@ export class SaldoCtaCteAplicadaGlobalComponent implements OnInit, OnDestroy {
             this.cargandoChange.emit(false);
           }
         );
+    }
+  }
+
+  /**
+   * funcion encargada de cargar el nombre del usuario
+   */
+  cargarNombreUsuario() {
+    if (this.perfilBasico && this.perfilBasico.informacionPersonal && this.perfilBasico.informacionPersonal.nombre) {
+      this.nombre = this.perfilBasico.informacionPersonal.nombre;
+    } else {
+      this.nombre = "-";
     }
   }
 }

@@ -1,32 +1,36 @@
-<div fxLayout="row" fxLayoutAlign="center" class="encabezado-filtro">
-  <div fxFlex="100%" class="texto-filtrar">
-    FILTRAR POR COSECHA
-  </div>
-</div>
+<div class="filtro-container">
 
-<mat-button-toggle-group class="grupo-botones-campanias" [(ngModel)]="cosecha">
-
-  <div
-    *ngFor="let cosecha of ((filtrosEspecieCosecha && filtrosEspecieCosecha.cosechas) ? filtrosEspecieCosecha.cosechas : [])"
-    class="boton-campania">
-    <mat-button-toggle value="{{cosecha.cosecha}}">
-      <div class="texto-campania">{{cosecha.cosechaDescripcion}}</div>
-    </mat-button-toggle>
+  <div fxLayout="row" fxLayoutAlign="center" class="encabezado-filtro">
+    <div fxFlex="100%" class="texto-filtrar">
+      FILTRAR POR COSECHA
+    </div>
   </div>
 
-</mat-button-toggle-group>
+  <mat-button-toggle-group class="grupo-botones-campanias" [(ngModel)]="cosecha">
 
-<!--botones-->
-<div fxLayout="row" fxLayoutAlign="space-between center" class="contenedor-botones">
-  <div fxFlex="84px">
-    <button mat-button class="boton-limpiar" (click)="cerrar()">Cerrar</button>
+    <div
+      *ngFor="let cosecha of ((filtrosEspecieCosecha && filtrosEspecieCosecha.cosechas) ? filtrosEspecieCosecha.cosechas : [])"
+      class="boton-campania">
+      <mat-button-toggle value="{{cosecha.cosecha}}">
+        <div class="texto-campania">{{cosecha.cosechaDescripcion}}</div>
+      </mat-button-toggle>
+    </div>
+
+  </mat-button-toggle-group>
+
+  <!--botones-->
+  <div fxLayout="row" fxLayoutAlign="space-between center" class="contenedor-botones">
+    <div fxFlex="84px">
+      <button mat-button class="boton-limpiar" (click)="cerrar()">Cerrar</button>
+    </div>
+
+    <div fxFlex="84px">
+      <button mat-button class="boton-limpiar" (click)="limpiar()">Limpiar</button>
+    </div>
+
+    <div fxFlex="84px">
+      <button mat-button class="boton-aplicar" (click)="aplicar()">Aplicar</button>
+    </div>
   </div>
 
-  <div fxFlex="84px">
-    <button mat-button class="boton-limpiar" (click)="limpiar()">Limpiar</button>
-  </div>
-
-  <div fxFlex="84px">
-    <button mat-button class="boton-aplicar" (click)="aplicar()">Aplicar</button>
-  </div>
 </div>

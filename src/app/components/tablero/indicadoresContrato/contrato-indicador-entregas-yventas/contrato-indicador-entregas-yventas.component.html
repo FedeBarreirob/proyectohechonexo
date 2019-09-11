@@ -1,59 +1,61 @@
-<div fxLayout="row" fxLayoutAlign="space-between center">
-    <div fxFlex="80%" class="titulo-principal">
-        RESUMEN DE CONTRATOS <br /> <span *ngIf="cargando == false"
-            class="texto-filtro">{{descripcionFiltroCosecha}}</span>
+<div [ngClass]="{'extra-padding-desktop': !esCelular}">
+    <div fxLayout="row" fxLayoutAlign="space-between center">
+        <div fxFlex="80%" class="titulo-principal">
+            RESUMEN DE CONTRATOS <br /> <span *ngIf="cargando == false"
+                class="texto-filtro">{{descripcionFiltroCosecha}}</span>
+        </div>
+
+        <div fxFlex="20%" class="filtro-cosecha" align="end">
+            <button mat-icon-button *ngIf="cargandoFiltrosCosecha == false && filtrosEspecieCosecha != null"
+                (click)="verFiltroCosecha()" [disabled]="cargando == true">
+                <mat-icon aria-label="Filtro de cosechas">filter_list</mat-icon>
+            </button>
+        </div>
     </div>
 
-    <div fxFlex="20%" class="filtro-cosecha" align="end">
-        <button mat-icon-button *ngIf="cargandoFiltrosCosecha == false && filtrosEspecieCosecha != null"
-            (click)="verFiltroCosecha()" [disabled]="cargando == true">
-            <mat-icon aria-label="Filtro de cosechas">filter_list</mat-icon>
-        </button>
+    <div fxLayout="row" fxLayoutAlign="none">
+        <div fxFlex="100%" class="sub-titulo-principal">
+            ENTREGAS
+        </div>
     </div>
+
+    <app-contrato-indicador-swiper-entrega
+        *ngIf="resumenDeContratos != null && resumenDeContratos.indicadoresEntregas != null && cargando == false"
+        [indicadores]="resumenDeContratos.indicadoresEntregas" [unidadMedida]="unidadMedida">
+    </app-contrato-indicador-swiper-entrega>
+
+    <div fxLayout="row" fxLayoutAlign="none">
+        <div fxFlex="100%" class="sub-titulo-principal">
+            VENTAS
+        </div>
+    </div>
+
+    <mat-tab-group mat-stretch-tabs mat-align-tabs="center">
+        <mat-tab label="Fijaciones">
+            <ng-template matTabContent>
+                <app-contrato-indicador-swiper-ventas
+                    *ngIf="resumenDeContratos != null && resumenDeContratos.indicadoresFijaciones != null && cargando == false"
+                    [indicadores]="resumenDeContratos.indicadoresFijaciones" [unidadMedida]="unidadMedida">
+                </app-contrato-indicador-swiper-ventas>
+            </ng-template>
+        </mat-tab>
+
+        <mat-tab label="Pesificaciones">
+            <ng-template matTabContent>
+                <app-contrato-indicador-swiper-ventas-pesificadas
+                    *ngIf="resumenDeContratos != null && resumenDeContratos.indicadoresPesificacion != null && cargando == false"
+                    [indicadores]="resumenDeContratos.indicadoresPesificacion" [unidadMedida]="unidadMedida">
+                </app-contrato-indicador-swiper-ventas-pesificadas>
+            </ng-template>
+        </mat-tab>
+
+        <mat-tab label="Liquidaciones">
+            <ng-template matTabContent>
+                <app-contrato-indicador-swiper-ventas-liquidadas
+                    *ngIf="resumenDeContratos != null && resumenDeContratos.indicadoresLiquidacion != null && cargando == false"
+                    [indicadores]="resumenDeContratos.indicadoresLiquidacion" [unidadMedida]="unidadMedida">
+                </app-contrato-indicador-swiper-ventas-liquidadas>
+            </ng-template>
+        </mat-tab>
+    </mat-tab-group>
 </div>
-
-<div fxLayout="row" fxLayoutAlign="none">
-    <div fxFlex="100%" class="sub-titulo-principal">
-        ENTREGAS
-    </div>
-</div>
-
-<app-contrato-indicador-swiper-entrega
-    *ngIf="resumenDeContratos != null && resumenDeContratos.indicadoresEntregas != null && cargando == false"
-    [indicadores]="resumenDeContratos.indicadoresEntregas" [unidadMedida]="unidadMedida">
-</app-contrato-indicador-swiper-entrega>
-
-<div fxLayout="row" fxLayoutAlign="none">
-    <div fxFlex="100%" class="sub-titulo-principal">
-        VENTAS
-    </div>
-</div>
-
-<mat-tab-group mat-stretch-tabs mat-align-tabs="center">
-    <mat-tab label="Fijaciones">
-        <ng-template matTabContent>
-            <app-contrato-indicador-swiper-ventas
-                *ngIf="resumenDeContratos != null && resumenDeContratos.indicadoresFijaciones != null && cargando == false"
-                [indicadores]="resumenDeContratos.indicadoresFijaciones" [unidadMedida]="unidadMedida">
-            </app-contrato-indicador-swiper-ventas>
-        </ng-template>
-    </mat-tab>
-
-    <mat-tab label="Pesificaciones">
-        <ng-template matTabContent>
-            <app-contrato-indicador-swiper-ventas-pesificadas
-                *ngIf="resumenDeContratos != null && resumenDeContratos.indicadoresPesificacion != null && cargando == false"
-                [indicadores]="resumenDeContratos.indicadoresPesificacion" [unidadMedida]="unidadMedida">
-            </app-contrato-indicador-swiper-ventas-pesificadas>
-        </ng-template>
-    </mat-tab>
-
-    <mat-tab label="Liquidaciones">
-        <ng-template matTabContent>
-            <app-contrato-indicador-swiper-ventas-liquidadas
-                *ngIf="resumenDeContratos != null && resumenDeContratos.indicadoresLiquidacion != null && cargando == false"
-                [indicadores]="resumenDeContratos.indicadoresLiquidacion" [unidadMedida]="unidadMedida">
-            </app-contrato-indicador-swiper-ventas-liquidadas>
-        </ng-template>
-    </mat-tab>
-</mat-tab-group>

@@ -105,3 +105,8 @@
     margin-top: 26px;
     margin-bottom: 25px;
 }
+
+.filtro-container {
+    width: 100%;
+    overflow-x: hidden;
+}
