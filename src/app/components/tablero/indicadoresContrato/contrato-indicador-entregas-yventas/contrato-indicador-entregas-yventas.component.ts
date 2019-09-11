@@ -170,4 +170,11 @@ export class ContratoIndicadorEntregasYVentasComponent implements OnInit, OnDest
       this.descripcionFiltroCosecha = "COSECHA 1718 EN ADELANTE";
     }
   }
+
+  /**
+   * Determina si hay datos cargados para mostrar
+   */
+  get hayDatosCargados(): boolean {
+    return this.resumenDeContratos != null && (this.resumenDeContratos.indicadoresEntregas != null || this.resumenDeContratos.indicadoresFijaciones != null);
+  }
 }
