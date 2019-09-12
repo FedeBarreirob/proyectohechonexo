@@ -24,8 +24,7 @@ export class ContratosComponent implements OnInit, OnDestroy {
   public cargandoFiltros: boolean;
   cargando$: Subject<boolean> = new Subject<boolean>();
 
-  observerFiltroListadoMovil$ = new Subject<any>();
-  observerFiltroListadoDesktop$ = new Subject<any>();
+  observerFiltro$ = new Subject<any>();
   esCelular: boolean;
   destroy$: Subject<any> = new Subject<any>();
 
@@ -76,11 +75,7 @@ export class ContratosComponent implements OnInit, OnDestroy {
 
   // funcion que ejecuta la carga del listado de entregas
   cargarListado(filtro: any) {
-    if (this.esCelular) {
-      this.observerFiltroListadoMovil$.next(filtro);
-    } else {
-      this.observerFiltroListadoDesktop$.next(filtro);
-    }
+    this.observerFiltro$.next(filtro);
   }
 
   // funcion encargada de capturar el valor de la cuenta
@@ -134,11 +129,11 @@ export class ContratosComponent implements OnInit, OnDestroy {
   /**
 	 * Muestra el indicador de carga mientras haya un proceso ejecutándose
 	 */
-	mostrarIndicadorLoading(cargando: boolean) {
-		if (cargando == true) {
-			this.cargando$.next(true);
-		} else {
-			this.cargando$.next(false);
-		}
-	}
+  mostrarIndicadorLoading(cargando: boolean) {
+    if (cargando == true) {
+      this.cargando$.next(true);
+    } else {
+      this.cargando$.next(false);
+    }
+  }
 }

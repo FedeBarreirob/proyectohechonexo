@@ -6,6 +6,7 @@ import { Observable } from 'rxjs';
 import { FiltroEspecieCosecha } from '../../interfaces/varios/filtro-especie-cosecha';
 import { ResponseServicio } from '../../interfaces/varios/response-servicio';
 import { Cacheable } from 'ngx-cacheable';
+import { ResponseListadoPaginado } from '../../interfaces/varios/response-listado-paginado';
 
 @Injectable({
   providedIn: 'root'
@@ -28,7 +29,7 @@ export class ContratosService {
    * @param filtro
    */
   @Cacheable()
-  listadoContratosResumidos(filtro: FiltroResumenContratoCompraVenta) {
+  listadoContratosResumidos(filtro: FiltroResumenContratoCompraVenta): Observable<ResponseListadoPaginado> {
 
     const httpOptions = {
       headers: new HttpHeaders({
@@ -36,7 +37,7 @@ export class ContratosService {
       })
     };
 
-    return this.http.post<any>(this.urlContratosListado, JSON.stringify(filtro), httpOptions);
+    return this.http.post<ResponseListadoPaginado>(this.urlContratosListado, JSON.stringify(filtro), httpOptions);
   }
 
   /**

@@ -15,7 +15,7 @@ import { takeUntil } from 'rxjs/operators';
 export class ContratosListaMovilComponent implements OnInit, OnDestroy {
 
   @Input()
-  observerFiltroListadoMovil$: Subject<any>;
+  observerFiltro$: Subject<any>;
 
   @Output()
   seleccionMovimiento: EventEmitter<ResumenContratoCompraVenta> = new EventEmitter<ResumenContratoCompraVenta>();
@@ -39,7 +39,7 @@ export class ContratosListaMovilComponent implements OnInit, OnDestroy {
 
   ngOnInit() {
     // observer del filtro
-    this.observerFiltroListadoMovil$
+    this.observerFiltro$
       .pipe(takeUntil(this.destroy$))
       .subscribe(
         filtro => {
@@ -92,12 +92,12 @@ export class ContratosListaMovilComponent implements OnInit, OnDestroy {
         .subscribe(respuesta => {
 
           // si no hay datos, reestablecer la pagina
-          if (respuesta.datos == null || respuesta.datos.length == 0) {
+          if (respuesta.datos.listado == null || respuesta.datos.listado.length == 0) {
             this.pagina = this.pagina - 1;
           }
 
           if (respuesta.exito == true) {
-            this.agregarMovimientosAlListado(respuesta.datos);
+            this.agregarMovimientosAlListado(respuesta.datos.listado);
           }
 
           this.cargando = false;

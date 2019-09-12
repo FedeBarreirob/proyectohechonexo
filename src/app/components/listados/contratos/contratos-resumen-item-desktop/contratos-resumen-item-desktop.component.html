@@ -1,0 +1,102 @@
+<div fxLayout="row" fxLayoutAlign="space-around center" class="container">
+
+  <!--Seleccion-->
+  <div fxFlex="24px">
+    <mat-checkbox></mat-checkbox>
+  </div>
+
+  <!--Identificacion del contrato-->
+  <div fxFlex="nogrow">
+    <div fxLayout="row" fxLayoutAlign="space-around center">
+
+      <div fxFlex="48px">
+        <img class="movimiento-icono" src="{{resumen.especie | imagenEspecie}}" />
+      </div>
+
+      <div fxFlex="270px">
+        <div fxLayout="column" fxLayoutAlign="center start">
+          <div fxFlex="100%" class="titulo-contrato-contenedor">
+            <span class="contrato-y-numero">Contrato {{resumen.numeroComprobanteContrato}}</span>
+            <div class="etiqueta" *ngIf="resumen.moneda != null">{{resumen.moneda=='P' ? 'En pesos' : 'En dólares'}}
+            </div>
+            <div class="etiqueta" *ngIf="resumen.tipoDescripcion != null">{{resumen.tipoNegocioDescripCorta}}</div>
+          </div>
+          <div fxFlex="100%" class="info-kg-pactados">{{resumen.kilosPactados | kilosA: unidadMedida | number: '.0-0'}}
+            {{unidadMedida | kilosTextoA}}
+            de {{resumen.especieDescripcion}}</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!--Entregado-->
+  <div fxFlex="nogrow">
+    <div fxLayout="column" fxLayoutAlign="none">
+
+      <div fxFlex="nogrow">
+        <div fxLayout="row" fxLayoutAlign="start center">
+          <div fxFlex="nogrow">
+            {{resumen.porcentajeKilosEntregados | number: '.2'}}%
+          </div>
+
+          <div fxFlex>
+            <mat-progress-bar mode="determinate" [value]="resumen.porcentajeKilosEntregados"></mat-progress-bar>
+          </div>
+        </div>
+      </div>
+
+      <div fxFlex="nogrow">
+        {{resumen.fechaEntregaDesde}} → {{resumen.fechaEntregaHasta}}
+      </div>
+    </div>
+  </div>
+
+  <!--Fijado-->
+  <div fxFlex="nogrow">
+    <div fxLayout="column" fxLayoutAlign="none">
+
+      <div fxFlex="nogrow">
+        <div fxLayout="row" fxLayoutAlign="start center">
+          <div fxFlex="nogrow">
+            {{resumen.porcentajeKilosFijados | number: '.2'}}%
+          </div>
+
+          <div fxFlex>
+            <mat-progress-bar mode="determinate" [value]="resumen.porcentajeKilosFijados"></mat-progress-bar>
+          </div>
+        </div>
+      </div>
+
+      <div fxFlex="nogrow">
+        {{resumen.fechaDesdeFijacion}} → {{resumen.fechaHastaFijacion}}
+      </div>
+    </div>
+  </div>
+
+  <!--Pesificado-->
+  <div fxFlex="nogrow">
+    <div fxLayout="row" fxLayoutAlign="start center">
+      <div fxFlex="nogrow">
+        {{resumen.porcentajeKilosPesificados | number: '.2'}}%
+      </div>
+
+      <div fxFlex="nogrow">
+        <mat-progress-bar mode="determinate" [value]="resumen.porcentajeKilosPesificados"></mat-progress-bar>
+      </div>
+    </div>
+  </div>
+
+  <!--Liquidado-->
+  <div fxFlex="nogrow">
+    <div fxLayout="row" fxLayoutAlign="start center">
+      <div fxFlex="nogrow">
+        {{resumen.porcentajeKilosFacturados | number: '.2'}}%
+      </div>
+
+      <div fxFlex="nogrow">
+        <mat-progress-bar mode="determinate" [value]="resumen.porcentajeKilosFacturados"></mat-progress-bar>
+      </div>
+    </div>
+  </div>
+
+</div>

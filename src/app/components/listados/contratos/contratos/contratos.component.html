@@ -1,4 +1,4 @@
-<mat-sidenav-container class="contenedor-filtro">
+<mat-sidenav-container class="contenedor-filtro" *ngIf="esCelular">
 	<mat-sidenav #menuFiltro position="end" class="sidenav-filtro">
 		<app-cereales-filtro [filtrosEspecieCosecha]="filtrosEspecieCosecha" [cuenta]="cuenta"
 			(botonCerrar)="menuFiltro.toggle()" (botonAplicar)="cargarListado($event)"></app-cereales-filtro>
@@ -8,10 +8,15 @@
 			(botonPersonalizadoEjecutado)="mostrarOcultarFiltros()"
 			[urlImagenAccionPersonalizada]="'assets/toolbar/embudo.png'"></app-tool-bar-general>
 
-		<app-contratos-lista-movil [observerFiltroListadoMovil$]="observerFiltroListadoMovil$"
+		<app-contratos-lista-movil *ngIf="esCelular" [observerFiltro$]="observerFiltro$"
 			(seleccionMovimiento)="verDetalle($event)" (cargandoChange)="mostrarIndicadorLoading($event)">
 		</app-contratos-lista-movil>
+
 	</section>
 </mat-sidenav-container>
+
+<app-contratos-lista-desktop *ngIf="!esCelular" [observerFiltro$]="observerFiltro$"
+	(seleccionMovimiento)="verDetalle($event)" (cargandoChange)="mostrarIndicadorLoading($event)">
+</app-contratos-lista-desktop>
 
 <!--<app-loading [cargando$]="cargando$"></app-loading>-->

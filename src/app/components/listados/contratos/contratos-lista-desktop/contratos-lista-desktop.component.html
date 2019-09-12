@@ -1,3 +1,14 @@
-<p>
-  contratos-lista-desktop works!
-</p>
+<div class="contenedor-listado" fxLayout="column" fxLayoutWrap fxLayoutAlign="none" infiniteScroll
+  [infiniteScrollDistance]="2" [infiniteScrollThrottle]="50" (scrolled)="onScroll()" [scrollWindow]="false">
+
+  <app-contratos-resumen-item-desktop *ngFor="let movimiento of (listadoContratos ? listadoContratos : [])"
+    (click)="verDetalle(movimiento)" [resumen]="movimiento" [unidadMedida]="unidadMedida">
+  </app-contratos-resumen-item-desktop>
+
+  <!--Spinner-->
+  <div fxLayout="row" fxLayoutAlign="center center" *ngIf="contratosDataSource.loading$ | async"
+    style="margin-top: 10px">
+    <mat-spinner diameter="24"></mat-spinner>
+  </div>
+
+</div>

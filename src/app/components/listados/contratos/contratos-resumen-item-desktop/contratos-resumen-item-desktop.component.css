@@ -1,0 +1,44 @@
+.container {
+    width: 100%;
+    border: 1px solid #ECECEC;
+    border-radius: 4px;
+    background-color: #FFFFFF;
+    padding: 13px;
+    margin: 2px;
+}
+
+.contrato-y-numero {
+    color: #666666;
+    font-family: Rubik;
+    font-size: 14px;
+}
+
+.etiqueta {
+    display: inline-block;
+    margin-left: 4px;
+    padding-right: 5px;
+    border-radius: 200px 0px 0px 200px;
+    -moz-border-radius: 200px 0px 0px 200px;
+    -webkit-border-radius: 200px 0px 0px 200px;
+    border: 1px solid #ECECEC;
+    background-color: #F7F8F8;
+    color: #666666;
+    font-family: Rubik;
+    font-size: 11px;
+    padding-left: 5px;
+    padding-top: 1px;
+    padding-bottom: 1px;
+}
+
+.titulo-contrato-contenedor {
+    width: 100%;
+    text-overflow: ellipsis;
+    overflow-x: hidden;
+    white-space: nowrap;
+}
+
+.info-kg-pactados {
+    color: #333333;
+    font-family: Rubik;
+    font-size: 20px;
+}
