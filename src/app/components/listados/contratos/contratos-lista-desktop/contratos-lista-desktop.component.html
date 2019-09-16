@@ -1,3 +1,21 @@
+<div fxLayout="row" fxLayoutAlign="space-between center" class="contenedor-titulo-filtro" fxLayoutGap="20px">
+
+  <div fxFlex="93px" class="titulo-seccion">
+    Contratos
+  </div>
+
+  <div fxFlex>
+    <app-cereales-filtro-desktop [filtrosEspecieCosecha]="filtrosEspecieCosecha" [cuenta]="cuenta"
+      (botonAplicar)="aplicar($event)" [disabled]="contratosDataSource.loading$ | async">
+    </app-cereales-filtro-desktop>
+  </div>
+
+</div>
+
+<div class="contenedor-header">
+  <app-contratos-resumen-header-item-desktop></app-contratos-resumen-header-item-desktop>
+</div>
+
 <div class="contenedor-listado" fxLayout="column" fxLayoutWrap fxLayoutAlign="none" infiniteScroll
   [infiniteScrollDistance]="2" [infiniteScrollThrottle]="50" (scrolled)="onScroll()" [scrollWindow]="false">
 

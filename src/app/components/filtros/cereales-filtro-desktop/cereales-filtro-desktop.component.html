@@ -1,0 +1,66 @@
+<div fxLayout="row" fxLayoutAlign="space-between center">
+
+  <!--Especies-->
+  <div fxFlex="nogrow" class="boton-container">
+    <button mat-button [matMenuTriggerFor]="menuProductos" [disabled]="disabled">
+      {{ leyendaFiltroProducto() }}<mat-icon>expand_more</mat-icon>
+    </button>
+    <mat-menu #menuProductos="matMenu">
+      <button mat-menu-item (click)="seleccionarProducto(null)"
+        [ngClass]="{'activo': especie === null, 'inactivo': especie !== null }">
+        Todos los productos
+      </button>
+      <button mat-menu-item *ngFor="let unaEspecie of filtrosEspecieCosecha.especies"
+        (click)="seleccionarProducto(unaEspecie)"
+        [ngClass]="{'activo': especie === unaEspecie, 'inactivo': especie !== unaEspecie }">
+        {{unaEspecie.especieDescripcion}}
+      </button>
+    </mat-menu>
+  </div>
+
+  <!--Cosechas-->
+  <div fxFlex="nogrow" class="boton-container">
+    <button mat-button [matMenuTriggerFor]="menuCosechas" [disabled]="disabled">
+      {{ leyendaFiltroCampania() }}<mat-icon>expand_more</mat-icon>
+    </button>
+    <mat-menu #menuCosechas="matMenu">
+      <button mat-menu-item (click)="seleccionarCampania(null)"
+        [ngClass]="{'activo': cosecha === null, 'inactivo': cosecha !== null }">
+        Todas las campañas
+      </button>
+      <button mat-menu-item *ngFor="let unaCosecha of filtrosEspecieCosecha.cosechas"
+        (click)="seleccionarCampania(unaCosecha)"
+        [ngClass]="{'activo': cosecha === unaCosecha, 'inactivo': cosecha !== unaCosecha }">
+        {{unaCosecha.cosechaDescripcion}}
+      </button>
+    </mat-menu>
+  </div>
+
+  <!--Personalizado-->
+  <div fxFlex="nogrow" class="boton-container">
+
+  </div>
+
+  <!--Fecha desde-->
+  <div fxFlex="nogrow" class="boton-container">
+    <input readonly [disabled]="disabled" [(ngModel)]="fechaDesde" matInput [matDatepicker]="desde" class="input-fecha"
+      placeholder="Desde">
+    <mat-datepicker-toggle matSuffix [for]="desde"></mat-datepicker-toggle>
+    <mat-datepicker touchUi #desde></mat-datepicker>
+  </div>
+
+  <!--Fecha hasta-->
+  <div fxFlex="nogrow" class="boton-container">
+    <input readonly [disabled]="disabled" [(ngModel)]="fechaHasta" matInput [matDatepicker]="hasta" class="input-fecha"
+      placeholder="hasta">
+    <mat-datepicker-toggle matSuffix [for]="hasta"></mat-datepicker-toggle>
+    <mat-datepicker touchUi #hasta></mat-datepicker>
+  </div>
+
+  <!--Ejecutar filtro-->
+  <div fxFlex="nogrow">
+    <button mat-icon-button (click)="aplicar()" [disabled]="disabled">
+      <mat-icon>navigate_next</mat-icon>
+    </button>
+  </div>
+</div>

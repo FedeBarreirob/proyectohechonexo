@@ -16,7 +16,9 @@
 </mat-sidenav-container>
 
 <app-contratos-lista-desktop *ngIf="!esCelular" [observerFiltro$]="observerFiltro$"
-	(seleccionMovimiento)="verDetalle($event)" (cargandoChange)="mostrarIndicadorLoading($event)">
+(botonAplicar)="cargarListado($event)"
+	[filtrosEspecieCosecha]="filtrosEspecieCosecha" [cuenta]="cuenta" (seleccionMovimiento)="verDetalle($event)"
+	(cargandoChange)="mostrarIndicadorLoading($event)">
 </app-contratos-lista-desktop>
 
 <!--<app-loading [cargando$]="cargando$"></app-loading>-->

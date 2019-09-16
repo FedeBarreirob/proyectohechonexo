@@ -7,6 +7,7 @@ import { ContratosService } from '../../../../services/contratos/contratos.servi
 import { AuthenticationService } from '../../../../services/security/authentication.service';
 import { takeUntil } from 'rxjs/operators';
 import { ContratosDataSource } from '../../../../datasources/contratos-data-source';
+import { FiltroEspecieCosecha } from '../../../../interfaces/varios/filtro-especie-cosecha';
 
 @Component({
   selector: 'app-contratos-lista-desktop',
@@ -16,13 +17,22 @@ import { ContratosDataSource } from '../../../../datasources/contratos-data-sour
 export class ContratosListaDesktopComponent implements OnInit, OnDestroy {
 
   @Input()
+  filtrosEspecieCosecha: FiltroEspecieCosecha;
+
+  @Input()
   observerFiltro$: Subject<any>;
+
+  @Input()
+  cuenta: any;
 
   @Output()
   seleccionMovimiento: EventEmitter<ResumenContratoCompraVenta> = new EventEmitter<ResumenContratoCompraVenta>();
 
   @Output()
   cargandoChange: EventEmitter<boolean> = new EventEmitter<boolean>();
+
+  @Output()
+  botonAplicar: EventEmitter<any> = new EventEmitter<any>();
 
   listadoContratos: Array<ResumenContratoCompraVenta> = [];
   pagina: number = 1;
@@ -158,5 +168,13 @@ export class ContratosListaDesktopComponent implements OnInit, OnDestroy {
     } else {
       return "-";
     }
+  }
+
+  /**
+   * Pasa el filtro al padre notificando la ejecución del filtro
+   * @param filtro 
+   */
+  aplicar(filtro) {
+    this.botonAplicar.next(filtro);
   }
 }

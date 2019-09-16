@@ -6,6 +6,20 @@
     padding-right: 13px;
 }
 
+.contenedor-header {
+    overflow-x: hidden;
+    padding-left: 13px;
+    padding-right: 13px;
+}
+
+.contenedor-titulo-filtro {
+    overflow-x: hidden;
+    padding-left: 13px;
+    padding-right: 13px;
+    padding-top: 32px;
+    padding-bottom: 28px;
+}
+
 .activo {
     color: #23B950;
     font-family: Rubik;
@@ -27,4 +41,10 @@
     font-family: Rubik;
     font-size: 14px;
     letter-spacing: 1.2px;
+}
+
+.titulo-seccion {
+    color: #333333;
+    font-family: Rubik;
+    font-size: 20px;
 }
