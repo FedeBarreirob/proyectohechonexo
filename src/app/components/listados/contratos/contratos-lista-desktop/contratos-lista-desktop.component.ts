@@ -7,7 +7,6 @@ import { ContratosService } from '../../../../services/contratos/contratos.servi
 import { AuthenticationService } from '../../../../services/security/authentication.service';
 import { takeUntil } from 'rxjs/operators';
 import { ContratosDataSource } from '../../../../datasources/contratos-data-source';
-import { FiltroEspecieCosecha } from '../../../../interfaces/varios/filtro-especie-cosecha';
 
 @Component({
   selector: 'app-contratos-lista-desktop',
@@ -17,22 +16,13 @@ import { FiltroEspecieCosecha } from '../../../../interfaces/varios/filtro-espec
 export class ContratosListaDesktopComponent implements OnInit, OnDestroy {
 
   @Input()
-  filtrosEspecieCosecha: FiltroEspecieCosecha;
-
-  @Input()
   observerFiltro$: Subject<any>;
-
-  @Input()
-  cuenta: any;
 
   @Output()
   seleccionMovimiento: EventEmitter<ResumenContratoCompraVenta> = new EventEmitter<ResumenContratoCompraVenta>();
 
   @Output()
   cargandoChange: EventEmitter<boolean> = new EventEmitter<boolean>();
-
-  @Output()
-  botonAplicar: EventEmitter<any> = new EventEmitter<any>();
 
   listadoContratos: Array<ResumenContratoCompraVenta> = [];
   pagina: number = 1;
@@ -61,7 +51,8 @@ export class ContratosListaDesktopComponent implements OnInit, OnDestroy {
         filtro => {
           this.filtro = filtro;
           this.cargarListado(true);
-        }
+        },
+        error => console.log(error)
       );
 
     // observer de perfil
@@ -91,7 +82,6 @@ export class ContratosListaDesktopComponent implements OnInit, OnDestroy {
 
   // funcion encargada de cargar el listado de entregas
   cargarListado(limpiar: boolean) {
-
     if (limpiar) {
       this.limpiar();
     }
@@ -123,6 +113,13 @@ export class ContratosListaDesktopComponent implements OnInit, OnDestroy {
         );
       }
     );
+
+    this.contratosDataSource.loading$.subscribe(
+      loading => {
+        this.cargandoChange.emit(loading);
+        this.cargando = loading;
+      }
+    );
   }
 
   // funcion que carga mas datos cuando hace scroll
@@ -136,45 +133,5 @@ export class ContratosListaDesktopComponent implements OnInit, OnDestroy {
   // funcion que muestra el detalle de un movimiento seleccionado
   verDetalle(movimiento: ResumenContratoCompraVenta) {
     this.seleccionMovimiento.emit(movimiento);
-  }
-
-  /**
-   * Establece el filtro para obtener 
-   * @param cumplido Estado del filtro de cumplido
-   */
-  seleccionarFiltroCumplido(cumplido?: boolean) {
-    if (this.filtro != null) {
-      if (this.filtro.cumplido != cumplido) {
-        this.filtro.cumplido = cumplido;
-        this.cargarListado(true);
-      }
-    }
-  }
-
-  /**
-   * Devuelve el nombre del filtro de cumplido según el filtro efectuado
-   */
-  leyendaFiltroCumplido(): string {
-    if (this.filtro != null) {
-
-      if (this.filtro.cumplido == null) {
-        return "TODOS";
-      } else if (this.filtro.cumplido == false) {
-        return "PENDIENTES";
-      } else {
-        return "CUMPLIDOS";
-      }
-
-    } else {
-      return "-";
-    }
-  }
-
-  /**
-   * Pasa el filtro al padre notificando la ejecución del filtro
-   * @param filtro 
-   */
-  aplicar(filtro) {
-    this.botonAplicar.next(filtro);
   }
 }

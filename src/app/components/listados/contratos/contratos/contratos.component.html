@@ -1,4 +1,5 @@
-<mat-sidenav-container class="contenedor-filtro" *ngIf="esCelular">
+<!--Modo movil-->
+<mat-sidenav-container class="contenedor-filtro" *ngIf="esCelular != null && esCelular == true">
 	<mat-sidenav #menuFiltro position="end" class="sidenav-filtro">
 		<app-cereales-filtro [filtrosEspecieCosecha]="filtrosEspecieCosecha" [cuenta]="cuenta"
 			(botonCerrar)="menuFiltro.toggle()" (botonAplicar)="cargarListado($event)"></app-cereales-filtro>
@@ -15,10 +16,23 @@
 	</section>
 </mat-sidenav-container>
 
-<app-contratos-lista-desktop *ngIf="!esCelular" [observerFiltro$]="observerFiltro$"
-(botonAplicar)="cargarListado($event)"
-	[filtrosEspecieCosecha]="filtrosEspecieCosecha" [cuenta]="cuenta" (seleccionMovimiento)="verDetalle($event)"
-	(cargandoChange)="mostrarIndicadorLoading($event)">
+<!--Modo desktop-->
+<div fxLayout="row" fxLayoutAlign="space-between center" class="contenedor-titulo-filtro" fxLayoutGap="20px"
+	*ngIf="esCelular != null && esCelular == false">
+
+	<div fxFlex="93px" class="titulo-seccion">
+		Contratos
+	</div>
+
+	<div fxFlex>
+		<app-cereales-filtro-desktop [filtrosEspecieCosecha]="filtrosEspecieCosecha" [cuenta]="cuenta"
+			(botonAplicar)="cargarListado($event)" [disabled]="(cargando$ | async) || cargandoFiltros">
+		</app-cereales-filtro-desktop>
+	</div>
+
+</div>
+<app-contratos-lista-desktop *ngIf="esCelular != null && esCelular == false" [observerFiltro$]="observerFiltro$"
+	(seleccionMovimiento)="verDetalle($event)" (cargandoChange)="mostrarIndicadorLoading($event)">
 </app-contratos-lista-desktop>
 
 <!--<app-loading [cargando$]="cargando$"></app-loading>-->

@@ -1,4 +1,4 @@
-<div fxLayout="row" fxLayoutAlign="space-between center">
+<div fxLayout="row" fxLayoutAlign="space-between center" *ngIf="filtrosEspecieCosecha && cuenta">
 
   <!--Especies-->
   <div fxFlex="nogrow" class="boton-container">
@@ -42,24 +42,22 @@
   </div>
 
   <!--Fecha desde-->
-  <div fxFlex="nogrow" class="boton-container">
-    <input readonly [disabled]="disabled" [(ngModel)]="fechaDesde" matInput [matDatepicker]="desde" class="input-fecha"
-      placeholder="Desde">
-    <mat-datepicker-toggle matSuffix [for]="desde"></mat-datepicker-toggle>
+  <div fxFlex="nogrow" class="boton-container" style="overflow: hidden">
+    <input readonly [(ngModel)]="fechaDesde" matInput [matDatepicker]="desde" class="input-fecha" placeholder="Desde">
+    <mat-datepicker-toggle matSuffix [for]="desde" [disabled]="disabled"></mat-datepicker-toggle>
     <mat-datepicker touchUi #desde></mat-datepicker>
   </div>
 
   <!--Fecha hasta-->
-  <div fxFlex="nogrow" class="boton-container">
-    <input readonly [disabled]="disabled" [(ngModel)]="fechaHasta" matInput [matDatepicker]="hasta" class="input-fecha"
-      placeholder="hasta">
-    <mat-datepicker-toggle matSuffix [for]="hasta"></mat-datepicker-toggle>
+  <div fxFlex="nogrow" class="boton-container" style="overflow: hidden">
+    <input readonly [(ngModel)]="fechaHasta" matInput [matDatepicker]="hasta" class="input-fecha" placeholder="Hasta">
+    <mat-datepicker-toggle matSuffix [for]="hasta" [disabled]="disabled"></mat-datepicker-toggle>
     <mat-datepicker touchUi #hasta></mat-datepicker>
   </div>
 
   <!--Ejecutar filtro-->
   <div fxFlex="nogrow">
-    <button mat-icon-button (click)="aplicar()" [disabled]="disabled">
+    <button mat-icon-button (click)="aplicar()" [disabled]="disabled" matTooltip="Buscar">
       <mat-icon>navigate_next</mat-icon>
     </button>
   </div>

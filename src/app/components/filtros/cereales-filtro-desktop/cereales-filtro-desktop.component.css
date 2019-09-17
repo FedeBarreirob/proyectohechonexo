@@ -9,12 +9,15 @@
 }
 
 .input-fecha {
-    height: 40px;
+    height: 32px;
     width: auto;
     padding-left: 10px;
     color: #666666;
     font-family: Rubik;
     font-size: 14px;
+    border: none;
+    margin-left: 2px;
+    padding-bottom: 5px;
 }
 
 .activo {

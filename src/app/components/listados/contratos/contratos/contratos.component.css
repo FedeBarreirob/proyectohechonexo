@@ -9,3 +9,17 @@
     width: 70%;
     max-width: 270px;
 }
+
+.contenedor-titulo-filtro {
+    overflow-x: hidden;
+    padding-left: 13px;
+    padding-right: 13px;
+    padding-top: 32px;
+    padding-bottom: 28px;
+}
+
+.titulo-seccion {
+    color: #333333;
+    font-family: Rubik;
+    font-size: 20px;
+}

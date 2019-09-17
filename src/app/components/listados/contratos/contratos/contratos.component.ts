@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild, OnDestroy } from '@angular/core';
+import { Component, OnInit, ViewChild, OnDestroy, AfterViewInit } from '@angular/core';
 import { MatSidenav, MatDialog } from '@angular/material';
 import { EntidadAlg } from '../../../../interfaces/perfiles/entidad-alg';
 import { FiltroEspecieCosecha } from '../../../../interfaces/varios/filtro-especie-cosecha';
@@ -15,7 +15,7 @@ import { takeUntil } from 'rxjs/operators';
   templateUrl: './contratos.component.html',
   styleUrls: ['./contratos.component.css']
 })
-export class ContratosComponent implements OnInit, OnDestroy {
+export class ContratosComponent implements OnInit, OnDestroy, AfterViewInit {
 
   @ViewChild('menuFiltro') public sidenav: MatSidenav;
 
@@ -24,8 +24,8 @@ export class ContratosComponent implements OnInit, OnDestroy {
   public cargandoFiltros: boolean;
   cargando$: Subject<boolean> = new Subject<boolean>();
 
-  observerFiltro$ = new Subject<any>();
-  esCelular: boolean;
+  observerFiltro$: Subject<any> = new Subject<any>();
+  esCelular: boolean = null;
   destroy$: Subject<any> = new Subject<any>();
 
   constructor(
@@ -46,8 +46,16 @@ export class ContratosComponent implements OnInit, OnDestroy {
             this.seleccionarCuenta(cuentaAlg);
             this.cargarListadoPorDefecto();
           }
-        }
+        },
+        error => console.log(error)
       );
+  }
+
+  ngAfterViewInit(): void {
+    if (this.cuentaAlgService.cuentaPreviamenteSeleccionada && !this.esCelular) {
+      this.seleccionarCuenta(this.cuentaAlgService.cuentaPreviamenteSeleccionada);
+      this.cargarListadoPorDefecto();
+    }
   }
 
   ngOnDestroy(): void {

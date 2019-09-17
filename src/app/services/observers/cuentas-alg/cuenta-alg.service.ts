@@ -8,11 +8,13 @@ import { Subject, Observable } from 'rxjs';
 export class CuentaAlgService {
 
   private _cuentaAlgSeleccionada$ = new Subject<EntidadAlg>();
+  public cuentaPreviamenteSeleccionada: EntidadAlg;
 
   constructor() { }
 
   // funcion que notifica la selección de una cuenta dada
   notificarSeleccion(cuentaAlg: EntidadAlg) {
+    this.cuentaPreviamenteSeleccionada = cuentaAlg;
     this._cuentaAlgSeleccionada$.next(cuentaAlg);
   }
 
