@@ -1,0 +1,213 @@
+<div *ngIf="resumenContrato">
+<button (click)="cerrar()">salir</button>
+
+<div fxLayout="row" fxLayoutAlign="space-between start" fxLayoutGap="13px" class="resumen-info-container">
+
+  <div fxFlex class="info-container">
+    
+    <div>
+      
+    </div>
+
+  </div>
+
+  <div fxFlex="250px" class="info-container">
+  </div>
+
+</div>
+
+
+
+<mat-progress-bar *ngIf="cargando" mode="indeterminate"></mat-progress-bar>
+
+
+<!--Encabezado-->
+<div fxLayout="row" fxLayoutAlign="space-around center" class="contenedor-encabezado">
+
+  <div fxFlex="20%">
+    <img class="movimiento-icono" src="{{resumenContrato.especie | imagenEspecie}}" />
+  </div>
+
+  <div fxFlex="80%">
+    <div fxLayout="column" fxLayoutAlign="none">
+      <div fxFlex="100%" class="titulo-contrato-contenedor">
+        <span class="contrato-y-numero">Contrato {{resumenContrato.numeroComprobanteContrato}}</span>
+        <div class="tipo-contrato" *ngIf="resumenContrato.tipoDescripcion != null">
+          {{resumenContrato.tipoNegocioDescripCorta}}
+        </div>
+      </div>
+      <div fxFlex="100%" class="info-kg-pactados">
+        {{resumenContrato.kilosPactados | kilosA: unidadMedida | number: '.0-0'}}
+        {{unidadMedida | kilosTextoA}}
+        de {{resumenContrato.especieDescripcion}}
+      </div>
+      <div fxFlex="100%" class="info-entregas-ventas-pendientes">
+        {{mensajeEntregasVentasPendientes}}
+      </div>
+    </div>
+  </div>
+</div>
+
+<!--Boton de descarga del comprobante-->
+<div fxLayout="row" fxLayoutAlign="space-between center" class="botonera">
+  <div fxFlex="100%">
+    <button mat-button class="boton-descarga-comprobante" (click)="descargarComprobante()" [disabled]="cargando==true">
+      <img src="assets/varios/pdf.png" />
+      Descargar comprobante
+    </button>
+  </div>
+</div>
+
+<!--Datos del contrato-->
+<span *ngIf="boleto != null">
+
+  <div fxLayout="row" fxLayoutAlign="space-between none">
+    <div fxFlex="100%" class="titulo-apartados">DATOS DEL CONTRATO</div>
+  </div>
+
+  <div fxLayout="row" fxLayoutAlign="space-between none" fxLayoutGap="10px">
+    <div fxFlex="50%" class="subtitulo-apartados">N. DE CONTRATO</div>
+    <div fxFlex="50%" class="subtitulo-apartados">COMPRADOR</div>
+  </div>
+
+  <div fxLayout="row" fxLayoutAlign="space-between none" fxLayoutGap="10px">
+    <div fxFlex="50%" class="dato-apartado">{{resumenContrato.numeroComprobanteContrato}}</div>
+    <div fxFlex="50%" class="dato-apartado">Gaviglio</div>
+  </div>
+
+  <div fxLayout="row" fxLayoutAlign="space-between none" fxLayoutGap="10px">
+    <div fxFlex="50%" class="subtitulo-apartados">VENDEDOR</div>
+    <div fxFlex="50%" class="subtitulo-apartados">FECHA DE OP.</div>
+  </div>
+
+  <div fxLayout="row" fxLayoutAlign="space-between none" fxLayoutGap="10px">
+    <div fxFlex="50%" class="dato-apartado">{{boleto.encabezado.nombreProductor}}</div>
+    <div fxFlex="50%" class="dato-apartado">{{boleto.encabezado.fechaOperacion}}</div>
+  </div>
+
+  <div fxLayout="row" fxLayoutAlign="space-between none" fxLayoutGap="10px">
+    <div fxFlex="50%" class="subtitulo-apartados">PROD. COSECHA</div>
+    <div fxFlex="50%" class="subtitulo-apartados">TIPO DE NEGOCIO</div>
+  </div>
+
+  <div fxLayout="row" fxLayoutAlign="space-between none" fxLayoutGap="10px">
+    <div fxFlex="50%" class="dato-apartado">{{boleto.encabezado.especieCosecha}}</div>
+    <div fxFlex="50%" class="dato-apartado">{{resumenContrato.tipoNegocioDescripCorta}}</div>
+  </div>
+
+  <div fxLayout="row" fxLayoutAlign="space-between none" fxLayoutGap="10px">
+    <div fxFlex="50%" class="subtitulo-apartados">PROCEDENCIA</div>
+    <div fxFlex="50%" class="subtitulo-apartados">DESTINO</div>
+  </div>
+
+  <div fxLayout="row" fxLayoutAlign="space-between none" fxLayoutGap="10px">
+    <div fxFlex="50%" class="dato-apartado">{{boleto.encabezado.procedencia}}</div>
+    <div fxFlex="50%" class="dato-apartado">{{boleto.encabezado.destino}}</div>
+  </div>
+
+  <mat-divider class="divisor"></mat-divider>
+
+  <!--Entregas-->
+  <div fxLayout="row" fxLayoutAlign="space-between center" fxLayoutGap="10px">
+    <div fxFlex="10%">
+      <ngx-gauge [value]="resumenContrato.porcentajeKilosEntregados" [type]="'full'" [cap]="'round'" [thick]="4"
+        [foregroundColor]="'#fec300'" [size]="30" class="manometro">
+        <ngx-gauge-value></ngx-gauge-value>
+      </ngx-gauge>
+    </div>
+
+    <div fxFlex="60%" class="indicador-porcentual">{{resumenContrato.porcentajeKilosEntregados | number: '.2'}}%
+      ENTREGAS</div>
+    <div fxFlex="30%" align="right"><button (click)="verDetalleEntregas()" mat-button class="link-ver-listado">Ver listado</button></div>
+  </div>
+
+  <div fxLayout="row" fxLayoutAlign="space-between none" fxLayoutGap="10px">
+    <div fxFlex="50%" class="subtitulo-apartados">DESDE</div>
+    <div fxFlex="50%" class="subtitulo-apartados">HASTA</div>
+  </div>
+
+  <div fxLayout="row" fxLayoutAlign="space-between none" fxLayoutGap="10px">
+    <div fxFlex="50%" class="dato-apartado">{{resumenContrato.fechaEntregaDesde}}</div>
+    <div fxFlex="50%" class="dato-apartado">{{resumenContrato.fechaEntregaHasta}}</div>
+  </div>
+
+  <div fxLayout="row" fxLayoutAlign="space-between none" fxLayoutGap="10px">
+    <div fxFlex="50%" class="subtitulo-apartados">{{unidadMedida | kilosTextoA | uppercase}} PACTADOS</div>
+    <div fxFlex="50%" class="subtitulo-apartados">{{unidadMedida | kilosTextoA | uppercase}} ENTREGADOS</div>
+  </div>
+
+  <div fxLayout="row" fxLayoutAlign="space-between none" fxLayoutGap="10px">
+    <div fxFlex="50%" class="dato-apartado">{{resumenContrato.kilosPactados | kilosA: unidadMedida | number: '.0-0'}}
+    </div>
+    <div fxFlex="50%" class="dato-apartado">{{resumenContrato.kilosEntregados | kilosA: unidadMedida | number: '.0-0'}}
+    </div>
+  </div>
+
+  <div fxLayout="row" fxLayoutAlign="space-between none" fxLayoutGap="10px">
+    <div fxFlex="50%" class="subtitulo-apartados">{{unidadMedida | kilosTextoA | uppercase}} PENDIENTES</div>
+    <div fxFlex="50%" class="subtitulo-apartados">{{unidadMedida | kilosTextoA | uppercase}} FACTURADOS</div>
+  </div>
+
+  <div fxLayout="row" fxLayoutAlign="space-between none" fxLayoutGap="10px">
+    <div fxFlex="50%" class="dato-apartado">
+      {{resumenContrato.kilosPendientesEntregar | kilosA: unidadMedida | number: '.0-0'}}</div>
+    <div fxFlex="50%" class="dato-apartado">{{resumenContrato.kilosFacturados | kilosA: unidadMedida | number: '.0-0'}}
+    </div>
+  </div>
+
+  <div fxLayout="row" fxLayoutAlign="space-between none">
+    <div fxFlex="100%" class="subtitulo-apartados">REFERENCIA DE FIJACIÓN</div>
+  </div>
+
+  <div fxLayout="row" fxLayoutAlign="space-between none">
+    <div fxFlex="100%" class="dato-apartado">{{boleto.encabezado.notas}}</div>
+  </div>
+
+  <mat-divider class="divisor"></mat-divider>
+
+  <!--Ventas-->
+  <div fxLayout="row" fxLayoutAlign="space-between center" fxLayoutGap="10px">
+    <div fxFlex="10%">
+      <ngx-gauge [value]="resumenContrato.porcentajeKilosFijados" [type]="'full'" [cap]="'round'" [thick]="4"
+        [foregroundColor]="'#fec300'" [size]="30" class="manometro">
+        <ngx-gauge-value></ngx-gauge-value>
+      </ngx-gauge>
+    </div>
+
+    <div fxFlex="60%" class="indicador-porcentual">{{resumenContrato.porcentajeKilosFijados | number: '.2'}}%
+      VENTAS</div>
+    <div fxFlex="30%" align="right"><button mat-button (click)="verDetalleVentas()" class="link-ver-listado">Ver listado</button></div>
+  </div>
+
+  <div fxLayout="row" fxLayoutAlign="space-between none" fxLayoutGap="10px">
+    <div fxFlex="50%" class="subtitulo-apartados">DESDE</div>
+    <div fxFlex="50%" class="subtitulo-apartados">HASTA</div>
+  </div>
+
+  <div fxLayout="row" fxLayoutAlign="space-between none" fxLayoutGap="10px">
+    <div fxFlex="50%" class="dato-apartado">{{resumenContrato.fechaDesdeFijacion}}</div>
+    <div fxFlex="50%" class="dato-apartado">{{resumenContrato.fechaHastaFijacion}}</div>
+  </div>
+
+  <div fxLayout="row" fxLayoutAlign="space-between none" fxLayoutGap="10px">
+    <div fxFlex="50%" class="subtitulo-apartados">{{unidadMedida | kilosTextoA | uppercase}} FIJADOS</div>
+    <div fxFlex="50%" class="subtitulo-apartados">{{unidadMedida | kilosTextoA | uppercase}} A FIJAR</div>
+  </div>
+
+  <div fxLayout="row" fxLayoutAlign="space-between none" fxLayoutGap="10px">
+    <div fxFlex="50%" class="dato-apartado">{{resumenContrato.kilosFijados | kilosA: unidadMedida | number: '.0-0'}}
+    </div>
+    <div fxFlex="50%" class="dato-apartado">{{resumenContrato.kilosAFijar | kilosA: unidadMedida | number: '.0-0'}}
+    </div>
+  </div>
+
+  <div fxLayout="row" fxLayoutAlign="space-between none">
+    <div fxFlex="100%" class="subtitulo-apartados">FORMA DE PAGO</div>
+  </div>
+
+  <div fxLayout="row" fxLayoutAlign="space-between none">
+    <div fxFlex="100%" class="dato-apartado">{{boleto.encabezado.condicionDePago}}</div>
+  </div>
+</span>
+
+</div>

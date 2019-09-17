@@ -145,6 +145,7 @@ import { ContratosListaDesktopComponent } from './components/listados/contratos/
 import { ContratosResumenItemDesktopComponent } from './components/listados/contratos/contratos-resumen-item-desktop/contratos-resumen-item-desktop.component';
 import { ContratosResumenHeaderItemDesktopComponent } from './components/listados/contratos/contratos-resumen-header-item-desktop/contratos-resumen-header-item-desktop.component';
 import { CerealesFiltroDesktopComponent } from './components/filtros/cereales-filtro-desktop/cereales-filtro-desktop.component';
+import { ContratoDetalleDesktopComponent } from './components/listados/contratos/contrato-detalle-desktop/contrato-detalle-desktop.component';
 
 registerLocaleData(localeEsAr, 'es-AR');
 
@@ -261,7 +262,8 @@ export function tokenGetter() {
 		ContratosListaDesktopComponent,
 		ContratosResumenItemDesktopComponent,
 		ContratosResumenHeaderItemDesktopComponent,
-		CerealesFiltroDesktopComponent
+		CerealesFiltroDesktopComponent,
+		ContratoDetalleDesktopComponent
 	],
 	imports: [
 		HttpClientModule,

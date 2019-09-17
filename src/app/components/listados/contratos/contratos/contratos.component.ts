@@ -28,6 +28,9 @@ export class ContratosComponent implements OnInit, OnDestroy, AfterViewInit {
   esCelular: boolean = null;
   destroy$: Subject<any> = new Subject<any>();
 
+  modoDetalleDesktop: boolean = false;
+  modoDetalleDesktopMovimiento$: Subject<ResumenContratoCompraVenta> = new Subject<ResumenContratoCompraVenta>();
+
   constructor(
     private contratosService: ContratosService,
     private dialog: MatDialog,
@@ -143,5 +146,28 @@ export class ContratosComponent implements OnInit, OnDestroy, AfterViewInit {
     } else {
       this.cargando$.next(false);
     }
+  }
+
+  /**
+   * Función encargada de mostrar el detalle de un movimiento seleccionado en modo desktop
+   * @param movimiento 
+   */
+  verDetalleDesktop(movimiento: ResumenContratoCompraVenta) {
+    this.modoDetalleDesktop = true;
+    this.modoDetalleDesktopMovimiento$.next(movimiento);
+  }
+
+  /**
+   * Función encargada de restaurar la vista saliendo del modo detalle
+   */
+  salirModoDetalleDesktop() {
+    this.modoDetalleDesktop = false;
+  }
+
+  /**
+   * Devuelve el observable del modo detalle
+   */
+  get modoDetalleDesktopMovimientoObs() {
+    return this.modoDetalleDesktopMovimiento$.asObservable();
   }
 }

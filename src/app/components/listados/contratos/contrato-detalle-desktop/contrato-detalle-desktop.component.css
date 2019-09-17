@@ -1,0 +1,11 @@
+.resumen-info-container {
+    width: 100%;
+    padding: 13px;
+}
+
+.info-container {
+    border: 1px solid #ECECEC;
+    border-radius: 4px;
+    background-color: #FFFFFF;
+    padding: 20px;
+}

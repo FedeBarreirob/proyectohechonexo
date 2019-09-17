@@ -17,22 +17,28 @@
 </mat-sidenav-container>
 
 <!--Modo desktop-->
-<div fxLayout="row" fxLayoutAlign="space-between center" class="contenedor-titulo-filtro" fxLayoutGap="20px"
-	*ngIf="esCelular != null && esCelular == false">
+<span [ngClass]="{'hide': modoDetalleDesktop}">
+	<div fxLayout="row" fxLayoutAlign="space-between center" class="contenedor-titulo-filtro" fxLayoutGap="20px"
+		*ngIf="esCelular != null && esCelular == false">
 
-	<div fxFlex="93px" class="titulo-seccion">
-		Contratos
+		<div fxFlex="93px" class="titulo-seccion">
+			Contratos
+		</div>
+
+		<div fxFlex>
+			<app-cereales-filtro-desktop [filtrosEspecieCosecha]="filtrosEspecieCosecha" [cuenta]="cuenta"
+				(botonAplicar)="cargarListado($event)" [disabled]="(cargando$ | async) || cargandoFiltros">
+			</app-cereales-filtro-desktop>
+		</div>
+
 	</div>
+	<app-contratos-lista-desktop *ngIf="esCelular != null && esCelular == false" [observerFiltro$]="observerFiltro$"
+		(seleccionMovimiento)="verDetalleDesktop($event)" (cargandoChange)="mostrarIndicadorLoading($event)">
+	</app-contratos-lista-desktop>
+</span>
 
-	<div fxFlex>
-		<app-cereales-filtro-desktop [filtrosEspecieCosecha]="filtrosEspecieCosecha" [cuenta]="cuenta"
-			(botonAplicar)="cargarListado($event)" [disabled]="(cargando$ | async) || cargandoFiltros">
-		</app-cereales-filtro-desktop>
-	</div>
-
-</div>
-<app-contratos-lista-desktop *ngIf="esCelular != null && esCelular == false" [observerFiltro$]="observerFiltro$"
-	(seleccionMovimiento)="verDetalle($event)" (cargandoChange)="mostrarIndicadorLoading($event)">
-</app-contratos-lista-desktop>
-
-<!--<app-loading [cargando$]="cargando$"></app-loading>-->
+<span [ngClass]="{'hide': !modoDetalleDesktop}">
+	<app-contrato-detalle-desktop (salir)="salirModoDetalleDesktop()"
+		[modoDetalleDesktopMovimiento$]="modoDetalleDesktopMovimiento$">
+	</app-contrato-detalle-desktop>
+</span>
