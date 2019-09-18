@@ -16,7 +16,7 @@ import { EntregasMasOperacionesComponent } from '../entregas-mas-operaciones/ent
 export class EntregasListaDesktopComponent implements OnInit {
 
   @Input()
-  observerFiltroListadoDesktop$: Subject<any>;
+  observerFiltro$: Subject<any>;
 
   @Output()
   seleccionMovimiento: EventEmitter<MovimientoEntrega> = new EventEmitter<MovimientoEntrega>();
@@ -36,7 +36,7 @@ export class EntregasListaDesktopComponent implements OnInit {
 
   ngOnInit() {
     // observer de filtro
-    this.observerFiltroListadoDesktop$.subscribe(
+    this.observerFiltro$.subscribe(
       filtro => {
         this.filtro = filtro;
         this.cargarListado();

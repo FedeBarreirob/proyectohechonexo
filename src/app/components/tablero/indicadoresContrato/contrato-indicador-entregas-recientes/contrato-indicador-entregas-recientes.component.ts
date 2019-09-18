@@ -17,7 +17,7 @@ export class ContratoIndicadorEntregasRecientesComponent implements OnInit, OnDe
   @Output()
   cargandoChange: EventEmitter<boolean> = new EventEmitter<boolean>();
 
-  observerFiltroListadoMovil$ = new Subject<FiltroEntregas>();
+  observerFiltro$ = new Subject<FiltroEntregas>();
   destroy$: Subject<any> = new Subject<any>();
 
   constructor(
@@ -59,7 +59,7 @@ export class ContratoIndicadorEntregasRecientesComponent implements OnInit, OnDe
       cantPorPagina: 0
     };
 
-    this.observerFiltroListadoMovil$.next(filtroPorDef);
+    this.observerFiltro$.next(filtroPorDef);
   }
 
   /**

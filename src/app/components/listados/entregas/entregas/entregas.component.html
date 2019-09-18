@@ -1,4 +1,5 @@
-<mat-sidenav-container class="contenedor-filtro">
+<!--Modo movil-->
+<mat-sidenav-container class="contenedor-filtro" *ngIf="esCelular != null && esCelular == true">
 	<mat-sidenav #menuFiltro position="end" class="sidenav-filtro">
 		<app-cereales-filtro [filtrosEspecieCosecha]="filtrosEspecieCosecha" [cuenta]="cuenta"
 			(botonCerrar)="menuFiltro.toggle()" (botonAplicar)="cargarListado($event)"></app-cereales-filtro>
@@ -7,13 +8,32 @@
 		<app-tool-bar-general [titulo]="'Entregas'" [disabled]="false"
 			(botonPersonalizadoEjecutado)="mostrarOcultarFiltros()"
 			[urlImagenAccionPersonalizada]="'assets/toolbar/embudo.png'"></app-tool-bar-general>
-		<app-entregas-lista-movil *ngIf="esCelular===true" [observerFiltroListadoMovil$]="observerFiltroListadoMovil$"
-			(seleccionMovimiento)="verDetalle($event)" (cargandoChange)="mostrarIndicadorLoading($event)"></app-entregas-lista-movil>
 
-		<app-entregas-lista-desktop *ngIf="esCelular===false"
-			[observerFiltroListadoDesktop$]="observerFiltroListadoDesktop$" (seleccionMovimiento)="verDetalle($event)">
-		</app-entregas-lista-desktop>
+		<app-entregas-lista-movil *ngIf="esCelular===true" [observerFiltro$]="observerFiltro$"
+			(seleccionMovimiento)="verDetalle($event)" (cargandoChange)="mostrarIndicadorLoading($event)">
+		</app-entregas-lista-movil>
+
 	</section>
 </mat-sidenav-container>
 
-<!--<app-loading [cargando$]="cargando$"></app-loading>-->
+<!--Modo desktop-->
+<span [ngClass]="{'hide': modoDetalleDesktop}">
+	<div fxLayout="row" fxLayoutAlign="space-between center" class="contenedor-titulo-filtro" fxLayoutGap="20px"
+		*ngIf="esCelular != null && esCelular == false">
+
+		<div fxFlex="93px" class="titulo-seccion">
+			Entregas
+		</div>
+
+		<div fxFlex>
+			<app-cereales-filtro-desktop [filtrosEspecieCosecha]="filtrosEspecieCosecha" [cuenta]="cuenta"
+				(botonAplicar)="cargarListado($event)" [disabled]="cargando || cargandoFiltros">
+			</app-cereales-filtro-desktop>
+		</div>
+
+	</div>
+
+	<app-entregas-lista-desktop *ngIf="esCelular != null && esCelular == false" [observerFiltro$]="observerFiltro$"
+		(seleccionMovimiento)="verDetalleDesktop($event)">
+	</app-entregas-lista-desktop>
+</span>

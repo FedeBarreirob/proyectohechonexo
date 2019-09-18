@@ -27,7 +27,7 @@
       <div fxFlex="50%" align="right"><button mat-button class="link-descargar-resumen">Descargar resumen</button></div>
     </div>-->
 
-    <app-entregas-lista-movil [observerFiltroListadoMovil$]="observerFiltroListadoMovil$"
+    <app-entregas-lista-movil [observerFiltro$]="observerFiltro$"
       [filtrarPorAplicacion]="false"
       (seleccionMovimiento)="verDetalle($event)"></app-entregas-lista-movil>
   </section>
