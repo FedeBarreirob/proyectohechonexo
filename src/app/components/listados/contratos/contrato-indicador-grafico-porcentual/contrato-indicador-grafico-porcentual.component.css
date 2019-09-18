@@ -1,0 +1,18 @@
+.indicador-container {
+    border: 1px solid #ECECEC;
+    border-radius: 4px;
+    background-color: #FFFFFF;
+    padding: 13px;
+}
+
+.texto {
+    color: #333333;
+    font-family: RubikLight;
+    font-size: 20px;
+}
+
+.subtexto {
+    color: #FFBC00;
+    font-family: Rubik;
+    font-size: 14px;
+}

@@ -7,6 +7,8 @@ import { ContratosService } from '../../../../services/contratos/contratos.servi
 import { AuthenticationService } from '../../../../services/security/authentication.service';
 import { ComprobantesDownloaderService } from '../../../../services/sharedServices/downloader/comprobantes-downloader.service';
 import { takeUntil } from 'rxjs/operators';
+import { saveAs } from 'file-saver/FileSaver';
+import { MatSnackBar } from '@angular/material';
 
 @Component({
   selector: 'app-contrato-detalle-desktop',
@@ -31,7 +33,8 @@ export class ContratoDetalleDesktopComponent implements OnInit, OnDestroy {
   constructor(
     private contratosService: ContratosService,
     private authenticationService: AuthenticationService,
-    private comprobanteDownloaderService: ComprobantesDownloaderService
+    private comprobanteDownloaderService: ComprobantesDownloaderService,
+    private snackBar: MatSnackBar
   ) { }
 
   ngOnInit() {
@@ -125,5 +128,44 @@ export class ContratoDetalleDesktopComponent implements OnInit, OnDestroy {
     if (!hayPendienteEntregar && !hayPendienteVender) {
       this.mensajeEntregasVentasPendientes = "";
     }
+  }
+
+  /**
+   * Función encargada de ejecutar el proceso de generación de comprobantes para obtener un pdf del mismo
+   */
+  descargarComprobante() {
+    if (this.cargando == false) {
+      this.cargando = true;
+
+      this.comprobanteDownloaderService.confirmacionVentaDescargado(this.resumenContrato.numeroSucursalContrato, this.resumenContrato.numeroComprobanteContrato)
+        .pipe(takeUntil(this.destroy$))
+        .subscribe(respuesta => {
+          var mediaType = 'application/pdf';
+          var blob = new Blob([respuesta], { type: mediaType });
+          var filename = `boleto.pdf`;
+
+          if (blob.size !== 0) {
+            saveAs(blob, filename);
+          } else {
+            this.openSnackBar("El comprobante no se encuentra disponible para su descarga.", "Descarga de comprobantes");
+          }
+
+          this.cargando = false;
+        }, error => {
+          console.log(error);
+          this.cargando = false;
+        });
+    }
+  }
+
+  /**
+   * Muestra un mensaje en pantalla
+   * @param message Mensaje a mostrar
+   * @param action Otro mensaje
+   */
+  openSnackBar(message: string, action: string) {
+    this.snackBar.open(message, action, {
+      duration: 2000,
+    });
   }
 }
