@@ -1,0 +1,45 @@
+<div fxLayout="row" fxLayoutAlign="space-around center" class="container">
+
+  <div fxFlex="24px">
+    <mat-checkbox></mat-checkbox>
+  </div>
+
+  <div fxFlex="100px">
+    <div fxLayout="row" fxLayoutAlign="space-around center" fxLayoutGap="8px">
+
+      <div fxFlex="24px">
+        <img class="movimiento-icono" src="{{movimiento.especie | imagenEspecie}}" />
+      </div>
+
+      <div fxFlex>
+        {{ movimiento.especieDescripcion }}
+      </div>
+
+    </div>
+  </div>
+
+  <div fxFlex="100px">
+    {{movimiento.fecha}}
+  </div>
+
+  <div fxFlex="100px">
+    {{movimiento.kilosBrutos | kilosA: unidadMedida | number: '.0-0'}}
+  </div>
+
+  <div fxFlex="100px">
+    {{movimiento.porcentajeHumedad | number: '.2'}}%
+  </div>
+
+  <div fxFlex="100px">
+    {{movimiento.porcentajeZarandeo | number: '.2'}}%
+  </div>
+
+  <div fxFlex="100px">
+    {{movimiento.porcentajeVolatil | number: '.2'}}%
+  </div>
+
+  <div fxFlex="100px">
+    {{movimiento.factor ? movimiento.factor : '-'}}/{{movimiento.grado ? movimiento.grado : '-'}}
+  </div>
+
+</div>

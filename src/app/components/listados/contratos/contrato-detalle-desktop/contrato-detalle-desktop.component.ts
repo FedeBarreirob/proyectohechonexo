@@ -72,7 +72,7 @@ export class ContratoDetalleDesktopComponent implements OnInit, OnDestroy {
   }
 
   /**
-   * 
+   * Cierra el detalle
    */
   cerrar() {
     this.salir.next();

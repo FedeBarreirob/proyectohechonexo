@@ -34,6 +34,12 @@
 	</div>
 
 	<app-entregas-lista-desktop *ngIf="esCelular != null && esCelular == false" [observerFiltro$]="observerFiltro$"
-		(seleccionMovimiento)="verDetalleDesktop($event)">
+		(seleccionMovimiento)="verDetalleDesktop($event)" (cargandoChange)="mostrarIndicadorLoading($event)">
 	</app-entregas-lista-desktop>
+</span>
+
+<span [ngClass]="{'hide': !modoDetalleDesktop}">
+	<app-entregas-detalle-desktop (salir)="salirModoDetalleDesktop()"
+		[modoDetalleDesktopMovimiento$]="modoDetalleDesktopMovimiento$">
+	</app-entregas-detalle-desktop>
 </span>

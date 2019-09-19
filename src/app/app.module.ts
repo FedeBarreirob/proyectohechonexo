@@ -148,6 +148,8 @@ import { CerealesFiltroDesktopComponent } from './components/filtros/cereales-fi
 import { ContratoDetalleDesktopComponent } from './components/listados/contratos/contrato-detalle-desktop/contrato-detalle-desktop.component';
 import { ContratoIndicadorGraficoPorcentualComponent } from './components/listados/contratos/contrato-indicador-grafico-porcentual/contrato-indicador-grafico-porcentual.component';
 import { EntregasHeaderItemDesktopComponent } from './components/listados/entregas/entregas-header-item-desktop/entregas-header-item-desktop.component';
+import { EntregasItemDesktopComponent } from './components/listados/entregas/entregas-item-desktop/entregas-item-desktop.component';
+import { EntregasDetalleDesktopComponent } from './components/listados/entregas/entregas-detalle-desktop/entregas-detalle-desktop.component';
 
 registerLocaleData(localeEsAr, 'es-AR');
 
@@ -267,7 +269,9 @@ export function tokenGetter() {
 		CerealesFiltroDesktopComponent,
 		ContratoDetalleDesktopComponent,
 		ContratoIndicadorGraficoPorcentualComponent,
-		EntregasHeaderItemDesktopComponent
+		EntregasHeaderItemDesktopComponent,
+		EntregasItemDesktopComponent,
+		EntregasDetalleDesktopComponent
 	],
 	imports: [
 		HttpClientModule,

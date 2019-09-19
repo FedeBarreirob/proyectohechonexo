@@ -142,9 +142,9 @@ export class EntregasDetalleComponent implements OnInit, OnDestroy {
 	}
 
 	/**
-   * Muestra un mensaje en pantalla
-   * @param message Mensaje a mostrar
-   */
+	 * Muestra un mensaje en pantalla
+	 * @param message Mensaje a mostrar
+	 */
 	openSnackBar(message: string) {
 		this.snackBar.open(message, null, {
 			duration: 2000,

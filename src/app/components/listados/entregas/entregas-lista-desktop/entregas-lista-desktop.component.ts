@@ -1,90 +1,140 @@
-import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
-import { MovimientoEntregaAgrupadoPorCampo, EntregasTotales, MovimientoEntrega } from '../../../../interfaces/entregas/listado-entregas';
+import { Component, OnInit, Input, Output, EventEmitter, OnDestroy } from '@angular/core';
+import { MovimientoEntrega } from '../../../../interfaces/entregas/listado-entregas';
 import { Subject } from 'rxjs';
 import { FiltroEntregas } from '../../../../interfaces/entregas/filtro-entregas';
 import { EntregasService } from '../../../../services/entregas/entregas.service';
-import { MatDialog } from '@angular/material';
 import { PerfilBasico } from '../../../../interfaces/perfiles/perfil-basico';
 import { AuthenticationService } from '../../../../services/security/authentication.service';
-import { EntregasMasOperacionesComponent } from '../entregas-mas-operaciones/entregas-mas-operaciones.component';
+import { takeUntil } from 'rxjs/operators';
 
 @Component({
   selector: 'app-entregas-lista-desktop',
   templateUrl: './entregas-lista-desktop.component.html',
   styleUrls: ['./entregas-lista-desktop.component.css']
 })
-export class EntregasListaDesktopComponent implements OnInit {
+export class EntregasListaDesktopComponent implements OnInit, OnDestroy {
 
   @Input()
   observerFiltro$: Subject<any>;
 
+  @Input()
+  cantidadPorPagina: number = 50;
+
   @Output()
   seleccionMovimiento: EventEmitter<MovimientoEntrega> = new EventEmitter<MovimientoEntrega>();
 
-  perfilBasico: PerfilBasico;
-  filtro: FiltroEntregas;
+  @Output()
+  cargandoChange: EventEmitter<boolean> = new EventEmitter<boolean>();
+
+  listadoEntregas: Array<MovimientoEntrega> = [];
+  pagina: number = 1;
+
   cargando: boolean = false;
-  listadoEntregasAgrupadasPorCampo: Array<MovimientoEntregaAgrupadoPorCampo>;
-  totales: EntregasTotales = null;
+  filtro: FiltroEntregas;
   unidadMedida: string;
+  perfilBasico: PerfilBasico;
+  destroy$: Subject<any> = new Subject<any>();
 
   constructor(
     private entregasService: EntregasService,
-    private dialog: MatDialog,
     private authenticationService: AuthenticationService
   ) { }
 
   ngOnInit() {
-    // observer de filtro
-    this.observerFiltro$.subscribe(
-      filtro => {
-        this.filtro = filtro;
-        this.cargarListado();
-      }
-    );
+    // observer del filtro
+    this.observerFiltro$
+      .pipe(takeUntil(this.destroy$))
+      .subscribe(
+        filtro => {
+          this.filtro = filtro;
+          this.cargarListado(true);
+        }
+      );
 
     // observer de perfil
-    this.authenticationService.perfilActivo$.subscribe(
-      perfil => {
-        this.perfilBasico = perfil;
-        this.cargarUnidadMedida()
-      });
+    this.authenticationService.perfilActivo$
+      .pipe(takeUntil(this.destroy$))
+      .subscribe(
+        perfil => {
+          this.perfilBasico = perfil;
+          this.cargarUnidadMedida()
+        });
 
     this.cargarUnidadMedida();
+  }
+
+  ngOnDestroy(): void {
+    this.destroy$.next();
+    this.destroy$.unsubscribe();
   }
 
   // funcion que carga la unidad de medida desde el perfil 
   cargarUnidadMedida() {
     if (this.perfilBasico) {
       this.unidadMedida = this.perfilBasico.informacionPersonal.unidadMedidaPeso;
+    } else {
+      this.perfilBasico = this.authenticationService.perfilUsuarioSeleccionado();
+      this.unidadMedida = this.perfilBasico.informacionPersonal.unidadMedidaPeso;
     }
   }
 
   // funcion encargada de cargar el listado de entregas
-  cargarListado() {
+  cargarListado(limpiar: boolean) {
     if (!this.cargando) {
       this.cargando = true;
-      this.limpiar();
+      this.cargandoChange.emit(true);
 
-      let filtroAgrupado: FiltroEntregas = this.filtro;
-      filtroAgrupado.agrupadoPorCampo = true;
-      filtroAgrupado.paginado = false;
+      if (limpiar) {
+        this.limpiar();
+      }
 
-      this.entregasService.listadoEntregas(filtroAgrupado).subscribe(respuesta => {
-        this.listadoEntregasAgrupadasPorCampo = respuesta.datos.listadoAgrupadoPorCampo;
-        this.totales = respuesta.datos.totales;
+      this.filtro.paginado = true;
+      this.filtro.pagina = this.pagina;
+      this.filtro.cantPorPagina = this.cantidadPorPagina;
 
-        this.cargando = false;
-      }, () => {
-        this.cargando = false;
-      });
+      this.entregasService.listadoEntregas(this.filtro)
+        .pipe(takeUntil(this.destroy$))
+        .subscribe(respuesta => {
+
+          // si no hay datos, reestablecer la pagina
+          if (respuesta.datos == null || respuesta.datos.length == 0) {
+            this.pagina = this.pagina - 1;
+          }
+
+          if (respuesta.exito == true && respuesta.datos != null) {
+            this.agregarMovimientosAlListado(respuesta.datos);
+          }
+
+          this.cargando = false;
+          this.cargandoChange.emit(false);
+        }, () => {
+          this.cargando = false;
+          this.cargandoChange.emit(false);
+        });
     }
   }
 
-  // funcion encargada de limpiar para nueva generacion
-  limpiar() {
-    this.listadoEntregasAgrupadasPorCampo = [];
-    this.totales = null;
+  // funcion encargada de limpiar para nueva generacion de listado
+  private limpiar() {
+    this.pagina = 1;
+    this.listadoEntregas.splice(0, this.listadoEntregas.length);
+  }
+
+  // funcion encargada de agregar la paginas de datos recuperados al listado
+  private agregarMovimientosAlListado(movimientos: Array<MovimientoEntrega>) {
+    movimientos.forEach(
+      movimiento => {
+        this.listadoEntregas.push(movimiento);
+      }
+    );
+  }
+
+  // funcion que carga mas datos cuando hace scroll
+  onScroll() {
+    if (this.cargando == false) {
+      this.pagina = this.pagina + 1;
+      this.cargarListado(false);
+    }
   }
 
   // funcion que muestra el detalle de un movimiento seleccionado
@@ -92,13 +142,4 @@ export class EntregasListaDesktopComponent implements OnInit {
     this.seleccionMovimiento.emit(movimiento);
   }
 
-  // funcion que muestra las operaciones extras
-  verOpcionesExtras() {
-    this.dialog.open(EntregasMasOperacionesComponent, {
-      data: {
-        movimientos: this.listadoEntregasAgrupadasPorCampo,
-        totales: this.totales
-      }
-    });
-  }
 }
