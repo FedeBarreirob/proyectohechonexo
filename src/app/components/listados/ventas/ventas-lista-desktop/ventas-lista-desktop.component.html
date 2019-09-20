@@ -1,84 +1,17 @@
-<mat-progress-bar *ngIf="cargando" mode="indeterminate"></mat-progress-bar>
-<div class="container" fxLayout="column" fxLayout.xs="column" fxLayoutWrap fxLayoutGap="0.5%"
-  fxLayoutAlign="space-around stretch">
+<div class="contenedor-header">
+  <app-ventas-header-item-desktop [unidadMedida]="unidadMedida"></app-ventas-header-item-desktop>
+</div>
 
-  <div fxFlex="100%">
-    <div *ngIf="totales" class="container" fxLayout="row" fxLayout.xs="column" fxLayoutGap="0.5%"
-      fxLayoutAlign="space-around stretch">
+<div class="contenedor-listado" fxLayout="column" fxLayoutWrap fxLayoutAlign="none" infiniteScroll
+  [infiniteScrollDistance]="2" [infiniteScrollThrottle]="50" (scrolled)="onScroll()" [scrollWindow]="false">
 
-      <div fxFlex="50%">
-        <h4 mat-dialog-title align="center">{{unidadMedida | kilosTextoA: 'largo'}} netos</h4>
-        <mat-dialog-content class="mat-typography">
-          <p align="center">{{totales.totalKgNetos | kilosA: unidadMedida | number: '.2'}}
-            {{unidadMedida | kilosTextoA}}</p>
-        </mat-dialog-content>
-      </div>
+  <app-ventas-item-desktop *ngFor="let movimiento of listadoVentas" (click)="verDetalle(movimiento)"
+    [movimiento]="movimiento" [unidadMedida]="unidadMedida">
+  </app-ventas-item-desktop>
 
-      <div fxFlex="50%">
-        <h4 mat-dialog-title align="center">Sin fijar</h4>
-        <mat-dialog-content class="mat-typography">
-          <p align="center">{{totales.totalSinFijarTC | kilosA: unidadMedida | number: '.2'}}
-            {{unidadMedida | kilosTextoA}}</p>
-        </mat-dialog-content>
-      </div>
-
-    </div>
+  <!--Spinner-->
+  <div fxLayout="row" fxLayoutAlign="center center" *ngIf="cargando" style="margin-top: 10px">
+    <mat-spinner diameter="24"></mat-spinner>
   </div>
 
-  <div fxFlex="100%">
-    <mat-card>
-      <mat-card-title>Ventas</mat-card-title>
-
-      <mat-card-content>
-
-        <!-- Encabezado -->
-        <div fxLayout="row" fxLayoutAlign="center space-between">
-          <div fxFlex="6%" class="conceptoEncabezado">Fecha</div>
-          <mat-divider [vertical]="true"></mat-divider>
-          <div fxFlex="12%" class="conceptoEncabezado">Comprobante</div>
-          <mat-divider [vertical]="true"></mat-divider>
-          <div fxFlex class="conceptoEncabezado">Puerto/Destino</div>
-          <mat-divider [vertical]="true"></mat-divider>
-          <div fxFlex="6%" class="conceptoEncabezado">Entrega Desde</div>
-          <mat-divider [vertical]="true"></mat-divider>
-          <div fxFlex="6%" class="conceptoEncabezado">Entrega Hasta</div>
-          <mat-divider [vertical]="true"></mat-divider>
-          <div fxFlex="12%" class="conceptoEncabezado">{{unidadMedida | kilosTextoA: 'largo'}} Totales
-          </div>
-          <mat-divider [vertical]="true"></mat-divider>
-          <div fxFlex="12%" class="conceptoEncabezado">Sin Fijar TC</div>
-          <mat-divider [vertical]="true"></mat-divider>
-          <div fxFlex="12%" class="conceptoEncabezado">Precio por QQ</div>
-          <mat-divider [vertical]="true"></mat-divider>
-          <div fxFlex="5%" class="conceptoEncabezado">Moneda</div>
-        </div>
-
-        <!--Movimientos-->
-        <div fxLayout="row" fxLayoutAlign="center space-between" class="movimiento"
-          *ngFor="let movimiento of (listado ? listado : []); index as i" (click)="verDetalle(movimiento)"
-          [ngClass]="i%2 == 0 ? 'filaPar' : 'filaImpar'">
-
-          <div fxFlex="6%" class="conceptoListaCompleta">{{movimiento.fecha}}</div>
-          <div fxFlex="12%" class="conceptoListaCompleta">{{movimiento.comprobante}}</div>
-          <div fxFlex class="conceptoListaCompleta">{{movimiento.puertoDestino}}</div>
-          <div fxFlex="6%" class="conceptoListaCompleta">{{movimiento.entregaDesde}}</div>
-          <div fxFlex="6%" class="conceptoListaCompleta">{{movimiento.entregaHasta}}</div>
-          <div fxFlex="12%" class="importeListaCompleta">
-            {{movimiento.kilosNetos | kilosA: unidadMedida | number: '.0'}}</div>
-          <div fxFlex="12%" class="importeListaCompleta">
-            {{movimiento.tc | kilosA: unidadMedida | number: '.0'}}</div>
-          <div fxFlex="12%" class="importeListaCompleta">{{movimiento.precioPorQuintal | number: '.2'}}
-          </div>
-          <div fxFlex="5%" class="conceptoListaCompleta">{{movimiento.moneda}}</div>
-
-        </div>
-
-      </mat-card-content>
-    </mat-card>
-  </div>
-
-  <button [disabled]="cargando==true" mat-mini-fab class="custom-button" (click)="verOpcionesExtras()"
-    *ngIf="listado != null">
-    <mat-icon aria-label="Más opciones">list</mat-icon>
-  </button>
 </div>

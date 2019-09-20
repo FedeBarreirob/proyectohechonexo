@@ -1,0 +1,138 @@
+<div *ngIf="movimiento">
+  <mat-progress-bar *ngIf="cargando" mode="indeterminate"></mat-progress-bar>
+
+  <div fxLayout="row" fxLayoutAlign="start start" fxLayoutGap="5px" class="miga-container">
+    <div fxflex="nogrow">
+      <span (click)="cerrar()" class="boton-entregas">Ventas</span>
+    </div>
+
+    <div fxflex="nogrow">
+      <mat-icon class="flecha">keyboard_arrow_right</mat-icon>
+    </div>
+
+    <div fxflex="nogrow">
+      <span class="entregas-numero-miga">Venta {{movimiento.comprobante}}</span>
+    </div>
+  </div>
+
+  <div fxLayout="row" fxLayoutAlign="space-between start" fxLayoutGap="13px" class="movimiento-info-container">
+
+    <!--Columna info prod-->
+    <div fxFlex class="info-container">
+
+      <!--Encabezado-->
+      <div fxLayout="row" fxLayoutAlign="space-between center">
+
+        <!--Icono y tn-->
+        <div fxFlex="nogrow">
+          <div fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="10px">
+            <div fxFlex="40px">
+              <img class="icono-producto" src="{{movimiento.especie | imagenEspecie}}" />
+            </div>
+
+            <div fxFlex class="catidad-producto-encabezado">
+              {{movimiento.kilos | kilosA: unidadMedida | number: '.0-0'}}
+              {{unidadMedida | kilosTextoA}}
+              de {{movimiento.especieDescripcion}}
+            </div>
+          </div>
+        </div>
+
+        <!--leyendas moneda y tipo de negocio-->
+        <div fxFlex="nogrow" *ngIf="contrato">
+          <div *ngIf="contrato.moneda != null" class="etiqueta">
+            {{contrato.moneda=='P' ? 'En pesos' : 'En dólares'}}
+          </div>
+          <div *ngIf="contrato.tipoNegocioDescripCorta != null" class="etiqueta">
+            {{contrato.tipoNegocioDescripCorta}}</div>
+        </div>
+
+      </div>
+
+      <!--Datos de la venta-->
+      <div fxLayout="row" fxLayoutAlign="space-between none" fxLayoutGap="10px">
+        <div fxFlex="100%" class="titulo-apartados">DATOS DE LA VENTA</div>
+      </div>
+
+      <div fxLayout="row" fxLayoutAlign="space-between none" fxLayoutGap="10px">
+        <div fxFlex="50%" class="subtitulo-apartados">FECHA</div>
+        <div fxFlex="50%" class="subtitulo-apartados">CAMPAÑA</div>
+      </div>
+
+      <div fxLayout="row" fxLayoutAlign="space-between none" fxLayoutGap="10px">
+        <div fxFlex="50%" class="dato-apartado">{{movimiento.fecha}}</div>
+        <div fxFlex="50%" class="dato-apartado">{{movimiento.cosecha}}</div>
+      </div>
+
+      <div fxLayout="row" fxLayoutAlign="space-between none" fxLayoutGap="10px">
+        <div fxFlex="50%" class="subtitulo-apartados">MERCADO</div>
+        <div fxFlex="50%" class="subtitulo-apartados">FECHA DE VENCIMIENTO</div>
+      </div>
+
+      <div fxLayout="row" fxLayoutAlign="space-between none" fxLayoutGap="10px">
+        <div fxFlex="50%" class="dato-apartado">{{movimiento.puertoDestino}}</div>
+        <div fxFlex="50%" class="dato-apartado" *ngIf="contrato != null">{{contrato.fechaHastaFijacion}}</div>
+      </div>
+
+      <div fxLayout="row" fxLayoutAlign="space-between none" fxLayoutGap="10px">
+        <div fxFlex="50%" class="subtitulo-apartados">CONTRATO</div>
+      </div>
+
+      <div fxLayout="row" fxLayoutAlign="space-between none" fxLayoutGap="10px">
+        <div fxFlex="50%">
+          <a class="boton-contrato" *ngIf="contrato != null" (click)="verDetalleContrato()">Contrato
+            #{{ contrato ? contrato.numeroComprobanteContrato : '' }}
+            <mat-icon>keyboard_arrow_right</mat-icon>
+          </a>
+        </div>
+
+      </div>
+      <!--Precios de fijacion-->
+      <div fxLayout="row" fxLayoutAlign="space-between none" fxLayoutGap="10px">
+        <div fxFlex="100%" class="titulo-apartados">PRECIOS DE FIJACIÓN</div>
+      </div>
+
+      <div fxLayout="row" fxLayoutAlign="space-between none" fxLayoutGap="10px">
+        <div fxFlex="50%" class="subtitulo-apartados">FIJADO</div>
+        <div fxFlex="50%" class="subtitulo-apartados">PRECIO</div>
+      </div>
+
+      <div fxLayout="row" fxLayoutAlign="space-between none" fxLayoutGap="10px">
+        <div fxFlex="50%" class="dato-apartado">{{movimiento.kilos | kilosA: unidadMedida | number: '.0-0'}}
+          {{unidadMedida | kilosTextoA}}</div>
+        <div fxFlex="50%" class="dato-apartado">{{movimiento.moneda | moneda}}
+          ${{movimiento.precioPorQuintal | precioQQA: unidadMedida | number: '.0-0'}}</div>
+      </div>
+
+      <div fxLayout="row" fxLayoutAlign="space-between none" fxLayoutGap="10px">
+        <div fxFlex="50%" class="subtitulo-apartados">TASA DE CAMBIO</div>
+        <div fxFlex="50%" class="subtitulo-apartados">TOTAL</div>
+      </div>
+
+      <div fxLayout="row" fxLayoutAlign="space-between none" fxLayoutGap="10px" *ngIf="movimiento.tipoDeCambio != null">
+        <div fxFlex="50%" class="dato-apartado">ARS ${{movimiento.tipoDeCambio | number: '.2-2'}}</div>
+        <div fxFlex="50%" class="dato-apartado">ARS
+          ${{movimiento.precioQQPesificado | precioQQA: unidadMedida | number: '.0-0'}}</div>
+      </div>
+
+    </div>
+
+    <!--Columna botones exportar-->
+    <div fxFlex="250px" class="info-container">
+
+      <div fxLayout="column" fxLayoutAlign="center stretch">
+
+        <div fxFlex>
+          <button mat-button class="boton-descarga-comprobante" (click)="descargarComprobante()"
+            [disabled]="cargando==true">
+            <img src="assets/varios/pdf.png" />
+            Descargar comprobante
+          </button>
+        </div>
+
+      </div>
+
+    </div>
+
+  </div>
+</div>

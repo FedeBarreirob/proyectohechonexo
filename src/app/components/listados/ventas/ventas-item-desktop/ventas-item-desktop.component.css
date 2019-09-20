@@ -1,0 +1,16 @@
+.container {
+    width: 100%;
+    border: 1px solid #ECECEC;
+    border-radius: 4px;
+    background-color: #FFFFFF;
+    padding: 13px;
+    margin: 2px;
+    color: #333333;
+    font-family: Rubik;
+    font-size: 14px;
+}
+
+.movimiento-icono {
+    width: 24px;
+    height: 24px;
+}

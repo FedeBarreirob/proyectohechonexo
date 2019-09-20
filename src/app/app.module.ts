@@ -150,6 +150,9 @@ import { ContratoIndicadorGraficoPorcentualComponent } from './components/listad
 import { EntregasHeaderItemDesktopComponent } from './components/listados/entregas/entregas-header-item-desktop/entregas-header-item-desktop.component';
 import { EntregasItemDesktopComponent } from './components/listados/entregas/entregas-item-desktop/entregas-item-desktop.component';
 import { EntregasDetalleDesktopComponent } from './components/listados/entregas/entregas-detalle-desktop/entregas-detalle-desktop.component';
+import { VentasHeaderItemDesktopComponent } from './components/listados/ventas/ventas-header-item-desktop/ventas-header-item-desktop.component';
+import { VentasItemDesktopComponent } from './components/listados/ventas/ventas-item-desktop/ventas-item-desktop.component';
+import { VentasDetalleDesktopComponent } from './components/listados/ventas/ventas-detalle-desktop/ventas-detalle-desktop.component';
 
 registerLocaleData(localeEsAr, 'es-AR');
 
@@ -271,7 +274,10 @@ export function tokenGetter() {
 		ContratoIndicadorGraficoPorcentualComponent,
 		EntregasHeaderItemDesktopComponent,
 		EntregasItemDesktopComponent,
-		EntregasDetalleDesktopComponent
+		EntregasDetalleDesktopComponent,
+		VentasHeaderItemDesktopComponent,
+		VentasItemDesktopComponent,
+		VentasDetalleDesktopComponent
 	],
 	imports: [
 		HttpClientModule,

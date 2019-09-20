@@ -15,7 +15,7 @@ import { takeUntil } from 'rxjs/operators';
 export class VentasListaMovilComponent implements OnInit, OnDestroy {
 
   @Input()
-  observerFiltroListadoMovil$: Subject<any>;
+  observerFiltro$: Subject<any>;
 
   @Input()
   filtrarPorPesificacion: boolean = true;
@@ -49,7 +49,7 @@ export class VentasListaMovilComponent implements OnInit, OnDestroy {
 
   ngOnInit() {
     // observer del filtro
-    this.observerFiltroListadoMovil$
+    this.observerFiltro$
       .pipe(takeUntil(this.destroy$))
       .subscribe(
         filtro => {

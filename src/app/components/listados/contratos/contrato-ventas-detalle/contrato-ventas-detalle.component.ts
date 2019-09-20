@@ -18,7 +18,7 @@ export class ContratoVentasDetalleComponent implements OnInit, OnDestroy {
 
   @ViewChild('menuFiltro') public sidenav: MatSidenav;
 
-  observerFiltroListadoMovil$ = new Subject<FiltroVentas>();
+  observerFiltro$ = new Subject<FiltroVentas>();
   cuenta: EntidadAlg;
   titulo: string;
   destroy$: Subject<any> = new Subject<any>();
@@ -60,7 +60,7 @@ export class ContratoVentasDetalleComponent implements OnInit, OnDestroy {
     filtroParaElContrato.cosecha = this.boleto.encabezado.cosecha;
     filtroParaElContrato.contrato = this.boleto.encabezado.id;
 
-    this.observerFiltroListadoMovil$.next(filtro);
+    this.observerFiltro$.next(filtro);
   }
 
   /**
