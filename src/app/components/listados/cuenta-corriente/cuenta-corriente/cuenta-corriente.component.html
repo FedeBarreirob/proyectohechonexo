@@ -1,4 +1,5 @@
-<mat-sidenav-container class="contenedor-filtro">
+<!--Modo movil-->
+<mat-sidenav-container class="contenedor-filtro" *ngIf="esCelular == true">
 	<mat-sidenav #menuFiltro position="end" class="sidenav-filtro">
 		<app-cta-cte-filtro [cuenta]="cuenta" (botonCerrar)="menuFiltro.toggle()"
 			(botonAplicar)="cargarListado($event, false)" [ctacteInfoActivo$]="ctacteInfoActivo$"></app-cta-cte-filtro>
@@ -8,9 +9,10 @@
 			(botonPersonalizadoEjecutado)="mostrarOcultarFiltros()"
 			[urlImagenAccionPersonalizada]="'assets/toolbar/embudo.png'"></app-tool-bar-general>
 
-		<mat-tab-group mat-align-tabs="center" (selectedTabChange) ="seleccionTab($event)">
+		<mat-tab-group mat-align-tabs="center" (selectedTabChange)="seleccionTab($event)">
 			<mat-tab label="CTA CTE APLICADA">
-				<app-cuenta-corriente-aplicada-saldo [observerFiltro$]="observerFiltroCtaCteAplicada$"></app-cuenta-corriente-aplicada-saldo>
+				<app-cuenta-corriente-aplicada-saldo [observerFiltro$]="observerFiltroCtaCteAplicada$">
+				</app-cuenta-corriente-aplicada-saldo>
 				<app-cuenta-corriente-aplicada-lista [observerFiltro$]="observerFiltroCtaCteAplicada$"
 					(seEncuentraCargando)="cambiarEstadoCargandoCtaCteAplicado($event)"
 					(seleccionMovimiento)="verDetalleAplicado($event)">
@@ -27,4 +29,18 @@
 	</section>
 </mat-sidenav-container>
 
-<!--<app-loading [cargando$]="cargando$"></app-loading>-->
+<!--Modo desktop-->
+<div *ngIf="esCelular == false" class="container-modo-desktop">
+	<mat-tab-group mat-align-tabs="left" (selectedTabChange)="seleccionTab($event)">
+
+		<mat-tab label="Cuenta corriente">
+			<app-cuenta-corriente-lista-desktop [cuenta]="cuenta" (seleccionMovimiento)="verDetalle($event)">
+			</app-cuenta-corriente-lista-desktop>
+		</mat-tab>
+
+		<mat-tab label="Cuenta corriente aplicada">
+			<app-cuenta-corriente-aplicada-lista-desktop></app-cuenta-corriente-aplicada-lista-desktop>
+		</mat-tab>
+
+	</mat-tab-group>
+</div>

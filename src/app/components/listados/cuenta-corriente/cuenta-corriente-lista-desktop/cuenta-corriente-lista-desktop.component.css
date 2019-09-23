@@ -1,0 +1,28 @@
+.titulo-seccion {
+    color: #333333;
+    font-family: Rubik;
+    font-size: 20px;
+}
+
+.contenedor-titulo-filtro {
+    overflow-x: hidden;
+    padding-top: 32px;
+    padding-bottom: 28px;
+    padding-left: 13px;
+    padding-right: 13px;
+}
+
+.contenedor-header {
+    overflow-x: hidden;
+    padding-left: 13px;
+    padding-right: 13px;
+}
+
+.contenedor-listado {
+    width: 100%;
+    min-height: 100%;
+    overflow-y: auto;
+    overflow-x: hidden;
+    padding-right: 13px;
+    padding-left: 13px;
+  }

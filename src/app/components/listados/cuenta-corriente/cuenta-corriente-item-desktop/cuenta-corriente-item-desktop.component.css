@@ -1,0 +1,11 @@
+.container {
+    width: 100%;
+    border: 1px solid #ECECEC;
+    border-radius: 4px;
+    background-color: #FFFFFF;
+    margin: 2px;
+    color: #333333;
+    font-family: Rubik;
+    font-size: 14px;
+    padding: 13px;
+}

@@ -50,18 +50,20 @@ export class CtacteComponent implements OnInit {
 
 	// funcion que ejecuta la carga del listado de ctacte
 	cargarListado() {
-		/*this.cargando = true;
+		this.cargando = true;
 		this.limpiar();
 
 		let filtro: FiltroListadoCtaCte = {
 			cuenta: this.cuenta,
 			fechaDesde: this.datePipe.transform(new Date(this.fechaDesde), 'dd/MM/yyyy'),
-			fechaHasta: this.datePipe.transform(new Date(this.fechaHasta), 'dd/MM/yyyy')
+			fechaHasta: this.datePipe.transform(new Date(this.fechaHasta), 'dd/MM/yyyy'),
+			totales: true,
+			paginado: false
 		}
 
 		let usuarioLogueado = <UserAuth>this.authenticationService.usuarioLogueado();
 		if (usuarioLogueado != null) {
-			return this.ctacteService.listadoCtaCte(filtro, usuarioLogueado.token).subscribe(respuesta => {
+			return this.ctacteService.listadoCtaCte(filtro).subscribe(respuesta => {
 				this.listadoCtaCte = respuesta.datos.listado;
 				this.saldosTotales = respuesta.datos.saldosTotales;
 
@@ -69,7 +71,7 @@ export class CtacteComponent implements OnInit {
 			}, error => {
 				this.cargando = false;
 			});
-		}*/
+		}
 	}
 
 	// funcion que muestra el detalle de un movimiento seleccionado

@@ -1,0 +1,31 @@
+<!--Filtro-->
+<div fxLayout="row" fxLayoutAlign="space-between center" class="contenedor-titulo-filtro" fxLayoutGap="20px">
+
+  <div fxFlex="250px" class="titulo-seccion">
+    Ficha de cuenta corriente
+  </div>
+
+  <div fxFlex>
+    <app-cta-cte-filtro-desktop [cuenta]="cuenta" [infoCtaCteActivo]="infoCtaCte.CUENTA_CORRIENTE"
+      (botonAplicar)="aplicar($event)"></app-cta-cte-filtro-desktop>
+  </div>
+
+</div>
+
+<!--Header-->
+<div class="contenedor-header">
+  <app-cuenta-corriente-header-item-desktop></app-cuenta-corriente-header-item-desktop>
+</div>
+
+<!--Listado-->
+<div class="contenedor-listado" fxLayout="column" fxLayoutWrap fxLayoutAlign="none">
+
+  <app-cuenta-corriente-item-desktop *ngFor="let movimiento of listado" [movimiento]="movimiento">
+  </app-cuenta-corriente-item-desktop>
+
+  <!--Spinner-->
+  <div fxLayout="row" fxLayoutAlign="center center" *ngIf="cargando" style="margin-top: 10px">
+    <mat-spinner diameter="24"></mat-spinner>
+  </div>
+
+</div>

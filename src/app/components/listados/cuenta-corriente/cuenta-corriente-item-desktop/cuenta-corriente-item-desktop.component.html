@@ -1,0 +1,65 @@
+<div fxLayout="row" fxLayoutAlign="space-around center" class="container">
+
+  <div fxFlex="24px">
+    <mat-checkbox></mat-checkbox>
+  </div>
+
+  <div fxFlex="100px">
+    {{movimiento.fechaCtaCte}}
+  </div>
+
+  <div fxFlex="150px">
+    {{movimiento.concepto}}
+  </div>
+
+  <div fxFlex="120px">
+    {{movimiento.comprobante}}
+  </div>
+
+  <div fxFlex="100px">
+    {{movimiento.fechaVencimiento}}
+  </div>
+
+  <div fxFlex="70px">
+    {{ movimiento.moneda | moneda }}
+  </div>
+
+  <!-- debe -->
+  <div fxFlex="120px">
+
+    <!--Pesos-->
+    <span *ngIf="movimiento.moneda == 'P' && movimiento.tipoMovimiento == 'D'">
+      {{movimiento.importeComprobantePesos | number: '2.2'}}
+    </span>
+
+    <!--Dolares-->
+    <span *ngIf="movimiento.moneda != 'P' && movimiento.tipoMovimiento == 'D'">
+      {{movimiento.importeComprobanteDolares | number: '2.2'}}
+    </span>
+
+  </div>
+
+  <!--haber-->
+  <div fxFlex="120px">
+
+    <!--Pesos-->
+    <span *ngIf="movimiento.moneda == 'P' && movimiento.tipoMovimiento == 'C'">
+      {{movimiento.importeComprobantePesos | number: '2.2'}}
+    </span>
+
+    <!--Dolares-->
+    <span *ngIf="movimiento.moneda != 'P' && movimiento.tipoMovimiento == 'C'">
+      {{movimiento.importeComprobanteDolares | number: '2.2'}}
+    </span>
+
+  </div>
+
+  <div fxFlex="120px">
+    {{movimiento.saldoPesos | number: '2.2'}}
+  </div>
+
+  <div fxFlex="120px">
+    {{movimiento.saldoDolares | number: '2.2'}}
+  </div>
+
+</div>

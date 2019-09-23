@@ -153,6 +153,11 @@ import { EntregasDetalleDesktopComponent } from './components/listados/entregas/
 import { VentasHeaderItemDesktopComponent } from './components/listados/ventas/ventas-header-item-desktop/ventas-header-item-desktop.component';
 import { VentasItemDesktopComponent } from './components/listados/ventas/ventas-item-desktop/ventas-item-desktop.component';
 import { VentasDetalleDesktopComponent } from './components/listados/ventas/ventas-detalle-desktop/ventas-detalle-desktop.component';
+import { CtaCteFiltroDesktopComponent } from './components/filtros/cta-cte-filtro-desktop/cta-cte-filtro-desktop.component';
+import { CuentaCorrienteListaDesktopComponent } from './components/listados/cuenta-corriente/cuenta-corriente-lista-desktop/cuenta-corriente-lista-desktop.component';
+import { CuentaCorrienteAplicadaListaDesktopComponent } from './components/listados/cuenta-corriente/cuenta-corriente-aplicada-lista-desktop/cuenta-corriente-aplicada-lista-desktop.component';
+import { CuentaCorrienteHeaderItemDesktopComponent } from './components/listados/cuenta-corriente/cuenta-corriente-header-item-desktop/cuenta-corriente-header-item-desktop.component';
+import { CuentaCorrienteItemDesktopComponent } from './components/listados/cuenta-corriente/cuenta-corriente-item-desktop/cuenta-corriente-item-desktop.component';
 
 registerLocaleData(localeEsAr, 'es-AR');
 
@@ -277,7 +282,12 @@ export function tokenGetter() {
 		EntregasDetalleDesktopComponent,
 		VentasHeaderItemDesktopComponent,
 		VentasItemDesktopComponent,
-		VentasDetalleDesktopComponent
+		VentasDetalleDesktopComponent,
+		CtaCteFiltroDesktopComponent,
+		CuentaCorrienteListaDesktopComponent,
+		CuentaCorrienteAplicadaListaDesktopComponent,
+		CuentaCorrienteHeaderItemDesktopComponent,
+		CuentaCorrienteItemDesktopComponent
 	],
 	imports: [
 		HttpClientModule,

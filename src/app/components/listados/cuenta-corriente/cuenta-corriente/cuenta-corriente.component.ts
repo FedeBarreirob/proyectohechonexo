@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild, OnDestroy } from '@angular/core';
+import { Component, OnInit, ViewChild, OnDestroy, AfterViewInit } from '@angular/core';
 import { MatSidenav, MatDialog, MatSnackBar, MatTabChangeEvent } from '@angular/material';
 import { EntidadAlg } from '../../../../interfaces/perfiles/entidad-alg';
 import { CuentaAlgService } from '../../../../services/observers/cuentas-alg/cuenta-alg.service';
@@ -17,7 +17,7 @@ import { CuentaCorrienteAplicadaDetalleComponent } from '../cuenta-corriente-apl
   styleUrls: ['./cuenta-corriente.component.css'],
   providers: [DatePipe]
 })
-export class CuentaCorrienteComponent implements OnInit, OnDestroy {
+export class CuentaCorrienteComponent implements OnInit, OnDestroy, AfterViewInit {
 
   @ViewChild('menuFiltro') public sidenav: MatSidenav;
 
@@ -61,6 +61,12 @@ export class CuentaCorrienteComponent implements OnInit, OnDestroy {
           }
         }
       );
+  }
+
+  ngAfterViewInit(): void {
+    if (this.cuentaAlgService.cuentaPreviamenteSeleccionada && !this.esCelular) {
+      this.seleccionarCuenta(this.cuentaAlgService.cuentaPreviamenteSeleccionada);
+    }
   }
 
   ngOnDestroy(): void {

@@ -1,0 +1,43 @@
+<div fxLayout="row" fxLayoutAlign="space-between center" *ngIf="cuenta">
+
+  <!--Rubro-->
+  <div fxFlex="nogrow" class="boton-container">
+    <button mat-button [matMenuTriggerFor]="menuRubros" [disabled]="disabled">
+      {{ rubro ? rubro.texto : "Seleccione un rubro" }}<mat-icon>expand_more</mat-icon>
+    </button>
+    <mat-menu #menuRubros="matMenu">
+      <button mat-menu-item *ngFor="let unRubro of rubros" (click)="seleccionarRubro(unRubro)"
+        [ngClass]="{'activo': rubro === unRubro, 'inactivo': rubro !== unRubro }">
+        {{ unRubro.texto }}
+      </button>
+    </mat-menu>
+  </div>
+
+  <!--Personalizado-->
+  <div fxFlex="nogrow" class="boton-container">
+
+  </div>
+
+  <!--Fecha desde-->
+  <div fxFlex="nogrow" class="boton-container" style="overflow: hidden"
+    *ngIf="infoCtaCteActivo === infoCtaCte.CUENTA_CORRIENTE">
+    <input readonly [(ngModel)]="fechaDesde" matInput [matDatepicker]="desde" class="input-fecha" placeholder="Desde">
+    <mat-datepicker-toggle matSuffix [for]="desde" [disabled]="disabled"></mat-datepicker-toggle>
+    <mat-datepicker touchUi #desde></mat-datepicker>
+  </div>
+
+  <!--Fecha hasta-->
+  <div fxFlex="nogrow" class="boton-container" style="overflow: hidden"
+    *ngIf="infoCtaCteActivo === infoCtaCte.CUENTA_CORRIENTE">
+    <input readonly [(ngModel)]="fechaHasta" matInput [matDatepicker]="hasta" class="input-fecha" placeholder="Hasta">
+    <mat-datepicker-toggle matSuffix [for]="hasta" [disabled]="disabled"></mat-datepicker-toggle>
+    <mat-datepicker touchUi #hasta></mat-datepicker>
+  </div>
+
+  <!--Ejecutar filtro-->
+  <div fxFlex="nogrow">
+    <button mat-icon-button (click)="aplicar()" [disabled]="disabled" matTooltip="Buscar">
+      <mat-icon>navigate_next</mat-icon>
+    </button>
+  </div>
+</div>

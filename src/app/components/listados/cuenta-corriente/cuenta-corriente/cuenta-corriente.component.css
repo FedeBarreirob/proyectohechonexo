@@ -21,3 +21,13 @@
 :host ::ng-deep .mat-ink-bar {
     background-color: #00cb75 !important;
 }
+
+/* tab otros*/
+
+:host ::ng-deep .container-modo-desktop .mat-tab-header {
+    border: none !important;
+}
+
+.container-modo-desktop {
+    padding-top: 22px;
+}
