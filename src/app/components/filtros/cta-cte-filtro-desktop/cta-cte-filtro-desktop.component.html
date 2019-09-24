@@ -1,9 +1,9 @@
-<div fxLayout="row" fxLayoutAlign="space-between center" *ngIf="cuenta">
+<div fxLayout="row" fxLayoutAlign="end center" *ngIf="cuenta" fxLayoutGap="5px">
 
   <!--Rubro-->
   <div fxFlex="nogrow" class="boton-container">
     <button mat-button [matMenuTriggerFor]="menuRubros" [disabled]="disabled">
-      {{ rubro ? rubro.texto : "Seleccione un rubro" }}<mat-icon>expand_more</mat-icon>
+      {{ rubro ? rubro.texto : "Todos los rubros" }}<mat-icon>expand_more</mat-icon>
     </button>
     <mat-menu #menuRubros="matMenu">
       <button mat-menu-item *ngFor="let unRubro of rubros" (click)="seleccionarRubro(unRubro)"

@@ -2,7 +2,7 @@
     padding-top: 100px;
 }
 
-.resumen-info-container {
+.movimiento-info-container {
     width: 100%;
     padding: 13px;
 }
@@ -46,7 +46,7 @@
     white-space: nowrap;
 }
 
-.icono-producto {
+.icono {
     width: 40px;
     height: 40px;
 }
@@ -81,7 +81,7 @@
     padding-bottom: 1px;
 }
 
-.boton-contratos {
+.boton-cerrar {
     color: #666666;
     font-family: Rubik;
     font-size: 14px;
@@ -92,7 +92,7 @@
     color: #999999;
 }
 
-.contrato-numero-miga {
+.numero-miga {
     color: #333333;
     font-family: Rubik;
     font-size: 14px;
@@ -119,4 +119,49 @@
     font-size: 14px;
     font-weight: bold;
     margin-top: 10px;
+}
+
+.boton-contrato {
+    color: rgba(45, 164, 66, 1);
+    font-family: Rubik;
+    font-size: 14px;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    justify-content: flex-start;
+    align-items: center;
+    align-content: center;
+    cursor: pointer;
+}
+
+.boton-descarga-comprobante-alt {
+    height: 40px;
+    width: 100%;
+    background-color: #FFFFFF;
+    border: 1px solid #2DA442;
+    border-radius: 4px;
+    color: #2DA442;
+    font-family: Rubik;
+    font-size: 14px;
+    font-weight: bold;
+    margin-top: 10px;
+}
+
+.encabezado-texto-importe {
+    color: #333333;
+    font-family: RubikLight;
+    font-size: 32px;
+    width: 100%;
+    text-overflow: ellipsis;
+    overflow: hidden;
+}
+
+.signo-positivo {
+    color: green;
+    font-weight: bold;
+}
+
+.signo-negativo {
+    color: red;
+    font-weight: bold;
 }

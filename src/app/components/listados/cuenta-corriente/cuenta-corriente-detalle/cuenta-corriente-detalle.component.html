@@ -21,7 +21,7 @@
 						[ngClass]="{'signo-positivo': movimiento.importeComprobantePesos > 0, 'signo-negativo': movimiento.importeComprobantePesos < 0 }">
 						{{ (movimiento.importeComprobantePesos < 0) ? '-' : (movimiento.importeComprobantePesos > 0) ? '+' : ''}}
 					</span>
-					<span class="moneda">{{ movimiento.moneda | moneda }}</span>
+					{{ movimiento.moneda | moneda }}
 					{{ ((movimiento.importeComprobantePesos > 0) ? movimiento.importeComprobantePesos : movimiento.importeComprobantePesos * (-1)) | number: '.2-2'}}
 				</span>
 
@@ -31,7 +31,7 @@
 						[ngClass]="{'signo-positivo': movimiento.importeComprobanteDolares > 0, 'signo-negativo': movimiento.importeComprobanteDolares < 0 }">
 						{{ (movimiento.importeComprobanteDolares < 0) ? '-' : (movimiento.importeComprobanteDolares > 0) ? '+' : ''}}
 					</span>
-					<span class="moneda">{{ movimiento.moneda | moneda }}</span>
+					{{ movimiento.moneda | moneda }}
 					{{ ((movimiento.importeComprobanteDolares > 0) ? movimiento.importeComprobanteDolares : movimiento.importeComprobanteDolares * (-1)) | number: '.2-2'}}
 				</span>
 			</div>

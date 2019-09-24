@@ -4,6 +4,12 @@
     height: 100%;
 }
 
+.contenedor-desktop {
+    height: 100%;
+    padding-top: 100px;
+}
+
+
 .sidenav-notificaciones {
     box-shadow: 3px 0 6px rgba(0, 0, 0, .24);
     width: 70%;

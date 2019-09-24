@@ -34,6 +34,7 @@ export class CuentaCorrienteListaDesktopComponent implements OnInit, OnDestroy {
   constructor(private ctacteService: CtacteService) { }
 
   ngOnInit() {
+    this.cargarListado();
   }
 
   ngOnDestroy(): void {
@@ -59,7 +60,7 @@ export class CuentaCorrienteListaDesktopComponent implements OnInit, OnDestroy {
 
       this.limpiar();
 
-      let filtroPaginado: any = this.filtro;
+      let filtroPaginado: any = (this.filtro) ? this.filtro : this.filtroPorDefecto();
       filtroPaginado.totales = true;
       filtroPaginado.paginado = false;
       filtroPaginado.ordenado = false;
@@ -79,8 +80,22 @@ export class CuentaCorrienteListaDesktopComponent implements OnInit, OnDestroy {
     }
   }
 
+  /**
+   * Retorna filtro por defecto
+   */
+  filtroPorDefecto(): any {
+    return {
+      cuenta: this.cuenta.id.codigo
+    };
+  }
+
   // funcion encargada de limpiar para nueva generacion de listado
   private limpiar() {
     this.listado.splice(0, this.listado.length);
+  }
+
+  // funcion que muestra el detalle de un movimiento seleccionado
+  verDetalle(movimiento: MovimientoCtaCte) {
+    this.seleccionMovimiento.emit(movimiento);
   }
 }

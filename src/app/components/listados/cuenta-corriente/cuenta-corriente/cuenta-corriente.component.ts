@@ -10,6 +10,7 @@ import { CuentaCorrienteDetalleComponent } from '../cuenta-corriente-detalle/cue
 import { MonedaService } from '../../../../services/moneda/moneda.service';
 import { InfoCtaCte } from '../../../../enums/info-cta-cte.enum';
 import { CuentaCorrienteAplicadaDetalleComponent } from '../cuenta-corriente-aplicada-detalle/cuenta-corriente-aplicada-detalle.component';
+import { MovimientoCtaCte } from 'src/app/interfaces/ctacte/listado.ctacte';
 
 @Component({
   selector: 'app-cuenta-corriente',
@@ -37,6 +38,9 @@ export class CuentaCorrienteComponent implements OnInit, OnDestroy, AfterViewIni
 
   ctacteInfoActivo$: Subject<InfoCtaCte> = new Subject<InfoCtaCte>();
   ctacteInfoActivo: InfoCtaCte = InfoCtaCte.CUENTA_CORRIENTE_APLICADA;
+
+  modoDetalleCtaCteDesktop: boolean = false;
+  modoDetalleCtaCteDesktopMovimiento$: Subject<MovimientoCtaCte> = new Subject<MovimientoCtaCte>();
 
   constructor(
     public dialog: MatDialog,
@@ -248,5 +252,21 @@ export class CuentaCorrienteComponent implements OnInit, OnDestroy, AfterViewIni
         this.ctacteInfoActivo = InfoCtaCte.CUENTA_CORRIENTE;
         break;
     }
+  }
+
+  /**
+   * Función encargada de mostrar el detalle de un movimiento seleccionado en modo desktop
+   * @param movimiento 
+   */
+  verDetalleCtaCteDesktop(movimiento: MovimientoCtaCte) {
+    this.modoDetalleCtaCteDesktop = true;
+    this.modoDetalleCtaCteDesktopMovimiento$.next(movimiento);
+  }
+
+  /**
+   * Función encargada de restaurar la vista saliendo del modo detalle
+   */
+  salirModoDetalleCtaCteDesktop() {
+    this.modoDetalleCtaCteDesktop = false;
   }
 }

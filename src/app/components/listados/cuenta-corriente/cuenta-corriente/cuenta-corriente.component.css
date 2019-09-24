@@ -24,10 +24,20 @@
 
 /* tab otros*/
 
+:host ::ng-deep .container-modo-desktop .mat-tab-label {
+    color: #333333 !important;
+    font-family: Rubik !important;
+    font-size: 20px !important;
+}
+
 :host ::ng-deep .container-modo-desktop .mat-tab-header {
     border: none !important;
 }
 
 .container-modo-desktop {
-    padding-top: 22px;
+    padding-top: 122px;
+}
+
+.hide {
+    display: none;
 }

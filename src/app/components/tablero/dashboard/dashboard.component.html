@@ -1,4 +1,4 @@
-<mat-sidenav-container class="contenedor-notificaciones">
+<mat-sidenav-container [ngClass]="{'contenedor-notificaciones': esCelular, 'contenedor-desktop': !esCelular }">
 	<mat-sidenav #menuNotificaciones position="end" class="sidenav-notificaciones" *ngIf="esCelular">
 
 		<app-panel-notificaciones (botonCerrar)="menuNotificaciones.toggle()"></app-panel-notificaciones>
