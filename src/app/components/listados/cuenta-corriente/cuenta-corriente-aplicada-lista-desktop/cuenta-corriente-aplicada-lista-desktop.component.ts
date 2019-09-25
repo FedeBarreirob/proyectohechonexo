@@ -93,4 +93,9 @@ export class CuentaCorrienteAplicadaListaDesktopComponent implements OnInit, OnD
   private limpiar() {
     this.listado.splice(0, this.listado.length);
   }
+
+  // funcion que muestra el detalle de un movimiento seleccionado
+  verDetalle(movimiento: MovimientoCtaCteAplicada) {
+    this.seleccionMovimiento.emit(movimiento);
+  }
 }

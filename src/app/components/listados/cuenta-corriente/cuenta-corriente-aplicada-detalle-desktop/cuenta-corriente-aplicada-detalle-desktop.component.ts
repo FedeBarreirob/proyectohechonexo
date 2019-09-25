@@ -1,20 +1,20 @@
 import { Component, OnInit, Input, Output, EventEmitter, OnDestroy } from '@angular/core';
-import { MovimientoCtaCte } from '../../../../interfaces/ctacte/listado.ctacte';
+import { MovimientoCtaCteAplicada } from '../../../../interfaces/ctacte-aplicada/listado-ctacte-aplicada';
 import { Subject } from 'rxjs';
-import { saveAs } from 'file-saver/FileSaver';
 import { ComprobantesDownloaderService } from '../../../../services/sharedServices/downloader/comprobantes-downloader.service';
-import { takeUntil } from 'rxjs/operators';
 import { MatSnackBar } from '@angular/material';
+import { saveAs } from 'file-saver/FileSaver';
+import { takeUntil } from 'rxjs/operators';
 
 @Component({
-  selector: 'app-cuenta-corriente-detalle-desktop',
-  templateUrl: './cuenta-corriente-detalle-desktop.component.html',
-  styleUrls: ['./cuenta-corriente-detalle-desktop.component.css']
+  selector: 'app-cuenta-corriente-aplicada-detalle-desktop',
+  templateUrl: './cuenta-corriente-aplicada-detalle-desktop.component.html',
+  styleUrls: ['./cuenta-corriente-aplicada-detalle-desktop.component.css']
 })
-export class CuentaCorrienteDetalleDesktopComponent implements OnInit, OnDestroy {
+export class CuentaCorrienteAplicadaDetalleDesktopComponent implements OnInit, OnDestroy {
 
   @Input()
-  modoDetalleDesktopMovimiento$: Subject<MovimientoCtaCte>;
+  modoDetalleDesktopMovimiento$: Subject<MovimientoCtaCteAplicada>;
 
   @Input()
   tcHoy: number;
@@ -22,7 +22,7 @@ export class CuentaCorrienteDetalleDesktopComponent implements OnInit, OnDestroy
   @Output()
   salir: EventEmitter<any> = new EventEmitter<any>();
 
-  movimiento: MovimientoCtaCte;
+  movimiento: MovimientoCtaCteAplicada;
   ivaDiff: number;
   destroy$: Subject<any> = new Subject<any>();
 
@@ -46,10 +46,10 @@ export class CuentaCorrienteDetalleDesktopComponent implements OnInit, OnDestroy
   }
 
   /**
-   * Función encargada de cargar todos los datos
-   * @param movimiento 
-   */
-  cargar(movimiento: MovimientoCtaCte) {
+  * Función encargada de cargar todos los datos
+  * @param movimiento 
+  */
+  cargar(movimiento: MovimientoCtaCteAplicada) {
     this.movimiento = movimiento;
   }
 
@@ -80,12 +80,12 @@ export class CuentaCorrienteDetalleDesktopComponent implements OnInit, OnDestroy
    * @param movimiento Movimiento que contiene el identificador del comprobante a descargar
    */
   descargarComprobante() {
-    this.comprobanteDownloaderService.comprobanteDescargado(this.movimiento.linkComprobante, this.movimiento.comprobante)
+    this.comprobanteDownloaderService.comprobanteDescargado(this.movimiento.linkComprobante, this.movimiento.comprobanteAfectado)
       .pipe(takeUntil(this.destroy$))
       .subscribe(respuesta => {
         var mediaType = 'application/pdf';
         var blob = new Blob([respuesta], { type: mediaType });
-        var filename = `${this.movimiento.comprobante}.pdf`;
+        var filename = `${this.movimiento.comprobanteAfectado}.pdf`;
 
         if (blob.size !== 0) {
           saveAs(blob, filename);

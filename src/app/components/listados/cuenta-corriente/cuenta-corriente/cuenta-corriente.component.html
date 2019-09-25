@@ -30,7 +30,7 @@
 </mat-sidenav-container>
 
 <!--Modo desktop-->
-<span [ngClass]="{'hide': modoDetalleCtaCteDesktop}">
+<span [ngClass]="{'hide': modoDetalleCtaCteDesktop || modoDetalleCtaCteAplicadaDesktop}">
 	<div *ngIf="esCelular == false && cuenta" class="container-modo-desktop">
 		<mat-tab-group mat-align-tabs="left" (selectedTabChange)="seleccionTab($event)">
 
@@ -42,7 +42,7 @@
 
 			<mat-tab label="Cuenta corriente aplicada">
 				<app-cuenta-corriente-aplicada-lista-desktop [cuenta]="cuenta"
-					(seleccionMovimiento)="verDetalle($event)">
+					(seleccionMovimiento)="verDetalleCtaCteAplicadaDesktop($event)">
 				</app-cuenta-corriente-aplicada-lista-desktop>
 			</mat-tab>
 
@@ -51,7 +51,13 @@
 </span>
 
 <span [ngClass]="{'hide': !modoDetalleCtaCteDesktop}">
-	<app-cuenta-corriente-detalle-desktop (salir)="salirModoDetalleCtaCteDesktop()"
+	<app-cuenta-corriente-detalle-desktop (salir)="salirModoDetalleCtaCteDesktop()" [tcHoy]="cotizacionMoneda"
 		[modoDetalleDesktopMovimiento$]="modoDetalleCtaCteDesktopMovimiento$">
 	</app-cuenta-corriente-detalle-desktop>
+</span>
+
+<span [ngClass]="{'hide': !modoDetalleCtaCteAplicadaDesktop}">
+	<app-cuenta-corriente-aplicada-detalle-desktop (salir)="salirModoDetalleCtaCteAplicadaDesktop()" [tcHoy]="cotizacionMoneda"
+		[modoDetalleDesktopMovimiento$]="modoDetalleCtaCteAplicadaDesktopMovimiento$">
+	</app-cuenta-corriente-aplicada-detalle-desktop>
 </span>

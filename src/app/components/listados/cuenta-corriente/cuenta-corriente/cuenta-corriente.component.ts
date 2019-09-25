@@ -10,7 +10,8 @@ import { CuentaCorrienteDetalleComponent } from '../cuenta-corriente-detalle/cue
 import { MonedaService } from '../../../../services/moneda/moneda.service';
 import { InfoCtaCte } from '../../../../enums/info-cta-cte.enum';
 import { CuentaCorrienteAplicadaDetalleComponent } from '../cuenta-corriente-aplicada-detalle/cuenta-corriente-aplicada-detalle.component';
-import { MovimientoCtaCte } from 'src/app/interfaces/ctacte/listado.ctacte';
+import { MovimientoCtaCte } from '../../../../interfaces/ctacte/listado.ctacte';
+import { MovimientoCtaCteAplicada } from '../../../../interfaces/ctacte-aplicada/listado-ctacte-aplicada';
 
 @Component({
   selector: 'app-cuenta-corriente',
@@ -41,6 +42,9 @@ export class CuentaCorrienteComponent implements OnInit, OnDestroy, AfterViewIni
 
   modoDetalleCtaCteDesktop: boolean = false;
   modoDetalleCtaCteDesktopMovimiento$: Subject<MovimientoCtaCte> = new Subject<MovimientoCtaCte>();
+
+  modoDetalleCtaCteAplicadaDesktop: boolean = false;
+  modoDetalleCtaCteAplicadaDesktopMovimiento$: Subject<MovimientoCtaCteAplicada> = new Subject<MovimientoCtaCteAplicada>();
 
   constructor(
     public dialog: MatDialog,
@@ -268,5 +272,21 @@ export class CuentaCorrienteComponent implements OnInit, OnDestroy, AfterViewIni
    */
   salirModoDetalleCtaCteDesktop() {
     this.modoDetalleCtaCteDesktop = false;
+  }
+
+  /**
+   * Función encargada de mostrar el detalle de un movimiento seleccionado en modo desktop
+   * @param movimiento 
+   */
+  verDetalleCtaCteAplicadaDesktop(movimiento: MovimientoCtaCteAplicada) {
+    this.modoDetalleCtaCteAplicadaDesktop = true;
+    this.modoDetalleCtaCteAplicadaDesktopMovimiento$.next(movimiento);
+  }
+
+  /**
+   * Función encargada de restaurar la vista saliendo del modo detalle
+   */
+  salirModoDetalleCtaCteAplicadaDesktop() {
+    this.modoDetalleCtaCteAplicadaDesktop = false;
   }
 }
