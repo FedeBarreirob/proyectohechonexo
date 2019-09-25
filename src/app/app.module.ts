@@ -162,6 +162,7 @@ import { CuentaCorrienteAplicadaHeaderItemDesktopComponent } from './components/
 import { CuentaCorrienteAplicadaItemDesktopComponent } from './components/listados/cuenta-corriente/cuenta-corriente-aplicada-item-desktop/cuenta-corriente-aplicada-item-desktop.component';
 import { CuentaCorrienteDetalleDesktopComponent } from './components/listados/cuenta-corriente/cuenta-corriente-detalle-desktop/cuenta-corriente-detalle-desktop.component';
 import { CuentaCorrienteAplicadaDetalleDesktopComponent } from './components/listados/cuenta-corriente/cuenta-corriente-aplicada-detalle-desktop/cuenta-corriente-aplicada-detalle-desktop.component';
+import { InformacionDePerfilDesktopComponent } from './components/usuarios-y-perfiles/informacion-de-perfil-desktop/informacion-de-perfil-desktop.component';
 
 registerLocaleData(localeEsAr, 'es-AR');
 
@@ -295,7 +296,8 @@ export function tokenGetter() {
 		CuentaCorrienteAplicadaHeaderItemDesktopComponent,
 		CuentaCorrienteAplicadaItemDesktopComponent,
 		CuentaCorrienteDetalleDesktopComponent,
-		CuentaCorrienteAplicadaDetalleDesktopComponent
+		CuentaCorrienteAplicadaDetalleDesktopComponent,
+		InformacionDePerfilDesktopComponent
 	],
 	imports: [
 		HttpClientModule,

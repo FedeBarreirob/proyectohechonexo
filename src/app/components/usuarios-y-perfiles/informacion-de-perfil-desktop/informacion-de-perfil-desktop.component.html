@@ -1,0 +1,37 @@
+<div class="contenedor-detalle">
+  <mat-progress-bar *ngIf="cargando" mode="indeterminate"></mat-progress-bar>
+
+  <div fxLayout="row" fxLayoutAlign="space-between center" class="contenedor-titulo-filtro" fxLayoutGap="20px">
+    <div fxFlex="93px" class="titulo-seccion">
+      Perfil
+    </div>
+  </div>
+
+  <!--Fila perfil-->
+  <div fxLayout="row" fxLayoutAlign="space-between start" fxLayoutGap="13px" class="movimiento-info-container">
+
+    <!--Columna info prod-->
+    <div fxFlex class="info-container">
+
+      <!--Encabezado-->
+      <div fxLayout="row" fxLayoutAlign="space-between center">
+
+        <!--Icono y tn-->
+        <div fxFlex="nogrow">
+          informacion de perfil
+        </div>
+
+      </div>
+
+    </div>
+
+    <!--Columna botones exportar-->
+    <div fxFlex="250px" class="info-container">
+
+      Cambiar cuenta
+      <app-combo-cuenta [showAvatar]="false"></app-combo-cuenta>
+
+    </div>
+
+  </div>
+</div>

@@ -22,6 +22,7 @@ import { CuentaCorrienteComponent } from '../components/listados/cuenta-corrient
 import { ContratosComponent } from '../components/listados/contratos/contratos/contratos.component';
 import { ComprobantesComponent } from '../components/listados/comprobantes/comprobantes/comprobantes.component';
 import { ReportesComponent } from '../components/listados/reportes/reportes/reportes.component';
+import { InformacionDePerfilDesktopComponent } from '../components/usuarios-y-perfiles/informacion-de-perfil-desktop/informacion-de-perfil-desktop.component';
 
 const routes: Routes = [
 	{
@@ -127,6 +128,14 @@ const routes: Routes = [
 	{
 		path: 'reportes',
 		component: ReportesComponent,
+		canActivate: [AuthGuardGuard],
+		data: {
+			rolAdmin: false
+		}
+	},
+	{
+		path: 'informacion-de-perfil-desktop',
+		component: InformacionDePerfilDesktopComponent,
 		canActivate: [AuthGuardGuard],
 		data: {
 			rolAdmin: false
