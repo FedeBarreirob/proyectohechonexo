@@ -13,15 +13,8 @@
     <!--Columna info prod-->
     <div fxFlex class="info-container">
 
-      <!--Encabezado-->
-      <div fxLayout="row" fxLayoutAlign="space-between center">
-
-        <!--Icono y tn-->
-        <div fxFlex="nogrow">
-          informacion de perfil
-        </div>
-
-      </div>
+      <app-info-perfil-edicion-desktop *ngIf="perfilBasico" [perfilBasico]="perfilBasico"
+        [nombreEntidad]="nombreEntidad"></app-info-perfil-edicion-desktop>
 
     </div>
 
@@ -34,4 +27,27 @@
     </div>
 
   </div>
+
+  <!--Fila Unidades de medida-->
+  <div fxLayout="row" fxLayoutAlign="space-between start" fxLayoutGap="13px" class="movimiento-info-container">
+
+    <div fxFlex class="info-container">
+      <app-selector-unidad-medida></app-selector-unidad-medida>
+    </div>
+
+    <div fxFlex="250px"></div>
+
+  </div>
+
+  <!--Cuentas de colaboradores-->
+  <div fxLayout="row" fxLayoutAlign="space-between start" fxLayoutGap="13px" class="movimiento-info-container">
+
+    <div fxFlex class="info-container">
+      <app-terceros-lista-desktop *ngIf="perfilBasico" [perfilBasico]="perfilBasico"></app-terceros-lista-desktop>
+    </div>
+
+    <div fxFlex="250px"></div>
+
+  </div>
+
 </div>

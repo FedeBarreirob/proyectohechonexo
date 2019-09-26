@@ -40,6 +40,11 @@ export class AppComponent {
 			"bell",
 			this.domSanitizer.bypassSecurityTrustResourceUrl("assets/toolbar/bell.svg")
 		);
+
+		this.matIconRegistry.addSvgIcon(
+			"cedit",
+			this.domSanitizer.bypassSecurityTrustResourceUrl("assets/toolbar/edit.svg")
+		);
 	}
 
 	/**

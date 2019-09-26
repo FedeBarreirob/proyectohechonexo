@@ -1,0 +1,32 @@
+<div fxLayout="row" fxLayoutAlign="start center">
+
+  <div fxFlex class="titulo">
+    MOSTRAR CANTIDADES EN:
+  </div>
+
+</div>
+
+<mat-radio-group aria-labelledby="unidad-medida-label" class="radio-group" [(ngModel)]="unidadMedidaPesoSeleccionado">
+  <div fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="70px">
+
+    <div fxFlex="nogrow">
+      <mat-radio-button class="radio-button radio-text" [value]="'kg'" (click)="actualizarUnidadDeMedidaPeso('kg')">
+        Kilogramos
+      </mat-radio-button>
+    </div>
+
+    <div fxFlex="nogrow">
+      <mat-radio-button class="radio-button radio-text" [value]="'tn'" (click)="actualizarUnidadDeMedidaPeso('tn')">
+        Toneladas
+      </mat-radio-button>
+    </div>
+
+    <div fxFlex="nogrow">
+      <mat-radio-button class="radio-button radio-text" [value]="'qq'" (click)="actualizarUnidadDeMedidaPeso('qq')">
+        Quintales
+      </mat-radio-button>
+    </div>
+
+  </div>
+
+</mat-radio-group>

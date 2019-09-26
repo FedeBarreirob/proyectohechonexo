@@ -163,6 +163,9 @@ import { CuentaCorrienteAplicadaItemDesktopComponent } from './components/listad
 import { CuentaCorrienteDetalleDesktopComponent } from './components/listados/cuenta-corriente/cuenta-corriente-detalle-desktop/cuenta-corriente-detalle-desktop.component';
 import { CuentaCorrienteAplicadaDetalleDesktopComponent } from './components/listados/cuenta-corriente/cuenta-corriente-aplicada-detalle-desktop/cuenta-corriente-aplicada-detalle-desktop.component';
 import { InformacionDePerfilDesktopComponent } from './components/usuarios-y-perfiles/informacion-de-perfil-desktop/informacion-de-perfil-desktop.component';
+import { InfoPerfilEdicionDesktopComponent } from './components/usuarios-y-perfiles/info-perfil-edicion-desktop/info-perfil-edicion-desktop.component';
+import { SelectorUnidadMedidaComponent } from './components/usuarios-y-perfiles/selector-unidad-medida/selector-unidad-medida.component';
+import { TercerosListaDesktopComponent } from './components/usuarios-y-perfiles/terceros/terceros-lista-desktop/terceros-lista-desktop.component';
 
 registerLocaleData(localeEsAr, 'es-AR');
 
@@ -297,7 +300,10 @@ export function tokenGetter() {
 		CuentaCorrienteAplicadaItemDesktopComponent,
 		CuentaCorrienteDetalleDesktopComponent,
 		CuentaCorrienteAplicadaDetalleDesktopComponent,
-		InformacionDePerfilDesktopComponent
+		InformacionDePerfilDesktopComponent,
+		InfoPerfilEdicionDesktopComponent,
+		SelectorUnidadMedidaComponent,
+		TercerosListaDesktopComponent
 	],
 	imports: [
 		HttpClientModule,

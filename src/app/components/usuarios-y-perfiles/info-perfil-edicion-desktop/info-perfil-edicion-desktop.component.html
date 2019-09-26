@@ -1,0 +1,79 @@
+<div fxLayout="row" fxLayoutAlign="space-between start" class="container">
+
+  <!--Avatar Empresa y email-->
+  <div fxFlex="50%">
+
+    <div fxLayout="row" fxLayoutAlign="start start" fxLayoutGap="20px">
+
+      <!--Avatar-->
+      <div fxFlex="96px">
+        <app-avatar-editor [(avatar)]="avatar"></app-avatar-editor>
+      </div>
+
+      <!--Nombre y email-->
+      <div fxFlex="nogrow">
+        <div fxLayout="column" fxLayoutAlign="start start">
+
+          <div fxFlex="nogrow" class="titulo-apartado">
+            NOMBRE
+          </div>
+
+          <div fxFlex="nogrow" class="dato-apartado">
+            {{perfilBasico.informacionPersonal.nombre}}
+          </div>
+
+          <div fxFlex="nogrow" class="titulo-apartado">
+            EMAIL
+          </div>
+
+          <div fxFlex="nogrow" class="dato-apartado">
+            {{perfilBasico.informacionPersonal.email}}
+          </div>
+
+        </div>
+      </div>
+
+    </div>
+
+  </div>
+
+  <!--Cuenta y contraseña Botón acciones-->
+  <div fxFlex="50%">
+
+    <div fxLayout="row" fxLayoutAlign="space-between start">
+
+      <!--Cuenta y contraseña-->
+      <div fxFlex="nogrow">
+        <div fxLayout="column" fxLayoutAlign="start start">
+
+          <div fxFlex="nogrow" class="titulo-apartado">
+            EMPRESA
+          </div>
+
+          <div fxFlex="nogrow" class="dato-apartado">
+            {{nombreEntidad}}
+          </div>
+
+          <div fxFlex="nogrow" class="titulo-apartado">
+            CONTRASEÑA
+          </div>
+
+          <div fxFlex="nogrow" class="dato-apartado">
+            *********
+          </div>
+
+        </div>
+      </div>
+
+      <!--Acciones-->
+      <div fxFlex="nogrow">
+        <button mat-icon-button (click)="editar()">
+          <mat-icon svgIcon="cedit"></mat-icon>
+        </button>
+      </div>
+
+    </div>
+
+  </div>
+
+</div>
