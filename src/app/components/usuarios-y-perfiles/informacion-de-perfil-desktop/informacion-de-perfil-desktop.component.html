@@ -21,8 +21,17 @@
     <!--Columna botones exportar-->
     <div fxFlex="250px" class="info-container">
 
-      Cambiar cuenta
-      <app-combo-cuenta [showAvatar]="false"></app-combo-cuenta>
+      <div fxLayout="row" fxLayoutAlign="space-between start">
+
+        <div fxFlex="nogrow" class="titulo-apartados">
+          Cambiar cuenta
+        </div>
+
+        <div fxFlex="nogrow" class="selector-cuenta-container">
+          <app-combo-cuenta [showAvatar]="false"></app-combo-cuenta>
+        </div>
+
+      </div>
 
     </div>
 
@@ -32,7 +41,7 @@
   <div fxLayout="row" fxLayoutAlign="space-between start" fxLayoutGap="13px" class="movimiento-info-container">
 
     <div fxFlex class="info-container">
-      <app-selector-unidad-medida></app-selector-unidad-medida>
+      <app-selector-unidad-medida *ngIf="perfilBasico" [perfilBasico]="perfilBasico"></app-selector-unidad-medida>
     </div>
 
     <div fxFlex="250px"></div>

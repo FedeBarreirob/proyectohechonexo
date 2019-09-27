@@ -5,6 +5,8 @@ import { TerceroBasico } from '../../../../interfaces/acceso-terceros/tercero-ba
 import { FiltroGenericoListaConFiltroId } from '../../../../interfaces/varios/filtro-generico-lista-con-filtroid';
 import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
+import { MatSlideToggleChange, MatDialog, MatSnackBar } from '@angular/material';
+import { AccesoTercerosEdicionComponent } from '../acceso-terceros-edicion/acceso-terceros-edicion.component';
 
 @Component({
   selector: 'app-terceros-lista-desktop',
@@ -29,7 +31,9 @@ export class TercerosListaDesktopComponent implements OnInit, OnDestroy {
   };
 
   constructor(
-    private terceroService: TercerosService
+    private terceroService: TercerosService,
+    private dialog: MatDialog,
+    private snackBar: MatSnackBar
   ) { }
 
   ngOnInit() {
@@ -104,5 +108,63 @@ export class TercerosListaDesktopComponent implements OnInit, OnDestroy {
       this.pagina = this.pagina + 1;
       this.cargarListado(false);
     }
+  }
+
+  /**
+   * Notifica que se ha seleccionado un tercero para ver o editar
+   * @param tercero Tercero a ver o editar
+   */
+  verEditar(tercero: TerceroBasico) {
+    const dialogRef = this.dialog.open(AccesoTercerosEdicionComponent, {
+      data: tercero,
+      panelClass: 'modal-sin-padding'
+    });
+
+    dialogRef.afterClosed().subscribe(
+      () => this.cargarListado(true)
+    );
+  }
+
+	/**
+   * Función que notifica un tercero con su estado de habilitación a asignarle
+   * @param tercero 
+   * @param $event 
+   */
+  habilitacion(tercero: TerceroBasico, $event: MatSlideToggleChange) {
+    tercero.credencial.baja = !$event.checked;
+
+    this.terceroService.darDeBajaTercero(
+      tercero.id,
+      tercero.credencial.baja
+    ).subscribe(
+      respuesta => {
+        if (respuesta.exito == false) {
+          this.cargarListado(true);
+        }
+
+        this.openSnackBar(respuesta.mensaje);
+      },
+      error => console.log(error)
+    );
+  }
+
+  /**
+   * Notifica que se debe mostrar un modal para agregar un tercero
+   */
+  agregarTercero() {
+    let dialorRef = this.dialog.open(AccesoTercerosEdicionComponent, {
+      panelClass: 'modal-sin-padding'
+    });
+
+    dialorRef.afterClosed().subscribe(
+      () => this.cargarListado(true)
+    );
+  }
+
+  // abre una notificacion
+  openSnackBar(message: string) {
+    this.snackBar.open(message, null, {
+      duration: 2000,
+    });
   }
 }

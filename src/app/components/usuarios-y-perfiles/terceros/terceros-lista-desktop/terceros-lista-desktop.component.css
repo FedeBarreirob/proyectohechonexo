@@ -1,0 +1,82 @@
+.titulo {
+    color: #666666;
+    font-family: Rubik;
+    font-size: 12px;
+    letter-spacing: 1.2px;
+    margin-bottom: 19px;
+}
+
+.contenedor-listado {
+    height: 170px;
+    overflow-y: scroll;
+    padding-left: 17px;
+    padding-right: 17px;
+    margin-bottom: 10px;
+}
+
+.nombre {
+    color: #111111;
+    font-family: Rubik;
+    font-size: 14px;
+    line-height: 18px;
+}
+
+.indicador-activo {
+    color: #666666;
+    font-family: Rubik;
+    font-size: 14px;
+    letter-spacing: 1px;
+    margin-right: 10px;
+}
+
+.img-editar {
+    height: 24px;
+    width: 24px;
+}
+
+.leyenda-vacio {
+    color: #666666;
+    font-family: Rubik;
+    font-size: 14px;
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.leyenda-agregar-colaborador {
+    color: #23B950;
+    font-family: Rubik;
+    font-size: 16px;
+    text-align: center;
+}
+
+.contenedor-leyenda-vacio {
+    position: fixed;
+    top: 50%;
+    margin: 15px;
+}
+
+.boton-agregar-aqui {
+    color: #23B950;
+    font-family: Rubik;
+    font-size: 14px;
+    text-align: center;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+.contenedor-item {
+    border-top: 1px solid rgba(35, 185, 80, 0.08);
+    border-bottom: 1px solid rgba(35, 185, 80, 0.08);
+    padding-top: 20px;
+    padding-bottom: 20px;
+}
+
+/* toggle slides*/
+
+:host /deep/ .mat-slide-toggle.mat-checked:not(.mat-disabled) .mat-slide-toggle-bar {
+    background-color: #00cb75;
+}
+
+:host /deep/ .mat-slide-toggle.mat-checked:not(.mat-disabled) .mat-slide-toggle-thumb {
+    background-color: #00cb75;
+}
