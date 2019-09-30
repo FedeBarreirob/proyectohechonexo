@@ -1,4 +1,4 @@
-<div class="contenedor-detalle">
+<div class="contenedor-detalle" [ngClass]="{'hide': modoDetalleEditPerfilDesktop || modoDetalleEditTerceroDesktop}">
   <mat-progress-bar *ngIf="cargando" mode="indeterminate"></mat-progress-bar>
 
   <div fxLayout="row" fxLayoutAlign="space-between center" class="contenedor-titulo-filtro" fxLayoutGap="20px">
@@ -14,7 +14,8 @@
     <div fxFlex class="info-container">
 
       <app-info-perfil-edicion-desktop *ngIf="perfilBasico" [perfilBasico]="perfilBasico"
-        [nombreEntidad]="nombreEntidad"></app-info-perfil-edicion-desktop>
+        [nombreEntidad]="nombreEntidad" (edicionPerfil)="verDetalleEditPerfilDesktop()">
+      </app-info-perfil-edicion-desktop>
 
     </div>
 
@@ -52,7 +53,8 @@
   <div fxLayout="row" fxLayoutAlign="space-between start" fxLayoutGap="13px" class="movimiento-info-container">
 
     <div fxFlex class="info-container">
-      <app-terceros-lista-desktop *ngIf="perfilBasico" [perfilBasico]="perfilBasico"></app-terceros-lista-desktop>
+      <app-terceros-lista-desktop *ngIf="perfilBasico" [perfilBasico]="perfilBasico"
+        (edicionTercero)="verDetalleEditTerceroDesktop($event)"></app-terceros-lista-desktop>
     </div>
 
     <div fxFlex="250px"></div>
@@ -60,3 +62,17 @@
   </div>
 
 </div>
+
+<!-- Edicion del perfil -->
+<span [ngClass]="{'hide': !modoDetalleEditPerfilDesktop}">
+  <app-edita-tu-perfil-desktop (salir)="salirModoDetalleEditPerfilDesktop()"
+    [modoDetalleEditPerfilDesktop$]="modoDetalleEditPerfilDesktop$">
+  </app-edita-tu-perfil-desktop>
+</span>
+
+<!-- Edicion del tercero -->
+<span [ngClass]="{'hide': !modoDetalleEditTerceroDesktop}">
+  <app-acceso-terceros-edicion-desktop (salir)="salirModoDetalleEditTerceroDesktop()"
+    [modoDetalleEditTerceroDesktop$]="modoDetalleEditTerceroDesktop$">
+  </app-acceso-terceros-edicion-desktop>
+</span>

@@ -167,6 +167,7 @@ import { InfoPerfilEdicionDesktopComponent } from './components/usuarios-y-perfi
 import { SelectorUnidadMedidaComponent } from './components/usuarios-y-perfiles/selector-unidad-medida/selector-unidad-medida.component';
 import { TercerosListaDesktopComponent } from './components/usuarios-y-perfiles/terceros/terceros-lista-desktop/terceros-lista-desktop.component';
 import { EditaTuPerfilDesktopComponent } from './components/usuarios-y-perfiles/edita-tu-perfil-desktop/edita-tu-perfil-desktop.component';
+import { AccesoTercerosEdicionDesktopComponent } from './components/usuarios-y-perfiles/terceros/acceso-terceros-edicion-desktop/acceso-terceros-edicion-desktop.component';
 
 registerLocaleData(localeEsAr, 'es-AR');
 
@@ -305,7 +306,8 @@ export function tokenGetter() {
 		InfoPerfilEdicionDesktopComponent,
 		SelectorUnidadMedidaComponent,
 		TercerosListaDesktopComponent,
-		EditaTuPerfilDesktopComponent
+		EditaTuPerfilDesktopComponent,
+		AccesoTercerosEdicionDesktopComponent
 	],
 	imports: [
 		HttpClientModule,

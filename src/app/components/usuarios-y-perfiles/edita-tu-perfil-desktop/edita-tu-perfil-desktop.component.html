@@ -1,3 +1,64 @@
-<p>
-  edita-tu-perfil-desktop works!
-</p>
+<div *ngIf="perfilBasico" class="contenedor-detalle">
+  <mat-progress-bar *ngIf="guardando" mode="indeterminate"></mat-progress-bar>
+
+  <div fxLayout="row" fxLayoutAlign="start start" fxLayoutGap="5px" class="miga-container">
+    <div fxflex="nogrow">
+      <span (click)="cerrar()" class="boton-miga">Perfil</span>
+    </div>
+
+    <div fxflex="nogrow">
+      <mat-icon class="flecha">keyboard_arrow_right</mat-icon>
+    </div>
+
+    <div fxflex="nogrow">
+      <span class="numero-miga">Edita tu perfil</span>
+    </div>
+  </div>
+
+  <div fxLayout="row" fxLayoutAlign="space-between start" fxLayoutGap="13px" class="data-info-container">
+
+    <!--Columna info prod-->
+    <div fxFlex class="info-container">
+
+      <!--Datos personales-->
+      <form [formGroup]="formGroup">
+
+        <div fxLayout="row" fxLayoutAlign="start center">
+          <div fxFlex="100%" class="etiqueta-input">
+            EMPRESA
+          </div>
+        </div>
+
+        <div fxLayout="row" fxLayoutAlign="start center" class="contenedor-control">
+          <div fxFlex="100%">
+            <input class="input" matInput formControlName="nombre">
+          </div>
+        </div>
+
+        <div fxLayout="row" fxLayoutAlign="start center">
+          <div fxFlex="100%" class="etiqueta-input">
+            E-MAIL
+          </div>
+        </div>
+
+        <div fxLayout="row" fxLayoutAlign="start center" class="contenedor-control">
+          <div fxFlex="100%">
+            <input class="input" matInput formControlName="email" #inputEmail [value]="inputEmail.value.toLowerCase()">
+          </div>
+        </div>
+      </form>
+
+      <div fxLayout="row" fxLayoutAlign="center center">
+        <div fxFlex="100%" class="contenedor-boton">
+          <button class="boton-guardar" [disabled]="guardando" mat-raised-button (click)="guardar()">Guardar</button>
+        </div>
+      </div>
+
+    </div>
+
+    <!--fill-->
+    <div fxFlex="250px">
+    </div>
+
+  </div>
+</div>

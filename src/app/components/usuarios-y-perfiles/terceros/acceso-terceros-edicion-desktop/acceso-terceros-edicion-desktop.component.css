@@ -60,6 +60,16 @@
     width: 100%;
 }
 
+.select {
+    border: 1px solid rgba(45, 164, 66, 0.1);
+    border-radius: 4px;
+    color: #111111;
+    font-family: Rubik;
+    font-size: 14px;
+    padding: 10px;
+    width: 100%;
+}
+
 .contenedor-boton {
     margin-top: 12px;
 }

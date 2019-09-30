@@ -1,7 +1,6 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, EventEmitter, Output } from '@angular/core';
 import { PerfilBasico } from '../../../interfaces/perfiles/perfil-basico';
 import { MatDialog } from '@angular/material';
-import { InfoPerfilEdicionComponent } from '../info-perfil-edicion/info-perfil-edicion.component';
 
 @Component({
   selector: 'app-info-perfil-edicion-desktop',
@@ -16,6 +15,9 @@ export class InfoPerfilEdicionDesktopComponent implements OnInit {
   @Input()
   nombreEntidad: string;
 
+  @Output()
+  edicionPerfil: EventEmitter<any> = new EventEmitter<any>();
+
   avatar: string;
 
   constructor(public dialog: MatDialog) { }
@@ -25,14 +27,9 @@ export class InfoPerfilEdicionDesktopComponent implements OnInit {
   }
 
   /**
-	 * Abre el modal para editar el perfil
-	 */
+   * Muetra la edición de perfil
+   */
   editar() {
-    let dialogEditarRef = this.dialog.open(InfoPerfilEdicionComponent, {
-      maxWidth: '50vw',
-      width: '50%',
-      panelClass: 'modal-sin-padding',
-      data: this.perfilBasico
-    });
+    this.edicionPerfil.emit();
   }
 }

@@ -163,3 +163,7 @@
 .selector-cuenta-container {
     padding-top: 16px;
 }
+
+.hide {
+    display: none;
+}

@@ -1,4 +1,4 @@
-import { Component, OnInit, Input, OnDestroy } from '@angular/core';
+import { Component, OnInit, Input, OnDestroy, EventEmitter, Output } from '@angular/core';
 import { PerfilBasico } from '../../../../interfaces/perfiles/perfil-basico';
 import { TercerosService } from '../../../../services/acceso-terceros/terceros.service';
 import { TerceroBasico } from '../../../../interfaces/acceso-terceros/tercero-basico';
@@ -17,6 +17,9 @@ export class TercerosListaDesktopComponent implements OnInit, OnDestroy {
 
   @Input()
   perfilBasico: PerfilBasico;
+
+  @Output()
+  edicionTercero: EventEmitter<TerceroBasico> = new EventEmitter<TerceroBasico>();
 
   destroy$: Subject<any> = new Subject<any>();
   cargando: boolean = false;
@@ -115,14 +118,17 @@ export class TercerosListaDesktopComponent implements OnInit, OnDestroy {
    * @param tercero Tercero a ver o editar
    */
   verEditar(tercero: TerceroBasico) {
-    const dialogRef = this.dialog.open(AccesoTercerosEdicionComponent, {
+
+    this.edicionTercero.emit(tercero);
+
+    /*const dialogRef = this.dialog.open(AccesoTercerosEdicionComponent, {
       data: tercero,
       panelClass: 'modal-sin-padding'
-    });
+    });*/
 
-    dialogRef.afterClosed().subscribe(
+    /*dialogRef.afterClosed().subscribe(
       () => this.cargarListado(true)
-    );
+    );*/
   }
 
 	/**
@@ -152,13 +158,14 @@ export class TercerosListaDesktopComponent implements OnInit, OnDestroy {
    * Notifica que se debe mostrar un modal para agregar un tercero
    */
   agregarTercero() {
-    let dialorRef = this.dialog.open(AccesoTercerosEdicionComponent, {
+    this.edicionTercero.emit(null);
+    /*let dialorRef = this.dialog.open(AccesoTercerosEdicionComponent, {
       panelClass: 'modal-sin-padding'
     });
 
     dialorRef.afterClosed().subscribe(
       () => this.cargarListado(true)
-    );
+    );*/
   }
 
   // abre una notificacion
