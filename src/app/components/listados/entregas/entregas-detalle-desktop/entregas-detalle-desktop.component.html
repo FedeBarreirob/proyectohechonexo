@@ -38,15 +38,6 @@
           </div>
         </div>
 
-        <!--leyendas moneda y tipo de negocio-->
-        <div fxFlex="nogrow" *ngIf="contrato">
-          <div *ngIf="contrato.moneda != null" class="etiqueta">
-            {{contrato.moneda=='P' ? 'En pesos' : 'En dólares'}}
-          </div>
-          <div *ngIf="contrato.tipoNegocioDescripCorta != null" class="etiqueta">
-            {{contrato.tipoNegocioDescripCorta}}</div>
-        </div>
-
       </div>
 
       <!--Datos de la entrega-->

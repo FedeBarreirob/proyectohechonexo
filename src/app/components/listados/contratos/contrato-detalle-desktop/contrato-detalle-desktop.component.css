@@ -120,3 +120,9 @@
     font-weight: bold;
     margin-top: 10px;
 }
+
+.separador {
+    margin-top: 22px;
+    height: 1px;
+    border: 2px solid #F7F8F8;
+}

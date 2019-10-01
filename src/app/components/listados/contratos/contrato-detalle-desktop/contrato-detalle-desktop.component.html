@@ -1,6 +1,6 @@
 <div *ngIf="resumenContrato" class="contenedor-detalle">
   <mat-progress-bar *ngIf="cargando" mode="indeterminate"></mat-progress-bar>
-  
+
   <div fxLayout="row" fxLayoutAlign="start start" fxLayoutGap="5px" class="miga-container">
     <div fxflex="nogrow">
       <span (click)="cerrar()" class="boton-contratos">Contratos</span>
@@ -61,7 +61,7 @@
       <div fxLayout="row" fxLayoutAlign="space-between none" fxLayoutGap="10px">
         <div fxFlex="50%" class="indicador-contenedor">
           <app-contrato-indicador-grafico-porcentual texto="{{resumenContrato.kilosEntregados | kilosA: unidadMedida | number: '.0-0'}}
-          {{unidadMedida | kilosTextoA}} entregadas"
+          {{unidadMedida | kilosTextoA}} aplicadas"
             subtexto="{{(100 - resumenContrato.porcentajeKilosEntregados) | number: '.2'}}% entregas pendientes"
             [porcentual]="100 - resumenContrato.porcentajeKilosEntregados">
           </app-contrato-indicador-grafico-porcentual>
@@ -160,6 +160,10 @@
         <div fxFlex="50%" class="dato-apartado">{{boleto.encabezado.destino}}</div>
       </div>
 
+      <div fxLayout="row" fxLayoutAlign="space-between none" fxLayoutGap="10px">
+        <div fxFlex="100%" class="separador"></div>
+      </div>
+
       <!--Entregas-->
       <div fxLayout="row" fxLayoutAlign="space-between none">
         <div fxFlex="100%" class="titulo-apartados">ENTREGA</div>
@@ -173,6 +177,10 @@
       <div fxLayout="row" fxLayoutAlign="space-between none" fxLayoutGap="10px">
         <div fxFlex="50%" class="dato-apartado">{{resumenContrato.fechaEntregaDesde}}</div>
         <div fxFlex="50%" class="dato-apartado">{{resumenContrato.fechaEntregaHasta}}</div>
+      </div>
+
+      <div fxLayout="row" fxLayoutAlign="space-between none" fxLayoutGap="10px">
+        <div fxFlex="100%" class="separador"></div>
       </div>
 
       <!--Fijacion-->
@@ -199,6 +207,10 @@
       <div fxLayout="row" fxLayoutAlign="space-between none" fxLayoutGap="10px">
         <div fxFlex="50%" class="dato-apartado">{{boleto.encabezado.condicionDePago}}</div>
         <div fxFlex="50%" class="dato-apartado">{{resumenContrato.tipoDescripcion}}</div>
+      </div>
+
+      <div fxLayout="row" fxLayoutAlign="space-between none" fxLayoutGap="10px">
+        <div fxFlex="100%" class="separador"></div>
       </div>
 
       <!--Observaciones-->
