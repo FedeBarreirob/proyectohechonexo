@@ -18,6 +18,9 @@ export class EditaTuPerfilDesktopComponent implements OnInit {
   @Output()
   salir: EventEmitter<any> = new EventEmitter<any>();
 
+  @Output()
+  perfilActualizado: EventEmitter<any> = new EventEmitter<any>();
+
   perfilBasico: PerfilBasico;
   formGroup: FormGroup;
   guardando: boolean = false;
@@ -82,6 +85,7 @@ export class EditaTuPerfilDesktopComponent implements OnInit {
           this.openSnackBar(respuesta.mensaje);
 
           if (respuesta.exito == true) {
+            this.perfilActualizado.emit();
             this.cerrar();
           }
         },

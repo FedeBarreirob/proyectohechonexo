@@ -20,6 +20,9 @@ export class AccesoTercerosEdicionDesktopComponent implements OnInit {
   @Output()
   salir: EventEmitter<any> = new EventEmitter<any>();
 
+  @Output()
+  terceroActualizado: EventEmitter<any> = new EventEmitter<any>();
+
   guardando: boolean = false;
   terceroBasico: TerceroBasico;
   esRegistroNuevo: boolean;
@@ -127,6 +130,7 @@ export class AccesoTercerosEdicionDesktopComponent implements OnInit {
           this.openSnackBar(respuesta.mensaje);
         } else {
           this.openSnackBar(respuesta.mensaje);
+          this.terceroActualizado.emit();
           this.cerrar();
         }
 
@@ -149,6 +153,7 @@ export class AccesoTercerosEdicionDesktopComponent implements OnInit {
           this.openSnackBar(respuesta.mensaje);
         } else {
           this.openSnackBar(respuesta.mensaje);
+          this.terceroActualizado.emit();
           this.cerrar();
         }
 

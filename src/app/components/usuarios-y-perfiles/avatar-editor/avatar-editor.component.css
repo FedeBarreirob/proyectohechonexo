@@ -16,3 +16,12 @@
     border: 2px solid rgba(45, 164, 66, 0.1);
     border-radius: 4px;
 }
+
+.boton-upload-text {
+    position: absolute;
+    bottom: -35px;
+    right: -13px;
+    color: #2DA442;
+    font-family: Rubik;
+    font-size: 14px;
+}

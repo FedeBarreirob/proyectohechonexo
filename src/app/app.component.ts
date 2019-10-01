@@ -45,6 +45,11 @@ export class AppComponent {
 			"cedit",
 			this.domSanitizer.bypassSecurityTrustResourceUrl("assets/toolbar/edit.svg")
 		);
+
+		this.matIconRegistry.addSvgIcon(
+			"cdelete",
+			this.domSanitizer.bypassSecurityTrustResourceUrl("assets/toolbar/delete.svg")
+		);
 	}
 
 	/**

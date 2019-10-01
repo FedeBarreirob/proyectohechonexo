@@ -5,6 +5,7 @@ import { CuentaAlgService } from '../../../services/observers/cuentas-alg/cuenta
 import { EntidadAlg } from '../../../interfaces/perfiles/entidad-alg';
 import { Subject } from 'rxjs';
 import { TerceroBasico } from '../../../interfaces/acceso-terceros/tercero-basico';
+import { PerfilesService } from '../../../services/perfiles/perfiles.service';
 
 @Component({
   selector: 'app-informacion-de-perfil-desktop',
@@ -14,6 +15,8 @@ import { TerceroBasico } from '../../../interfaces/acceso-terceros/tercero-basic
 export class InformacionDePerfilDesktopComponent implements OnInit {
 
   cargando: boolean;
+  cargando$: Subject<boolean> = new Subject<boolean>();
+
   perfilBasico: PerfilBasico;
   nombreEntidad: string;
 
@@ -23,9 +26,12 @@ export class InformacionDePerfilDesktopComponent implements OnInit {
   modoDetalleEditTerceroDesktop: boolean = false;
   modoDetalleEditTerceroDesktop$: Subject<TerceroBasico> = new Subject<TerceroBasico>();
 
+  notificacionTerceroActualizado$: Subject<any> = new Subject<any>();
+
   constructor(
     private authenticationService: AuthenticationService,
-    private cuentaAlgService: CuentaAlgService
+    private cuentaAlgService: CuentaAlgService,
+    private perfilesService: PerfilesService
   ) { }
 
   ngOnInit() {
@@ -37,6 +43,8 @@ export class InformacionDePerfilDesktopComponent implements OnInit {
     this.cuentaAlgService.cuentaSeleccionada$.subscribe(
       cuentaAlg => this.cargarDatosCuentaSeleccionada(cuentaAlg)
     );
+
+    this.recargaDelPerfilSiEsActualizado();
   }
 
   /**
@@ -81,5 +89,27 @@ export class InformacionDePerfilDesktopComponent implements OnInit {
    */
   salirModoDetalleEditTerceroDesktop() {
     this.modoDetalleEditTerceroDesktop = false;
+  }
+
+  /**
+   * Función encargada de recargar los datos del perfil
+   */
+  recargaDelPerfilSiEsActualizado() {
+    this.cargando$.next(true);
+    this.perfilesService.reCargarPerfilLogueado().subscribe(
+      () => {
+        this.cargando$.next(false);
+      },
+      () => {
+        this.cargando$.next(false);
+      }
+    );
+  }
+
+  /**
+   * Notifica que un tercero ha sido actualizado
+   */
+  notificarTerceroActualizado() {
+    this.notificacionTerceroActualizado$.next();
   }
 }

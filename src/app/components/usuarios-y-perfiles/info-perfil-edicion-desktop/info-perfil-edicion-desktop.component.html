@@ -7,7 +7,8 @@
 
       <!--Avatar-->
       <div fxFlex="96px">
-        <app-avatar-editor [(avatar)]="avatar"></app-avatar-editor>
+        <app-avatar-editor [(avatar)]="avatar" [indicadorCambiarFotoDebajo]="true"
+          (avatarChange)="actualizarAvatar($event)"></app-avatar-editor>
       </div>
 
       <!--Nombre y email-->
@@ -58,7 +59,8 @@
             CONTRASEÑA
           </div>
 
-          <div fxFlex="nogrow" class="dato-apartado">
+          <div fxFlex="nogrow" class="dato-apartado password" (click)="cambiarPassword()"
+            matTooltip="Haga click aquí para cambiar su contraseña">
             *********
           </div>
 

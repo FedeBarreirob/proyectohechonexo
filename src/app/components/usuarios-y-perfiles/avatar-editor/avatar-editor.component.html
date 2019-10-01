@@ -1,8 +1,13 @@
 <div class="contenedor-imagen">
   <img [src]="avatar ? avatar : null || 'assets/perfil/sin-foto.jpg'" alt="Avatar" class="imagen" />
 
-  <button mat-icon-button (click)="fileInput.click()" class="boton-upload">
+  <button mat-icon-button (click)="fileInput.click()" class="boton-upload" *ngIf="!indicadorCambiarFotoDebajo">
     <img src="assets/varios/agregar.png" />
+    <input #fileInput type='file' (change)="onSelectAvatar($event)" style="display:none;" />
+  </button>
+
+  <button mat-button (click)="fileInput.click()" class="boton-upload-text" *ngIf="indicadorCambiarFotoDebajo">
+    Cambiar foto
     <input #fileInput type='file' (change)="onSelectAvatar($event)" style="display:none;" />
   </button>
 </div>

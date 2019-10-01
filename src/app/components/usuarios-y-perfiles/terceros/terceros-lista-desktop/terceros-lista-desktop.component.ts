@@ -18,6 +18,9 @@ export class TercerosListaDesktopComponent implements OnInit, OnDestroy {
   @Input()
   perfilBasico: PerfilBasico;
 
+  @Input()
+  notificacionTerceroActualizado$: Subject<any>;
+
   @Output()
   edicionTercero: EventEmitter<TerceroBasico> = new EventEmitter<TerceroBasico>();
 
@@ -42,6 +45,10 @@ export class TercerosListaDesktopComponent implements OnInit, OnDestroy {
   ngOnInit() {
     this.filtro.filtroId = this.perfilBasico.informacionPersonal.id;
     this.cargarListado(true);
+
+    this.notificacionTerceroActualizado$.subscribe(
+      () => this.cargarListado(true)
+    );
   }
 
   ngOnDestroy(): void {
@@ -173,5 +180,36 @@ export class TercerosListaDesktopComponent implements OnInit, OnDestroy {
     this.snackBar.open(message, null, {
       duration: 2000,
     });
+  }
+
+  /**
+   * Borra un tercero
+   * @param tercero 
+   */
+  borrar(tercero: TerceroBasico) {
+    if (!this.cargando) {
+      let mensaje = `¿Está seguro de borrar el tercero ${tercero.credencial.username}?`;
+
+      if (confirm(mensaje)) {
+
+        this.cargando = true;
+
+        this.terceroService.eliminarTercero(
+          tercero.id
+        ).subscribe(
+          respuesta => {
+            this.cargando = false;
+            this.openSnackBar(respuesta.mensaje);
+            if (respuesta.exito == true) {
+              this.cargarListado(true);
+            }
+          },
+          error => {
+            console.log(error);
+            this.cargando = false;
+          }
+        );
+      }
+    }
   }
 }

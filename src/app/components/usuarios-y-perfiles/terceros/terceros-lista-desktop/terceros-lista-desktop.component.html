@@ -21,9 +21,15 @@
       </mat-slide-toggle>
     </div>
 
-    <div fxFlex="70px" align="end">
-      <button mat-icon-button (click)="verEditar(tercero)">
+    <div fxFlex="40px" align="end">
+      <button mat-icon-button (click)="verEditar(tercero)" matTooltip="Editar">
         <mat-icon svgIcon="cedit"></mat-icon>
+      </button>
+    </div>
+
+    <div fxFlex="40px" align="end">
+      <button mat-icon-button (click)="borrar(tercero)" matTooltip="Borrar">
+        <mat-icon svgIcon="cdelete"></mat-icon>
       </button>
     </div>
 

@@ -14,7 +14,8 @@
     <div fxFlex class="info-container">
 
       <app-info-perfil-edicion-desktop *ngIf="perfilBasico" [perfilBasico]="perfilBasico"
-        [nombreEntidad]="nombreEntidad" (edicionPerfil)="verDetalleEditPerfilDesktop()">
+        [nombreEntidad]="nombreEntidad" (edicionPerfil)="verDetalleEditPerfilDesktop()"
+        (perfilActualizado)="recargaDelPerfilSiEsActualizado()">
       </app-info-perfil-edicion-desktop>
 
     </div>
@@ -54,7 +55,8 @@
 
     <div fxFlex class="info-container">
       <app-terceros-lista-desktop *ngIf="perfilBasico" [perfilBasico]="perfilBasico"
-        (edicionTercero)="verDetalleEditTerceroDesktop($event)"></app-terceros-lista-desktop>
+        (edicionTercero)="verDetalleEditTerceroDesktop($event)"
+        [notificacionTerceroActualizado$]="notificacionTerceroActualizado$"></app-terceros-lista-desktop>
     </div>
 
     <div fxFlex="250px"></div>
@@ -66,13 +68,17 @@
 <!-- Edicion del perfil -->
 <span [ngClass]="{'hide': !modoDetalleEditPerfilDesktop}">
   <app-edita-tu-perfil-desktop (salir)="salirModoDetalleEditPerfilDesktop()"
-    [modoDetalleEditPerfilDesktop$]="modoDetalleEditPerfilDesktop$">
+    [modoDetalleEditPerfilDesktop$]="modoDetalleEditPerfilDesktop$"
+    (perfilActualizado)="recargaDelPerfilSiEsActualizado()">
   </app-edita-tu-perfil-desktop>
 </span>
 
 <!-- Edicion del tercero -->
 <span [ngClass]="{'hide': !modoDetalleEditTerceroDesktop}">
   <app-acceso-terceros-edicion-desktop (salir)="salirModoDetalleEditTerceroDesktop()"
-    [modoDetalleEditTerceroDesktop$]="modoDetalleEditTerceroDesktop$">
+    [modoDetalleEditTerceroDesktop$]="modoDetalleEditTerceroDesktop$"
+    (terceroActualizado)="notificarTerceroActualizado()">
   </app-acceso-terceros-edicion-desktop>
 </span>
+
+<app-loading [cargando$]="cargando$"></app-loading>

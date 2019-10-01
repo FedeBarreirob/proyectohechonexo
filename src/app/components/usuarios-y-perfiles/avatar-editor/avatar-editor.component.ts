@@ -14,6 +14,9 @@ export class AvatarEditorComponent implements OnInit {
   @Output()
   avatarChange: EventEmitter<string> = new EventEmitter<string>();
 
+  @Input()
+  indicadorCambiarFotoDebajo: boolean = false;
+
   constructor(
     private snackBar: MatSnackBar
   ) { }
@@ -48,7 +51,7 @@ export class AvatarEditorComponent implements OnInit {
       }
 
       // si la imagen supera los 100Kb error
-      if (fileAvatar.size > 102400) {
+      if (fileAvatar.size > 512000) {
         return false;
       }
 
