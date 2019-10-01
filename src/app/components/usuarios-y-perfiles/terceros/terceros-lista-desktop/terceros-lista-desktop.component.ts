@@ -36,6 +36,8 @@ export class TercerosListaDesktopComponent implements OnInit, OnDestroy {
     filtroId: 0
   };
 
+  infoColaboradores = "Un colaborador es una persona que puede tener acceso a tu cuenta para ver detalles de información. Crea un nombre de usuario y contraseña y compartíselo para que pueda entrar a la plataforma.";
+
   constructor(
     private terceroService: TercerosService,
     private dialog: MatDialog,
