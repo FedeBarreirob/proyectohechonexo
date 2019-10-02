@@ -50,7 +50,7 @@
 		<mat-nav-list *ngIf="authService.esLogueado">
 
 			<div *ngFor="let link of links">
-				<app-link-menu [link]="link"></app-link-menu>
+				<app-link-menu [link]="link" *ngIf="!(link.ocultarDesktop == true && !esCelular)"></app-link-menu>
 			</div>
 
 		</mat-nav-list>

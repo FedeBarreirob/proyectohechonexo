@@ -3,5 +3,6 @@ export interface ItemLinkMenu {
     rutaLink: string,
     imagen: string,
     imagenActiva: string,
-    permitido: boolean
+    permitido: boolean,
+    ocultarDesktop: boolean
 }

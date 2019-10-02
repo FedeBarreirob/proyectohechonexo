@@ -105,98 +105,112 @@ export class MainNavComponent implements OnInit, OnDestroy {
 				rutaLink: "/dashboard",
 				imagen: "assets/sidebar/casa.png",
 				imagenActiva: "assets/sidebar/casa-hot.png",
-				permitido: true
+				permitido: true,
+				ocultarDesktop: false
 			},
 			{
 				nombre: "Contratos",
 				rutaLink: "/contratos",
 				imagen: "assets/sidebar/contratos.png",
 				imagenActiva: "assets/sidebar/contratos-hot.png",
-				permitido: true
+				permitido: true,
+				ocultarDesktop: false
 			},
 			{
 				nombre: "Entregas",
 				rutaLink: "/entregas",
 				imagen: "assets/sidebar/truck.png",
 				imagenActiva: "assets/sidebar/truck-hot.png",
-				permitido: true
+				permitido: true,
+				ocultarDesktop: false
 			},
 			{
 				nombre: "Ventas",
 				rutaLink: "/ventas",
 				imagen: "assets/sidebar/ventas.png",
 				imagenActiva: "assets/sidebar/ventas-hot.png",
-				permitido: true
+				permitido: true,
+				ocultarDesktop: false
 			},
 			/*{
 				nombre: "Otros movimientos",
 				rutaLink: "/otros-movimientos",
 				imagen: "assets/sidebar/casa.png",
 				imagenActiva: "assets/sidebar/casa-hot.png",
-				permitido: true
+				permitido: true,
+				ocultarDesktop: false
 			},*/
 			{
 				nombre: "Cuenta",
 				rutaLink: "/ctacte",
 				imagen: "assets/sidebar/cta-cte.png",
 				imagenActiva: "assets/sidebar/casa-hot.png",
-				permitido: true
+				permitido: true,
+				ocultarDesktop: false
 			},
 			/*{
 				nombre: "Merc. Pend. Entregar",
 				rutaLink: "/mercaderia-pendiente-entregar",
 				imagen: "assets/sidebar/casa.png",
 				imagenActiva: "assets/sidebar/casa-hot.png",
-				permitido: true
+				permitido: true,
+				ocultarDesktop: false
 			},
 			{
 				nombre: "Comprob. Pend. Facturar",
 				rutaLink: "/comprobantes-pendientes-facturar",
 				imagen: "assets/sidebar/casa.png",
 				imagenActiva: "assets/sidebar/casa-hot.png",
-				permitido: true
+				permitido: true,
+				ocultarDesktop: false
 			},*/
 			{
 				nombre: "Administrador de cuentas",
 				rutaLink: "/administrador-de-cuentas",
 				imagen: "assets/sidebar/perfil.png",
 				imagenActiva: "assets/sidebar/perfil-hot.png",
-				permitido: this.authService.esAdmin || this.authService.esRol('SUB_ADMINISTRADOR') || this.authService.esRol('COMERCIAL')
+				permitido: this.authService.esAdmin || this.authService.esRol('SUB_ADMINISTRADOR') || this.authService.esRol('COMERCIAL'),
+				ocultarDesktop: false
 			},
 			/*{
 				nombre: "Accesos a terceros",
 				rutaLink: "/acceso-terceros",
 				imagen: "assets/sidebar/casa.png",
 				imagenActiva: "assets/sidebar/casa-hot.png",
-				permitido: this.authService.esAdmin || this.authService.esRol('PRODUCTOR')
+				permitido: this.authService.esAdmin || this.authService.esRol('PRODUCTOR'),
+				ocultarDesktop: false
 			},*/
 			{
 				nombre: "Comprobantes",
 				rutaLink: "/archivo-de-comprobantes",
 				imagen: "assets/sidebar/folder.png",
 				imagenActiva: "assets/sidebar/folder-hot.png",
-				permitido: true
+				permitido: true,
+				ocultarDesktop: false
 			},
 			{
 				nombre: "Reportes",
 				rutaLink: "/reportes",
 				imagen: "assets/sidebar/chart.png",
 				imagenActiva: "assets/sidebar/chart-hot.png",
-				permitido: true
+				permitido: true,
+				ocultarDesktop: false
 			},
 			{
 				nombre: "Perfil",
 				rutaLink: "/informacion-de-perfil",
 				imagen: "assets/sidebar/perfil.png",
 				imagenActiva: "assets/sidebar/perfil-hot.png",
-				permitido: true
+				permitido: true,
+				ocultarDesktop: true
 			},
 			{
 				nombre: "Cerrar Sersión",
 				rutaLink: "/login",
 				imagen: "assets/sidebar/close-session.png",
 				imagenActiva: "assets/sidebar/close-session-hot.png",
-				permitido: true
+				permitido: true,
+				ocultarDesktop: false
 			}
 		];
 	}
