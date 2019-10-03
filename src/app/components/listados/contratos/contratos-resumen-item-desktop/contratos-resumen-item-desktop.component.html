@@ -76,8 +76,8 @@
   </div>
 
   <!--Pesificado-->
-  <div fxFlex="147px" [matTooltip]="tooltipPesificaciones">
-    <div fxLayout="row" fxLayoutAlign="start center">
+  <div fxFlex="110px" [matTooltip]="tooltipPesificaciones">
+    <div fxLayout="row" fxLayoutAlign="end center">
       <div fxFlex="nogrow" class="porcentual-text">
         {{resumen.porcentajeKilosPesificados | number: '.2'}}%
       </div>
@@ -90,8 +90,8 @@
   </div>
 
   <!--Liquidado-->
-  <div fxFlex="147px" [matTooltip]="tooltipLiquidaciones">
-    <div fxLayout="row" fxLayoutAlign="start center">
+  <div fxFlex="110px" [matTooltip]="tooltipLiquidaciones">
+    <div fxLayout="row" fxLayoutAlign="end center">
       <div fxFlex="nogrow" class="porcentual-text">
         {{resumen.porcentajeKilosFacturados | number: '.2'}}%
       </div>
@@ -99,6 +99,20 @@
       <div fxFlex="48px"
         [ngClass]="{'barra-progreso-alert': resumen.porcentajeKilosFacturados < 100, 'barra-progreso-ok': resumen.porcentajeKilosFacturados == 100}">
         <mat-progress-bar mode="determinate" [value]="resumen.porcentajeKilosFacturados"></mat-progress-bar>
+      </div>
+    </div>
+  </div>
+
+  <!--Pagado-->
+  <div fxFlex="110px" [matTooltip]="tooltipPagados">
+    <div fxLayout="row" fxLayoutAlign="end center">
+      <div fxFlex="nogrow" class="porcentual-text">
+        {{resumen.porcentajeKilosPagados | number: '.2'}}%
+      </div>
+
+      <div fxFlex="48px"
+        [ngClass]="{'barra-progreso-alert': resumen.porcentajeKilosPagados < 100, 'barra-progreso-ok': resumen.porcentajeKilosPagados == 100}">
+        <mat-progress-bar mode="determinate" [value]="resumen.porcentajeKilosPagados"></mat-progress-bar>
       </div>
     </div>
   </div>

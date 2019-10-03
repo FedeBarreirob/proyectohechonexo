@@ -85,10 +85,10 @@
           </app-contrato-indicador-grafico-porcentual>
         </div>
         <div fxFlex="50%" class="indicador-contenedor">
-          <app-contrato-indicador-grafico-porcentual texto="{{resumenContrato.kilosFacturados | kilosA: unidadMedida | number: '.0-0'}}
+          <app-contrato-indicador-grafico-porcentual texto="{{resumenContrato.kilosPagados | kilosA: unidadMedida | number: '.0-0'}}
               {{unidadMedida | kilosTextoA}} pagadas"
-            subtexto="{{(100 - resumenContrato.porcentajeKilosFacturados) | number: '.2'}}% pagos pendientes"
-            [porcentual]="100 - resumenContrato.porcentajeKilosFacturados">
+            subtexto="{{(100 - resumenContrato.porcentajeKilosPagados) | number: '.2'}}% pagos pendientes"
+            [porcentual]="100 - resumenContrato.porcentajeKilosPagados">
           </app-contrato-indicador-grafico-porcentual>
         </div>
       </div>

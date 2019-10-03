@@ -71,4 +71,15 @@ export class ContratosResumenItemDesktopComponent implements OnInit {
       return "No tenés nada pendiente de liquidar";
     }
   }
+
+  /**
+   * Devuelve el texto para el tooltips de pagados
+   */
+  get tooltipPagados() {
+    if (this.resumen.porcentajeKilosPagados != 100) {
+      return `Tenés ${parseFloat(this.kilosApipe.transform(this.resumen.kilosPactados - this.resumen.kilosPagados, this.unidadMedida)).toFixed(0)} ${this.kilosTextoApipe.transform(this.resumen.pendienteFacturar, this.unidadMedida)} pendientes`;
+    } else {
+      return "No tenés pagos pendientes";
+    }
+  }
 }

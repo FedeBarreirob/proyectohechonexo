@@ -15,6 +15,7 @@ export interface ResumenContratoCompraVenta {
     kilosPendientesEntregar?: number,
     kilosFijados?: number,
     kilosAFijar?: number,
+    kilosPagados?: number,
     tipoDescripcion?: string,
     contratoId?: number,
     plazosFijacion?: Array<PlazoFijacion>,
@@ -31,5 +32,6 @@ export interface ResumenContratoCompraVenta {
     fechaVencimientoVenta?: Date,
     porcentajeKilosPesificados?: number,
     porcentajeKilosFacturados?: number,
+    porcentajeKilosPagados?: number,
     pendienteFacturar?: number
 }
