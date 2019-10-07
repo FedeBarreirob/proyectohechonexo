@@ -9,6 +9,7 @@ import { DeviceDetectorService } from 'ngx-device-detector';
 import { ContratosDetalleComponent } from '../contratos-detalle/contratos-detalle.component';
 import { ResumenContratoCompraVenta } from '../../../../interfaces/contratos/resumen-contrato-compra-venta';
 import { takeUntil } from 'rxjs/operators';
+import { FiltroPersonalizadoParaFiltroCereal } from '../../../../interfaces/varios/filtro-personalizado-para-filtro-cereal';
 
 @Component({
   selector: 'app-contratos',
@@ -30,6 +31,20 @@ export class ContratosComponent implements OnInit, OnDestroy, AfterViewInit {
 
   modoDetalleDesktop: boolean = false;
   modoDetalleDesktopMovimiento$: Subject<ResumenContratoCompraVenta> = new Subject<ResumenContratoCompraVenta>();
+
+  // filtro a utilizar en la barra de filtros de cereales
+  filtroPersonalizado: Array<FiltroPersonalizadoParaFiltroCereal> = [
+    {
+      descripcion: "Pendientes",
+      filtroAtributo: "cumplido",
+      value: false
+    },
+    {
+      descripcion: "Cumplidos",
+      filtroAtributo: "cumplido",
+      value: true
+    }
+  ];
 
   constructor(
     private contratosService: ContratosService,

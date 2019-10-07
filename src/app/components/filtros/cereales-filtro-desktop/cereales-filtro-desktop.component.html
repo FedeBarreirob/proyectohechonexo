@@ -1,4 +1,4 @@
-<div fxLayout="row" fxLayoutAlign="space-between center" *ngIf="filtrosEspecieCosecha && cuenta">
+<div fxLayout="row" fxLayoutAlign="end center" *ngIf="filtrosEspecieCosecha && cuenta" fxLayoutGap="5px">
 
   <!--Especies-->
   <div fxFlex="nogrow" class="boton-container">
@@ -37,8 +37,21 @@
   </div>
 
   <!--Personalizado-->
-  <div fxFlex="nogrow" class="boton-container">
-
+  <div fxFlex="nogrow" class="boton-container" *ngIf="filtroPersonalizado && filtroPersonalizado.length > 0">
+    <button mat-button [matMenuTriggerFor]="menuPersonalizado" [disabled]="disabled">
+      {{ leyendaFiltroPersonalizado() }}<mat-icon>expand_more</mat-icon>
+    </button>
+    <mat-menu #menuPersonalizado="matMenu">
+      <button mat-menu-item (click)="seleccionarOpcionPersonalizada(null)"
+        [ngClass]="{'activo': filtroPersonalizadoSeleccionado === null, 'inactivo': filtroPersonalizadoSeleccionado !== null }">
+        {{ filtroPersonalizadoLabelDefault }}
+      </button>
+      <button mat-menu-item *ngFor="let unFiltro of filtroPersonalizado"
+        (click)="seleccionarOpcionPersonalizada(unFiltro)"
+        [ngClass]="{'activo': filtroPersonalizadoSeleccionado === unFiltro, 'inactivo': filtroPersonalizadoSeleccionado !== unFiltro }">
+        {{unFiltro.descripcion}}
+      </button>
+    </mat-menu>
   </div>
 
   <!--Fecha desde-->

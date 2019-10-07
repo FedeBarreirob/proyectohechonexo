@@ -27,7 +27,8 @@
 
 		<div fxFlex>
 			<app-cereales-filtro-desktop [filtrosEspecieCosecha]="filtrosEspecieCosecha" [cuenta]="cuenta"
-				(botonAplicar)="cargarListado($event)" [disabled]="(cargando$ | async) || cargandoFiltros">
+				(botonAplicar)="cargarListado($event)" [disabled]="(cargando$ | async) || cargandoFiltros"
+				[filtroPersonalizado]="filtroPersonalizado">
 			</app-cereales-filtro-desktop>
 		</div>
 

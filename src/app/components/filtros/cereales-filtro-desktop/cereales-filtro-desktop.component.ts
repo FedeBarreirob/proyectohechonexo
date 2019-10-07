@@ -3,6 +3,7 @@ import { FiltroEspecieCosecha } from '../../../interfaces/varios/filtro-especie-
 import { Especie } from '../../../interfaces/varios/especie';
 import { Cosecha } from '../../../interfaces/varios/cosecha';
 import { DatePipe } from '@angular/common';
+import { FiltroPersonalizadoParaFiltroCereal } from '../../../interfaces/varios/filtro-personalizado-para-filtro-cereal';
 
 @Component({
   selector: 'app-cereales-filtro-desktop',
@@ -16,6 +17,12 @@ export class CerealesFiltroDesktopComponent implements OnInit {
   filtrosEspecieCosecha: FiltroEspecieCosecha;
 
   @Input()
+  filtroPersonalizado: Array<FiltroPersonalizadoParaFiltroCereal>;
+
+  @Input()
+  filtroPersonalizadoLabelDefault: string = "Todos";
+
+  @Input()
   cuenta: any;
 
   @Input()
@@ -24,10 +31,11 @@ export class CerealesFiltroDesktopComponent implements OnInit {
   @Output()
   botonAplicar: EventEmitter<any> = new EventEmitter<any>();
 
-  public especie: Especie = null;
-  public cosecha: Cosecha = null;
-  public fechaDesde: string;
-  public fechaHasta: string;
+  especie: Especie = null;
+  cosecha: Cosecha = null;
+  fechaDesde: string;
+  fechaHasta: string;
+  filtroPersonalizadoSeleccionado: FiltroPersonalizadoParaFiltroCereal = null;
 
   constructor(private datePipe: DatePipe) { }
 
@@ -89,9 +97,32 @@ export class CerealesFiltroDesktopComponent implements OnInit {
         cosecha: (this.cosecha) ? this.cosecha.cosecha : null
       }
 
+      if (this.filtroPersonalizadoSeleccionado) {
+        filtro[this.filtroPersonalizadoSeleccionado.filtroAtributo] = this.filtroPersonalizadoSeleccionado.value
+      }
+
       this.botonAplicar.emit(filtro);
     } else {
       this.botonAplicar.emit(null);
     }
+  }
+
+  /**
+   * Función que muestra 
+   */
+  leyendaFiltroPersonalizado(): string {
+    if (this.filtroPersonalizadoSeleccionado == null) {
+      return this.filtroPersonalizadoLabelDefault;
+    } else {
+      return this.filtroPersonalizadoSeleccionado.descripcion;
+    }
+  }
+
+  /**
+   * Función encargada de seleccionar una opción personalizada dada
+   * @param opcionPersonalizada 
+   */
+  seleccionarOpcionPersonalizada(opcionPersonalizada: FiltroPersonalizadoParaFiltroCereal) {
+    this.filtroPersonalizadoSeleccionado = opcionPersonalizada;
   }
 }

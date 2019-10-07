@@ -11,6 +11,7 @@ import { CuentaAlgService } from '../../../../services/observers/cuentas-alg/cue
 import { VentasDetalleComponent } from '../ventas-detalle/ventas-detalle.component';
 import { FijacionVenta } from '../../../../interfaces/ventas/fijacion-venta';
 import { takeUntil } from 'rxjs/operators';
+import { FiltroPersonalizadoParaFiltroCereal } from '../../../../interfaces/varios/filtro-personalizado-para-filtro-cereal';
 
 @Component({
   selector: 'app-ventas',
@@ -33,6 +34,20 @@ export class VentasComponent implements OnInit, OnDestroy, AfterViewInit {
 
   modoDetalleDesktop: boolean = false;
   modoDetalleDesktopMovimiento$: Subject<MovimientoVenta> = new Subject<MovimientoVenta>();
+
+  // filtro a utilizar en la barra de filtros de cereales
+  filtroPersonalizado: Array<FiltroPersonalizadoParaFiltroCereal> = [
+    {
+      descripcion: "Pesificado",
+      filtroAtributo: "pesificado",
+      value: true
+    },
+    {
+      descripcion: "Pendientes de pesificar",
+      filtroAtributo: "pesificado",
+      value: false
+    }
+  ];
 
   constructor(
     private ventasService: VentasService,
