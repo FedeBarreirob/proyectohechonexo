@@ -5,6 +5,7 @@ import { InfoCtaCte } from '../../../../enums/info-cta-cte.enum';
 import { Subject } from 'rxjs';
 import { CtacteAplicadaService } from '../../../../services/ctacte-aplicada/ctacte-aplicada.service';
 import { takeUntil } from 'rxjs/operators';
+import { FiltroPersonalizadoParaFiltroCtaCte } from '../../../../interfaces/varios/filtro-personalizado-para-filtro-cta-cte';
 
 @Component({
   selector: 'app-cuenta-corriente-aplicada-lista-desktop',
@@ -25,11 +26,33 @@ export class CuentaCorrienteAplicadaListaDesktopComponent implements OnInit, OnD
   cargando: boolean = false;
   destroy$: Subject<any> = new Subject<any>();
 
-  // filtros extendidos
-  aCobrar: boolean = false;
-  aPagar: boolean = false;
-  vencido: boolean = false;
-  AVencer: boolean = false;
+  // filtro a utilizar en la barra de filtros de cereales
+  filtroPersonalizado: Array<FiltroPersonalizadoParaFiltroCtaCte> = [
+    {
+      descripcion: "A cobrar",
+      filtroAtributo: "aCobrar",
+      checkbox: true,
+      value: null
+    },
+    {
+      descripcion: "A pagar",
+      filtroAtributo: "aPagar",
+      checkbox: true,
+      value: null
+    },
+    {
+      descripcion: "Vencido",
+      filtroAtributo: "vencido",
+      checkbox: true,
+      value: null
+    },
+    {
+      descripcion: "A Vencer",
+      filtroAtributo: "AVencer",
+      checkbox: true,
+      value: null
+    }
+  ];
 
   constructor(private ctacteAplicadaService: CtacteAplicadaService) { }
 
@@ -64,10 +87,6 @@ export class CuentaCorrienteAplicadaListaDesktopComponent implements OnInit, OnD
       filtroPaginado.totales = true;
       filtroPaginado.paginado = false;
       filtroPaginado.ordenado = false;
-      filtroPaginado.aCobrar = this.aCobrar;
-      filtroPaginado.aPagar = this.aPagar;
-      filtroPaginado.vencido = this.vencido;
-      filtroPaginado.AVencer = this.AVencer;
 
       this.ctacteAplicadaService.listadoCtaCte(filtroPaginado)
         .pipe(takeUntil(this.destroy$))

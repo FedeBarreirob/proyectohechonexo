@@ -14,8 +14,28 @@
   </div>
 
   <!--Personalizado-->
-  <div fxFlex="nogrow" class="boton-container">
+  <div fxFlex="nogrow" class="boton-container" *ngIf="filtroPersonalizado && filtroPersonalizado.length > 0">
+    <button mat-button [matMenuTriggerFor]="menuPersonalizado" [disabled]="disabled">
+      {{ leyendaFiltroPersonalizado() }}<mat-icon>expand_more</mat-icon>
+    </button>
+    <mat-menu #menuPersonalizado="matMenu">
+      <button mat-menu-item (click)="seleccionarOpcionPersonalizada(null)"
+        [ngClass]="{'activo': filtroPersonalizadoSeleccionado === null, 'inactivo': filtroPersonalizadoSeleccionado !== null }">
+        {{ filtroPersonalizadoLabelDefault }}
+      </button>
 
+      <span *ngFor="let unFiltro of filtroPersonalizado">
+        <mat-checkbox *ngIf="unFiltro.checkbox" class="mat-menu-item"
+          (click)="$event.stopPropagation()" (change)="seleccionarOpcionPersonalizadaCheckbox($event, unFiltro);">{{unFiltro.descripcion}}
+        </mat-checkbox>
+
+        <button mat-menu-item *ngIf="!unFiltro.checkbox" (click)="seleccionarOpcionPersonalizada(unFiltro)"
+          [ngClass]="{'activo': filtroPersonalizadoSeleccionado === unFiltro, 'inactivo': filtroPersonalizadoSeleccionado !== unFiltro }">
+          {{unFiltro.descripcion}}
+        </button>
+      </span>
+
+    </mat-menu>
   </div>
 
   <!--Fecha desde-->

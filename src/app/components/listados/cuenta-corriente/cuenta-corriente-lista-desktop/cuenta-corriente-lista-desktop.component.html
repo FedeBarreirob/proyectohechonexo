@@ -7,7 +7,7 @@
 
   <div fxFlex>
     <app-cta-cte-filtro-desktop [cuenta]="cuenta" [infoCtaCteActivo]="infoCtaCte.CUENTA_CORRIENTE"
-      (botonAplicar)="aplicar($event)"></app-cta-cte-filtro-desktop>
+      [filtroPersonalizado]="filtroPersonalizado" (botonAplicar)="aplicar($event)"></app-cta-cte-filtro-desktop>
   </div>
 
 </div>
@@ -20,7 +20,8 @@
 <!--Listado-->
 <div class="contenedor-listado" fxLayout="column" fxLayoutWrap fxLayoutAlign="none">
 
-  <app-cuenta-corriente-item-desktop *ngFor="let movimiento of listado" [movimiento]="movimiento" (click)="verDetalle(movimiento)">
+  <app-cuenta-corriente-item-desktop *ngFor="let movimiento of listado" [movimiento]="movimiento"
+    (click)="verDetalle(movimiento)">
   </app-cuenta-corriente-item-desktop>
 
   <!--Spinner-->

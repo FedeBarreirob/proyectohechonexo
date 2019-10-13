@@ -5,6 +5,7 @@ import { MovimientoCtaCte } from '../../../../interfaces/ctacte/listado.ctacte';
 import { Subject } from 'rxjs';
 import { CtacteService } from '../../../../services/ctacte/ctacte.service';
 import { takeUntil } from 'rxjs/operators';
+import { FiltroPersonalizadoParaFiltroCtaCte } from 'src/app/interfaces/varios/filtro-personalizado-para-filtro-cta-cte';
 
 @Component({
   selector: 'app-cuenta-corriente-lista-desktop',
@@ -25,11 +26,33 @@ export class CuentaCorrienteListaDesktopComponent implements OnInit, OnDestroy {
   cargando: boolean = false;
   destroy$: Subject<any> = new Subject<any>();
 
-  // filtros extendidos
-  aCobrar: boolean = false;
-  aPagar: boolean = false;
-  vencido: boolean = false;
-  AVencer: boolean = false;
+  // filtro a utilizar en la barra de filtros de cereales
+  filtroPersonalizado: Array<FiltroPersonalizadoParaFiltroCtaCte> = [
+    {
+      descripcion: "A cobrar",
+      filtroAtributo: "aCobrar",
+      checkbox: true,
+      value: null
+    },
+    {
+      descripcion: "A pagar",
+      filtroAtributo: "aPagar",
+      checkbox: true,
+      value: null
+    },
+    {
+      descripcion: "Vencido",
+      filtroAtributo: "vencido",
+      checkbox: true,
+      value: null
+    },
+    {
+      descripcion: "A Vencer",
+      filtroAtributo: "AVencer",
+      checkbox: true,
+      value: null
+    }
+  ];
 
   constructor(private ctacteService: CtacteService) { }
 
@@ -64,10 +87,6 @@ export class CuentaCorrienteListaDesktopComponent implements OnInit, OnDestroy {
       filtroPaginado.totales = true;
       filtroPaginado.paginado = false;
       filtroPaginado.ordenado = false;
-      filtroPaginado.aCobrar = this.aCobrar;
-      filtroPaginado.aPagar = this.aPagar;
-      filtroPaginado.vencido = this.vencido;
-      filtroPaginado.AVencer = this.AVencer;
 
       this.ctacteService.listadoCtaCte(filtroPaginado)
         .pipe(takeUntil(this.destroy$))

@@ -1,6 +1,8 @@
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { InfoCtaCte } from '../../../enums/info-cta-cte.enum';
 import { DatePipe } from '@angular/common';
+import { FiltroPersonalizadoParaFiltroCtaCte } from '../../../interfaces/varios/filtro-personalizado-para-filtro-cta-cte';
+import { MatCheckbox, MatCheckboxChange } from '@angular/material';
 
 @Component({
   selector: 'app-cta-cte-filtro-desktop',
@@ -18,6 +20,15 @@ export class CtaCteFiltroDesktopComponent implements OnInit {
 
   @Output()
   botonAplicar: EventEmitter<any> = new EventEmitter<any>();
+
+  @Input()
+  filtroPersonalizado: Array<FiltroPersonalizadoParaFiltroCtaCte>;
+
+  @Input()
+  filtroPersonalizadoLabelDefault: string = "Todos";
+
+  filtroPersonalizadoSeleccionado: FiltroPersonalizadoParaFiltroCtaCte = null;
+  filtrosTipoCheck: Array<any> = [];
 
   infoCtaCte: any = InfoCtaCte;
   fechaDesde: string;
@@ -66,7 +77,12 @@ export class CtaCteFiltroDesktopComponent implements OnInit {
         fechaHasta: fechaHastaFiltro
       }
 
+      if (this.filtroPersonalizadoSeleccionado) {
+        filtro[this.filtroPersonalizadoSeleccionado.filtroAtributo] = this.filtroPersonalizadoSeleccionado.value
+      }
+
       filtro = this.filtroConFiltroRubros(filtro);
+      filtro = this.filtroConFiltroChk(filtro);
 
       this.botonAplicar.emit(filtro);
     } else {
@@ -97,5 +113,52 @@ export class CtaCteFiltroDesktopComponent implements OnInit {
     }
 
     return filtroConRubros;
+  }
+
+  /**
+   * Función que muestra 
+   */
+  leyendaFiltroPersonalizado(): string {
+    if (this.filtroPersonalizadoSeleccionado == null) {
+      return this.filtroPersonalizadoLabelDefault;
+    } else {
+      return this.filtroPersonalizadoSeleccionado.descripcion;
+    }
+  }
+
+  /**
+   * Función encargada de seleccionar una opción personalizada dada
+   * @param opcionPersonalizada 
+   */
+  seleccionarOpcionPersonalizada(opcionPersonalizada: FiltroPersonalizadoParaFiltroCtaCte) {
+    this.filtroPersonalizadoSeleccionado = opcionPersonalizada;
+  }
+
+  /**
+   * Función que aplica el filtro tipo checkbox al filtro principal
+   * @param event 
+   * @param checkboxChange 
+   */
+  seleccionarOpcionPersonalizadaCheckbox(checkboxChange: MatCheckboxChange, opcionPersonalizada: FiltroPersonalizadoParaFiltroCtaCte) {
+
+    let filtroCheckAux = this.filtrosTipoCheck.filter(unFiltro => unFiltro.key != opcionPersonalizada.filtroAtributo);
+    filtroCheckAux.push({
+      key: opcionPersonalizada.filtroAtributo,
+      value: checkboxChange.checked
+    });
+
+    this.filtrosTipoCheck = filtroCheckAux;
+  }
+
+  /**
+   * Agrega filtros según filtros basados en checkboxes
+   * @param filtro Filtro sin los nuevos filtros
+   */
+  filtroConFiltroChk(filtro: any): any {
+    let filtroConFiltrosChk = filtro;
+
+    this.filtrosTipoCheck.forEach(filtroChk => filtroConFiltrosChk[filtroChk.key] = filtroChk.value);
+
+    return filtroConFiltrosChk;
   }
 }
