@@ -1,5 +1,12 @@
-<div class="container" fxLayout="column" fxLayout.xs="column" fxLayoutWrap fxLayoutGap="0.5%" fxLayoutAlign="space-around stretch">
+<div class="container" fxLayout="column" fxLayout.xs="column" fxLayoutWrap fxLayoutGap="0.5%"
+	fxLayoutAlign="space-around stretch">
 	<mat-progress-bar *ngIf="cargando" mode="indeterminate"></mat-progress-bar>
+
+	<div fxFlexFill fxLayout="row" fxLayoutAlign="space-between center">
+		<div fxFlex="100%">
+			<mat-card-title>Administrador de cuentas</mat-card-title>
+		</div>
+	</div>
 
 	<div fxLayout="row" fxLayoutAlign="space-between center">
 
@@ -11,7 +18,8 @@
 					<div fxLayout="row" fxLayoutAlign="space-between center">
 						<div fxFlex="100%">
 							<mat-form-field class="full-width-input">
-								<input [disabled]="cargando" [(ngModel)]="filtro.filtro" matInput placeholder="Filtro de búsqueda" />
+								<input [disabled]="cargando" [(ngModel)]="filtro.filtro" matInput
+									placeholder="Filtro de búsqueda" />
 							</mat-form-field>
 						</div>
 					</div>
@@ -31,11 +39,6 @@
 	<div fxLayout="row" fxLayoutAlign="space-between center">
 		<div fxFlex="100%">
 			<mat-card>
-				<div fxFlexFill fxLayout="row" fxLayoutAlign="space-between center">
-					<div fxFlex="100%">
-						<mat-card-title>Administrador de cuentas</mat-card-title>
-					</div>
-				</div>
 
 				<div fxFlexFill fxLayout="row" fxLayoutAlign="space-between center" fxLayoutGap="2px">
 					<div fxFlex="15%">
@@ -61,7 +64,8 @@
 				</div>
 
 				<mat-card-content>
-					<mat-nav-list class="listado" *ngFor="let perfil of (listaPaginada.listado ? listaPaginada.listado : [])">
+					<mat-nav-list class="listado"
+						*ngFor="let perfil of (listaPaginada.listado ? listaPaginada.listado : [])">
 
 						<div fxFlexFill fxLayout="row" fxLayoutAlign="space-between center" fxLayoutGap="2px">
 							<div fxFlex="15%">
@@ -84,7 +88,8 @@
 								<div fxFlexFill fxLayout="row" fxLayoutAlign="space-around center" fxLayoutGap="2px">
 
 									<div fxFlex="25%">
-										<mat-slide-toggle [checked]="!perfil.credencial.baja" (change)="habilitacion(perfil, $event)"></mat-slide-toggle>
+										<mat-slide-toggle [checked]="!perfil.credencial.baja"
+											(change)="habilitacion(perfil, $event)"></mat-slide-toggle>
 									</div>
 									<div fxFlex="25%">
 										<button mat-icon-button color="primary" (click)="verEditar(perfil)">
@@ -117,8 +122,8 @@
 	<!-- Paginador -->
 	<div fxLayout="row" fxLayoutAlign="space-between center">
 		<div fxFlex="100%">
-			<mat-paginator [length]="listaPaginada.cantidadTotalRegistros" [pageSize]="filtro.cantPorPagina" (page)="pageEvent = cargarListado($event)"
-			 [pageSizeOptions]="pageSizeOptions">
+			<mat-paginator [length]="listaPaginada.cantidadTotalRegistros" [pageSize]="filtro.cantPorPagina"
+				(page)="pageEvent = cargarListado($event)" [pageSizeOptions]="pageSizeOptions">
 			</mat-paginator>
 		</div>
 	</div>

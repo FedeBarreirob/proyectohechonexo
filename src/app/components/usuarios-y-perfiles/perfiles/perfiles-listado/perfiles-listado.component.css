@@ -1,7 +1,15 @@
+.container {
+  padding-top: 122px;
+  padding-left: 15px;
+  padding-right: 15px;
+  padding-bottom: 5px;
+}
+
 mat-nav-list {
   padding-left: .5em;
   padding-right: .5em;
 }
+
 mat-nav-list:hover {
   background-color: beige;
 }
