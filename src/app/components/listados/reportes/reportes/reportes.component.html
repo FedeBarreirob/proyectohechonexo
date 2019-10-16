@@ -1,3 +1,4 @@
-<app-tool-bar-general titulo="Reportes"></app-tool-bar-general>
-
-<app-tenencias-impositivas *ngIf="cuenta != null" [cuenta]="cuenta.id.codigo"></app-tenencias-impositivas>
+<div [ngClass]="{'container-desktop': !esCelular}">
+    <app-tool-bar-general titulo="Reportes"></app-tool-bar-general>
+    <app-tenencias-impositivas *ngIf="cuenta != null" [cuenta]="cuenta.id.codigo"></app-tenencias-impositivas>
+</div>
