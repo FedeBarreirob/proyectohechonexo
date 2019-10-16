@@ -4,6 +4,11 @@
     height: 100%;
 }
 
+.contenedor-filtro-desktop {
+    height: 100%;
+    padding-top: 122px;
+}
+
 .sidenav-filtro {
     box-shadow: 3px 0 6px rgba(0, 0, 0, .24);
     width: 70%;

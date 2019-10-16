@@ -10,6 +10,19 @@
     padding: 13px;
 }
 
+.container:hover {
+    cursor: pointer;
+    width: 100%;
+    border: 1px solid #ECECEC;
+    border-radius: 4px;
+    background-color: #C8E8DC;
+    margin: 2px;
+    color: #333333;
+    font-family: Rubik;
+    font-size: 14px;
+    padding: 13px;
+}
+
 .moneda {
     color: #666666;
     font-family: Rubik;

@@ -4,6 +4,7 @@ import { EventEmitter } from '@angular/core';
 import { BreakpointObserver } from '@angular/cdk/layout';
 import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
+import { DeviceDetectorService } from 'ngx-device-detector';
 
 @Component({
   selector: 'app-tool-bar-general',
@@ -29,14 +30,18 @@ export class ToolBarGeneralComponent implements OnInit, OnDestroy {
 
   mostrarBtnMostrarOcultarSidebar: boolean;
   destroy$: Subject<any> = new Subject<any>();
+  esCelular: boolean;
 
   constructor(
     public sidebarService: SidebarService,
-    private breakpointObserver: BreakpointObserver
+    private breakpointObserver: BreakpointObserver,
+    private deviceService: DeviceDetectorService
   ) {
   }
 
   ngOnInit() {
+    this.esCelular = this.deviceService.isMobile();
+    
     // suscribir a notificacion de visualizacion del boton sandwiche
     this.sidebarService.mostrarSandwiche$
       .pipe(takeUntil(this.destroy$))

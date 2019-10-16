@@ -4,6 +4,7 @@ import { EntidadAlg } from 'src/app/interfaces/perfiles/entidad-alg';
 import { CuentaAlgService } from 'src/app/services/observers/cuentas-alg/cuenta-alg.service';
 import { Subject } from 'rxjs';
 import { FiltroCtaCteComprobanteDescarga } from 'src/app/interfaces/archivo-de-comprobantes/filtro-cta-cte-comprobante-descarga';
+import { DeviceDetectorService } from 'ngx-device-detector';
 
 @Component({
   selector: 'app-comprobantes',
@@ -17,10 +18,16 @@ export class ComprobantesComponent implements OnInit {
 
   cuenta: EntidadAlg;
   filtroArchivosComprobantes$: Subject<FiltroCtaCteComprobanteDescarga> = new Subject<FiltroCtaCteComprobanteDescarga>();
+  esCelular: boolean;
 
-  constructor(private cuentasService: CuentaAlgService) { }
+  constructor(
+    private cuentasService: CuentaAlgService,
+    private deviceService: DeviceDetectorService
+  ) { }
 
   ngOnInit() {
+    this.esCelular = this.deviceService.isMobile();
+    
     this.cuentasService.cuentaSeleccionada$.subscribe(
       cuenta => this.cuenta = cuenta
     );

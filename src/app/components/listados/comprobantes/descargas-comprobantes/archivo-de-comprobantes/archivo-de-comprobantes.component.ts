@@ -8,6 +8,7 @@ import { saveAs } from 'file-saver/FileSaver';
 import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
 import { DatePipe } from '@angular/common';
+import { DeviceDetectorService } from 'ngx-device-detector';
 
 @Component({
   selector: 'app-archivo-de-comprobantes',
@@ -30,6 +31,7 @@ export class ArchivoDeComprobantesComponent implements OnInit, OnDestroy {
   destroy$: Subject<any> = new Subject<any>();
   cargando: boolean = false;
   toggleSeleccionTodo: boolean = false;
+  esCelular: boolean;
 
   // listado de las referencias a los comprobantes
   comprobantes: Array<ComprobanteParaDescarga> = [];
@@ -39,7 +41,8 @@ export class ArchivoDeComprobantesComponent implements OnInit, OnDestroy {
     private archivoDeComprobantesService: ArchivoDeComprobantesService,
     private comprobantesDownloaderService: ComprobantesDownloaderService,
     private snackBar: MatSnackBar,
-    private datePipe: DatePipe
+    private datePipe: DatePipe,
+    private deviceService: DeviceDetectorService
   ) { }
 
   ngOnDestroy(): void {
@@ -48,6 +51,8 @@ export class ArchivoDeComprobantesComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit() {
+    this.esCelular = this.deviceService.isMobile();
+    
     this.filtroArchivosComprobantes$.subscribe(
       filtro => {
         this.filtro = filtro;

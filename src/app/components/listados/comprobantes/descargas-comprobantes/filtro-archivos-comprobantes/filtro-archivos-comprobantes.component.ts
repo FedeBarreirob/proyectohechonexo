@@ -2,6 +2,7 @@ import { Component, OnInit, Output, EventEmitter, Input } from '@angular/core';
 import { OrigenComprobante } from '../../../../../enums/origen-comprobante.enum';
 import { DatePipe } from '@angular/common';
 import { FiltroCtaCteComprobanteDescarga } from '../../../../../interfaces/archivo-de-comprobantes/filtro-cta-cte-comprobante-descarga';
+import { DeviceDetectorService } from 'ngx-device-detector';
 
 @Component({
   selector: 'app-filtro-archivos-comprobantes',
@@ -26,10 +27,15 @@ export class FiltroArchivosComprobantesComponent implements OnInit {
   fechaDesde: string;
   fechaHasta: string;
   filtroIdentificacionComprobante: string;
+  esCelular: boolean;
 
-  constructor(private datePipe: DatePipe) { }
+  constructor(
+    private datePipe: DatePipe,
+    private deviceService: DeviceDetectorService
+  ) { }
 
   ngOnInit() {
+    this.esCelular = this.deviceService.isMobile();
     this.cargarFiltroPorDefecto();
   }
 

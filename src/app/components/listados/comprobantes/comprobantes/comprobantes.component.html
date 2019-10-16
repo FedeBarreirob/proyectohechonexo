@@ -1,4 +1,4 @@
-<mat-sidenav-container class="contenedor-filtro">
+<mat-sidenav-container [ngClass]="{'contenedor-filtro': esCelular, 'contenedor-filtro-desktop': !esCelular}">
   <mat-sidenav #menuFiltro position="end" class="sidenav-filtro">
 
     <app-filtro-archivos-comprobantes *ngIf="cuenta != null" [cuenta]="cuenta.id.codigo"

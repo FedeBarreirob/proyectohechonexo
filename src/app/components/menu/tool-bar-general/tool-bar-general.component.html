@@ -1,6 +1,6 @@
 <div fxLayout="row" fxLayoutAlign="space-around center">
 
-    <div fxFlex="48px" *ngIf="mostrarBtnMostrarOcultarSidebar == true">
+    <div fxFlex="48px" *ngIf="mostrarBtnMostrarOcultarSidebar == true && esCelular">
         <button mat-icon-button class="boton-sandwich" (click)="mostrarOcultarSidebar()">
             <mat-icon [ngStyle]="{'color': colorIndicador}">menu</mat-icon>
         </button>
@@ -8,7 +8,7 @@
 
     <div fxFlex="24px" *ngIf="mostrarBtnMostrarOcultarSidebar != true"></div>
 
-    <div fxFlex="48px" class="selector-cuenta">
+    <div fxFlex="48px" class="selector-cuenta" *ngIf="esCelular">
         <app-combo-cuenta [colorIndicador]="colorIndicador" [disabled]="disabled == true"></app-combo-cuenta>
     </div>
     <div fxFlex>

@@ -7,6 +7,16 @@
     margin: 2px;
 }
 
+.container:hover {
+    cursor: pointer;
+    width: 100%;
+    border: 1px solid #ECECEC;
+    border-radius: 4px;
+    background-color: #C8E8DC;
+    padding: 13px;
+    margin: 2px;
+}
+
 .contrato-y-numero {
     color: #666666;
     font-family: Rubik;

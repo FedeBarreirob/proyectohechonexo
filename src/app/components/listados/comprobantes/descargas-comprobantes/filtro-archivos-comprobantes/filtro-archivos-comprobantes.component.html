@@ -1,4 +1,5 @@
-<div fxLayout="row" fxLayoutAlign="center" class="encabezado-filtro">
+<div fxLayout="row" fxLayoutAlign="center"
+  [ngClass]="{'encabezado-filtro': esCelular, 'encabezado-filtro-desktop': !esCelular}">
   <div fxFlex="80%" class="texto-filtrar">
     FILTRAR
   </div>
