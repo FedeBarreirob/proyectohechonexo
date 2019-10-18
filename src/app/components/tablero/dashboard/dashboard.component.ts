@@ -2,6 +2,10 @@ import { Component, OnInit, ViewChild } from '@angular/core';
 import { MatSidenav } from '@angular/material';
 import { Subject } from 'rxjs';
 import { DeviceDetectorService } from 'ngx-device-detector';
+import { NotificacionesService } from '../../../services/notificaciones/notificaciones.service';
+import { AuthenticationService } from '../../../services/security/authentication.service';
+import { UserAuth } from '../../../models/security/user';
+import { EstadoNotificaciones } from '../../../enums/estado-notificaciones.enum';
 
 @Component({
   selector: 'app-dashboard',
@@ -18,13 +22,21 @@ export class DashboardComponent implements OnInit {
   cargandoIndicadorEntregasRecientes: boolean = false;
   cargandoIndicadorVentasRecientes: boolean = false;
   esCelular: boolean;
+  hayNotificacionesNuevas: boolean = false;
 
   constructor(
-    private deviceService: DeviceDetectorService
+    private deviceService: DeviceDetectorService,
+    private notificacionService: NotificacionesService,
+    private authenticationService: AuthenticationService
   ) { }
 
   ngOnInit() {
     this.esCelular = this.deviceService.isMobile();
+
+    if (this.esCelular) {
+      this.actualizarIndicadorMensajes();
+      this.notificacionService.huboCambiosEstadoMensajes$.subscribe(respuesta => this.actualizarIndicadorMensajes());
+    }
   }
 
   /**
@@ -87,6 +99,32 @@ export class DashboardComponent implements OnInit {
       this.cargando$.next(true);
     } else {
       this.cargando$.next(false);
+    }
+  }
+
+  /**
+   * Verifica si hay mensajes y cambia el ícono si corresponde
+   */
+  actualizarIndicadorMensajes() {
+    let perfil = this.authenticationService.perfilUsuarioSeleccionado();
+    let usuarioLogueado = <UserAuth>this.authenticationService.usuarioLogueado();
+    if (usuarioLogueado != null && perfil != null) {
+
+      this.notificacionService.cantidadMensajesEnEstadoIndicado(
+        perfil.informacionPersonal.id,
+        EstadoNotificaciones.NO_LEIDO)
+        .subscribe(respuesta => {
+
+          if (respuesta.exito) {
+            let cantidadMensajes: number = respuesta.datos;
+            if (cantidadMensajes > 0) {
+              this.hayNotificacionesNuevas = true;
+            } else {
+              this.hayNotificacionesNuevas = false;
+            }
+          }
+
+        }, error => console.log(error));
     }
   }
 }

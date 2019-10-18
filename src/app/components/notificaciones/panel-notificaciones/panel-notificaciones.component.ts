@@ -5,6 +5,7 @@ import { NotificacionesService } from '../../../services/notificaciones/notifica
 import { AuthenticationService } from '../../../services/security/authentication.service';
 import { PerfilBasico } from '../../../interfaces/perfiles/perfil-basico';
 import { takeUntil } from 'rxjs/operators';
+import { DeviceDetectorService } from 'ngx-device-detector';
 
 @Component({
   selector: 'app-panel-notificaciones',
@@ -22,13 +23,17 @@ export class PanelNotificacionesComponent implements OnInit, OnDestroy {
   cantidadPorPagina: number = 50;
   cargando: boolean = false;
   perfilBasico: PerfilBasico;
+  esCelular: boolean;
 
   constructor(
     private notificacionService: NotificacionesService,
-    private authenticationService: AuthenticationService
+    private authenticationService: AuthenticationService,
+    private deviceService: DeviceDetectorService
   ) { }
 
   ngOnInit() {
+    this.esCelular = this.deviceService.isMobile();
+
     // observer de perfil
     this.authenticationService.perfilActivo$
       .pipe(takeUntil(this.destroy$))
@@ -37,6 +42,9 @@ export class PanelNotificacionesComponent implements OnInit, OnDestroy {
           this.perfilBasico = perfil;
           this.cargarListado(true);
         });
+
+    this.perfilBasico = this.authenticationService.perfilUsuarioSeleccionado();
+    this.cargarListado(true);
   }
 
   ngOnDestroy(): void {
@@ -60,21 +68,25 @@ export class PanelNotificacionesComponent implements OnInit, OnDestroy {
         perfil = this.authenticationService.perfilUsuarioSeleccionado();
       }
 
-      this.notificacionService.listadoNotificaciones(
-        perfil.informacionPersonal.id, this.pagina, this.cantidadPorPagina)
-        .pipe(takeUntil(this.destroy$))
-        .subscribe(respuesta => {
+      if (perfil && perfil.informacionPersonal) {
+        this.notificacionService.listadoNotificaciones(
+          perfil.informacionPersonal.id, this.pagina, this.cantidadPorPagina)
+          .pipe(takeUntil(this.destroy$))
+          .subscribe(respuesta => {
 
-          if (respuesta.exito == true && respuesta.datos != null && respuesta.datos.cantidadTotalRegistros > 0) {
-            this.agregarMovimientosAlListado(respuesta.datos.listado);
-          } else {
-            this.pagina = this.pagina - 1;
-          }
+            if (respuesta.exito == true && respuesta.datos != null && respuesta.datos.listado != null && respuesta.datos.cantidadTotalRegistros > 0) {
+              this.agregarMovimientosAlListado(respuesta.datos.listado);
+            } else {
+              this.pagina = this.pagina - 1;
+            }
 
-          this.cargando = false;
-        }, error => {
-          this.cargando = false;
-        });
+            this.cargando = false;
+          }, error => {
+            this.cargando = false;
+          });
+      } else {
+        this.cargando = false;
+      }
     }
   }
 

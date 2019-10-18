@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, AfterViewInit } from '@angular/core';
 import { EntidadAlg } from '../../../../interfaces/perfiles/entidad-alg';
 import { CuentaAlgService } from '../../../../services/observers/cuentas-alg/cuenta-alg.service';
 import { DeviceDetectorService } from 'ngx-device-detector';
@@ -8,7 +8,7 @@ import { DeviceDetectorService } from 'ngx-device-detector';
   templateUrl: './reportes.component.html',
   styleUrls: ['./reportes.component.css']
 })
-export class ReportesComponent implements OnInit {
+export class ReportesComponent implements OnInit, AfterViewInit {
 
   cuenta: EntidadAlg;
   esCelular: boolean;
@@ -26,4 +26,9 @@ export class ReportesComponent implements OnInit {
     );
   }
 
+  ngAfterViewInit(): void {
+    if (this.cuentasService.cuentaPreviamenteSeleccionada && !this.esCelular) {
+      this.cuenta = this.cuentasService.cuentaPreviamenteSeleccionada;
+    }
+  }
 }

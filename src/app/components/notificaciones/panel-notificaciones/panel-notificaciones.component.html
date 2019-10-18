@@ -1,4 +1,5 @@
-<div fxLayout="row" fxLayoutAlign="center" class="encabezado-notificaciones">
+<div fxLayout="row" fxLayoutAlign="center"
+  [ngClass]="{'encabezado-notificaciones': esCelular, 'encabezado-notificaciones-desktop': !esCelular}">
   <div fxFlex="80%" class="texto-notificaciones">
     NOTIFICACIONES
   </div>

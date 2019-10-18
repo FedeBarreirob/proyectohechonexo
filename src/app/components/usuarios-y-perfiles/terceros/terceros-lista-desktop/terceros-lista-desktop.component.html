@@ -47,17 +47,3 @@
 </div>
 
 <a class="boton-agregar-aqui" (click)="agregarTercero()">Agregar colaborador</a>
-
-<!--Leyenda si es vacio-->
-<div *ngIf="(listadoTerceros == null || listadoTerceros.length == 0) && cargando == false"
-  class="contenedor-leyenda-vacio">
-  <div fxLayout="column" fxLayoutAlign="center center">
-    <div fxFlex="100%" class="leyenda-vacio">
-      Un “colaborador” es una persona a la que podés darle acceso parcial a tu cuenta
-    </div>
-
-    <div fxFlex="100%" class="leyenda-agregar-colaborador">
-      Agrega una cuenta de colaborador <a class="boton-agregar-aqui" (click)="agregarTercero()">aquí</a>
-    </div>
-  </div>
-</div>

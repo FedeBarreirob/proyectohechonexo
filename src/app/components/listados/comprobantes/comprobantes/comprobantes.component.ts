@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, OnInit, ViewChild, AfterViewInit } from '@angular/core';
 import { MatSidenav } from '@angular/material';
 import { EntidadAlg } from 'src/app/interfaces/perfiles/entidad-alg';
 import { CuentaAlgService } from 'src/app/services/observers/cuentas-alg/cuenta-alg.service';
@@ -11,7 +11,7 @@ import { DeviceDetectorService } from 'ngx-device-detector';
   templateUrl: './comprobantes.component.html',
   styleUrls: ['./comprobantes.component.css']
 })
-export class ComprobantesComponent implements OnInit {
+export class ComprobantesComponent implements OnInit, AfterViewInit {
 
   @ViewChild('menuFiltro')
   sidenav: MatSidenav;
@@ -27,10 +27,16 @@ export class ComprobantesComponent implements OnInit {
 
   ngOnInit() {
     this.esCelular = this.deviceService.isMobile();
-    
+
     this.cuentasService.cuentaSeleccionada$.subscribe(
       cuenta => this.cuenta = cuenta
     );
+  }
+
+  ngAfterViewInit(): void {
+    if (this.cuentasService.cuentaPreviamenteSeleccionada && !this.esCelular) {
+      this.cuenta = this.cuentasService.cuentaPreviamenteSeleccionada;
+    }
   }
 
   /**

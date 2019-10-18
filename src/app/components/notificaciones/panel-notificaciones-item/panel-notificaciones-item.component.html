@@ -1,4 +1,4 @@
-<mat-card>
+<mat-card class="notificacion-container" (click)="verDetalle()" [ngClass]="{'notificacion-container-no-leido': notificacion.estado == estadoNotificacion.NO_LEIDO, 'notificacion-container-leido': notificacion.estado == estadoNotificacion.LEIDO }">
 
   <div fxLayout="row" fxLayoutAlign="space-around center">
 

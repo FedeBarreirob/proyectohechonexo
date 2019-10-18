@@ -16,3 +16,26 @@
     font-family: Rubik;
     font-size: 12px;
 }
+
+.notificacion-container-no-leido {
+    margin-left: 5px;
+    margin-right: 5px;
+    margin-bottom: 5px;
+    cursor: pointer;
+    font-weight: bold;
+}
+
+.notificacion-container-no-leido:hover {
+    background-color: #C8E8DC;
+}
+
+.notificacion-container-leido {
+    margin-left: 5px;
+    margin-right: 5px;
+    margin-bottom: 5px;
+    cursor: pointer;
+}
+
+.notificacion-container-leido:hover {
+    background-color: #C8E8DC;
+}

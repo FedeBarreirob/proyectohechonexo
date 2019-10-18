@@ -52,7 +52,7 @@ export class ArchivoDeComprobantesComponent implements OnInit, OnDestroy {
 
   ngOnInit() {
     this.esCelular = this.deviceService.isMobile();
-    
+
     this.filtroArchivosComprobantes$.subscribe(
       filtro => {
         this.filtro = filtro;

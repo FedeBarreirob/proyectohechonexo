@@ -1,12 +1,2 @@
-<div fxLayout="row" fxLayoutAlign="center space-evenly">
-
-	<div fxFill>
-	</div>
-
-	<div fxFlex="auto">
-		<button mat-icon-button (click)="irAlBuzon()">
-			<mat-icon *ngIf="mensajesNuevos > 0" matBadge={{mensajesNuevos}} matBadgeColor="warn">mail_outline</mat-icon>
-			<mat-icon *ngIf="mensajesNuevos == 0">mail_outline</mat-icon>
-		</button>
-	</div>
-</div>
+<mat-icon *ngIf="mensajesNuevos > 0" svgIcon="bell" matBadge={{mensajesNuevos}}></mat-icon>
+<mat-icon *ngIf="mensajesNuevos == 0" svgIcon="bell"></mat-icon>

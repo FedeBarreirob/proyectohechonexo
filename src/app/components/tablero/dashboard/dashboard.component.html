@@ -9,7 +9,7 @@
 		<div class="fondo-verde" [ngClass]="{'fondo-verde': esCelular, 'fondo-verde-desktop': !esCelular}">
 			<app-tool-bar-general *ngIf="esCelular" [titulo]="'Inicio'" [disabled]="false"
 				[colorIndicador]="'#FFFFFFFF'" (botonPersonalizadoEjecutado)="mostrarOcultarNotificaciones()"
-				[urlImagenAccionPersonalizada]="'assets/toolbar/Campana.png'"></app-tool-bar-general>
+				[urlImagenAccionPersonalizada]="hayNotificacionesNuevas ? 'assets/toolbar/bell-white-hot.svg' : 'assets/toolbar/bell-white.svg'"></app-tool-bar-general>
 
 			<app-saldo-cta-cte-aplicada-global (cargandoChange)="esCargandoCtaCte($event)">
 			</app-saldo-cta-cte-aplicada-global>
