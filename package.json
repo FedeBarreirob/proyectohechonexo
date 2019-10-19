@@ -8,8 +8,10 @@
     "test": "ng test",
     "lint": "ng lint",
     "e2e": "ng e2e",
-    "phonegap": "ng build --prod --base-href . --output-path phonegap/www",
-    "phonegap-run": "npm run phonegap && cd phonegap && phonegap run android",
+    "phonegap-build": "ng build --prod --base-href . --output-path phonegap/www",
+    "phonegap-build-debug": "ng build --base-href . --output-path phonegap/www",
+    "phonegap-run": "npm run phonegap-build-debug && cd phonegap && phonegap run android --device",
+    "phonegap-run-web": "npm run phonegap-build-debug && cd phonegap && phonegap run browser",
     "build-web-prod": "ng build --prod --base-href /DigitalUIClientes/"
   },
   "private": true,

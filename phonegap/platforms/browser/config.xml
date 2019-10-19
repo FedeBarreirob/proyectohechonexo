@@ -1,15 +1,17 @@
 <?xml version='1.0' encoding='utf-8'?>
-<widget id="com.gaviglio.app" version="1.0.0" xmlns="http://www.w3.org/ns/widgets" xmlns:cdv="http://cordova.apache.org/ns/1.0" xmlns:gap="http://phonegap.com/ns/1.0">
-    <name>Gaviglio Digital App</name>
+<widget android-versionCode="25" id="com.agro123.topfarming" version="3.0.0" xmlns="http://www.w3.org/ns/widgets" xmlns:cdv="http://cordova.apache.org/ns/1.0" xmlns:gap="http://phonegap.com/ns/1.0">
+    <name>TopFarming</name>
     <description>
+        Information and opportunities for farmers in one place
     </description>
-    <author email="support@phonegap.com" href="http://phonegap.com">
-        PhoneGap Team
+    <author email="tambero.web@gmail.com" href="http://topfarming.net">
+        TopFarming
     </author>
     <content src="index.html" />
+    <access origin="*" />
     <allow-navigation href="*" />
     <allow-intent href="*" />
-    <access origin="*" />
+    <access launch-external="yes" origin="whatsapp:*" />
     <preference name="DisallowOverscroll" value="true" />
-    <preference name="android-minSdkVersion" value="14" />
+    <preference name="android-minSdkVersion" value="19" />
 </widget>

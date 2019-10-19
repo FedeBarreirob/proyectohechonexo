@@ -1,6 +1,6 @@
 {
-  "name": "Gaviglio Digital App",
-  "short_name": "Gaviglio Digital App",
+  "name": "helloworld",
+  "short_name": "helloworld",
   "description": "Description of your app from template",
   "start_url": "index.html",
   "scope": "index.html",

@@ -8,45 +8,67 @@
   },
   "installed_plugins": {
     "cordova-plugin-battery-status": {
-      "PACKAGE_NAME": "com.phonegap.helloworld"
+      "PACKAGE_NAME": "com.agro123.topfarming"
     },
     "cordova-plugin-camera": {
-      "PACKAGE_NAME": "com.phonegap.helloworld"
-    },
-    "cordova-plugin-device": {
-      "PACKAGE_NAME": "com.phonegap.helloworld"
-    },
-    "cordova-plugin-dialogs": {
-      "PACKAGE_NAME": "com.phonegap.helloworld"
-    },
-    "cordova-plugin-geolocation": {
-      "PACKAGE_NAME": "com.phonegap.helloworld"
-    },
-    "cordova-plugin-globalization": {
-      "PACKAGE_NAME": "com.phonegap.helloworld"
-    },
-    "cordova-plugin-inappbrowser": {
-      "PACKAGE_NAME": "com.phonegap.helloworld"
+      "PACKAGE_NAME": "com.agro123.topfarming"
     },
     "cordova-plugin-media-capture": {
-      "PACKAGE_NAME": "com.phonegap.helloworld"
+      "PACKAGE_NAME": "com.agro123.topfarming"
+    },
+    "cordova-plugin-dialogs": {
+      "PACKAGE_NAME": "com.agro123.topfarming"
+    },
+    "cordova-plugin-globalization": {
+      "PACKAGE_NAME": "com.agro123.topfarming"
+    },
+    "cordova-plugin-inappbrowser": {
+      "PACKAGE_NAME": "com.agro123.topfarming"
     },
     "cordova-plugin-network-information": {
-      "PACKAGE_NAME": "com.phonegap.helloworld"
+      "PACKAGE_NAME": "com.agro123.topfarming"
     },
     "cordova-plugin-vibration": {
-      "PACKAGE_NAME": "com.phonegap.helloworld"
+      "PACKAGE_NAME": "com.agro123.topfarming"
     },
     "cordova-plugin-whitelist": {
+      "PACKAGE_NAME": "com.agro123.topfarming"
+    },
+    "cordova-plugin-device": {
+      "PACKAGE_NAME": "com.agro123.topfarming"
+    },
+    "cordova-plugin-geolocation": {
+      "PACKAGE_NAME": "com.agro123.topfarming"
+    },
+    "cordova-plugin-sim": {
+      "PACKAGE_NAME": "com.agro123.topfarming"
+    },
+    "cordova-plugin-contacts-phonenumbers": {
+      "PACKAGE_NAME": "com.agro123.topfarming"
+    },
+    "onesignal-cordova-plugin": {
+      "PACKAGE_NAME": "com.agro123.topfarming"
+    },
+    "cordova-plugin-google-analytics": {
+      "PACKAGE_NAME": "com.agro123.topfarming"
+    },
+    "cordova-plugin-customurlscheme": {
+      "URL_SCHEME": "topfarming",
+      "PACKAGE_NAME": "io.cordova.hellocordova"
+    },
+    "cordova-plugin-x-socialsharing": {
       "PACKAGE_NAME": "io.cordova.hellocordova"
     }
   },
   "dependent_plugins": {
     "cordova-plugin-compat": {
-      "PACKAGE_NAME": "com.phonegap.helloworld"
+      "PACKAGE_NAME": "com.agro123.topfarming"
     },
     "cordova-plugin-file": {
-      "PACKAGE_NAME": "com.phonegap.helloworld"
+      "PACKAGE_NAME": "com.agro123.topfarming"
+    },
+    "es6-promise-plugin": {
+      "PACKAGE_NAME": "io.cordova.hellocordova"
     }
   }
 }
