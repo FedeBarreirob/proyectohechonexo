@@ -8,73 +8,76 @@
   },
   "installed_plugins": {
     "cordova-plugin-battery-status": {
-      "PACKAGE_NAME": "com.agro123.topfarming"
+      "PACKAGE_NAME": "com.gaviglio.digital"
     },
     "cordova-plugin-camera": {
-      "PACKAGE_NAME": "com.agro123.topfarming"
+      "PACKAGE_NAME": "com.gaviglio.digital"
     },
     "cordova-plugin-contacts-phonenumbers": {
-      "PACKAGE_NAME": "com.agro123.topfarming"
-    },
-    "cordova-plugin-device": {
-      "PACKAGE_NAME": "com.agro123.topfarming"
-    },
-    "cordova-plugin-dialogs": {
-      "PACKAGE_NAME": "com.agro123.topfarming"
-    },
-    "cordova-plugin-geolocation": {
-      "PACKAGE_NAME": "com.agro123.topfarming"
-    },
-    "cordova-plugin-globalization": {
-      "PACKAGE_NAME": "com.agro123.topfarming"
-    },
-    "cordova-plugin-inappbrowser": {
-      "PACKAGE_NAME": "com.agro123.topfarming"
-    },
-    "cordova-plugin-media-capture": {
-      "PACKAGE_NAME": "com.agro123.topfarming"
-    },
-    "cordova-plugin-network-information": {
-      "PACKAGE_NAME": "com.agro123.topfarming"
-    },
-    "cordova-plugin-sim": {
-      "PACKAGE_NAME": "com.agro123.topfarming"
-    },
-    "cordova-plugin-vibration": {
-      "PACKAGE_NAME": "com.agro123.topfarming"
-    },
-    "cordova-plugin-whitelist": {
-      "PACKAGE_NAME": "com.agro123.topfarming"
-    },
-    "onesignal-cordova-plugin": {
-      "PACKAGE_NAME": "com.agro123.topfarming"
-    },
-    "cordova-plugin-google-analytics": {
-      "GMS_VERSION": "11.0.1",
-      "PACKAGE_NAME": "com.agro123.topfarming"
+      "PACKAGE_NAME": "com.gaviglio.digital"
     },
     "cordova-plugin-customurlscheme": {
       "URL_SCHEME": "topfarming",
       "ANDROID_SCHEME": " ",
       "ANDROID_HOST": " ",
       "ANDROID_PATHPREFIX": "/",
-      "PACKAGE_NAME": "com.agro123.topfarming"
+      "PACKAGE_NAME": "com.gaviglio.digital"
     },
-    "cordova-plugin-x-socialsharing": {
-      "ANDROID_SUPPORT_V4_VERSION": "24.1.1+",
-      "PACKAGE_NAME": "com.agro123.topfarming"
+    "cordova-plugin-device": {
+      "PACKAGE_NAME": "com.gaviglio.digital"
+    },
+    "cordova-plugin-dialogs": {
+      "PACKAGE_NAME": "com.gaviglio.digital"
     },
     "cordova-plugin-file-opener2": {
       "ANDROID_SUPPORT_V4_VERSION": "27.+",
       "PACKAGE_NAME": "com.gaviglio.digital"
+    },
+    "cordova-plugin-geolocation": {
+      "PACKAGE_NAME": "com.gaviglio.digital"
+    },
+    "cordova-plugin-globalization": {
+      "PACKAGE_NAME": "com.gaviglio.digital"
+    },
+    "cordova-plugin-google-analytics": {
+      "GMS_VERSION": "11.0.1",
+      "PACKAGE_NAME": "com.gaviglio.digital"
+    },
+    "cordova-plugin-inappbrowser": {
+      "PACKAGE_NAME": "com.gaviglio.digital"
+    },
+    "cordova-plugin-media-capture": {
+      "PACKAGE_NAME": "com.gaviglio.digital"
+    },
+    "cordova-plugin-network-information": {
+      "PACKAGE_NAME": "com.gaviglio.digital"
+    },
+    "cordova-plugin-sim": {
+      "PACKAGE_NAME": "com.gaviglio.digital"
+    },
+    "cordova-plugin-vibration": {
+      "PACKAGE_NAME": "com.gaviglio.digital"
+    },
+    "cordova-plugin-whitelist": {
+      "PACKAGE_NAME": "com.gaviglio.digital"
+    },
+    "cordova-plugin-x-socialsharing": {
+      "ANDROID_SUPPORT_V4_VERSION": "24.1.1+",
+      "PACKAGE_NAME": "com.gaviglio.digital"
+    },
+    "onesignal-cordova-plugin": {
+      "PACKAGE_NAME": "com.gaviglio.digital"
     }
   },
   "dependent_plugins": {
+    "at.modalog.cordova.plugin.cache": {
+      "PACKAGE_NAME": "com.gaviglio.digital"
+    },
     "cordova-plugin-file": {
-      "PACKAGE_NAME": "com.agro123.topfarming"
+      "PACKAGE_NAME": "com.gaviglio.digital"
     },
     "es6-promise-plugin": {
-      "PACKAGE_NAME": "com.agro123.topfarming"
+      "PACKAGE_NAME": "com.gaviglio.digital"
     }
   }
 }

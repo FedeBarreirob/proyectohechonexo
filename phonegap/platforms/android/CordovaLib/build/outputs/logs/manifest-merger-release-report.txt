@@ -1,12 +1,12 @@
 -- Merging decision tree log ---
 manifest
-ADDED from /home/alberto/Desarrollos/Gaviglio/Digital/DigitalUIClientes/phonegap/platforms/android/CordovaLib/AndroidManifest.xml:20:1-23:12
-INJECTED from /home/alberto/Desarrollos/Gaviglio/Digital/DigitalUIClientes/phonegap/platforms/android/CordovaLib/AndroidManifest.xml:20:1-23:12
-INJECTED from /home/alberto/Desarrollos/Gaviglio/Digital/DigitalUIClientes/phonegap/platforms/android/CordovaLib/AndroidManifest.xml:20:1-23:12
-INJECTED from /home/alberto/Desarrollos/Gaviglio/Digital/DigitalUIClientes/phonegap/platforms/android/CordovaLib/AndroidManifest.xml:20:1-23:12
-INJECTED from /home/alberto/Desarrollos/Gaviglio/Digital/DigitalUIClientes/phonegap/platforms/android/CordovaLib/AndroidManifest.xml:20:1-23:12
-INJECTED from /home/alberto/Desarrollos/Gaviglio/Digital/DigitalUIClientes/phonegap/platforms/android/CordovaLib/AndroidManifest.xml:20:1-23:12
-INJECTED from /home/alberto/Desarrollos/Gaviglio/Digital/DigitalUIClientes/phonegap/platforms/android/CordovaLib/AndroidManifest.xml:20:1-23:12
+ADDED from /home/alberto/Desarrollos/Gaviglio/Digital/DigitalUIClientes/phonegap/platforms/android/CordovaLib/AndroidManifest.xml:20:1-22:12
+INJECTED from /home/alberto/Desarrollos/Gaviglio/Digital/DigitalUIClientes/phonegap/platforms/android/CordovaLib/AndroidManifest.xml:20:1-22:12
+INJECTED from /home/alberto/Desarrollos/Gaviglio/Digital/DigitalUIClientes/phonegap/platforms/android/CordovaLib/AndroidManifest.xml:20:1-22:12
+INJECTED from /home/alberto/Desarrollos/Gaviglio/Digital/DigitalUIClientes/phonegap/platforms/android/CordovaLib/AndroidManifest.xml:20:1-22:12
+INJECTED from /home/alberto/Desarrollos/Gaviglio/Digital/DigitalUIClientes/phonegap/platforms/android/CordovaLib/AndroidManifest.xml:20:1-22:12
+INJECTED from /home/alberto/Desarrollos/Gaviglio/Digital/DigitalUIClientes/phonegap/platforms/android/CordovaLib/AndroidManifest.xml:20:1-22:12
+INJECTED from /home/alberto/Desarrollos/Gaviglio/Digital/DigitalUIClientes/phonegap/platforms/android/CordovaLib/AndroidManifest.xml:20:1-22:12
 	package
 		ADDED from /home/alberto/Desarrollos/Gaviglio/Digital/DigitalUIClientes/phonegap/platforms/android/CordovaLib/AndroidManifest.xml:21:7-35
 		INJECTED from /home/alberto/Desarrollos/Gaviglio/Digital/DigitalUIClientes/phonegap/platforms/android/CordovaLib/AndroidManifest.xml
@@ -22,6 +22,10 @@ INJECTED from /home/alberto/Desarrollos/Gaviglio/Digital/DigitalUIClientes/phone
 		INJECTED from /home/alberto/Desarrollos/Gaviglio/Digital/DigitalUIClientes/phonegap/platforms/android/CordovaLib/AndroidManifest.xml
 		INJECTED from /home/alberto/Desarrollos/Gaviglio/Digital/DigitalUIClientes/phonegap/platforms/android/CordovaLib/AndroidManifest.xml
 uses-sdk
-ADDED from /home/alberto/Desarrollos/Gaviglio/Digital/DigitalUIClientes/phonegap/platforms/android/CordovaLib/AndroidManifest.xml:22:5-44
+INJECTED from /home/alberto/Desarrollos/Gaviglio/Digital/DigitalUIClientes/phonegap/platforms/android/CordovaLib/AndroidManifest.xml reason: use-sdk injection requested
+INJECTED from /home/alberto/Desarrollos/Gaviglio/Digital/DigitalUIClientes/phonegap/platforms/android/CordovaLib/AndroidManifest.xml
+INJECTED from /home/alberto/Desarrollos/Gaviglio/Digital/DigitalUIClientes/phonegap/platforms/android/CordovaLib/AndroidManifest.xml
 	android:minSdkVersion
-		ADDED from /home/alberto/Desarrollos/Gaviglio/Digital/DigitalUIClientes/phonegap/platforms/android/CordovaLib/AndroidManifest.xml:22:15-41
+		INJECTED from /home/alberto/Desarrollos/Gaviglio/Digital/DigitalUIClientes/phonegap/platforms/android/CordovaLib/AndroidManifest.xml
+		ADDED from /home/alberto/Desarrollos/Gaviglio/Digital/DigitalUIClientes/phonegap/platforms/android/CordovaLib/AndroidManifest.xml
+		INJECTED from /home/alberto/Desarrollos/Gaviglio/Digital/DigitalUIClientes/phonegap/platforms/android/CordovaLib/AndroidManifest.xml

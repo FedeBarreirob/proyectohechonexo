@@ -4,24 +4,7 @@
             "outputFile": "/home/alberto/Desarrollos/Gaviglio/Digital/DigitalUIClientes/phonegap/platforms/android/app/build/intermediates/incremental/mergeReleaseResources/merged.dir/values-am/values-am.xml",
             "map": [
                 {
-                    "source": "/home/alberto/.gradle/caches/transforms-1/files-1.1/support-compat-27.1.1.aar/45c973bacc64d79d8ac75a1748fc0a74/res/values-am/values-am.xml",
-                    "from": {
-                        "startLines": "2",
-                        "startColumns": "4",
-                        "startOffsets": "55",
-                        "endColumns": "100",
-                        "endOffsets": "151"
-                    },
-                    "to": {
-                        "startLines": "19",
-                        "startColumns": "4",
-                        "startOffsets": "2462",
-                        "endColumns": "100",
-                        "endOffsets": "2558"
-                    }
-                },
-                {
-                    "source": "/home/alberto/.gradle/caches/transforms-1/files-1.1/play-services-basement-11.0.1.aar/6a8a58842b8c2a62899e96f628229bc4/res/values-am/values.xml",
+                    "source": "/home/alberto/.gradle/caches/transforms-1/files-1.1/play-services-basement-11.0.1.aar/3dd042b5540549981e0d7f274739074f/res/values-am/values.xml",
                     "from": {
                         "startLines": "4",
                         "startColumns": "0",
@@ -38,7 +21,7 @@
                     }
                 },
                 {
-                    "source": "/home/alberto/.gradle/caches/transforms-1/files-1.1/play-services-base-11.0.1.aar/ef11296c3e3b6a964acb215e75330619/res/values-am/values.xml",
+                    "source": "/home/alberto/.gradle/caches/transforms-1/files-1.1/play-services-base-11.0.1.aar/db30c8740e9ea8291bee0a2622334a43/res/values-am/values.xml",
                     "from": {
                         "startLines": "4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19",
                         "startColumns": "0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0",
@@ -52,6 +35,23 @@
                         "startOffsets": "105,209,380,504,608,794,919,1241,1428,1533,1709,1834,2028,2185,2275,2362",
                         "endColumns": "103,170,123,103,185,124,130,186,104,175,124,193,156,89,86,99",
                         "endOffsets": "204,375,499,603,789,914,1045,1423,1528,1704,1829,2023,2180,2270,2357,2457"
+                    }
+                },
+                {
+                    "source": "/home/alberto/.gradle/caches/transforms-1/files-1.1/support-compat-27.1.1.aar/2ad603edc0bd50f3be8c6e0e417822d8/res/values-am/values-am.xml",
+                    "from": {
+                        "startLines": "2",
+                        "startColumns": "4",
+                        "startOffsets": "55",
+                        "endColumns": "100",
+                        "endOffsets": "151"
+                    },
+                    "to": {
+                        "startLines": "19",
+                        "startColumns": "4",
+                        "startOffsets": "2462",
+                        "endColumns": "100",
+                        "endOffsets": "2558"
                     }
                 }
             ]

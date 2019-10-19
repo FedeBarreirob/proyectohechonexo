@@ -1,5 +1,8 @@
 <?xml version='1.0' encoding='utf-8'?>
 <widget android-versionCode="1" id="com.gaviglio.digital" version="1.0.0" xmlns="http://www.w3.org/ns/widgets" xmlns:gap="http://phonegap.com/ns/1.0">
+    <feature name="Cache">
+        <param name="android-package" value="at.modalog.cordova.plugin.cache.Cache" />
+    </feature>
     <feature name="Battery">
         <param name="android-package" value="org.apache.cordova.batterystatus.BatteryListener" />
     </feature>
@@ -8,6 +11,9 @@
     </feature>
     <feature name="ContactsPhoneNumbers">
         <param name="android-package" value="com.dbaq.cordova.contactsPhoneNumbers.ContactsManager" />
+    </feature>
+    <feature name="LaunchMyApp">
+        <param name="android-package" value="nl.xservices.plugins.LaunchMyApp" />
     </feature>
     <feature name="Device">
         <param name="android-package" value="org.apache.cordova.device.Device" />
@@ -20,11 +26,17 @@
         <param name="onload" value="true" />
     </feature>
     <allow-navigation href="cdvfile:*" />
+    <feature name="FileOpener2">
+        <param name="android-package" value="io.github.pwlin.cordova.plugins.fileopener2.FileOpener2" />
+    </feature>
     <feature name="Geolocation">
         <param name="android-package" value="org.apache.cordova.geolocation.Geolocation" />
     </feature>
     <feature name="Globalization">
         <param name="android-package" value="org.apache.cordova.globalization.Globalization" />
+    </feature>
+    <feature name="UniversalAnalytics">
+        <param name="android-package" value="com.danielcwilson.plugins.analytics.UniversalAnalyticsPlugin" />
     </feature>
     <feature name="InAppBrowser">
         <param name="android-package" value="org.apache.cordova.inappbrowser.InAppBrowser" />
@@ -45,20 +57,11 @@
         <param name="android-package" value="org.apache.cordova.whitelist.WhitelistPlugin" />
         <param name="onload" value="true" />
     </feature>
-    <feature name="OneSignalPush">
-        <param name="android-package" value="com.plugin.gcm.OneSignalPush" />
-    </feature>
-    <feature name="UniversalAnalytics">
-        <param name="android-package" value="com.danielcwilson.plugins.analytics.UniversalAnalyticsPlugin" />
-    </feature>
-    <feature name="LaunchMyApp">
-        <param name="android-package" value="nl.xservices.plugins.LaunchMyApp" />
-    </feature>
     <feature name="SocialSharing">
         <param name="android-package" value="nl.xservices.plugins.SocialSharing" />
     </feature>
-    <feature name="FileOpener2">
-        <param name="android-package" value="io.github.pwlin.cordova.plugins.fileopener2.FileOpener2" />
+    <feature name="OneSignalPush">
+        <param name="android-package" value="com.plugin.gcm.OneSignalPush" />
     </feature>
     <name>Gaviglio Digital</name>
     <description>
