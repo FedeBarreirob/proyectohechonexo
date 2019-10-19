@@ -432,6 +432,14 @@ module.exports = [
     "clobbers": [
       "window.plugins.socialsharing"
     ]
+  },
+  {
+    "id": "cordova-plugin-file-opener2.FileOpener2",
+    "file": "plugins/cordova-plugin-file-opener2/www/plugins.FileOpener2.js",
+    "pluginId": "cordova-plugin-file-opener2",
+    "clobbers": [
+      "cordova.plugins.fileOpener2"
+    ]
   }
 ];
 module.exports.metadata = 
@@ -455,7 +463,8 @@ module.exports.metadata =
   "cordova-plugin-google-analytics": "1.8.6",
   "cordova-plugin-customurlscheme": "4.4.0",
   "es6-promise-plugin": "4.2.2",
-  "cordova-plugin-x-socialsharing": "5.4.7"
+  "cordova-plugin-x-socialsharing": "5.4.7",
+  "cordova-plugin-file-opener2": "2.2.1"
 };
 // BOTTOM OF METADATA
 });

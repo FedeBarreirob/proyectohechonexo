@@ -208,6 +208,10 @@
         "source": "/home/alberto/.gradle/caches/transforms-1/files-1.1/play-services-base-11.0.1.aar/ef11296c3e3b6a964acb215e75330619/res/drawable/common_google_signin_btn_text_dark_normal.xml"
     },
     {
+        "merged": "/home/alberto/Desarrollos/Gaviglio/Digital/DigitalUIClientes/phonegap/platforms/android/app/build/intermediates/res/merged/release/xml_opener_paths.xml.flat",
+        "source": "/home/alberto/Desarrollos/Gaviglio/Digital/DigitalUIClientes/phonegap/platforms/android/app/src/main/res/xml/opener_paths.xml"
+    },
+    {
         "merged": "/home/alberto/Desarrollos/Gaviglio/Digital/DigitalUIClientes/phonegap/platforms/android/app/build/intermediates/res/merged/release/drawable_common_google_signin_btn_icon_light_normal.xml.flat",
         "source": "/home/alberto/.gradle/caches/transforms-1/files-1.1/play-services-base-11.0.1.aar/ef11296c3e3b6a964acb215e75330619/res/drawable/common_google_signin_btn_icon_light_normal.xml"
     },
