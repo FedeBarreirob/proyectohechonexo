@@ -35,20 +35,7 @@ export class MainNavComponent implements OnInit, OnDestroy {
 
 	ngOnInit(): void {
 		this.esCelular = this.deviceService.isMobile();
-
-		this.authService.huboLoginCompleto$
-			.pipe(takeUntil(this.destroy$))
-			.subscribe(
-				login => {
-					if (login) {
-						this.cargarLinks();
-					} else {
-						if (this.links) {
-							this.links.splice(0, this.links.length);
-						}
-					}
-				}
-			);
+		this.cargarLinks();
 
 		// escuchar cambios en el toggle del sidebar
 		this.sidebarService.toggle$
@@ -62,7 +49,7 @@ export class MainNavComponent implements OnInit, OnDestroy {
 			.pipe(takeUntil(this.destroy$))
 			.subscribe(
 				respuesta => {
-					if (respuesta == true && this.authService.esLogueado) {
+					if (respuesta == true) {
 						this.sidebarService.notificarVisibilidadBotonSandwiche(true);
 					} else {
 						this.sidebarService.notificarVisibilidadBotonSandwiche(false);

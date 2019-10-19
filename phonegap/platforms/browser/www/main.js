@@ -54,6 +54,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _components_listados_comprobantes_comprobantes_comprobantes_component__WEBPACK_IMPORTED_MODULE_18__ = __webpack_require__(/*! ../components/listados/comprobantes/comprobantes/comprobantes.component */ "./src/app/components/listados/comprobantes/comprobantes/comprobantes.component.ts");
 /* harmony import */ var _components_listados_reportes_reportes_reportes_component__WEBPACK_IMPORTED_MODULE_19__ = __webpack_require__(/*! ../components/listados/reportes/reportes/reportes.component */ "./src/app/components/listados/reportes/reportes/reportes.component.ts");
 /* harmony import */ var _components_usuarios_y_perfiles_informacion_de_perfil_desktop_informacion_de_perfil_desktop_component__WEBPACK_IMPORTED_MODULE_20__ = __webpack_require__(/*! ../components/usuarios-y-perfiles/informacion-de-perfil-desktop/informacion-de-perfil-desktop.component */ "./src/app/components/usuarios-y-perfiles/informacion-de-perfil-desktop/informacion-de-perfil-desktop.component.ts");
+/* harmony import */ var _components_layouts_login_layout_login_layout_component__WEBPACK_IMPORTED_MODULE_21__ = __webpack_require__(/*! ../components/layouts/login-layout/login-layout.component */ "./src/app/components/layouts/login-layout/login-layout.component.ts");
+/* harmony import */ var _components_layouts_home_layout_home_layout_component__WEBPACK_IMPORTED_MODULE_22__ = __webpack_require__(/*! ../components/layouts/home-layout/home-layout.component */ "./src/app/components/layouts/home-layout/home-layout.component.ts");
 var __decorate = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -83,140 +85,149 @@ var __decorate = (undefined && undefined.__decorate) || function (decorators, ta
 
 
 
+
+
 var routes = [
     {
-        path: 'login',
-        component: _components_login_login_component__WEBPACK_IMPORTED_MODULE_4__["LoginComponent"],
+        path: 'login', component: _components_layouts_login_layout_login_layout_component__WEBPACK_IMPORTED_MODULE_21__["LoginLayoutComponent"],
+        children: [
+            { path: '', component: _components_login_login_component__WEBPACK_IMPORTED_MODULE_4__["LoginComponent"] }
+        ]
     },
     {
-        path: 'dashboard',
-        component: _components_tablero_dashboard_dashboard_component__WEBPACK_IMPORTED_MODULE_3__["DashboardComponent"],
-        canActivate: [_security_auth_guard_guard__WEBPACK_IMPORTED_MODULE_2__["AuthGuardGuard"]],
-        data: {
-            rolAdmin: false
-        }
-    },
-    {
-        path: 'ctacte',
-        component: _components_listados_cuenta_corriente_cuenta_corriente_cuenta_corriente_component__WEBPACK_IMPORTED_MODULE_16__["CuentaCorrienteComponent"],
-        canActivate: [_security_auth_guard_guard__WEBPACK_IMPORTED_MODULE_2__["AuthGuardGuard"]],
-        data: {
-            rolAdmin: false
-        }
-    },
-    {
-        path: 'entregas',
-        component: _components_listados_entregas_entregas_entregas_component__WEBPACK_IMPORTED_MODULE_5__["EntregasComponent"],
-        canActivate: [_security_auth_guard_guard__WEBPACK_IMPORTED_MODULE_2__["AuthGuardGuard"]],
-        data: {
-            rolAdmin: false
-        }
-    },
-    {
-        path: 'ventas',
-        component: _components_listados_ventas_ventas_ventas_component__WEBPACK_IMPORTED_MODULE_6__["VentasComponent"],
-        canActivate: [_security_auth_guard_guard__WEBPACK_IMPORTED_MODULE_2__["AuthGuardGuard"]],
-        data: {
-            rolAdmin: false
-        }
-    },
-    {
-        path: 'mercaderia-pendiente-entregar',
-        component: _components_listados_merc_pend_entregar_merc_pend_entregar_merc_pend_entregar_component__WEBPACK_IMPORTED_MODULE_7__["MercPendEntregarComponent"],
-        canActivate: [_security_auth_guard_guard__WEBPACK_IMPORTED_MODULE_2__["AuthGuardGuard"]],
-        data: {
-            rolAdmin: false
-        }
-    },
-    {
-        path: 'comprobantes-pendientes-facturar',
-        component: _components_listados_comprobantes_pend_facturar_comprobantes_pend_facturar_comprobantes_pend_facturar_component__WEBPACK_IMPORTED_MODULE_8__["ComprobantesPendFacturarComponent"],
-        canActivate: [_security_auth_guard_guard__WEBPACK_IMPORTED_MODULE_2__["AuthGuardGuard"]],
-        data: {
-            rolAdmin: false
-        }
-    },
-    {
-        path: 'otros-movimientos',
-        component: _components_listados_otros_movimientos_otros_movimientos_otros_movimientos_component__WEBPACK_IMPORTED_MODULE_10__["OtrosMovimientosComponent"],
-        canActivate: [_security_auth_guard_guard__WEBPACK_IMPORTED_MODULE_2__["AuthGuardGuard"]],
-        data: {
-            rolAdmin: false
-        }
-    },
-    {
-        path: 'administrador-de-cuentas',
-        component: _components_usuarios_y_perfiles_perfiles_perfiles_listado_perfiles_listado_component__WEBPACK_IMPORTED_MODULE_9__["PerfilesListadoComponent"],
-        canActivate: [_security_auth_guard_guard__WEBPACK_IMPORTED_MODULE_2__["AuthGuardGuard"]],
-        data: {
-            rolAdmin: false
-        }
-    },
-    {
-        path: 'informacion-de-perfil',
-        component: _components_usuarios_y_perfiles_informacion_de_perfil_informacion_de_perfil_component__WEBPACK_IMPORTED_MODULE_11__["InformacionDePerfilComponent"],
-        canActivate: [_security_auth_guard_guard__WEBPACK_IMPORTED_MODULE_2__["AuthGuardGuard"]],
-        data: {
-            rolAdmin: false
-        }
-    },
-    {
-        path: 'archivo-de-comprobantes',
-        component: _components_listados_comprobantes_comprobantes_comprobantes_component__WEBPACK_IMPORTED_MODULE_18__["ComprobantesComponent"],
-        canActivate: [_security_auth_guard_guard__WEBPACK_IMPORTED_MODULE_2__["AuthGuardGuard"]],
-        data: {
-            rolAdmin: false
-        }
-    },
-    {
-        path: 'buzon',
-        component: _components_notificaciones_buzon_buzon_component__WEBPACK_IMPORTED_MODULE_15__["BuzonComponent"],
-        canActivate: [_security_auth_guard_guard__WEBPACK_IMPORTED_MODULE_2__["AuthGuardGuard"]],
-        data: {
-            rolAdmin: false
-        }
-    },
-    {
-        path: 'contratos',
-        component: _components_listados_contratos_contratos_contratos_component__WEBPACK_IMPORTED_MODULE_17__["ContratosComponent"],
-        canActivate: [_security_auth_guard_guard__WEBPACK_IMPORTED_MODULE_2__["AuthGuardGuard"]],
-        data: {
-            rolAdmin: false
-        }
-    },
-    {
-        path: 'reportes',
-        component: _components_listados_reportes_reportes_reportes_component__WEBPACK_IMPORTED_MODULE_19__["ReportesComponent"],
-        canActivate: [_security_auth_guard_guard__WEBPACK_IMPORTED_MODULE_2__["AuthGuardGuard"]],
-        data: {
-            rolAdmin: false
-        }
-    },
-    {
-        path: 'informacion-de-perfil-desktop',
-        component: _components_usuarios_y_perfiles_informacion_de_perfil_desktop_informacion_de_perfil_desktop_component__WEBPACK_IMPORTED_MODULE_20__["InformacionDePerfilDesktopComponent"],
-        canActivate: [_security_auth_guard_guard__WEBPACK_IMPORTED_MODULE_2__["AuthGuardGuard"]],
-        data: {
-            rolAdmin: false
-        }
-    },
-    {
-        path: 'recuperacion-password',
-        component: _components_usuarios_y_perfiles_recuperacion_password_recuperacion_password_component__WEBPACK_IMPORTED_MODULE_12__["RecuperacionPasswordComponent"]
-    },
-    {
-        path: 'restablecer-password/:token',
-        component: _components_usuarios_y_perfiles_restablecimiento_password_restablecimiento_password_component__WEBPACK_IMPORTED_MODULE_13__["RestablecimientoPasswordComponent"]
-    },
-    {
-        path: 'solicitud-alta',
-        component: _components_usuarios_y_perfiles_solicitud_alta_solicitud_alta_component__WEBPACK_IMPORTED_MODULE_14__["SolicitudAltaComponent"]
-    },
-    {
-        path: '', redirectTo: '/dashboard', pathMatch: 'full'
-    },
-    {
-        path: '**', redirectTo: '/dashboard'
+        path: '', component: _components_layouts_home_layout_home_layout_component__WEBPACK_IMPORTED_MODULE_22__["HomeLayoutComponent"],
+        children: [
+            {
+                path: 'dashboard',
+                component: _components_tablero_dashboard_dashboard_component__WEBPACK_IMPORTED_MODULE_3__["DashboardComponent"],
+                canActivate: [_security_auth_guard_guard__WEBPACK_IMPORTED_MODULE_2__["AuthGuardGuard"]],
+                data: {
+                    rolAdmin: false
+                }
+            },
+            {
+                path: 'ctacte',
+                component: _components_listados_cuenta_corriente_cuenta_corriente_cuenta_corriente_component__WEBPACK_IMPORTED_MODULE_16__["CuentaCorrienteComponent"],
+                canActivate: [_security_auth_guard_guard__WEBPACK_IMPORTED_MODULE_2__["AuthGuardGuard"]],
+                data: {
+                    rolAdmin: false
+                }
+            },
+            {
+                path: 'entregas',
+                component: _components_listados_entregas_entregas_entregas_component__WEBPACK_IMPORTED_MODULE_5__["EntregasComponent"],
+                canActivate: [_security_auth_guard_guard__WEBPACK_IMPORTED_MODULE_2__["AuthGuardGuard"]],
+                data: {
+                    rolAdmin: false
+                }
+            },
+            {
+                path: 'ventas',
+                component: _components_listados_ventas_ventas_ventas_component__WEBPACK_IMPORTED_MODULE_6__["VentasComponent"],
+                canActivate: [_security_auth_guard_guard__WEBPACK_IMPORTED_MODULE_2__["AuthGuardGuard"]],
+                data: {
+                    rolAdmin: false
+                }
+            },
+            {
+                path: 'mercaderia-pendiente-entregar',
+                component: _components_listados_merc_pend_entregar_merc_pend_entregar_merc_pend_entregar_component__WEBPACK_IMPORTED_MODULE_7__["MercPendEntregarComponent"],
+                canActivate: [_security_auth_guard_guard__WEBPACK_IMPORTED_MODULE_2__["AuthGuardGuard"]],
+                data: {
+                    rolAdmin: false
+                }
+            },
+            {
+                path: 'comprobantes-pendientes-facturar',
+                component: _components_listados_comprobantes_pend_facturar_comprobantes_pend_facturar_comprobantes_pend_facturar_component__WEBPACK_IMPORTED_MODULE_8__["ComprobantesPendFacturarComponent"],
+                canActivate: [_security_auth_guard_guard__WEBPACK_IMPORTED_MODULE_2__["AuthGuardGuard"]],
+                data: {
+                    rolAdmin: false
+                }
+            },
+            {
+                path: 'otros-movimientos',
+                component: _components_listados_otros_movimientos_otros_movimientos_otros_movimientos_component__WEBPACK_IMPORTED_MODULE_10__["OtrosMovimientosComponent"],
+                canActivate: [_security_auth_guard_guard__WEBPACK_IMPORTED_MODULE_2__["AuthGuardGuard"]],
+                data: {
+                    rolAdmin: false
+                }
+            },
+            {
+                path: 'administrador-de-cuentas',
+                component: _components_usuarios_y_perfiles_perfiles_perfiles_listado_perfiles_listado_component__WEBPACK_IMPORTED_MODULE_9__["PerfilesListadoComponent"],
+                canActivate: [_security_auth_guard_guard__WEBPACK_IMPORTED_MODULE_2__["AuthGuardGuard"]],
+                data: {
+                    rolAdmin: false
+                }
+            },
+            {
+                path: 'informacion-de-perfil',
+                component: _components_usuarios_y_perfiles_informacion_de_perfil_informacion_de_perfil_component__WEBPACK_IMPORTED_MODULE_11__["InformacionDePerfilComponent"],
+                canActivate: [_security_auth_guard_guard__WEBPACK_IMPORTED_MODULE_2__["AuthGuardGuard"]],
+                data: {
+                    rolAdmin: false
+                }
+            },
+            {
+                path: 'archivo-de-comprobantes',
+                component: _components_listados_comprobantes_comprobantes_comprobantes_component__WEBPACK_IMPORTED_MODULE_18__["ComprobantesComponent"],
+                canActivate: [_security_auth_guard_guard__WEBPACK_IMPORTED_MODULE_2__["AuthGuardGuard"]],
+                data: {
+                    rolAdmin: false
+                }
+            },
+            {
+                path: 'buzon',
+                component: _components_notificaciones_buzon_buzon_component__WEBPACK_IMPORTED_MODULE_15__["BuzonComponent"],
+                canActivate: [_security_auth_guard_guard__WEBPACK_IMPORTED_MODULE_2__["AuthGuardGuard"]],
+                data: {
+                    rolAdmin: false
+                }
+            },
+            {
+                path: 'contratos',
+                component: _components_listados_contratos_contratos_contratos_component__WEBPACK_IMPORTED_MODULE_17__["ContratosComponent"],
+                canActivate: [_security_auth_guard_guard__WEBPACK_IMPORTED_MODULE_2__["AuthGuardGuard"]],
+                data: {
+                    rolAdmin: false
+                }
+            },
+            {
+                path: 'reportes',
+                component: _components_listados_reportes_reportes_reportes_component__WEBPACK_IMPORTED_MODULE_19__["ReportesComponent"],
+                canActivate: [_security_auth_guard_guard__WEBPACK_IMPORTED_MODULE_2__["AuthGuardGuard"]],
+                data: {
+                    rolAdmin: false
+                }
+            },
+            {
+                path: 'informacion-de-perfil-desktop',
+                component: _components_usuarios_y_perfiles_informacion_de_perfil_desktop_informacion_de_perfil_desktop_component__WEBPACK_IMPORTED_MODULE_20__["InformacionDePerfilDesktopComponent"],
+                canActivate: [_security_auth_guard_guard__WEBPACK_IMPORTED_MODULE_2__["AuthGuardGuard"]],
+                data: {
+                    rolAdmin: false
+                }
+            },
+            {
+                path: 'recuperacion-password',
+                component: _components_usuarios_y_perfiles_recuperacion_password_recuperacion_password_component__WEBPACK_IMPORTED_MODULE_12__["RecuperacionPasswordComponent"]
+            },
+            {
+                path: 'restablecer-password/:token',
+                component: _components_usuarios_y_perfiles_restablecimiento_password_restablecimiento_password_component__WEBPACK_IMPORTED_MODULE_13__["RestablecimientoPasswordComponent"]
+            },
+            {
+                path: 'solicitud-alta',
+                component: _components_usuarios_y_perfiles_solicitud_alta_solicitud_alta_component__WEBPACK_IMPORTED_MODULE_14__["SolicitudAltaComponent"]
+            },
+            {
+                path: '', redirectTo: '/dashboard', pathMatch: 'full'
+            },
+            {
+                path: '**', redirectTo: '/dashboard'
+            }
+        ]
     }
 ];
 var AppRoutingModule = /** @class */ (function () {
@@ -258,7 +269,7 @@ module.exports = ""
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<app-main-nav>\n    <router-outlet></router-outlet>\n</app-main-nav>"
+module.exports = "<router-outlet></router-outlet>"
 
 /***/ }),
 
@@ -518,6 +529,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _components_usuarios_y_perfiles_terceros_terceros_lista_desktop_terceros_lista_desktop_component__WEBPACK_IMPORTED_MODULE_149__ = __webpack_require__(/*! ./components/usuarios-y-perfiles/terceros/terceros-lista-desktop/terceros-lista-desktop.component */ "./src/app/components/usuarios-y-perfiles/terceros/terceros-lista-desktop/terceros-lista-desktop.component.ts");
 /* harmony import */ var _components_usuarios_y_perfiles_edita_tu_perfil_desktop_edita_tu_perfil_desktop_component__WEBPACK_IMPORTED_MODULE_150__ = __webpack_require__(/*! ./components/usuarios-y-perfiles/edita-tu-perfil-desktop/edita-tu-perfil-desktop.component */ "./src/app/components/usuarios-y-perfiles/edita-tu-perfil-desktop/edita-tu-perfil-desktop.component.ts");
 /* harmony import */ var _components_usuarios_y_perfiles_terceros_acceso_terceros_edicion_desktop_acceso_terceros_edicion_desktop_component__WEBPACK_IMPORTED_MODULE_151__ = __webpack_require__(/*! ./components/usuarios-y-perfiles/terceros/acceso-terceros-edicion-desktop/acceso-terceros-edicion-desktop.component */ "./src/app/components/usuarios-y-perfiles/terceros/acceso-terceros-edicion-desktop/acceso-terceros-edicion-desktop.component.ts");
+/* harmony import */ var _components_layouts_login_layout_login_layout_component__WEBPACK_IMPORTED_MODULE_152__ = __webpack_require__(/*! ./components/layouts/login-layout/login-layout.component */ "./src/app/components/layouts/login-layout/login-layout.component.ts");
+/* harmony import */ var _components_layouts_home_layout_home_layout_component__WEBPACK_IMPORTED_MODULE_153__ = __webpack_require__(/*! ./components/layouts/home-layout/home-layout.component */ "./src/app/components/layouts/home-layout/home-layout.component.ts");
 var __decorate = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -552,6 +565,8 @@ var DEFAULT_SWIPER_CONFIG = {
 
 
 // Componentes
+
+
 
 
 
@@ -826,7 +841,9 @@ var AppModule = /** @class */ (function () {
                 _components_usuarios_y_perfiles_selector_unidad_medida_selector_unidad_medida_component__WEBPACK_IMPORTED_MODULE_148__["SelectorUnidadMedidaComponent"],
                 _components_usuarios_y_perfiles_terceros_terceros_lista_desktop_terceros_lista_desktop_component__WEBPACK_IMPORTED_MODULE_149__["TercerosListaDesktopComponent"],
                 _components_usuarios_y_perfiles_edita_tu_perfil_desktop_edita_tu_perfil_desktop_component__WEBPACK_IMPORTED_MODULE_150__["EditaTuPerfilDesktopComponent"],
-                _components_usuarios_y_perfiles_terceros_acceso_terceros_edicion_desktop_acceso_terceros_edicion_desktop_component__WEBPACK_IMPORTED_MODULE_151__["AccesoTercerosEdicionDesktopComponent"]
+                _components_usuarios_y_perfiles_terceros_acceso_terceros_edicion_desktop_acceso_terceros_edicion_desktop_component__WEBPACK_IMPORTED_MODULE_151__["AccesoTercerosEdicionDesktopComponent"],
+                _components_layouts_login_layout_login_layout_component__WEBPACK_IMPORTED_MODULE_152__["LoginLayoutComponent"],
+                _components_layouts_home_layout_home_layout_component__WEBPACK_IMPORTED_MODULE_153__["HomeLayoutComponent"]
             ],
             imports: [
                 _angular_common_http__WEBPACK_IMPORTED_MODULE_2__["HttpClientModule"],
@@ -1998,6 +2015,132 @@ var FiltroCosechaComponent = /** @class */ (function () {
         __metadata("design:paramtypes", [Object, _angular_material__WEBPACK_IMPORTED_MODULE_1__["MatDialogRef"]])
     ], FiltroCosechaComponent);
     return FiltroCosechaComponent;
+}());
+
+
+
+/***/ }),
+
+/***/ "./src/app/components/layouts/home-layout/home-layout.component.css":
+/*!**************************************************************************!*\
+  !*** ./src/app/components/layouts/home-layout/home-layout.component.css ***!
+  \**************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+module.exports = ""
+
+/***/ }),
+
+/***/ "./src/app/components/layouts/home-layout/home-layout.component.html":
+/*!***************************************************************************!*\
+  !*** ./src/app/components/layouts/home-layout/home-layout.component.html ***!
+  \***************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+module.exports = "<app-main-nav>\n  <router-outlet></router-outlet>\n</app-main-nav>  "
+
+/***/ }),
+
+/***/ "./src/app/components/layouts/home-layout/home-layout.component.ts":
+/*!*************************************************************************!*\
+  !*** ./src/app/components/layouts/home-layout/home-layout.component.ts ***!
+  \*************************************************************************/
+/*! exports provided: HomeLayoutComponent */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "HomeLayoutComponent", function() { return HomeLayoutComponent; });
+/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm5/core.js");
+var __decorate = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+var __metadata = (undefined && undefined.__metadata) || function (k, v) {
+    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+};
+
+var HomeLayoutComponent = /** @class */ (function () {
+    function HomeLayoutComponent() {
+    }
+    HomeLayoutComponent.prototype.ngOnInit = function () {
+    };
+    HomeLayoutComponent = __decorate([
+        Object(_angular_core__WEBPACK_IMPORTED_MODULE_0__["Component"])({
+            selector: 'app-home-layout',
+            template: __webpack_require__(/*! ./home-layout.component.html */ "./src/app/components/layouts/home-layout/home-layout.component.html"),
+            styles: [__webpack_require__(/*! ./home-layout.component.css */ "./src/app/components/layouts/home-layout/home-layout.component.css")]
+        }),
+        __metadata("design:paramtypes", [])
+    ], HomeLayoutComponent);
+    return HomeLayoutComponent;
+}());
+
+
+
+/***/ }),
+
+/***/ "./src/app/components/layouts/login-layout/login-layout.component.css":
+/*!****************************************************************************!*\
+  !*** ./src/app/components/layouts/login-layout/login-layout.component.css ***!
+  \****************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+module.exports = ""
+
+/***/ }),
+
+/***/ "./src/app/components/layouts/login-layout/login-layout.component.html":
+/*!*****************************************************************************!*\
+  !*** ./src/app/components/layouts/login-layout/login-layout.component.html ***!
+  \*****************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+module.exports = "<router-outlet></router-outlet>"
+
+/***/ }),
+
+/***/ "./src/app/components/layouts/login-layout/login-layout.component.ts":
+/*!***************************************************************************!*\
+  !*** ./src/app/components/layouts/login-layout/login-layout.component.ts ***!
+  \***************************************************************************/
+/*! exports provided: LoginLayoutComponent */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "LoginLayoutComponent", function() { return LoginLayoutComponent; });
+/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm5/core.js");
+var __decorate = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+var __metadata = (undefined && undefined.__metadata) || function (k, v) {
+    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+};
+
+var LoginLayoutComponent = /** @class */ (function () {
+    function LoginLayoutComponent() {
+    }
+    LoginLayoutComponent.prototype.ngOnInit = function () {
+    };
+    LoginLayoutComponent = __decorate([
+        Object(_angular_core__WEBPACK_IMPORTED_MODULE_0__["Component"])({
+            selector: 'app-login-layout',
+            template: __webpack_require__(/*! ./login-layout.component.html */ "./src/app/components/layouts/login-layout/login-layout.component.html"),
+            styles: [__webpack_require__(/*! ./login-layout.component.css */ "./src/app/components/layouts/login-layout/login-layout.component.css")]
+        }),
+        __metadata("design:paramtypes", [])
+    ], LoginLayoutComponent);
+    return LoginLayoutComponent;
 }());
 
 
@@ -11643,7 +11786,7 @@ module.exports = ".sidenav-container {\n  height: 100%;\n  font-family: Rubik;\n
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<mat-toolbar class=\"main-toolbar\" *ngIf=\"authService.esLogueado && !esCelular\">\n\t<button type=\"button\" aria-label=\"Toggle sidenav\" mat-icon-button (click)=\"drawer.toggle()\"\n\t\t*ngIf=\"(isHandset$ | async) && authService.esLogueado\">\n\t\t<mat-icon aria-label=\"Side nav toggle icon\">menu</mat-icon>\n\t</button>\n\n\t<span>\n\t\t<img src=\"assets/logo.png\" class=\"logo\" alt=\"Gaviglio\" />\n\t</span>\n\n\t<span class=\"relleno\"></span>\n\n\t<span class=\"relleno\"\n\t\t*ngIf=\"authService.esAdmin || authService.esRol('SUB_ADMINISTRADOR') || authService.esRol('COMERCIAL')\">\n\t\t<app-selector-cuentas></app-selector-cuentas>\n\t</span>\n\n\t<span class=\"notificaciones-container\">\n\t\t<button mat-icon-button (click)=\"mostrarOcultarNotificaciones()\">\n\t\t\t<app-acceso-buzon></app-acceso-buzon>\n\t\t</button>\n\t</span>\n\n\t<span class=\"info-perfil-container\">\n\t\t<a href=\"\" routerLink=\"/informacion-de-perfil-desktop\" style=\"text-decoration: none\">\n\t\t\t<app-info-perfil modoParaToolbar=\"true\"></app-info-perfil>\n\t\t</a>\n\t</span>\n\n\t<span class=\"selector-combo-container\">\n\t\t<app-combo-cuenta [showAvatar]=\"false\" sizeArrow=\"36px\"></app-combo-cuenta>\n\t</span>\n</mat-toolbar>\n\n<mat-sidenav-container class=\"sidenav-container\">\n\n\t<mat-sidenav #menuNotificaciones position=\"end\" class=\"sidenav-notificaciones\" *ngIf=\"!esCelular\">\n\t\t<app-panel-notificaciones (botonCerrar)=\"menuNotificaciones.toggle()\"></app-panel-notificaciones>\n\t</mat-sidenav>\n\n\t<mat-sidenav *ngIf=\"authService.esLogueado\" (click)=\"isPantallaPequena && drawer.toggle()\" #drawer\n\t\t[ngClass]=\"{'sidenav': esCelular, 'sidenav-desktop': !esCelular}\" fixedInViewport=\"true\"\n\t\t[attr.role]=\"(isHandset$ | async) ? 'dialog' : 'navigation'\" [mode]=\"(isHandset$ | async) ? 'over' : 'side'\"\n\t\t[opened]=\"!isPantallaPequena && authService.esLogueado\">\n\n\t\t<app-info-perfil *ngIf=\"esCelular\"></app-info-perfil>\n\n\t\t<p class=\"menu-text\" *ngIf=\"!esCelular\">MENÚ</p>\n\n\t\t<mat-nav-list *ngIf=\"authService.esLogueado\">\n\n\t\t\t<div *ngFor=\"let link of links\">\n\t\t\t\t<app-link-menu [link]=\"link\" *ngIf=\"!(link.ocultarDesktop == true && !esCelular)\"></app-link-menu>\n\t\t\t</div>\n\n\t\t</mat-nav-list>\n\t</mat-sidenav>\n\n\t<mat-sidenav-content>\n\n\t\t<ng-content></ng-content>\n\n\t</mat-sidenav-content>\n</mat-sidenav-container>"
+module.exports = "<mat-toolbar class=\"main-toolbar\" *ngIf=\"!esCelular\">\n\t<button type=\"button\" aria-label=\"Toggle sidenav\" mat-icon-button (click)=\"drawer.toggle()\"\n\t\t*ngIf=\"(isHandset$ | async)\">\n\t\t<mat-icon aria-label=\"Side nav toggle icon\">menu</mat-icon>\n\t</button>\n\n\t<span>\n\t\t<img src=\"assets/logo.png\" class=\"logo\" alt=\"Gaviglio\" />\n\t</span>\n\n\t<span class=\"relleno\"></span>\n\n\t<span class=\"relleno\"\n\t\t*ngIf=\"authService.esAdmin || authService.esRol('SUB_ADMINISTRADOR') || authService.esRol('COMERCIAL')\">\n\t\t<app-selector-cuentas></app-selector-cuentas>\n\t</span>\n\n\t<span class=\"notificaciones-container\">\n\t\t<button mat-icon-button (click)=\"mostrarOcultarNotificaciones()\">\n\t\t\t<app-acceso-buzon></app-acceso-buzon>\n\t\t</button>\n\t</span>\n\n\t<span class=\"info-perfil-container\">\n\t\t<a href=\"\" routerLink=\"/informacion-de-perfil-desktop\" style=\"text-decoration: none\">\n\t\t\t<app-info-perfil modoParaToolbar=\"true\"></app-info-perfil>\n\t\t</a>\n\t</span>\n\n\t<span class=\"selector-combo-container\">\n\t\t<app-combo-cuenta [showAvatar]=\"false\" sizeArrow=\"36px\"></app-combo-cuenta>\n\t</span>\n</mat-toolbar>\n\n<mat-sidenav-container class=\"sidenav-container\">\n\n\t<mat-sidenav #menuNotificaciones position=\"end\" class=\"sidenav-notificaciones\" *ngIf=\"!esCelular\">\n\t\t<app-panel-notificaciones (botonCerrar)=\"menuNotificaciones.toggle()\"></app-panel-notificaciones>\n\t</mat-sidenav>\n\n\t<mat-sidenav (click)=\"isPantallaPequena && drawer.toggle()\" #drawer\n\t\t[ngClass]=\"{'sidenav': esCelular, 'sidenav-desktop': !esCelular}\" fixedInViewport=\"true\"\n\t\t[attr.role]=\"(isHandset$ | async) ? 'dialog' : 'navigation'\" [mode]=\"(isHandset$ | async) ? 'over' : 'side'\"\n\t\t[opened]=\"!(isHandset$ | async)\">\n\n\t\t<app-info-perfil *ngIf=\"esCelular\"></app-info-perfil>\n\n\t\t<p class=\"menu-text\" *ngIf=\"!esCelular\">MENÚ</p>\n\n\t\t<mat-nav-list>\n\n\t\t\t<div *ngFor=\"let link of links\">\n\t\t\t\t<app-link-menu [link]=\"link\" *ngIf=\"!(link.ocultarDesktop == true && !esCelular)\"></app-link-menu>\n\t\t\t</div>\n\n\t\t</mat-nav-list>\n\t</mat-sidenav>\n\n\t<mat-sidenav-content>\n\n\t\t<ng-content></ng-content>\n\n\t</mat-sidenav-content>\n</mat-sidenav-container>"
 
 /***/ }),
 
@@ -11696,18 +11839,7 @@ var MainNavComponent = /** @class */ (function () {
     MainNavComponent.prototype.ngOnInit = function () {
         var _this = this;
         this.esCelular = this.deviceService.isMobile();
-        this.authService.huboLoginCompleto$
-            .pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_3__["takeUntil"])(this.destroy$))
-            .subscribe(function (login) {
-            if (login) {
-                _this.cargarLinks();
-            }
-            else {
-                if (_this.links) {
-                    _this.links.splice(0, _this.links.length);
-                }
-            }
-        });
+        this.cargarLinks();
         // escuchar cambios en el toggle del sidebar
         this.sidebarService.toggle$
             .pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_3__["takeUntil"])(this.destroy$))
@@ -11716,7 +11848,7 @@ var MainNavComponent = /** @class */ (function () {
         this.isHandset$
             .pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_3__["takeUntil"])(this.destroy$))
             .subscribe(function (respuesta) {
-            if (respuesta == true && _this.authService.esLogueado) {
+            if (respuesta == true) {
                 _this.sidebarService.notificarVisibilidadBotonSandwiche(true);
             }
             else {

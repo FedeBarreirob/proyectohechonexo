@@ -23,141 +23,150 @@ import { ContratosComponent } from '../components/listados/contratos/contratos/c
 import { ComprobantesComponent } from '../components/listados/comprobantes/comprobantes/comprobantes.component';
 import { ReportesComponent } from '../components/listados/reportes/reportes/reportes.component';
 import { InformacionDePerfilDesktopComponent } from '../components/usuarios-y-perfiles/informacion-de-perfil-desktop/informacion-de-perfil-desktop.component';
+import { LoginLayoutComponent } from '../components/layouts/login-layout/login-layout.component';
+import { HomeLayoutComponent } from '../components/layouts/home-layout/home-layout.component';
 
 const routes: Routes = [
 	{
-		path: 'login',
-		component: LoginComponent,
+		path: 'login', component: LoginLayoutComponent,
+		children: [
+			{ path: '', component: LoginComponent }
+		]
 	},
 	{
-		path: 'dashboard',
-		component: DashboardComponent,
-		canActivate: [AuthGuardGuard],
-		data: {
-			rolAdmin: false
-		}
-	},
-	{
-		path: 'ctacte',
-		component: CuentaCorrienteComponent,
-		canActivate: [AuthGuardGuard],
-		data: {
-			rolAdmin: false
-		}
-	},
-	{
-		path: 'entregas',
-		component: EntregasComponent,
-		canActivate: [AuthGuardGuard],
-		data: {
-			rolAdmin: false
-		}
-	},
-	{
-		path: 'ventas',
-		component: VentasComponent,
-		canActivate: [AuthGuardGuard],
-		data: {
-			rolAdmin: false
-		}
-	},
-	{
-		path: 'mercaderia-pendiente-entregar',
-		component: MercPendEntregarComponent,
-		canActivate: [AuthGuardGuard],
-		data: {
-			rolAdmin: false
-		}
-	},
-	{
-		path: 'comprobantes-pendientes-facturar',
-		component: ComprobantesPendFacturarComponent,
-		canActivate: [AuthGuardGuard],
-		data: {
-			rolAdmin: false
-		}
-	},
-	{
-		path: 'otros-movimientos',
-		component: OtrosMovimientosComponent,
-		canActivate: [AuthGuardGuard],
-		data: {
-			rolAdmin: false
-		}
-	},
-	{
-		path: 'administrador-de-cuentas',
-		component: PerfilesListadoComponent,
-		canActivate: [AuthGuardGuard],
-		data: {
-			rolAdmin: false
-		}
-	},
-	{
-		path: 'informacion-de-perfil',
-		component: InformacionDePerfilComponent,
-		canActivate: [AuthGuardGuard],
-		data: {
-			rolAdmin: false
-		}
-	},
-	{
-		path: 'archivo-de-comprobantes',
-		component: ComprobantesComponent,
-		canActivate: [AuthGuardGuard],
-		data: {
-			rolAdmin: false
-		}
-	},
-	{
-		path: 'buzon',
-		component: BuzonComponent,
-		canActivate: [AuthGuardGuard],
-		data: {
-			rolAdmin: false
-		}
-	},
-	{
-		path: 'contratos',
-		component: ContratosComponent,
-		canActivate: [AuthGuardGuard],
-		data: {
-			rolAdmin: false
-		}
-	},
-	{
-		path: 'reportes',
-		component: ReportesComponent,
-		canActivate: [AuthGuardGuard],
-		data: {
-			rolAdmin: false
-		}
-	},
-	{
-		path: 'informacion-de-perfil-desktop',
-		component: InformacionDePerfilDesktopComponent,
-		canActivate: [AuthGuardGuard],
-		data: {
-			rolAdmin: false
-		}
-	},
-	{
-		path: 'recuperacion-password',
-		component: RecuperacionPasswordComponent
-	},
-	{
-		path: 'restablecer-password/:token',
-		component: RestablecimientoPasswordComponent
-	},
-	{
-		path: 'solicitud-alta',
-		component: SolicitudAltaComponent
-	},
-	{
-		path: '', redirectTo: '/dashboard', pathMatch: 'full'
-	},
-	{
-		path: '**', redirectTo: '/dashboard'
+		path: '', component: HomeLayoutComponent,
+		children: [
+			{
+				path: 'dashboard',
+				component: DashboardComponent,
+				canActivate: [AuthGuardGuard],
+				data: {
+					rolAdmin: false
+				}
+			},
+			{
+				path: 'ctacte',
+				component: CuentaCorrienteComponent,
+				canActivate: [AuthGuardGuard],
+				data: {
+					rolAdmin: false
+				}
+			},
+			{
+				path: 'entregas',
+				component: EntregasComponent,
+				canActivate: [AuthGuardGuard],
+				data: {
+					rolAdmin: false
+				}
+			},
+			{
+				path: 'ventas',
+				component: VentasComponent,
+				canActivate: [AuthGuardGuard],
+				data: {
+					rolAdmin: false
+				}
+			},
+			{
+				path: 'mercaderia-pendiente-entregar',
+				component: MercPendEntregarComponent,
+				canActivate: [AuthGuardGuard],
+				data: {
+					rolAdmin: false
+				}
+			},
+			{
+				path: 'comprobantes-pendientes-facturar',
+				component: ComprobantesPendFacturarComponent,
+				canActivate: [AuthGuardGuard],
+				data: {
+					rolAdmin: false
+				}
+			},
+			{
+				path: 'otros-movimientos',
+				component: OtrosMovimientosComponent,
+				canActivate: [AuthGuardGuard],
+				data: {
+					rolAdmin: false
+				}
+			},
+			{
+				path: 'administrador-de-cuentas',
+				component: PerfilesListadoComponent,
+				canActivate: [AuthGuardGuard],
+				data: {
+					rolAdmin: false
+				}
+			},
+			{
+				path: 'informacion-de-perfil',
+				component: InformacionDePerfilComponent,
+				canActivate: [AuthGuardGuard],
+				data: {
+					rolAdmin: false
+				}
+			},
+			{
+				path: 'archivo-de-comprobantes',
+				component: ComprobantesComponent,
+				canActivate: [AuthGuardGuard],
+				data: {
+					rolAdmin: false
+				}
+			},
+			{
+				path: 'buzon',
+				component: BuzonComponent,
+				canActivate: [AuthGuardGuard],
+				data: {
+					rolAdmin: false
+				}
+			},
+			{
+				path: 'contratos',
+				component: ContratosComponent,
+				canActivate: [AuthGuardGuard],
+				data: {
+					rolAdmin: false
+				}
+			},
+			{
+				path: 'reportes',
+				component: ReportesComponent,
+				canActivate: [AuthGuardGuard],
+				data: {
+					rolAdmin: false
+				}
+			},
+			{
+				path: 'informacion-de-perfil-desktop',
+				component: InformacionDePerfilDesktopComponent,
+				canActivate: [AuthGuardGuard],
+				data: {
+					rolAdmin: false
+				}
+			},
+			{
+				path: 'recuperacion-password',
+				component: RecuperacionPasswordComponent
+			},
+			{
+				path: 'restablecer-password/:token',
+				component: RestablecimientoPasswordComponent
+			},
+			{
+				path: 'solicitud-alta',
+				component: SolicitudAltaComponent
+			},
+			{
+				path: '', redirectTo: '/dashboard', pathMatch: 'full'
+			},
+			{
+				path: '**', redirectTo: '/dashboard'
+			}
+		]
 	}
 ];
 

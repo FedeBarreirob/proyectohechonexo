@@ -1,6 +1,6 @@
-<mat-toolbar class="main-toolbar" *ngIf="authService.esLogueado && !esCelular">
+<mat-toolbar class="main-toolbar" *ngIf="!esCelular">
 	<button type="button" aria-label="Toggle sidenav" mat-icon-button (click)="drawer.toggle()"
-		*ngIf="(isHandset$ | async) && authService.esLogueado">
+		*ngIf="(isHandset$ | async)">
 		<mat-icon aria-label="Side nav toggle icon">menu</mat-icon>
 	</button>
 
@@ -38,16 +38,16 @@
 		<app-panel-notificaciones (botonCerrar)="menuNotificaciones.toggle()"></app-panel-notificaciones>
 	</mat-sidenav>
 
-	<mat-sidenav *ngIf="authService.esLogueado" (click)="isPantallaPequena && drawer.toggle()" #drawer
+	<mat-sidenav (click)="isPantallaPequena && drawer.toggle()" #drawer
 		[ngClass]="{'sidenav': esCelular, 'sidenav-desktop': !esCelular}" fixedInViewport="true"
 		[attr.role]="(isHandset$ | async) ? 'dialog' : 'navigation'" [mode]="(isHandset$ | async) ? 'over' : 'side'"
-		[opened]="!(isHandset$ | async) && authService.esLogueado">
+		[opened]="!(isHandset$ | async)">
 
 		<app-info-perfil *ngIf="esCelular"></app-info-perfil>
 
 		<p class="menu-text" *ngIf="!esCelular">MENÚ</p>
 
-		<mat-nav-list *ngIf="authService.esLogueado">
+		<mat-nav-list>
 
 			<div *ngFor="let link of links">
 				<app-link-menu [link]="link" *ngIf="!(link.ocultarDesktop == true && !esCelular)"></app-link-menu>
