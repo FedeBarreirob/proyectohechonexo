@@ -288,6 +288,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _angular_platform_browser__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @angular/platform-browser */ "./node_modules/@angular/platform-browser/fesm5/platform-browser.js");
 /* harmony import */ var _angular_router__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @angular/router */ "./node_modules/@angular/router/fesm5/router.js");
 /* harmony import */ var _services_security_authentication_service__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./services/security/authentication.service */ "./src/app/services/security/authentication.service.ts");
+/* harmony import */ var _services_analytics_google_analytics_service__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./services/analytics/google-analytics.service */ "./src/app/services/analytics/google-analytics.service.ts");
 var __decorate = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -302,17 +303,22 @@ var __metadata = (undefined && undefined.__metadata) || function (k, v) {
 
 
 
+
 var AppComponent = /** @class */ (function () {
-    function AppComponent(matIconRegistry, domSanitizer, router, authService) {
+    function AppComponent(matIconRegistry, domSanitizer, router, authService, googleAnalyticsService) {
         this.matIconRegistry = matIconRegistry;
         this.domSanitizer = domSanitizer;
         this.router = router;
         this.authService = authService;
+        this.googleAnalyticsService = googleAnalyticsService;
         this.title = 'Gaviglio Digital Clientes';
         this.cargarIconos();
         this.trackUrl();
         this.trackUser();
     }
+    AppComponent.prototype.ngOnInit = function () {
+        this.googleAnalyticsService.init();
+    };
     /**
      * Carga los iconos
      */
@@ -326,11 +332,15 @@ var AppComponent = /** @class */ (function () {
      * Trackea las url para google analytics
      */
     AppComponent.prototype.trackUrl = function () {
+        var _this = this;
         // subscribe to router events and send page views to Google Analytics
         this.router.events.subscribe(function (event) {
             if (event instanceof _angular_router__WEBPACK_IMPORTED_MODULE_3__["NavigationEnd"]) {
-                ga('set', 'page', event.urlAfterRedirects);
-                ga('send', 'pageview');
+                _this.googleAnalyticsService.trackView("route", event.urlAfterRedirects);
+                if (ga) {
+                    ga('set', 'page', event.urlAfterRedirects);
+                    ga('send', 'pageview');
+                }
             }
         });
     };
@@ -342,7 +352,9 @@ var AppComponent = /** @class */ (function () {
         this.authService.huboLoginCompleto$.subscribe(function (respuesta) {
             if (respuesta == true) {
                 var usuario = _this.authService.perfilUsuarioLogueado().credencial.username;
-                ga('set', 'userId', usuario);
+                if (ga) {
+                    ga('set', 'userId', usuario);
+                }
             }
         });
     };
@@ -355,7 +367,8 @@ var AppComponent = /** @class */ (function () {
         __metadata("design:paramtypes", [_angular_material__WEBPACK_IMPORTED_MODULE_1__["MatIconRegistry"],
             _angular_platform_browser__WEBPACK_IMPORTED_MODULE_2__["DomSanitizer"],
             _angular_router__WEBPACK_IMPORTED_MODULE_3__["Router"],
-            _services_security_authentication_service__WEBPACK_IMPORTED_MODULE_4__["AuthenticationService"]])
+            _services_security_authentication_service__WEBPACK_IMPORTED_MODULE_4__["AuthenticationService"],
+            _services_analytics_google_analytics_service__WEBPACK_IMPORTED_MODULE_5__["GoogleAnalyticsService"]])
     ], AppComponent);
     return AppComponent;
 }());
@@ -12698,6 +12711,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var file_saver_FileSaver__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! file-saver/FileSaver */ "./node_modules/file-saver/FileSaver.js");
 /* harmony import */ var file_saver_FileSaver__WEBPACK_IMPORTED_MODULE_5___default = /*#__PURE__*/__webpack_require__.n(file_saver_FileSaver__WEBPACK_IMPORTED_MODULE_5__);
 /* harmony import */ var _enums_estado_notificaciones_enum__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../../../enums/estado-notificaciones.enum */ "./src/app/enums/estado-notificaciones.enum.ts");
+/* harmony import */ var _services_sharedServices_downloader_downloader_util_service__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ../../../services/sharedServices/downloader/downloader-util.service */ "./src/app/services/sharedServices/downloader/downloader-util.service.ts");
+/* harmony import */ var _environments_environment__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ../../../../environments/environment */ "./src/environments/environment.ts");
 var __decorate = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -12717,13 +12732,16 @@ var __param = (undefined && undefined.__param) || function (paramIndex, decorato
 
 
 
+
+
 var NotificacionDetalleComponent = /** @class */ (function () {
-    function NotificacionDetalleComponent(data, authenticationService, notificacionService, comprobanteDownloaderService, snackBar) {
+    function NotificacionDetalleComponent(data, authenticationService, notificacionService, comprobanteDownloaderService, snackBar, downloaderUtilService) {
         this.data = data;
         this.authenticationService = authenticationService;
         this.notificacionService = notificacionService;
         this.comprobanteDownloaderService = comprobanteDownloaderService;
         this.snackBar = snackBar;
+        this.downloaderUtilService = downloaderUtilService;
         this.usuarioLogueado = this.authenticationService.usuarioLogueado();
     }
     NotificacionDetalleComponent.prototype.ngOnInit = function () {
@@ -12742,7 +12760,12 @@ var NotificacionDetalleComponent = /** @class */ (function () {
             var blob = new Blob([respuesta], { type: mediaType });
             var filename = comprobante.comprobante + ".pdf";
             if (blob.size !== 0) {
-                Object(file_saver_FileSaver__WEBPACK_IMPORTED_MODULE_5__["saveAs"])(blob, filename);
+                if (_environments_environment__WEBPACK_IMPORTED_MODULE_8__["environment"].inPhonegap) {
+                    _this.downloaderUtilService.download(filename, blob, mediaType);
+                }
+                else {
+                    Object(file_saver_FileSaver__WEBPACK_IMPORTED_MODULE_5__["saveAs"])(blob, filename);
+                }
             }
             else {
                 _this.openSnackBar("El comprobante no se encuentra disponible para su descarga.", "Descarga de comprobantes");
@@ -12780,7 +12803,12 @@ var NotificacionDetalleComponent = /** @class */ (function () {
             var blob = new Blob([respuesta], { type: mediaType });
             var filename = confirmacionVenta.comprobante + ".pdf";
             if (blob.size !== 0) {
-                Object(file_saver_FileSaver__WEBPACK_IMPORTED_MODULE_5__["saveAs"])(blob, filename);
+                if (_environments_environment__WEBPACK_IMPORTED_MODULE_8__["environment"].inPhonegap) {
+                    _this.downloaderUtilService.download(filename, blob, mediaType);
+                }
+                else {
+                    Object(file_saver_FileSaver__WEBPACK_IMPORTED_MODULE_5__["saveAs"])(blob, filename);
+                }
             }
             else {
                 _this.openSnackBar("El comprobante no se encuentra disponible para su descarga.", "Descarga de comprobantes");
@@ -12797,7 +12825,8 @@ var NotificacionDetalleComponent = /** @class */ (function () {
         __metadata("design:paramtypes", [Object, _services_security_authentication_service__WEBPACK_IMPORTED_MODULE_2__["AuthenticationService"],
             _services_notificaciones_notificaciones_service__WEBPACK_IMPORTED_MODULE_3__["NotificacionesService"],
             _services_sharedServices_downloader_comprobantes_downloader_service__WEBPACK_IMPORTED_MODULE_4__["ComprobantesDownloaderService"],
-            _angular_material__WEBPACK_IMPORTED_MODULE_1__["MatSnackBar"]])
+            _angular_material__WEBPACK_IMPORTED_MODULE_1__["MatSnackBar"],
+            _services_sharedServices_downloader_downloader_util_service__WEBPACK_IMPORTED_MODULE_7__["DownloaderUtilService"]])
     ], NotificacionDetalleComponent);
     return NotificacionDetalleComponent;
 }());
@@ -18828,6 +18857,67 @@ var TercerosService = /** @class */ (function () {
 
 /***/ }),
 
+/***/ "./src/app/services/analytics/google-analytics.service.ts":
+/*!****************************************************************!*\
+  !*** ./src/app/services/analytics/google-analytics.service.ts ***!
+  \****************************************************************/
+/*! exports provided: GoogleAnalyticsService */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "GoogleAnalyticsService", function() { return GoogleAnalyticsService; });
+/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm5/core.js");
+/* harmony import */ var _environments_environment__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../../environments/environment */ "./src/environments/environment.ts");
+var __decorate = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+var __metadata = (undefined && undefined.__metadata) || function (k, v) {
+    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+};
+
+
+var GoogleAnalyticsService = /** @class */ (function () {
+    function GoogleAnalyticsService() {
+    }
+    /**
+     * Initialize Google Analytics
+     */
+    GoogleAnalyticsService.prototype.init = function () {
+        if (_environments_environment__WEBPACK_IMPORTED_MODULE_1__["environment"].trackear == true && _environments_environment__WEBPACK_IMPORTED_MODULE_1__["environment"].inPhonegap == true) {
+            if (window && window.ga) {
+                window.ga.startTrackerWithId(_environments_environment__WEBPACK_IMPORTED_MODULE_1__["environment"].googleAnalyticsID);
+            }
+        }
+    };
+    /**
+     * Tracking screen
+     * @param screenName
+     * @param url Relative url
+     */
+    GoogleAnalyticsService.prototype.trackView = function (screenName, url) {
+        if (_environments_environment__WEBPACK_IMPORTED_MODULE_1__["environment"].trackear == true && _environments_environment__WEBPACK_IMPORTED_MODULE_1__["environment"].inPhonegap == true) {
+            if (window && window.ga) {
+                window.ga.trackView(screenName, url);
+            }
+        }
+    };
+    GoogleAnalyticsService = __decorate([
+        Object(_angular_core__WEBPACK_IMPORTED_MODULE_0__["Injectable"])({
+            providedIn: 'root'
+        }),
+        __metadata("design:paramtypes", [])
+    ], GoogleAnalyticsService);
+    return GoogleAnalyticsService;
+}());
+
+
+
+/***/ }),
+
 /***/ "./src/app/services/archivo-de-comprobantes/archivo-de-comprobantes.service.ts":
 /*!*************************************************************************************!*\
   !*** ./src/app/services/archivo-de-comprobantes/archivo-de-comprobantes.service.ts ***!
@@ -21084,22 +21174,24 @@ var OneSignalService = /** @class */ (function () {
     * Initialize OneSignal
     */
     OneSignalService.prototype.init = function () {
-        // Enable to debug issues.
-        //window.plugins.OneSignal.setLogLevel({logLevel: 4, visualLevel: 4});
-        var notificationOpenedCallback = function (jsonData) {
-            if (jsonData.notification.payload.additionalData.url) {
-                window.open(jsonData.notification.payload.additionalData.url, "_self", 'location=yes');
-            }
-        };
-        window.plugins.OneSignal
-            .startInit(_environments_environment__WEBPACK_IMPORTED_MODULE_2__["environment"].oneSignalApiKey)
-            .handleNotificationOpened(notificationOpenedCallback)
-            .endInit();
-        // get onesignal id
-        var me = this;
-        window.plugins.OneSignal.getIds(function (ids) {
-            me.saveOneSignalIdInLS(ids.userId);
-        });
+        if (_environments_environment__WEBPACK_IMPORTED_MODULE_2__["environment"].inPhonegap == true) {
+            // Enable to debug issues.
+            //window.plugins.OneSignal.setLogLevel({logLevel: 4, visualLevel: 4});
+            var notificationOpenedCallback = function (jsonData) {
+                if (jsonData.notification.payload.additionalData.url) {
+                    window.open(jsonData.notification.payload.additionalData.url, "_self", 'location=yes');
+                }
+            };
+            window.plugins.OneSignal
+                .startInit(_environments_environment__WEBPACK_IMPORTED_MODULE_2__["environment"].oneSignalApiKey)
+                .handleNotificationOpened(notificationOpenedCallback)
+                .endInit();
+            // get onesignal id
+            var me_1 = this;
+            window.plugins.OneSignal.getIds(function (ids) {
+                me_1.saveOneSignalIdInLS(ids.userId);
+            });
+        }
     };
     /**
      * Saves onesignal id in ls
@@ -22246,6 +22338,8 @@ var environment = {
     production: false,
     inPhonegap: true,
     oneSignalApiKey: '39901250-6212-4942-9d7a-413712e251fb',
+    googleAnalyticsID: 'UA-144101541-1',
+    trackear: true,
     /*hostSeguridad: 'http://localhost:8080/DigitalSeguridad-1.0-SNAPSHOT/api',
     hostCtaCte: 'http://localhost:8080/DigitalCuentaCorriente-1.0-SNAPSHOT/api',
     hostEntregasYVentas: 'http://localhost:8080/DigitalEntregasYVentas-1.0-SNAPSHOT/api',

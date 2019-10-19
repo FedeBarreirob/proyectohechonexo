@@ -18,25 +18,27 @@ export class OneSignalService {
 	* Initialize OneSignal
 	*/
 	init() {
-		// Enable to debug issues.
-		//window.plugins.OneSignal.setLogLevel({logLevel: 4, visualLevel: 4});
+		if (environment.inPhonegap == true) {
+			// Enable to debug issues.
+			//window.plugins.OneSignal.setLogLevel({logLevel: 4, visualLevel: 4});
 
-		var notificationOpenedCallback = function (jsonData) {
-			if (jsonData.notification.payload.additionalData.url) {
-				window.open(jsonData.notification.payload.additionalData.url, "_self", 'location=yes');
-			}
-		};
+			var notificationOpenedCallback = function (jsonData) {
+				if (jsonData.notification.payload.additionalData.url) {
+					window.open(jsonData.notification.payload.additionalData.url, "_self", 'location=yes');
+				}
+			};
 
-		window.plugins.OneSignal
-			.startInit(environment.oneSignalApiKey)
-			.handleNotificationOpened(notificationOpenedCallback)
-			.endInit();
+			window.plugins.OneSignal
+				.startInit(environment.oneSignalApiKey)
+				.handleNotificationOpened(notificationOpenedCallback)
+				.endInit();
 
-		// get onesignal id
-		let me = this;
-		window.plugins.OneSignal.getIds(function (ids) {
-			me.saveOneSignalIdInLS(ids.userId);
-		});
+			// get onesignal id
+			let me = this;
+			window.plugins.OneSignal.getIds(function (ids) {
+				me.saveOneSignalIdInLS(ids.userId);
+			});
+		}
 	}
 
 	/**

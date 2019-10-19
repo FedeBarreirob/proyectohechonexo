@@ -10,6 +10,8 @@ import { saveAs } from 'file-saver/FileSaver';
 import { PerfilBasico } from '../../../interfaces/perfiles/perfil-basico';
 import { EstadoNotificaciones } from '../../../enums/estado-notificaciones.enum';
 import { ConfirmacionDeVentaNovedad } from '../../../interfaces/notificaciones/confirmacion-de-venta-novedad';
+import { DownloaderUtilService } from '../../../services/sharedServices/downloader/downloader-util.service';
+import { environment } from '../../../../environments/environment';
 
 @Component({
 	selector: 'app-notificacion-detalle',
@@ -26,7 +28,8 @@ export class NotificacionDetalleComponent implements OnInit {
 		private authenticationService: AuthenticationService,
 		private notificacionService: NotificacionesService,
 		private comprobanteDownloaderService: ComprobantesDownloaderService,
-		private snackBar: MatSnackBar
+		private snackBar: MatSnackBar,
+		private downloaderUtilService: DownloaderUtilService
 	) {
 		this.usuarioLogueado = <UserAuth>this.authenticationService.usuarioLogueado();
 	}
@@ -49,7 +52,13 @@ export class NotificacionDetalleComponent implements OnInit {
 				var filename = `${comprobante.comprobante}.pdf`;
 
 				if (blob.size !== 0) {
-					saveAs(blob, filename);
+
+					if (environment.inPhonegap) {
+						this.downloaderUtilService.download(filename, blob, mediaType);
+					} else {
+						saveAs(blob, filename);
+					}
+
 				} else {
 					this.openSnackBar("El comprobante no se encuentra disponible para su descarga.", "Descarga de comprobantes");
 				}
@@ -93,7 +102,13 @@ export class NotificacionDetalleComponent implements OnInit {
 				var filename = `${confirmacionVenta.comprobante}.pdf`;
 
 				if (blob.size !== 0) {
-					saveAs(blob, filename);
+
+					if (environment.inPhonegap) {
+						this.downloaderUtilService.download(filename, blob, mediaType);
+					} else {
+						saveAs(blob, filename);
+					}
+
 				} else {
 					this.openSnackBar("El comprobante no se encuentra disponible para su descarga.", "Descarga de comprobantes");
 				}

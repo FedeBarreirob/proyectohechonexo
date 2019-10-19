@@ -1,8 +1,9 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { MatIconRegistry } from '@angular/material';
 import { DomSanitizer } from '@angular/platform-browser';
 import { Router, NavigationEnd } from '@angular/router';
 import { AuthenticationService } from './services/security/authentication.service';
+import { GoogleAnalyticsService } from './services/analytics/google-analytics.service';
 
 // declare ga as a function to set and sent the events
 declare let ga: Function;
@@ -12,7 +13,7 @@ declare let ga: Function;
 	templateUrl: './app.component.html',
 	styleUrls: ['./app.component.css']
 })
-export class AppComponent {
+export class AppComponent implements OnInit {
 
 	title = 'Gaviglio Digital Clientes';
 
@@ -20,11 +21,16 @@ export class AppComponent {
 		private matIconRegistry: MatIconRegistry,
 		private domSanitizer: DomSanitizer,
 		private router: Router,
-		private authService: AuthenticationService
+		private authService: AuthenticationService,
+		private googleAnalyticsService: GoogleAnalyticsService
 	) {
 		this.cargarIconos();
 		this.trackUrl();
 		this.trackUser();
+	}
+
+	ngOnInit(): void {
+		this.googleAnalyticsService.init();
 	}
 
 	/**
@@ -60,8 +66,14 @@ export class AppComponent {
 		this.router.events.subscribe(event => {
 
 			if (event instanceof NavigationEnd) {
-				ga('set', 'page', event.urlAfterRedirects);
-				ga('send', 'pageview');
+
+				this.googleAnalyticsService.trackView("route", event.urlAfterRedirects);
+
+				if (ga) {
+					ga('set', 'page', event.urlAfterRedirects);
+					ga('send', 'pageview');
+				}
+
 			}
 
 		});
@@ -75,7 +87,10 @@ export class AppComponent {
 			respuesta => {
 				if (respuesta == true) {
 					let usuario = this.authService.perfilUsuarioLogueado().credencial.username;
-					ga('set', 'userId', usuario);
+
+					if (ga) {
+						ga('set', 'userId', usuario);
+					}
 				}
 			}
 		);
