@@ -22,6 +22,7 @@ export class ContratoIndicadorSwiperVentasPesificadasComponent implements OnInit
   constructor(private deviceService: DeviceDetectorService) { }
 
   ngOnInit() {
+    this.esCelular = this.deviceService.isMobile();
     this.configurarSwiper();
   }
 

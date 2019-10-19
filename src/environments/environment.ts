@@ -5,6 +5,7 @@
 export const environment = {
   production: false,
   inPhonegap: true,
+  oneSignalApiKey: '39901250-6212-4942-9d7a-413712e251fb',
   /*hostSeguridad: 'http://localhost:8080/DigitalSeguridad-1.0-SNAPSHOT/api',
   hostCtaCte: 'http://localhost:8080/DigitalCuentaCorriente-1.0-SNAPSHOT/api',
   hostEntregasYVentas: 'http://localhost:8080/DigitalEntregasYVentas-1.0-SNAPSHOT/api',

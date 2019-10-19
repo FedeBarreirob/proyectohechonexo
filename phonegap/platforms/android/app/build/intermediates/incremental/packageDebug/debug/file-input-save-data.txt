@@ -1,5 +1,5 @@
 #Internal package file, do not edit.
-#Sat Oct 19 09:32:53 ART 2019
+#Sat Oct 19 10:32:06 ART 2019
 2.path=www/assets/sidebar/chart-hot.png
 14.set=ASSET
 107.baseType=DIRECTORY

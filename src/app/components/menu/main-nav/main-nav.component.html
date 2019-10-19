@@ -38,7 +38,7 @@
 		<app-panel-notificaciones (botonCerrar)="menuNotificaciones.toggle()"></app-panel-notificaciones>
 	</mat-sidenav>
 
-	<mat-sidenav (click)="isPantallaPequena && drawer.toggle()" #drawer
+	<mat-sidenav *ngIf="authService.esLogueado" (click)="isPantallaPequena && drawer.toggle()" #drawer
 		[ngClass]="{'sidenav': esCelular, 'sidenav-desktop': !esCelular}" fixedInViewport="true"
 		[attr.role]="(isHandset$ | async) ? 'dialog' : 'navigation'" [mode]="(isHandset$ | async) ? 'over' : 'side'"
 		[opened]="!(isHandset$ | async) && authService.esLogueado">

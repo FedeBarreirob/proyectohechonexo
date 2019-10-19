@@ -11643,7 +11643,7 @@ module.exports = ".sidenav-container {\n  height: 100%;\n  font-family: Rubik;\n
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<mat-toolbar class=\"main-toolbar\" *ngIf=\"authService.esLogueado && !esCelular\">\n\t<button type=\"button\" aria-label=\"Toggle sidenav\" mat-icon-button (click)=\"drawer.toggle()\"\n\t\t*ngIf=\"(isHandset$ | async) && authService.esLogueado\">\n\t\t<mat-icon aria-label=\"Side nav toggle icon\">menu</mat-icon>\n\t</button>\n\n\t<span>\n\t\t<img src=\"assets/logo.png\" class=\"logo\" alt=\"Gaviglio\" />\n\t</span>\n\n\t<span class=\"relleno\"></span>\n\n\t<span class=\"relleno\"\n\t\t*ngIf=\"authService.esAdmin || authService.esRol('SUB_ADMINISTRADOR') || authService.esRol('COMERCIAL')\">\n\t\t<app-selector-cuentas></app-selector-cuentas>\n\t</span>\n\n\t<span class=\"notificaciones-container\">\n\t\t<button mat-icon-button (click)=\"mostrarOcultarNotificaciones()\">\n\t\t\t<app-acceso-buzon></app-acceso-buzon>\n\t\t</button>\n\t</span>\n\n\t<span class=\"info-perfil-container\">\n\t\t<a href=\"\" routerLink=\"/informacion-de-perfil-desktop\" style=\"text-decoration: none\">\n\t\t\t<app-info-perfil modoParaToolbar=\"true\"></app-info-perfil>\n\t\t</a>\n\t</span>\n\n\t<span class=\"selector-combo-container\">\n\t\t<app-combo-cuenta [showAvatar]=\"false\" sizeArrow=\"36px\"></app-combo-cuenta>\n\t</span>\n</mat-toolbar>\n\n<mat-sidenav-container class=\"sidenav-container\">\n\n\t<mat-sidenav #menuNotificaciones position=\"end\" class=\"sidenav-notificaciones\" *ngIf=\"!esCelular\">\n\t\t<app-panel-notificaciones (botonCerrar)=\"menuNotificaciones.toggle()\"></app-panel-notificaciones>\n\t</mat-sidenav>\n\n\t<mat-sidenav (click)=\"isPantallaPequena && drawer.toggle()\" #drawer\n\t\t[ngClass]=\"{'sidenav': esCelular, 'sidenav-desktop': !esCelular}\" fixedInViewport=\"true\"\n\t\t[attr.role]=\"(isHandset$ | async) ? 'dialog' : 'navigation'\" [mode]=\"(isHandset$ | async) ? 'over' : 'side'\"\n\t\t[opened]=\"!(isHandset$ | async) && authService.esLogueado\">\n\n\t\t<app-info-perfil *ngIf=\"esCelular\"></app-info-perfil>\n\n\t\t<p class=\"menu-text\" *ngIf=\"!esCelular\">MENÚ</p>\n\n\t\t<mat-nav-list *ngIf=\"authService.esLogueado\">\n\n\t\t\t<div *ngFor=\"let link of links\">\n\t\t\t\t<app-link-menu [link]=\"link\" *ngIf=\"!(link.ocultarDesktop == true && !esCelular)\"></app-link-menu>\n\t\t\t</div>\n\n\t\t</mat-nav-list>\n\t</mat-sidenav>\n\n\t<mat-sidenav-content>\n\n\t\t<ng-content></ng-content>\n\n\t</mat-sidenav-content>\n</mat-sidenav-container>"
+module.exports = "<mat-toolbar class=\"main-toolbar\" *ngIf=\"authService.esLogueado && !esCelular\">\n\t<button type=\"button\" aria-label=\"Toggle sidenav\" mat-icon-button (click)=\"drawer.toggle()\"\n\t\t*ngIf=\"(isHandset$ | async) && authService.esLogueado\">\n\t\t<mat-icon aria-label=\"Side nav toggle icon\">menu</mat-icon>\n\t</button>\n\n\t<span>\n\t\t<img src=\"assets/logo.png\" class=\"logo\" alt=\"Gaviglio\" />\n\t</span>\n\n\t<span class=\"relleno\"></span>\n\n\t<span class=\"relleno\"\n\t\t*ngIf=\"authService.esAdmin || authService.esRol('SUB_ADMINISTRADOR') || authService.esRol('COMERCIAL')\">\n\t\t<app-selector-cuentas></app-selector-cuentas>\n\t</span>\n\n\t<span class=\"notificaciones-container\">\n\t\t<button mat-icon-button (click)=\"mostrarOcultarNotificaciones()\">\n\t\t\t<app-acceso-buzon></app-acceso-buzon>\n\t\t</button>\n\t</span>\n\n\t<span class=\"info-perfil-container\">\n\t\t<a href=\"\" routerLink=\"/informacion-de-perfil-desktop\" style=\"text-decoration: none\">\n\t\t\t<app-info-perfil modoParaToolbar=\"true\"></app-info-perfil>\n\t\t</a>\n\t</span>\n\n\t<span class=\"selector-combo-container\">\n\t\t<app-combo-cuenta [showAvatar]=\"false\" sizeArrow=\"36px\"></app-combo-cuenta>\n\t</span>\n</mat-toolbar>\n\n<mat-sidenav-container class=\"sidenav-container\">\n\n\t<mat-sidenav #menuNotificaciones position=\"end\" class=\"sidenav-notificaciones\" *ngIf=\"!esCelular\">\n\t\t<app-panel-notificaciones (botonCerrar)=\"menuNotificaciones.toggle()\"></app-panel-notificaciones>\n\t</mat-sidenav>\n\n\t<mat-sidenav *ngIf=\"authService.esLogueado\" (click)=\"isPantallaPequena && drawer.toggle()\" #drawer\n\t\t[ngClass]=\"{'sidenav': esCelular, 'sidenav-desktop': !esCelular}\" fixedInViewport=\"true\"\n\t\t[attr.role]=\"(isHandset$ | async) ? 'dialog' : 'navigation'\" [mode]=\"(isHandset$ | async) ? 'over' : 'side'\"\n\t\t[opened]=\"!isPantallaPequena && authService.esLogueado\">\n\n\t\t<app-info-perfil *ngIf=\"esCelular\"></app-info-perfil>\n\n\t\t<p class=\"menu-text\" *ngIf=\"!esCelular\">MENÚ</p>\n\n\t\t<mat-nav-list *ngIf=\"authService.esLogueado\">\n\n\t\t\t<div *ngFor=\"let link of links\">\n\t\t\t\t<app-link-menu [link]=\"link\" *ngIf=\"!(link.ocultarDesktop == true && !esCelular)\"></app-link-menu>\n\t\t\t</div>\n\n\t\t</mat-nav-list>\n\t</mat-sidenav>\n\n\t<mat-sidenav-content>\n\n\t\t<ng-content></ng-content>\n\n\t</mat-sidenav-content>\n</mat-sidenav-container>"
 
 /***/ }),
 
@@ -12942,7 +12942,7 @@ module.exports = "/*sidebar*/\n\n.contenedor-notificaciones {\n    height: 100%;
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<mat-sidenav-container [ngClass]=\"{'contenedor-notificaciones': esCelular, 'contenedor-desktop': !esCelular }\">\n\t<mat-sidenav #menuNotificaciones position=\"end\" class=\"sidenav-notificaciones\" *ngIf=\"esCelular\">\n\n\t\t<app-panel-notificaciones (botonCerrar)=\"menuNotificaciones.toggle()\"></app-panel-notificaciones>\n\n\t</mat-sidenav>\n\t<section>\n\n\t\t<div class=\"fondo-verde\" [ngClass]=\"{'fondo-verde': esCelular, 'fondo-verde-desktop': !esCelular}\">\n\t\t\t<app-tool-bar-general *ngIf=\"esCelular\" [titulo]=\"'Inicio'\" [disabled]=\"false\"\n\t\t\t\t[colorIndicador]=\"'#FFFFFFFF'\" (botonPersonalizadoEjecutado)=\"mostrarOcultarNotificaciones()\"\n\t\t\t\t[urlImagenAccionPersonalizada]=\"hayNotificacionesNuevas ? 'assets/toolbar/bell-white-hot.svg' : 'assets/toolbar/bell-white.svg'\"></app-tool-bar-general>\n\n\t\t\t<app-saldo-cta-cte-aplicada-global (cargandoChange)=\"esCargandoCtaCte($event)\">\n\t\t\t</app-saldo-cta-cte-aplicada-global>\n\t\t</div>\n\n\t\t<div [ngClass]=\"{'fondo-blanco': esCelular, 'fondo-blanco-desktop': !esCelular}\">\n\t\t\t<app-contrato-indicador-entregas-yventas (cargandoChange)=\"esCargandoIndicadorContratos($event)\">\n\t\t\t</app-contrato-indicador-entregas-yventas>\n\n\t\t\t<div *ngIf=\"esCelular\">\n\t\t\t\t<app-contrato-indicador-entregas-recientes\n\t\t\t\t\t(cargandoChange)=\"esCargandoIndicadorEntregasRecientes($event)\">\n\t\t\t\t</app-contrato-indicador-entregas-recientes>\n\t\t\t\t<app-contrato-indicador-ventas-recientes (cargandoChange)=\"esCargandoIndicadorVentasRecientes($event)\">\n\t\t\t\t</app-contrato-indicador-ventas-recientes>\n\t\t\t</div>\n\n\t\t\t<div *ngIf=\"!esCelular\" fxLayout=\"row\" fxLayoutAlign=\"space-between start\" style=\"padding: 10px;\">\n\t\t\t\t<div fxFlex=\"50%\">\n\t\t\t\t\t<app-contrato-indicador-entregas-recientes\n\t\t\t\t\t\t(cargandoChange)=\"esCargandoIndicadorEntregasRecientes($event)\">\n\t\t\t\t\t</app-contrato-indicador-entregas-recientes>\n\t\t\t\t</div>\n\t\t\t\t<div fxFlex=\"50%\">\n\t\t\t\t\t<app-contrato-indicador-ventas-recientes\n\t\t\t\t\t\t(cargandoChange)=\"esCargandoIndicadorVentasRecientes($event)\">\n\t\t\t\t\t</app-contrato-indicador-ventas-recientes>\n\t\t\t\t</div>\n\t\t\t</div>\n\n\t\t</div>\n\n\t</section>\n</mat-sidenav-container>\n\n<app-loading [cargando$]=\"cargando$\"></app-loading>"
+module.exports = "<mat-sidenav-container [ngClass]=\"{'contenedor-notificaciones': esCelular, 'contenedor-desktop': !esCelular }\">\n\t<mat-sidenav #menuNotificaciones position=\"end\" class=\"sidenav-notificaciones\" *ngIf=\"esCelular\">\n\n\t\t<app-panel-notificaciones (botonCerrar)=\"menuNotificaciones.toggle()\"></app-panel-notificaciones>\n\n\t</mat-sidenav>\n\t<section>\n\n\t\t<div class=\"fondo-verde\" [ngClass]=\"{'fondo-verde': esCelular, 'fondo-verde-desktop': !esCelular}\">\n\t\t\t<app-tool-bar-general *ngIf=\"esCelular\" [titulo]=\"'Inicio'\" [disabled]=\"false\"\n\t\t\t\tcolorIndicador=\"white\" (botonPersonalizadoEjecutado)=\"mostrarOcultarNotificaciones()\"\n\t\t\t\t[urlImagenAccionPersonalizada]=\"hayNotificacionesNuevas ? 'assets/toolbar/bell-white-hot.svg' : 'assets/toolbar/bell-white.svg'\"></app-tool-bar-general>\n\n\t\t\t<app-saldo-cta-cte-aplicada-global (cargandoChange)=\"esCargandoCtaCte($event)\">\n\t\t\t</app-saldo-cta-cte-aplicada-global>\n\t\t</div>\n\n\t\t<div [ngClass]=\"{'fondo-blanco': esCelular, 'fondo-blanco-desktop': !esCelular}\">\n\t\t\t<app-contrato-indicador-entregas-yventas (cargandoChange)=\"esCargandoIndicadorContratos($event)\">\n\t\t\t</app-contrato-indicador-entregas-yventas>\n\n\t\t\t<div *ngIf=\"esCelular\">\n\t\t\t\t<app-contrato-indicador-entregas-recientes\n\t\t\t\t\t(cargandoChange)=\"esCargandoIndicadorEntregasRecientes($event)\">\n\t\t\t\t</app-contrato-indicador-entregas-recientes>\n\t\t\t\t<app-contrato-indicador-ventas-recientes (cargandoChange)=\"esCargandoIndicadorVentasRecientes($event)\">\n\t\t\t\t</app-contrato-indicador-ventas-recientes>\n\t\t\t</div>\n\n\t\t\t<div *ngIf=\"!esCelular\" fxLayout=\"row\" fxLayoutAlign=\"space-between start\" style=\"padding: 10px;\">\n\t\t\t\t<div fxFlex=\"50%\">\n\t\t\t\t\t<app-contrato-indicador-entregas-recientes\n\t\t\t\t\t\t(cargandoChange)=\"esCargandoIndicadorEntregasRecientes($event)\">\n\t\t\t\t\t</app-contrato-indicador-entregas-recientes>\n\t\t\t\t</div>\n\t\t\t\t<div fxFlex=\"50%\">\n\t\t\t\t\t<app-contrato-indicador-ventas-recientes\n\t\t\t\t\t\t(cargandoChange)=\"esCargandoIndicadorVentasRecientes($event)\">\n\t\t\t\t\t</app-contrato-indicador-ventas-recientes>\n\t\t\t\t</div>\n\t\t\t</div>\n\n\t\t</div>\n\n\t</section>\n</mat-sidenav-container>\n\n<app-loading [cargando$]=\"cargando$\"></app-loading>"
 
 /***/ }),
 
@@ -13852,6 +13852,7 @@ var ContratoIndicadorSwiperVentasPesificadasComponent = /** @class */ (function 
         };
     }
     ContratoIndicadorSwiperVentasPesificadasComponent.prototype.ngOnInit = function () {
+        this.esCelular = this.deviceService.isMobile();
         this.configurarSwiper();
     };
     /**
@@ -20930,6 +20931,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "OneSignalService", function() { return OneSignalService; });
 /* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm5/core.js");
 /* harmony import */ var _security_authentication_service__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../security/authentication.service */ "./src/app/services/security/authentication.service.ts");
+/* harmony import */ var _environments_environment__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../environments/environment */ "./src/environments/environment.ts");
 var __decorate = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -20941,104 +20943,45 @@ var __metadata = (undefined && undefined.__metadata) || function (k, v) {
 };
 
 
-var OneSignal;
+
 var OneSignalService = /** @class */ (function () {
     function OneSignalService(authenticationService) {
         this.authenticationService = authenticationService;
     }
-    // inicia el proceso de OneSignal
+    /**
+    * Initialize OneSignal
+    */
     OneSignalService.prototype.init = function () {
-        var _this = this;
-        this.oneSignalInit ? console.log('Already Initialized') : this.addScript('https://cdn.onesignal.com/sdks/OneSignalSDK.js', function () {
-            console.log('OneSignal Script Loaded');
-            _this.initOneSignal();
+        // Enable to debug issues.
+        //window.plugins.OneSignal.setLogLevel({logLevel: 4, visualLevel: 4});
+        var notificationOpenedCallback = function (jsonData) {
+            if (jsonData.notification.payload.additionalData.url) {
+                window.open(jsonData.notification.payload.additionalData.url, "_self", 'location=yes');
+            }
+        };
+        window.plugins.OneSignal
+            .startInit(_environments_environment__WEBPACK_IMPORTED_MODULE_2__["environment"].oneSignalApiKey)
+            .handleNotificationOpened(notificationOpenedCallback)
+            .endInit();
+        // get onesignal id
+        var me = this;
+        window.plugins.OneSignal.getIds(function (ids) {
+            me.saveOneSignalIdInLS(ids.userId);
         });
     };
-    OneSignalService.prototype.stop = function () {
-        this.oneSignalInit = null;
-    };
-    OneSignalService.prototype.addScript = function (fileSrc, callback) {
-        var head = document.getElementsByTagName('head')[0];
-        var script = document.createElement('script');
-        script.type = 'text/javascript';
-        script.onload = callback;
-        script.src = fileSrc;
-        head.appendChild(script);
-    };
-    OneSignalService.prototype.initOneSignal = function () {
+    /**
+     * Saves onesignal id in ls
+     * @param id
+     */
+    OneSignalService.prototype.saveOneSignalIdInLS = function (id) {
+        localStorage.setItem("onesignalid", id);
         var perfilLogueado = this.authenticationService.perfilUsuarioLogueado();
         if (perfilLogueado) {
-            OneSignal = window['OneSignal'] || [];
-            OneSignal.sendTag('perfil_id', perfilLogueado.informacionPersonal.id, function (tagsSent) {
-                // Callback called when tags have finished sending
-                console.log('OneSignal Tag Sent', tagsSent);
-            });
-            console.log('Init OneSignal');
-            OneSignal.push(['init', {
-                    appId: '39901250-6212-4942-9d7a-413712e251fb',
-                    autoRegister: true,
-                    allowLocalhostAsSecureOrigin: true,
-                    notifyButton: {
-                        enable: false,
-                    },
-                }]);
-            console.log('OneSignal Initialized');
-            this.checkIfSubscribed();
-        }
-        else {
-            console.log('Perfil nulo');
+            window.plugins.OneSignal.sendTag("perfil_id", perfilLogueado.informacionPersonal.id);
         }
     };
-    OneSignalService.prototype.subscribe = function () {
-        var _this = this;
-        OneSignal.push(function () {
-            console.log('Register For Push');
-            OneSignal.push(['registerForPushNotifications']);
-            OneSignal.on('subscriptionChange', function (isSubscribed) {
-                console.log('The user\'s subscription state is now:', isSubscribed);
-                _this.listenForNotification();
-                OneSignal.getUserId().then(function (userId) {
-                    console.log('User ID is', userId);
-                    _this.oneSignalId = userId;
-                    _this.updateLocalUserProfile();
-                });
-            });
-        });
-    };
-    OneSignalService.prototype.listenForNotification = function () {
-        var _this = this;
-        console.log('Initalize Listener');
-        OneSignal.on('notificationDisplay', function (event) {
-            console.log('OneSignal notification displayed:', event);
-            _this.listenForNotification();
-        });
-    };
-    OneSignalService.prototype.getUserID = function () {
-        var _this = this;
-        OneSignal.getUserId().then(function (userId) {
-            console.log('User ID is', userId);
-            _this.oneSignalId = userId;
-        });
-    };
-    OneSignalService.prototype.checkIfSubscribed = function () {
-        var _this = this;
-        OneSignal.push(function () {
-            OneSignal.isPushNotificationsEnabled(function (isEnabled) {
-                if (isEnabled) {
-                    console.log('Push notifications are enabled!');
-                    _this.getUserID();
-                }
-                else {
-                    console.log('Push notifications are not enabled yet.');
-                    _this.subscribe();
-                }
-            }, function () {
-                console.log('Push permission not granted');
-            });
-        });
-    };
-    OneSignalService.prototype.updateLocalUserProfile = function () {
-        console.log(this.oneSignalId);
+    OneSignalService.prototype.stop = function () {
+        console.log("no implementado");
     };
     OneSignalService = __decorate([
         Object(_angular_core__WEBPACK_IMPORTED_MODULE_0__["Injectable"])({
@@ -21707,6 +21650,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var file_saver__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(file_saver__WEBPACK_IMPORTED_MODULE_1__);
 /* harmony import */ var xlsx__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! xlsx */ "./node_modules/xlsx/xlsx.js");
 /* harmony import */ var xlsx__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(xlsx__WEBPACK_IMPORTED_MODULE_2__);
+/* harmony import */ var _downloader_downloader_util_service__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../downloader/downloader-util.service */ "./src/app/services/sharedServices/downloader/downloader-util.service.ts");
+/* harmony import */ var _environments_environment__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../../../../../environments/environment */ "./src/environments/environment.ts");
 var __decorate = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -21719,10 +21664,13 @@ var __metadata = (undefined && undefined.__metadata) || function (k, v) {
 
 
 
+
+
 var EXCEL_TYPE = 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet;charset=UTF-8';
 var EXCEL_EXTENSION = '.xlsx';
 var ExcelService = /** @class */ (function () {
-    function ExcelService() {
+    function ExcelService(downloaderUtilService) {
+        this.downloaderUtilService = downloaderUtilService;
     }
     /**
      * Exporta el contenido de un objeto a archivo excel
@@ -21760,13 +21708,19 @@ var ExcelService = /** @class */ (function () {
      */
     ExcelService.prototype.saveAsExcelFile = function (buffer, fileName) {
         var data = new Blob([buffer], { type: EXCEL_TYPE });
-        file_saver__WEBPACK_IMPORTED_MODULE_1__["saveAs"](data, fileName + '_export_' + new Date().getTime() + EXCEL_EXTENSION);
+        // descargar
+        if (_environments_environment__WEBPACK_IMPORTED_MODULE_4__["environment"].inPhonegap) {
+            this.downloaderUtilService.download(fileName + '_export_' + new Date().getTime() + EXCEL_EXTENSION, data, "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet");
+        }
+        else {
+            file_saver__WEBPACK_IMPORTED_MODULE_1__["saveAs"](data, fileName + '_export_' + new Date().getTime() + EXCEL_EXTENSION);
+        }
     };
     ExcelService = __decorate([
         Object(_angular_core__WEBPACK_IMPORTED_MODULE_0__["Injectable"])({
             providedIn: 'root'
         }),
-        __metadata("design:paramtypes", [])
+        __metadata("design:paramtypes", [_downloader_downloader_util_service__WEBPACK_IMPORTED_MODULE_3__["DownloaderUtilService"]])
     ], ExcelService);
     return ExcelService;
 }());
@@ -21833,7 +21787,13 @@ var PdfService = /** @class */ (function () {
             }
             // renderizar
             pdf.autoTable(columnas, rows, opciones);
-            pdf.save(nombreArchivo + ".pdf");
+            // descargar
+            if (_environments_environment__WEBPACK_IMPORTED_MODULE_2__["environment"].inPhonegap) {
+                this.downloaderUtilService.download(nombreArchivo + ".pdf", pdf.output('blob'), 'application/pdf');
+            }
+            else {
+                pdf.save(nombreArchivo + ".pdf");
+            }
         }
         catch (e) {
             console.log(e);
@@ -21861,7 +21821,13 @@ var PdfService = /** @class */ (function () {
             }
             // renderizar
             pdf.autoTable(columnas, lista, opciones);
-            pdf.save(nombreArchivo + ".pdf");
+            // descargar
+            if (_environments_environment__WEBPACK_IMPORTED_MODULE_2__["environment"].inPhonegap) {
+                this.downloaderUtilService.download(nombreArchivo + ".pdf", pdf.output('blob'), 'application/pdf');
+            }
+            else {
+                pdf.save(nombreArchivo + ".pdf");
+            }
         }
         catch (e) {
             console.log(e);
@@ -21884,7 +21850,7 @@ var PdfService = /** @class */ (function () {
                 }
                 pdf.autoTable(columnas, rows, opciones);
             }
-            // descargar      
+            // descargar
             if (_environments_environment__WEBPACK_IMPORTED_MODULE_2__["environment"].inPhonegap) {
                 this.downloaderUtilService.download(nombreArchivo + ".pdf", pdf.output('blob'), 'application/pdf');
             }
@@ -22147,6 +22113,7 @@ __webpack_require__.r(__webpack_exports__);
 var environment = {
     production: false,
     inPhonegap: true,
+    oneSignalApiKey: '39901250-6212-4942-9d7a-413712e251fb',
     /*hostSeguridad: 'http://localhost:8080/DigitalSeguridad-1.0-SNAPSHOT/api',
     hostCtaCte: 'http://localhost:8080/DigitalCuentaCorriente-1.0-SNAPSHOT/api',
     hostEntregasYVentas: 'http://localhost:8080/DigitalEntregasYVentas-1.0-SNAPSHOT/api',
