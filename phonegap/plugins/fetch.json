@@ -162,5 +162,13 @@
     "variables": {
       "ANDROID_SUPPORT_V4_VERSION": "24.1.1+"
     }
+  },
+  "cordova-plugin-file-opener2": {
+    "source": {
+      "type": "registry",
+      "id": "cordova-plugin-file-opener2"
+    },
+    "is_top_level": true,
+    "variables": {}
   }
 }

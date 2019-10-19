@@ -82,6 +82,9 @@
     },
     "cordova-plugin-x-socialsharing": {
       "PACKAGE_NAME": "io.cordova.hellocordova"
+    },
+    "cordova-plugin-file-opener2": {
+      "PACKAGE_NAME": "io.cordova.hellocordova"
     }
   },
   "dependent_plugins": {},
@@ -972,6 +975,14 @@
       "clobbers": [
         "window.plugins.socialsharing"
       ]
+    },
+    {
+      "file": "plugins/cordova-plugin-file-opener2/www/plugins.FileOpener2.js",
+      "id": "cordova-plugin-file-opener2.FileOpener2",
+      "pluginId": "cordova-plugin-file-opener2",
+      "clobbers": [
+        "cordova.plugins.fileOpener2"
+      ]
     }
   ],
   "plugin_metadata": {
@@ -994,6 +1005,7 @@
     "cordova-plugin-google-analytics": "1.8.6",
     "cordova-plugin-customurlscheme": "4.4.0",
     "es6-promise-plugin": "4.2.2",
-    "cordova-plugin-x-socialsharing": "5.4.7"
+    "cordova-plugin-x-socialsharing": "5.4.7",
+    "cordova-plugin-file-opener2": "2.2.1"
   }
 }

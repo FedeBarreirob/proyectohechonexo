@@ -1,6 +1,8 @@
 import { Injectable } from '@angular/core';
 import * as FileSaver from 'file-saver';
 import * as XLSX from 'xlsx';
+import { DownloaderUtilService } from '../../downloader/downloader-util.service';
+import { environment } from '../../../../../environments/environment';
 
 const EXCEL_TYPE = 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet;charset=UTF-8';
 const EXCEL_EXTENSION = '.xlsx';
@@ -10,7 +12,7 @@ const EXCEL_EXTENSION = '.xlsx';
 })
 export class ExcelService {
 
-  constructor() { }
+  constructor(private downloaderUtilService: DownloaderUtilService) { }
 
   /**
    * Exporta el contenido de un objeto a archivo excel
@@ -56,6 +58,13 @@ export class ExcelService {
    */
   private saveAsExcelFile(buffer: any, fileName: string): void {
     const data: Blob = new Blob([buffer], { type: EXCEL_TYPE });
-    FileSaver.saveAs(data, fileName + '_export_' + new Date().getTime() + EXCEL_EXTENSION);
+
+    // descargar
+    if (environment.inPhonegap) {
+      this.downloaderUtilService.download(fileName + '_export_' + new Date().getTime() + EXCEL_EXTENSION, data, "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet");
+    } else {
+      FileSaver.saveAs(data, fileName + '_export_' + new Date().getTime() + EXCEL_EXTENSION);
+    }
+
   }
 }

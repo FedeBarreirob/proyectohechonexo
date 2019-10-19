@@ -4,6 +4,8 @@ import { ComprobantesDownloaderService } from '../../../../services/sharedServic
 import { saveAs } from 'file-saver/FileSaver';
 import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
+import { DownloaderUtilService } from '../../../../services/sharedServices/downloader/downloader-util.service';
+import { environment } from '../../../../../environments/environment';
 
 @Component({
   selector: 'app-cuenta-corriente-detalle',
@@ -21,7 +23,8 @@ export class CuentaCorrienteDetalleComponent implements OnInit, OnDestroy {
     @Inject(MAT_DIALOG_DATA) public data: any,
     private comprobanteDownloaderService: ComprobantesDownloaderService,
     private snackBar: MatSnackBar,
-    private dialogRef: MatDialogRef<CuentaCorrienteDetalleComponent>
+    private dialogRef: MatDialogRef<CuentaCorrienteDetalleComponent>,
+    private downloaderUtilService: DownloaderUtilService
   ) {
     this.movimiento = this.data.movimiento;
     this.tcHoy = this.data.tc;
@@ -49,7 +52,13 @@ export class CuentaCorrienteDetalleComponent implements OnInit, OnDestroy {
         var filename = `${this.movimiento.comprobante}.pdf`;
 
         if (blob.size !== 0) {
-          saveAs(blob, filename);
+
+          if (environment.inPhonegap) {
+            this.downloaderUtilService.download(filename, blob, mediaType);
+          } else {
+            saveAs(blob, filename);
+          }
+
         } else {
           this.openSnackBar("El comprobante no se encuentra disponible para su descarga.", "Descarga de comprobantes");
         }

@@ -1,4 +1,6 @@
 import { Injectable } from '@angular/core';
+import { DownloaderUtilService } from '../../downloader/downloader-util.service';
+import { environment } from '../../../../../environments/environment';
 declare let jsPDF;
 
 @Injectable({
@@ -6,7 +8,7 @@ declare let jsPDF;
 })
 export class PdfService {
 
-  constructor() { }
+  constructor(private downloaderUtilService: DownloaderUtilService) { }
 
   // funcion encargada de generar un pdf a partir de un objeto
   objetoAPdf(objeto: any, titulo: string, columnas: Array<string>, nombreArchivo: string, opcionesExtras: any = null) {
@@ -37,7 +39,13 @@ export class PdfService {
 
       // renderizar
       pdf.autoTable(columnas, rows, opciones);
-      pdf.save(`${nombreArchivo}.pdf`);
+
+      // descargar
+      if (environment.inPhonegap) {
+        this.downloaderUtilService.download(`${nombreArchivo}.pdf`, pdf.output('blob'), 'application/pdf');
+      } else {
+        pdf.save(`${nombreArchivo}.pdf`);
+      }
     } catch (e) {
       console.log(e);
     }
@@ -65,7 +73,13 @@ export class PdfService {
 
       // renderizar
       pdf.autoTable(columnas, lista, opciones);
-      pdf.save(`${nombreArchivo}.pdf`);
+
+      // descargar
+      if (environment.inPhonegap) {
+        this.downloaderUtilService.download(`${nombreArchivo}.pdf`, pdf.output('blob'), 'application/pdf');
+      } else {
+        pdf.save(`${nombreArchivo}.pdf`);
+      }
     } catch (e) {
       console.log(e);
     }
@@ -92,8 +106,12 @@ export class PdfService {
         pdf.autoTable(columnas, rows, opciones);
       }
 
-      // renderizar      
-      pdf.save(`${nombreArchivo}.pdf`);
+      // descargar
+      if (environment.inPhonegap) {
+        this.downloaderUtilService.download(`${nombreArchivo}.pdf`, pdf.output('blob'), 'application/pdf');
+      } else {
+        pdf.save(`${nombreArchivo}.pdf`);
+      }
     } catch (e) {
       console.log(e);
     }

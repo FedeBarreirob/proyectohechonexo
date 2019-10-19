@@ -13,6 +13,8 @@ import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
 import { saveAs } from 'file-saver/FileSaver';
 import { ComprobantesDownloaderService } from '../../../../services/sharedServices/downloader/comprobantes-downloader.service';
+import { DownloaderUtilService } from '../../../../services/sharedServices/downloader/downloader-util.service';
+import { environment } from '../../../../../environments/environment';
 
 @Component({
 	selector: 'app-entregas-detalle',
@@ -39,7 +41,8 @@ export class EntregasDetalleComponent implements OnInit, OnDestroy {
 		private cuentaAlgService: CuentaAlgService,
 		private contratoServicio: ContratosService,
 		private comprobanteDownloaderService: ComprobantesDownloaderService,
-		private snackBar: MatSnackBar
+		private snackBar: MatSnackBar,
+		private downloaderUtilService: DownloaderUtilService
 	) {
 		this.movimiento = this.data.movimiento;
 		this.linkContrato = this.data.linkContrato;
@@ -128,7 +131,13 @@ export class EntregasDetalleComponent implements OnInit, OnDestroy {
 					var filename = `certificado.pdf`;
 
 					if (blob.size !== 0) {
-						saveAs(blob, filename);
+
+						if (environment.inPhonegap) {
+							this.downloaderUtilService.download(filename, blob, mediaType);
+						} else {
+							saveAs(blob, filename);
+						}
+
 					} else {
 						this.openSnackBar("El comprobante no se encuentra disponible para su descarga.");
 					}

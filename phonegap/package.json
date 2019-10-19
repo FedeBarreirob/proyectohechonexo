@@ -34,6 +34,9 @@
       },
       "cordova-plugin-x-socialsharing": {
         "ANDROID_SUPPORT_V4_VERSION": "24.1.1+"
+      },
+      "cordova-plugin-file-opener2": {
+        "ANDROID_SUPPORT_V4_VERSION": "27.+"
       }
     }
   },
@@ -50,6 +53,7 @@
     "cordova-plugin-dialogs": "^1.3.4",
     "cordova-plugin-exitapp2": "1.0.4",
     "cordova-plugin-file": "^4.3.3",
+    "cordova-plugin-file-opener2": "2.2.1",
     "cordova-plugin-geolocation": "^4.0.1",
     "cordova-plugin-globalization": "^1.0.9",
     "cordova-plugin-google-analytics": "1.8.6",

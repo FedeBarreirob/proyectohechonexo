@@ -12,6 +12,8 @@ import { ContratoEntregasDetalleComponent } from '../contrato-entregas-detalle/c
 import { ContratoVentasDetalleComponent } from '../contrato-ventas-detalle/contrato-ventas-detalle.component';
 import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
+import { DownloaderUtilService } from '../../../../../app/services/sharedServices/downloader/downloader-util.service';
+import { environment } from '../../../../../environments/environment';
 
 @Component({
   selector: 'app-contratos-detalle',
@@ -38,7 +40,8 @@ export class ContratosDetalleComponent implements OnInit, OnDestroy {
     private comprobanteDownloaderService: ComprobantesDownloaderService,
     private snackBar: MatSnackBar,
     private dialog: MatDialog,
-    private deviceService: DeviceDetectorService
+    private deviceService: DeviceDetectorService,
+    private downloaderUtilService: DownloaderUtilService
   ) { }
 
   ngOnInit() {
@@ -138,7 +141,13 @@ export class ContratosDetalleComponent implements OnInit, OnDestroy {
           var filename = `boleto.pdf`;
 
           if (blob.size !== 0) {
-            saveAs(blob, filename);
+
+            if (environment.inPhonegap) {
+              this.downloaderUtilService.download(filename, blob, mediaType);
+            } else {
+              saveAs(blob, filename);
+            }
+
           } else {
             this.openSnackBar("El comprobante no se encuentra disponible para su descarga.", "Descarga de comprobantes");
           }

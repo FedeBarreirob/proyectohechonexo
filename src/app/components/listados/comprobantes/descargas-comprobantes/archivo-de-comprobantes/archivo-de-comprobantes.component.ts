@@ -9,6 +9,8 @@ import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
 import { DatePipe } from '@angular/common';
 import { DeviceDetectorService } from 'ngx-device-detector';
+import { DownloaderUtilService } from '../../../../../services/sharedServices/downloader/downloader-util.service';
+import { environment } from '../../../../../../environments/environment';
 
 @Component({
   selector: 'app-archivo-de-comprobantes',
@@ -42,7 +44,8 @@ export class ArchivoDeComprobantesComponent implements OnInit, OnDestroy {
     private comprobantesDownloaderService: ComprobantesDownloaderService,
     private snackBar: MatSnackBar,
     private datePipe: DatePipe,
-    private deviceService: DeviceDetectorService
+    private deviceService: DeviceDetectorService,
+    private downloaderUtilService: DownloaderUtilService
   ) { }
 
   ngOnDestroy(): void {
@@ -168,7 +171,13 @@ export class ArchivoDeComprobantesComponent implements OnInit, OnDestroy {
           var filename = 'comprobantes.zip';
 
           if (blob.size !== 0) {
-            saveAs(blob, filename);
+
+            if (environment.inPhonegap) {
+              this.downloaderUtilService.download(filename, blob, mediaType);
+            } else {
+              saveAs(blob, filename);
+            }
+
           } else {
             this.openSnackBar("Ninguno de los comprobantes indicados se encuentran para su descarga.");
           }

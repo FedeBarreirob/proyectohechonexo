@@ -1,0 +1,4 @@
+#Sat Oct 19 09:32:52 ART 2019
+base.0=/home/alberto/Desarrollos/Gaviglio/Digital/DigitalUIClientes/phonegap/platforms/android/app/build/intermediates/transforms/dexMerger/debug/0
+path.0=classes.dex
+renamed.0=classes.dex
