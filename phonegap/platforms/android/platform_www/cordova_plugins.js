@@ -57,14 +57,6 @@ cordova.define('cordova/plugin_list', function(require, exports, module) {
       ]
     },
     {
-      "id": "cordova-plugin-customurlscheme.LaunchMyApp",
-      "file": "plugins/cordova-plugin-customurlscheme/www/android/LaunchMyApp.js",
-      "pluginId": "cordova-plugin-customurlscheme",
-      "clobbers": [
-        "window.plugins.launchmyapp"
-      ]
-    },
-    {
       "id": "cordova-plugin-device.device",
       "file": "plugins/cordova-plugin-device/www/device.js",
       "pluginId": "cordova-plugin-device",
@@ -448,6 +440,14 @@ cordova.define('cordova/plugin_list', function(require, exports, module) {
       "clobbers": [
         "OneSignal"
       ]
+    },
+    {
+      "id": "cordova-plugin-customurlscheme.LaunchMyApp",
+      "file": "plugins/cordova-plugin-customurlscheme/www/android/LaunchMyApp.js",
+      "pluginId": "cordova-plugin-customurlscheme",
+      "clobbers": [
+        "window.plugins.launchmyapp"
+      ]
     }
   ];
   module.exports.metadata = {
@@ -455,7 +455,6 @@ cordova.define('cordova/plugin_list', function(require, exports, module) {
     "cordova-plugin-battery-status": "1.2.5",
     "cordova-plugin-camera": "2.4.1",
     "cordova-plugin-contacts-phonenumbers": "0.0.12",
-    "cordova-plugin-customurlscheme": "4.4.0",
     "cordova-plugin-device": "1.1.7",
     "cordova-plugin-dialogs": "1.3.4",
     "cordova-plugin-file": "4.3.3",
@@ -471,6 +470,7 @@ cordova.define('cordova/plugin_list', function(require, exports, module) {
     "cordova-plugin-whitelist": "1.3.3",
     "es6-promise-plugin": "4.2.2",
     "cordova-plugin-x-socialsharing": "5.4.7",
-    "onesignal-cordova-plugin": "2.4.7"
+    "onesignal-cordova-plugin": "2.4.7",
+    "cordova-plugin-customurlscheme": "4.4.0"
   };
 });

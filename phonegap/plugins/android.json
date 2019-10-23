@@ -16,13 +16,6 @@
     "cordova-plugin-contacts-phonenumbers": {
       "PACKAGE_NAME": "com.gaviglio.digital"
     },
-    "cordova-plugin-customurlscheme": {
-      "URL_SCHEME": "topfarming",
-      "ANDROID_SCHEME": " ",
-      "ANDROID_HOST": " ",
-      "ANDROID_PATHPREFIX": "/",
-      "PACKAGE_NAME": "com.gaviglio.digital"
-    },
     "cordova-plugin-device": {
       "PACKAGE_NAME": "com.gaviglio.digital"
     },
@@ -66,6 +59,13 @@
       "PACKAGE_NAME": "com.gaviglio.digital"
     },
     "onesignal-cordova-plugin": {
+      "PACKAGE_NAME": "com.gaviglio.digital"
+    },
+    "cordova-plugin-customurlscheme": {
+      "URL_SCHEME": "gavigliodigital",
+      "ANDROID_SCHEME": " ",
+      "ANDROID_HOST": " ",
+      "ANDROID_PATHPREFIX": "/",
       "PACKAGE_NAME": "com.gaviglio.digital"
     }
   },

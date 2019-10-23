@@ -26,17 +26,17 @@
       "cordova-plugin-google-analytics": {
         "GMS_VERSION": "11.0.1"
       },
-      "cordova-plugin-customurlscheme": {
-        "URL_SCHEME": "topfarming",
-        "ANDROID_SCHEME": " ",
-        "ANDROID_HOST": " ",
-        "ANDROID_PATHPREFIX": "/"
-      },
       "cordova-plugin-x-socialsharing": {
         "ANDROID_SUPPORT_V4_VERSION": "24.1.1+"
       },
       "cordova-plugin-file-opener2": {
         "ANDROID_SUPPORT_V4_VERSION": "27.+"
+      },
+      "cordova-plugin-customurlscheme": {
+        "URL_SCHEME": "gavigliodigital",
+        "ANDROID_SCHEME": " ",
+        "ANDROID_HOST": " ",
+        "ANDROID_PATHPREFIX": "/"
       }
     }
   },

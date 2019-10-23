@@ -73,10 +73,6 @@
     "cordova-plugin-google-analytics": {
       "PACKAGE_NAME": "com.agro123.topfarming"
     },
-    "cordova-plugin-customurlscheme": {
-      "URL_SCHEME": "topfarming",
-      "PACKAGE_NAME": "io.cordova.hellocordova"
-    },
     "es6-promise-plugin": {
       "PACKAGE_NAME": "io.cordova.hellocordova"
     },
@@ -84,6 +80,10 @@
       "PACKAGE_NAME": "io.cordova.hellocordova"
     },
     "cordova-plugin-file-opener2": {
+      "PACKAGE_NAME": "io.cordova.hellocordova"
+    },
+    "cordova-plugin-customurlscheme": {
+      "URL_SCHEME": "gavigliodigital",
       "PACKAGE_NAME": "io.cordova.hellocordova"
     }
   },
@@ -1003,9 +1003,9 @@
     "cordova-plugin-contacts-phonenumbers": "0.0.12",
     "onesignal-cordova-plugin": "2.4.7",
     "cordova-plugin-google-analytics": "1.8.6",
-    "cordova-plugin-customurlscheme": "4.4.0",
     "es6-promise-plugin": "4.2.2",
     "cordova-plugin-x-socialsharing": "5.4.7",
-    "cordova-plugin-file-opener2": "2.2.1"
+    "cordova-plugin-file-opener2": "2.2.1",
+    "cordova-plugin-customurlscheme": "4.4.0"
   }
 }

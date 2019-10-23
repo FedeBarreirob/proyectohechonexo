@@ -135,16 +135,6 @@
     "is_top_level": true,
     "variables": {}
   },
-  "cordova-plugin-customurlscheme": {
-    "source": {
-      "type": "registry",
-      "id": "cordova-plugin-customurlscheme"
-    },
-    "is_top_level": true,
-    "variables": {
-      "URL_SCHEME": "topfarming"
-    }
-  },
   "es6-promise-plugin": {
     "source": {
       "type": "registry",
@@ -170,5 +160,15 @@
     },
     "is_top_level": true,
     "variables": {}
+  },
+  "cordova-plugin-customurlscheme": {
+    "source": {
+      "type": "registry",
+      "id": "cordova-plugin-customurlscheme"
+    },
+    "is_top_level": true,
+    "variables": {
+      "URL_SCHEME": "gavigliodigital"
+    }
   }
 }

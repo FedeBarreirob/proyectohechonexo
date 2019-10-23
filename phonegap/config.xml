@@ -1,5 +1,5 @@
 <?xml version='1.0' encoding='utf-8'?>
-<widget android-versionCode="1" id="com.gaviglio.digital" version="1.0.0" xmlns="http://www.w3.org/ns/widgets" xmlns:gap="http://phonegap.com/ns/1.0">
+<widget android-versionCode="4" id="com.gaviglio.digital" version="1.0.0" xmlns="http://www.w3.org/ns/widgets" xmlns:gap="http://phonegap.com/ns/1.0">
     <name>Gaviglio Digital</name>
     <description>
     </description>
@@ -94,12 +94,6 @@
     </plugin>
     <access launch-external="yes" origin="whatsapp:*" />
     <plugin name="cordova-plugin-inappbrowser" spec="^1.7.2" />
-    <plugin name="cordova-plugin-customurlscheme" spec="4.4.0">
-        <variable name="URL_SCHEME" value="gaviglio" />
-        <variable name="ANDROID_SCHEME" value=" " />
-        <variable name="ANDROID_HOST" value=" " />
-        <variable name="ANDROID_PATHPREFIX" value="/" />
-    </plugin>
     <platform name="android">
         <preference name="loadUrlTimeoutValue" value="700000" />
     </platform>

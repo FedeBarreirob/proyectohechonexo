@@ -25,10 +25,6 @@
               "count": 1
             },
             {
-              "xml": "<feature name=\"LaunchMyApp\"><param name=\"android-package\" value=\"nl.xservices.plugins.LaunchMyApp\" /></feature>",
-              "count": 1
-            },
-            {
               "xml": "<feature name=\"Device\"><param name=\"android-package\" value=\"org.apache.cordova.device.Device\" /></feature>",
               "count": 1
             },
@@ -91,6 +87,10 @@
             {
               "xml": "<feature name=\"OneSignalPush\"><param name=\"android-package\" value=\"com.plugin.gcm.OneSignalPush\" /></feature>",
               "count": 1
+            },
+            {
+              "xml": "<feature name=\"LaunchMyApp\"><param name=\"android-package\" value=\"nl.xservices.plugins.LaunchMyApp\" /></feature>",
+              "count": 1
             }
           ]
         }
@@ -151,7 +151,7 @@
           ],
           "/manifest/application/activity": [
             {
-              "xml": "<intent-filter><action android:name=\"android.intent.action.VIEW\" /><category android:name=\"android.intent.category.DEFAULT\" /><category android:name=\"android.intent.category.BROWSABLE\" /><data android:scheme=\"topfarming\" /></intent-filter>",
+              "xml": "<intent-filter><action android:name=\"android.intent.action.VIEW\" /><category android:name=\"android.intent.category.DEFAULT\" /><category android:name=\"android.intent.category.BROWSABLE\" /><data android:scheme=\"gavigliodigital\" /></intent-filter>",
               "count": 1
             },
             {
@@ -238,13 +238,6 @@
     "cordova-plugin-contacts-phonenumbers": {
       "PACKAGE_NAME": "com.gaviglio.digital"
     },
-    "cordova-plugin-customurlscheme": {
-      "URL_SCHEME": "topfarming",
-      "ANDROID_SCHEME": " ",
-      "ANDROID_HOST": " ",
-      "ANDROID_PATHPREFIX": "/",
-      "PACKAGE_NAME": "com.gaviglio.digital"
-    },
     "cordova-plugin-device": {
       "PACKAGE_NAME": "com.gaviglio.digital"
     },
@@ -294,6 +287,13 @@
       "PACKAGE_NAME": "com.gaviglio.digital"
     },
     "onesignal-cordova-plugin": {
+      "PACKAGE_NAME": "com.gaviglio.digital"
+    },
+    "cordova-plugin-customurlscheme": {
+      "URL_SCHEME": "gavigliodigital",
+      "ANDROID_SCHEME": " ",
+      "ANDROID_HOST": " ",
+      "ANDROID_PATHPREFIX": "/",
       "PACKAGE_NAME": "com.gaviglio.digital"
     }
   },
@@ -353,14 +353,6 @@
       "pluginId": "cordova-plugin-contacts-phonenumbers",
       "clobbers": [
         "navigator.contactsPhoneNumbers"
-      ]
-    },
-    {
-      "id": "cordova-plugin-customurlscheme.LaunchMyApp",
-      "file": "plugins/cordova-plugin-customurlscheme/www/android/LaunchMyApp.js",
-      "pluginId": "cordova-plugin-customurlscheme",
-      "clobbers": [
-        "window.plugins.launchmyapp"
       ]
     },
     {
@@ -747,6 +739,14 @@
       "clobbers": [
         "OneSignal"
       ]
+    },
+    {
+      "id": "cordova-plugin-customurlscheme.LaunchMyApp",
+      "file": "plugins/cordova-plugin-customurlscheme/www/android/LaunchMyApp.js",
+      "pluginId": "cordova-plugin-customurlscheme",
+      "clobbers": [
+        "window.plugins.launchmyapp"
+      ]
     }
   ],
   "plugin_metadata": {
@@ -754,7 +754,6 @@
     "cordova-plugin-battery-status": "1.2.5",
     "cordova-plugin-camera": "2.4.1",
     "cordova-plugin-contacts-phonenumbers": "0.0.12",
-    "cordova-plugin-customurlscheme": "4.4.0",
     "cordova-plugin-device": "1.1.7",
     "cordova-plugin-dialogs": "1.3.4",
     "cordova-plugin-file": "4.3.3",
@@ -770,6 +769,7 @@
     "cordova-plugin-whitelist": "1.3.3",
     "es6-promise-plugin": "4.2.2",
     "cordova-plugin-x-socialsharing": "5.4.7",
-    "onesignal-cordova-plugin": "2.4.7"
+    "onesignal-cordova-plugin": "2.4.7",
+    "cordova-plugin-customurlscheme": "4.4.0"
   }
 }

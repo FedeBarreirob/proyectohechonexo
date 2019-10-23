@@ -916,10 +916,10 @@ module.exports.metadata =
     "cordova-plugin-contacts-phonenumbers": "0.0.12",
     "onesignal-cordova-plugin": "2.4.7",
     "cordova-plugin-google-analytics": "1.8.6",
-    "cordova-plugin-customurlscheme": "4.4.0",
     "es6-promise-plugin": "4.2.2",
     "cordova-plugin-x-socialsharing": "5.4.7",
-    "cordova-plugin-file-opener2": "2.2.1"
+    "cordova-plugin-file-opener2": "2.2.1",
+    "cordova-plugin-customurlscheme": "4.4.0"
 }
 // BOTTOM OF METADATA
 });

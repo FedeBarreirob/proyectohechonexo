@@ -163,7 +163,7 @@ category#android.intent.category.LAUNCHER
 ADDED from /home/alberto/Desarrollos/Gaviglio/Digital/DigitalUIClientes/phonegap/platforms/android/app/src/main/AndroidManifest.xml:9:17-77
 	android:name
 		ADDED from /home/alberto/Desarrollos/Gaviglio/Digital/DigitalUIClientes/phonegap/platforms/android/app/src/main/AndroidManifest.xml:9:27-74
-intent-filter#action:name:android.intent.action.VIEW+category:name:android.intent.category.BROWSABLE+category:name:android.intent.category.DEFAULT+data:scheme:topfarming
+intent-filter#action:name:android.intent.action.VIEW+category:name:android.intent.category.BROWSABLE+category:name:android.intent.category.DEFAULT+data:scheme:gavigliodigital
 ADDED from /home/alberto/Desarrollos/Gaviglio/Digital/DigitalUIClientes/phonegap/platforms/android/app/src/main/AndroidManifest.xml:11:13-16:29
 action#android.intent.action.VIEW
 ADDED from /home/alberto/Desarrollos/Gaviglio/Digital/DigitalUIClientes/phonegap/platforms/android/app/src/main/AndroidManifest.xml:12:17-69
@@ -178,11 +178,11 @@ ADDED from /home/alberto/Desarrollos/Gaviglio/Digital/DigitalUIClientes/phonegap
 	android:name
 		ADDED from /home/alberto/Desarrollos/Gaviglio/Digital/DigitalUIClientes/phonegap/platforms/android/app/src/main/AndroidManifest.xml:14:27-75
 data
-ADDED from /home/alberto/Desarrollos/Gaviglio/Digital/DigitalUIClientes/phonegap/platforms/android/app/src/main/AndroidManifest.xml:15:17-53
+ADDED from /home/alberto/Desarrollos/Gaviglio/Digital/DigitalUIClientes/phonegap/platforms/android/app/src/main/AndroidManifest.xml:15:17-58
 	android:host
 		ADDED from /home/alberto/Desarrollos/Gaviglio/Digital/DigitalUIClientes/phonegap/platforms/android/app/src/main/AndroidManifest.xml:21:23-39
 	android:scheme
-		ADDED from /home/alberto/Desarrollos/Gaviglio/Digital/DigitalUIClientes/phonegap/platforms/android/app/src/main/AndroidManifest.xml:15:23-50
+		ADDED from /home/alberto/Desarrollos/Gaviglio/Digital/DigitalUIClientes/phonegap/platforms/android/app/src/main/AndroidManifest.xml:15:23-55
 	android:pathPrefix
 		ADDED from /home/alberto/Desarrollos/Gaviglio/Digital/DigitalUIClientes/phonegap/platforms/android/app/src/main/AndroidManifest.xml:21:40-62
 intent-filter#action:name:android.intent.action.VIEW+category:name:android.intent.category.BROWSABLE+category:name:android.intent.category.DEFAULT+data:host: +data:pathPrefix:/+data:scheme: 

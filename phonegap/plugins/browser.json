@@ -52,14 +52,14 @@
     "cordova-plugin-google-analytics": {
       "PACKAGE_NAME": "com.agro123.topfarming"
     },
-    "cordova-plugin-customurlscheme": {
-      "URL_SCHEME": "topfarming",
-      "PACKAGE_NAME": "io.cordova.hellocordova"
-    },
     "cordova-plugin-x-socialsharing": {
       "PACKAGE_NAME": "io.cordova.hellocordova"
     },
     "cordova-plugin-file-opener2": {
+      "PACKAGE_NAME": "io.cordova.hellocordova"
+    },
+    "cordova-plugin-customurlscheme": {
+      "URL_SCHEME": "gavigliodigital",
       "PACKAGE_NAME": "io.cordova.hellocordova"
     }
   },
