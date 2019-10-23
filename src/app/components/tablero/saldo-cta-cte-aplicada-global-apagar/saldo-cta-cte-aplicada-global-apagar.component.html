@@ -5,7 +5,7 @@
   </div>
 
   <div fxLayout="row" fxLayoutAlign="space-between center"
-    *ngIf="saldoGlobal && seObtuvoSaldoExito && saldoGlobal.aPagarVencido != 0 && saldoGlobal.aPagarAVencer != 0">
+    *ngIf="saldoGlobal && seObtuvoSaldoExito && (saldoGlobal.aPagarVencido != 0 || saldoGlobal.aPagarAVencer != 0)">
     <div fxFlex="50%" class="contenedor-importe" *ngIf="saldoGlobal != null && seObtuvoSaldoExito == true"><span
         class="importe-pagar">{{ saldoGlobal.aPagarVencido | number: '.0-0' }}</span> <span class="ars">ARS</span>
     </div>
@@ -22,13 +22,13 @@
   </div>
 
   <div fxLayout="row" fxLayoutAlign="space-between center"
-    *ngIf="saldoGlobal && seObtuvoSaldoExito && saldoGlobal.aPagarVencido != 0 && saldoGlobal.aPagarAVencer != 0">
+    *ngIf="saldoGlobal && seObtuvoSaldoExito && (saldoGlobal.aPagarVencido != 0 || saldoGlobal.aPagarAVencer != 0)">
     <div fxFlex="50%" class="vencido-vencer">Vencido</div>
     <div fxFlex="50%" class="vencido-vencer">Por vencer</div>
   </div>
 
   <div fxLayout="row" fxLayoutAlign="space-between center"
-    *ngIf="!(saldoGlobal && seObtuvoSaldoExito && saldoGlobal.aPagarVencido != 0 && saldoGlobal.aPagarAVencer != 0)">
+    *ngIf="saldoGlobal?.aPagarVencido == 0 && saldoGlobal?.aPagarAVencer == 0">
     <div fxFlex="100%" class="vencido-vencer" style="margin-top: 15px;">No tienes nada para pagar.</div>
   </div>
 

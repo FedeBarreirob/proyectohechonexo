@@ -21,7 +21,7 @@ export class SaldoCtaCteAplicadaGlobalComponent implements OnInit, OnDestroy {
   saldoGlobal: SaldoGlobalCtaCteAplicada;
   cargando: boolean = false;
   destroy$: Subject<any> = new Subject<any>();
-  seObtuvoSaldoExito: boolean;
+  seObtuvoSaldoExito: boolean = false;
   esCelular: boolean;
   nombre: string;
   perfilBasico: PerfilBasico;
