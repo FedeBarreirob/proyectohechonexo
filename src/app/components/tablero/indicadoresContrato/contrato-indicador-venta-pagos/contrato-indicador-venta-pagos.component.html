@@ -1,0 +1,48 @@
+<mat-card [ngClass]="{'card-indicador-desktop': !esCelular}">
+
+  <div fxLayout="row" fxLayoutAlign="space-between center">
+    <div fxFlex="110px" class="especie">
+      {{indicador.descEspecie}}
+    </div>
+
+    <div fxFlex="24px">
+      <img class="especie-icono" src="{{indicador.codEspecie | imagenEspecie}}" />
+    </div>
+  </div>
+
+  <div fxLayout="row" fxLayoutAlign="center center">
+    <ngx-gauge [value]="indicador.porcentajeKilosPagados" [type]="'semi'" [cap]="'round'" [thick]="4"
+      [thresholds]="thresholdConfig" [size]="90" class="manometro">
+      <ngx-gauge-value><span class="porcentual">{{indicador.porcentajeKilosPagados | number: '.2'}}%</span>
+      </ngx-gauge-value>
+    </ngx-gauge>
+  </div>
+
+  <div fxLayout="column" fxLayoutAlign="center center" class="contenedor-realizado">
+    <div fxFlex="100%" class="realizado-titulo">Pagado</div>
+    <div fxFlex="100%" class="realizado-cantidad">
+      {{indicador.kgPagados | kilosA: unidadMedida | number: '.0-0'}}{{unidadMedida | kilosTextoA}}
+    </div>
+  </div>
+
+  <div fxLayout="row" fxLayoutAlign="space-between center">
+    <div fxFlex="50%" class="subtitulo">
+      Pactado
+    </div>
+
+    <div fxFlex="50%" class="subtitulo">
+      Pendiente
+    </div>
+  </div>
+
+  <div fxLayout="row" fxLayoutAlign="space-between center">
+    <div fxFlex="50%" class="subtitulo-cantidad">
+      {{indicador.kgPactados | kilosA: unidadMedida | number: '.0-0'}}{{unidadMedida | kilosTextoA}}
+    </div>
+
+    <div fxFlex="50%"
+      [ngClass]="{'subtitulo-cantidad': indicador.kgAFijarTC == 0, 'subtitulo-cantidad-pendiente': indicador.kgAFijarTC != 0}">
+      {{indicador.kgPendientesDePagar | kilosA: unidadMedida | number: '.0-0'}}{{unidadMedida | kilosTextoA}}
+    </div>
+  </div>
+</mat-card>

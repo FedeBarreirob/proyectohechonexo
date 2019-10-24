@@ -1,0 +1,11 @@
+<div class="swiper-container" [swiper]="config">
+  <div class="swiper-wrapper">
+    <div class="swiper-slide" *ngFor="let indicador of indicadores">
+      <app-contrato-indicador-venta-pagos [indicador]="indicador" [unidadMedida]="unidadMedida">
+      </app-contrato-indicador-venta-pagos>
+    </div>
+  </div>
+
+  <div class="swiper-pagination"></div>
+
+</div>

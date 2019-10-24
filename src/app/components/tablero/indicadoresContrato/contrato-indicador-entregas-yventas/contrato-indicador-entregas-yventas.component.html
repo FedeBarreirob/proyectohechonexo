@@ -51,6 +51,15 @@
                 </ng-template>
             </mat-tab>
 
+            <mat-tab label="Pagos">
+                <ng-template matTabContent>
+                    <app-contrato-indicador-swiper-ventas-pagos
+                        *ngIf="resumenDeContratos != null && resumenDeContratos.indicadoresPagos != null && cargando == false"
+                        [indicadores]="resumenDeContratos.indicadoresPagos" [unidadMedida]="unidadMedida">
+                    </app-contrato-indicador-swiper-ventas-pagos>
+                </ng-template>
+            </mat-tab>
+
             <mat-tab label="Liquidaciones">
                 <ng-template matTabContent>
                     <app-contrato-indicador-swiper-ventas-liquidadas
@@ -65,7 +74,7 @@
     <!--Si no hay datos a mostrar-->
     <div fxLayout="column" fxLayoutAlign="center center" *ngIf="!hayDatosCargados" class="info-sin-data-container">
         <div fxFlex="nogrow">
-            <img src="assets/varios/sin-data.png" class="info-sin-data-img"/>
+            <img src="assets/varios/sin-data.png" class="info-sin-data-img" />
         </div>
 
         <div fxFlex="nogrow" class="info-sin-data-text">

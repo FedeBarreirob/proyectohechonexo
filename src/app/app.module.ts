@@ -170,6 +170,8 @@ import { EditaTuPerfilDesktopComponent } from './components/usuarios-y-perfiles/
 import { AccesoTercerosEdicionDesktopComponent } from './components/usuarios-y-perfiles/terceros/acceso-terceros-edicion-desktop/acceso-terceros-edicion-desktop.component';
 import { LoginLayoutComponent } from './components/layouts/login-layout/login-layout.component';
 import { HomeLayoutComponent } from './components/layouts/home-layout/home-layout.component';
+import { ContratoIndicadorSwiperVentasPagosComponent } from './components/tablero/indicadoresContrato/contrato-indicador-swiper-ventas-pagos/contrato-indicador-swiper-ventas-pagos.component';
+import { ContratoIndicadorVentaPagosComponent } from './components/tablero/indicadoresContrato/contrato-indicador-venta-pagos/contrato-indicador-venta-pagos.component';
 
 registerLocaleData(localeEsAr, 'es-AR');
 
@@ -311,7 +313,9 @@ export function tokenGetter() {
 		EditaTuPerfilDesktopComponent,
 		AccesoTercerosEdicionDesktopComponent,
 		LoginLayoutComponent,
-		HomeLayoutComponent
+		HomeLayoutComponent,
+		ContratoIndicadorSwiperVentasPagosComponent,
+		ContratoIndicadorVentaPagosComponent
 	],
 	imports: [
 		HttpClientModule,

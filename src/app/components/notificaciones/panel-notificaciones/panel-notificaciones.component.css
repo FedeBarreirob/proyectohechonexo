@@ -1,4 +1,10 @@
 .contenedor-listado {
+    height: 90vh;
+    overflow-y: scroll;
+    margin-top: 5px;
+}
+
+.contenedor-listado-desktop {
     height: 75vh;
     overflow-y: scroll;
     margin-top: 5px;

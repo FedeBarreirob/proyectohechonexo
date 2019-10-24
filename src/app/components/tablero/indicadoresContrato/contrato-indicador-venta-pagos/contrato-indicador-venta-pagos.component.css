@@ -1,0 +1,62 @@
+.especie {
+    color: #333333;
+    font-family: RubikLight;
+    font-size: 14px;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    white-space: nowrap;
+}
+
+.especie-icono {
+    height: 24px;
+    width: 24px;
+}
+
+.porcentual {
+    color: #666666;
+    font-family: Rubik;
+    font-size: 14px;
+}
+
+.realizado-titulo {
+    color: #666666;
+    font-family: Rubik;
+    font-size: 11px;
+}
+
+.realizado-cantidad {
+    color: #333333;
+    font-family: Rubik;
+    font-size: 16px;
+    text-align: center;
+}
+
+.subtitulo {
+    color: #666666;
+    font-family: Rubik;
+    font-size: 11px;
+    text-align: center;
+}
+
+.subtitulo-cantidad {
+    color: #333333;
+    font-family: Rubik;
+    font-size: 14px;
+    text-align: center;
+}
+
+.contenedor-realizado {
+    margin-top: -25px;
+    margin-bottom: 15px;
+}
+
+.subtitulo-cantidad-pendiente {
+    color: #E8021D;
+    font-family: Rubik;
+    font-size: 14px;
+    text-align: center;
+}
+
+.card-indicador-desktop {
+    margin-right: 20px;
+}
