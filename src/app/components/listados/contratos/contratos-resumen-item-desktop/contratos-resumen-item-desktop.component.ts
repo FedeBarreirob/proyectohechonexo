@@ -1,4 +1,4 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { ResumenContratoCompraVenta } from '../../../../interfaces/contratos/resumen-contrato-compra-venta';
 import { KilosAPipe } from '../../../../pipes/kilos-a.pipe';
 import { KilosTextoAPipe } from '../../../../pipes/kilos-texto-a.pipe';
@@ -15,10 +15,15 @@ import { KilosTextoAPipe } from '../../../../pipes/kilos-texto-a.pipe';
 export class ContratosResumenItemDesktopComponent implements OnInit {
 
   @Input()
-  resumen: ResumenContratoCompraVenta;
+  public resumen: ResumenContratoCompraVenta;
 
   @Input()
   unidadMedida: string;
+
+  @Output()
+  cambioSeleccion: EventEmitter<any> = new EventEmitter<any>();
+
+  public seleccionado: boolean;
 
   constructor(
     private kilosApipe: KilosAPipe,
@@ -81,5 +86,13 @@ export class ContratosResumenItemDesktopComponent implements OnInit {
     } else {
       return "No tenés pagos pendientes";
     }
+  }
+
+  /**
+   * Notifica que se ha cambiado la seleccion 
+   * @param $event 
+   */
+  notificarCambioSeleccion($event) {
+    this.cambioSeleccion.emit();
   }
 }

@@ -172,6 +172,7 @@ import { LoginLayoutComponent } from './components/layouts/login-layout/login-la
 import { HomeLayoutComponent } from './components/layouts/home-layout/home-layout.component';
 import { ContratoIndicadorSwiperVentasPagosComponent } from './components/tablero/indicadoresContrato/contrato-indicador-swiper-ventas-pagos/contrato-indicador-swiper-ventas-pagos.component';
 import { ContratoIndicadorVentaPagosComponent } from './components/tablero/indicadoresContrato/contrato-indicador-venta-pagos/contrato-indicador-venta-pagos.component';
+import { ToolBarDescargasComponent } from './components/common/tool-bar-descargas/tool-bar-descargas.component';
 
 registerLocaleData(localeEsAr, 'es-AR');
 
@@ -315,7 +316,8 @@ export function tokenGetter() {
 		LoginLayoutComponent,
 		HomeLayoutComponent,
 		ContratoIndicadorSwiperVentasPagosComponent,
-		ContratoIndicadorVentaPagosComponent
+		ContratoIndicadorVentaPagosComponent,
+		ToolBarDescargasComponent
 	],
 	imports: [
 		HttpClientModule,

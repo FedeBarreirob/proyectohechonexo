@@ -1,5 +1,5 @@
 import { Component, OnInit, ViewChild, OnDestroy, AfterViewInit } from '@angular/core';
-import { MatSidenav, MatDialog } from '@angular/material';
+import { MatSidenav, MatDialog, MatSnackBar } from '@angular/material';
 import { EntidadAlg } from '../../../../interfaces/perfiles/entidad-alg';
 import { FiltroEspecieCosecha } from '../../../../interfaces/varios/filtro-especie-cosecha';
 import { Subject } from 'rxjs';
@@ -10,6 +10,8 @@ import { ContratosDetalleComponent } from '../contratos-detalle/contratos-detall
 import { ResumenContratoCompraVenta } from '../../../../interfaces/contratos/resumen-contrato-compra-venta';
 import { takeUntil } from 'rxjs/operators';
 import { FiltroPersonalizadoParaFiltroCereal } from '../../../../interfaces/varios/filtro-personalizado-para-filtro-cereal';
+import { ComprobantesDownloaderService } from '../../../../services/sharedServices/downloader/comprobantes-downloader.service';
+import { saveAs } from 'file-saver/FileSaver';
 
 @Component({
   selector: 'app-contratos',
@@ -32,6 +34,8 @@ export class ContratosComponent implements OnInit, OnDestroy, AfterViewInit {
   modoDetalleDesktop: boolean = false;
   modoDetalleDesktopMovimiento$: Subject<ResumenContratoCompraVenta> = new Subject<ResumenContratoCompraVenta>();
 
+  identificadoresParaDescarga: Array<any>;
+
   // filtro a utilizar en la barra de filtros de cereales
   filtroPersonalizado: Array<FiltroPersonalizadoParaFiltroCereal> = [
     {
@@ -50,7 +54,9 @@ export class ContratosComponent implements OnInit, OnDestroy, AfterViewInit {
     private contratosService: ContratosService,
     private dialog: MatDialog,
     private cuentaAlgService: CuentaAlgService,
-    private deviceService: DeviceDetectorService
+    private deviceService: DeviceDetectorService,
+    private comprobanteDownloaderService: ComprobantesDownloaderService,
+    private snackBar: MatSnackBar
   ) { }
 
   ngOnInit() {
@@ -184,5 +190,55 @@ export class ContratosComponent implements OnInit, OnDestroy, AfterViewInit {
    */
   get modoDetalleDesktopMovimientoObs() {
     return this.modoDetalleDesktopMovimiento$.asObservable();
+  }
+
+  /**
+   * Obtiene los comprobantes seleccionados para su descarga
+   * @param listadoSeleccionados 
+   */
+  contratosSeleccionados(listadoSeleccionados: any) {
+    this.identificadoresParaDescarga = listadoSeleccionados;
+  }
+
+  /**
+   * Función que ejecuta el proceso de descarga de comprobantes seleccionados
+   */
+  descargarSeleccionados() {
+    if (this.identificadoresParaDescarga && this.identificadoresParaDescarga.length > 0) {
+      /*if (this.cargando == false) {
+        this.cargando = true;*/
+
+      let identificadores = this.identificadoresParaDescarga.map(identificador => identificador.identificadorParaDescarga);
+
+      this.comprobanteDownloaderService.confirmacionVentaDescargadoMasivo(identificadores)
+        .pipe(takeUntil(this.destroy$))
+        .subscribe(respuesta => {
+          var mediaType = 'application/zip';
+          var blob = new Blob([respuesta], { type: mediaType });
+          var filename = `boletos.zip`;
+
+          if (blob.size !== 0) {
+            saveAs(blob, filename);
+          } else {
+            this.openSnackBar("Los comprobantes no se encuentra disponible para su descarga.", "Descarga de comprobantes");
+          }
+
+          //this.cargando = false;
+        }, error => {
+          console.log(error);
+          //this.cargando = false;
+        });
+    }
+  }
+
+  /**
+  * Muestra un mensaje en pantalla
+  * @param message Mensaje a mostrar
+  * @param action Otro mensaje
+  */
+  openSnackBar(message: string, action: string) {
+    this.snackBar.open(message, action, {
+      duration: 2000,
+    });
   }
 }

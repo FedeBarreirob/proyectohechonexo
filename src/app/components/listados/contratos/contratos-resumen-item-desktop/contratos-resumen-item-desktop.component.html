@@ -1,5 +1,10 @@
 <div fxLayout="row" fxLayoutAlign="space-around center" class="container">
 
+  <!--Check de descarga-->
+  <div fxFlex="28px">
+    <mat-checkbox [(ngModel)]="seleccionado" (change)="notificarCambioSeleccion($event)"></mat-checkbox>
+  </div>
+
   <!--Identificacion del contrato-->
   <div fxFlex="318px">
     <div fxLayout="row" fxLayoutAlign="space-around center">

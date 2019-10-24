@@ -13,6 +13,7 @@ export class ComprobantesDownloaderService {
 	private urlCtaCteComprobantesDescargarMasivo = `${environment.hostCtaCte}/Comprobantes/descargarMasivo`;
 	private urlGeneradorComprobanteConfVentaDescargar = `${environment.hostGeneradorComprobantes}/confirmacionesDeVentas/descargar`;
 	private urlGeneradorComprobanteCertificado1116ADescargar = `${environment.hostGeneradorComprobantes}/afip/certificado1116A`;
+	private urlGeneradorComprobanteConfVentaDescargarMasivo = `${environment.hostGeneradorComprobantes}/confirmacionesDeVentas/descargarMasivo`;
 
 	constructor(
 		private http: HttpClient
@@ -22,7 +23,7 @@ export class ComprobantesDownloaderService {
 	comprobanteDescargado(link: string, comprobante: string): Observable<Blob> {
 
 		let headers = new HttpHeaders({
-			'Content-Type': 'application/json'
+			'Content-Type': 'application/pdf'
 		});
 
 		let params = new HttpParams().set('link', link).set('comprobante', comprobante);
@@ -39,7 +40,7 @@ export class ComprobantesDownloaderService {
 
 		const httpOptions = {
 			headers: new HttpHeaders({
-				'Content-Type': 'application/json'
+				'Content-Type': 'application/zip'
 			}),
 			responseType: 'blob' as 'blob'
 		};
@@ -51,7 +52,7 @@ export class ComprobantesDownloaderService {
 	confirmacionVentaDescargado(nroSucursal: number, nroComprobante: number): Observable<Blob> {
 
 		let headers = new HttpHeaders({
-			'Content-Type': 'application/json'
+			'Content-Type': 'application/pdf'
 		});
 
 		let url = `${this.urlGeneradorComprobanteConfVentaDescargar}/${nroSucursal}/${nroComprobante}`;
@@ -70,10 +71,35 @@ export class ComprobantesDownloaderService {
 	certificadoAfipDescargado(nro1116A): Observable<Blob> {
 
 		let headers = new HttpHeaders({
-			'Content-Type': 'application/json'
+			'Content-Type': 'application/pdf'
 		});
 
 		let url = `${this.urlGeneradorComprobanteCertificado1116ADescargar}/${nro1116A}`;
+
+		const options = {
+			headers, responseType: 'blob' as 'blob'
+		}
+
+		return this.http.get(url, options);
+	}
+
+	/**
+	 * Descarga un zip con los pdf de las confirmaciones de ventas
+	 * @param identificadores Listado de objetos con dos atributos: sucursal y comprobante
+	 */
+	confirmacionVentaDescargadoMasivo(identificadores: Array<any>): Observable<Blob> {
+
+		let headers = new HttpHeaders({
+			'Content-Type': 'application/zip'
+		});
+
+		let identificadoresParam = identificadores
+			.map(identificador => {
+				return `${identificador.sucursal}-${identificador.comprobante}`;
+			})
+			.join(",");
+
+		let url = `${this.urlGeneradorComprobanteConfVentaDescargarMasivo}/${identificadoresParam}`;
 
 		const options = {
 			headers, responseType: 'blob' as 'blob'

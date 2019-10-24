@@ -1,4 +1,4 @@
-import { Component, OnInit, Input, Output, EventEmitter, OnDestroy } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter, OnDestroy, ViewChildren, QueryList } from '@angular/core';
 import { Subject } from 'rxjs';
 import { ResumenContratoCompraVenta } from '../../../../interfaces/contratos/resumen-contrato-compra-venta';
 import { FiltroResumenContratoCompraVenta } from '../../../../interfaces/contratos/filtro-resumen-contrato-compra-venta';
@@ -7,6 +7,7 @@ import { ContratosService } from '../../../../services/contratos/contratos.servi
 import { AuthenticationService } from '../../../../services/security/authentication.service';
 import { takeUntil } from 'rxjs/operators';
 import { ContratosDataSource } from '../../../../datasources/contratos-data-source';
+import { ContratosResumenItemDesktopComponent } from '../contratos-resumen-item-desktop/contratos-resumen-item-desktop.component';
 
 @Component({
   selector: 'app-contratos-lista-desktop',
@@ -23,6 +24,12 @@ export class ContratosListaDesktopComponent implements OnInit, OnDestroy {
 
   @Output()
   cargandoChange: EventEmitter<boolean> = new EventEmitter<boolean>();
+
+  @Output()
+  contratosSeleccionados: EventEmitter<any> = new EventEmitter<any>();
+
+  @ViewChildren(ContratosResumenItemDesktopComponent)
+  contratosItems: QueryList<ContratosResumenItemDesktopComponent>;
 
   listadoContratos: Array<ResumenContratoCompraVenta> = [];
   pagina: number = 1;
@@ -133,5 +140,26 @@ export class ContratosListaDesktopComponent implements OnInit, OnDestroy {
   // funcion que muestra el detalle de un movimiento seleccionado
   verDetalle(movimiento: ResumenContratoCompraVenta) {
     this.seleccionMovimiento.emit(movimiento);
+  }
+
+  /**
+   * Función encargada de crear una lista con los contratos seleccionados
+   */
+  rearmarListaSeleccionados() {
+    if (this.contratosItems && this.contratosItems.length > 0) {
+
+      let listadoSeleccionados = this.contratosItems
+        .filter(contratoItem => contratoItem.seleccionado == true)
+        .map(contratoItem => {
+          return {
+            identificadorParaDescarga: {
+              sucursal: contratoItem.resumen.numeroSucursalContrato,
+              comprobante: contratoItem.resumen.numeroComprobanteContrato
+            }
+          };
+        });
+
+      this.contratosSeleccionados.emit(listadoSeleccionados);
+    }
   }
 }
