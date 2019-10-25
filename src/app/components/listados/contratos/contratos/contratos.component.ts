@@ -35,6 +35,7 @@ export class ContratosComponent implements OnInit, OnDestroy, AfterViewInit {
   modoDetalleDesktopMovimiento$: Subject<ResumenContratoCompraVenta> = new Subject<ResumenContratoCompraVenta>();
 
   identificadoresParaDescarga: Array<any>;
+  descargandoArchivos: boolean = false;
 
   // filtro a utilizar en la barra de filtros de cereales
   filtroPersonalizado: Array<FiltroPersonalizadoParaFiltroCereal> = [
@@ -204,10 +205,9 @@ export class ContratosComponent implements OnInit, OnDestroy, AfterViewInit {
    * Función que ejecuta el proceso de descarga de comprobantes seleccionados
    */
   descargarSeleccionados() {
-    if (this.identificadoresParaDescarga && this.identificadoresParaDescarga.length > 0) {
-      /*if (this.cargando == false) {
-        this.cargando = true;*/
+    if (this.identificadoresParaDescarga && this.identificadoresParaDescarga.length > 0 && this.descargandoArchivos == false) {
 
+      this.descargandoArchivos = true;
       let identificadores = this.identificadoresParaDescarga.map(identificador => identificador.identificadorParaDescarga);
 
       this.comprobanteDownloaderService.confirmacionVentaDescargadoMasivo(identificadores)
@@ -223,10 +223,10 @@ export class ContratosComponent implements OnInit, OnDestroy, AfterViewInit {
             this.openSnackBar("Los comprobantes no se encuentra disponible para su descarga.", "Descarga de comprobantes");
           }
 
-          //this.cargando = false;
+          this.descargandoArchivos = false;
         }, error => {
           console.log(error);
-          //this.cargando = false;
+          this.descargandoArchivos = false;
         });
     }
   }

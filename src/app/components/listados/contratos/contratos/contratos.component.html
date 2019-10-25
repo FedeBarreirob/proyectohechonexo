@@ -33,9 +33,12 @@
 		</div>
 
 		<div fxFlex *ngIf="identificadoresParaDescarga && identificadoresParaDescarga.length > 0">
-			<app-tool-bar-descargas (descargarComprobanteChange)="descargarSeleccionados()"></app-tool-bar-descargas>
+			<app-tool-bar-descargas (descargarComprobanteChange)="descargarSeleccionados()"
+				[disabled]="descargandoArchivos"></app-tool-bar-descargas>
 		</div>
 	</div>
+	<mat-progress-bar *ngIf="descargandoArchivos" mode="indeterminate"></mat-progress-bar>
+
 	<app-contratos-lista-desktop *ngIf="esCelular != null && esCelular == false" [observerFiltro$]="observerFiltro$"
 		(seleccionMovimiento)="verDetalleDesktop($event)" (cargandoChange)="mostrarIndicadorLoading($event)"
 		(contratosSeleccionados)="contratosSeleccionados($event)">

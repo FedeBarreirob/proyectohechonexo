@@ -162,4 +162,17 @@ export class ContratosListaDesktopComponent implements OnInit, OnDestroy {
       this.contratosSeleccionados.emit(listadoSeleccionados);
     }
   }
+
+  /**
+   * Selecciona todos los contratos si corresponde, rearma el listado de descarga
+   * @param todos 
+   */
+  seleccionarTodos(seleccion: boolean) {
+    if (this.contratosItems && this.contratosItems.length > 0) {
+
+      this.contratosItems.forEach(contratoItem => contratoItem.seleccionado = seleccion);
+      this.rearmarListaSeleccionados();
+
+    }
+  }
 }

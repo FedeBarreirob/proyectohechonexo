@@ -23,6 +23,9 @@ export class ContratosResumenItemDesktopComponent implements OnInit {
   @Output()
   cambioSeleccion: EventEmitter<any> = new EventEmitter<any>();
 
+  @Output()
+  verDetalle: EventEmitter<ResumenContratoCompraVenta> = new EventEmitter<ResumenContratoCompraVenta>();
+
   public seleccionado: boolean;
 
   constructor(
@@ -94,5 +97,12 @@ export class ContratosResumenItemDesktopComponent implements OnInit {
    */
   notificarCambioSeleccion($event) {
     this.cambioSeleccion.emit();
+  }
+
+  /**
+   * Notifica un resumen para que sea mostrar en un detalle
+   */
+  notificarVerDetalle() {
+    this.verDetalle.emit(this.resumen);
   }
 }

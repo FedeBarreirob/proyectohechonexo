@@ -1,5 +1,5 @@
 <div class="contenedor-header">
-  <app-contratos-resumen-header-item-desktop></app-contratos-resumen-header-item-desktop>
+  <app-contratos-resumen-header-item-desktop (cambioSeleccion)="seleccionarTodos($event)"></app-contratos-resumen-header-item-desktop>
 </div>
 
 <div class="contenedor-listado" fxLayout="column" fxLayoutWrap fxLayoutAlign="none" infiniteScroll
@@ -11,7 +11,7 @@
   </app-contratos-resumen-item-desktop>-->
 
   <app-contratos-resumen-item-desktop *ngFor="let movimiento of (listadoContratos ? listadoContratos : [])"
-     [resumen]="movimiento" [unidadMedida]="unidadMedida" (cambioSeleccion)="rearmarListaSeleccionados()">
+     [resumen]="movimiento" [unidadMedida]="unidadMedida" (cambioSeleccion)="rearmarListaSeleccionados()" (verDetalle)="verDetalle($event)">
   </app-contratos-resumen-item-desktop>
 
   <!--Spinner-->

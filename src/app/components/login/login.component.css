@@ -152,10 +152,6 @@
     background-size: cover;
 }
 
-:host /deep/.mat-checkbox-checked.mat-accent .mat-checkbox-background, .mat-checkbox-indeterminate.mat-accent .mat-checkbox-background {
-    background-color: #00cb75;
-}
-
 .card-base {
     width: 91.67%;
     border: 1px solid rgba(35, 185, 80, 0.08);

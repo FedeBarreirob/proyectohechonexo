@@ -1,6 +1,6 @@
 <div fxLayout="row" fxLayoutAlign="end center" fxLayoutGap="5px">
   <div fxFlex="nogrow">
-    <button mat-button class="boton-descarga-comprobante" (click)="descargarComprobante()">
+    <button mat-button class="boton-descarga-comprobante" (click)="descargarComprobante()" [disabled]="disabled">
       <img src="assets/varios/pdf.png" />
       Descargar comprobante
     </button>

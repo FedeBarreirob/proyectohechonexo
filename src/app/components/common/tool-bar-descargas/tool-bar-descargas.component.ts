@@ -1,4 +1,4 @@
-import { Component, OnInit, EventEmitter, Output } from '@angular/core';
+import { Component, OnInit, EventEmitter, Output, Input } from '@angular/core';
 
 @Component({
   selector: 'app-tool-bar-descargas',
@@ -6,6 +6,9 @@ import { Component, OnInit, EventEmitter, Output } from '@angular/core';
   styleUrls: ['./tool-bar-descargas.component.css']
 })
 export class ToolBarDescargasComponent implements OnInit {
+
+  @Input()
+  disabled: boolean = false;
 
   @Output()
   descargarComprobanteChange: EventEmitter<any> = new EventEmitter<any>();

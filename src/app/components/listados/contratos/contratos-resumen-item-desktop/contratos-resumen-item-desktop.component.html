@@ -5,115 +5,124 @@
     <mat-checkbox [(ngModel)]="seleccionado" (change)="notificarCambioSeleccion($event)"></mat-checkbox>
   </div>
 
-  <!--Identificacion del contrato-->
-  <div fxFlex="318px">
+  <div fxFlex (click)="notificarVerDetalle()">
+
     <div fxLayout="row" fxLayoutAlign="space-around center">
 
-      <div fxFlex="48px">
-        <img class="movimiento-icono" src="{{resumen.especie | imagenEspecie}}" />
-      </div>
+      <!--Identificacion del contrato-->
+      <div fxFlex="318px">
+        <div fxLayout="row" fxLayoutAlign="space-around center">
 
-      <div fxFlex="270px">
-        <div fxLayout="column" fxLayoutAlign="center start">
-          <div fxFlex="100%" class="titulo-contrato-contenedor">
-            <span class="contrato-y-numero">Contrato {{resumen.numeroComprobanteContrato}}</span>
-            <div class="etiqueta" *ngIf="resumen.moneda != null">{{resumen.moneda=='P' ? 'En pesos' : 'En dólares'}}
+          <div fxFlex="48px">
+            <img class="movimiento-icono" src="{{resumen.especie | imagenEspecie}}" />
+          </div>
+
+          <div fxFlex="270px">
+            <div fxLayout="column" fxLayoutAlign="center start">
+              <div fxFlex="100%" class="titulo-contrato-contenedor">
+                <span class="contrato-y-numero">Contrato {{resumen.numeroComprobanteContrato}}</span>
+                <div class="etiqueta" *ngIf="resumen.moneda != null">{{resumen.moneda=='P' ? 'En pesos' : 'En dólares'}}
+                </div>
+                <div class="etiqueta" *ngIf="resumen.tipoDescripcion != null">{{resumen.tipoNegocioDescripCorta}}</div>
+              </div>
+              <div fxFlex="100%" class="info-kg-pactados">
+                {{resumen.kilosPactados | kilosA: unidadMedida | number: '.0-0'}}
+                {{unidadMedida | kilosTextoA}}
+                de {{resumen.especieDescripcion}}</div>
             </div>
-            <div class="etiqueta" *ngIf="resumen.tipoDescripcion != null">{{resumen.tipoNegocioDescripCorta}}</div>
           </div>
-          <div fxFlex="100%" class="info-kg-pactados">{{resumen.kilosPactados | kilosA: unidadMedida | number: '.0-0'}}
-            {{unidadMedida | kilosTextoA}}
-            de {{resumen.especieDescripcion}}</div>
         </div>
       </div>
-    </div>
-  </div>
 
-  <!--Entregado-->
-  <div fxFlex="147px" [matTooltip]="tooltipEntregas">
-    <div fxLayout="column" fxLayoutAlign="none">
+      <!--Entregado-->
+      <div fxFlex="147px" [matTooltip]="tooltipEntregas">
+        <div fxLayout="column" fxLayoutAlign="none">
 
-      <div fxFlex="nogrow">
-        <div fxLayout="row" fxLayoutAlign="start center">
+          <div fxFlex="nogrow">
+            <div fxLayout="row" fxLayoutAlign="start center">
+              <div fxFlex="nogrow" class="porcentual-text">
+                {{resumen.porcentajeKilosEntregados | number: '.2'}}%
+              </div>
+
+              <div fxFlex="48px"
+                [ngClass]="{'barra-progreso-alert': resumen.porcentajeKilosEntregados < 100, 'barra-progreso-ok': resumen.porcentajeKilosEntregados == 100}">
+                <mat-progress-bar mode="determinate" [value]="resumen.porcentajeKilosEntregados"></mat-progress-bar>
+              </div>
+            </div>
+          </div>
+
+          <div fxFlex="nogrow" class="fecha-rango-text" *ngIf="resumen.fechaEntregaDesde && resumen.fechaEntregaHasta">
+            {{resumen.fechaEntregaDesde}} → {{resumen.fechaEntregaHasta}}
+          </div>
+        </div>
+      </div>
+
+      <!--Fijado-->
+      <div fxFlex="147px" [matTooltip]="tooltipFijaciones">
+        <div fxLayout="column" fxLayoutAlign="none">
+
+          <div fxFlex="nogrow">
+            <div fxLayout="row" fxLayoutAlign="start center">
+              <div fxFlex="nogrow" class="porcentual-text">
+                {{resumen.porcentajeKilosFijados | number: '.2'}}%
+              </div>
+
+              <div fxFlex="48px"
+                [ngClass]="{'barra-progreso-alert': resumen.porcentajeKilosFijados < 100, 'barra-progreso-ok': resumen.porcentajeKilosFijados == 100}">
+                <mat-progress-bar mode="determinate" [value]="resumen.porcentajeKilosFijados"></mat-progress-bar>
+              </div>
+            </div>
+          </div>
+
+          <div fxFlex="nogrow" class="fecha-rango-text"
+            *ngIf="resumen.fechaDesdeFijacion && resumen.fechaHastaFijacion">
+            {{resumen.fechaDesdeFijacion}} → {{resumen.fechaHastaFijacion}}
+          </div>
+        </div>
+      </div>
+
+      <!--Pesificado-->
+      <div fxFlex="110px" [matTooltip]="tooltipPesificaciones">
+        <div fxLayout="row" fxLayoutAlign="end center">
           <div fxFlex="nogrow" class="porcentual-text">
-            {{resumen.porcentajeKilosEntregados | number: '.2'}}%
+            {{resumen.porcentajeKilosPesificados | number: '.2'}}%
           </div>
 
           <div fxFlex="48px"
-            [ngClass]="{'barra-progreso-alert': resumen.porcentajeKilosEntregados < 100, 'barra-progreso-ok': resumen.porcentajeKilosEntregados == 100}">
-            <mat-progress-bar mode="determinate" [value]="resumen.porcentajeKilosEntregados"></mat-progress-bar>
+            [ngClass]="{'barra-progreso-alert': resumen.porcentajeKilosPesificados < 100, 'barra-progreso-ok': resumen.porcentajeKilosPesificados == 100}">
+            <mat-progress-bar mode="determinate" [value]="resumen.porcentajeKilosPesificados"></mat-progress-bar>
           </div>
         </div>
       </div>
 
-      <div fxFlex="nogrow" class="fecha-rango-text" *ngIf="resumen.fechaEntregaDesde && resumen.fechaEntregaHasta">
-        {{resumen.fechaEntregaDesde}} → {{resumen.fechaEntregaHasta}}
-      </div>
-    </div>
-  </div>
-
-  <!--Fijado-->
-  <div fxFlex="147px" [matTooltip]="tooltipFijaciones">
-    <div fxLayout="column" fxLayoutAlign="none">
-
-      <div fxFlex="nogrow">
-        <div fxLayout="row" fxLayoutAlign="start center">
+      <!--Liquidado-->
+      <div fxFlex="110px" [matTooltip]="tooltipLiquidaciones">
+        <div fxLayout="row" fxLayoutAlign="end center">
           <div fxFlex="nogrow" class="porcentual-text">
-            {{resumen.porcentajeKilosFijados | number: '.2'}}%
+            {{resumen.porcentajeKilosFacturados | number: '.2'}}%
           </div>
 
           <div fxFlex="48px"
-            [ngClass]="{'barra-progreso-alert': resumen.porcentajeKilosFijados < 100, 'barra-progreso-ok': resumen.porcentajeKilosFijados == 100}">
-            <mat-progress-bar mode="determinate" [value]="resumen.porcentajeKilosFijados"></mat-progress-bar>
+            [ngClass]="{'barra-progreso-alert': resumen.porcentajeKilosFacturados < 100, 'barra-progreso-ok': resumen.porcentajeKilosFacturados == 100}">
+            <mat-progress-bar mode="determinate" [value]="resumen.porcentajeKilosFacturados"></mat-progress-bar>
           </div>
         </div>
       </div>
 
-      <div fxFlex="nogrow" class="fecha-rango-text" *ngIf="resumen.fechaDesdeFijacion && resumen.fechaHastaFijacion">
-        {{resumen.fechaDesdeFijacion}} → {{resumen.fechaHastaFijacion}}
-      </div>
-    </div>
-  </div>
+      <!--Pagado-->
+      <div fxFlex="110px" [matTooltip]="tooltipPagados">
+        <div fxLayout="row" fxLayoutAlign="end center">
+          <div fxFlex="nogrow" class="porcentual-text">
+            {{resumen.porcentajeKilosPagados | number: '.2'}}%
+          </div>
 
-  <!--Pesificado-->
-  <div fxFlex="110px" [matTooltip]="tooltipPesificaciones">
-    <div fxLayout="row" fxLayoutAlign="end center">
-      <div fxFlex="nogrow" class="porcentual-text">
-        {{resumen.porcentajeKilosPesificados | number: '.2'}}%
-      </div>
-
-      <div fxFlex="48px"
-        [ngClass]="{'barra-progreso-alert': resumen.porcentajeKilosPesificados < 100, 'barra-progreso-ok': resumen.porcentajeKilosPesificados == 100}">
-        <mat-progress-bar mode="determinate" [value]="resumen.porcentajeKilosPesificados"></mat-progress-bar>
-      </div>
-    </div>
-  </div>
-
-  <!--Liquidado-->
-  <div fxFlex="110px" [matTooltip]="tooltipLiquidaciones">
-    <div fxLayout="row" fxLayoutAlign="end center">
-      <div fxFlex="nogrow" class="porcentual-text">
-        {{resumen.porcentajeKilosFacturados | number: '.2'}}%
+          <div fxFlex="48px"
+            [ngClass]="{'barra-progreso-alert': resumen.porcentajeKilosPagados < 100, 'barra-progreso-ok': resumen.porcentajeKilosPagados == 100}">
+            <mat-progress-bar mode="determinate" [value]="resumen.porcentajeKilosPagados"></mat-progress-bar>
+          </div>
+        </div>
       </div>
 
-      <div fxFlex="48px"
-        [ngClass]="{'barra-progreso-alert': resumen.porcentajeKilosFacturados < 100, 'barra-progreso-ok': resumen.porcentajeKilosFacturados == 100}">
-        <mat-progress-bar mode="determinate" [value]="resumen.porcentajeKilosFacturados"></mat-progress-bar>
-      </div>
-    </div>
-  </div>
-
-  <!--Pagado-->
-  <div fxFlex="110px" [matTooltip]="tooltipPagados">
-    <div fxLayout="row" fxLayoutAlign="end center">
-      <div fxFlex="nogrow" class="porcentual-text">
-        {{resumen.porcentajeKilosPagados | number: '.2'}}%
-      </div>
-
-      <div fxFlex="48px"
-        [ngClass]="{'barra-progreso-alert': resumen.porcentajeKilosPagados < 100, 'barra-progreso-ok': resumen.porcentajeKilosPagados == 100}">
-        <mat-progress-bar mode="determinate" [value]="resumen.porcentajeKilosPagados"></mat-progress-bar>
-      </div>
     </div>
   </div>
 
