@@ -1,4 +1,4 @@
-import { Component, OnInit, Input, Output, EventEmitter, OnDestroy } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter, OnDestroy, ViewChildren, QueryList } from '@angular/core';
 import { MovimientoEntrega } from '../../../../interfaces/entregas/listado-entregas';
 import { Subject } from 'rxjs';
 import { FiltroEntregas } from '../../../../interfaces/entregas/filtro-entregas';
@@ -6,6 +6,7 @@ import { EntregasService } from '../../../../services/entregas/entregas.service'
 import { PerfilBasico } from '../../../../interfaces/perfiles/perfil-basico';
 import { AuthenticationService } from '../../../../services/security/authentication.service';
 import { takeUntil } from 'rxjs/operators';
+import { EntregasItemDesktopComponent } from '../entregas-item-desktop/entregas-item-desktop.component';
 
 @Component({
   selector: 'app-entregas-lista-desktop',
@@ -25,6 +26,12 @@ export class EntregasListaDesktopComponent implements OnInit, OnDestroy {
 
   @Output()
   cargandoChange: EventEmitter<boolean> = new EventEmitter<boolean>();
+
+  @Output()
+  entregasSeleccionados: EventEmitter<any> = new EventEmitter<any>();
+
+  @ViewChildren(EntregasItemDesktopComponent)
+  entregasItems: QueryList<EntregasItemDesktopComponent>;
 
   listadoEntregas: Array<MovimientoEntrega> = [];
   pagina: number = 1;
@@ -142,4 +149,36 @@ export class EntregasListaDesktopComponent implements OnInit, OnDestroy {
     this.seleccionMovimiento.emit(movimiento);
   }
 
+  /**
+   * Función encargada de crear una lista con las entregas seleccionados
+   */
+  rearmarListaSeleccionados() {
+    if (this.entregasItems && this.entregasItems.length > 0) {
+
+      let listadoSeleccionados = this.entregasItems
+        .filter(entregaItem => entregaItem.seleccionado == true)
+        .map(entregaItem => {
+          return {
+            identificadorParaDescarga: {
+              nroCertificado: entregaItem.movimiento.n1116A
+            }
+          };
+        });
+
+      this.entregasSeleccionados.emit(listadoSeleccionados);
+    }
+  }
+
+  /**
+   * Selecciona todos los contratos si corresponde, rearma el listado de descarga
+   * @param todos 
+   */
+  seleccionarTodos(seleccion: boolean) {
+    if (this.entregasItems && this.entregasItems.length > 0) {
+
+      this.entregasItems.forEach(entregaItem => entregaItem.seleccionado = seleccion);
+      this.rearmarListaSeleccionados();
+
+    }
+  }
 }

@@ -2,7 +2,7 @@ import { Component, OnInit, ViewChild, OnDestroy, AfterViewInit } from '@angular
 import { EntregasService } from '../../../../services/entregas/entregas.service';
 import { MovimientoEntrega } from '../../../../interfaces/entregas/listado-entregas';
 import { DatePipe } from '@angular/common';
-import { MatDialog, MatSidenav } from '@angular/material';
+import { MatDialog, MatSidenav, MatSnackBar } from '@angular/material';
 import { EntregasDetalleComponent } from '../entregas-detalle/entregas-detalle.component';
 import { FiltroEspecieCosecha } from '../../../../interfaces/varios/filtro-especie-cosecha';
 import { EntidadAlg } from '../../../../interfaces/perfiles/entidad-alg';
@@ -10,6 +10,8 @@ import { CuentaAlgService } from '../../../../services/observers/cuentas-alg/cue
 import { DeviceDetectorService } from 'ngx-device-detector';
 import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
+import { ComprobantesDownloaderService } from '../../../../services/sharedServices/downloader/comprobantes-downloader.service';
+import { saveAs } from 'file-saver/FileSaver';
 
 @Component({
   selector: 'app-entregas',
@@ -33,11 +35,16 @@ export class EntregasComponent implements OnInit, OnDestroy, AfterViewInit {
   modoDetalleDesktop: boolean = false;
   modoDetalleDesktopMovimiento$: Subject<MovimientoEntrega> = new Subject<MovimientoEntrega>();
 
+  identificadoresParaDescarga: Array<any>;
+  descargandoArchivos: boolean = false;
+
   constructor(
     private entregasService: EntregasService,
     public dialog: MatDialog,
     private cuentaAlgService: CuentaAlgService,
-    private deviceService: DeviceDetectorService
+    private deviceService: DeviceDetectorService,
+    private snackBar: MatSnackBar,
+    private comprobanteDownloaderService: ComprobantesDownloaderService
   ) {
   }
 
@@ -173,4 +180,52 @@ export class EntregasComponent implements OnInit, OnDestroy, AfterViewInit {
     this.modoDetalleDesktop = false;
   }
 
+  /**
+   * Obtiene los comprobantes seleccionados para su descarga
+   * @param listadoSeleccionados 
+   */
+  entregasSeleccionados(listadoSeleccionados: any) {
+    this.identificadoresParaDescarga = listadoSeleccionados;
+  }
+
+  /**
+   * Función que ejecuta el proceso de descarga de comprobantes seleccionados
+   */
+  descargarSeleccionados() {
+    if (this.identificadoresParaDescarga && this.identificadoresParaDescarga.length > 0 && this.descargandoArchivos == false) {
+
+      this.descargandoArchivos = true;
+      let identificadores = this.identificadoresParaDescarga.map(identificador => identificador.identificadorParaDescarga);
+
+      this.comprobanteDownloaderService.certificadoAfipDescargadoMasivo(identificadores)
+        .pipe(takeUntil(this.destroy$))
+        .subscribe(respuesta => {
+          var mediaType = 'application/zip';
+          var blob = new Blob([respuesta], { type: mediaType });
+          var filename = `certificados.zip`;
+
+          if (blob.size !== 0) {
+            saveAs(blob, filename);
+          } else {
+            this.openSnackBar("Los certificados no se encuentra disponible para su descarga.", "Descarga de comprobantes");
+          }
+
+          this.descargandoArchivos = false;
+        }, error => {
+          console.log(error);
+          this.descargandoArchivos = false;
+        });
+    }
+  }
+
+  /**
+  * Muestra un mensaje en pantalla
+  * @param message Mensaje a mostrar
+  * @param action Otro mensaje
+  */
+  openSnackBar(message: string, action: string) {
+    this.snackBar.open(message, action, {
+      duration: 2000,
+    });
+  }
 }

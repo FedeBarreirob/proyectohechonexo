@@ -1,35 +1,46 @@
 <div fxLayout="row" fxLayoutAlign="space-around center" class="container">
 
-  <div fxFlex="100px">
-    Producto
+  <!--Check de descarga-->
+  <div fxFlex="28px">
+    <mat-checkbox (change)="notificarCambioSeleccion($event)"></mat-checkbox>
   </div>
 
-  <div fxFlex="100px">
-    Fecha
-  </div>
+  <div fxFlex>
+    <div fxLayout="row" fxLayoutAlign="space-around center">
 
-  <div fxFlex="100px">
-    {{unidadMedida | kilosTextoA}} Brutos
-  </div>
+      <div fxFlex="100px">
+        Producto
+      </div>
 
-  <div fxFlex="100px">
-    Humedad
-  </div>
+      <div fxFlex="100px">
+        Fecha
+      </div>
 
-  <div fxFlex="100px">
-    Zaranda
-  </div>
+      <div fxFlex="100px">
+        {{unidadMedida | kilosTextoA}} Brutos
+      </div>
 
-  <div fxFlex="100px">
-    Volátil
-  </div>
+      <div fxFlex="100px">
+        Humedad
+      </div>
 
-  <div fxFlex="100px">
-    Factor/Grado
-  </div>
+      <div fxFlex="100px">
+        Zaranda
+      </div>
 
-  <div fxFlex="100px">
-    CP
-  </div>
+      <div fxFlex="100px">
+        Volátil
+      </div>
 
+      <div fxFlex="100px">
+        Factor/Grado
+      </div>
+
+      <div fxFlex="100px">
+        CP
+      </div>
+
+    </div>
+
+  </div>
 </div>

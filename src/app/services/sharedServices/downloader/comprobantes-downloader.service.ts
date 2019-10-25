@@ -14,6 +14,7 @@ export class ComprobantesDownloaderService {
 	private urlGeneradorComprobanteConfVentaDescargar = `${environment.hostGeneradorComprobantes}/confirmacionesDeVentas/descargar`;
 	private urlGeneradorComprobanteCertificado1116ADescargar = `${environment.hostGeneradorComprobantes}/afip/certificado1116A`;
 	private urlGeneradorComprobanteConfVentaDescargarMasivo = `${environment.hostGeneradorComprobantes}/confirmacionesDeVentas/descargarMasivo`;
+	private urlGeneradorComprobanteCertificado1116ADescargarMasivo = `${environment.hostGeneradorComprobantes}/afip/certificado1116AMasivo`;
 
 	constructor(
 		private http: HttpClient
@@ -100,6 +101,29 @@ export class ComprobantesDownloaderService {
 			.join(",");
 
 		let url = `${this.urlGeneradorComprobanteConfVentaDescargarMasivo}/${identificadoresParam}`;
+
+		const options = {
+			headers, responseType: 'blob' as 'blob'
+		}
+
+		return this.http.get(url, options);
+	}
+
+	/**
+	 * Descarga un zip con los pdf de los certificados de afip de entregas
+	 * @param identificadores Listado de objetos con dos atributos: nroCertificado
+	 */
+	certificadoAfipDescargadoMasivo(identificadores: Array<any>): Observable<Blob> {
+
+		let headers = new HttpHeaders({
+			'Content-Type': 'application/zip'
+		});
+
+		let identificadoresParam = identificadores
+			.map(identificador => identificador.nroCertificado)
+			.join(",");
+
+		let url = `${this.urlGeneradorComprobanteCertificado1116ADescargarMasivo}/${identificadoresParam}`;
 
 		const options = {
 			headers, responseType: 'blob' as 'blob'

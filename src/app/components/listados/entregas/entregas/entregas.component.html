@@ -25,16 +25,23 @@
 			Entregas
 		</div>
 
-		<div fxFlex>
+		<div fxFlex *ngIf="!identificadoresParaDescarga || identificadoresParaDescarga.length <= 0">
 			<app-cereales-filtro-desktop [filtrosEspecieCosecha]="filtrosEspecieCosecha" [cuenta]="cuenta"
 				(botonAplicar)="cargarListado($event)" [disabled]="cargando || cargandoFiltros">
 			</app-cereales-filtro-desktop>
 		</div>
 
+		<div fxFlex *ngIf="identificadoresParaDescarga && identificadoresParaDescarga.length > 0">
+			<app-tool-bar-descargas (descargarComprobanteChange)="descargarSeleccionados()"
+				[disabled]="descargandoArchivos"></app-tool-bar-descargas>
+		</div>
 	</div>
 
+	<mat-progress-bar *ngIf="descargandoArchivos" mode="indeterminate"></mat-progress-bar>
+
 	<app-entregas-lista-desktop *ngIf="esCelular != null && esCelular == false" [observerFiltro$]="observerFiltro$"
-		(seleccionMovimiento)="verDetalleDesktop($event)" (cargandoChange)="mostrarIndicadorLoading($event)">
+		(seleccionMovimiento)="verDetalleDesktop($event)" (cargandoChange)="mostrarIndicadorLoading($event)"
+		(entregasSeleccionados)="entregasSeleccionados($event)">
 	</app-entregas-lista-desktop>
 </span>
 
