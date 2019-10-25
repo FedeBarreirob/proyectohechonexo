@@ -12,6 +12,7 @@ import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
 import { ComprobantesDownloaderService } from '../../../../services/sharedServices/downloader/comprobantes-downloader.service';
 import { saveAs } from 'file-saver/FileSaver';
+import { EntregasExportacionesService } from '../../../../services/entregas/entregas-exportaciones.service';
 
 @Component({
   selector: 'app-entregas',
@@ -37,6 +38,7 @@ export class EntregasComponent implements OnInit, OnDestroy, AfterViewInit {
 
   identificadoresParaDescarga: Array<any>;
   descargandoArchivos: boolean = false;
+  botonesBarraDescargaExtras: Array<any> = [];
 
   constructor(
     private entregasService: EntregasService,
@@ -44,7 +46,8 @@ export class EntregasComponent implements OnInit, OnDestroy, AfterViewInit {
     private cuentaAlgService: CuentaAlgService,
     private deviceService: DeviceDetectorService,
     private snackBar: MatSnackBar,
-    private comprobanteDownloaderService: ComprobantesDownloaderService
+    private comprobanteDownloaderService: ComprobantesDownloaderService,
+    private entregasExportacionesService: EntregasExportacionesService
   ) {
   }
 
@@ -61,6 +64,8 @@ export class EntregasComponent implements OnInit, OnDestroy, AfterViewInit {
           }
         }
       );
+
+    this.cargarBotonesExtrasDescarga();
   }
 
   ngAfterViewInit(): void {
@@ -195,7 +200,7 @@ export class EntregasComponent implements OnInit, OnDestroy, AfterViewInit {
     if (this.identificadoresParaDescarga && this.identificadoresParaDescarga.length > 0 && this.descargandoArchivos == false) {
 
       this.descargandoArchivos = true;
-      let identificadores = this.identificadoresParaDescarga.map(identificador => identificador.identificadorParaDescarga);
+      let identificadores = this.identificadoresParaDescarga.map(identificador => identificador.movimiento.n1116A);
 
       this.comprobanteDownloaderService.certificadoAfipDescargadoMasivo(identificadores)
         .pipe(takeUntil(this.destroy$))
@@ -227,5 +232,73 @@ export class EntregasComponent implements OnInit, OnDestroy, AfterViewInit {
     this.snackBar.open(message, action, {
       duration: 2000,
     });
+  }
+
+  /**
+   * Función encargada de cargar los botones extras en la barra de descargas
+   */
+  cargarBotonesExtrasDescarga() {
+    if (!this.esCelular) {
+
+      this.botonesBarraDescargaExtras.push({
+        id: "excel",
+        nombre: "Exportar a Excel",
+        img: "assets/varios/excel.svg"
+      });
+
+      this.botonesBarraDescargaExtras.push({
+        id: "pdf",
+        nombre: "Exportar a PDF",
+        img: "assets/varios/pdf-verde.svg"
+      });
+
+    }
+  }
+
+  /**
+   * Ejecuta la exportación indicada
+   * @param exportador 
+   */
+  exportarSegunOpcion(exportador: any) {
+    switch (exportador) {
+      case "excel":
+        this.exportacionMasivaExcel();
+        break;
+
+      case "pdf":
+        this.exportacionMasivaPDF();
+        break;
+
+      default:
+        break;
+    }
+  }
+
+  /**
+   * Exporta todos los movimientos seleccionados a una planilla excel
+   */
+  exportacionMasivaExcel() {
+    if (this.identificadoresParaDescarga && this.identificadoresParaDescarga.length > 0 && this.descargandoArchivos == false) {
+
+      this.descargandoArchivos = true;
+      let movimientosSeleccionados = this.identificadoresParaDescarga.map(identificador => identificador.movimiento);
+
+      this.entregasExportacionesService.exportarListadoEntregasDetalleExcel(movimientosSeleccionados);
+      this.descargandoArchivos = false;
+    }
+  }
+
+  /**
+   * Exporta todos los movimientos seleccionados a un archivo pdf
+   */
+  exportacionMasivaPDF() {
+    if (this.identificadoresParaDescarga && this.identificadoresParaDescarga.length > 0 && this.descargandoArchivos == false) {
+
+      this.descargandoArchivos = true;
+      let movimientosSeleccionados = this.identificadoresParaDescarga.map(identificador => identificador.movimiento);
+
+      this.entregasExportacionesService.exportarListadoEntregasDetallePDF(movimientosSeleccionados, null);
+      this.descargandoArchivos = false;
+    }
   }
 }

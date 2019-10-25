@@ -51,7 +51,7 @@ export class EntregasExportacionesService {
   }
 
   // funcion que exporta a pdf un movimiento de entregas detalle
-  exportarListadoEntregasDetallePDF(movimimentos: Array<MovimientoEntrega>, totales: EntregasTotales) {
+  exportarListadoEntregasDetallePDF(movimimentos: Array<MovimientoEntrega>, totales?: EntregasTotales) {
     try {
 
       let rows = [];
@@ -88,53 +88,55 @@ export class EntregasExportacionesService {
       columnas.push(movimientosColumnas);
 
       // totales
-      // .. preparar datos
-      let totalesRow = [];
-      totalesRow.push(
-        [
-          "Total Kg. Brutos",
-          `${this.decimalPipe.transform(totales.totalKgBrutos, '.2')} Kg`
-        ]
-      );
-      totalesRow.push(
-        [
-          "Total Kg. Humedad",
-          `${this.decimalPipe.transform(totales.totalKgHumedad, '.2')} Kg`
-        ]
-      );
-      totalesRow.push(
-        [
-          "Total Kg. Zarandeo",
-          `${this.decimalPipe.transform(totales.totalKgZarandeo, '.2')} Kg`
-        ]
-      );
-      totalesRow.push(
-        [
-          "Total Kg. Volátil",
-          `${this.decimalPipe.transform(totales.totalKgVolatil, '.2')} Kg`
-        ]
-      );
-      totalesRow.push(
-        [
-          "Total Entregas",
-          `${this.decimalPipe.transform(totales.cantidadEntregas, '.0')}`
-        ]
-      );
-      rows.push(totalesRow);
+      if (totales) {
+        // .. preparar datos
+        let totalesRow = [];
+        totalesRow.push(
+          [
+            "Total Kg. Brutos",
+            `${this.decimalPipe.transform(totales.totalKgBrutos, '.2')} Kg`
+          ]
+        );
+        totalesRow.push(
+          [
+            "Total Kg. Humedad",
+            `${this.decimalPipe.transform(totales.totalKgHumedad, '.2')} Kg`
+          ]
+        );
+        totalesRow.push(
+          [
+            "Total Kg. Zarandeo",
+            `${this.decimalPipe.transform(totales.totalKgZarandeo, '.2')} Kg`
+          ]
+        );
+        totalesRow.push(
+          [
+            "Total Kg. Volátil",
+            `${this.decimalPipe.transform(totales.totalKgVolatil, '.2')} Kg`
+          ]
+        );
+        totalesRow.push(
+          [
+            "Total Entregas",
+            `${this.decimalPipe.transform(totales.cantidadEntregas, '.0')}`
+          ]
+        );
+        rows.push(totalesRow);
 
-      // .. preparar opciones
-      let totalesOpciones = {
-        startY: 30,
-        columnStyles: {
-          0: { columnWidth: '50%', halign: 'left' },
-          1: { columnWidth: '50%', halign: 'right' },
-        }
-      };
-      opciones.push(totalesOpciones);
+        // .. preparar opciones
+        let totalesOpciones = {
+          startY: 30,
+          columnStyles: {
+            0: { columnWidth: '50%', halign: 'left' },
+            1: { columnWidth: '50%', halign: 'right' },
+          }
+        };
+        opciones.push(totalesOpciones);
 
-      // .. columnas
-      let totalesColumnas = ["Concepto", "Valor"];
-      columnas.push(totalesColumnas);
+        // .. columnas
+        let totalesColumnas = ["Concepto", "Valor"];
+        columnas.push(totalesColumnas);
+      }
 
       // renderizar
       this.pdfService.listaMultipleAPdf(

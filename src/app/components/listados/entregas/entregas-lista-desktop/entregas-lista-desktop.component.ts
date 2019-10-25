@@ -159,9 +159,7 @@ export class EntregasListaDesktopComponent implements OnInit, OnDestroy {
         .filter(entregaItem => entregaItem.seleccionado == true)
         .map(entregaItem => {
           return {
-            identificadorParaDescarga: {
-              nroCertificado: entregaItem.movimiento.n1116A
-            }
+            movimiento: entregaItem.movimiento
           };
         });
 

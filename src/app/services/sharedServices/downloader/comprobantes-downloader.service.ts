@@ -119,10 +119,7 @@ export class ComprobantesDownloaderService {
 			'Content-Type': 'application/zip'
 		});
 
-		let identificadoresParam = identificadores
-			.map(identificador => identificador.nroCertificado)
-			.join(",");
-
+		let identificadoresParam = identificadores.join(",");
 		let url = `${this.urlGeneradorComprobanteCertificado1116ADescargarMasivo}/${identificadoresParam}`;
 
 		const options = {

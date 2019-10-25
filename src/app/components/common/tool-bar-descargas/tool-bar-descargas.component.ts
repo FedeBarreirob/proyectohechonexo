@@ -10,8 +10,14 @@ export class ToolBarDescargasComponent implements OnInit {
   @Input()
   disabled: boolean = false;
 
+  @Input()
+  botonesExtras: Array<any>;
+
   @Output()
   descargarComprobanteChange: EventEmitter<any> = new EventEmitter<any>();
+
+  @Output()
+  botonPresionado: EventEmitter<any> = new EventEmitter<any>();
 
   constructor() { }
 
@@ -23,5 +29,13 @@ export class ToolBarDescargasComponent implements OnInit {
    */
   descargarComprobante() {
     this.descargarComprobanteChange.emit();
+  }
+
+  /**
+   * Notifica que se ha presionado un botón extra
+   * @param botonId 
+   */
+  notificarBotonPresionado(botonId: any) {
+    this.botonPresionado.emit(botonId);
   }
 }

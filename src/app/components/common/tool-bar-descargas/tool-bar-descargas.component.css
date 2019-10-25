@@ -10,3 +10,20 @@
     font-weight: bold;
     margin-top: 10px;
 }
+
+.boton-extra {
+    height: 40px;
+    width: 100%;
+    background-color: white;
+    border: 1px solid #2DA442;
+    border-radius: 4px;
+    color: #2DA442;
+    font-family: Rubik;
+    font-size: 14px;
+    font-weight: bold;
+    margin-top: 10px;
+}
+
+.boton-extra img {
+    height: 20px;
+}
