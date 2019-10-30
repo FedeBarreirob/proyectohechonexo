@@ -2,7 +2,7 @@ import { Component, OnInit, ViewChild, OnDestroy, AfterViewInit } from '@angular
 import { VentasService } from '../../../../services/ventas/ventas.service';
 import { MovimientoVenta } from '../../../../interfaces/ventas/listado-ventas';
 import { DatePipe } from '@angular/common';
-import { MatDialog, MatSidenav } from '@angular/material';
+import { MatDialog, MatSidenav, MatSnackBar } from '@angular/material';
 import { FiltroEspecieCosecha } from '../../../../interfaces/varios/filtro-especie-cosecha';
 import { EntidadAlg } from '../../../../interfaces/perfiles/entidad-alg';
 import { Subject } from 'rxjs';
@@ -12,6 +12,9 @@ import { VentasDetalleComponent } from '../ventas-detalle/ventas-detalle.compone
 import { FijacionVenta } from '../../../../interfaces/ventas/fijacion-venta';
 import { takeUntil } from 'rxjs/operators';
 import { FiltroPersonalizadoParaFiltroCereal } from '../../../../interfaces/varios/filtro-personalizado-para-filtro-cereal';
+import { saveAs } from 'file-saver/FileSaver';
+import { ComprobantesDownloaderService } from '../../../../services/sharedServices/downloader/comprobantes-downloader.service';
+import { VentasExportacionesService } from '../../../../services/ventas/ventas-exportaciones.service';
 
 @Component({
   selector: 'app-ventas',
@@ -35,6 +38,10 @@ export class VentasComponent implements OnInit, OnDestroy, AfterViewInit {
   modoDetalleDesktop: boolean = false;
   modoDetalleDesktopMovimiento$: Subject<MovimientoVenta> = new Subject<MovimientoVenta>();
 
+  identificadoresParaDescarga: Array<any>;
+  descargandoArchivos: boolean = false;
+  botonesBarraDescargaExtras: Array<any> = [];
+
   // filtro a utilizar en la barra de filtros de cereales
   filtroPersonalizado: Array<FiltroPersonalizadoParaFiltroCereal> = [
     {
@@ -53,7 +60,11 @@ export class VentasComponent implements OnInit, OnDestroy, AfterViewInit {
     private ventasService: VentasService,
     public dialog: MatDialog,
     private cuentaAlgService: CuentaAlgService,
-    private deviceService: DeviceDetectorService) { }
+    private deviceService: DeviceDetectorService,
+    private comprobanteDownloaderService: ComprobantesDownloaderService,
+    private snackBar: MatSnackBar,
+    private ventasExportacionesService: VentasExportacionesService
+  ) { }
 
   ngOnInit() {
     this.esCelular = this.deviceService.isMobile();
@@ -68,6 +79,8 @@ export class VentasComponent implements OnInit, OnDestroy, AfterViewInit {
           }
         }
       );
+
+    this.cargarBotonesExtrasDescarga();
   }
 
   ngAfterViewInit(): void {
@@ -187,4 +200,125 @@ export class VentasComponent implements OnInit, OnDestroy, AfterViewInit {
     this.modoDetalleDesktop = false;
   }
 
+  /**
+   * Obtiene los comprobantes seleccionados para su descarga
+   * @param listadoSeleccionados 
+   */
+  ventasSeleccionados(listadoSeleccionados: any) {
+    this.identificadoresParaDescarga = listadoSeleccionados;
+  }
+
+  /**
+   * Función encargada de cargar los botones extras en la barra de descargas
+   */
+  cargarBotonesExtrasDescarga() {
+    if (!this.esCelular) {
+
+      this.botonesBarraDescargaExtras.push({
+        id: "excel",
+        nombre: "Exportar a Excel",
+        img: "assets/varios/excel.svg"
+      });
+
+      this.botonesBarraDescargaExtras.push({
+        id: "pdf",
+        nombre: "Exportar a PDF",
+        img: "assets/varios/pdf-verde.svg"
+      });
+
+    }
+  }
+
+  /**
+   * Función que ejecuta el proceso de descarga de comprobantes seleccionados
+   */
+  descargarSeleccionados() {
+    if (this.identificadoresParaDescarga && this.identificadoresParaDescarga.length > 0 && this.descargandoArchivos == false) {
+
+      this.descargandoArchivos = true;
+      let identificadores = this.identificadoresParaDescarga.map(identificador => {
+        return {
+          sucursal: 1,
+          comprobante: identificador.movimiento.numeroComprobanteContrato
+        }
+      });
+
+      this.comprobanteDownloaderService.confirmacionVentaDescargadoMasivo(identificadores)
+        .pipe(takeUntil(this.destroy$))
+        .subscribe(respuesta => {
+          var mediaType = 'application/zip';
+          var blob = new Blob([respuesta], { type: mediaType });
+          var filename = `boletos.zip`;
+
+          if (blob.size !== 0) {
+            saveAs(blob, filename);
+          } else {
+            this.openSnackBar("Los comprobantes no se encuentra disponible para su descarga.", "Descarga de comprobantes");
+          }
+
+          this.descargandoArchivos = false;
+        }, error => {
+          console.log(error);
+          this.descargandoArchivos = false;
+        });
+    }
+  }
+
+  /**
+  * Muestra un mensaje en pantalla
+  * @param message Mensaje a mostrar
+  * @param action Otro mensaje
+  */
+  openSnackBar(message: string, action: string) {
+    this.snackBar.open(message, action, {
+      duration: 2000,
+    });
+  }
+
+  /**
+   * Ejecuta la exportación indicada
+   * @param exportador 
+   */
+  exportarSegunOpcion(exportador: any) {
+    switch (exportador) {
+      case "excel":
+        this.exportacionMasivaExcel();
+        break;
+
+      case "pdf":
+        this.exportacionMasivaPDF();
+        break;
+
+      default:
+        break;
+    }
+  }
+
+  /**
+   * Exporta todos los movimientos seleccionados a una planilla excel
+   */
+  exportacionMasivaExcel() {
+    if (this.identificadoresParaDescarga && this.identificadoresParaDescarga.length > 0 && this.descargandoArchivos == false) {
+
+      this.descargandoArchivos = true;
+      let movimientosSeleccionados = this.identificadoresParaDescarga.map(identificador => identificador.movimiento);
+
+      this.ventasExportacionesService.exportarListadoVentasDetalleExcel(movimientosSeleccionados);
+      this.descargandoArchivos = false;
+    }
+  }
+
+  /**
+   * Exporta todos los movimientos seleccionados a un archivo pdf
+   */
+  exportacionMasivaPDF() {
+    if (this.identificadoresParaDescarga && this.identificadoresParaDescarga.length > 0 && this.descargandoArchivos == false) {
+
+      this.descargandoArchivos = true;
+      let movimientosSeleccionados = this.identificadoresParaDescarga.map(identificador => identificador.movimiento);
+
+      this.ventasExportacionesService.exportarListadoVentasDetallePDF(movimientosSeleccionados, null);
+      this.descargandoArchivos = false;
+    }
+  }
 }

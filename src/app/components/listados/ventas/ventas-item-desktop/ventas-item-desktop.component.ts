@@ -1,4 +1,4 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { FijacionVenta } from '../../../../interfaces/ventas/fijacion-venta';
 
 @Component({
@@ -14,9 +14,31 @@ export class VentasItemDesktopComponent implements OnInit {
   @Input()
   unidadMedida: string;
 
+  @Output()
+  cambioSeleccion: EventEmitter<any> = new EventEmitter<any>();
+
+  @Output()
+  verDetalle: EventEmitter<FijacionVenta> = new EventEmitter<FijacionVenta>();
+
+  public seleccionado: boolean;
+
   constructor() { }
 
   ngOnInit() {
   }
 
+  /**
+   * Notifica que se ha cambiado la seleccion 
+   * @param $event 
+   */
+  notificarCambioSeleccion($event) {
+    this.cambioSeleccion.emit();
+  }
+
+  /**
+   * Notifica un movimiento para que sea mostrar en un detalle
+   */
+  notificarVerDetalle() {
+    this.verDetalle.emit(this.movimiento);
+  }
 }

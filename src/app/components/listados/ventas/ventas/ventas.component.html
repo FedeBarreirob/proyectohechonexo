@@ -25,18 +25,25 @@
 			Ventas
 		</div>
 
-		<div fxFlex>
+		<div fxFlex *ngIf="!identificadoresParaDescarga || identificadoresParaDescarga.length <= 0">
 			<app-cereales-filtro-desktop [filtrosEspecieCosecha]="filtrosEspecieCosecha" [cuenta]="cuenta"
 				[filtroPersonalizado]="filtroPersonalizado" (botonAplicar)="cargarListado($event)"
 				[disabled]="cargando || cargandoFiltros">
 			</app-cereales-filtro-desktop>
 		</div>
 
+		<div fxFlex *ngIf="identificadoresParaDescarga && identificadoresParaDescarga.length > 0">
+			<app-tool-bar-descargas (descargarComprobanteChange)="descargarSeleccionados()"
+				[botonesExtras]="botonesBarraDescargaExtras" [disabled]="descargandoArchivos"
+				(botonPresionado)="exportarSegunOpcion($event)"></app-tool-bar-descargas>
+		</div>
 	</div>
 
+	<mat-progress-bar *ngIf="descargandoArchivos" mode="indeterminate"></mat-progress-bar>
+	
 	<app-ventas-lista-desktop *ngIf="esCelular===false" (seleccionMovimiento)="verDetalleDesktop($event)"
 		(cargandoChange)="mostrarIndicadorLoading($event)" [observerFiltro$]="observerFiltro$"
-		(seleccionMovimiento)="verDetalleDesktop($event)">
+		(seleccionMovimiento)="verDetalleDesktop($event)" (ventasSeleccionados)="ventasSeleccionados($event)">
 	</app-ventas-lista-desktop>
 
 </span>

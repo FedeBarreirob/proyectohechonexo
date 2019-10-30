@@ -192,7 +192,7 @@ export class MainNavComponent implements OnInit, OnDestroy {
 				ocultarDesktop: true
 			},
 			{
-				nombre: "Cerrar Sersión",
+				nombre: "Cerrar sesión",
 				rutaLink: "/login",
 				imagen: "assets/sidebar/close-session.png",
 				imagenActiva: "assets/sidebar/close-session-hot.png",

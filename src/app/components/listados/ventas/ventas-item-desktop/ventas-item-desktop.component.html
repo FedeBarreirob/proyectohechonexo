@@ -1,37 +1,50 @@
 <div fxLayout="row" fxLayoutAlign="space-around center" class="container">
 
-  <div fxFlex="200px">
-    <div fxLayout="row" fxLayoutAlign="space-around center" fxLayoutGap="8px">
+  <!--Check de descarga-->
+  <div fxFlex="28px">
+    <mat-checkbox [(ngModel)]="seleccionado" (change)="notificarCambioSeleccion($event)"></mat-checkbox>
+  </div>
 
-      <div fxFlex="24px">
-        <img class="movimiento-icono" src="{{movimiento.especie | imagenEspecie}}" />
+  <div fxFlex (click)="notificarVerDetalle()">
+
+    <div fxLayout="row" fxLayoutAlign="space-around center">
+
+      <div fxFlex="200px">
+        <div fxLayout="row" fxLayoutAlign="space-around center" fxLayoutGap="8px">
+
+          <div fxFlex="24px">
+            <img class="movimiento-icono" src="{{movimiento.especie | imagenEspecie}}" />
+          </div>
+
+          <div fxFlex>
+            {{ movimiento.especieDescripcion }}
+          </div>
+
+        </div>
       </div>
 
-      <div fxFlex>
-        {{ movimiento.especieDescripcion }}
+      <div fxFlex="150px">
+        {{movimiento.fecha}}
+      </div>
+
+      <div fxFlex="200px">
+        {{movimiento.comprobante}}
+      </div>
+
+      <div fxFlex="150px">
+        {{movimiento.kilos | kilosA: unidadMedida | number: '.0-0'}}
+      </div>
+
+      <div fxFlex="150px">
+        ${{movimiento.precioPorQuintal | precioQQA: unidadMedida | number: '.0-0'}}
+      </div>
+
+      <div fxFlex="100px">
+        {{movimiento.moneda | moneda}}
       </div>
 
     </div>
-  </div>
 
-  <div fxFlex="150px">
-    {{movimiento.fecha}}
-  </div>
-
-  <div fxFlex="200px">
-    {{movimiento.comprobante}}
-  </div>
-
-  <div fxFlex="150px">
-    {{movimiento.kilos | kilosA: unidadMedida | number: '.0-0'}}
-  </div>
-
-  <div fxFlex="150px">
-    ${{movimiento.precioPorQuintal | precioQQA: unidadMedida | number: '.0-0'}}
-  </div>
-
-  <div fxFlex="100px">
-    {{movimiento.moneda | moneda}}
   </div>
 
 </div>

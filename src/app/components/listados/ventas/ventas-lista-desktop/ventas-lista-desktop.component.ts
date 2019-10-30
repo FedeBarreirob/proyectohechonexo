@@ -1,4 +1,4 @@
-import { Component, OnInit, Input, Output, EventEmitter, OnDestroy } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter, OnDestroy, ViewChildren, QueryList } from '@angular/core';
 import { Subject } from 'rxjs';
 import { PerfilBasico } from '../../../../interfaces/perfiles/perfil-basico';
 import { FiltroVentas } from '../../../../interfaces/ventas/filtro-ventas';
@@ -6,6 +6,7 @@ import { VentasService } from '../../../../services/ventas/ventas.service';
 import { AuthenticationService } from '../../../../services/security/authentication.service';
 import { takeUntil } from 'rxjs/operators';
 import { FijacionVenta } from '../../../../interfaces/ventas/fijacion-venta';
+import { VentasItemDesktopComponent } from '../ventas-item-desktop/ventas-item-desktop.component';
 
 @Component({
   selector: 'app-ventas-lista-desktop',
@@ -25,6 +26,12 @@ export class VentasListaDesktopComponent implements OnInit, OnDestroy {
 
   @Output()
   cargandoChange: EventEmitter<boolean> = new EventEmitter<boolean>();
+
+  @Output()
+  ventasSeleccionados: EventEmitter<any> = new EventEmitter<any>();
+
+  @ViewChildren(VentasItemDesktopComponent)
+  ventasItems: QueryList<VentasItemDesktopComponent>;
 
   listadoVentas: Array<FijacionVenta> = [];
   pagina: number = 1;
@@ -140,5 +147,36 @@ export class VentasListaDesktopComponent implements OnInit, OnDestroy {
   // funcion que muestra el detalle de un movimiento seleccionado
   verDetalle(movimiento: FijacionVenta) {
     this.seleccionMovimiento.emit(movimiento);
+  }
+
+  /**
+   * Función encargada de crear una lista con las entregas seleccionados
+   */
+  rearmarListaSeleccionados() {
+    if (this.ventasItems && this.ventasItems.length > 0) {
+
+      let listadoSeleccionados = this.ventasItems
+        .filter(ventaItem => ventaItem.seleccionado == true)
+        .map(ventaItem => {
+          return {
+            movimiento: ventaItem.movimiento
+          };
+        });
+
+      this.ventasSeleccionados.emit(listadoSeleccionados);
+    }
+  }
+
+  /**
+   * Selecciona todos los contratos si corresponde, rearma el listado de descarga
+   * @param todos 
+   */
+  seleccionarTodos(seleccion: boolean) {
+    if (this.ventasItems && this.ventasItems.length > 0) {
+
+      this.ventasItems.forEach(ventaItem => ventaItem.seleccionado = seleccion);
+      this.rearmarListaSeleccionados();
+
+    }
   }
 }

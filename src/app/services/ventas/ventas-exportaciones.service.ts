@@ -3,6 +3,7 @@ import { ExcelService } from '../sharedServices/exportadores/excel/excel.service
 import { PdfService } from '../sharedServices/exportadores/pdf/pdf.service';
 import { MovimientoVenta, VentasTotales } from '../../interfaces/ventas/listado-ventas';
 import { DecimalPipe } from '@angular/common';
+import { FijacionVenta } from '../../interfaces/ventas/fijacion-venta';
 
 @Injectable({
   providedIn: 'root'
@@ -42,7 +43,7 @@ export class VentasExportacionesService {
   }
 
   // funcion que exporta a excel un listado movimiento de ventas
-  exportarListadoVentasDetalleExcel(movimimentos: Array<MovimientoVenta>) {
+  exportarListadoVentasDetalleExcel(movimimentos: Array<FijacionVenta>) {
     try {
       this.excelService.exportAsExcelFile(movimimentos, "ventas");
     } catch (e) {
@@ -51,7 +52,7 @@ export class VentasExportacionesService {
   }
 
   // funcion que exporta a pdf un movimiento de ventas detalle
-  exportarListadoVentasDetallePDF(movimimentos: Array<MovimientoVenta>, totales: VentasTotales) {
+  exportarListadoVentasDetallePDF(movimimentos: Array<FijacionVenta>, totales: VentasTotales) {
     try {
 
       let rows = [];
@@ -68,7 +69,7 @@ export class VentasExportacionesService {
         movimientosRows.push([
           `${movimiento.especie} ${movimiento.cosecha}`,
           movimiento.fecha,
-          `${this.decimalPipe.transform(movimiento.kilosNetos, '.2')} Kg`,
+          `${this.decimalPipe.transform(movimiento.kilos, '.2')} Kg`,
           `${signoMonetario} ${this.decimalPipe.transform(movimiento.precioPorQuintal, '.2')}`
         ]);
       }
@@ -91,35 +92,38 @@ export class VentasExportacionesService {
       columnas.push(movimientosColumnas);
 
       // totales
-      // .. preparar datos
-      let totalesRow = [];
-      totalesRow.push(
-        [
-          "Total Kg. Netos",
-          `${this.decimalPipe.transform(totales.totalKgNetos, '.2')} Kg`
-        ]
-      );
-      totalesRow.push(
-        [
-          "Total Kg. Sin Fijar",
-          `${this.decimalPipe.transform(totales.totalSinFijarTC, '.2')} Kg`
-        ]
-      );
-      rows.push(totalesRow);
+      if (totales) {
 
-      // .. preparar opciones
-      let totalesOpciones = {
-        startY: 30,
-        columnStyles: {
-          0: { columnWidth: '50%', halign: 'left' },
-          1: { columnWidth: '50%', halign: 'right' },
-        }
-      };
-      opciones.push(totalesOpciones);
+        // .. preparar datos
+        let totalesRow = [];
+        totalesRow.push(
+          [
+            "Total Kg. Netos",
+            `${this.decimalPipe.transform(totales.totalKgNetos, '.2')} Kg`
+          ]
+        );
+        totalesRow.push(
+          [
+            "Total Kg. Sin Fijar",
+            `${this.decimalPipe.transform(totales.totalSinFijarTC, '.2')} Kg`
+          ]
+        );
+        rows.push(totalesRow);
 
-      // .. columnas
-      let totalesColumnas = ["Concepto", "Valor"];
-      columnas.push(totalesColumnas);
+        // .. preparar opciones
+        let totalesOpciones = {
+          startY: 30,
+          columnStyles: {
+            0: { columnWidth: '50%', halign: 'left' },
+            1: { columnWidth: '50%', halign: 'right' },
+          }
+        };
+        opciones.push(totalesOpciones);
+
+        // .. columnas
+        let totalesColumnas = ["Concepto", "Valor"];
+        columnas.push(totalesColumnas);
+      }
 
       // renderizar
       this.pdfService.listaMultipleAPdf(
