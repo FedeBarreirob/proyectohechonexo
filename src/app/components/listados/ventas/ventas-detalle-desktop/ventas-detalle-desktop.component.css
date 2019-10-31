@@ -146,3 +146,7 @@
     font-weight: bold;
     margin-top: 10px;
 }
+
+.boton-descarga-comprobante-alt img {
+    height: 20px;
+}

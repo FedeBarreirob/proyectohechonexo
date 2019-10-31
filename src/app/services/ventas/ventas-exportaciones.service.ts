@@ -17,9 +17,9 @@ export class VentasExportacionesService {
   ) { }
 
   // funcion que exporta a excel un movimiento de venta
-  exportarVentasDetalleExcel(movimiento: MovimientoVenta) {
+  exportarVentasDetalleExcel(movimiento: FijacionVenta) {
     try {
-      let listado: Array<MovimientoVenta> = [];
+      let listado: Array<FijacionVenta> = [];
       listado.push(movimiento);
 
       this.excelService.exportAsExcelFile(listado, "ventas");
@@ -29,7 +29,7 @@ export class VentasExportacionesService {
   }
 
   // funcion que exporta a pdf un movimiento de ventas
-  exportarVentasDetallePDF(movimiento: MovimientoVenta) {
+  exportarVentasDetallePDF(movimiento: FijacionVenta) {
     try {
       this.pdfService.objetoAPdf(
         movimiento,

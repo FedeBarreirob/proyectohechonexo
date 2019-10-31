@@ -12,6 +12,7 @@ import { takeUntil } from 'rxjs/operators';
 import { ContratosDetalleComponent } from '../../contratos/contratos-detalle/contratos-detalle.component';
 import { saveAs } from 'file-saver/FileSaver';
 import { ComprobantesDownloaderService } from '../../../../services/sharedServices/downloader/comprobantes-downloader.service';
+import { VentasExportacionesService } from '../../../../services/ventas/ventas-exportaciones.service';
 
 @Component({
   selector: 'app-ventas-detalle-desktop',
@@ -39,7 +40,8 @@ export class VentasDetalleDesktopComponent implements OnInit, OnDestroy {
     private contratoServicio: ContratosService,
     public dialog: MatDialog,
     private snackBar: MatSnackBar,
-    private comprobanteDownloaderService: ComprobantesDownloaderService
+    private comprobanteDownloaderService: ComprobantesDownloaderService,
+    private exportadorService: VentasExportacionesService
   ) { }
 
   ngOnInit() {
@@ -157,5 +159,19 @@ export class VentasDetalleDesktopComponent implements OnInit, OnDestroy {
     this.snackBar.open(message, action, {
       duration: 2000,
     });
+  }
+
+  /**
+   * Función encargada de exportar a excel
+   */
+  exportarAExcel() {
+    this.exportadorService.exportarVentasDetalleExcel(this.movimiento);
+  }
+
+	/**
+   * Función encargada de exportar a pdf
+   */
+  exportarAPDF() {
+    this.exportadorService.exportarVentasDetallePDF(this.movimiento);
   }
 }
