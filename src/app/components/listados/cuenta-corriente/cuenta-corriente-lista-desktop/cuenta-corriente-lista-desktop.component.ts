@@ -1,11 +1,12 @@
-import { Component, OnInit, Output, EventEmitter, Input, OnDestroy } from '@angular/core';
+import { Component, OnInit, Output, EventEmitter, Input, OnDestroy, ViewChildren, QueryList } from '@angular/core';
 import { InfoCtaCte } from '../../../../enums/info-cta-cte.enum';
 import { EntidadAlg } from '../../../../interfaces/perfiles/entidad-alg';
 import { MovimientoCtaCte } from '../../../../interfaces/ctacte/listado.ctacte';
 import { Subject } from 'rxjs';
 import { CtacteService } from '../../../../services/ctacte/ctacte.service';
 import { takeUntil } from 'rxjs/operators';
-import { FiltroPersonalizadoParaFiltroCtaCte } from 'src/app/interfaces/varios/filtro-personalizado-para-filtro-cta-cte';
+import { FiltroPersonalizadoParaFiltroCtaCte } from '../../../../interfaces/varios/filtro-personalizado-para-filtro-cta-cte';
+import { CuentaCorrienteItemDesktopComponent } from '../cuenta-corriente-item-desktop/cuenta-corriente-item-desktop.component';
 
 @Component({
   selector: 'app-cuenta-corriente-lista-desktop',
@@ -20,11 +21,18 @@ export class CuentaCorrienteListaDesktopComponent implements OnInit, OnDestroy {
   @Output()
   seleccionMovimiento: EventEmitter<any> = new EventEmitter<any>();
 
+  @ViewChildren(CuentaCorrienteItemDesktopComponent)
+  ctacteItems: QueryList<CuentaCorrienteItemDesktopComponent>;
+
   infoCtaCte: any = InfoCtaCte;
   listado: Array<MovimientoCtaCte> = [];
   filtro: any;
   cargando: boolean = false;
   destroy$: Subject<any> = new Subject<any>();
+
+  identificadoresParaDescarga: Array<any>;
+  descargandoArchivos: boolean = false;
+  botonesBarraDescargaExtras: Array<any> = [];
 
   // filtro a utilizar en la barra de filtros de cereales
   filtroPersonalizado: Array<FiltroPersonalizadoParaFiltroCtaCte> = [
@@ -57,6 +65,7 @@ export class CuentaCorrienteListaDesktopComponent implements OnInit, OnDestroy {
   constructor(private ctacteService: CtacteService) { }
 
   ngOnInit() {
+    this.cargarBotonesExtrasDescarga();
     this.cargarListado();
   }
 
@@ -116,5 +125,55 @@ export class CuentaCorrienteListaDesktopComponent implements OnInit, OnDestroy {
   // funcion que muestra el detalle de un movimiento seleccionado
   verDetalle(movimiento: MovimientoCtaCte) {
     this.seleccionMovimiento.emit(movimiento);
+  }
+
+  /**
+   * Función encargada de crear una lista con los seleccionados
+   */
+  rearmarListaSeleccionados() {
+    if (this.ctacteItems && this.ctacteItems.length > 0) {
+
+      let listadoSeleccionados = this.ctacteItems
+        .filter(ctacteItem => ctacteItem.seleccionado == true)
+        .map(ctacteItem => {
+          return {
+            movimiento: ctacteItem.movimiento
+          };
+        });
+
+      this.identificadoresParaDescarga = listadoSeleccionados;
+    }
+  }
+
+  /**
+   * Selecciona todos los items si corresponde, rearma el listado de descarga
+   * @param todos 
+   */
+  seleccionarTodos(seleccion: boolean) {
+    if (this.ctacteItems && this.ctacteItems.length > 0) {
+
+      this.ctacteItems.forEach(ctacteItem => ctacteItem.seleccionado = seleccion);
+      this.rearmarListaSeleccionados();
+
+    }
+  }
+
+  /**
+   * Función encargada de cargar los botones extras en la barra de descargas
+   */
+  cargarBotonesExtrasDescarga() {
+
+    this.botonesBarraDescargaExtras.push({
+      id: "excel",
+      nombre: "Exportar a Excel",
+      img: "assets/varios/excel.svg"
+    });
+
+    this.botonesBarraDescargaExtras.push({
+      id: "pdf",
+      nombre: "Exportar a PDF",
+      img: "assets/varios/pdf-verde.svg"
+    });
+
   }
 }

@@ -1,4 +1,4 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { MovimientoCtaCte } from '../../../../interfaces/ctacte/listado.ctacte';
 
 @Component({
@@ -11,9 +11,32 @@ export class CuentaCorrienteItemDesktopComponent implements OnInit {
   @Input()
   movimiento: MovimientoCtaCte;
 
+  @Output()
+  cambioSeleccion: EventEmitter<any> = new EventEmitter<any>();
+
+  @Output()
+  verDetalle: EventEmitter<MovimientoCtaCte> = new EventEmitter<MovimientoCtaCte>();
+
+  public seleccionado: boolean;
+
   constructor() { }
 
   ngOnInit() {
+  }
+
+  /**
+   * Notifica que se ha cambiado la seleccion 
+   * @param $event 
+   */
+  notificarCambioSeleccion($event) {
+    this.cambioSeleccion.emit();
+  }
+
+  /**
+   * Notifica un movimiento para que sea mostrar en un detalle
+   */
+  notificarVerDetalle() {
+    this.verDetalle.emit(this.movimiento);
   }
 
 }

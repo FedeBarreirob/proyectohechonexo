@@ -1,71 +1,84 @@
 <div fxLayout="row" fxLayoutAlign="space-around center" class="container" fxLayoutGap="5px">
 
-  <div fxFlex="100px">
-    {{movimiento.fechaCtaCte}}
+  <!--Check de descarga-->
+  <div fxFlex="28px">
+    <mat-checkbox [(ngModel)]="seleccionado" (change)="notificarCambioSeleccion($event)"></mat-checkbox>
   </div>
 
-  <div fxFlex="150px" class="concepto" [matTooltip]="movimiento.concepto">
-    {{movimiento.concepto}}
-  </div>
+  <div fxFlex (click)="notificarVerDetalle()">
 
-  <div fxFlex="145px">
-    {{movimiento.comprobante}}
-  </div>
+    <div fxLayout="row" fxLayoutAlign="space-around center">
 
-  <div fxFlex="100px">
-    {{movimiento.fechaVencimiento}}
-  </div>
+      <div fxFlex="100px">
+        {{movimiento.fechaCtaCte}}
+      </div>
 
-  <div fxFlex="30px" class="moneda">
-    <span *ngIf="movimiento.concepto != 'TRANSPORTE'">{{ movimiento.moneda | moneda }}</span>
-  </div>
+      <div fxFlex="150px" class="concepto" [matTooltip]="movimiento.concepto">
+        {{movimiento.concepto}}
+      </div>
 
-  <!-- debe -->
-  <div fxFlex="100px" class="importe">
+      <div fxFlex="145px">
+        {{movimiento.comprobante}}
+      </div>
 
-    <!--Pesos-->
-    <span *ngIf="movimiento.moneda == 'P' && movimiento.tipoMovimiento == 'D'">
-      {{movimiento.importeComprobantePesos | number: '0.2-2'}}
-    </span>
+      <div fxFlex="100px">
+        {{movimiento.fechaVencimiento}}
+      </div>
 
-    <!--Dolares-->
-    <span *ngIf="movimiento.moneda != 'P' && movimiento.tipoMovimiento == 'D'">
-      {{movimiento.importeComprobanteDolares | number: '0.2-2'}}
-    </span>
+      <div fxFlex="30px" class="moneda">
+        <span *ngIf="movimiento.concepto != 'TRANSPORTE'">{{ movimiento.moneda | moneda }}</span>
+      </div>
 
-    <!--Ninguno-->
-    <span *ngIf="movimiento.tipoMovimiento == 'C'">
-      {{0 | number: '0.2-2'}}
-    </span>
+      <!-- debe -->
+      <div fxFlex="100px" class="importe">
 
-  </div>
+        <!--Pesos-->
+        <span *ngIf="movimiento.moneda == 'P' && movimiento.tipoMovimiento == 'D'">
+          {{movimiento.importeComprobantePesos | number: '0.2-2'}}
+        </span>
 
-  <!--haber-->
-  <div fxFlex="100px" class="importe">
+        <!--Dolares-->
+        <span *ngIf="movimiento.moneda != 'P' && movimiento.tipoMovimiento == 'D'">
+          {{movimiento.importeComprobanteDolares | number: '0.2-2'}}
+        </span>
 
-    <!--Pesos-->
-    <span *ngIf="movimiento.moneda == 'P' && movimiento.tipoMovimiento == 'C'">
-      {{movimiento.importeComprobantePesos | number: '0.2-2'}}
-    </span>
+        <!--Ninguno-->
+        <span *ngIf="movimiento.tipoMovimiento == 'C'">
+          {{0 | number: '0.2-2'}}
+        </span>
 
-    <!--Dolares-->
-    <span *ngIf="movimiento.moneda != 'P' && movimiento.tipoMovimiento == 'C'">
-      {{movimiento.importeComprobanteDolares | number: '0.2-2'}}
-    </span>
+      </div>
 
-    <!--Ninguno-->
-    <span *ngIf="movimiento.tipoMovimiento == 'D'">
-      {{0 | number: '0.2-2'}}
-    </span>
+      <!--haber-->
+      <div fxFlex="100px" class="importe">
 
-  </div>
+        <!--Pesos-->
+        <span *ngIf="movimiento.moneda == 'P' && movimiento.tipoMovimiento == 'C'">
+          {{movimiento.importeComprobantePesos | number: '0.2-2'}}
+        </span>
 
-  <div fxFlex="100px" class="importe">
-    {{movimiento.saldoPesos | number: '0.2-2'}}
-  </div>
+        <!--Dolares-->
+        <span *ngIf="movimiento.moneda != 'P' && movimiento.tipoMovimiento == 'C'">
+          {{movimiento.importeComprobanteDolares | number: '0.2-2'}}
+        </span>
 
-  <div fxFlex="100px" class="importe">
-    {{movimiento.saldoDolares | number: '0.2-2'}}
+        <!--Ninguno-->
+        <span *ngIf="movimiento.tipoMovimiento == 'D'">
+          {{0 | number: '0.2-2'}}
+        </span>
+
+      </div>
+
+      <div fxFlex="100px" class="importe">
+        {{movimiento.saldoPesos | number: '0.2-2'}}
+      </div>
+
+      <div fxFlex="100px" class="importe">
+        {{movimiento.saldoDolares | number: '0.2-2'}}
+      </div>
+
+    </div>
+
   </div>
 
 </div>
