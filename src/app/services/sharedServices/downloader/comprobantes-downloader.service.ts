@@ -24,7 +24,7 @@ export class ComprobantesDownloaderService {
 	comprobanteDescargado(link: string, comprobante: string): Observable<Blob> {
 
 		let headers = new HttpHeaders({
-			'Content-Type': 'application/pdf'
+			'Content-Type': 'application/json'
 		});
 
 		let params = new HttpParams().set('link', link).set('comprobante', comprobante);
@@ -41,7 +41,7 @@ export class ComprobantesDownloaderService {
 
 		const httpOptions = {
 			headers: new HttpHeaders({
-				'Content-Type': 'application/zip'
+				'Content-Type': 'application/json'
 			}),
 			responseType: 'blob' as 'blob'
 		};
@@ -53,7 +53,7 @@ export class ComprobantesDownloaderService {
 	confirmacionVentaDescargado(nroSucursal: number, nroComprobante: number): Observable<Blob> {
 
 		let headers = new HttpHeaders({
-			'Content-Type': 'application/pdf'
+			'Content-Type': 'application/json'
 		});
 
 		let url = `${this.urlGeneradorComprobanteConfVentaDescargar}/${nroSucursal}/${nroComprobante}`;
@@ -72,7 +72,7 @@ export class ComprobantesDownloaderService {
 	certificadoAfipDescargado(nro1116A): Observable<Blob> {
 
 		let headers = new HttpHeaders({
-			'Content-Type': 'application/pdf'
+			'Content-Type': 'application/json'
 		});
 
 		let url = `${this.urlGeneradorComprobanteCertificado1116ADescargar}/${nro1116A}`;
@@ -91,7 +91,7 @@ export class ComprobantesDownloaderService {
 	confirmacionVentaDescargadoMasivo(identificadores: Array<any>): Observable<Blob> {
 
 		let headers = new HttpHeaders({
-			'Content-Type': 'application/zip'
+			'Content-Type': 'application/json'
 		});
 
 		let identificadoresParam = identificadores
@@ -116,7 +116,7 @@ export class ComprobantesDownloaderService {
 	certificadoAfipDescargadoMasivo(identificadores: Array<any>): Observable<Blob> {
 
 		let headers = new HttpHeaders({
-			'Content-Type': 'application/zip'
+			'Content-Type': 'application/json'
 		});
 
 		let identificadoresParam = identificadores.join(",");
