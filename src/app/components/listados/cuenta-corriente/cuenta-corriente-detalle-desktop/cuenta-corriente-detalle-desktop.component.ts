@@ -5,6 +5,7 @@ import { saveAs } from 'file-saver/FileSaver';
 import { ComprobantesDownloaderService } from '../../../../services/sharedServices/downloader/comprobantes-downloader.service';
 import { takeUntil } from 'rxjs/operators';
 import { MatSnackBar } from '@angular/material';
+import { CtaCteExportacionesService } from '../../../../services/ctacte/cta-cte-exportaciones.service';
 
 @Component({
   selector: 'app-cuenta-corriente-detalle-desktop',
@@ -28,7 +29,8 @@ export class CuentaCorrienteDetalleDesktopComponent implements OnInit, OnDestroy
 
   constructor(
     private comprobanteDownloaderService: ComprobantesDownloaderService,
-    private snackBar: MatSnackBar
+    private snackBar: MatSnackBar,
+    private exportacionesService: CtaCteExportacionesService
   ) { }
 
   ngOnInit() {
@@ -105,5 +107,19 @@ export class CuentaCorrienteDetalleDesktopComponent implements OnInit, OnDestroy
     this.snackBar.open(message, action, {
       duration: 2000,
     });
+  }
+
+  /**
+   * Exporta el detalle a excel
+   */
+  exportarAExcel() {
+    this.exportacionesService.exportarMovCtaCteDetalleExcel(this.movimiento);
+  }
+
+  /**
+   * Exporta el detalle a pdf
+   */
+  exportarAPDF() {
+    this.exportacionesService.exportarMovCtaCteDetallePDF(this.movimiento);
   }
 }

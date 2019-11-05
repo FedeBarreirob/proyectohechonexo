@@ -2,7 +2,8 @@
 
   <!--Check de descarga-->
   <div fxFlex="28px">
-    <mat-checkbox [(ngModel)]="seleccionado" (change)="notificarCambioSeleccion($event)"></mat-checkbox>
+    <mat-checkbox *ngIf="movimiento.concepto != 'TRANSPORTE'" [(ngModel)]="seleccionado"
+      (change)="notificarCambioSeleccion($event)"></mat-checkbox>
   </div>
 
   <div fxFlex (click)="notificarVerDetalle()">

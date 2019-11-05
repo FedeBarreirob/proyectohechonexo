@@ -7,6 +7,13 @@ import { CtacteService } from '../../../../services/ctacte/ctacte.service';
 import { takeUntil } from 'rxjs/operators';
 import { FiltroPersonalizadoParaFiltroCtaCte } from '../../../../interfaces/varios/filtro-personalizado-para-filtro-cta-cte';
 import { CuentaCorrienteItemDesktopComponent } from '../cuenta-corriente-item-desktop/cuenta-corriente-item-desktop.component';
+import { MatSnackBar } from '@angular/material';
+import { ComprobantesDownloaderService } from '../../../../services/sharedServices/downloader/comprobantes-downloader.service';
+import { environment } from '../../../../../environments/environment';
+import { saveAs } from 'file-saver/FileSaver';
+import { DownloaderUtilService } from '../../../../services/sharedServices/downloader/downloader-util.service';
+import { ComprobanteParaDescarga } from '../../../../interfaces/archivo-de-comprobantes/comprobante-para-descarga';
+import { CtaCteExportacionesService } from '../../../../services/ctacte/cta-cte-exportaciones.service';
 
 @Component({
   selector: 'app-cuenta-corriente-lista-desktop',
@@ -62,7 +69,13 @@ export class CuentaCorrienteListaDesktopComponent implements OnInit, OnDestroy {
     }
   ];
 
-  constructor(private ctacteService: CtacteService) { }
+  constructor(
+    private ctacteService: CtacteService,
+    private snackBar: MatSnackBar,
+    private comprobantesDownloaderService: ComprobantesDownloaderService,
+    private downloaderUtilService: DownloaderUtilService,
+    private exportacionesService: CtaCteExportacionesService
+  ) { }
 
   ngOnInit() {
     this.cargarBotonesExtrasDescarga();
@@ -134,7 +147,7 @@ export class CuentaCorrienteListaDesktopComponent implements OnInit, OnDestroy {
     if (this.ctacteItems && this.ctacteItems.length > 0) {
 
       let listadoSeleccionados = this.ctacteItems
-        .filter(ctacteItem => ctacteItem.seleccionado == true)
+        .filter(ctacteItem => ctacteItem.seleccionado == true && ctacteItem.movimiento.concepto != "TRANSPORTE")
         .map(ctacteItem => {
           return {
             movimiento: ctacteItem.movimiento
@@ -175,5 +188,102 @@ export class CuentaCorrienteListaDesktopComponent implements OnInit, OnDestroy {
       img: "assets/varios/pdf-verde.svg"
     });
 
+  }
+
+  /**
+   * Ejecuta la exportación indicada
+   * @param exportador 
+   */
+  exportarSegunOpcion(exportador: any) {
+    switch (exportador) {
+      case "excel":
+        this.exportacionMasivaExcel();
+        break;
+
+      case "pdf":
+        this.exportacionMasivaPDF();
+        break;
+
+      default:
+        break;
+    }
+  }
+
+  /**
+   * Exporta el listado a excel
+   */
+  exportacionMasivaExcel() {
+    if (this.identificadoresParaDescarga && this.descargandoArchivos == false) {
+      this.descargandoArchivos = true;
+
+      let movimientos: Array<MovimientoCtaCte> = this.identificadoresParaDescarga.map(identificador => identificador.movimiento);
+      this.exportacionesService.exportarListadoMovCtaCteDetalleExcel(movimientos);
+
+      this.descargandoArchivos = false;
+    }
+  }
+
+  /**
+   * Exporta el listado a pdf
+   */
+  exportacionMasivaPDF() {
+    if (this.identificadoresParaDescarga && this.descargandoArchivos == false) {
+      this.descargandoArchivos = true;
+
+      let movimientos: Array<MovimientoCtaCte> = this.identificadoresParaDescarga.map(identificador => identificador.movimiento);
+      this.exportacionesService.exportarListadoMovCtaCteDetallePDF(movimientos, null);
+
+      this.descargandoArchivos = false;
+    }
+  }
+
+  /**
+   * Función encargada de ejecutar el proceso de descarga de comprbantes
+   */
+  descargarSeleccionados() {
+    if (this.identificadoresParaDescarga && this.descargandoArchivos == false) {
+
+      this.descargandoArchivos = true;
+
+      let comprobantesSeleccionados: Array<ComprobanteParaDescarga> = this.identificadoresParaDescarga
+        .map(identificador => {
+          return {
+            comprobante: identificador.movimiento.comprobante,
+            link: identificador.movimiento.linkComprobante,
+            existeArchivo: true
+          }
+        });
+
+      this.comprobantesDownloaderService.comprobanteDescargadoMasivo(comprobantesSeleccionados)
+        .subscribe(respuesta => {
+          var mediaType = 'application/zip';
+          var blob = new Blob([respuesta], { type: mediaType });
+          var filename = 'comprobantes.zip';
+
+          if (blob.size !== 0) {
+
+            if (environment.inPhonegap) {
+              this.downloaderUtilService.download(filename, blob, mediaType);
+            } else {
+              saveAs(blob, filename);
+            }
+
+          } else {
+            this.openSnackBar("Ninguno de los comprobantes indicados se encuentran para su descarga.");
+          }
+
+          this.descargandoArchivos = false;
+        }, error => {
+          console.log(error);
+          this.descargandoArchivos = false;
+        });
+    }
+  }
+
+  // abre una notificacion
+  openSnackBar(message: string) {
+    this.snackBar.open(message, null, {
+      duration: 2000,
+    });
   }
 }

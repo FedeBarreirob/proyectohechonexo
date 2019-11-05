@@ -18,6 +18,8 @@
 
 </div>
 
+<mat-progress-bar *ngIf="descargandoArchivos" mode="indeterminate"></mat-progress-bar>
+
 <!--Header-->
 <div class="contenedor-header">
   <app-cuenta-corriente-header-item-desktop (cambioSeleccion)="seleccionarTodos($event)">

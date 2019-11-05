@@ -36,7 +36,9 @@ export class CuentaCorrienteItemDesktopComponent implements OnInit {
    * Notifica un movimiento para que sea mostrar en un detalle
    */
   notificarVerDetalle() {
-    this.verDetalle.emit(this.movimiento);
+    if (this.movimiento.concepto != 'TRANSPORTE') {
+      this.verDetalle.emit(this.movimiento);
+    }
   }
 
 }

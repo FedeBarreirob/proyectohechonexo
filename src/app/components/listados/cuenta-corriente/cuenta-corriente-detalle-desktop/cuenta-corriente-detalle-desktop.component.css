@@ -147,6 +147,10 @@
     margin-top: 10px;
 }
 
+.boton-descarga-comprobante-alt img {
+    height: 20px;
+}
+
 .encabezado-texto-importe {
     color: #333333;
     font-family: RubikLight;
