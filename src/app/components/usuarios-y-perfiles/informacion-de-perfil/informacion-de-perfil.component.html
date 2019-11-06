@@ -76,4 +76,19 @@
 	</div>
 </div>
 
+<div class="contenedor-selector-cantidades" *ngIf="(authenticationService.esAdmin || authenticationService.esRol('SUB_ADMINISTRADOR') ||
+	authenticationService.esRol('COMERCIAL'))">
+	<div fxLayout="row" fxLayoutAlign="space-between center">
+		<div fxFlex="100%" class="titulo-apartado">
+			SELECCIÓN DE PERFIL:
+		</div>
+	</div>
+
+	<div fxLayout="row" fxLayoutAlign="space-between center" class="contenedor-boton-menu">
+		<div fxFlex="100%">
+			<app-selector-cuentas></app-selector-cuentas>
+		</div>
+	</div>
+</div>
+
 <app-loading [cargando$]="cargando$"></app-loading>

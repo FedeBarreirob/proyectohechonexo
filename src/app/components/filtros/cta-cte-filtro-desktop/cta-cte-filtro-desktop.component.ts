@@ -2,7 +2,7 @@ import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { InfoCtaCte } from '../../../enums/info-cta-cte.enum';
 import { DatePipe } from '@angular/common';
 import { FiltroPersonalizadoParaFiltroCtaCte } from '../../../interfaces/varios/filtro-personalizado-para-filtro-cta-cte';
-import { MatCheckbox, MatCheckboxChange } from '@angular/material';
+import { MatCheckboxChange } from '@angular/material';
 
 @Component({
   selector: 'app-cta-cte-filtro-desktop',
@@ -26,6 +26,12 @@ export class CtaCteFiltroDesktopComponent implements OnInit {
 
   @Input()
   filtroPersonalizadoLabelDefault: string = "Todos";
+
+  @Input()
+  desde: Date;
+
+  @Input()
+  hasta: Date;
 
   filtroPersonalizadoSeleccionado: FiltroPersonalizadoParaFiltroCtaCte = null;
   filtrosTipoCheck: Array<any> = [];
@@ -52,6 +58,20 @@ export class CtaCteFiltroDesktopComponent implements OnInit {
   constructor(private datePipe: DatePipe) { }
 
   ngOnInit() {
+    this.cargarFechasPorDefecto();
+  }
+
+  /**
+   * Si se ha indicado fechas, se cargan
+   */
+  cargarFechasPorDefecto() {
+    if (this.desde) {
+      this.fechaDesde = this.desde.toISOString();
+    }
+
+    if (this.hasta) {
+      this.fechaHasta = this.hasta.toISOString();
+    }
   }
 
   /**

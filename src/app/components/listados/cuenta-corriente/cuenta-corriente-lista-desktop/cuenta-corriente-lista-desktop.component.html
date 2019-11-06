@@ -5,8 +5,8 @@
     Ficha de cuenta corriente
   </div>
 
-  <div fxFlex *ngIf="!identificadoresParaDescarga || identificadoresParaDescarga.length <= 0">
-    <app-cta-cte-filtro-desktop [cuenta]="cuenta" [infoCtaCteActivo]="infoCtaCte.CUENTA_CORRIENTE"
+  <div fxFlex *ngIf="(!identificadoresParaDescarga || identificadoresParaDescarga.length <= 0) && semanaAtras && hoy">
+    <app-cta-cte-filtro-desktop [cuenta]="cuenta" [desde]="semanaAtras" [hasta]="hoy" [infoCtaCteActivo]="infoCtaCte.CUENTA_CORRIENTE"
       [filtroPersonalizado]="filtroPersonalizado" (botonAplicar)="aplicar($event)"></app-cta-cte-filtro-desktop>
   </div>
 

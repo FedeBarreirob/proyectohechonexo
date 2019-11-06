@@ -24,7 +24,7 @@ export class InformacionDePerfilComponent implements OnInit {
   unidadMedidaPesoSeleccionado: string;
 
   constructor(
-    private authenticationService: AuthenticationService,
+    public authenticationService: AuthenticationService,
     private perfilesService: PerfilesService,
     private snackBar: MatSnackBar,
     public dialog: MatDialog

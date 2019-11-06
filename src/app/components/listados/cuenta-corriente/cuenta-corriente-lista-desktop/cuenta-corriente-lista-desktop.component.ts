@@ -14,11 +14,13 @@ import { saveAs } from 'file-saver/FileSaver';
 import { DownloaderUtilService } from '../../../../services/sharedServices/downloader/downloader-util.service';
 import { ComprobanteParaDescarga } from '../../../../interfaces/archivo-de-comprobantes/comprobante-para-descarga';
 import { CtaCteExportacionesService } from '../../../../services/ctacte/cta-cte-exportaciones.service';
+import { DatePipe } from '@angular/common';
 
 @Component({
   selector: 'app-cuenta-corriente-lista-desktop',
   templateUrl: './cuenta-corriente-lista-desktop.component.html',
-  styleUrls: ['./cuenta-corriente-lista-desktop.component.css']
+  styleUrls: ['./cuenta-corriente-lista-desktop.component.css'],
+  providers: [DatePipe]
 })
 export class CuentaCorrienteListaDesktopComponent implements OnInit, OnDestroy {
 
@@ -40,6 +42,10 @@ export class CuentaCorrienteListaDesktopComponent implements OnInit, OnDestroy {
   identificadoresParaDescarga: Array<any>;
   descargandoArchivos: boolean = false;
   botonesBarraDescargaExtras: Array<any> = [];
+
+  // filtros de fecha por defecto
+  hoy: Date;
+  semanaAtras: Date;
 
   // filtro a utilizar en la barra de filtros de cereales
   filtroPersonalizado: Array<FiltroPersonalizadoParaFiltroCtaCte> = [
@@ -74,12 +80,23 @@ export class CuentaCorrienteListaDesktopComponent implements OnInit, OnDestroy {
     private snackBar: MatSnackBar,
     private comprobantesDownloaderService: ComprobantesDownloaderService,
     private downloaderUtilService: DownloaderUtilService,
-    private exportacionesService: CtaCteExportacionesService
+    private exportacionesService: CtaCteExportacionesService,
+    private datePipe: DatePipe
   ) { }
 
   ngOnInit() {
+    this.cargarRangoFechasDef();
     this.cargarBotonesExtrasDescarga();
     this.cargarListado();
+  }
+
+  /**
+   * Inicializa el rango de fecha por defecto
+   */
+  cargarRangoFechasDef() {
+    this.hoy = new Date();
+    this.semanaAtras = new Date();
+    this.semanaAtras.setDate(this.semanaAtras.getDate() - 7);
   }
 
   ngOnDestroy(): void {
@@ -125,8 +142,14 @@ export class CuentaCorrienteListaDesktopComponent implements OnInit, OnDestroy {
    * Retorna filtro por defecto
    */
   filtroPorDefecto(): any {
+
+    let fechaDesdeFiltro = this.datePipe.transform(this.semanaAtras, 'dd/MM/yyyy');
+    let fechaHastaFiltro = this.datePipe.transform(this.hoy, 'dd/MM/yyyy');
+
     return {
-      cuenta: this.cuenta.id.codigo
+      cuenta: this.cuenta.id.codigo,
+      fechaDesde: fechaDesdeFiltro,
+      fechaHasta: fechaHastaFiltro
     };
   }
 

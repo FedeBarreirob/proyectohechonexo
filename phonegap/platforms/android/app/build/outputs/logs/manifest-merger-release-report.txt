@@ -137,6 +137,8 @@ MERGED from [com.google.android.gms:play-services-basement:11.0.1] /home/alberto
 		ADDED from /home/alberto/Desarrollos/Gaviglio/Digital/DigitalUIClientes/phonegap/platforms/android/app/src/main/AndroidManifest.xml:5:18-52
 	android:icon
 		ADDED from /home/alberto/Desarrollos/Gaviglio/Digital/DigitalUIClientes/phonegap/platforms/android/app/src/main/AndroidManifest.xml:5:53-87
+	android:usesCleartextTraffic
+		ADDED from /home/alberto/Desarrollos/Gaviglio/Digital/DigitalUIClientes/phonegap/platforms/android/app/src/main/AndroidManifest.xml:5:148-183
 activity#com.gaviglio.digital.MainActivity
 ADDED from /home/alberto/Desarrollos/Gaviglio/Digital/DigitalUIClientes/phonegap/platforms/android/app/src/main/AndroidManifest.xml:6:9-23:20
 	android:label

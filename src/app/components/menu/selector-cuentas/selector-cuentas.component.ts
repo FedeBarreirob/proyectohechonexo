@@ -7,6 +7,7 @@ import { FiltroGenericoLista } from '../../../interfaces/varios/filtro-generico-
 import { debounceTime, tap, takeUntil } from 'rxjs/operators';
 import { isUndefined } from 'util';
 import { Subject } from 'rxjs';
+import { DeviceDetectorService } from 'ngx-device-detector';
 
 @Component({
 	selector: 'app-selector-cuentas',
@@ -16,6 +17,7 @@ import { Subject } from 'rxjs';
 export class SelectorCuentasComponent implements OnInit, OnDestroy {
 
 	isLoading = false;
+	esCelular: boolean;
 
 	// busqueda de perfiles
 	public buscadorPerfiles: FormControl = new FormControl();
@@ -25,10 +27,13 @@ export class SelectorCuentasComponent implements OnInit, OnDestroy {
 
 	constructor(
 		private perfilService: PerfilesService,
-		private authenticationService: AuthenticationService
+		private authenticationService: AuthenticationService,
+		private deviceService: DeviceDetectorService
 	) { }
 
 	ngOnInit() {
+		this.esCelular = this.deviceService.isMobile();
+
 		this.buscadorPerfiles.valueChanges
 			.pipe(
 				debounceTime(500),
@@ -112,10 +117,13 @@ export class SelectorCuentasComponent implements OnInit, OnDestroy {
 
 			if (!isUndefined(perfil)) {
 				this.authenticationService.setPerfilActivo(perfil);
+
+				if (!this.esCelular) {
+					window.location.reload();
+				}
 			} else {
 				this.limpiarPerfilSeleccionado();
 			}
-
 		} else {
 			this.limpiarPerfilSeleccionado();
 		}
