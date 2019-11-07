@@ -19,6 +19,25 @@
 </div>
 
 <mat-button-toggle-group class="grupo-botones-origen" [(ngModel)]="origenSeleccionado">
+
+  <div class="boton-origen">
+    <mat-button-toggle [value]="origenComprobante.CONTRATOS">
+      <div class="texto-campania">Contratos</div>
+    </mat-button-toggle>
+  </div>
+
+  <div class="boton-origen">
+    <mat-button-toggle [value]="origenComprobante.ENTREGAS">
+      <div class="texto-campania">Entregas</div>
+    </mat-button-toggle>
+  </div>
+
+  <div class="boton-origen">
+    <mat-button-toggle [value]="origenComprobante.VENTAS">
+      <div class="texto-campania">Ventas</div>
+    </mat-button-toggle>
+  </div>
+
   <div class="boton-origen">
     <mat-button-toggle [value]="origenComprobante.CUENTA_CORRIENTE">
       <div class="texto-campania">Cuenta corriente</div>
@@ -30,6 +49,7 @@
       <div class="texto-campania">Cta. Cte. Aplicada</div>
     </mat-button-toggle>
   </div>
+
 </mat-button-toggle-group>
 
 <!-- Filtro de nombre de comprobante -->

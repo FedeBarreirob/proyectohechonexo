@@ -19,7 +19,7 @@ export class FiltroArchivosComprobantesComponent implements OnInit {
   botonCerrar: EventEmitter<void> = new EventEmitter<void>();
 
   @Output()
-  botonAplicar: EventEmitter<FiltroCtaCteComprobanteDescarga> = new EventEmitter<FiltroCtaCteComprobanteDescarga>();
+  botonAplicar: EventEmitter<any> = new EventEmitter<any>();
 
   origenComprobante: any = OrigenComprobante;
   origenSeleccionado: OrigenComprobante = OrigenComprobante.CUENTA_CORRIENTE;
