@@ -1,75 +1,86 @@
 <div fxLayout="row" fxLayoutAlign="space-around center" class="container" fxLayoutGap="5px">
 
-  <div fxFlex="100px">
-    {{movimiento.fechaCtaCte}}
+  <!--Check de descarga-->
+  <div fxFlex="28px">
+    <mat-checkbox [(ngModel)]="seleccionado" (change)="notificarCambioSeleccion($event)"></mat-checkbox>
   </div>
 
-  <div fxFlex="130px" class="concepto" [matTooltip]="movimiento.concepto">
-    {{movimiento.concepto}}
+  <div fxFlex (click)="notificarVerDetalle()">
+
+    <div fxLayout="row" fxLayoutAlign="space-around center">
+
+      <div fxFlex="100px">
+        {{movimiento.fechaCtaCte}}
+      </div>
+
+      <div fxFlex="130px" class="concepto" [matTooltip]="movimiento.concepto">
+        {{movimiento.concepto}}
+      </div>
+
+      <div fxFlex="145px">
+        {{movimiento.comprobanteAfectado}}
+      </div>
+
+      <div fxFlex="100px">
+        {{movimiento.fechaVencimiento}}
+      </div>
+
+      <div fxFlex="30px" class="moneda">
+        <span *ngIf="movimiento.concepto != 'TRANSPORTE'">{{ movimiento.moneda | moneda }}</span>
+      </div>
+
+      <div fxFlex="40px" class="importe">
+        {{movimiento.tipoDeCambio | number: '0.2-2'}}
+      </div>
+
+      <!-- debe -->
+      <div fxFlex="100px" class="importe">
+
+        <!--Pesos-->
+        <span *ngIf="movimiento.moneda == 'P' && movimiento.tipoMovimiento == 'D'">
+          {{movimiento.importeComprobantePesos | number: '0.2-2'}}
+        </span>
+
+        <!--Dolares-->
+        <span *ngIf="movimiento.moneda != 'P' && movimiento.tipoMovimiento == 'D'">
+          {{movimiento.importeComprobanteDolares | number: '0.2-2'}}
+        </span>
+
+        <!--Ninguno-->
+        <span *ngIf="movimiento.tipoMovimiento == 'C'">
+          {{0 | number: '0.2-2'}}
+        </span>
+
+      </div>
+
+      <!--haber-->
+      <div fxFlex="100px" class="importe">
+
+        <!--Pesos-->
+        <span *ngIf="movimiento.moneda == 'P' && movimiento.tipoMovimiento == 'C'">
+          {{movimiento.importeComprobantePesos | number: '0.2-2'}}
+        </span>
+
+        <!--Dolares-->
+        <span *ngIf="movimiento.moneda != 'P' && movimiento.tipoMovimiento == 'C'">
+          {{movimiento.importeComprobanteDolares | number: '0.2-2'}}
+        </span>
+
+        <!--Ninguno-->
+        <span *ngIf="movimiento.tipoMovimiento == 'D'">
+          {{0 | number: '0.2-2'}}
+        </span>
+
+      </div>
+
+      <div fxFlex="100px" class="importe">
+        {{movimiento.saldoPesos | number: '0.2-2'}}
+      </div>
+
+      <div fxFlex="100px" class="importe">
+        {{movimiento.saldoDolares | number: '0.2-2'}}
+      </div>
+
+    </div>
   </div>
-
-  <div fxFlex="145px">
-    {{movimiento.comprobanteAfectado}}
-  </div>
-
-  <div fxFlex="100px">
-    {{movimiento.fechaVencimiento}}
-  </div>
-
-  <div fxFlex="30px" class="moneda">
-    <span *ngIf="movimiento.concepto != 'TRANSPORTE'">{{ movimiento.moneda | moneda }}</span>
-  </div>
-
-  <div fxFlex="40px" class="importe">
-    {{movimiento.tipoDeCambio | number: '0.2-2'}}
-  </div>
-
-  <!-- debe -->
-  <div fxFlex="100px" class="importe">
-
-    <!--Pesos-->
-    <span *ngIf="movimiento.moneda == 'P' && movimiento.tipoMovimiento == 'D'">
-      {{movimiento.importeComprobantePesos | number: '0.2-2'}}
-    </span>
-
-    <!--Dolares-->
-    <span *ngIf="movimiento.moneda != 'P' && movimiento.tipoMovimiento == 'D'">
-      {{movimiento.importeComprobanteDolares | number: '0.2-2'}}
-    </span>
-
-    <!--Ninguno-->
-    <span *ngIf="movimiento.tipoMovimiento == 'C'">
-      {{0 | number: '0.2-2'}}
-    </span>
-
-  </div>
-
-  <!--haber-->
-  <div fxFlex="100px" class="importe">
-
-    <!--Pesos-->
-    <span *ngIf="movimiento.moneda == 'P' && movimiento.tipoMovimiento == 'C'">
-      {{movimiento.importeComprobantePesos | number: '0.2-2'}}
-    </span>
-
-    <!--Dolares-->
-    <span *ngIf="movimiento.moneda != 'P' && movimiento.tipoMovimiento == 'C'">
-      {{movimiento.importeComprobanteDolares | number: '0.2-2'}}
-    </span>
-
-    <!--Ninguno-->
-    <span *ngIf="movimiento.tipoMovimiento == 'D'">
-      {{0 | number: '0.2-2'}}
-    </span>
-
-  </div>
-
-  <div fxFlex="100px" class="importe">
-    {{movimiento.saldoPesos | number: '0.2-2'}}
-  </div>
-
-  <div fxFlex="100px" class="importe">
-    {{movimiento.saldoDolares | number: '0.2-2'}}
-  </div>
-
 </div>

@@ -1,43 +1,53 @@
 <div fxLayout="row" fxLayoutAlign="space-around center" class="container" fxLayoutGap="5px">
 
-  <div fxFlex="100px">
-    Fecha comp.
+  <!--Check de descarga-->
+  <div fxFlex="28px">
+    <mat-checkbox (change)="notificarCambioSeleccion($event)"></mat-checkbox>
   </div>
 
-  <div fxFlex="130px">
-    Concepto
-  </div>
+  <div fxFlex>
+    <div fxLayout="row" fxLayoutAlign="space-around center">
 
-  <div fxFlex="145px">
-    Comprobante
-  </div>
+      <div fxFlex="100px">
+        Fecha comp.
+      </div>
 
-  <div fxFlex="100px">
-    Fecha venc.
-  </div>
+      <div fxFlex="130px">
+        Concepto
+      </div>
 
-  <div fxFlex="30px">
-    Mon.
-  </div>
+      <div fxFlex="145px">
+        Comprobante
+      </div>
 
-  <div fxFlex="40px" class="importe">
-    TC
-  </div>
+      <div fxFlex="100px">
+        Fecha venc.
+      </div>
 
-  <div fxFlex="100px" class="importe">
-    Debe
-  </div>
+      <div fxFlex="30px">
+        Mon.
+      </div>
 
-  <div fxFlex="100px" class="importe">
-    Haber
-  </div>
+      <div fxFlex="40px" class="importe">
+        TC
+      </div>
 
-  <div fxFlex="100px" class="importe">
-    Saldo en ARS
-  </div>
+      <div fxFlex="100px" class="importe">
+        Debe
+      </div>
 
-  <div fxFlex="100px" class="importe">
-    Saldo en USD
-  </div>
+      <div fxFlex="100px" class="importe">
+        Haber
+      </div>
 
+      <div fxFlex="100px" class="importe">
+        Saldo en ARS
+      </div>
+
+      <div fxFlex="100px" class="importe">
+        Saldo en USD
+      </div>
+
+    </div>
+  </div>
 </div>

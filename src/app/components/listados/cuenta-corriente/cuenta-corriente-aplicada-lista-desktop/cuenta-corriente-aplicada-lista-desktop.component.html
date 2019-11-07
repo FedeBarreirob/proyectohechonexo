@@ -5,23 +5,32 @@
     Ficha de cuenta corriente
   </div>
 
-  <div fxFlex>
+  <div fxFlex *ngIf="!identificadoresParaDescarga || identificadoresParaDescarga.length <= 0">
     <app-cta-cte-filtro-desktop [cuenta]="cuenta" [infoCtaCteActivo]="infoCtaCte.CUENTA_CORRIENTE_APLICADA"
       [filtroPersonalizado]="filtroPersonalizado" (botonAplicar)="aplicar($event)"></app-cta-cte-filtro-desktop>
   </div>
 
+  <div fxFlex *ngIf="identificadoresParaDescarga && identificadoresParaDescarga.length > 0">
+    <app-tool-bar-descargas (descargarComprobanteChange)="descargarSeleccionados()"
+      [botonesExtras]="botonesBarraDescargaExtras" [disabled]="descargandoArchivos"
+      (botonPresionado)="exportarSegunOpcion($event)"></app-tool-bar-descargas>
+  </div>
+
 </div>
+
+<mat-progress-bar *ngIf="descargandoArchivos" mode="indeterminate"></mat-progress-bar>
 
 <!--Header-->
 <div class="contenedor-header">
-  <app-cuenta-corriente-aplicada-header-item-desktop></app-cuenta-corriente-aplicada-header-item-desktop>
+  <app-cuenta-corriente-aplicada-header-item-desktop (cambioSeleccion)="seleccionarTodos($event)">
+  </app-cuenta-corriente-aplicada-header-item-desktop>
 </div>
 
 <!--Listado-->
 <div class="contenedor-listado" fxLayout="column" fxLayoutWrap fxLayoutAlign="none">
 
   <app-cuenta-corriente-aplicada-item-desktop *ngFor="let movimiento of listado" [movimiento]="movimiento"
-    (click)="verDetalle(movimiento)">
+    (cambioSeleccion)="rearmarListaSeleccionados()" (verDetalle)="verDetalle(movimiento)">
   </app-cuenta-corriente-aplicada-item-desktop>
 
   <!--Spinner-->

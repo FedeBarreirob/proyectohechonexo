@@ -14,7 +14,7 @@ export class CtaCteAplicadaExportacionesServiceService {
     private pdfService: PdfService,
     private decimalPipe: DecimalPipe) { }
 
-    // funcion que exporta a excel un movimiento de ctacte aplicada detalle
+  // funcion que exporta a excel un movimiento de ctacte aplicada detalle
   exportarMovCtaCteDetalleExcel(movimiento: MovimientoCtaCteAplicada) {
     try {
       let listado: Array<MovimientoCtaCteAplicada> = [];
@@ -87,35 +87,37 @@ export class CtaCteAplicadaExportacionesServiceService {
       columnas.push(movimientosColumnas);
 
       // saldos
-      // .. preparar datos
-      let saldosRow = [];
-      saldosRow.push(
-        [
-          "Saldo en pesos",
-          `AR$ ${this.decimalPipe.transform(saldos.saldoPesos, '.2')}`
-        ]
-      );
-      saldosRow.push(
-        [
-          "Saldo en dólares",
-          `US$ ${this.decimalPipe.transform(saldos.saldoDolares, '.2')}`
-        ]
-      );
-      rows.push(saldosRow);
+      if (saldos) {
+        // .. preparar datos
+        let saldosRow = [];
+        saldosRow.push(
+          [
+            "Saldo en pesos",
+            `AR$ ${this.decimalPipe.transform(saldos.saldoPesos, '.2')}`
+          ]
+        );
+        saldosRow.push(
+          [
+            "Saldo en dólares",
+            `US$ ${this.decimalPipe.transform(saldos.saldoDolares, '.2')}`
+          ]
+        );
+        rows.push(saldosRow);
 
-      // .. preparar opciones
-      let saldosOpciones = {
-        startY: 30,
-        columnStyles: {
-          0: { columnWidth: '50%', halign: 'left' },
-          1: { columnWidth: '50%', halign: 'right' },
-        }
-      };
-      opciones.push(saldosOpciones);
+        // .. preparar opciones
+        let saldosOpciones = {
+          startY: 30,
+          columnStyles: {
+            0: { columnWidth: '50%', halign: 'left' },
+            1: { columnWidth: '50%', halign: 'right' },
+          }
+        };
+        opciones.push(saldosOpciones);
 
-      // .. columnas
-      let saldosColumnas = ["Concepto", "Valor"];
-      columnas.push(saldosColumnas);
+        // .. columnas
+        let saldosColumnas = ["Concepto", "Valor"];
+        columnas.push(saldosColumnas);
+      }
 
       // renderizar
       this.pdfService.listaMultipleAPdf(
