@@ -18,7 +18,7 @@
   </button>
 </mat-menu>
 
-<div class="contenedor-listado" fxLayout="column" fxLayoutWrap fxLayoutAlign="none" infiniteScroll
+<div class="contenedor-listado" *ngIf="listadoContratos && listadoContratos.length > 0" fxLayout="column" fxLayoutWrap fxLayoutAlign="none" infiniteScroll
   [infiniteScrollDistance]="2" [infiniteScrollThrottle]="50" (scrolled)="onScroll()" [scrollWindow]="false">
 
   <app-contratos-resumen-item-movil *ngFor="let movimiento of (listadoContratos ? listadoContratos : [])"
@@ -30,4 +30,15 @@
     <mat-spinner diameter="24"></mat-spinner>
   </div>
 
+</div>
+
+<!--Si no hay datos a mostrar-->
+<div fxLayout="column" fxLayoutAlign="center center" *ngIf="listadoContratos && listadoContratos.length == 0" class="info-sin-data-container">
+    <div fxFlex="nogrow">
+        <img src="assets/varios/sin-data.png" class="info-sin-data-img"/>
+    </div>
+
+    <div fxFlex="nogrow" class="info-sin-data-text">
+        Cuando tengamos información de tus contratos la podrás ver aquí.
+    </div>
 </div>

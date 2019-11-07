@@ -13,7 +13,7 @@
   <div fxFlex="35%">Monto</div>
 </div>
 
-<div class="contenedor-listado" fxLayout="column" fxLayoutWrap fxLayoutAlign="none" infiniteScroll
+<div class="contenedor-listado" *ngIf="listado && listado.length > 0" fxLayout="column" fxLayoutWrap fxLayoutAlign="none" infiniteScroll
   [infiniteScrollDistance]="2" [infiniteScrollThrottle]="50" (scrolled)="onScroll()" [scrollWindow]="false">
 
   <div fxLayout="row" fxLayoutAlign="space-around center" *ngFor="let movimiento of (listado ? listado : [])"
@@ -55,4 +55,15 @@
     <mat-spinner diameter="24"></mat-spinner>
   </div>
   
+</div>
+
+<!--Si no hay datos a mostrar-->
+<div fxLayout="column" fxLayoutAlign="center center" *ngIf="listado && listado.length == 0" class="info-sin-data-container">
+    <div fxFlex="nogrow">
+        <img src="assets/varios/sin-data.png" class="info-sin-data-img"/>
+    </div>
+
+    <div fxFlex="nogrow" class="info-sin-data-text">
+        Cuando tengamos información de tus cuentas corrientes la podrás ver aquí.
+    </div>
 </div>
