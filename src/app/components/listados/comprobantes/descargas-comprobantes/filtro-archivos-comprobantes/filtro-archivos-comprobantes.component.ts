@@ -11,7 +11,7 @@ import { FiltroComprobanteDescarga } from '../../../../../interfaces/archivo-de-
   providers: [DatePipe]
 })
 export class FiltroArchivosComprobantesComponent implements OnInit {
-
+  
   @Input()
   cuenta: string;
 
@@ -22,7 +22,7 @@ export class FiltroArchivosComprobantesComponent implements OnInit {
   botonAplicar: EventEmitter<any> = new EventEmitter<any>();
 
   origenComprobante: any = OrigenComprobante;
-  origenSeleccionado: OrigenComprobante = OrigenComprobante.CUENTA_CORRIENTE;
+  origenSeleccionado: OrigenComprobante = OrigenComprobante.CONTRATOS;
 
   fechaDesde: string;
   fechaHasta: string;
@@ -61,7 +61,7 @@ export class FiltroArchivosComprobantesComponent implements OnInit {
    * Función encargada de limpiar los filtros para un nuevo filtrado
    */
   limpiar() {
-    this.origenSeleccionado = OrigenComprobante.CUENTA_CORRIENTE;
+    this.origenSeleccionado = OrigenComprobante.CONTRATOS;
     this.filtroIdentificacionComprobante = "";
     this.fechaDesde = "";
     this.fechaHasta = "";

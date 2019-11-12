@@ -1,3 +1,5 @@
+<mat-progress-bar *ngIf="descargandoArchivos" mode="indeterminate"></mat-progress-bar>
+
 <div class="contenedor-listado" fxLayout="column" fxLayoutWrap fxLayoutAlign="none" infiniteScroll
 	[infiniteScrollDistance]="2" [infiniteScrollThrottle]="50" (scrolled)="onScroll()" [scrollWindow]="false">
 
@@ -38,7 +40,7 @@
 	<div fxLayout="row" fxLayoutAlign="space-between center" class="botonera">
 		<div fxFlex="100%">
 			<button mat-button
-				[disabled]="(cargando==true || comprobantesSeleccionados.length == 0 || comprobantes.length == 0) && esCelular"
+				[disabled]="(cargando==true || descargandoArchivos==true || comprobantesSeleccionados.length == 0 || comprobantes.length == 0)"
 				class="boton-descarga-comprobante" (click)="descargar()">
 				Descargar seleccionados
 			</button>

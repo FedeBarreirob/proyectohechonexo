@@ -35,6 +35,7 @@ export class ArchivoDeComprobantesComponent implements OnInit, OnDestroy {
 
   destroy$: Subject<any> = new Subject<any>();
   cargando: boolean = false;
+  descargandoArchivos: boolean = false;
   toggleSeleccionTodo: boolean = false;
   esCelular: boolean;
 
@@ -66,27 +67,27 @@ export class ArchivoDeComprobantesComponent implements OnInit, OnDestroy {
       }
     );
 
-    //this.cargarFiltroPorDefecto();
-    //this.cargarListado(true);
+    this.cargarFiltroPorDefecto();
+    this.cargarListado(true);
   }
 
   /**
    * Función encargada de cargar el filtro por defecto
    */
   cargarFiltroPorDefecto() {
-    /*let hace3Meses: Date = new Date();
+    let hace3Meses: Date = new Date();
     hace3Meses.setMonth(hace3Meses.getMonth() - 3);
 
     let fechaDesdeFiltro = this.datePipe.transform(hace3Meses, 'dd/MM/yyyy');
     let fechaHastaFiltro = this.datePipe.transform(new Date(), 'dd/MM/yyyy');
 
     this.filtro = {
-      esAplicada: false,
+      origen: OrigenComprobante.CONTRATOS,
       cuenta: this.cuenta,
       paginado: true,
       fechaDesde: fechaDesdeFiltro,
       fechaHasta: fechaHastaFiltro
-    }*/
+    }
   }
 
   // funcion encargada de cargar el listado de comprobantes
@@ -155,6 +156,14 @@ export class ArchivoDeComprobantesComponent implements OnInit, OnDestroy {
         observer = this.archivoDeComprobantesService.comprobantesContratosFiltrados(this.filtro);
         break;
 
+      case OrigenComprobante.ENTREGAS:
+        observer = this.archivoDeComprobantesService.comprobantesEntregasFiltrados(this.filtro);
+        break;
+
+      case OrigenComprobante.VENTAS:
+        observer = this.archivoDeComprobantesService.comprobantesVentasFiltrados(this.filtro);
+        break;
+
       default:
         observer = null;
     }
@@ -202,10 +211,43 @@ export class ArchivoDeComprobantesComponent implements OnInit, OnDestroy {
     }
   }
 
-  // funcion encargada de ejecutar el proceso de descarga
+  /**
+   * Ejecuta el proceso de descarga segun tipo de comprobantes
+   */
   descargar() {
-    if (this.cargando == false) {
-      this.cargando = true;
+    switch (this.filtro.origen) {
+
+      case OrigenComprobante.CUENTA_CORRIENTE:
+        this.descargarCtaCte();
+        break;
+
+      case OrigenComprobante.CUENTA_CORRIENTE_APLICADA:
+        this.descargarCtaCte();
+        break;
+
+      case OrigenComprobante.CONTRATOS:
+        this.descargarContratos();
+        break;
+
+      case OrigenComprobante.ENTREGAS:
+        this.descargarEntregas();
+        break;
+
+      case OrigenComprobante.VENTAS:
+        this.descargarContratos();
+        break;
+
+      default:
+        break;
+    }
+  }
+
+  /**
+   * Ejecuta el proceso de descarga de los comprobantes de ctacte y aplicada
+   */
+  descargarCtaCte() {
+    if (this.descargandoArchivos == false) {
+      this.descargandoArchivos = true;
 
       this.comprobantesDownloaderService.comprobanteDescargadoMasivo(this.comprobantesSeleccionados)
         .subscribe(respuesta => {
@@ -225,10 +267,78 @@ export class ArchivoDeComprobantesComponent implements OnInit, OnDestroy {
             this.openSnackBar("Ninguno de los comprobantes indicados se encuentran para su descarga.");
           }
 
-          this.cargando = false;
+          this.descargandoArchivos = false;
         }, error => {
           console.log(error);
-          this.cargando = false;
+          this.descargandoArchivos = false;
+        });
+    }
+  }
+
+  /**
+   * Función que ejecuta el proceso de descarga de comprobantes seleccionados
+   */
+  descargarContratos() {
+    if (this.descargandoArchivos == false && this.comprobantesSeleccionados && this.comprobantesSeleccionados.length > 0) {
+      this.descargandoArchivos = true;
+
+      let identificadores: Array<any> = this.comprobantesSeleccionados.map(comprobantes => {
+
+        let comprobantePartes = comprobantes.link.split("-");
+
+        return {
+          sucursal: comprobantePartes[0],
+          comprobante: comprobantePartes[1]
+        }
+      });
+
+      this.comprobantesDownloaderService.confirmacionVentaDescargadoMasivo(identificadores)
+        .pipe(takeUntil(this.destroy$))
+        .subscribe(respuesta => {
+          var mediaType = 'application/zip';
+          var blob = new Blob([respuesta], { type: mediaType });
+          var filename = `boletos.zip`;
+
+          if (blob.size !== 0) {
+            saveAs(blob, filename);
+          } else {
+            this.openSnackBar("Ninguno de los comprobantes indicados se encuentran para su descarga.");
+          }
+
+          this.descargandoArchivos = false;
+        }, error => {
+          console.log(error);
+          this.descargandoArchivos = false;
+        });
+    }
+  }
+
+  /**
+   * Función que ejecuta el proceso de descarga de comprobantes seleccionados
+   */
+  descargarEntregas() {
+    if (this.descargandoArchivos == false && this.comprobantesSeleccionados && this.comprobantesSeleccionados.length > 0) {
+      this.descargandoArchivos = true;
+
+      let identificadores = this.comprobantesSeleccionados.map(comrpobante => comrpobante.link);
+
+      this.comprobantesDownloaderService.certificadoAfipDescargadoMasivo(identificadores)
+        .pipe(takeUntil(this.destroy$))
+        .subscribe(respuesta => {
+          var mediaType = 'application/zip';
+          var blob = new Blob([respuesta], { type: mediaType });
+          var filename = `certificados.zip`;
+
+          if (blob.size !== 0) {
+            saveAs(blob, filename);
+          } else {
+            this.openSnackBar("Ninguno de los comprobantes indicados se encuentran para su descarga.");
+          }
+
+          this.descargandoArchivos = false;
+        }, error => {
+          console.log(error);
+          this.descargandoArchivos = false;
         });
     }
   }

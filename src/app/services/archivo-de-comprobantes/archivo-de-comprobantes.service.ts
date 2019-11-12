@@ -14,6 +14,8 @@ export class ArchivoDeComprobantesService {
 
   private urlCtaCteArchivoDeComprobantesComprobantes = `${environment.hostCtaCte}/archivosDeOperaciones/comprobantes`;
   private urlContratosArchivoDeComprobantesComprobantes = `${environment.hostGeneradorComprobantes}/confirmacionesDeVentas/comprobantesContratos`;
+  private urlEntregasArchivoDeComprobantesComprobantes = `${environment.hostGeneradorComprobantes}/entregas/comprobantesEntregas`;
+  private urlVentasArchivoDeComprobantesComprobantes = `${environment.hostGeneradorComprobantes}/ventas/comprobantesVentas`;
 
   constructor(
     private http: HttpClient
@@ -49,5 +51,37 @@ export class ArchivoDeComprobantesService {
     };
 
     return this.http.post<ResponseServicio>(this.urlContratosArchivoDeComprobantesComprobantes, JSON.stringify(filtro), httpOptions);
+  }
+
+  /**
+   * Función que devuelve un listado de comprobantes de entregas
+   * @param filtro 
+   */
+  @Cacheable()
+  comprobantesEntregasFiltrados(filtro: FiltroComprobanteDescarga): Observable<ResponseServicio> {
+
+    const httpOptions = {
+      headers: new HttpHeaders({
+        'Content-Type': 'application/json'
+      })
+    };
+
+    return this.http.post<ResponseServicio>(this.urlEntregasArchivoDeComprobantesComprobantes, JSON.stringify(filtro), httpOptions);
+  }
+
+  /**
+   * Función que devuelve un listado de comprobantes de ventas
+   * @param filtro 
+   */
+  @Cacheable()
+  comprobantesVentasFiltrados(filtro: FiltroComprobanteDescarga): Observable<ResponseServicio> {
+
+    const httpOptions = {
+      headers: new HttpHeaders({
+        'Content-Type': 'application/json'
+      })
+    };
+
+    return this.http.post<ResponseServicio>(this.urlVentasArchivoDeComprobantesComprobantes, JSON.stringify(filtro), httpOptions);
   }
 }
