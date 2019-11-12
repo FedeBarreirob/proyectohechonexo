@@ -1,10 +1,10 @@
 import { Component, OnInit, ViewChild, AfterViewInit } from '@angular/core';
 import { MatSidenav } from '@angular/material';
-import { EntidadAlg } from 'src/app/interfaces/perfiles/entidad-alg';
-import { CuentaAlgService } from 'src/app/services/observers/cuentas-alg/cuenta-alg.service';
+import { EntidadAlg } from '../../../../interfaces/perfiles/entidad-alg';
+import { CuentaAlgService } from '../../../../services/observers/cuentas-alg/cuenta-alg.service';
 import { Subject } from 'rxjs';
-import { FiltroCtaCteComprobanteDescarga } from 'src/app/interfaces/archivo-de-comprobantes/filtro-cta-cte-comprobante-descarga';
 import { DeviceDetectorService } from 'ngx-device-detector';
+import { FiltroComprobanteDescarga } from '../../../../interfaces/archivo-de-comprobantes/filtro-comprobante-descarga';
 
 @Component({
   selector: 'app-comprobantes',
@@ -17,7 +17,7 @@ export class ComprobantesComponent implements OnInit, AfterViewInit {
   sidenav: MatSidenav;
 
   cuenta: EntidadAlg;
-  filtroArchivosComprobantes$: Subject<FiltroCtaCteComprobanteDescarga> = new Subject<FiltroCtaCteComprobanteDescarga>();
+  filtroArchivosComprobantes$: Subject<FiltroComprobanteDescarga> = new Subject<FiltroComprobanteDescarga>();
   esCelular: boolean;
 
   constructor(
@@ -50,7 +50,7 @@ export class ComprobantesComponent implements OnInit, AfterViewInit {
    * Notifica que se debe cargar el listado de comprobantes a descargar
    * @param filtro Filtro para la busqueda de comprobantes
    */
-  cargarListadoArchivosComprobantes(filtro: FiltroCtaCteComprobanteDescarga) {
+  cargarListadoArchivosComprobantes(filtro: FiltroComprobanteDescarga) {
     this.filtroArchivosComprobantes$.next(filtro);
   }
 }

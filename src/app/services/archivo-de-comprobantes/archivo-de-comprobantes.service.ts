@@ -5,6 +5,7 @@ import { FiltroCtaCteComprobanteDescarga } from '../../interfaces/archivo-de-com
 import { ResponseServicio } from '../../interfaces/varios/response-servicio';
 import { Observable } from 'rxjs';
 import { Cacheable } from 'ngx-cacheable';
+import { FiltroComprobanteDescarga } from '../../interfaces/archivo-de-comprobantes/filtro-comprobante-descarga';
 
 @Injectable({
   providedIn: 'root'
@@ -12,17 +13,18 @@ import { Cacheable } from 'ngx-cacheable';
 export class ArchivoDeComprobantesService {
 
   private urlCtaCteArchivoDeComprobantesComprobantes = `${environment.hostCtaCte}/archivosDeOperaciones/comprobantes`;
+  private urlContratosArchivoDeComprobantesComprobantes = `${environment.hostGeneradorComprobantes}/confirmacionesDeVentas/comprobantesContratos`;
 
   constructor(
     private http: HttpClient
   ) { }
 
   /**
-   * Función que devuelve un listado de comprobantes segun filtro indicado
+   * Función que devuelve un listado de comprobantes de cuenta corriente/aplicada segun filtro indicado
    * @param filtro 
    */
   @Cacheable()
-  comprobantesFiltrados(filtro: FiltroCtaCteComprobanteDescarga): Observable<ResponseServicio> {
+  comprobantesCtaCteFiltrados(filtro: FiltroCtaCteComprobanteDescarga): Observable<ResponseServicio> {
 
     const httpOptions = {
       headers: new HttpHeaders({
@@ -31,5 +33,21 @@ export class ArchivoDeComprobantesService {
     };
 
     return this.http.post<ResponseServicio>(this.urlCtaCteArchivoDeComprobantesComprobantes, JSON.stringify(filtro), httpOptions);
+  }
+
+  /**
+   * Función que devuelve un listado de comprobantes de contratos
+   * @param filtro 
+   */
+  @Cacheable()
+  comprobantesContratosFiltrados(filtro: FiltroComprobanteDescarga): Observable<ResponseServicio> {
+
+    const httpOptions = {
+      headers: new HttpHeaders({
+        'Content-Type': 'application/json'
+      })
+    };
+
+    return this.http.post<ResponseServicio>(this.urlContratosArchivoDeComprobantesComprobantes, JSON.stringify(filtro), httpOptions);
   }
 }

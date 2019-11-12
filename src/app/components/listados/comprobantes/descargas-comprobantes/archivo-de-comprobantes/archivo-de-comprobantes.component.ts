@@ -5,12 +5,15 @@ import { ComprobanteParaDescarga } from '../../../../../interfaces/archivo-de-co
 import { MatSlideToggleChange, MatSnackBar } from '@angular/material';
 import { ComprobantesDownloaderService } from '../../../../../services/sharedServices/downloader/comprobantes-downloader.service';
 import { saveAs } from 'file-saver/FileSaver';
-import { Subject } from 'rxjs';
+import { Subject, Observable } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
 import { DatePipe } from '@angular/common';
 import { DeviceDetectorService } from 'ngx-device-detector';
 import { DownloaderUtilService } from '../../../../../services/sharedServices/downloader/downloader-util.service';
 import { environment } from '../../../../../../environments/environment';
+import { FiltroComprobanteDescarga } from '../../../../../interfaces/archivo-de-comprobantes/filtro-comprobante-descarga';
+import { OrigenComprobante } from '../../../../../enums/origen-comprobante.enum';
+import { ResponseServicio } from '../../../../../interfaces/varios/response-servicio';
 
 @Component({
   selector: 'app-archivo-de-comprobantes',
@@ -21,14 +24,14 @@ import { environment } from '../../../../../../environments/environment';
 export class ArchivoDeComprobantesComponent implements OnInit, OnDestroy {
 
   @Input()
-  filtroArchivosComprobantes$: Subject<FiltroCtaCteComprobanteDescarga> = new Subject<FiltroCtaCteComprobanteDescarga>();
+  filtroArchivosComprobantes$: Subject<FiltroComprobanteDescarga> = new Subject<FiltroComprobanteDescarga>();
 
   @Input()
   cuenta: string
 
   pagina: number = 1;
   cantidadPorPagina: number = 50;
-  filtro: FiltroCtaCteComprobanteDescarga;
+  filtro: FiltroComprobanteDescarga;
 
   destroy$: Subject<any> = new Subject<any>();
   cargando: boolean = false;
@@ -63,15 +66,15 @@ export class ArchivoDeComprobantesComponent implements OnInit, OnDestroy {
       }
     );
 
-    this.cargarFiltroPorDefecto();
-    this.cargarListado(true);
+    //this.cargarFiltroPorDefecto();
+    //this.cargarListado(true);
   }
 
   /**
    * Función encargada de cargar el filtro por defecto
    */
   cargarFiltroPorDefecto() {
-    let hace3Meses: Date = new Date();
+    /*let hace3Meses: Date = new Date();
     hace3Meses.setMonth(hace3Meses.getMonth() - 3);
 
     let fechaDesdeFiltro = this.datePipe.transform(hace3Meses, 'dd/MM/yyyy');
@@ -83,7 +86,7 @@ export class ArchivoDeComprobantesComponent implements OnInit, OnDestroy {
       paginado: true,
       fechaDesde: fechaDesdeFiltro,
       fechaHasta: fechaHastaFiltro
-    }
+    }*/
   }
 
   // funcion encargada de cargar el listado de comprobantes
@@ -99,24 +102,64 @@ export class ArchivoDeComprobantesComponent implements OnInit, OnDestroy {
       this.filtro.pagina = this.pagina;
       this.filtro.cantPorPagina = this.cantidadPorPagina;
 
-      this.archivoDeComprobantesService.comprobantesFiltrados(this.filtro)
-        .pipe(takeUntil(this.destroy$))
-        .subscribe(respuesta => {
+      let comprobantesObs: Observable<ResponseServicio> = this.comprobantesSegunOrigen();
+      if (comprobantesObs) {
 
-          // si no hay datos, reestablecer la pagina
-          if (respuesta.datos == null || respuesta.datos.length == 0) {
-            this.pagina = this.pagina - 1;
-          }
+        comprobantesObs
+          .pipe(takeUntil(this.destroy$))
+          .subscribe(respuesta => {
 
-          if (respuesta.exito == true && respuesta.datos != null) {
-            this.agregarAlListado(respuesta.datos);
-          }
+            // si no hay datos, reestablecer la pagina
+            if (respuesta.datos == null || respuesta.datos.length == 0) {
+              this.pagina = this.pagina - 1;
+            }
 
-          this.cargando = false;
-        }, () => {
-          this.cargando = false;
-        });
+            if (respuesta.exito == true && respuesta.datos != null) {
+              this.agregarAlListado(respuesta.datos);
+            }
+
+            this.cargando = false;
+          }, () => {
+            this.cargando = false;
+          });
+
+      } else {
+        this.cargando = false;
+      }
     }
+  }
+
+  /**
+   * Devuelve los comprobantes segun origen indicado en el filtro
+   */
+  comprobantesSegunOrigen(): Observable<ResponseServicio> {
+
+    let observer: Observable<ResponseServicio>;
+
+    // filtro para cuenta corriente unicamente
+    let filtroSrv: FiltroCtaCteComprobanteDescarga = this.filtro;
+
+    switch (this.filtro.origen) {
+
+      case OrigenComprobante.CUENTA_CORRIENTE:
+        filtroSrv.esAplicada = false;
+        observer = this.archivoDeComprobantesService.comprobantesCtaCteFiltrados(filtroSrv);
+        break;
+
+      case OrigenComprobante.CUENTA_CORRIENTE_APLICADA:
+        filtroSrv.esAplicada = true;
+        observer = this.archivoDeComprobantesService.comprobantesCtaCteFiltrados(filtroSrv);
+        break;
+
+      case OrigenComprobante.CONTRATOS:
+        observer = this.archivoDeComprobantesService.comprobantesContratosFiltrados(this.filtro);
+        break;
+
+      default:
+        observer = null;
+    }
+
+    return observer;
   }
 
   // funcion encargada de agregar la paginas de datos recuperados al listado

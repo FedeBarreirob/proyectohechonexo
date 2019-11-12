@@ -1,8 +1,8 @@
 import { Component, OnInit, Output, EventEmitter, Input } from '@angular/core';
 import { OrigenComprobante } from '../../../../../enums/origen-comprobante.enum';
 import { DatePipe } from '@angular/common';
-import { FiltroCtaCteComprobanteDescarga } from '../../../../../interfaces/archivo-de-comprobantes/filtro-cta-cte-comprobante-descarga';
 import { DeviceDetectorService } from 'ngx-device-detector';
+import { FiltroComprobanteDescarga } from '../../../../../interfaces/archivo-de-comprobantes/filtro-comprobante-descarga';
 
 @Component({
   selector: 'app-filtro-archivos-comprobantes',
@@ -75,8 +75,8 @@ export class FiltroArchivosComprobantesComponent implements OnInit {
       let fechaDesdeFiltro = (this.fechaDesde) ? this.datePipe.transform(new Date(this.fechaDesde), 'dd/MM/yyyy') : null;
       let fechaHastaFiltro = (this.fechaHasta) ? this.datePipe.transform(new Date(this.fechaHasta), 'dd/MM/yyyy') : null;
 
-      let filtro: FiltroCtaCteComprobanteDescarga = {
-        esAplicada: this.origenSeleccionado == OrigenComprobante.CUENTA_CORRIENTE_APLICADA,
+      let filtro: FiltroComprobanteDescarga = {
+        origen: this.origenSeleccionado,
         cuenta: this.cuenta,
         fechaDesde: fechaDesdeFiltro,
         fechaHasta: fechaHastaFiltro,
