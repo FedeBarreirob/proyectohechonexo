@@ -1,45 +1,84 @@
+<div fxLayout="row" fxLayoutAlign="space-between center titulo-seccion" class="contenedor-titulo-filtro" fxLayoutGap="20px" style="font-size: 130%;">
+  Entregas
+</div>
+
+<div fxLayout="row" fxLayoutAlign="space-between center" class="contenedor-titulo-filtro" fxLayoutGap="20px" style="padding-top: 0">
+  <!--Indicador pactadas-->
+  <div fxLayout="row" fxLayoutAlign="space-between none" fxLayoutGap="10px">
+    <div fxFlex="100%" class="indicador-contenedor">
+      <app-contrato-indicador-grafico-porcentual title="{{pactadasTitulo}}"
+                                                 texto="{{pactadasCantidad}} Tn"
+                                                 subtexto="{{pactadasPorcentaje}}% entregas pendientes"
+                                                 [porcentual]="pactadasPorcentaje">
+      </app-contrato-indicador-grafico-porcentual>
+    </div>
+  </div>
+
+  <!--Indicador descargadas-->
+  <div fxLayout="row" fxLayoutAlign="space-between none" fxLayoutGap="10px">
+    <div fxFlex="100%" class="indicador-contenedor">
+      <app-contrato-indicador-grafico-porcentual title="{{descargadasTitulo}}"
+                                                 texto="{{descargadasCantidad}} Tn"
+                                                 subtexto="{{descargadasPorcentaje}}% entregas pendientes"
+                                                 [porcentual]="descargadasPorcentaje">
+      </app-contrato-indicador-grafico-porcentual>
+    </div>
+  </div>
+
+  <!--Indicador aplicadas-->
+  <div fxLayout="row" fxLayoutAlign="space-between none" fxLayoutGap="10px">
+    <div fxFlex="100%" class="indicador-contenedor">
+      <app-contrato-indicador-grafico-porcentual title="{{aplicadasTitulo}}"
+                                                 texto="{{aplicadasCantidad}} Tn"
+                                                 subtexto="{{aplicadasPorcentaje}}% entregas pendientes"
+                                                 [porcentual]="aplicadasPorcentaje">
+      </app-contrato-indicador-grafico-porcentual>
+    </div>
+  </div>
+</div>
+
 <!--Modo movil-->
 <mat-sidenav-container class="contenedor-filtro" *ngIf="esCelular != null && esCelular == true">
-	<mat-sidenav #menuFiltro position="end" class="sidenav-filtro">
-		<app-cereales-filtro [filtrosEspecieCosecha]="filtrosEspecieCosecha" [cuenta]="cuenta"
-			(botonCerrar)="menuFiltro.toggle()" (botonAplicar)="cargarListado($event)"></app-cereales-filtro>
-	</mat-sidenav>
-	<section>
-		<app-tool-bar-general [titulo]="'Entregas'" [disabled]="false"
-			(botonPersonalizadoEjecutado)="mostrarOcultarFiltros()"
-			[urlImagenAccionPersonalizada]="'assets/toolbar/embudo.png'"></app-tool-bar-general>
+  <mat-sidenav #menuFiltro position="end" class="sidenav-filtro">
+    <app-cereales-filtro [filtrosEspecieCosecha]="filtrosEspecieCosecha" [cuenta]="cuenta"
+                         (botonCerrar)="menuFiltro.toggle()" (botonAplicar)="cargarListado($event)"></app-cereales-filtro>
+  </mat-sidenav>
+  <section>
+    <app-tool-bar-general [titulo]="'Entregas'" [disabled]="false"
+                          (botonPersonalizadoEjecutado)="mostrarOcultarFiltros()"
+                          [urlImagenAccionPersonalizada]="'assets/toolbar/embudo.png'"></app-tool-bar-general>
 
-		<app-entregas-lista-movil *ngIf="esCelular===true" [observerFiltro$]="observerFiltro$"
-			(seleccionMovimiento)="verDetalle($event)" (cargandoChange)="mostrarIndicadorLoading($event)">
-		</app-entregas-lista-movil>
+    <app-entregas-lista-movil *ngIf="esCelular===true" [observerFiltro$]="observerFiltro$"
+                              (seleccionMovimiento)="verDetalle($event)" (cargandoChange)="mostrarIndicadorLoading($event)">
+    </app-entregas-lista-movil>
 
-	</section>
+  </section>
 </mat-sidenav-container>
 
 <!--Modo desktop-->
 <span [ngClass]="{'hide': modoDetalleDesktop}">
-	<div fxLayout="row" fxLayoutAlign="space-between center" class="contenedor-titulo-filtro" fxLayoutGap="20px"
-		*ngIf="esCelular != null && esCelular == false">
+  <div fxLayout="row" fxLayoutAlign="space-between center" class="contenedor-titulo-filtro" fxLayoutGap="20px"
+       *ngIf="esCelular != null && esCelular == false" style="padding-top: 0">
 
-		<div fxFlex="93px" class="titulo-seccion">
-			Entregas
-		</div>
+    <div fxFlex="150px">
+      Listado de entregas
+    </div>
 
-		<div fxFlex>
-			<app-cereales-filtro-desktop [filtrosEspecieCosecha]="filtrosEspecieCosecha" [cuenta]="cuenta"
-				(botonAplicar)="cargarListado($event)" [disabled]="cargando || cargandoFiltros">
-			</app-cereales-filtro-desktop>
-		</div>
+    <div fxFlex>
+      <app-cereales-filtro-desktop [filtrosEspecieCosecha]="filtrosEspecieCosecha" [cuenta]="cuenta"
+                                   (botonAplicar)="cargarListado($event)" [disabled]="cargando || cargandoFiltros">
+      </app-cereales-filtro-desktop>
+    </div>
 
-	</div>
+  </div>
 
-	<app-entregas-lista-desktop *ngIf="esCelular != null && esCelular == false" [observerFiltro$]="observerFiltro$"
-		(seleccionMovimiento)="verDetalleDesktop($event)" (cargandoChange)="mostrarIndicadorLoading($event)">
-	</app-entregas-lista-desktop>
+  <app-entregas-lista-desktop *ngIf="esCelular != null && esCelular == false" [observerFiltro$]="observerFiltro$"
+                              (seleccionMovimiento)="verDetalleDesktop($event)" (cargandoChange)="mostrarIndicadorLoading($event)">
+  </app-entregas-lista-desktop>
 </span>
 
 <span [ngClass]="{'hide': !modoDetalleDesktop}">
-	<app-entregas-detalle-desktop (salir)="salirModoDetalleDesktop()"
-		[modoDetalleDesktopMovimiento$]="modoDetalleDesktopMovimiento$">
-	</app-entregas-detalle-desktop>
+  <app-entregas-detalle-desktop (salir)="salirModoDetalleDesktop()"
+                                [modoDetalleDesktopMovimiento$]="modoDetalleDesktopMovimiento$">
+  </app-entregas-detalle-desktop>
 </span>
