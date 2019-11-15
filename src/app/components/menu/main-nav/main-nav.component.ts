@@ -131,7 +131,7 @@ export class MainNavComponent implements OnInit, OnDestroy {
 				nombre: "Cuenta",
 				rutaLink: "/ctacte",
 				imagen: "assets/sidebar/cta-cte.png",
-				imagenActiva: "assets/sidebar/casa-hot.png",
+				imagenActiva: "assets/sidebar/cta-cte-hot.png",
 				permitido: true,
 				ocultarDesktop: false
 			},
@@ -151,14 +151,6 @@ export class MainNavComponent implements OnInit, OnDestroy {
 				permitido: true,
 				ocultarDesktop: false
 			},*/
-			{
-				nombre: "Administrador de cuentas",
-				rutaLink: "/administrador-de-cuentas",
-				imagen: "assets/sidebar/perfil.png",
-				imagenActiva: "assets/sidebar/perfil-hot.png",
-				permitido: this.authService.esAdmin || this.authService.esRol('SUB_ADMINISTRADOR') || this.authService.esRol('COMERCIAL'),
-				ocultarDesktop: false
-			},
 			/*{
 				nombre: "Accesos a terceros",
 				rutaLink: "/acceso-terceros",
@@ -181,6 +173,14 @@ export class MainNavComponent implements OnInit, OnDestroy {
 				imagen: "assets/sidebar/chart.png",
 				imagenActiva: "assets/sidebar/chart-hot.png",
 				permitido: true,
+				ocultarDesktop: false
+			},
+			{
+				nombre: "Administrador de cuentas",
+				rutaLink: "/administrador-de-cuentas",
+				imagen: "assets/sidebar/admin.png",
+				imagenActiva: "assets/sidebar/admin-hot.png",
+				permitido: this.authService.esAdmin || this.authService.esRol('SUB_ADMINISTRADOR') || this.authService.esRol('COMERCIAL'),
 				ocultarDesktop: false
 			},
 			{
