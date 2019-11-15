@@ -1,68 +1,3 @@
-<div fxLayout="row" fxLayoutAlign="space-between center titulo-seccion" class="contenedor-titulo-filtro" fxLayoutGap="20px" style="font-size: 130%;">
-  Ventas
-</div>
-
-<!--Primera fila de indicadores-->
-<div fxLayout="row" fxLayoutAlign="space-between center" class="contenedor-titulo-filtro" fxLayoutGap="20px" style="padding-top: 0">
-  <!--Indicador pactadas-->
-  <div fxLayout="row" fxLayoutAlign="space-between none" fxLayoutGap="10px">
-    <div class="indicador-contenedor">
-      <app-contrato-indicador-grafico-porcentual title="Pactadas"
-                                                 texto="{{pactadasCantidad}} Tn"
-                                                 subtexto="{{pactadasPorcentaje}}% entregas pendientes"
-                                                 [porcentual]="pactadasPorcentaje">
-      </app-contrato-indicador-grafico-porcentual>
-    </div>
-  </div>
-
-  <!--Indicador fijadas-->
-  <div fxLayout="row" fxLayoutAlign="space-between none" fxLayoutGap="10px">
-    <div class="indicador-contenedor">
-      <app-contrato-indicador-grafico-porcentual title="Fijadas"
-                                                 texto="{{fijadasCantidad}} Tn"
-                                                 subtexto="{{fijadasPorcentaje}}% entregas pendientes"
-                                                 [porcentual]="fijadasPorcentaje">
-      </app-contrato-indicador-grafico-porcentual>
-    </div>
-  </div>
-
-  <!--Indicador pesificadas-->
-  <div fxLayout="row" fxLayoutAlign="space-between none" fxLayoutGap="10px">
-    <div class="indicador-contenedor">
-      <app-contrato-indicador-grafico-porcentual title="Pesificadas"
-                                                 texto="{{pesificadasCantidad}} Tn"
-                                                 subtexto="{{pesificadasPorcentaje}}% entregas pendientes"
-                                                 [porcentual]="pesificadasPorcentaje">
-      </app-contrato-indicador-grafico-porcentual>
-    </div>
-  </div>
-</div>
-
-<!--Segunda fila de indicadores-->
-<div fxLayout="row" fxLayoutAlign="space-between center" class="contenedor-titulo-filtro" fxLayoutGap="20px" style="padding-top: 0">
-  <!--Indicador liquidadas-->
-  <div fxLayout="row" fxLayoutAlign="space-between none" fxLayoutGap="10px">
-    <div class="indicador-contenedor">
-      <app-contrato-indicador-grafico-porcentual title="Liquidadas"
-                                                 texto="{{liquidadasCantidad}} Tn"
-                                                 subtexto="{{liquidadasPorcentaje}}% entregas pendientes"
-                                                 [porcentual]="liquidadasPorcentaje">
-      </app-contrato-indicador-grafico-porcentual>
-    </div>
-  </div>
-
-  <!--Indicador pagadas-->
-  <div fxLayout="row" fxLayoutAlign="space-between none" fxLayoutGap="10px">
-    <div class="indicador-contenedor">
-      <app-contrato-indicador-grafico-porcentual title="Pagadas"
-                                                 texto="{{pagadasCantidad}} Tn"
-                                                 subtexto="{{pagadasPorcentaje}}% entregas pendientes"
-                                                 [porcentual]="pagadasPorcentaje">
-      </app-contrato-indicador-grafico-porcentual>
-    </div>
-  </div>
-</div>
-
 <!--Modo movil-->
 <mat-sidenav-container class="contenedor-filtro" *ngIf="esCelular != null && esCelular == true">
   <mat-sidenav #menuFiltro position="end" class="sidenav-filtro">
@@ -83,6 +18,68 @@
 
 <!--Modo desktop-->
 <span [ngClass]="{'hide': modoDetalleDesktop}">
+  <div fxLayout="row" fxLayoutAlign="space-between center titulo-seccion" class="contenedor-titulo-filtro" fxLayoutGap="20px" style="font-size: 130%;">
+    Ventas
+  </div>
+
+  <!--Indicadores-->
+  <div fxLayout="row" fxLayoutAlign="space-between" fxLayoutGap="20px" style="padding-left: 13px; padding-bottom: 28px;">
+    <!--Indicador pactadas-->
+    <div fxLayout="row" fxLayoutAlign="space-between none" fxLayoutGap="10px">
+      <div class="indicador-contenedor">
+        <app-contrato-indicador-grafico-porcentual title="Pactadas"
+                                                   texto="{{pactadasCantidad}} Tn"
+                                                   subtexto="{{pactadasPorcentaje}}% entregas pendientes"
+                                                   [porcentual]="pactadasPorcentaje">
+        </app-contrato-indicador-grafico-porcentual>
+      </div>
+    </div>
+
+    <!--Indicador fijadas-->
+    <div fxLayout="row" fxLayoutAlign="space-between none" fxLayoutGap="10px">
+      <div class="indicador-contenedor">
+        <app-contrato-indicador-grafico-porcentual title="Fijadas"
+                                                   texto="{{fijadasCantidad}} Tn"
+                                                   subtexto="{{fijadasPorcentaje}}% entregas pendientes"
+                                                   [porcentual]="fijadasPorcentaje">
+        </app-contrato-indicador-grafico-porcentual>
+      </div>
+    </div>
+
+    <!--Indicador pesificadas-->
+    <div fxLayout="row" fxLayoutAlign="space-between none" fxLayoutGap="10px">
+      <div class="indicador-contenedor">
+        <app-contrato-indicador-grafico-porcentual title="Pesificadas"
+                                                   texto="{{pesificadasCantidad}} Tn"
+                                                   subtexto="{{pesificadasPorcentaje}}% entregas pendientes"
+                                                   [porcentual]="pesificadasPorcentaje">
+        </app-contrato-indicador-grafico-porcentual>
+      </div>
+    </div>
+
+    <!--Indicador liquidadas-->
+    <div fxLayout="row" fxLayoutAlign="space-between none" fxLayoutGap="10px">
+      <div class="indicador-contenedor">
+        <app-contrato-indicador-grafico-porcentual title="Liquidadas"
+                                                   texto="{{liquidadasCantidad}} Tn"
+                                                   subtexto="{{liquidadasPorcentaje}}% entregas pendientes"
+                                                   [porcentual]="liquidadasPorcentaje">
+        </app-contrato-indicador-grafico-porcentual>
+      </div>
+    </div>
+
+    <!--Indicador pagadas-->
+    <div fxLayout="row" fxLayoutAlign="space-between none" fxLayoutGap="10px">
+      <div class="indicador-contenedor">
+        <app-contrato-indicador-grafico-porcentual title="Pagadas"
+                                                   texto="{{pagadasCantidad}} Tn"
+                                                   subtexto="{{pagadasPorcentaje}}% entregas pendientes"
+                                                   [porcentual]="pagadasPorcentaje">
+        </app-contrato-indicador-grafico-porcentual>
+      </div>
+    </div>
+  </div>
+
   <div fxLayout="row" fxLayoutAlign="space-between center" class="contenedor-titulo-filtro" fxLayoutGap="20px"
        *ngIf="esCelular != null && esCelular == false" style="padding-top: 0">
 
