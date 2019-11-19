@@ -6,6 +6,9 @@ import { ComprobantesDownloaderService } from '../../../../services/sharedServic
 import { takeUntil } from 'rxjs/operators';
 import { MatSnackBar } from '@angular/material';
 import { CtaCteExportacionesService } from '../../../../services/ctacte/cta-cte-exportaciones.service';
+import { FiltroEspecieCosecha } from '../../../../interfaces/varios/filtro-especie-cosecha';
+import { EntidadAlg } from '../../../../interfaces/perfiles/entidad-alg';
+import { MovimientoEntrega } from '../../../../interfaces/entregas/listado-entregas';
 
 @Component({
   selector: 'app-cuenta-corriente-detalle-desktop',
@@ -26,6 +29,10 @@ export class CuentaCorrienteDetalleDesktopComponent implements OnInit, OnDestroy
   movimiento: MovimientoCtaCte;
   ivaDiff: number;
   destroy$: Subject<any> = new Subject<any>();
+
+  filtrosEspecieCosecha: Subject<FiltroEspecieCosecha> = new Subject<FiltroEspecieCosecha>();
+  cuenta: Subject<EntidadAlg> = new Subject<EntidadAlg>();
+  listadoEntregas: Array<Subject<MovimientoEntrega>> = [new Subject<MovimientoEntrega>(), new Subject<MovimientoEntrega>(), new Subject<MovimientoEntrega>()];
 
   constructor(
     private comprobanteDownloaderService: ComprobantesDownloaderService,

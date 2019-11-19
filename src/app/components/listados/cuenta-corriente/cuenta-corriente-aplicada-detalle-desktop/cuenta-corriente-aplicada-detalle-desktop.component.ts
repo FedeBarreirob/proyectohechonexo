@@ -5,6 +5,9 @@ import { ComprobantesDownloaderService } from '../../../../services/sharedServic
 import { MatSnackBar } from '@angular/material';
 import { saveAs } from 'file-saver/FileSaver';
 import { takeUntil } from 'rxjs/operators';
+import { FiltroEspecieCosecha } from '../../../../interfaces/varios/filtro-especie-cosecha';
+import { EntidadAlg } from '../../../../interfaces/perfiles/entidad-alg';
+import { MovimientoEntrega } from '../../../../interfaces/entregas/listado-entregas';
 
 @Component({
   selector: 'app-cuenta-corriente-aplicada-detalle-desktop',
@@ -25,6 +28,10 @@ export class CuentaCorrienteAplicadaDetalleDesktopComponent implements OnInit, O
   movimiento: MovimientoCtaCteAplicada;
   ivaDiff: number;
   destroy$: Subject<any> = new Subject<any>();
+
+  filtrosEspecieCosecha: Subject<FiltroEspecieCosecha> = new Subject<FiltroEspecieCosecha>();
+  cuenta: Subject<EntidadAlg> = new Subject<EntidadAlg>();
+  listadoEntregas: Array<Subject<MovimientoEntrega>> = [ new Subject<MovimientoEntrega>(), new Subject<MovimientoEntrega>(), new Subject<MovimientoEntrega>() ];
 
   constructor(
     private comprobanteDownloaderService: ComprobantesDownloaderService,

@@ -35,7 +35,7 @@
               <!--Pesos-->
               <span *ngIf="movimiento.moneda == 'P'">
                 <span
-                  [ngClass]="{'signo-positivo': movimiento.importeComprobantePesos > 0, 'signo-negativo': movimiento.importeComprobantePesos < 0 }">
+                      [ngClass]="{'signo-positivo': movimiento.importeComprobantePesos > 0, 'signo-negativo': movimiento.importeComprobantePesos < 0 }">
                   {{ (movimiento.importeComprobantePesos < 0) ? '-' : (movimiento.importeComprobantePesos > 0) ? '+' : ''}}
                 </span>
                 <span class="moneda">{{ movimiento.moneda | moneda }}</span>
@@ -45,7 +45,7 @@
               <!--Dolares-->
               <span *ngIf="movimiento.moneda != 'P'">
                 <span
-                  [ngClass]="{'signo-positivo': movimiento.importeComprobanteDolares > 0, 'signo-negativo': movimiento.importeComprobanteDolares < 0 }">
+                      [ngClass]="{'signo-positivo': movimiento.importeComprobanteDolares > 0, 'signo-negativo': movimiento.importeComprobanteDolares < 0 }">
                   {{ (movimiento.importeComprobanteDolares < 0) ? '-' : (movimiento.importeComprobanteDolares > 0) ? '+' : ''}}
                 </span>
                 <span class="moneda">{{ movimiento.moneda | moneda }}</span>
@@ -110,7 +110,7 @@
 
         <div fxFlex>
           <button mat-button class="boton-descarga-comprobante" (click)="descargarComprobante()"
-            [disabled]="cargando==true">
+                  [disabled]="cargando==true">
             <img src="assets/varios/pdf.png" />
             Descargar comprobante
           </button>
@@ -136,5 +136,35 @@
 
     </div>
 
+  </div>
+
+  <div fxLayout="row" fxLayoutAlign="space-between start" fxLayoutGap="13px" class="movimiento-info-container">
+    <div fxFlex="100%" class="info-container">
+      <mat-tab-group mat-align-tabs="left">
+        <mat-tab label="IMPUTACIONES">
+          <div fxLayout="row" fxLayoutAlign="space-between center" class="contenedor-titulo-filtro" fxLayoutGap="20px" style="margin-top: 2%; margin-bottom: 1%">
+            <div fxFlex="200px" class="titulo-seccion" style="font-weight: bold;">
+              Listado de imputaciones
+            </div>
+
+            <div fxFlex>
+              <app-cereales-filtro-desktop [filtrosEspecieCosecha]="filtrosEspecieCosecha" [cuenta]="cuenta">
+              </app-cereales-filtro-desktop>
+            </div>
+          </div>
+
+          <div class="contenedor-header">
+            <app-entregas-header-item-desktop [unidadMedida]="unidadMedida"></app-entregas-header-item-desktop>
+          </div>
+
+          <div class="contenedor-listado" fxLayout="column" fxLayoutWrap fxLayoutAlign="none" infiniteScroll
+               [infiniteScrollDistance]="2" [infiniteScrollThrottle]="50" [scrollWindow]="false">
+
+            <app-entregas-item-desktop *ngFor="let movimiento of listadoEntregas" [movimiento]="movimiento" [unidadMedida]="unidadMedida">
+            </app-entregas-item-desktop>
+          </div>
+        </mat-tab>
+      </mat-tab-group>
+    </div>
   </div>
 </div>
