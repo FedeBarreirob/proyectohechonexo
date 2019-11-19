@@ -33,6 +33,18 @@ export class EntregasComponent implements OnInit, OnDestroy, AfterViewInit {
   esCelular: boolean;
   destroy$: Subject<any> = new Subject<any>();
 
+  pactadasTitulo: string = "Pactadas";
+  pactadasCantidad: number = 124;
+  pactadasPorcentaje: number = 78;
+
+  descargadasTitulo: string = "Descargadas";
+  descargadasCantidad: number = 300;
+  descargadasPorcentaje: number = 100;
+
+  aplicadasTitulo: string = "Aplicadas";
+  aplicadasCantidad: number = 273;
+  aplicadasPorcentaje: number = 29;
+
   modoDetalleDesktop: boolean = false;
   modoDetalleDesktopMovimiento$: Subject<MovimientoEntrega> = new Subject<MovimientoEntrega>();
 

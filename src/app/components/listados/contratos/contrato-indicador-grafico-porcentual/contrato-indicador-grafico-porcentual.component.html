@@ -1,24 +1,31 @@
 <div fxLayout="row" fxLayoutAlign="center center" class="indicador-container" fxLayoutGap="8px">
-
-  <div fxFlex="nogrow">
-    <ngx-gauge [value]="porcentual" [type]="'full'" [cap]="'round'" [thick]="5" [foregroundColor]="'#fec300'"
-      [size]="42">
-      <ngx-gauge-value></ngx-gauge-value>
-    </ngx-gauge>
-  </div>
-
   <div fxFlex>
 
     <div fxLayout="column" fxLayoutAlign="space-between start">
-      <div fxFlex="100%" class="texto">
-        {{texto}}
+      <div fxFlex="100%" class="texto" *ngIf="title" style="font-size: 100%;">
+        {{title}}
       </div>
 
       <div fxFlex="100%" class="subtexto">
-        {{subtexto}}
+        <div fxFlex="nogrow">
+          <ngx-gauge [value]="porcentual" [type]="'full'" [cap]="'round'" [thick]="5" [foregroundColor]="'#fec300'"
+                     [size]="42">
+            <ngx-gauge-value></ngx-gauge-value>
+          </ngx-gauge>
+        </div>
+
+        <div fxFlex>
+          <div fxLayout="column" fxLayoutAlign="space-between start">
+            <div fxFlex="100%" class="texto">
+              {{texto}}
+            </div>
+
+            <div fxFlex="100%" class="subtexto">
+              {{subtexto}}
+            </div>
+          </div>
+        </div>
       </div>
     </div>
-
   </div>
-
 </div>

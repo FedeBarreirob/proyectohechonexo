@@ -8,6 +8,9 @@ import { Component, OnInit, Input } from '@angular/core';
 export class ContratoIndicadorGraficoPorcentualComponent implements OnInit {
 
   @Input()
+  title: string;
+
+  @Input()
   texto: string;
   
   @Input()
