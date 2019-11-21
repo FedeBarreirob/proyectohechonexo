@@ -1,0 +1,33 @@
+<div fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="20px" *ngIf="indicadorGlobal && !cargando">
+
+  <!--Indicador pactadas-->
+  <div fxFlex="250px">
+    <app-contrato-indicador-grafico-porcentual [mostrarPorcentual]="false" [title]="pactadasTitulo" texto="{{indicadorGlobal.kgPactados | kilosA: unidadMedida | number: '.0-0'}}
+      {{unidadMedida | kilosTextoA}}">
+    </app-contrato-indicador-grafico-porcentual>
+  </div>
+
+  <!--Indicador descargadas-->
+  <div fxFlex="250px">
+    <app-contrato-indicador-grafico-porcentual [title]="descargadasTitulo" texto="{{indicadorGlobal.kgEntregados | kilosA: unidadMedida | number: '.0-0'}}
+    {{unidadMedida | kilosTextoA}}"
+      subtexto="{{(indicadorGlobal.porcentajeKilosPendientesDeEntregar) | number: '.2'}}% entregas pendientes"
+      [porcentual]="indicadorGlobal.porcentajeKilosPendientesDeEntregar">
+    </app-contrato-indicador-grafico-porcentual>
+  </div>
+
+  <!--Indicador aplicadas-->
+  <div fxFlex="250px">
+    <app-contrato-indicador-grafico-porcentual [title]="aplicadasTitulo" texto="{{indicadorGlobal.kgAplicados | kilosA: unidadMedida | number: '.0-0'}}
+    {{unidadMedida | kilosTextoA}}"
+      subtexto="{{(indicadorGlobal.porcentajeKilosPendientesDeAplicar) | number: '.2'}}% entregas pendientes"
+      [porcentual]="indicadorGlobal.porcentajeKilosPendientesDeAplicar">
+    </app-contrato-indicador-grafico-porcentual>
+  </div>
+
+</div>
+
+<!--Spinner-->
+<div fxLayout="row" fxLayoutAlign="center center" *ngIf="cargando" style="margin-top: 10px">
+  <mat-spinner diameter="24"></mat-spinner>
+</div>

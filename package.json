@@ -12,7 +12,8 @@
     "phonegap-build-debug": "ng build --base-href . --output-path phonegap/www",
     "phonegap-run": "npm run phonegap-build-debug && cd phonegap && phonegap run android --device",
     "phonegap-run-web": "npm run phonegap-build-debug && cd phonegap && phonegap run browser",
-    "build-web-prod": "ng build --prod --base-href /DigitalUIClientes/"
+    "build-web-prod": "ng build --prod --base-href /DigitalUIClientes/",
+    "build-web-test": "ng build --prod --base-href /test/DigitalUIClientes/"
   },
   "private": true,
   "dependencies": {

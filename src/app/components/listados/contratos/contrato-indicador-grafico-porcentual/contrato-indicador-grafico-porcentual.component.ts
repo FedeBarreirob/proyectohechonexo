@@ -19,10 +19,12 @@ export class ContratoIndicadorGraficoPorcentualComponent implements OnInit {
   @Input()
   porcentual: number;
 
+  @Input()
+  mostrarPorcentual: boolean = true;
+
   constructor() { }
 
   ngOnInit() {
-    console.log(this.porcentual);
   }
 
 }

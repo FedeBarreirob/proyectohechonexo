@@ -20,38 +20,12 @@
 <span [ngClass]="{'hide': modoDetalleDesktop}">
   <div fxLayout="row" fxLayoutAlign="space-between" class="contenedor-titulo-filtro" fxLayoutGap="20px"
     style="font-size: 130%;" *ngIf="esCelular != null && esCelular == false">
-
     Entregas
   </div>
 
-  <div fxLayout="row" style="padding-left: 13px; padding-bottom: 28px;" fxLayoutGap="20px"
-    *ngIf="esCelular != null && esCelular == false">
-
-    <!--Indicador pactadas-->
-    <div fxLayout="row" fxLayoutAlign="space-between none" fxLayoutGap="10px">
-      <div fxFlex="100%" class="indicador-contenedor">
-        <app-contrato-indicador-grafico-porcentual title="{{pactadasTitulo}}" texto="{{pactadasCantidad}} Tn"
-          subtexto="{{pactadasPorcentaje}}% entregas pendientes" [porcentual]="pactadasPorcentaje">
-        </app-contrato-indicador-grafico-porcentual>
-      </div>
-    </div>
-
-    <!--Indicador descargadas-->
-    <div fxLayout="row" fxLayoutAlign="space-between none" fxLayoutGap="10px">
-      <div fxFlex="100%" class="indicador-contenedor">
-        <app-contrato-indicador-grafico-porcentual title="{{descargadasTitulo}}" texto="{{descargadasCantidad}} Tn"
-          subtexto="{{descargadasPorcentaje}}% entregas pendientes" [porcentual]="descargadasPorcentaje">
-        </app-contrato-indicador-grafico-porcentual>
-      </div>
-    </div>
-
-    <!--Indicador aplicadas-->
-    <div fxLayout="row" fxLayoutAlign="space-between none" fxLayoutGap="10px">
-      <div fxFlex="100%" class="indicador-contenedor">
-        <app-contrato-indicador-grafico-porcentual title="{{aplicadasTitulo}}" texto="{{aplicadasCantidad}} Tn"
-          subtexto="{{aplicadasPorcentaje}}% entregas pendientes" [porcentual]="aplicadasPorcentaje">
-        </app-contrato-indicador-grafico-porcentual>
-      </div>
+  <div fxLayout="row" *ngIf="esCelular != null && esCelular == false" class="indicador-global-contenedor">
+    <div fxFlex="100%">
+      <app-entregas-indicador-global [observerFiltro$]="observerFiltro$"></app-entregas-indicador-global>
     </div>
   </div>
 

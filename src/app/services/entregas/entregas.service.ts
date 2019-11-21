@@ -5,6 +5,7 @@ import { environment } from '../../../environments/environment';
 import { Observable } from 'rxjs';
 import { FiltroEspecieCosecha } from '../../interfaces/varios/filtro-especie-cosecha';
 import { Cacheable } from 'ngx-cacheable';
+import { ResponseServicio } from '../../interfaces/varios/response-servicio';
 
 @Injectable({
   providedIn: 'root'
@@ -13,11 +14,9 @@ export class EntregasService {
 
   private urlEntregasListado = `${environment.hostEntregasYVentas}/Entregas/listado`;
   private urlEntregasFiltrosEspecieCosecha = `${environment.hostEntregasYVentas}/Entregas/filtrosEspecieCosechas`;
+  private urlEntregasIndicadorGlobal = `${environment.hostEntregasYVentas}/Entregas/indicadorGlobal`;
 
-  constructor(
-    private http: HttpClient
-  ) {
-  }
+  constructor(private http: HttpClient) { }
 
   // funcion que retorna un observable del listado con las entregas asociado a una cuenta dada
   @Cacheable()
@@ -46,5 +45,23 @@ export class EntregasService {
 
     let urlConParametro = `${this.urlEntregasFiltrosEspecieCosecha}/${cuenta}`;
     return this.http.get<FiltroEspecieCosecha>(urlConParametro, httpOptions);
+  }
+
+  /**
+   * Devuelve los indicadores de entregas totales: pactado, entregado, aplicado
+   * @param filtro 
+   */
+  @Cacheable()
+  indicadorGlobal(filtro: FiltroEntregas): Observable<ResponseServicio> {
+
+    const httpOptions = {
+      headers: new HttpHeaders({
+        'Content-Type': 'application/json'
+      })
+    };
+
+    return this.http.post<ResponseServicio>(this.urlEntregasIndicadorGlobal,
+      JSON.stringify(filtro),
+      httpOptions);
   }
 }

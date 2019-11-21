@@ -6,10 +6,10 @@
         {{title}}
       </div>
 
-      <div fxFlex="100%" class="subtexto">
+      <div fxFlex="100%" class="subtexto" *ngIf="mostrarPorcentual">
         <div fxFlex="nogrow">
           <ngx-gauge [value]="porcentual" [type]="'full'" [cap]="'round'" [thick]="5" [foregroundColor]="'#fec300'"
-                     [size]="42">
+            [size]="42">
             <ngx-gauge-value></ngx-gauge-value>
           </ngx-gauge>
         </div>
@@ -26,6 +26,11 @@
           </div>
         </div>
       </div>
+
+      <div fxFlex="100%" class="texto" *ngIf="!mostrarPorcentual">
+        {{texto}}
+      </div>
+
     </div>
   </div>
 </div>
