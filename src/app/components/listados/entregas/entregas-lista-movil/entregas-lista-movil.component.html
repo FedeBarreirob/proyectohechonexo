@@ -26,7 +26,7 @@
   <div fxFlex align="end">{{unidadMedida | kilosTextoA}} {{unidadMedida | netasA }}</div>
 </div>
 
-<div fxLayout="column" *ngIf="listadoEntregas && listadoEntregas.length > 0" fxLayoutWrap fxLayoutAlign="none" infiniteScroll [infiniteScrollDistance]="2"
+<div fxLayout="column" fxLayoutWrap fxLayoutAlign="none" infiniteScroll [infiniteScrollDistance]="2"
   [infiniteScrollThrottle]="50" (scrolled)="onScroll()" [scrollWindow]="false"
   [ngClass]="{'contenedor-listado' : cargarOnScroll == true, 'contenedor-listado-sin-alto' : cargarOnScroll == false}">
 
@@ -57,15 +57,14 @@
     <mat-spinner diameter="24"></mat-spinner>
   </div>
 
-</div>
+  <!--Si no hay datos a mostrar-->
+  <div fxLayout="column" fxLayoutAlign="center center" *ngIf="!cargando && listadoEntregas && listadoEntregas.length == 0" class="info-sin-data-container">
+      <div fxFlex="nogrow">
+          <img src="assets/varios/sin-data.png" class="info-sin-data-img"/>
+      </div>
 
-<!--Si no hay datos a mostrar-->
-<div fxLayout="column" fxLayoutAlign="center center" *ngIf="listadoEntregas && listadoEntregas.length == 0" class="info-sin-data-container">
-    <div fxFlex="nogrow">
-        <img src="assets/varios/sin-data.png" class="info-sin-data-img"/>
-    </div>
-
-    <div fxFlex="nogrow" class="info-sin-data-text">
-        Cuando tengamos información de tus entregas la podrás ver aquí.
-    </div>
+      <div fxFlex="nogrow" class="info-sin-data-text">
+          Cuando tengamos información de tus entregas la podrás ver aquí.
+      </div>
+  </div>
 </div>

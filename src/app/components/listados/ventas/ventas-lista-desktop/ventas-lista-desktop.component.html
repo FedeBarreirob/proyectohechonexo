@@ -2,7 +2,7 @@
   <app-ventas-header-item-desktop [unidadMedida]="unidadMedida"></app-ventas-header-item-desktop>
 </div>
 
-<div class="contenedor-listado" *ngIf="listadoVentas && listadoVentas.length > 0" fxLayout="column" fxLayoutWrap fxLayoutAlign="none" infiniteScroll
+<div class="contenedor-listado" fxLayout="column" fxLayoutWrap fxLayoutAlign="none" infiniteScroll
   [infiniteScrollDistance]="2" [infiniteScrollThrottle]="50" (scrolled)="onScroll()" [scrollWindow]="false">
 
   <app-ventas-item-desktop *ngFor="let movimiento of listadoVentas" (click)="verDetalle(movimiento)"
@@ -14,15 +14,14 @@
     <mat-spinner diameter="24"></mat-spinner>
   </div>
 
-</div>
+  <!--Si no hay datos a mostrar-->
+  <div fxLayout="column" fxLayoutAlign="center center" *ngIf="!cargando && listadoVentas && listadoVentas.length == 0" class="info-sin-data-container">
+      <div fxFlex="nogrow">
+          <img src="assets/varios/sin-data.png" class="info-sin-data-img"/>
+      </div>
 
-<!--Si no hay datos a mostrar-->
-<div fxLayout="column" fxLayoutAlign="center center" *ngIf="listadoVentas && listadoVentas.length == 0" class="info-sin-data-container">
-    <div fxFlex="nogrow">
-        <img src="assets/varios/sin-data.png" class="info-sin-data-img"/>
-    </div>
-
-    <div fxFlex="nogrow" class="info-sin-data-text">
-        Cuando tengamos información de tus ventas la podrás ver aquí.
-    </div>
+      <div fxFlex="nogrow" class="info-sin-data-text">
+          Cuando tengamos información de tus ventas la podrás ver aquí.
+      </div>
+  </div>
 </div>
