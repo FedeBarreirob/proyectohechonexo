@@ -34,16 +34,16 @@
 	<div *ngIf="esCelular == false && cuenta" class="container-modo-desktop">
 		<mat-tab-group mat-align-tabs="left" (selectedTabChange)="seleccionTab($event)">
 
-			<mat-tab label="Cuenta corriente">
-				<app-cuenta-corriente-lista-desktop [cuenta]="cuenta"
-					(seleccionMovimiento)="verDetalleCtaCteDesktop($event)">
-				</app-cuenta-corriente-lista-desktop>
-			</mat-tab>
-
 			<mat-tab label="Cuenta corriente aplicada">
 				<app-cuenta-corriente-aplicada-lista-desktop [cuenta]="cuenta"
 					(seleccionMovimiento)="verDetalleCtaCteAplicadaDesktop($event)">
 				</app-cuenta-corriente-aplicada-lista-desktop>
+			</mat-tab>
+
+			<mat-tab label="Cuenta corriente">
+				<app-cuenta-corriente-lista-desktop [cuenta]="cuenta"
+					(seleccionMovimiento)="verDetalleCtaCteDesktop($event)">
+				</app-cuenta-corriente-lista-desktop>
 			</mat-tab>
 
 		</mat-tab-group>
