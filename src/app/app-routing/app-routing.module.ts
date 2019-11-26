@@ -32,6 +32,12 @@ const routes: Routes = [
 		children: [
 			{ path: '', component: LoginComponent }
 		]
+  },
+	{
+		path: 'recuperacion-password', component: LoginLayoutComponent,
+		children: [{
+			path: '', component: RecuperacionPasswordComponent
+		}]
 	},
 	{
 		path: '', component: HomeLayoutComponent,
@@ -147,10 +153,6 @@ const routes: Routes = [
 				data: {
 					rolAdmin: false
 				}
-			},
-			{
-				path: 'recuperacion-password',
-				component: RecuperacionPasswordComponent
 			},
 			{
 				path: 'restablecer-password/:token',
