@@ -48,6 +48,10 @@
       </div>
 
       <div fxFlex="100px">
+        {{movimiento.kilosNetos | kilosA: unidadMedida | number: '.0-0'}}
+      </div>
+
+      <div fxFlex="100px">
         {{movimiento.numeroComprobanteExterno}}
       </div>
 

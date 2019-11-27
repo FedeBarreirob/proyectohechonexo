@@ -20,7 +20,7 @@
   <div fxFlex="250px">
     <app-contrato-indicador-grafico-porcentual [title]="aplicadasTitulo" texto="{{indicadorGlobal.kgAplicados | kilosA: unidadMedida | number: '.0-0'}}
     {{unidadMedida | kilosTextoA}}"
-      subtexto="{{(indicadorGlobal.porcentajeKilosPendientesDeAplicar) | number: '.2'}}% entregas pendientes"
+      subtexto="{{(indicadorGlobal.porcentajeKilosPendientesDeAplicar) | number: '.2'}}% entregas pendientes de aplicar"
       [porcentual]="indicadorGlobal.porcentajeKilosPendientesDeAplicar">
     </app-contrato-indicador-grafico-porcentual>
   </div>
