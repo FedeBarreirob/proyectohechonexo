@@ -63,15 +63,15 @@
         <div fxFlex="50%" class="indicador-contenedor">
           <app-contrato-indicador-grafico-porcentual texto="{{resumenContrato.kilosEntregados | kilosA: unidadMedida | number: '.0-0'}}
           {{unidadMedida | kilosTextoA}} aplicadas"
-                                                     subtexto="{{(100 - resumenContrato.porcentajeKilosEntregados) | number: '.2'}}% entregas pendientes"
-                                                     [porcentual]="100 - resumenContrato.porcentajeKilosEntregados">
+            subtexto="{{(100 - resumenContrato.porcentajeKilosEntregados) | number: '.2'}}% entregas pendientes"
+            [porcentual]="100 - resumenContrato.porcentajeKilosEntregados">
           </app-contrato-indicador-grafico-porcentual>
         </div>
         <div fxFlex="50%" class="indicador-contenedor">
           <app-contrato-indicador-grafico-porcentual texto="{{resumenContrato.kilosFijados | kilosA: unidadMedida | number: '.0-0'}}
             {{unidadMedida | kilosTextoA}} fijadas"
-                                                     subtexto="{{(100 - resumenContrato.porcentajeKilosFijados) | number: '.2'}}% fijaciones pendientes"
-                                                     [porcentual]="100 - resumenContrato.porcentajeKilosFijados">
+            subtexto="{{(100 - resumenContrato.porcentajeKilosFijados) | number: '.2'}}% fijaciones pendientes"
+            [porcentual]="100 - resumenContrato.porcentajeKilosFijados">
           </app-contrato-indicador-grafico-porcentual>
         </div>
       </div>
@@ -81,15 +81,15 @@
         <div fxFlex="50%" class="indicador-contenedor">
           <app-contrato-indicador-grafico-porcentual texto="{{(resumenContrato.kilosPactados-resumenContrato.kilosPendientesPesificar) | kilosA: unidadMedida | number: '.0-0'}}
             {{unidadMedida | kilosTextoA}} pesificadas"
-                                                     subtexto="{{(100 - resumenContrato.porcentajeKilosPesificados) | number: '.2'}}% pesificaciones pendientes"
-                                                     [porcentual]="100 - resumenContrato.porcentajeKilosPesificados">
+            subtexto="{{(100 - resumenContrato.porcentajeKilosPesificados) | number: '.2'}}% pesificaciones pendientes"
+            [porcentual]="100 - resumenContrato.porcentajeKilosPesificados">
           </app-contrato-indicador-grafico-porcentual>
         </div>
         <div fxFlex="50%" class="indicador-contenedor">
           <app-contrato-indicador-grafico-porcentual texto="{{resumenContrato.kilosPagados | kilosA: unidadMedida | number: '.0-0'}}
               {{unidadMedida | kilosTextoA}} pagadas"
-                                                     subtexto="{{(100 - resumenContrato.porcentajeKilosPagados) | number: '.2'}}% pagos pendientes"
-                                                     [porcentual]="100 - resumenContrato.porcentajeKilosPagados">
+            subtexto="{{(100 - resumenContrato.porcentajeKilosPagados) | number: '.2'}}% pagos pendientes"
+            [porcentual]="100 - resumenContrato.porcentajeKilosPagados">
           </app-contrato-indicador-grafico-porcentual>
         </div>
       </div>
@@ -147,7 +147,9 @@
       </div>
 
       <div fxLayout="row" fxLayoutAlign="space-between none" fxLayoutGap="10px">
-        <div fxFlex="50%" class="dato-apartado">-</div>
+        <div fxFlex="50%" class="dato-apartado" *ngIf="boleto && resumenContrato.aFijar == 0">
+          ${{boleto.encabezado.precioQQ | precioQQA: unidadMedida | number: '.0-0'}}</div>
+        <div fxFlex="50%" class="dato-apartado" *ngIf="boleto && resumenContrato.aFijar == 1">-</div>
         <div fxFlex="50%" class="dato-apartado">{{boleto.encabezado.moneda}}</div>
       </div>
 
@@ -228,7 +230,7 @@
     <!--Columna botones exportar-->
     <div fxFlex="250px" class="info-container">
       <button mat-button class="boton-descarga-comprobante" (click)="descargarComprobante()"
-              [disabled]="cargando==true">
+        [disabled]="cargando==true">
         <img src="assets/varios/pdf.png" />
         Descargar comprobante
       </button>
@@ -240,7 +242,8 @@
     <div fxFlex="100%" class="info-container">
       <mat-tab-group mat-align-tabs="left">
         <mat-tab label="Entregas aplicadas">
-          <div fxLayout="row" fxLayoutAlign="space-between center" class="contenedor-titulo-filtro" fxLayoutGap="20px" style="margin-top: 2%; margin-bottom: 1%">
+          <div fxLayout="row" fxLayoutAlign="space-between center" class="contenedor-titulo-filtro" fxLayoutGap="20px"
+            style="margin-top: 2%; margin-bottom: 1%">
             <div fxFlex="200px" class="titulo-seccion" style="font-weight: bold;">
               Listado de entregas
             </div>
@@ -256,15 +259,17 @@
           </div>
 
           <div class="contenedor-listado" fxLayout="column" fxLayoutWrap fxLayoutAlign="none" infiniteScroll
-               [infiniteScrollDistance]="2" [infiniteScrollThrottle]="50" [scrollWindow]="false">
+            [infiniteScrollDistance]="2" [infiniteScrollThrottle]="50" [scrollWindow]="false">
 
-            <app-entregas-item-desktop *ngFor="let movimiento of listadoEntregasFijadas" [movimiento]="movimiento" [unidadMedida]="unidadMedida">
+            <app-entregas-item-desktop *ngFor="let movimiento of listadoEntregasFijadas" [movimiento]="movimiento"
+              [unidadMedida]="unidadMedida">
             </app-entregas-item-desktop>
           </div>
         </mat-tab>
 
         <mat-tab label="Fijaciones">
-          <div fxLayout="row" fxLayoutAlign="space-between center" class="contenedor-titulo-filtro" fxLayoutGap="20px" style="margin-top: 2%; margin-bottom: 1%">
+          <div fxLayout="row" fxLayoutAlign="space-between center" class="contenedor-titulo-filtro" fxLayoutGap="20px"
+            style="margin-top: 2%; margin-bottom: 1%">
             <div fxFlex="200px" class="titulo-seccion" style="font-weight: bold;">
               Listado de fijaciones
             </div>
@@ -280,15 +285,17 @@
           </div>
 
           <div class="contenedor-listado" fxLayout="column" fxLayoutWrap fxLayoutAlign="none" infiniteScroll
-               [infiniteScrollDistance]="2" [infiniteScrollThrottle]="50" [scrollWindow]="false">
+            [infiniteScrollDistance]="2" [infiniteScrollThrottle]="50" [scrollWindow]="false">
 
-            <app-entregas-item-desktop *ngFor="let movimiento of listadoFijaciones" [movimiento]="movimiento" [unidadMedida]="unidadMedida">
+            <app-entregas-item-desktop *ngFor="let movimiento of listadoFijaciones" [movimiento]="movimiento"
+              [unidadMedida]="unidadMedida">
             </app-entregas-item-desktop>
           </div>
         </mat-tab>
 
         <mat-tab label="Facturas">
-          <div fxLayout="row" fxLayoutAlign="space-between center" class="contenedor-titulo-filtro" fxLayoutGap="20px" style="margin-top: 2%; margin-bottom: 1%">
+          <div fxLayout="row" fxLayoutAlign="space-between center" class="contenedor-titulo-filtro" fxLayoutGap="20px"
+            style="margin-top: 2%; margin-bottom: 1%">
             <div fxFlex="200px" class="titulo-seccion" style="font-weight: bold;">
               Listado de facturas
             </div>
@@ -304,9 +311,10 @@
           </div>
 
           <div class="contenedor-listado" fxLayout="column" fxLayoutWrap fxLayoutAlign="none" infiniteScroll
-               [infiniteScrollDistance]="2" [infiniteScrollThrottle]="50" [scrollWindow]="false">
+            [infiniteScrollDistance]="2" [infiniteScrollThrottle]="50" [scrollWindow]="false">
 
-            <app-entregas-item-desktop *ngFor="let movimiento of listadoFacturas" [movimiento]="movimiento" [unidadMedida]="unidadMedida">
+            <app-entregas-item-desktop *ngFor="let movimiento of listadoFacturas" [movimiento]="movimiento"
+              [unidadMedida]="unidadMedida">
             </app-entregas-item-desktop>
           </div>
         </mat-tab>
