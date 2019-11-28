@@ -34,7 +34,8 @@
             <div fxFlex class="encabezado-texto-importe">
               <!--Pesos-->
               <span *ngIf="movimiento.moneda == 'P'">
-                <span [ngClass]="{'signo-positivo': movimiento.importeComprobantePesos > 0, 'signo-negativo': movimiento.importeComprobantePesos < 0 }">
+                <span
+                  [ngClass]="{'signo-positivo': movimiento.importeComprobantePesos > 0, 'signo-negativo': movimiento.importeComprobantePesos < 0 }">
                   {{ (movimiento.importeComprobantePesos < 0) ? '-' : (movimiento.importeComprobantePesos > 0) ? '+' : ''}}
                 </span>
                 <span class="moneda">{{ movimiento.moneda | moneda }}</span>
@@ -43,7 +44,8 @@
 
               <!--Dolares-->
               <span *ngIf="movimiento.moneda != 'P'">
-                <span [ngClass]="{'signo-positivo': movimiento.importeComprobanteDolares > 0, 'signo-negativo': movimiento.importeComprobanteDolares < 0 }">
+                <span
+                  [ngClass]="{'signo-positivo': movimiento.importeComprobanteDolares > 0, 'signo-negativo': movimiento.importeComprobanteDolares < 0 }">
                   {{ (movimiento.importeComprobanteDolares < 0) ? '-' : (movimiento.importeComprobanteDolares > 0) ? '+' : ''}}
                 </span>
                 <span class="moneda">{{ movimiento.moneda | moneda }}</span>
@@ -109,7 +111,7 @@
 
         <div fxFlex>
           <button mat-button class="boton-descarga-comprobante" (click)="descargarComprobante()"
-                  [disabled]="cargando==true">
+            [disabled]="cargando==true">
             <img src="assets/varios/pdf.png" />
             Descargar comprobante
           </button>
@@ -121,6 +123,7 @@
 
   </div>
 
+  <!--
   <div fxLayout="row" fxLayoutAlign="space-between start" fxLayoutGap="13px" class="movimiento-info-container">
     <div fxFlex="100%" class="info-container">
       <mat-tab-group mat-align-tabs="left">
@@ -150,4 +153,6 @@
       </mat-tab-group>
     </div>
   </div>
+  -->
+
 </div>
