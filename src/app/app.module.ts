@@ -174,6 +174,7 @@ import { ContratoIndicadorSwiperVentasPagosComponent } from './components/tabler
 import { ContratoIndicadorVentaPagosComponent } from './components/tablero/indicadoresContrato/contrato-indicador-venta-pagos/contrato-indicador-venta-pagos.component';
 import { ToolBarDescargasComponent } from './components/common/tool-bar-descargas/tool-bar-descargas.component';
 import { EntregasIndicadorGlobalComponent } from './components/listados/entregas/entregas-indicador-global/entregas-indicador-global.component';
+import { VentasIndicadorGlobalComponent } from './components/listados/ventas/ventas-indicador-global/ventas-indicador-global.component';
 
 registerLocaleData(localeEsAr, 'es-AR');
 
@@ -319,7 +320,8 @@ export function tokenGetter() {
 		ContratoIndicadorSwiperVentasPagosComponent,
 		ContratoIndicadorVentaPagosComponent,
 		ToolBarDescargasComponent,
-		EntregasIndicadorGlobalComponent
+		EntregasIndicadorGlobalComponent,
+		VentasIndicadorGlobalComponent
 	],
 	imports: [
 		HttpClientModule,

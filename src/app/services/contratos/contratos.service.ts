@@ -7,6 +7,7 @@ import { FiltroEspecieCosecha } from '../../interfaces/varios/filtro-especie-cos
 import { ResponseServicio } from '../../interfaces/varios/response-servicio';
 import { Cacheable } from 'ngx-cacheable';
 import { ResponseListadoPaginado } from '../../interfaces/varios/response-listado-paginado';
+import { FiltroVentas } from '../../interfaces/ventas/filtro-ventas';
 
 @Injectable({
   providedIn: 'root'
@@ -19,6 +20,7 @@ export class ContratosService {
   private urlContratosContratoResumenPorTk = `${environment.hostEntregasYVentas}/contratos/contratoResumidoDeTicketAplicado`;
   private urlContratosContratoResumenPorID = `${environment.hostEntregasYVentas}/contratos/contratoResumidoPorId`;
   private urlContratosIndicadoresPorEspecie = `${environment.hostEntregasYVentas}/contratos/indicadoresPorEspecie`;
+  private urlContratosIndicadoresGlobalVentas = `${environment.hostEntregasYVentas}/contratos/indicadoresGlobalVentas`;
 
   constructor(
     private http: HttpClient
@@ -127,5 +129,23 @@ export class ContratosService {
 
     let urlConParametro = `${this.urlContratosIndicadoresPorEspecie}/${cuenta}/${paramCosecha}`;
     return this.http.get<ResponseServicio>(urlConParametro, httpOptions);
+  }
+
+  /**
+   * Devuelve los indicadores de ventas: pactadas, fijadass, pesificadas, liquidadas y pagadas
+   * @param filtro 
+   */
+  @Cacheable()
+  indicadoresGlobalVentas(filtro: FiltroVentas): Observable<ResponseServicio> {
+
+    const httpOptions = {
+      headers: new HttpHeaders({
+        'Content-Type': 'application/json'
+      })
+    };
+
+    let dataJson = JSON.stringify(filtro);
+
+    return this.http.post<ResponseServicio>(this.urlContratosIndicadoresGlobalVentas, dataJson, httpOptions);
   }
 }

@@ -35,21 +35,6 @@ export class VentasComponent implements OnInit, OnDestroy, AfterViewInit {
   esCelular: boolean;
   destroy$: Subject<any> = new Subject<any>();
 
-  pactadasCantidad: number = 124;
-  pactadasPorcentaje: number = 78;
-
-  fijadasCantidad: number = 200;
-  fijadasPorcentaje: number = 23;
-
-  pesificadasCantidad: number = 86;
-  pesificadasPorcentaje: number = 100;
-
-  liquidadasCantidad: number = 862;
-  liquidadasPorcentaje: number = 93;
-
-  pagadasCantidad: number = 800;
-  pagadasPorcentaje: number = 78;
-
   modoDetalleDesktop: boolean = false;
   modoDetalleDesktopMovimiento$: Subject<MovimientoVenta> = new Subject<MovimientoVenta>();
 

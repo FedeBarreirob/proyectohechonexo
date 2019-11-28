@@ -32,6 +32,9 @@
   width: 100%;
   padding-left: 13px;
   padding-bottom: 28px;
-  overflow-y: hidden;
+  overflow: hidden;
+}
+
+.indicador-global-contenedor:hover {
   overflow-x: auto;
 }

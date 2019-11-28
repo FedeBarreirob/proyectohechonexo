@@ -27,3 +27,14 @@
   font-family: Rubik;
   font-size: 20px;
 }
+
+.indicador-global-contenedor {
+  width: 100%;
+  padding-left: 13px;
+  padding-bottom: 28px;
+  overflow: hidden;
+}
+
+.indicador-global-contenedor:hover {
+  overflow-x: auto;
+}
