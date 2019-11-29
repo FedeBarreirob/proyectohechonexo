@@ -14,6 +14,9 @@ export class VentasItemMovilComponent implements OnInit {
   @Input()
   unidadMedida: string;
 
+  @Input()
+  ventasPesificadas: boolean;
+
   constructor() { }
 
   ngOnInit() {

@@ -30,7 +30,8 @@
   [ngClass]="{'contenedor-listado' : cargarOnScroll == true, 'contenedor-listado-sin-alto' : cargarOnScroll == false}">
 
   <app-ventas-item-movil *ngFor="let movimiento of (listado ? listado : [])" [movimiento]="movimiento"
-    [unidadMedida]="unidadMedida" (click)="verDetalle(movimiento)"></app-ventas-item-movil>
+    [unidadMedida]="unidadMedida" [ventasPesificadas]="ventasPesificadas" (click)="verDetalle(movimiento)">
+  </app-ventas-item-movil>
 
   <!--Spinner-->
   <div fxLayout="row" fxLayoutAlign="center center" *ngIf="cargando == true" style="margin-top: 10px">
