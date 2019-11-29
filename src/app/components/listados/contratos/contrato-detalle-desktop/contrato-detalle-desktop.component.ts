@@ -9,9 +9,6 @@ import { ComprobantesDownloaderService } from '../../../../services/sharedServic
 import { takeUntil } from 'rxjs/operators';
 import { saveAs } from 'file-saver/FileSaver';
 import { MatSnackBar } from '@angular/material';
-import { FiltroEspecieCosecha } from '../../../../interfaces/varios/filtro-especie-cosecha';
-import { EntidadAlg } from '../../../../interfaces/perfiles/entidad-alg';
-import { MovimientoEntrega } from '../../../../interfaces/entregas/listado-entregas';
 
 @Component({
   selector: 'app-contrato-detalle-desktop',
@@ -33,11 +30,7 @@ export class ContratoDetalleDesktopComponent implements OnInit, OnDestroy {
   mensajeEntregasVentasPendientes: string = "";
   destroy$: Subject<any> = new Subject<any>();
 
-  filtrosEspecieCosecha: Subject<FiltroEspecieCosecha> = new Subject<FiltroEspecieCosecha>();
-  cuenta: Subject<EntidadAlg> = new Subject<EntidadAlg>();
-  listadoEntregasFijadas: Array<Subject<MovimientoEntrega>> = [new Subject<MovimientoEntrega>(), new Subject<MovimientoEntrega>(), new Subject<MovimientoEntrega>(), new Subject<MovimientoEntrega>(), new Subject<MovimientoEntrega>()];
-  listadoFijaciones: Array<Subject<MovimientoEntrega>> = [new Subject<MovimientoEntrega>(), new Subject<MovimientoEntrega>(), new Subject<MovimientoEntrega>()];
-  listadoFacturas: Array<Subject<MovimientoEntrega>> = [new Subject<MovimientoEntrega>(), new Subject<MovimientoEntrega>(), new Subject<MovimientoEntrega>(), new Subject<MovimientoEntrega>(), new Subject<MovimientoEntrega>(), new Subject<MovimientoEntrega>(), new Subject<MovimientoEntrega>(), new Subject<MovimientoEntrega>(), new Subject<MovimientoEntrega>(), new Subject<MovimientoEntrega>(), new Subject<MovimientoEntrega>()];
+  contratoId$: Subject<number> = new Subject<number>();
 
   constructor(
     private contratosService: ContratosService,
@@ -52,7 +45,6 @@ export class ContratoDetalleDesktopComponent implements OnInit, OnDestroy {
     this.modoDetalleDesktopMovimiento$.subscribe(
       resumen => this.cargar(resumen)
     );
-
   }
 
   /**
@@ -100,6 +92,7 @@ export class ContratoDetalleDesktopComponent implements OnInit, OnDestroy {
           respuesta => {
             if (respuesta.exito == true) {
               this.boleto = respuesta.datos;
+              this.contratoId$.next(this.boleto.encabezado.id);
             }
             this.cargando = false;
           },

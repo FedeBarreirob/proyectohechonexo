@@ -18,12 +18,14 @@
 
 <!--Modo desktop-->
 <span [ngClass]="{'hide': modoDetalleDesktop}">
+
   <div fxLayout="row" fxLayoutAlign="space-between" class="contenedor-titulo-filtro" fxLayoutGap="20px"
-    style="font-size: 130%;" *ngIf="esCelular != null && esCelular == false">
+    style="font-size: 130%;" *ngIf="esCelular != null && esCelular == false && aplicado == false">
     Entregas
   </div>
 
-  <div fxLayout="row" *ngIf="esCelular != null && esCelular == false" class="indicador-global-contenedor">
+  <div fxLayout="row" *ngIf="esCelular != null && esCelular == false && aplicado == false"
+    class="indicador-global-contenedor">
     <div fxFlex="100%">
       <app-entregas-indicador-global [observerFiltro$]="observerFiltro$"></app-entregas-indicador-global>
     </div>

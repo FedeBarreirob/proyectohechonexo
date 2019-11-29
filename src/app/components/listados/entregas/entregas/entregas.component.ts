@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild, OnDestroy, AfterViewInit } from '@angular/core';
+import { Component, OnInit, ViewChild, OnDestroy, AfterViewInit, Input } from '@angular/core';
 import { EntregasService } from '../../../../services/entregas/entregas.service';
 import { MovimientoEntrega } from '../../../../interfaces/entregas/listado-entregas';
 import { DatePipe } from '@angular/common';
@@ -22,6 +22,12 @@ import { EntregasExportacionesService } from '../../../../services/entregas/entr
 })
 export class EntregasComponent implements OnInit, OnDestroy, AfterViewInit {
 
+  @Input()
+  aplicado: boolean = false;
+
+  @Input()
+  contratoId$: Subject<any>;
+
   @ViewChild('menuFiltro') public sidenav: MatSidenav;
 
   public cuenta: EntidadAlg;
@@ -40,6 +46,8 @@ export class EntregasComponent implements OnInit, OnDestroy, AfterViewInit {
   descargandoArchivos: boolean = false;
   botonesBarraDescargaExtras: Array<any> = [];
 
+  contratoId: number;
+
   constructor(
     private entregasService: EntregasService,
     public dialog: MatDialog,
@@ -54,13 +62,23 @@ export class EntregasComponent implements OnInit, OnDestroy, AfterViewInit {
   ngOnInit() {
     this.esCelular = this.deviceService.isMobile();
 
+    if (this.contratoId$) {
+      this.contratoId$.subscribe(contratoId => {
+        this.contratoId = contratoId;
+        this.cargarListadoPorDefecto();
+      });
+    }
+
     this.cuentaAlgService.cuentaSeleccionada$
       .pipe(takeUntil(this.destroy$))
       .subscribe(
         cuentaAlg => {
           if (!this.cuenta || (this.cuenta && this.cuenta.id.codigo != cuentaAlg.id.codigo)) {
             this.seleccionarCuenta(cuentaAlg);
-            this.cargarListadoPorDefecto();
+
+            if (this.aplicado == false) {
+              this.cargarListadoPorDefecto();
+            }
           }
         }
       );
@@ -71,7 +89,10 @@ export class EntregasComponent implements OnInit, OnDestroy, AfterViewInit {
   ngAfterViewInit(): void {
     if (this.cuentaAlgService.cuentaPreviamenteSeleccionada && !this.esCelular) {
       this.seleccionarCuenta(this.cuentaAlgService.cuentaPreviamenteSeleccionada);
-      this.cargarListadoPorDefecto();
+
+      if (this.aplicado == false) {
+        this.cargarListadoPorDefecto();
+      }
     }
   }
 
@@ -100,6 +121,12 @@ export class EntregasComponent implements OnInit, OnDestroy, AfterViewInit {
 
   // funcion que ejecuta la carga del listado de entregas
   cargarListado(filtro: any) {
+
+    if (this.contratoId) {
+      filtro.contratoId = this.contratoId;
+      filtro.aplicado = true;
+    }
+
     this.observerFiltro$.next(filtro);
   }
 
@@ -152,7 +179,9 @@ export class EntregasComponent implements OnInit, OnDestroy, AfterViewInit {
       fechaDesde: null,
       fechaHasta: null,
       especie: null,
-      cosecha: null
+      cosecha: null,
+      contratoId: this.contratoId,
+      aplicado: (this.contratoId) ? true : null
     }
 
     this.cargarListado(filtro);
