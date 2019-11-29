@@ -17,12 +17,14 @@
 
 <!--Modo desktop-->
 <span [ngClass]="{'hide': modoDetalleDesktop}">
+
   <div fxLayout="row" fxLayoutAlign="space-between center titulo-seccion" class="contenedor-titulo-filtro"
-    fxLayoutGap="20px" style="font-size: 130%;">
+    fxLayoutGap="20px" style="font-size: 130%;" *ngIf="filtrarPorContrato == false">
     Ventas
   </div>
 
-  <div fxLayout="row" *ngIf="esCelular != null && esCelular == false" class="indicador-global-contenedor">
+  <div fxLayout="row" *ngIf="esCelular != null && esCelular == false && filtrarPorContrato == false"
+    class="indicador-global-contenedor">
     <div fxFlex="100%">
       <app-ventas-indicador-global [observerFiltro$]="observerFiltro$"></app-ventas-indicador-global>
     </div>
@@ -61,6 +63,6 @@
 
 <span [ngClass]="{'hide': !modoDetalleDesktop}">
   <app-ventas-detalle-desktop (salir)="salirModoDetalleDesktop()"
-    [modoDetalleDesktopMovimiento$]="modoDetalleDesktopMovimiento$">
+    [modoDetalleDesktopMovimiento$]="modoDetalleDesktopMovimiento$" [filtrarPorContrato]="filtrarPorContrato">
   </app-ventas-detalle-desktop>
 </span>

@@ -24,6 +24,9 @@ export class EntregasDetalleDesktopComponent implements OnInit, OnDestroy {
   @Input()
   modoDetalleDesktopMovimiento$: Subject<MovimientoEntrega>;
 
+  @Input()
+  aplicado: boolean = false;
+
   @Output()
   salir: EventEmitter<any> = new EventEmitter<any>();
 

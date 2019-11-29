@@ -24,6 +24,9 @@ export class VentasDetalleDesktopComponent implements OnInit, OnDestroy {
   @Input()
   modoDetalleDesktopMovimiento$: Subject<FijacionVenta>;
 
+  @Input()
+  filtrarPorContrato: boolean = false;
+
   @Output()
   salir: EventEmitter<any> = new EventEmitter<any>();
 

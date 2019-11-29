@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild, OnDestroy, AfterViewInit } from '@angular/core';
+import { Component, OnInit, ViewChild, OnDestroy, AfterViewInit, Input } from '@angular/core';
 import { VentasService } from '../../../../services/ventas/ventas.service';
 import { MovimientoVenta } from '../../../../interfaces/ventas/listado-ventas';
 import { DatePipe } from '@angular/common';
@@ -24,12 +24,20 @@ import { VentasExportacionesService } from '../../../../services/ventas/ventas-e
 })
 export class VentasComponent implements OnInit, OnDestroy, AfterViewInit {
 
+  @Input()
+  filtrarPorContrato: boolean = false;
+
+  @Input()
+  contratoId$: Subject<any>;
+
   @ViewChild('menuFiltro') public sidenav: MatSidenav;
 
   public cuenta: EntidadAlg;
   public filtrosEspecieCosecha: FiltroEspecieCosecha;
   public cargandoFiltros: boolean;
   cargando$: Subject<boolean> = new Subject<boolean>();
+
+  contratoId: number;
 
   observerFiltro$ = new Subject<any>();
   esCelular: boolean;
@@ -69,13 +77,23 @@ export class VentasComponent implements OnInit, OnDestroy, AfterViewInit {
   ngOnInit() {
     this.esCelular = this.deviceService.isMobile();
 
+    if (this.contratoId$) {
+      this.contratoId$.subscribe(contratoId => {
+        this.contratoId = contratoId;
+        this.cargarListadoPorDefecto();
+      });
+    }
+
     this.cuentaAlgService.cuentaSeleccionada$
       .pipe(takeUntil(this.destroy$))
       .subscribe(
         cuentaAlg => {
           if (!this.cuenta || (this.cuenta && this.cuenta.id.codigo != cuentaAlg.id.codigo)) {
             this.seleccionarCuenta(cuentaAlg);
-            this.cargarListadoPorDefecto();
+
+            if (this.filtrarPorContrato == false) {
+              this.cargarListadoPorDefecto();
+            }
           }
         }
       );
@@ -86,7 +104,10 @@ export class VentasComponent implements OnInit, OnDestroy, AfterViewInit {
   ngAfterViewInit(): void {
     if (this.cuentaAlgService.cuentaPreviamenteSeleccionada && !this.esCelular) {
       this.seleccionarCuenta(this.cuentaAlgService.cuentaPreviamenteSeleccionada);
-      this.cargarListadoPorDefecto();
+
+      if (this.filtrarPorContrato == false) {
+        this.cargarListadoPorDefecto();
+      }
     }
   }
 
@@ -115,6 +136,11 @@ export class VentasComponent implements OnInit, OnDestroy, AfterViewInit {
 
   // funcion que ejecuta la carga del listado de entregas
   cargarListado(filtro: any) {
+
+    if (this.contratoId) {
+      filtro.contrato = this.contratoId;
+    }
+
     this.observerFiltro$.next(filtro);
   }
 
@@ -167,7 +193,8 @@ export class VentasComponent implements OnInit, OnDestroy, AfterViewInit {
       fechaDesde: null,
       fechaHasta: null,
       especie: null,
-      cosecha: null
+      cosecha: null,
+      contrato: this.contratoId
     }
 
     this.cargarListado(filtro);

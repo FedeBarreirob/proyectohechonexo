@@ -1,4 +1,4 @@
-<div *ngIf="movimiento" class="contenedor-detalle">
+<div *ngIf="movimiento" [ngClass]="{ 'contenedor-detalle': aplicado == false }">
   <mat-progress-bar *ngIf="cargando" mode="indeterminate"></mat-progress-bar>
 
   <div fxLayout="row" fxLayoutAlign="start start" fxLayoutGap="5px" class="miga-container">
@@ -149,14 +149,16 @@
         </div>
 
         <div fxFlex>
-          <button mat-button class="boton-descarga-comprobante-alt" (click)="exportarAExcel()" [disabled]="cargando==true">
+          <button mat-button class="boton-descarga-comprobante-alt" (click)="exportarAExcel()"
+            [disabled]="cargando==true">
             <img src="assets/varios/excel.svg" />
             Descargar Excel
           </button>
         </div>
 
         <div fxFlex>
-          <button mat-button class="boton-descarga-comprobante-alt" (click)="exportarAPDF()" [disabled]="cargando==true">
+          <button mat-button class="boton-descarga-comprobante-alt" (click)="exportarAPDF()"
+            [disabled]="cargando==true">
             <img src="assets/varios/pdf-verde.svg" />
             Descargar PDF
           </button>
