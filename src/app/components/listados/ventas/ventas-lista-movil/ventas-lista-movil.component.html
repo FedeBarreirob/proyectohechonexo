@@ -19,61 +19,18 @@
 
 </mat-menu>
 
-<div fxLayout="row" fxLayoutAlign="space-around center" class="titulos">
-  <div fxFlex="40%">Venta</div>
-  <div fxFlex="30%" align="end">{{unidadMedida | kilosTextoA}} {{unidadMedida | netasA }}</div>
-  <div fxFlex="30%">$/{{unidadMedida | kilosTextoA}}</div>
+<div fxLayout="row" fxLayoutAlign="space-between center" class="titulos">
+  <div fxFlex="nogrow">Venta</div>
+  <div fxFlex="nogrow">{{unidadMedida | kilosTextoA}} {{unidadMedida | netasA }}</div>
+  <div fxFlex="nogrow">$/{{unidadMedida | kilosTextoA}}</div>
 </div>
 
 <div fxLayout="column" fxLayoutWrap fxLayoutAlign="none" infiniteScroll [infiniteScrollDistance]="2"
   [infiniteScrollThrottle]="50" (scrolled)="onScroll()" [scrollWindow]="false"
   [ngClass]="{'contenedor-listado' : cargarOnScroll == true, 'contenedor-listado-sin-alto' : cargarOnScroll == false}">
 
-  <div fxLayout="row" fxLayoutAlign="space-around center" *ngFor="let movimiento of (listado ? listado : [])"
-    class="movimiento-fila" (click)="verDetalle(movimiento)" fxLayoutGap="5px">
-
-    <div fxFlex="40px">
-      <img class="movimiento-icono" src="{{movimiento.especie | imagenEspecie}}" />
-    </div>
-
-    <div fxFlex="100px">
-      <p class="especie-cosecha">{{movimiento.especieDescripcion}} {{movimiento.cosecha}}</p>
-      <p class="fecha">{{movimiento.fecha}}</p>
-    </div>
-
-    <div fxFlex="60px" class="kg-netos" align="right">
-      {{movimiento.kilos | kilosA: unidadMedida | number: '.0-0'}}
-    </div>
-
-    <!--Pesificadas-->
-    <div fxFlex="80px" align="right" *ngIf="ventasPesificadas!=null && ventasPesificadas == true">
-      <span *ngIf="movimiento.precioQQPesificado!=null"
-        class="precio-qq">${{movimiento.precioQQPesificado | precioQQA: unidadMedida | number: '.0-0'}}</span>
-      <span *ngIf="movimiento.precioQQPesificado==null && movimiento.moneda =='P'"
-        class="precio-qq">${{movimiento.precioPorQuintal | precioQQA: unidadMedida | number: '.0-0'}}</span>
-      <span class="moneda">{{'P' | moneda}}</span>
-    </div>
-
-    <!--Pendientes de pesificar-->
-    <div fxFlex="80px" align="right" *ngIf="ventasPesificadas!=null && ventasPesificadas == false">
-      <span class="precio-qq">${{movimiento.precioPorQuintal | precioQQA: unidadMedida | number: '.0-0'}}</span>
-      <span class="moneda">{{movimiento.moneda | moneda}}</span>
-    </div>
-
-    <!--Todas-->
-    <div fxFlex="80px" align="right" *ngIf="ventasPesificadas == null">
-
-      <span *ngIf="movimiento.precioQQPesificado!=null"
-        class="precio-qq">${{movimiento.precioQQPesificado | precioQQA: unidadMedida | number: '.0-0'}}</span>
-
-      <span *ngIf="movimiento.precioQQPesificado==null"
-        class="precio-qq">${{movimiento.precioPorQuintal | precioQQA: unidadMedida | number: '.0-0'}}</span>
-
-      <span *ngIf="movimiento.precioQQPesificado!=null" class="moneda">{{'P' | moneda}}</span>
-      <span *ngIf="movimiento.precioQQPesificado==null" class="moneda">{{movimiento.moneda | moneda}}</span>
-    </div>
-
-  </div>
+  <app-ventas-item-movil *ngFor="let movimiento of (listado ? listado : [])" [movimiento]="movimiento"
+    [unidadMedida]="unidadMedida" (click)="verDetalle(movimiento)"></app-ventas-item-movil>
 
   <!--Spinner-->
   <div fxLayout="row" fxLayoutAlign="center center" *ngIf="cargando == true" style="margin-top: 10px">

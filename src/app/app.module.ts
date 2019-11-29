@@ -176,6 +176,7 @@ import { ToolBarDescargasComponent } from './components/common/tool-bar-descarga
 import { EntregasIndicadorGlobalComponent } from './components/listados/entregas/entregas-indicador-global/entregas-indicador-global.component';
 import { VentasIndicadorGlobalComponent } from './components/listados/ventas/ventas-indicador-global/ventas-indicador-global.component';
 import { EntregasItemMovilComponent } from './components/listados/entregas/entregas-item-movil/entregas-item-movil.component';
+import { VentasItemMovilComponent } from './components/listados/ventas/ventas-item-movil/ventas-item-movil.component';
 
 registerLocaleData(localeEsAr, 'es-AR');
 
@@ -323,7 +324,8 @@ export function tokenGetter() {
 		ToolBarDescargasComponent,
 		EntregasIndicadorGlobalComponent,
 		VentasIndicadorGlobalComponent,
-		EntregasItemMovilComponent
+		EntregasItemMovilComponent,
+		VentasItemMovilComponent
 	],
 	imports: [
 		HttpClientModule,

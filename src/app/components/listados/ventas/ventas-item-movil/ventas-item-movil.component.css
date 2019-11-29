@@ -28,12 +28,17 @@
 
 .kg-netos {
     color: #333333;
-    font-family: RubikLight;
-    font-size: 20px;
-    text-align: right;
+    font-family: Rubik;
+    font-size: 14px;
 }
 
-.cp {
+.precio-qq {
+    color: #333333;
+    font-family: Rubik;
+    font-size: 14px;
+}
+
+.moneda {
     color: #666666;
     font-family: Rubik;
     font-size: 11px;

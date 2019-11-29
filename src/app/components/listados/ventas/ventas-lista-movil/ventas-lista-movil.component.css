@@ -2,66 +2,10 @@
     color: #666666;
     font-family: Rubik;
     font-size: 14px;
-    text-align: center;
     margin-top: 30px;
+    padding-left: 17px;
+    padding-right: 17px;
     padding-bottom: 10px;
-}
-
-.movimiento-fila {
-    border: 1px solid rgba(35, 185, 80, 0.08);
-    border-radius: 4px;
-    margin-bottom: 3px;
-    background-color: white;
-    margin-top: 3px;
-    padding-left: 9px;
-    padding-right: 9px;
-    margin-left: 17px;
-    margin-right: 17px;
-}
-
-.movimiento-icono {
-    height: 38px;
-    width: 38px;
-}
-
-.especie-cosecha {
-    height: 19px;
-    color: #333333;
-    font-family: Rubik;
-    font-size: 16px;
-    line-height: 30px;
-}
-
-.fecha {
-    height: 13px;
-    color: #666666;
-    font-family: Rubik;
-    font-size: 11px;
-    line-height: 0px;
-}
-
-.kg-netos {
-    height: 17px;
-    color: #333333;
-    font-family: Rubik;
-    font-size: 14px;
-    line-height: 17px;
-}
-
-.precio-qq {
-    height: 17px;
-    color: #333333;
-    font-family: Rubik;
-    font-size: 14px;
-    line-height: 17px;
-}
-
-.moneda {
-    height: 13px;
-    color: #666666;
-    font-family: Rubik;
-    font-size: 11px;
-    line-height: 13px;
 }
 
 .contenedor-listado {
