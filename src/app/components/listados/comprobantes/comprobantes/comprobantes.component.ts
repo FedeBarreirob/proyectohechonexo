@@ -1,10 +1,11 @@
 import { Component, OnInit, ViewChild, AfterViewInit } from '@angular/core';
-import { MatSidenav } from '@angular/material';
+import { MatSidenav, MatDialog } from '@angular/material';
 import { EntidadAlg } from '../../../../interfaces/perfiles/entidad-alg';
 import { CuentaAlgService } from '../../../../services/observers/cuentas-alg/cuenta-alg.service';
 import { Subject } from 'rxjs';
 import { DeviceDetectorService } from 'ngx-device-detector';
 import { FiltroComprobanteDescarga } from '../../../../interfaces/archivo-de-comprobantes/filtro-comprobante-descarga';
+import { TutorialModalComponent } from '../../../common/tutorial-modal/tutorial-modal.component';
 
 @Component({
   selector: 'app-comprobantes',
@@ -22,10 +23,16 @@ export class ComprobantesComponent implements OnInit, AfterViewInit {
 
   constructor(
     private cuentasService: CuentaAlgService,
-    private deviceService: DeviceDetectorService
+    private deviceService: DeviceDetectorService,
+    private dialog: MatDialog
   ) { }
 
   ngOnInit() {
+    // Modal tutorial
+    this.dialog.open(TutorialModalComponent, {
+      data: {}
+    });
+
     this.esCelular = this.deviceService.isMobile();
 
     this.cuentasService.cuentaSeleccionada$.subscribe(

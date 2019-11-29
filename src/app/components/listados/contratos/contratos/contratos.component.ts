@@ -12,6 +12,7 @@ import { takeUntil } from 'rxjs/operators';
 import { FiltroPersonalizadoParaFiltroCereal } from '../../../../interfaces/varios/filtro-personalizado-para-filtro-cereal';
 import { ComprobantesDownloaderService } from '../../../../services/sharedServices/downloader/comprobantes-downloader.service';
 import { saveAs } from 'file-saver/FileSaver';
+import { TutorialModalComponent } from '../../../common/tutorial-modal/tutorial-modal.component';
 
 @Component({
   selector: 'app-contratos',
@@ -61,6 +62,11 @@ export class ContratosComponent implements OnInit, OnDestroy, AfterViewInit {
   ) { }
 
   ngOnInit() {
+    // Modal tutorial
+    this.dialog.open(TutorialModalComponent, {
+      data: {}
+    });
+
     this.esCelular = this.deviceService.isMobile();
 
     this.cuentaAlgService.cuentaSeleccionada$

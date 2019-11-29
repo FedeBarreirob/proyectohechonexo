@@ -1,0 +1,13 @@
+<h1 mat-dialog-title>{{data.title ? data.title : 'Tutorial Modal'}}</h1>
+
+<div mat-dialog-content>
+  {{data.description ? data.description : 'Descripción Tutorial Modal'}}
+
+  <br /><br />
+
+  <mat-checkbox [(ngModel)]="ocultarTutorial">Omitir</mat-checkbox>
+</div>
+
+<div mat-dialog-actions>
+  <button mat-button [mat-dialog-close]="ocultarTutorial" cdkFocusInitial>Cerrar</button>
+</div>

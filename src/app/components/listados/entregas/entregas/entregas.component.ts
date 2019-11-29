@@ -13,6 +13,7 @@ import { takeUntil } from 'rxjs/operators';
 import { ComprobantesDownloaderService } from '../../../../services/sharedServices/downloader/comprobantes-downloader.service';
 import { saveAs } from 'file-saver/FileSaver';
 import { EntregasExportacionesService } from '../../../../services/entregas/entregas-exportaciones.service';
+import { TutorialModalComponent } from '../../../common/tutorial-modal/tutorial-modal.component';
 
 @Component({
   selector: 'app-entregas',
@@ -52,6 +53,11 @@ export class EntregasComponent implements OnInit, OnDestroy, AfterViewInit {
   }
 
   ngOnInit() {
+    // Modal tutorial
+    this.dialog.open(TutorialModalComponent, {
+      data: {}
+    });
+
     this.esCelular = this.deviceService.isMobile();
 
     this.cuentaAlgService.cuentaSeleccionada$

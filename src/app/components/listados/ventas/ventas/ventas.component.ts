@@ -15,6 +15,7 @@ import { FiltroPersonalizadoParaFiltroCereal } from '../../../../interfaces/vari
 import { saveAs } from 'file-saver/FileSaver';
 import { ComprobantesDownloaderService } from '../../../../services/sharedServices/downloader/comprobantes-downloader.service';
 import { VentasExportacionesService } from '../../../../services/ventas/ventas-exportaciones.service';
+import { TutorialModalComponent } from '../../../common/tutorial-modal/tutorial-modal.component';
 
 @Component({
   selector: 'app-ventas',
@@ -67,6 +68,11 @@ export class VentasComponent implements OnInit, OnDestroy, AfterViewInit {
   ) { }
 
   ngOnInit() {
+    // Modal tutorial
+    this.dialog.open(TutorialModalComponent, {
+      data: {}
+    });
+
     this.esCelular = this.deviceService.isMobile();
 
     this.cuentaAlgService.cuentaSeleccionada$

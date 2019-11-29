@@ -8,6 +8,7 @@ import { AuthenticationService } from '../../../../services/security/authenticat
 import { UserAuth } from '../../../../models/security/user';
 import { PerfilBasico } from '../../../../interfaces/perfiles/perfil-basico';
 import { ModalCambioPasswordComponent } from '../../modal-cambio-password/modal-cambio-password.component';
+import { TutorialModalComponent } from '../../../common/tutorial-modal/tutorial-modal.component';
 
 @Component({
 	selector: 'app-perfiles-listado',
@@ -43,7 +44,12 @@ export class PerfilesListadoComponent implements OnInit {
 		this.usuarioLogueado = <UserAuth>this.authenticationService.usuarioLogueado();
 	}
 
-	ngOnInit() {
+  ngOnInit() {
+    // Modal tutorial
+    this.dialog.open(TutorialModalComponent, {
+      data: {}
+    });
+
 		this.cargando = false;
 	}
 

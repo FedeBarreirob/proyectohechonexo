@@ -1,11 +1,12 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
-import { MatSidenav } from '@angular/material';
+import { MatSidenav, MatDialog, MatSnackBar } from '@angular/material';
 import { Subject } from 'rxjs';
 import { DeviceDetectorService } from 'ngx-device-detector';
 import { NotificacionesService } from '../../../services/notificaciones/notificaciones.service';
 import { AuthenticationService } from '../../../services/security/authentication.service';
 import { UserAuth } from '../../../models/security/user';
 import { EstadoNotificaciones } from '../../../enums/estado-notificaciones.enum';
+import { TutorialModalComponent } from '../../../components/common/tutorial-modal/tutorial-modal.component';
 
 @Component({
   selector: 'app-dashboard',
@@ -23,14 +24,28 @@ export class DashboardComponent implements OnInit {
   cargandoIndicadorVentasRecientes: boolean = false;
   esCelular: boolean;
   hayNotificacionesNuevas: boolean = false;
+  ocultarTutorial: boolean = false;
 
   constructor(
     private deviceService: DeviceDetectorService,
     private notificacionService: NotificacionesService,
-    private authenticationService: AuthenticationService
+    private authenticationService: AuthenticationService,
+    private dialog: MatDialog
   ) { }
 
   ngOnInit() {
+    // Modal tutorial
+    if (!this.ocultarTutorial) {
+      const dialogRef = this.dialog.open(TutorialModalComponent, {
+        data: { title: 'Dashboard', description: 'Descripción de prueba ahd65h654adh654da546ha546dhd654ah654ah546ah546ad ad65h65a4 h45adh56 ha654 dha654dh4ad65 ha6d54h465adh65ad4ha5d64h65ad4h654adh4ad4 564ad564h54 56 4hha654a hd546 had45 had546 ahd456 had654had456had' }
+      });
+
+      dialogRef.afterClosed().subscribe(result => {
+        debugger;
+        this.ocultarTutorial = result;
+      });
+    }
+
     this.esCelular = this.deviceService.isMobile();
 
     if (this.esCelular) {

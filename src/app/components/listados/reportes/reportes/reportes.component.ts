@@ -2,6 +2,8 @@ import { Component, OnInit, AfterViewInit } from '@angular/core';
 import { EntidadAlg } from '../../../../interfaces/perfiles/entidad-alg';
 import { CuentaAlgService } from '../../../../services/observers/cuentas-alg/cuenta-alg.service';
 import { DeviceDetectorService } from 'ngx-device-detector';
+import { MatDialog, PageEvent, MatSlideToggleChange, MatSnackBar } from '@angular/material';
+import { TutorialModalComponent } from '../../../common/tutorial-modal/tutorial-modal.component';
 
 @Component({
   selector: 'app-reportes',
@@ -15,10 +17,16 @@ export class ReportesComponent implements OnInit, AfterViewInit {
 
   constructor(
     private cuentasService: CuentaAlgService,
-    private deviceService: DeviceDetectorService
+    private deviceService: DeviceDetectorService,
+    private dialog: MatDialog
   ) { }
 
   ngOnInit() {
+    // Modal tutorial
+    this.dialog.open(TutorialModalComponent, {
+      data: {}
+    });
+
     this.esCelular = this.deviceService.isMobile();
 
     this.cuentasService.cuentaSeleccionada$.subscribe(

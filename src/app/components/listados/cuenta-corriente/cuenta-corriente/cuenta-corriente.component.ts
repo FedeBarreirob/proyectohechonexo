@@ -12,6 +12,7 @@ import { InfoCtaCte } from '../../../../enums/info-cta-cte.enum';
 import { CuentaCorrienteAplicadaDetalleComponent } from '../cuenta-corriente-aplicada-detalle/cuenta-corriente-aplicada-detalle.component';
 import { MovimientoCtaCte } from '../../../../interfaces/ctacte/listado.ctacte';
 import { MovimientoCtaCteAplicada } from '../../../../interfaces/ctacte-aplicada/listado-ctacte-aplicada';
+import { TutorialModalComponent } from '../../../common/tutorial-modal/tutorial-modal.component';
 
 @Component({
   selector: 'app-cuenta-corriente',
@@ -56,6 +57,11 @@ export class CuentaCorrienteComponent implements OnInit, OnDestroy, AfterViewIni
   ) { }
 
   ngOnInit() {
+    // Modal tutorial
+    this.dialog.open(TutorialModalComponent, {
+      data: {}
+    });
+
     this.esCelular = this.deviceService.isMobile();
 
     this.cuentaAlgService.cuentaSeleccionada$
