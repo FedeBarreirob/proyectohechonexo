@@ -16,39 +16,8 @@
 <div class="contenedor-listado" fxLayout="column" fxLayoutWrap fxLayoutAlign="none" infiniteScroll
   [infiniteScrollDistance]="2" [infiniteScrollThrottle]="50" (scrolled)="onScroll()" [scrollWindow]="false">
 
-  <div fxLayout="row" fxLayoutAlign="space-around center" *ngFor="let movimiento of (listado ? listado : [])"
-    class="movimiento-fila" (click)="verDetalle(movimiento)">
-
-    <div fxFlex="60%">
-      <p class="concepto">{{movimiento.concepto}}</p>
-      <p class="fecha">{{movimiento.fechaCtaCte}}</p>
-      <p class="comprobante">{{movimiento.comprobanteAfectado}}</p>
-    </div>
-
-    <div fxFlex></div>
-
-    <div fxFlex="35%" class="monto">
-
-      <!--Pesos-->
-      <span *ngIf="movimiento.moneda == 'P'">
-        <span [ngClass]="{'signo-positivo': movimiento.saldoPesos > 0, 'signo-negativo': movimiento.saldoPesos < 0 }">
-          {{(movimiento.saldoPesos < 0) ? '-' : (movimiento.saldoPesos > 0) ? '+' : ''}}
-        </span>
-        {{((movimiento.saldoPesos > 0) ? movimiento.saldoPesos : movimiento.saldoPesos * (-1)) | number: '.2'}}
-      </span>
-
-      <!--Dolares-->
-      <span *ngIf="movimiento.moneda != 'P'">
-        <span
-          [ngClass]="{'signo-positivo': movimiento.saldoDolares > 0, 'signo-negativo': movimiento.saldoDolares < 0 }">
-          {{ (movimiento.saldoDolares < 0) ? '-' : (movimiento.saldoDolares > 0) ? '+' : ''}}
-        </span>
-        {{ ((movimiento.saldoDolares > 0) ? movimiento.saldoDolares : movimiento.saldoDolares * (-1)) | number: '.2'}}
-      </span>
-
-      <span class="moneda">{{ movimiento.moneda | moneda }}</span>
-    </div>
-  </div>
+  <app-cuenta-corriente-aplicada-item-movil *ngFor="let movimiento of (listado ? listado : [])"
+    [movimiento]="movimiento" (click)="verDetalle(movimiento)"></app-cuenta-corriente-aplicada-item-movil>
 
   <!--Spinner-->
   <div fxLayout="row" fxLayoutAlign="center center" *ngIf="cargando == true" style="margin-top: 10px">

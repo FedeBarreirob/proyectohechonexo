@@ -177,6 +177,8 @@ import { EntregasIndicadorGlobalComponent } from './components/listados/entregas
 import { VentasIndicadorGlobalComponent } from './components/listados/ventas/ventas-indicador-global/ventas-indicador-global.component';
 import { EntregasItemMovilComponent } from './components/listados/entregas/entregas-item-movil/entregas-item-movil.component';
 import { VentasItemMovilComponent } from './components/listados/ventas/ventas-item-movil/ventas-item-movil.component';
+import { CuentaCorrienteItemMovilComponent } from './components/listados/cuenta-corriente/cuenta-corriente-item-movil/cuenta-corriente-item-movil.component';
+import { CuentaCorrienteAplicadaItemMovilComponent } from './components/listados/cuenta-corriente/cuenta-corriente-aplicada-item-movil/cuenta-corriente-aplicada-item-movil.component';
 
 registerLocaleData(localeEsAr, 'es-AR');
 
@@ -325,7 +327,9 @@ export function tokenGetter() {
 		EntregasIndicadorGlobalComponent,
 		VentasIndicadorGlobalComponent,
 		EntregasItemMovilComponent,
-		VentasItemMovilComponent
+		VentasItemMovilComponent,
+		CuentaCorrienteItemMovilComponent,
+		CuentaCorrienteAplicadaItemMovilComponent
 	],
 	imports: [
 		HttpClientModule,
