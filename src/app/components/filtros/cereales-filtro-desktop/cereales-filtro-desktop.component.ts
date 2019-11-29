@@ -80,6 +80,15 @@ export class CerealesFiltroDesktopComponent implements OnInit {
     }
   }
 
+  // funcion que limpiar 
+  limpiar() {
+    this.especie = null;
+    this.cosecha = null;
+    this.filtroPersonalizadoSeleccionado = null;
+    this.fechaDesde = "";
+    this.fechaHasta = "";
+  }
+
   /**
    * Función encargada de ejecutar el proceso de filtrado
    */

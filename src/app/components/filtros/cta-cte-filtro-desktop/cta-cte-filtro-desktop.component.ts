@@ -82,6 +82,21 @@ export class CtaCteFiltroDesktopComponent implements OnInit {
     this.rubro = unRubro;
   }
 
+  // funcion que limpiar 
+  limpiar() {
+    this.rubro = null;
+    this.filtrosTipoCheck = [];
+    debugger;
+    var checkBoxList = document.getElementsByClassName("mat-checkbox-checked");
+    for (var i = 0; i < checkBoxList.length; i++) {
+      checkBoxList[i].classList.remove("mat-checkbox-checked");
+    }
+    var dt = new Date();
+    dt.setDate(dt.getDate() - 7);
+    this.fechaDesde = dt.toISOString();
+    this.fechaHasta = new Date().toISOString();
+  }
+
   /**
    * funcion que arma un filtro y lo notifica al llamador
    */

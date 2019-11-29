@@ -35,3 +35,26 @@
     height: 48px;
     min-width: 200px;
 }
+
+.boton-limpiar {
+    height: 40px;
+    width: 104px;
+    border: 1px solid #2DA442;
+    border-radius: 4px;
+    color: #2DA442;
+    font-family: Rubik;
+    font-size: 14px;
+}
+
+.boton-aplicar {
+    height: 40px;
+    width: 104px;
+    background-color: #2DA442;
+    border: 1px solid #2DA442;
+    border-radius: 4px;
+    color: #FFFFFF;
+    font-family: Rubik;
+    font-size: 14px;
+    font-weight: bold;
+    margin-left: 5px;
+}
