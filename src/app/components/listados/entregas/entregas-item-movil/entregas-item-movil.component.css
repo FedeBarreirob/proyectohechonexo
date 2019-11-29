@@ -1,0 +1,41 @@
+.movimiento-fila {
+    border: 1px solid rgba(35, 185, 80, 0.08);
+    border-radius: 4px;
+    margin-bottom: 3px;
+    margin-left: 17px;
+    margin-right: 17px;
+    margin-top: 3px;
+    padding: 9px;
+    background-color: white;
+}
+
+.movimiento-icono {
+    height: 38px;
+    width: 38px;
+}
+
+.especie-cosecha {
+    color: #333333;
+    font-family: Rubik;
+    font-size: 16px;
+}
+
+.fecha {
+    color: #666666;
+    font-family: Rubik;
+    font-size: 11px;
+}
+
+.kg-netos {
+    color: #333333;
+    font-family: RubikLight;
+    font-size: 20px;
+    line-height: 24px;
+    text-align: right;
+}
+
+.cp {
+    color: #666666;
+    font-family: Rubik;
+    font-size: 11px;
+}

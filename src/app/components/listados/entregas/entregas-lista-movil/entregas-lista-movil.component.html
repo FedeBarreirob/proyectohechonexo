@@ -21,36 +21,17 @@
 -->
 
 <div fxLayout="row" fxLayoutAlign="space-between center" class="titulos">
-  <div fxFlex="140px">Entrega</div>
-  <div fxFlex="60px" align="end">RM/CP</div>
-  <div fxFlex align="end">{{unidadMedida | kilosTextoA}} {{unidadMedida | netasA }}</div>
+  <div fxFlex="nogrow">Entrega</div>
+  <div fxFlex="nogrow">CP</div>
+  <div fxFlex="nogrow">{{unidadMedida | kilosTextoA}} {{unidadMedida | netasA }}</div>
 </div>
 
 <div fxLayout="column" fxLayoutWrap fxLayoutAlign="none" infiniteScroll [infiniteScrollDistance]="2"
   [infiniteScrollThrottle]="50" (scrolled)="onScroll()" [scrollWindow]="false"
   [ngClass]="{'contenedor-listado' : cargarOnScroll == true, 'contenedor-listado-sin-alto' : cargarOnScroll == false}">
 
-  <div fxLayout="row" fxLayoutAlign="space-between center"
-    *ngFor="let movimiento of (listadoEntregas ? listadoEntregas : [])" class="movimiento-fila"
-    (click)="verDetalle(movimiento)">
-
-    <div fxFlex="40px">
-      <img class="movimiento-icono" src="{{movimiento.especie | imagenEspecie}}" />
-    </div>
-
-    <div fxFlex="100px">
-      <p class="especie-cosecha">{{movimiento.especieDescripcion}} {{movimiento.cosecha}}</p>
-      <p class="fecha">{{movimiento.fecha}}</p>
-    </div>
-
-    <div fxFlex="20px" class="cp">
-      {{movimiento.numeroComprobanteExterno}}
-    </div>
-
-    <div fxFlex class="kg-netos" align="end">
-      {{movimiento.kilosNetos | kilosA: unidadMedida | number: '.0-0'}}
-    </div>
-  </div>
+  <app-entregas-item-movil *ngFor="let movimiento of (listadoEntregas ? listadoEntregas : [])" [movimiento]="movimiento"
+    [unidadMedida]="unidadMedida" (click)="verDetalle(movimiento)"></app-entregas-item-movil>
 
   <!--Spinner-->
   <div fxLayout="row" fxLayoutAlign="center center" *ngIf="cargando == true" style="margin-top: 10px">

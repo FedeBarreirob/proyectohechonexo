@@ -8,61 +8,13 @@
     padding-bottom: 10px;
 }
 
-.movimiento-fila {
-    width: 100%;
-    border: 1px solid rgba(35, 185, 80, 0.08);
-    border-radius: 4px;
-    margin-bottom: 3px;
-    background-color: white;
-    margin-top: 3px;
-    padding-left: 9px;
-    padding-right: 9px;
-}
-
-.movimiento-icono {
-    height: 38px;
-    width: 38px;
-}
-
-.especie-cosecha {
-    height: 19px;
-    width: 93.9px;
-    color: #333333;
-    font-family: Rubik;
-    font-size: 16px;
-    line-height: 30px;
-}
-
-.fecha {
-    height: 13px;
-    width: 81.6px;
-    color: #666666;
-    font-family: Rubik;
-    font-size: 11px;
-    line-height: 0px;
-}
-
-.kg-netos {
-    height: 24px;
-    width: 63px;
-    color: #333333;
-    font-family: RubikLight;
-    font-size: 20px;
-    line-height: 24px;
-    text-align: right;
-}
-
 .contenedor-listado {
     height: 82vh;
     overflow-y: scroll;
-    padding-left: 17px;
-    padding-right: 17px;
 }
 
 .contenedor-listado-sin-alto {
     overflow-y: scroll;
-    padding-left: 17px;
-    padding-right: 17px;
 }
 
 .activo {
@@ -86,10 +38,4 @@
     font-family: Rubik;
     font-size: 14px;
     letter-spacing: 1.2px;
-}
-
-.cp {
-    color: #666666;
-    font-family: Rubik;
-    font-size: 11px;
 }

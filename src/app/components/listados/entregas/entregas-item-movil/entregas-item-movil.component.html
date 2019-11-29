@@ -1,0 +1,29 @@
+<div class="movimiento-fila">
+  <div fxLayout="row" fxLayoutAlign="space-between center" fxLayoutGap="5px">
+
+    <div fxFlex="38px">
+      <img class="movimiento-icono" src="{{movimiento.especie | imagenEspecie}}" />
+    </div>
+
+    <div fxFlex="100px">
+      <div fxLayout="column" fxLayoutAlign="space-between start">
+        <div fxFlex="nogrow" class="especie-cosecha">
+          {{movimiento.especieDescripcion}} {{movimiento.cosecha}}
+        </div>
+
+        <div fxFlex="nogrow" class="fecha">
+          {{movimiento.fecha}}
+        </div>
+      </div>
+    </div>
+
+    <div fxFlex="nogrow" class="cp">
+      {{movimiento.numeroComprobanteExterno}}
+    </div>
+
+    <div fxFlex class="kg-netos" align="end">
+      {{movimiento.kilosNetos | kilosA: unidadMedida | number: '.0-0'}}
+    </div>
+
+  </div>
+</div>
