@@ -1,8 +1,8 @@
-import { Component, OnInit, Input, OnDestroy } from '@angular/core';
+import { Component, OnInit, Input, OnDestroy, ViewChildren, ViewChild } from '@angular/core';
 import { FiltroCtaCteComprobanteDescarga } from '../../../../../interfaces/archivo-de-comprobantes/filtro-cta-cte-comprobante-descarga';
 import { ArchivoDeComprobantesService } from '../../../../../services/archivo-de-comprobantes/archivo-de-comprobantes.service';
 import { ComprobanteParaDescarga } from '../../../../../interfaces/archivo-de-comprobantes/comprobante-para-descarga';
-import { MatSlideToggleChange, MatSnackBar } from '@angular/material';
+import { MatSlideToggleChange, MatSnackBar, MatSelectionList } from '@angular/material';
 import { ComprobantesDownloaderService } from '../../../../../services/sharedServices/downloader/comprobantes-downloader.service';
 import { saveAs } from 'file-saver/FileSaver';
 import { Subject, Observable } from 'rxjs';
@@ -28,6 +28,9 @@ export class ArchivoDeComprobantesComponent implements OnInit, OnDestroy {
 
   @Input()
   cuenta: string
+
+  @ViewChild('lista')
+  lista: MatSelectionList;
 
   pagina: number = 1;
   cantidadPorPagina: number = 50;
@@ -82,7 +85,7 @@ export class ArchivoDeComprobantesComponent implements OnInit, OnDestroy {
     let fechaHastaFiltro = this.datePipe.transform(new Date(), 'dd/MM/yyyy');
 
     this.filtro = {
-      origen: OrigenComprobante.CONTRATOS,
+      origen: OrigenComprobante.CUENTA_CORRIENTE,
       cuenta: this.cuenta,
       paginado: true,
       fechaDesde: fechaDesdeFiltro,
@@ -362,6 +365,28 @@ export class ArchivoDeComprobantesComponent implements OnInit, OnDestroy {
     if (this.cargando == false) {
       this.pagina = this.pagina + 1;
       this.cargarListado(false);
+    }
+  }
+
+  /**
+   * Selecciona o deselecciona todo
+   */
+  toggleSelection() {
+    if (this.sonTodosSeleccionados()) {
+      this.lista.deselectAll();
+    } else {
+      this.lista.selectAll();
+    }
+  }
+
+  /**
+   * Devuelve el texto de seleccionar todo segun selección
+   */
+  get textoBotonSeleccionarTodo() {
+    if (this.sonTodosSeleccionados()) {
+      return "Quitar selección";
+    } else {
+      return "Seleccionar todos"
     }
   }
 }

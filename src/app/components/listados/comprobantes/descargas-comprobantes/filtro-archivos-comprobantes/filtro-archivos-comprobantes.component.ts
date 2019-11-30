@@ -22,7 +22,7 @@ export class FiltroArchivosComprobantesComponent implements OnInit {
   botonAplicar: EventEmitter<any> = new EventEmitter<any>();
 
   origenComprobante: any = OrigenComprobante;
-  origenSeleccionado: OrigenComprobante = OrigenComprobante.CONTRATOS;
+  origenSeleccionado: OrigenComprobante = OrigenComprobante.CUENTA_CORRIENTE;
 
   fechaDesde: string;
   fechaHasta: string;
@@ -61,7 +61,7 @@ export class FiltroArchivosComprobantesComponent implements OnInit {
    * Función encargada de limpiar los filtros para un nuevo filtrado
    */
   limpiar() {
-    this.origenSeleccionado = OrigenComprobante.CONTRATOS;
+    this.origenSeleccionado = OrigenComprobante.CUENTA_CORRIENTE;
     this.filtroIdentificacionComprobante = "";
     this.fechaDesde = "";
     this.fechaHasta = "";

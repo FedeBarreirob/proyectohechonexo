@@ -3,7 +3,7 @@
 <div class="contenedor-listado" fxLayout="column" fxLayoutWrap fxLayoutAlign="none" infiniteScroll
 	[infiniteScrollDistance]="2" [infiniteScrollThrottle]="50" (scrolled)="onScroll()" [scrollWindow]="false">
 
-	<mat-selection-list (ngModelChange)="actualizarSeleccion($event)" [(ngModel)]="comprobantesSeleccionados">
+	<mat-selection-list #lista (ngModelChange)="actualizarSeleccion($event)" [(ngModel)]="comprobantesSeleccionados">
 		<mat-list-option *ngFor="let comprobante of comprobantes" [value]="comprobante" class="comprobante-fila"
 			[disabled]="comprobante.existeArchivo == false">
 
@@ -20,8 +20,8 @@
 			</div>
 
 			<div fxLayout="row" fxLayoutAlign="space-between center">
-				<div fxFlexOffset="24px" fxFlex [ngClass]="(comprobante.existeArchivo)?'ok':'bad'">
-					{{ comprobante.existeArchivo ? 'Disponible para su descarga' : 'No disponible para su descarga' }}
+				<div fxFlexOffset="24px" fxFlex class="concepto-comprobante">
+					{{ comprobante.concepto }}
 				</div>
 			</div>
 		</mat-list-option>
@@ -35,15 +35,24 @@
 </div>
 
 <!--Boton de descarga del comprobante-->
-<div [ngClass]="{'boton-flotante-contenedor': esCelular, 'boton-flotante-contenedor-desktop': !esCelular}"
-	*ngIf="!(cargando==true || comprobantesSeleccionados.length == 0 || comprobantes.length == 0) || esCelular">
-	<div fxLayout="row" fxLayoutAlign="space-between center" class="botonera">
-		<div fxFlex="100%">
+<div [ngClass]="{'boton-flotante-contenedor': esCelular, 'boton-flotante-contenedor-desktop': !esCelular}">
+
+	<div fxLayout="row" fxLayoutAlign="space-between center" class="botonera" fxLayoutGap="10px">
+
+		<div fxFlex="50%">
+			<button mat-button [disabled]="(cargando==true || descargandoArchivos==true || comprobantes.length == 0)"
+				class="boton-descarga-comprobante" (click)="toggleSelection()">
+				{{ textoBotonSeleccionarTodo }}
+			</button>
+		</div>
+
+		<div fxFlex="50%">
 			<button mat-button
 				[disabled]="(cargando==true || descargandoArchivos==true || comprobantesSeleccionados.length == 0 || comprobantes.length == 0)"
 				class="boton-descarga-comprobante" (click)="descargar()">
-				Descargar seleccionados
+				Descargar
 			</button>
 		</div>
+
 	</div>
 </div>
