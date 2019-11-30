@@ -86,7 +86,6 @@ export class CtaCteFiltroDesktopComponent implements OnInit {
   limpiar() {
     this.rubro = null;
     this.filtrosTipoCheck = [];
-    debugger;
     var checkBoxList = document.getElementsByClassName("mat-checkbox-checked");
     for (var i = 0; i < checkBoxList.length; i++) {
       checkBoxList[i].classList.remove("mat-checkbox-checked");
