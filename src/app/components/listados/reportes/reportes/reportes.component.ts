@@ -4,6 +4,7 @@ import { CuentaAlgService } from '../../../../services/observers/cuentas-alg/cue
 import { DeviceDetectorService } from 'ngx-device-detector';
 import { MatDialog, PageEvent, MatSlideToggleChange, MatSnackBar } from '@angular/material';
 import { TutorialModalComponent } from '../../../common/tutorial-modal/tutorial-modal.component';
+import { AuthenticationService } from '../../../../services/security/authentication.service';
 
 @Component({
   selector: 'app-reportes',
@@ -18,14 +19,21 @@ export class ReportesComponent implements OnInit, AfterViewInit {
   constructor(
     private cuentasService: CuentaAlgService,
     private deviceService: DeviceDetectorService,
-    private dialog: MatDialog
+    private dialog: MatDialog,
+    private authenticationService: AuthenticationService
   ) { }
 
   ngOnInit() {
     // Modal tutorial
-    this.dialog.open(TutorialModalComponent, {
-      data: { title: 'Reportes', description: 'En esta sección encontrarás reportes de interés que agilizarán tu trabajo. Ya puedes encontrar el “Reporte de existencias” a la fecha que desees para compartirle a tu equipo contable en segundos. Nuevos reportes instantáneos aparecerán próximamente.' }
-    });
+    if (!this.authenticationService.esAdmin && !JSON.parse(localStorage.getItem('reportesTutorial'))) {
+      const dialogRef = this.dialog.open(TutorialModalComponent, {
+        data: { title: 'Reportes', description: 'En esta sección encontrarás reportes de interés que agilizarán tu trabajo. Ya puedes encontrar el “Reporte de existencias” a la fecha que desees para compartirle a tu equipo contable en segundos. Nuevos reportes instantáneos aparecerán próximamente.' }
+      });
+
+      dialogRef.afterClosed().subscribe(result => {
+        localStorage.setItem('reportesTutorial', JSON.stringify(true));
+      });
+    }
 
     this.esCelular = this.deviceService.isMobile();
 

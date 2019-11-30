@@ -8,6 +8,7 @@ import { AccesoTercerosComponent } from '../terceros/acceso-terceros/acceso-terc
 import { Subject } from 'rxjs';
 import { InfoPerfilCambioPasswordComponent } from '../info-perfil-cambio-password/info-perfil-cambio-password.component';
 import { InfoPerfilEdicionComponent } from '../info-perfil-edicion/info-perfil-edicion.component';
+import { TutorialModalComponent } from '../../common/tutorial-modal/tutorial-modal.component';
 
 @Component({
   selector: 'app-informacion-de-perfil',
@@ -31,6 +32,17 @@ export class InformacionDePerfilComponent implements OnInit {
   ) { }
 
   ngOnInit() {
+    // Modal tutorial
+    if (!this.authenticationService.esAdmin && !JSON.parse(localStorage.getItem('perfilTutorial'))) {
+      const dialogRef = this.dialog.open(TutorialModalComponent, {
+        data: { title: 'Perfil', description: 'En esta sección podés personalizar tu perfil y tu experiencia. Editá tu nombre, incluí una foto y agregá tus datos personales. Generá permisos para que tu equipo o contador puedan acceder a tu cuenta. También podés definir tu preferencia para ver la información de tus negocios de granos en quintales, toneladas o kilos.' }
+      });
+
+      dialogRef.afterClosed().subscribe(result => {
+        localStorage.setItem('perfilTutorial', JSON.stringify(true));
+      });
+    }
+
     this.cargando = false;
 
     this.authenticationService.perfilActivo$.subscribe(

@@ -13,6 +13,7 @@ import { CuentaCorrienteAplicadaDetalleComponent } from '../cuenta-corriente-apl
 import { MovimientoCtaCte } from '../../../../interfaces/ctacte/listado.ctacte';
 import { MovimientoCtaCteAplicada } from '../../../../interfaces/ctacte-aplicada/listado-ctacte-aplicada';
 import { TutorialModalComponent } from '../../../common/tutorial-modal/tutorial-modal.component';
+import { AuthenticationService } from '../../../../services/security/authentication.service';
 
 @Component({
   selector: 'app-cuenta-corriente',
@@ -53,14 +54,21 @@ export class CuentaCorrienteComponent implements OnInit, OnDestroy, AfterViewIni
     private deviceService: DeviceDetectorService,
     private datePipe: DatePipe,
     private monedaService: MonedaService,
-    private snackBar: MatSnackBar
+    private snackBar: MatSnackBar,
+    private authenticationService: AuthenticationService
   ) { }
 
   ngOnInit() {
     // Modal tutorial
-    this.dialog.open(TutorialModalComponent, {
-      data: { title: 'Cuenta', description: 'En esta sección encontrarás los movimientos y aplicaciones de tu cuenta corriente. Podés acceder al detalle de cada operación y sus comprobantes asociados. Usá los filtros para buscar por rubro de negocio, período, o estado de la operación.' }
-    });
+    if (!this.authenticationService.esAdmin && !JSON.parse(localStorage.getItem('cuentasTutorial'))) {
+      const dialogRef = this.dialog.open(TutorialModalComponent, {
+        data: { title: 'Cuenta', description: 'En esta sección encontrarás los movimientos y aplicaciones de tu cuenta corriente. Podés acceder al detalle de cada operación y sus comprobantes asociados. Usá los filtros para buscar por rubro de negocio, período, o estado de la operación.' }
+      });
+
+      dialogRef.afterClosed().subscribe(result => {
+        localStorage.setItem('cuentasTutorial', JSON.stringify(true));
+      });
+    }
 
     this.esCelular = this.deviceService.isMobile();
 

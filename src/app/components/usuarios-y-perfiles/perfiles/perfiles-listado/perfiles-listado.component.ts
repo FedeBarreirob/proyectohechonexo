@@ -45,11 +45,6 @@ export class PerfilesListadoComponent implements OnInit {
 	}
 
   ngOnInit() {
-    // Modal tutorial
-    this.dialog.open(TutorialModalComponent, {
-      data: {}
-    });
-
 		this.cargando = false;
 	}
 

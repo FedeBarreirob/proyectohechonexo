@@ -6,6 +6,7 @@ import { Subject } from 'rxjs';
 import { DeviceDetectorService } from 'ngx-device-detector';
 import { FiltroComprobanteDescarga } from '../../../../interfaces/archivo-de-comprobantes/filtro-comprobante-descarga';
 import { TutorialModalComponent } from '../../../common/tutorial-modal/tutorial-modal.component';
+import { AuthenticationService } from '../../../../services/security/authentication.service';
 
 @Component({
   selector: 'app-comprobantes',
@@ -24,14 +25,21 @@ export class ComprobantesComponent implements OnInit, AfterViewInit {
   constructor(
     private cuentasService: CuentaAlgService,
     private deviceService: DeviceDetectorService,
-    private dialog: MatDialog
+    private dialog: MatDialog,
+    private authenticationService: AuthenticationService
   ) { }
 
   ngOnInit() {
     // Modal tutorial
-    this.dialog.open(TutorialModalComponent, {
-      data: { title: 'Comprobante', description: 'En esta sección encontrarás todos tus comprobantes. Agilizá tu búsqueda usando los filtros que te permiten buscar por palabra clave, origen del comprobante o período. Seleccioná uno o más comprobantes a la vez para descargarlos y compartirlos al instante.' }
-    });
+    if (!this.authenticationService.esAdmin && !JSON.parse(localStorage.getItem('comprobantesTutorial'))) {
+      const dialogRef = this.dialog.open(TutorialModalComponent, {
+        data: { title: 'Comprobante', description: 'En esta sección encontrarás todos tus comprobantes. Agilizá tu búsqueda usando los filtros que te permiten buscar por palabra clave, origen del comprobante o período. Seleccioná uno o más comprobantes a la vez para descargarlos y compartirlos al instante.' }
+      });
+
+      dialogRef.afterClosed().subscribe(result => {
+        localStorage.setItem('comprobantesTutorial', JSON.stringify(true));
+      });
+    }
 
     this.esCelular = this.deviceService.isMobile();
 

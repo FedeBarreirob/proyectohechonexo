@@ -16,6 +16,7 @@ import { saveAs } from 'file-saver/FileSaver';
 import { ComprobantesDownloaderService } from '../../../../services/sharedServices/downloader/comprobantes-downloader.service';
 import { VentasExportacionesService } from '../../../../services/ventas/ventas-exportaciones.service';
 import { TutorialModalComponent } from '../../../common/tutorial-modal/tutorial-modal.component';
+import { AuthenticationService } from '../../../../services/security/authentication.service';
 
 @Component({
   selector: 'app-ventas',
@@ -64,14 +65,21 @@ export class VentasComponent implements OnInit, OnDestroy, AfterViewInit {
     private deviceService: DeviceDetectorService,
     private comprobanteDownloaderService: ComprobantesDownloaderService,
     private snackBar: MatSnackBar,
-    private ventasExportacionesService: VentasExportacionesService
+    private ventasExportacionesService: VentasExportacionesService,
+    private authenticationService: AuthenticationService
   ) { }
 
   ngOnInit() {
     // Modal tutorial
-    this.dialog.open(TutorialModalComponent, {
-      data: { title: 'Ventas', description: 'En esta sección encontrarás todas tus ventas de grano. Podés acceder al detalle de cada fijación y sus comprobantes asociados haciendo click en cada venta. Usá los filtros para acceder al producto, campaña o fecha que desees para agilizar tu búsqueda.' }
-    });
+    if (!this.authenticationService.esAdmin && !JSON.parse(localStorage.getItem('ventasTutorial'))) {
+      const dialogRef = this.dialog.open(TutorialModalComponent, {
+        data: { title: 'Ventas', description: 'En esta sección encontrarás todas tus ventas de grano. Podés acceder al detalle de cada fijación y sus comprobantes asociados haciendo click en cada venta. Usá los filtros para acceder al producto, campaña o fecha que desees para agilizar tu búsqueda.' }
+      });
+
+      dialogRef.afterClosed().subscribe(result => {
+        localStorage.setItem('ventasTutorial', JSON.stringify(true));
+      });
+    }
 
     this.esCelular = this.deviceService.isMobile();
 

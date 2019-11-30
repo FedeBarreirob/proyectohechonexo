@@ -24,7 +24,6 @@ export class DashboardComponent implements OnInit {
   cargandoIndicadorVentasRecientes: boolean = false;
   esCelular: boolean;
   hayNotificacionesNuevas: boolean = false;
-  ocultarTutorial: boolean = false;
 
   constructor(
     private deviceService: DeviceDetectorService,
@@ -35,14 +34,14 @@ export class DashboardComponent implements OnInit {
 
   ngOnInit() {
     // Modal tutorial
-    if (!this.ocultarTutorial) {
+    if (!this.authenticationService.esAdmin && !JSON.parse(localStorage.getItem('homeTutorial'))) {
       const dialogRef = this.dialog.open(TutorialModalComponent, {
-        data: { title: 'Dashboard', description: 'Descripción de prueba ahd65h654adh654da546ha546dhd654ah654ah546ah546ad ad65h65a4 h45adh56 ha654 dha654dh4ad65 ha6d54h465adh65ad4ha5d64h65ad4h654adh4ad4 564ad564h54 56 4hha654a hd546 had45 had546 ahd456 had654had456had' }
+        data: {
+          title: 'Inicio', description: 'En esta sección encontrarás un resumen rápido de: cuánto dinero disponés para cobrar o pagar en todo concepto, contemplando el tipo de cambio correspondiente a la fecha, cuánto grano entregado o pendiente de entrega, cuánto grano vendido o pendiente de fijar, pesificar o liquidar las últimas entregas y ventas realizadas' }
       });
 
       dialogRef.afterClosed().subscribe(result => {
-        debugger;
-        this.ocultarTutorial = result;
+        localStorage.setItem('homeTutorial', JSON.stringify(true));
       });
     }
 

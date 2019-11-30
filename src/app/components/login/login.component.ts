@@ -77,6 +77,14 @@ export class LoginComponent implements OnInit {
 			this.authenticationService.login(frm.username, frm.password).subscribe(
 				respuesta => {
 					if (respuesta && respuesta.exito == true) {
+						localStorage.setItem('homeTutorial', JSON.stringify(false));
+						localStorage.setItem('contratosTutorial', JSON.stringify(false));
+						localStorage.setItem('entregasTutorial', JSON.stringify(false));
+						localStorage.setItem('ventasTutorial', JSON.stringify(false));
+						localStorage.setItem('cuentasTutorial', JSON.stringify(false));
+						localStorage.setItem('comprobantesTutorial', JSON.stringify(false));
+						localStorage.setItem('reportesTutorial', JSON.stringify(false));
+						localStorage.setItem('perfilTutorial', JSON.stringify(false));
 						this.authenticationService.guardarTokenUsuarioLogueado(frm.username, respuesta.token);
 
 						if (frm.recuerdame == true) {

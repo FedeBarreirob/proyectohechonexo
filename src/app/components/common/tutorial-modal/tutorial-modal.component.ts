@@ -11,14 +11,13 @@ export class TutorialModalComponent implements OnInit {
 
   title: string;
   description: string;
-  ocultarTutorial: boolean;
 
   constructor(
     @Inject(MAT_DIALOG_DATA) public data: TutorialModalComponent,
     public dialogRef: MatDialogRef<any>) { }
 
   ngOnInit() {
-    
+
   }
 
   onNoClick(): void {

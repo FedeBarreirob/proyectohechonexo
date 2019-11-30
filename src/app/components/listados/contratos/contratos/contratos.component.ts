@@ -13,6 +13,7 @@ import { FiltroPersonalizadoParaFiltroCereal } from '../../../../interfaces/vari
 import { ComprobantesDownloaderService } from '../../../../services/sharedServices/downloader/comprobantes-downloader.service';
 import { saveAs } from 'file-saver/FileSaver';
 import { TutorialModalComponent } from '../../../common/tutorial-modal/tutorial-modal.component';
+import { AuthenticationService } from '../../../../services/security/authentication.service';
 
 @Component({
   selector: 'app-contratos',
@@ -58,14 +59,21 @@ export class ContratosComponent implements OnInit, OnDestroy, AfterViewInit {
     private cuentaAlgService: CuentaAlgService,
     private deviceService: DeviceDetectorService,
     private comprobanteDownloaderService: ComprobantesDownloaderService,
-    private snackBar: MatSnackBar
+    private snackBar: MatSnackBar,
+    private authenticationService: AuthenticationService
   ) { }
 
   ngOnInit() {
     // Modal tutorial
-    this.dialog.open(TutorialModalComponent, {
-      data: { title: 'Contratos', description: 'En esta sección encontrás todos los contratos de granos que realizaste. Rápidamente conocé para cada negocio o contrato cuánto grano tenés entregado, fijado, liquidado o pagado.', description2: 'Recordá usar los filtros para llegar más rápido a la información que querés ubicar.', description3: 'Podés acceder al detalle de cada operación, sus condiciones y comprobantes asociados haciendo click en cada contrato.'}
-    });
+    if (!this.authenticationService.esAdmin && !JSON.parse(localStorage.getItem('contratosTutorial'))) {
+      const dialogRef = this.dialog.open(TutorialModalComponent, {
+        data: { title: 'Contratos', description: 'En esta sección encontrás todos los contratos de granos que realizaste. Rápidamente conocé para cada negocio o contrato cuánto grano tenés entregado, fijado, liquidado o pagado.', description2: 'Recordá usar los filtros para llegar más rápido a la información que querés ubicar.', description3: 'Podés acceder al detalle de cada operación, sus condiciones y comprobantes asociados haciendo click en cada contrato.' }
+      });
+
+      dialogRef.afterClosed().subscribe(result => {
+        localStorage.setItem('contratosTutorial', JSON.stringify(true));
+      });
+    }
 
     this.esCelular = this.deviceService.isMobile();
 
