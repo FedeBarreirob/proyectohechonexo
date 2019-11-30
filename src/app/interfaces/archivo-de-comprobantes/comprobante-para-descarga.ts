@@ -1,5 +1,6 @@
 export interface ComprobanteParaDescarga {
     comprobante: string,
     link: string,
-    existeArchivo: boolean
+    existeArchivo: boolean,
+    concepto?: string
 }
