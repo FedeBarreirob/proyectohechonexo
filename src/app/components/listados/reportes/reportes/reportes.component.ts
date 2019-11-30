@@ -24,7 +24,7 @@ export class ReportesComponent implements OnInit, AfterViewInit {
   ngOnInit() {
     // Modal tutorial
     this.dialog.open(TutorialModalComponent, {
-      data: {}
+      data: { title: 'Reportes', description: 'En esta sección encontrarás reportes de interés que agilizarán tu trabajo. Ya puedes encontrar el “Reporte de existencias” a la fecha que desees para compartirle a tu equipo contable en segundos. Nuevos reportes instantáneos aparecerán próximamente.' }
     });
 
     this.esCelular = this.deviceService.isMobile();

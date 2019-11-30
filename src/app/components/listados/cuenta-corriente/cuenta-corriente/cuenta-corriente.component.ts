@@ -59,7 +59,7 @@ export class CuentaCorrienteComponent implements OnInit, OnDestroy, AfterViewIni
   ngOnInit() {
     // Modal tutorial
     this.dialog.open(TutorialModalComponent, {
-      data: {}
+      data: { title: 'Cuenta', description: 'En esta sección encontrarás los movimientos y aplicaciones de tu cuenta corriente. Podés acceder al detalle de cada operación y sus comprobantes asociados. Usá los filtros para buscar por rubro de negocio, período, o estado de la operación.' }
     });
 
     this.esCelular = this.deviceService.isMobile();

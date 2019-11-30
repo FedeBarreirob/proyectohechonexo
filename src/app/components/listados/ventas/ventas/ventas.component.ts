@@ -70,7 +70,7 @@ export class VentasComponent implements OnInit, OnDestroy, AfterViewInit {
   ngOnInit() {
     // Modal tutorial
     this.dialog.open(TutorialModalComponent, {
-      data: {}
+      data: { title: 'Ventas', description: 'En esta sección encontrarás todas tus ventas de grano. Podés acceder al detalle de cada fijación y sus comprobantes asociados haciendo click en cada venta. Usá los filtros para acceder al producto, campaña o fecha que desees para agilizar tu búsqueda.' }
     });
 
     this.esCelular = this.deviceService.isMobile();

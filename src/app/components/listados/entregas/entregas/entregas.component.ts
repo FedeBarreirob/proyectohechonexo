@@ -55,7 +55,7 @@ export class EntregasComponent implements OnInit, OnDestroy, AfterViewInit {
   ngOnInit() {
     // Modal tutorial
     this.dialog.open(TutorialModalComponent, {
-      data: {}
+      data: { title: 'Entregas', description: 'En esta sección encontrarás todas tus entregas de grano. Podés acceder al detalle de cada descarga y sus comprobantes asociados haciendo click en cada entrega. Usá los filtros para acceder al producto, campaña o fecha que quieras para agilizar tu búsqueda.' }
     });
 
     this.esCelular = this.deviceService.isMobile();

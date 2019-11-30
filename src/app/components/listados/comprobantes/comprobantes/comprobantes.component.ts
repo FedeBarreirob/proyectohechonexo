@@ -30,7 +30,7 @@ export class ComprobantesComponent implements OnInit, AfterViewInit {
   ngOnInit() {
     // Modal tutorial
     this.dialog.open(TutorialModalComponent, {
-      data: {}
+      data: { title: 'Comprobante', description: 'En esta sección encontrarás todos tus comprobantes. Agilizá tu búsqueda usando los filtros que te permiten buscar por palabra clave, origen del comprobante o período. Seleccioná uno o más comprobantes a la vez para descargarlos y compartirlos al instante.' }
     });
 
     this.esCelular = this.deviceService.isMobile();
