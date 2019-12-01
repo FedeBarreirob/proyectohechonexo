@@ -10,7 +10,7 @@
 
 .input-fecha {
     height: 32px;
-    width: auto;
+    width: 77px;
     padding-left: 10px;
     color: #666666;
     font-family: Rubik;
@@ -38,7 +38,7 @@
 
 .boton-limpiar {
     height: 40px;
-    width: 104px;
+    width: 90px;
     border: 1px solid #2DA442;
     border-radius: 4px;
     color: #2DA442;
@@ -48,7 +48,7 @@
 
 .boton-aplicar {
     height: 40px;
-    width: 104px;
+    width: 90px;
     background-color: #2DA442;
     border: 1px solid #2DA442;
     border-radius: 4px;
