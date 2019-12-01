@@ -33,15 +33,32 @@ export class DashboardComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-    // Modal tutorial
-    if (!this.authenticationService.esAdmin && !JSON.parse(localStorage.getItem('homeTutorial'))) {
+    // Modal tutorial bienvenida
+    if (!this.authenticationService.esAdmin && !JSON.parse(localStorage.getItem('welcomeTutorial'))) {
       const dialogRef = this.dialog.open(TutorialModalComponent, {
-        data: {
-          title: 'Inicio', description: 'En esta sección encontrarás un resumen rápido de: cuánto dinero disponés para cobrar o pagar en todo concepto, contemplando el tipo de cambio correspondiente a la fecha, cuánto grano entregado o pendiente de entrega, cuánto grano vendido o pendiente de fijar, pesificar o liquidar las últimas entregas y ventas realizadas' }
+        data: { buttonText: 'OK!', title: '¡Bienvenido a Gaviglio Digital!', description: 'Ya puedes acceder a toda la información de tu cuenta de manera sencilla y ágil, en cualquier momento o lugar, desde tu celular o tu computadora.' }
       });
 
       dialogRef.afterClosed().subscribe(result => {
-        localStorage.setItem('homeTutorial', JSON.stringify(true));
+        localStorage.setItem('welcomeTutorial', JSON.stringify(true));
+
+        // Modal tutorial
+        if (!this.authenticationService.esAdmin && !JSON.parse(localStorage.getItem('homeTutorial'))) {
+          const dialogRef2 = this.dialog.open(TutorialModalComponent, {
+            data: {
+              title: 'Inicio',
+              description: 'En esta sección encontrarás un resumen rápido de:',
+              listItems: ['Cuánto dinero disponés para cobrar o pagar en todo concepto, contemplando el tipo de cambio correspondiente a la fecha',
+                'Cuánto grano entregado o pendiente de entrega',
+                'Cuánto grano vendido o pendiente de fijar, pesificar o liquidar',
+                'Las últimas entregas y ventas realizadas']
+            }
+          });
+
+          dialogRef2.afterClosed().subscribe(result => {
+            localStorage.setItem('homeTutorial', JSON.stringify(true));
+          });
+        }
       });
     }
 

@@ -11,6 +11,7 @@ export class TutorialModalComponent implements OnInit {
 
   title: string;
   description: string;
+  listItems: Array<any> = [];
 
   constructor(
     @Inject(MAT_DIALOG_DATA) public data: TutorialModalComponent,

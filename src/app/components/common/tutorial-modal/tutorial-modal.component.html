@@ -1,17 +1,13 @@
-<h1 mat-dialog-title>{{data.title ? data.title : 'Tutorial Modal'}}</h1>
+<h1 class="tutorial-modal" mat-dialog-title>{{data.title}}</h1>
 
-<div mat-dialog-content>
+<div class="tutorial-modal">
   {{data.description}}
 
-  <br /><br />
-
-  {{data.description2}}
-
-  <br />
-
-  {{data.description3}}
+  <ul *ngIf="data.listItems">
+    <li *ngFor="let item of data.listItems">{{item}}</li>
+  </ul>
 </div>
 
 <div mat-dialog-actions>
-  <button mat-button [mat-dialog-close]="ocultarTutorial" cdkFocusInitial>Entendido</button>
+  <button mat-button (click)="onNoClick();" cdkFocusInitial class="tutorial-modal">{{data.buttonText ? data.buttonText : "Entendido"}}</button>
 </div>
