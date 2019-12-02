@@ -86,9 +86,8 @@ export class CtaCteFiltroDesktopComponent implements OnInit {
   limpiar() {
     this.rubro = null;
     this.filtrosTipoCheck = [];
-    var checkBoxList = document.getElementsByClassName("mat-checkbox-checked");
-    for (var i = 0; i < checkBoxList.length; i++) {
-      checkBoxList[i].classList.remove("mat-checkbox-checked");
+    for (var i = 0; i < this.filtroPersonalizado.length; i++) {
+      this.filtroPersonalizado[i].value = false;
     }
     var dt = new Date();
     dt.setDate(dt.getDate() - 7);
