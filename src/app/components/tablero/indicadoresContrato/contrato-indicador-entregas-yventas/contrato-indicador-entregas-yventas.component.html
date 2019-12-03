@@ -51,21 +51,21 @@
                 </ng-template>
             </mat-tab>
 
-            <mat-tab label="Pagos">
-                <ng-template matTabContent>
-                    <app-contrato-indicador-swiper-ventas-pagos
-                        *ngIf="resumenDeContratos != null && resumenDeContratos.indicadoresPagos != null && cargando == false"
-                        [indicadores]="resumenDeContratos.indicadoresPagos" [unidadMedida]="unidadMedida">
-                    </app-contrato-indicador-swiper-ventas-pagos>
-                </ng-template>
-            </mat-tab>
-
             <mat-tab label="Liquidaciones">
                 <ng-template matTabContent>
                     <app-contrato-indicador-swiper-ventas-liquidadas
                         *ngIf="resumenDeContratos != null && resumenDeContratos.indicadoresLiquidacion != null && cargando == false"
                         [indicadores]="resumenDeContratos.indicadoresLiquidacion" [unidadMedida]="unidadMedida">
                     </app-contrato-indicador-swiper-ventas-liquidadas>
+                </ng-template>
+            </mat-tab>
+
+            <mat-tab label="Pagos">
+                <ng-template matTabContent>
+                    <app-contrato-indicador-swiper-ventas-pagos
+                        *ngIf="resumenDeContratos != null && resumenDeContratos.indicadoresPagos != null && cargando == false"
+                        [indicadores]="resumenDeContratos.indicadoresPagos" [unidadMedida]="unidadMedida">
+                    </app-contrato-indicador-swiper-ventas-pagos>
                 </ng-template>
             </mat-tab>
         </mat-tab-group>
