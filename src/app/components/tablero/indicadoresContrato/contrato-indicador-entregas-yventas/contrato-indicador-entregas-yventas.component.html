@@ -71,8 +71,13 @@
         </mat-tab-group>
     </span>
 
+  <!--Spinner-->
+  <div fxLayout="row" fxLayoutAlign="center center" *ngIf="cargando" style="margin-top: 10px">
+    <mat-spinner diameter="24"></mat-spinner>
+  </div>
+
     <!--Si no hay datos a mostrar-->
-    <div fxLayout="column" fxLayoutAlign="center center" *ngIf="!hayDatosCargados" class="info-sin-data-container">
+    <div fxLayout="column" fxLayoutAlign="center center" *ngIf="!hayDatosCargados && !cargando" class="info-sin-data-container">
         <div fxFlex="nogrow">
             <img src="assets/varios/sin-data.png" class="info-sin-data-img" />
         </div>

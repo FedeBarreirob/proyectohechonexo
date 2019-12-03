@@ -1,6 +1,6 @@
 <!--Tipo de cambio modo celular-->
 <div class="contenedor-fecha-tipocambio" fxLayout="row" fxLayoutAlign="space-between center"
-  *ngIf="cargando == false && esCelular">
+     *ngIf="esCelular">
   <div fxFlex="50%" class="contenedor-fecha-hora">
     <app-fecha-hora></app-fecha-hora>
   </div>
@@ -22,15 +22,20 @@
 <!--Saldos modo celular-->
 <span *ngIf="esCelular">
   <app-saldo-cta-cte-aplicada-global-acobrar *ngIf="cargando == false" [seObtuvoSaldoExito]="seObtuvoSaldoExito"
-    [saldoGlobal]="saldoGlobal"></app-saldo-cta-cte-aplicada-global-acobrar>
+                                             [saldoGlobal]="saldoGlobal"></app-saldo-cta-cte-aplicada-global-acobrar>
 
   <app-saldo-cta-cte-aplicada-global-apagar *ngIf="cargando == false" [seObtuvoSaldoExito]="seObtuvoSaldoExito"
-    [saldoGlobal]="saldoGlobal"></app-saldo-cta-cte-aplicada-global-apagar>
+                                            [saldoGlobal]="saldoGlobal"></app-saldo-cta-cte-aplicada-global-apagar>
+
+  <!--Spinner-->
+  <div fxLayout="row" fxLayoutAlign="center center" *ngIf="cargando" style="margin-top: 10px">
+    <mat-spinner diameter="24"></mat-spinner>
+  </div>
 </span>
 
 <!--Tipo de cambio modo desktop-->
 <div class="contenedor-fecha-tipocambio-desktop" fxLayout="row" fxLayoutAlign="space-between center"
-  *ngIf="cargando == false && !esCelular">
+     *ngIf="!esCelular">
   <div fxFlex="50%" class="contenedor-saludo-desktop">
     Hola {{nombre}}
   </div>
@@ -63,12 +68,17 @@
     <tr>
       <td style="width: 50%;">
         <app-saldo-cta-cte-aplicada-global-acobrar *ngIf="cargando == false" [seObtuvoSaldoExito]="seObtuvoSaldoExito"
-          [saldoGlobal]="saldoGlobal"></app-saldo-cta-cte-aplicada-global-acobrar>
+                                                   [saldoGlobal]="saldoGlobal"></app-saldo-cta-cte-aplicada-global-acobrar>
       </td>
       <td style="width: 50%;">
         <app-saldo-cta-cte-aplicada-global-apagar *ngIf="cargando == false" [seObtuvoSaldoExito]="seObtuvoSaldoExito"
-          [saldoGlobal]="saldoGlobal"></app-saldo-cta-cte-aplicada-global-apagar>
+                                                  [saldoGlobal]="saldoGlobal"></app-saldo-cta-cte-aplicada-global-apagar>
       </td>
     </tr>
   </table>
+
+  <!--Spinner-->
+  <div fxLayout="row" fxLayoutAlign="center center" *ngIf="cargando" style="margin-top: 10px">
+    <mat-spinner diameter="24"></mat-spinner>
+  </div>
 </div>
