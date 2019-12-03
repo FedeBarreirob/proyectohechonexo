@@ -9,11 +9,13 @@
 
   <div fxLayout="row" fxLayoutAlign="start center" class="contenedor-control" *ngIf="data.userName">
     <div fxFlex="100%">
-      <input class="input" matInput formControlName="data.username" cdkFocusInitial placeholder="Campo de carga: Ej. Juan, Laura">
+      <input class="input" matInput cdkFocusInitial placeholder="Campo de carga: Ej. Juan, Laura" [(ngModel)]="data.username">
     </div>
   </div>
+
+  {{data.description2}}
 </div>
 
-<div mat-dialog-actions>
-  <button mat-button (click)="onNoClick();" class="tutorial-modal">{{data.buttonText ? data.buttonText : "Entendido"}}</button>
+<div mat-dialog-actions align="end">
+  <button mat-button [mat-dialog-close]="data.username" class="tutorial-modal">{{data.buttonText ? data.buttonText : "Entendido"}}</button>
 </div>

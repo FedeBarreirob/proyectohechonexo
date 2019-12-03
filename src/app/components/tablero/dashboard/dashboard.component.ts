@@ -7,6 +7,10 @@ import { AuthenticationService } from '../../../services/security/authentication
 import { UserAuth } from '../../../models/security/user';
 import { EstadoNotificaciones } from '../../../enums/estado-notificaciones.enum';
 import { TutorialModalComponent } from '../../../components/common/tutorial-modal/tutorial-modal.component';
+import { PerfilesService } from '../../../services/perfiles/perfiles.service';
+import { PerfilBasico } from '../../../interfaces/perfiles/perfil-basico';
+import { takeUntil } from 'rxjs/operators';
+import { window } from 'rxjs/internal/operators/window';
 
 @Component({
   selector: 'app-dashboard',
@@ -24,12 +28,15 @@ export class DashboardComponent implements OnInit {
   cargandoIndicadorVentasRecientes: boolean = false;
   esCelular: boolean;
   hayNotificacionesNuevas: boolean = false;
+  destroy$: Subject<any> = new Subject<any>();
+  perfilBasico: PerfilBasico;
 
   constructor(
     private deviceService: DeviceDetectorService,
     private notificacionService: NotificacionesService,
     private authenticationService: AuthenticationService,
-    private dialog: MatDialog
+    private dialog: MatDialog,
+    private perfilService: PerfilesService
   ) { }
 
   ngOnInit() {
@@ -45,8 +52,15 @@ export class DashboardComponent implements OnInit {
           data: { buttonText: 'Adelante!', title: '¡Bienvenido a Gaviglio Digital! 2/2', description: 'Escribe tu nombre para personalizar tu experiencia:', description2: 'Recuerda que puedes editarlo también en la sección Perfil.', userName: ' ' }
         });
 
-        dialogRef2.afterClosed().subscribe(result => {
+        dialogRef2.afterClosed().subscribe(userName => {
           localStorage.setItem('welcomeTutorial', JSON.stringify(true));
+          this.authenticationService.perfilActivo$
+            .pipe(takeUntil(this.destroy$))
+            .subscribe(
+            perfil => {
+              perfil.informacionPersonal.nombre = userName;
+              this.perfilService.actualizarDatosPersonales(perfil);
+            });
 
           // Modal tutorial
           if (!this.authenticationService.esAdmin && !JSON.parse(localStorage.getItem('homeTutorial'))) {
