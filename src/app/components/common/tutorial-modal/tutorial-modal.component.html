@@ -6,8 +6,14 @@
   <ul *ngIf="data.listItems">
     <li *ngFor="let item of data.listItems">{{item}}</li>
   </ul>
+
+  <div fxLayout="row" fxLayoutAlign="start center" class="contenedor-control" *ngIf="data.userName">
+    <div fxFlex="100%">
+      <input class="input" matInput formControlName="data.username" cdkFocusInitial placeholder="Campo de carga: Ej. Juan, Laura">
+    </div>
+  </div>
 </div>
 
 <div mat-dialog-actions>
-  <button mat-button (click)="onNoClick();" cdkFocusInitial class="tutorial-modal">{{data.buttonText ? data.buttonText : "Entendido"}}</button>
+  <button mat-button (click)="onNoClick();" class="tutorial-modal">{{data.buttonText ? data.buttonText : "Entendido"}}</button>
 </div>
