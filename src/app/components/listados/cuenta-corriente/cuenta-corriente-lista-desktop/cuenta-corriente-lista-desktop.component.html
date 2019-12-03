@@ -21,7 +21,7 @@
 <mat-progress-bar *ngIf="descargandoArchivos" mode="indeterminate"></mat-progress-bar>
 
 <!--Header-->
-<div class="contenedor-header">
+<div class="contenedor-header" *ngIf="listado && listado.length > 0">
   <app-cuenta-corriente-header-item-desktop (cambioSeleccion)="seleccionarTodos($event)">
   </app-cuenta-corriente-header-item-desktop>
 </div>
@@ -38,4 +38,14 @@
     <mat-spinner diameter="24"></mat-spinner>
   </div>
 
+  <!--Si no hay datos a mostrar-->
+  <div fxLayout="column" fxLayoutAlign="center center" *ngIf="!cargando && listado && listado.length == 0" class="info-sin-data-container">
+      <div fxFlex="nogrow">
+          <img src="assets/varios/sin-data.png" class="info-sin-data-img"/>
+      </div>
+
+      <div fxFlex="nogrow" class="info-sin-data-text">
+          Cuando tengamos información de tus cuentas corrientes la podrás ver aquí.
+      </div>
+  </div>
 </div>

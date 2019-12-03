@@ -1,5 +1,6 @@
 <div class="contenedor-header">
-  <app-entregas-header-item-desktop (cambioSeleccion)="seleccionarTodos($event)" [unidadMedida]="unidadMedida">
+  <app-entregas-header-item-desktop *ngIf="listadoEntregas && listadoEntregas.length > 0"
+    (cambioSeleccion)="seleccionarTodos($event)" [unidadMedida]="unidadMedida">
   </app-entregas-header-item-desktop>
 </div>
 
@@ -15,4 +16,15 @@
     <mat-spinner diameter="24"></mat-spinner>
   </div>
 
+  <!--Si no hay datos a mostrar-->
+  <div fxLayout="column" fxLayoutAlign="center center"
+    *ngIf="!cargando && listadoEntregas && listadoEntregas.length == 0" class="info-sin-data-container">
+    <div fxFlex="nogrow">
+      <img src="assets/varios/sin-data.png" class="info-sin-data-img" />
+    </div>
+
+    <div fxFlex="nogrow" class="info-sin-data-text">
+      Cuando tengamos información de tus entregas la podrás ver aquí.
+    </div>
+  </div>
 </div>

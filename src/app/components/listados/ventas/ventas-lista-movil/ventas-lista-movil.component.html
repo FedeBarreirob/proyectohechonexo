@@ -38,4 +38,14 @@
     <mat-spinner diameter="24"></mat-spinner>
   </div>
 
+  <!--Si no hay datos a mostrar-->
+  <div fxLayout="column" fxLayoutAlign="center center" *ngIf="!cargando && listado && listado.length == 0" class="info-sin-data-container">
+      <div fxFlex="nogrow">
+          <img src="assets/varios/sin-data.png" class="info-sin-data-img"/>
+      </div>
+
+      <div fxFlex="nogrow" class="info-sin-data-text">
+          Cuando tengamos información de tus ventas la podrás ver aquí.
+      </div>
+  </div>
 </div>

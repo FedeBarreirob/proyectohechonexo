@@ -1,12 +1,14 @@
 <div class="contenedor-header">
-  <app-contratos-resumen-header-item-desktop (cambioSeleccion)="seleccionarTodos($event)"></app-contratos-resumen-header-item-desktop>
+  <app-contratos-resumen-header-item-desktop *ngIf="listadoContratos && listadoContratos.length > 0"
+    (cambioSeleccion)="seleccionarTodos($event)"></app-contratos-resumen-header-item-desktop>
 </div>
 
 <div class="contenedor-listado" fxLayout="column" fxLayoutWrap fxLayoutAlign="none" infiniteScroll
   [infiniteScrollDistance]="2" [infiniteScrollThrottle]="50" (scrolled)="onScroll()" [scrollWindow]="false">
 
   <app-contratos-resumen-item-desktop *ngFor="let movimiento of (listadoContratos ? listadoContratos : [])"
-     [resumen]="movimiento" [unidadMedida]="unidadMedida" (cambioSeleccion)="rearmarListaSeleccionados()" (verDetalle)="verDetalle($event)">
+    [resumen]="movimiento" [unidadMedida]="unidadMedida" (cambioSeleccion)="rearmarListaSeleccionados()"
+    (verDetalle)="verDetalle($event)">
   </app-contratos-resumen-item-desktop>
 
   <!--Spinner-->
@@ -15,4 +17,15 @@
     <mat-spinner diameter="24"></mat-spinner>
   </div>
 
+  <!--Si no hay datos a mostrar-->
+  <div fxLayout="column" fxLayoutAlign="center center"
+    *ngIf="!cargando && listadoContratos && listadoContratos.length == 0" class="info-sin-data-container">
+    <div fxFlex="nogrow">
+      <img src="assets/varios/sin-data.png" class="info-sin-data-img" />
+    </div>
+
+    <div fxFlex="nogrow" class="info-sin-data-text">
+      Cuando tengamos información de tus contratos la podrás ver aquí.
+    </div>
+  </div>
 </div>
