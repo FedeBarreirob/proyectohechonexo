@@ -34,17 +34,19 @@
   <div fxLayout="row" fxLayoutAlign="space-between center" fxLayoutGap="20px"
     *ngIf="esCelular != null && esCelular == false">
 
-    <div fxFlex="160px" style="padding-left: 13px;">
+    <div fxFlex="nogrow" style="padding-left: 13px;">
       Listado de entregas
     </div>
 
-    <div fxFlex *ngIf="!identificadoresParaDescarga || identificadoresParaDescarga.length <= 0">
+    <div fxFlex *ngIf="!identificadoresParaDescarga || identificadoresParaDescarga.length <= 0"
+      style="padding-right: 13px;">
       <app-cereales-filtro-desktop [filtrosEspecieCosecha]="filtrosEspecieCosecha" [cuenta]="cuenta"
-        (botonAplicar)="cargarListado($event)" [disabled]="cargando || cargandoFiltros">
+        (botonAplicar)="cargarListado($event)" [disabled]="(cargando$ | async) || cargandoFiltros">
       </app-cereales-filtro-desktop>
     </div>
 
-    <div fxFlex *ngIf="identificadoresParaDescarga && identificadoresParaDescarga.length > 0">
+    <div fxFlex *ngIf="identificadoresParaDescarga && identificadoresParaDescarga.length > 0"
+      style="padding-right: 13px;">
       <app-tool-bar-descargas (descargarComprobanteChange)="descargarSeleccionados()"
         [botonesExtras]="botonesBarraDescargaExtras" [disabled]="descargandoArchivos"
         (botonPresionado)="exportarSegunOpcion($event)"></app-tool-bar-descargas>

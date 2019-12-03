@@ -33,14 +33,14 @@
   <div fxLayout="row" fxLayoutAlign="space-between center" class="contenedor-titulo-filtro" fxLayoutGap="20px"
     *ngIf="esCelular != null && esCelular == false" style="padding-top: 0">
 
-    <div fxFlex="150px">
-      Listado de ventas
+    <div fxFlex="nogrow">
+      Listado
     </div>
 
     <div fxFlex *ngIf="!identificadoresParaDescarga || identificadoresParaDescarga.length <= 0">
       <app-cereales-filtro-desktop [filtrosEspecieCosecha]="filtrosEspecieCosecha" [cuenta]="cuenta"
         [filtroPersonalizado]="filtroPersonalizado" (botonAplicar)="cargarListado($event)"
-        [disabled]="cargando || cargandoFiltros">
+        [disabled]="(cargando$ | async) || cargandoFiltros">
       </app-cereales-filtro-desktop>
     </div>
 

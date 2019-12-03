@@ -33,6 +33,9 @@ export class CtaCteFiltroDesktopComponent implements OnInit {
   @Input()
   hasta: Date;
 
+  @Input()
+  disabled: boolean = false;
+
   filtroPersonalizadoSeleccionado: FiltroPersonalizadoParaFiltroCtaCte = null;
   filtrosTipoCheck: Array<any> = [];
 
@@ -67,10 +70,14 @@ export class CtaCteFiltroDesktopComponent implements OnInit {
   cargarFechasPorDefecto() {
     if (this.desde) {
       this.fechaDesde = this.desde.toISOString();
+    } else {
+      this.fechaDesde = null;
     }
 
     if (this.hasta) {
       this.fechaHasta = this.hasta.toISOString();
+    } else {
+      this.fechaHasta = null;
     }
   }
 
@@ -89,10 +96,8 @@ export class CtaCteFiltroDesktopComponent implements OnInit {
     for (var i = 0; i < this.filtroPersonalizado.length; i++) {
       this.filtroPersonalizado[i].value = false;
     }
-    var dt = new Date();
-    dt.setDate(dt.getDate() - 7);
-    this.fechaDesde = dt.toISOString();
-    this.fechaHasta = new Date().toISOString();
+
+    this.cargarFechasPorDefecto();
   }
 
   /**
@@ -131,18 +136,22 @@ export class CtaCteFiltroDesktopComponent implements OnInit {
 
     let filtroConRubros = filtro;
 
-    switch (this.rubro) {
-      case "granos":
-        filtroConRubros.granos = true;
-        break;
+    if (this.rubro) {
 
-      case "agroinsumos":
-        filtroConRubros.agroinsumos = true;
-        break;
+      switch (this.rubro.codigo) {
+        case "granos":
+          filtroConRubros.granos = true;
+          break;
 
-      case "balanceado":
-        filtroConRubros.nutricionAnimal = true;
-        break;
+        case "agroinsumos":
+          filtroConRubros.agroinsumos = true;
+          break;
+
+        case "balanceado":
+          filtroConRubros.nutricionAnimal = true;
+          break;
+      }
+
     }
 
     return filtroConRubros;
