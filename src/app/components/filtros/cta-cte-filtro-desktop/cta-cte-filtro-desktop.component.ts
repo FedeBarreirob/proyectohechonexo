@@ -82,6 +82,19 @@ export class CtaCteFiltroDesktopComponent implements OnInit {
     this.rubro = unRubro;
   }
 
+  // funcion que limpiar 
+  limpiar() {
+    this.rubro = null;
+    this.filtrosTipoCheck = [];
+    for (var i = 0; i < this.filtroPersonalizado.length; i++) {
+      this.filtroPersonalizado[i].value = false;
+    }
+    var dt = new Date();
+    dt.setDate(dt.getDate() - 7);
+    this.fechaDesde = dt.toISOString();
+    this.fechaHasta = new Date().toISOString();
+  }
+
   /**
    * funcion que arma un filtro y lo notifica al llamador
    */

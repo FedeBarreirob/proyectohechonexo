@@ -25,7 +25,7 @@
       </button>
 
       <span *ngFor="let unFiltro of filtroPersonalizado">
-        <mat-checkbox *ngIf="unFiltro.checkbox" class="mat-menu-item"
+        <mat-checkbox *ngIf="unFiltro.checkbox" class="mat-menu-item" [(ngModel)]="unFiltro.value"
           (click)="$event.stopPropagation()" (change)="seleccionarOpcionPersonalizadaCheckbox($event, unFiltro);">{{unFiltro.descripcion}}
         </mat-checkbox>
 
@@ -56,8 +56,15 @@
 
   <!--Ejecutar filtro-->
   <div fxFlex="nogrow">
-    <button mat-icon-button (click)="aplicar()" [disabled]="disabled" matTooltip="Buscar">
-      <mat-icon>navigate_next</mat-icon>
-    </button>
+    <!--botones-->
+    <div fxLayout="row" fxLayoutAlign="space-between center" class="contenedor-botones">
+      <div fxFlex="50%">
+        <button mat-button class="boton-limpiar" (click)="limpiar()" [disabled]="disabled">Limpiar</button>
+      </div>
+
+      <div fxFlex="50%">
+        <button mat-button class="boton-aplicar" (click)="aplicar()" [disabled]="disabled">Aplicar</button>
+      </div>
+    </div>
   </div>
 </div>

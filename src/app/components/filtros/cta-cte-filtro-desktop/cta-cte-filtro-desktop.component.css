@@ -10,7 +10,7 @@
 
 .input-fecha {
     height: 32px;
-    width: auto;
+    width: 77px;
     padding-left: 10px;
     color: #666666;
     font-family: Rubik;
@@ -34,4 +34,27 @@
     font-size: 14px;
     height: 48px;
     min-width: 200px;
+}
+
+.boton-limpiar {
+    height: 40px;
+    width: 90px;
+    border: 1px solid #2DA442;
+    border-radius: 4px;
+    color: #2DA442;
+    font-family: Rubik;
+    font-size: 14px;
+}
+
+.boton-aplicar {
+    height: 40px;
+    width: 90px;
+    background-color: #2DA442;
+    border: 1px solid #2DA442;
+    border-radius: 4px;
+    color: #FFFFFF;
+    font-family: Rubik;
+    font-size: 14px;
+    font-weight: bold;
+    margin-left: 5px;
 }
