@@ -13,6 +13,9 @@ import { takeUntil } from 'rxjs/operators';
 import { ComprobantesDownloaderService } from '../../../../services/sharedServices/downloader/comprobantes-downloader.service';
 import { saveAs } from 'file-saver/FileSaver';
 import { EntregasExportacionesService } from '../../../../services/entregas/entregas-exportaciones.service';
+import { TutorialModalComponent } from '../../../common/tutorial-modal/tutorial-modal.component';
+import { AuthenticationService } from '../../../../services/security/authentication.service';
+import { TutorialModalService } from '../../../../services/tutorial-modal/tutorial-modal.service';
 
 @Component({
   selector: 'app-entregas',
@@ -55,11 +58,34 @@ export class EntregasComponent implements OnInit, OnDestroy, AfterViewInit {
     private deviceService: DeviceDetectorService,
     private snackBar: MatSnackBar,
     private comprobanteDownloaderService: ComprobantesDownloaderService,
-    private entregasExportacionesService: EntregasExportacionesService
+    private entregasExportacionesService: EntregasExportacionesService,
+    private authenticationService: AuthenticationService,
+    private tutorialModalService: TutorialModalService
   ) {
   }
 
   ngOnInit() {
+    var currentUser = JSON.parse(localStorage.getItem('currentUserPerfil'));
+    var entregasTutorial = currentUser.tutorialModales.filter(tutorial => tutorial.key == 'entregasTutorial')[0];
+
+    // Modal tutorial
+    if (this.authenticationService.esRol("PRODUCTOR") && !JSON.parse(localStorage.getItem('entregasTutorial')) && !entregasTutorial.visto) {
+      const dialogRef = this.dialog.open(TutorialModalComponent, {
+        data: { title: entregasTutorial.contenido.title, description: entregasTutorial.contenido.description }
+      });
+
+      dialogRef.afterClosed().subscribe(result => {
+        localStorage.setItem('entregasTutorial', JSON.stringify(true));
+        this.tutorialModalService.marcarVisto({
+          perfilId: currentUser.informacionPersonal.id,
+          key: 'entregasTutorial',
+          visto: true
+        }).subscribe(result => {
+
+        });
+      });
+    }
+
     this.esCelular = this.deviceService.isMobile();
 
     if (this.contratoId$) {

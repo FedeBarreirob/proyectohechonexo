@@ -1,10 +1,13 @@
 import { Component, OnInit, ViewChild, AfterViewInit } from '@angular/core';
-import { MatSidenav } from '@angular/material';
+import { MatSidenav, MatDialog } from '@angular/material';
 import { EntidadAlg } from '../../../../interfaces/perfiles/entidad-alg';
 import { CuentaAlgService } from '../../../../services/observers/cuentas-alg/cuenta-alg.service';
 import { Subject } from 'rxjs';
 import { DeviceDetectorService } from 'ngx-device-detector';
 import { FiltroComprobanteDescarga } from '../../../../interfaces/archivo-de-comprobantes/filtro-comprobante-descarga';
+import { TutorialModalComponent } from '../../../common/tutorial-modal/tutorial-modal.component';
+import { AuthenticationService } from '../../../../services/security/authentication.service';
+import { TutorialModalService } from '../../../../services/tutorial-modal/tutorial-modal.service';
 
 @Component({
   selector: 'app-comprobantes',
@@ -22,10 +25,34 @@ export class ComprobantesComponent implements OnInit, AfterViewInit {
 
   constructor(
     private cuentasService: CuentaAlgService,
-    private deviceService: DeviceDetectorService
+    private deviceService: DeviceDetectorService,
+    private dialog: MatDialog,
+    private authenticationService: AuthenticationService,
+    private tutorialModalService: TutorialModalService
   ) { }
 
   ngOnInit() {
+    var currentUser = JSON.parse(localStorage.getItem('currentUserPerfil'));
+    var comprobantesTutorial = currentUser.tutorialModales.filter(tutorial => tutorial.key == 'comprobantesTutorial')[0];
+
+    // Modal tutorial
+    if (this.authenticationService.esRol("PRODUCTOR") && !JSON.parse(localStorage.getItem('comprobantesTutorial')) && !comprobantesTutorial.visto) {
+      const dialogRef = this.dialog.open(TutorialModalComponent, {
+        data: { title: comprobantesTutorial.contenido.title, description: comprobantesTutorial.contenido.description }
+      });
+
+      dialogRef.afterClosed().subscribe(result => {
+        localStorage.setItem('comprobantesTutorial', JSON.stringify(true));
+        this.tutorialModalService.marcarVisto({
+          perfilId: currentUser.informacionPersonal.id,
+          key: 'comprobantesTutorial',
+          visto: true
+        }).subscribe(result => {
+
+        });
+      });
+    }
+
     this.esCelular = this.deviceService.isMobile();
 
     this.cuentasService.cuentaSeleccionada$.subscribe(

@@ -12,6 +12,9 @@ import { InfoCtaCte } from '../../../../enums/info-cta-cte.enum';
 import { CuentaCorrienteAplicadaDetalleComponent } from '../cuenta-corriente-aplicada-detalle/cuenta-corriente-aplicada-detalle.component';
 import { MovimientoCtaCte } from '../../../../interfaces/ctacte/listado.ctacte';
 import { MovimientoCtaCteAplicada } from '../../../../interfaces/ctacte-aplicada/listado-ctacte-aplicada';
+import { TutorialModalComponent } from '../../../common/tutorial-modal/tutorial-modal.component';
+import { AuthenticationService } from '../../../../services/security/authentication.service';
+import { TutorialModalService } from '../../../../services/tutorial-modal/tutorial-modal.service';
 
 @Component({
   selector: 'app-cuenta-corriente',
@@ -52,10 +55,33 @@ export class CuentaCorrienteComponent implements OnInit, OnDestroy, AfterViewIni
     private deviceService: DeviceDetectorService,
     private datePipe: DatePipe,
     private monedaService: MonedaService,
-    private snackBar: MatSnackBar
+    private snackBar: MatSnackBar,
+    private authenticationService: AuthenticationService,
+    private tutorialModalService: TutorialModalService
   ) { }
 
   ngOnInit() {
+    var currentUser = JSON.parse(localStorage.getItem('currentUserPerfil'));
+    var cuentasTutorial = currentUser.tutorialModales.filter(tutorial => tutorial.key == 'cuentasTutorial')[0];
+
+    // Modal tutorial
+    if (this.authenticationService.esRol("PRODUCTOR") && !JSON.parse(localStorage.getItem('cuentasTutorial')) && !cuentasTutorial.visto) {
+      const dialogRef = this.dialog.open(TutorialModalComponent, {
+        data: { title: cuentasTutorial.contenido.title, description: cuentasTutorial.contenido.description }
+      });
+
+      dialogRef.afterClosed().subscribe(result => {
+        localStorage.setItem('cuentasTutorial', JSON.stringify(true));
+        this.tutorialModalService.marcarVisto({
+          perfilId: currentUser.informacionPersonal.id,
+          key: 'cuentasTutorial',
+          visto: true
+        }).subscribe(result => {
+
+        });
+      });
+    }
+
     this.esCelular = this.deviceService.isMobile();
 
     this.cuentaAlgService.cuentaSeleccionada$

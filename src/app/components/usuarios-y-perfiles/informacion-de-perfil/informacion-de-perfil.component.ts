@@ -8,6 +8,8 @@ import { AccesoTercerosComponent } from '../terceros/acceso-terceros/acceso-terc
 import { Subject } from 'rxjs';
 import { InfoPerfilCambioPasswordComponent } from '../info-perfil-cambio-password/info-perfil-cambio-password.component';
 import { InfoPerfilEdicionComponent } from '../info-perfil-edicion/info-perfil-edicion.component';
+import { TutorialModalComponent } from '../../common/tutorial-modal/tutorial-modal.component';
+import { TutorialModalService } from '../../../services/tutorial-modal/tutorial-modal.service';
 
 @Component({
   selector: 'app-informacion-de-perfil',
@@ -27,10 +29,32 @@ export class InformacionDePerfilComponent implements OnInit {
     public authenticationService: AuthenticationService,
     private perfilesService: PerfilesService,
     private snackBar: MatSnackBar,
-    public dialog: MatDialog
+    public dialog: MatDialog,
+    private tutorialModalService: TutorialModalService
   ) { }
 
   ngOnInit() {
+    var currentUser = JSON.parse(localStorage.getItem('currentUserPerfil'));
+    var perfilTutorial = currentUser.tutorialModales.filter(tutorial => tutorial.key == 'perfilTutorial')[0];
+
+    // Modal tutorial
+    if (this.authenticationService.esRol("PRODUCTOR") && !JSON.parse(localStorage.getItem('perfilTutorial')) && !perfilTutorial.visto) {
+      const dialogRef = this.dialog.open(TutorialModalComponent, {
+        data: { title: perfilTutorial.contenido.title, description: perfilTutorial.contenido.description }
+      });
+
+      dialogRef.afterClosed().subscribe(result => {
+        localStorage.setItem('perfilTutorial', JSON.stringify(true));
+        this.tutorialModalService.marcarVisto({
+          perfilId: currentUser.informacionPersonal.id,
+          key: 'perfilTutorial',
+          visto: true
+        }).subscribe(result => {
+
+        });
+      });
+    }
+
     this.cargando = false;
 
     this.authenticationService.perfilActivo$.subscribe(

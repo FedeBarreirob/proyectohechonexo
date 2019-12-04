@@ -12,6 +12,9 @@ import { takeUntil } from 'rxjs/operators';
 import { FiltroPersonalizadoParaFiltroCereal } from '../../../../interfaces/varios/filtro-personalizado-para-filtro-cereal';
 import { ComprobantesDownloaderService } from '../../../../services/sharedServices/downloader/comprobantes-downloader.service';
 import { saveAs } from 'file-saver/FileSaver';
+import { TutorialModalComponent } from '../../../common/tutorial-modal/tutorial-modal.component';
+import { AuthenticationService } from '../../../../services/security/authentication.service';
+import { TutorialModalService } from '../../../../services/tutorial-modal/tutorial-modal.service';
 
 @Component({
   selector: 'app-contratos',
@@ -57,10 +60,53 @@ export class ContratosComponent implements OnInit, OnDestroy, AfterViewInit {
     private cuentaAlgService: CuentaAlgService,
     private deviceService: DeviceDetectorService,
     private comprobanteDownloaderService: ComprobantesDownloaderService,
-    private snackBar: MatSnackBar
+    private snackBar: MatSnackBar,
+    private authenticationService: AuthenticationService,
+    private tutorialModalService: TutorialModalService
   ) { }
 
   ngOnInit() {
+    var currentUser = JSON.parse(localStorage.getItem('currentUserPerfil'));
+    var contratosTutorial1_2 = currentUser.tutorialModales.filter(tutorial => tutorial.key == 'contratosTutorial1-2')[0];
+
+    // Modal tutorial 1/2
+    if (this.authenticationService.esRol("PRODUCTOR") && !JSON.parse(localStorage.getItem('contratosTutorial1-2')) && !contratosTutorial1_2.visto) {
+      const dialogRef = this.dialog.open(TutorialModalComponent, {
+        data: { title: contratosTutorial1_2.contenido.title, description: contratosTutorial1_2.contenido.description }
+      });
+
+      dialogRef.afterClosed().subscribe(result => {
+        localStorage.setItem('contratosTutorial1-2', JSON.stringify(true));
+        this.tutorialModalService.marcarVisto({
+          perfilId: currentUser.informacionPersonal.id,
+          key: 'contratosTutorial1-2',
+          visto: true
+        }).subscribe(result => {
+
+        });
+
+        var contratosTutorial2_2 = currentUser.tutorialModales.filter(tutorial => tutorial.key == 'contratosTutorial2-2')[0];
+
+        if (this.authenticationService.esRol("PRODUCTOR") && !JSON.parse(localStorage.getItem('contratosTutorial2-2')) && !contratosTutorial2_2.visto) {
+          // Modal tutorial 2/2
+          var dialogRef2 = this.dialog.open(TutorialModalComponent, {
+            data: { title: contratosTutorial2_2.contenido.title, description: contratosTutorial2_2.contenido.description }
+          });
+
+          dialogRef2.afterClosed().subscribe(result => {
+            localStorage.setItem('contratosTutorial2-2', JSON.stringify(true));
+            this.tutorialModalService.marcarVisto({
+              perfilId: currentUser.informacionPersonal.id,
+              key: 'contratosTutorial2-2',
+              visto: true
+            }).subscribe(result => {
+
+            });
+          });
+        }
+      });
+    }
+
     this.esCelular = this.deviceService.isMobile();
 
     this.cuentaAlgService.cuentaSeleccionada$
