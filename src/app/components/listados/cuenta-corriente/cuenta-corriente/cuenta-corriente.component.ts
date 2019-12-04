@@ -61,25 +61,27 @@ export class CuentaCorrienteComponent implements OnInit, OnDestroy, AfterViewIni
   ) { }
 
   ngOnInit() {
-    var currentUser = JSON.parse(localStorage.getItem('currentUserPerfil'));
-    var cuentasTutorial = currentUser.tutorialModales.filter(tutorial => tutorial.key == 'cuentasTutorial')[0];
+    if (this.authenticationService.esRol("PRODUCTOR")) {
+      var currentUser = JSON.parse(localStorage.getItem('currentUserPerfil'));
+      var cuentasTutorial = currentUser.tutorialModales.filter(tutorial => tutorial.key == 'cuentasTutorial')[0];
 
-    // Modal tutorial
-    if (this.authenticationService.esRol("PRODUCTOR") && !JSON.parse(localStorage.getItem('cuentasTutorial')) && !cuentasTutorial.visto) {
-      const dialogRef = this.dialog.open(TutorialModalComponent, {
-        data: { title: cuentasTutorial.contenido.title, description: cuentasTutorial.contenido.description }
-      });
-
-      dialogRef.afterClosed().subscribe(result => {
-        localStorage.setItem('cuentasTutorial', JSON.stringify(true));
-        this.tutorialModalService.marcarVisto({
-          perfilId: currentUser.informacionPersonal.id,
-          key: 'cuentasTutorial',
-          visto: true
-        }).subscribe(result => {
-
+      // Modal tutorial
+      if (!JSON.parse(localStorage.getItem('cuentasTutorial')) && !cuentasTutorial.visto) {
+        const dialogRef = this.dialog.open(TutorialModalComponent, {
+          data: { title: cuentasTutorial.contenido.title, description: cuentasTutorial.contenido.description }
         });
-      });
+
+        dialogRef.afterClosed().subscribe(result => {
+          localStorage.setItem('cuentasTutorial', JSON.stringify(true));
+          this.tutorialModalService.marcarVisto({
+            perfilId: currentUser.informacionPersonal.id,
+            key: 'cuentasTutorial',
+            visto: true
+          }).subscribe(result => {
+
+          });
+        });
+      }
     }
 
     this.esCelular = this.deviceService.isMobile();

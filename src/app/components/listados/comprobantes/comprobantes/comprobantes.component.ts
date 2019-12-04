@@ -32,25 +32,27 @@ export class ComprobantesComponent implements OnInit, AfterViewInit {
   ) { }
 
   ngOnInit() {
-    var currentUser = JSON.parse(localStorage.getItem('currentUserPerfil'));
-    var comprobantesTutorial = currentUser.tutorialModales.filter(tutorial => tutorial.key == 'comprobantesTutorial')[0];
+    if (this.authenticationService.esRol("PRODUCTOR")) {
+      var currentUser = JSON.parse(localStorage.getItem('currentUserPerfil'));
+      var comprobantesTutorial = currentUser.tutorialModales.filter(tutorial => tutorial.key == 'comprobantesTutorial')[0];
 
-    // Modal tutorial
-    if (this.authenticationService.esRol("PRODUCTOR") && !JSON.parse(localStorage.getItem('comprobantesTutorial')) && !comprobantesTutorial.visto) {
-      const dialogRef = this.dialog.open(TutorialModalComponent, {
-        data: { title: comprobantesTutorial.contenido.title, description: comprobantesTutorial.contenido.description }
-      });
-
-      dialogRef.afterClosed().subscribe(result => {
-        localStorage.setItem('comprobantesTutorial', JSON.stringify(true));
-        this.tutorialModalService.marcarVisto({
-          perfilId: currentUser.informacionPersonal.id,
-          key: 'comprobantesTutorial',
-          visto: true
-        }).subscribe(result => {
-
+      // Modal tutorial
+      if (!JSON.parse(localStorage.getItem('comprobantesTutorial')) && !comprobantesTutorial.visto) {
+        const dialogRef = this.dialog.open(TutorialModalComponent, {
+          data: { title: comprobantesTutorial.contenido.title, description: comprobantesTutorial.contenido.description }
         });
-      });
+
+        dialogRef.afterClosed().subscribe(result => {
+          localStorage.setItem('comprobantesTutorial', JSON.stringify(true));
+          this.tutorialModalService.marcarVisto({
+            perfilId: currentUser.informacionPersonal.id,
+            key: 'comprobantesTutorial',
+            visto: true
+          }).subscribe(result => {
+
+          });
+        });
+      }
     }
 
     this.esCelular = this.deviceService.isMobile();

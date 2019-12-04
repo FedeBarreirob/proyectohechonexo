@@ -40,25 +40,27 @@ export class InformacionDePerfilDesktopComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-    var currentUser = JSON.parse(localStorage.getItem('currentUserPerfil'));
-    var perfilTutorial = currentUser.tutorialModales.filter(tutorial => tutorial.key == 'perfilTutorial')[0];
+    if (this.authenticationService.esRol("PRODUCTOR")) {
+      var currentUser = JSON.parse(localStorage.getItem('currentUserPerfil'));
+      var perfilTutorial = currentUser.tutorialModales.filter(tutorial => tutorial.key == 'perfilTutorial')[0];
 
-    // Modal tutorial
-    if (this.authenticationService.esRol("PRODUCTOR") && !JSON.parse(localStorage.getItem('perfilTutorial')) && !perfilTutorial.visto) {
-      const dialogRef = this.dialog.open(TutorialModalComponent, {
-        data: { title: perfilTutorial.contenido.title, description: perfilTutorial.contenido.description }
-      });
-
-      dialogRef.afterClosed().subscribe(result => {
-        localStorage.setItem('perfilTutorial', JSON.stringify(true));
-        this.tutorialModalService.marcarVisto({
-          perfilId: currentUser.informacionPersonal.id,
-          key: 'perfilTutorial',
-          visto: true
-        }).subscribe(result => {
-
+      // Modal tutorial
+      if (!JSON.parse(localStorage.getItem('perfilTutorial')) && !perfilTutorial.visto) {
+        const dialogRef = this.dialog.open(TutorialModalComponent, {
+          data: { title: perfilTutorial.contenido.title, description: perfilTutorial.contenido.description }
         });
-      });
+
+        dialogRef.afterClosed().subscribe(result => {
+          localStorage.setItem('perfilTutorial', JSON.stringify(true));
+          this.tutorialModalService.marcarVisto({
+            perfilId: currentUser.informacionPersonal.id,
+            key: 'perfilTutorial',
+            visto: true
+          }).subscribe(result => {
+
+          });
+        });
+      }
     }
 
     this.authenticationService.perfilActivo$.subscribe(

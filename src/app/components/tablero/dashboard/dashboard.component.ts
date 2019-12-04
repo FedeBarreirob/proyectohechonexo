@@ -42,74 +42,76 @@ export class DashboardComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-    var currentUser = JSON.parse(localStorage.getItem('currentUserPerfil'));
-    var welcomeTutorial1_2 = currentUser.tutorialModales.filter(tutorial => tutorial.key == 'welcomeTutorial1-2')[0];
+    if (this.authenticationService.esRol("PRODUCTOR")) {
+      var currentUser = JSON.parse(localStorage.getItem('currentUserPerfil'));
+      var welcomeTutorial1_2 = currentUser.tutorialModales.filter(tutorial => tutorial.key == 'welcomeTutorial1-2')[0];
 
-    // Modal tutorial bienvenida 1/2
-    if (this.authenticationService.esRol("PRODUCTOR") && !JSON.parse(localStorage.getItem('welcomeTutorial1-2')) && !welcomeTutorial1_2.visto) {
-      const dialogRef = this.dialog.open(TutorialModalComponent, {
-        data: { buttonText: welcomeTutorial1_2.contenido.buttonText, title: welcomeTutorial1_2.contenido.title, description: welcomeTutorial1_2.contenido.description }
-      });
-
-      dialogRef.afterClosed().subscribe(result => {
-        localStorage.setItem('welcomeTutorial1-2', JSON.stringify(true));
-        this.tutorialModalService.marcarVisto({
-          perfilId: currentUser.informacionPersonal.id,
-          key: 'welcomeTutorial1-2',
-          visto: true
-        }).subscribe(result => {
-
+      // Modal tutorial bienvenida 1/2
+      if (!JSON.parse(localStorage.getItem('welcomeTutorial1-2')) && !welcomeTutorial1_2.visto) {
+        const dialogRef = this.dialog.open(TutorialModalComponent, {
+          data: { buttonText: welcomeTutorial1_2.contenido.buttonText, title: welcomeTutorial1_2.contenido.title, description: welcomeTutorial1_2.contenido.description }
         });
 
-        var welcomeTutorial2_2 = currentUser.tutorialModales.filter(tutorial => tutorial.key == 'welcomeTutorial2-2')[0];
+        dialogRef.afterClosed().subscribe(result => {
+          localStorage.setItem('welcomeTutorial1-2', JSON.stringify(true));
+          this.tutorialModalService.marcarVisto({
+            perfilId: currentUser.informacionPersonal.id,
+            key: 'welcomeTutorial1-2',
+            visto: true
+          }).subscribe(result => {
 
-        // Modal tutorial bienvenida 2/2
-        if (this.authenticationService.esRol("PRODUCTOR") && !JSON.parse(localStorage.getItem('welcomeTutorial2-2')) && !welcomeTutorial2_2.visto) {
-          const dialogRef2 = this.dialog.open(TutorialModalComponent, {
-            data: { buttonText: welcomeTutorial2_2.contenido.buttonText, title: welcomeTutorial2_2.contenido.title, description: welcomeTutorial2_2.contenido.description, description2: welcomeTutorial2_2.contenido.description2, userName: welcomeTutorial2_2.contenido.userName }
           });
 
-          dialogRef2.afterClosed().subscribe(userName => {
-            localStorage.setItem('welcomeTutorial2-2', JSON.stringify(true));
-            this.tutorialModalService.marcarVisto({
-              perfilId: currentUser.informacionPersonal.id,
-              key: 'welcomeTutorial2-2',
-              visto: true
-            }).subscribe(result => {
+          var welcomeTutorial2_2 = currentUser.tutorialModales.filter(tutorial => tutorial.key == 'welcomeTutorial2-2')[0];
 
-            });;
+          // Modal tutorial bienvenida 2/2
+          if (!JSON.parse(localStorage.getItem('welcomeTutorial2-2')) && !welcomeTutorial2_2.visto) {
+            const dialogRef2 = this.dialog.open(TutorialModalComponent, {
+              data: { buttonText: welcomeTutorial2_2.contenido.buttonText, title: welcomeTutorial2_2.contenido.title, description: welcomeTutorial2_2.contenido.description, description2: welcomeTutorial2_2.contenido.description2, userName: welcomeTutorial2_2.contenido.userName }
+            });
 
-            if (userName) {
-              currentUser.informacionPersonal.nombre = userName;
-              this.perfilService.actualizarDatosPersonales(currentUser).subscribe(response => { this.authenticationService.setPerfilActivo(currentUser); });
-            }
+            dialogRef2.afterClosed().subscribe(userName => {
+              localStorage.setItem('welcomeTutorial2-2', JSON.stringify(true));
+              this.tutorialModalService.marcarVisto({
+                perfilId: currentUser.informacionPersonal.id,
+                key: 'welcomeTutorial2-2',
+                visto: true
+              }).subscribe(result => {
 
-            var homeTutorial = currentUser.tutorialModales.filter(tutorial => tutorial.key == 'homeTutorial')[0];
+              });;
 
-            // Modal tutorial
-            if (this.authenticationService.esRol("PRODUCTOR") && !JSON.parse(localStorage.getItem('homeTutorial')) && !homeTutorial.visto) {
-              const dialogRef3 = this.dialog.open(TutorialModalComponent, {
-                data: {
-                  title: homeTutorial.contenido.title,
-                  description: homeTutorial.contenido.description,
-                  listItems: homeTutorial.contenido.listItems
-                }
-              });
+              if (userName) {
+                currentUser.informacionPersonal.nombre = userName;
+                this.perfilService.actualizarDatosPersonales(currentUser).subscribe(response => { this.authenticationService.setPerfilActivo(currentUser); });
+              }
 
-              dialogRef3.afterClosed().subscribe(result => {
-                localStorage.setItem('homeTutorial', JSON.stringify(true));
-                this.tutorialModalService.marcarVisto({
-                  perfilId: currentUser.informacionPersonal.id,
-                  key: 'homeTutorial',
-                  visto: true
-                }).subscribe(result => {
+              var homeTutorial = currentUser.tutorialModales.filter(tutorial => tutorial.key == 'homeTutorial')[0];
 
-                });;
-              });
-            }
-          });
-        }
-      });
+              // Modal tutorial
+              if (!JSON.parse(localStorage.getItem('homeTutorial')) && !homeTutorial.visto) {
+                const dialogRef3 = this.dialog.open(TutorialModalComponent, {
+                  data: {
+                    title: homeTutorial.contenido.title,
+                    description: homeTutorial.contenido.description,
+                    listItems: homeTutorial.contenido.listItems
+                  }
+                });
+
+                dialogRef3.afterClosed().subscribe(result => {
+                  localStorage.setItem('homeTutorial', JSON.stringify(true));
+                  this.tutorialModalService.marcarVisto({
+                    perfilId: currentUser.informacionPersonal.id,
+                    key: 'homeTutorial',
+                    visto: true
+                  }).subscribe(result => {
+
+                  });;
+                });
+              }
+            });
+          }
+        });
+      }
     }
 
     this.esCelular = this.deviceService.isMobile();
