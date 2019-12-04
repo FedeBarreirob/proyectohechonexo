@@ -80,14 +80,8 @@ export class DashboardComponent implements OnInit {
             });;
 
             if (userName) {
-              this.authenticationService.perfilActivo$
-                .pipe(takeUntil(this.destroy$))
-                .subscribe(
-                perfil => {
-                  perfil.informacionPersonal.nombre = userName;
-                  this.perfilService.actualizarDatosPersonales(perfil);
-                  this.authenticationService.renovarToken();
-                });
+              currentUser.informacionPersonal.nombre = userName;
+              this.perfilService.actualizarDatosPersonales(currentUser).subscribe(response => { this.authenticationService.setPerfilActivo(currentUser); });
             }
 
             var homeTutorial = currentUser.tutorialModales.filter(tutorial => tutorial.key == 'homeTutorial')[0];
