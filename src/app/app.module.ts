@@ -180,6 +180,7 @@ import { VentasItemMovilComponent } from './components/listados/ventas/ventas-it
 import { CuentaCorrienteItemMovilComponent } from './components/listados/cuenta-corriente/cuenta-corriente-item-movil/cuenta-corriente-item-movil.component';
 import { CuentaCorrienteAplicadaItemMovilComponent } from './components/listados/cuenta-corriente/cuenta-corriente-aplicada-item-movil/cuenta-corriente-aplicada-item-movil.component';
 import { TutorialModalComponent } from './components/common/tutorial-modal/tutorial-modal.component';
+import { NotificacionDetalleUrlComponent } from './components/notificaciones/notificacion-detalle-url/notificacion-detalle-url.component';
 
 registerLocaleData(localeEsAr, 'es-AR');
 
@@ -331,7 +332,8 @@ export function tokenGetter() {
 		VentasItemMovilComponent,
 		CuentaCorrienteItemMovilComponent,
 		CuentaCorrienteAplicadaItemMovilComponent,
-		TutorialModalComponent
+		TutorialModalComponent,
+		NotificacionDetalleUrlComponent
 	],
 	imports: [
 		HttpClientModule,
@@ -407,7 +409,8 @@ export function tokenGetter() {
 		InfoPerfilCambioPasswordComponent,
 		InfoPerfilEdicionComponent,
 		CuentaCorrienteAplicadaDetalleComponent,
-		TutorialModalComponent
+		TutorialModalComponent,
+		NotificacionDetalleUrlComponent
 	],
 	bootstrap: [AppComponent]
 })
