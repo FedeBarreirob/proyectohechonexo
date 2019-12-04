@@ -78,7 +78,8 @@ export class LoginComponent implements OnInit {
 				respuesta => {
 					if (respuesta && respuesta.exito == true) {
 						localStorage.setItem('homeTutorial', JSON.stringify(false));
-						localStorage.setItem('contratosTutorial', JSON.stringify(false));
+						localStorage.setItem('contratosTutorial1-2', JSON.stringify(false));
+						localStorage.setItem('contratosTutorial2-2', JSON.stringify(false));
 						localStorage.setItem('entregasTutorial', JSON.stringify(false));
 						localStorage.setItem('ventasTutorial', JSON.stringify(false));
 						localStorage.setItem('cuentasTutorial', JSON.stringify(false));
