@@ -72,25 +72,27 @@ export class VentasComponent implements OnInit, OnDestroy, AfterViewInit {
   ) { }
 
   ngOnInit() {
-    var currentUser = JSON.parse(localStorage.getItem('currentUserPerfil'));
-    var ventasTutorial = currentUser.tutorialModales.filter(tutorial => tutorial.key == 'ventasTutorial')[0];
+    if (this.authenticationService.esRol("PRODUCTOR")) {
+      var currentUser = JSON.parse(localStorage.getItem('currentUserPerfil'));
+      var ventasTutorial = currentUser.tutorialModales.filter(tutorial => tutorial.key == 'ventasTutorial')[0];
 
-    // Modal tutorial
-    if (this.authenticationService.esRol("PRODUCTOR") && !JSON.parse(localStorage.getItem('ventasTutorial')) && !ventasTutorial.visto) {
-      const dialogRef = this.dialog.open(TutorialModalComponent, {
-        data: { title: ventasTutorial.contenido.title, description: ventasTutorial.contenido.description }
-      });
-
-      dialogRef.afterClosed().subscribe(result => {
-        localStorage.setItem('ventasTutorial', JSON.stringify(true));
-        this.tutorialModalService.marcarVisto({
-          perfilId: currentUser.informacionPersonal.id,
-          key: 'ventasTutorial',
-          visto: true
-        }).subscribe(result => {
-
+      // Modal tutorial
+      if (!JSON.parse(localStorage.getItem('ventasTutorial')) && !ventasTutorial.visto) {
+        const dialogRef = this.dialog.open(TutorialModalComponent, {
+          data: { title: ventasTutorial.contenido.title, description: ventasTutorial.contenido.description }
         });
-      });
+
+        dialogRef.afterClosed().subscribe(result => {
+          localStorage.setItem('ventasTutorial', JSON.stringify(true));
+          this.tutorialModalService.marcarVisto({
+            perfilId: currentUser.informacionPersonal.id,
+            key: 'ventasTutorial',
+            visto: true
+          }).subscribe(result => {
+
+          });
+        });
+      }
     }
 
     this.esCelular = this.deviceService.isMobile();

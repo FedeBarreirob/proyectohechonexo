@@ -66,45 +66,47 @@ export class ContratosComponent implements OnInit, OnDestroy, AfterViewInit {
   ) { }
 
   ngOnInit() {
-    var currentUser = JSON.parse(localStorage.getItem('currentUserPerfil'));
-    var contratosTutorial1_2 = currentUser.tutorialModales.filter(tutorial => tutorial.key == 'contratosTutorial1-2')[0];
+    if (this.authenticationService.esRol("PRODUCTOR")) {
+      var currentUser = JSON.parse(localStorage.getItem('currentUserPerfil'));
+      var contratosTutorial1_2 = currentUser.tutorialModales.filter(tutorial => tutorial.key == 'contratosTutorial1-2')[0];
 
-    // Modal tutorial 1/2
-    if (this.authenticationService.esRol("PRODUCTOR") && !JSON.parse(localStorage.getItem('contratosTutorial1-2')) && !contratosTutorial1_2.visto) {
-      const dialogRef = this.dialog.open(TutorialModalComponent, {
-        data: { title: contratosTutorial1_2.contenido.title, description: contratosTutorial1_2.contenido.description }
-      });
-
-      dialogRef.afterClosed().subscribe(result => {
-        localStorage.setItem('contratosTutorial1-2', JSON.stringify(true));
-        this.tutorialModalService.marcarVisto({
-          perfilId: currentUser.informacionPersonal.id,
-          key: 'contratosTutorial1-2',
-          visto: true
-        }).subscribe(result => {
-
+      // Modal tutorial 1/2
+      if (!JSON.parse(localStorage.getItem('contratosTutorial1-2')) && !contratosTutorial1_2.visto) {
+        const dialogRef = this.dialog.open(TutorialModalComponent, {
+          data: { title: contratosTutorial1_2.contenido.title, description: contratosTutorial1_2.contenido.description }
         });
 
-        var contratosTutorial2_2 = currentUser.tutorialModales.filter(tutorial => tutorial.key == 'contratosTutorial2-2')[0];
+        dialogRef.afterClosed().subscribe(result => {
+          localStorage.setItem('contratosTutorial1-2', JSON.stringify(true));
+          this.tutorialModalService.marcarVisto({
+            perfilId: currentUser.informacionPersonal.id,
+            key: 'contratosTutorial1-2',
+            visto: true
+          }).subscribe(result => {
 
-        if (this.authenticationService.esRol("PRODUCTOR") && !JSON.parse(localStorage.getItem('contratosTutorial2-2')) && !contratosTutorial2_2.visto) {
-          // Modal tutorial 2/2
-          var dialogRef2 = this.dialog.open(TutorialModalComponent, {
-            data: { title: contratosTutorial2_2.contenido.title, description: contratosTutorial2_2.contenido.description }
           });
 
-          dialogRef2.afterClosed().subscribe(result => {
-            localStorage.setItem('contratosTutorial2-2', JSON.stringify(true));
-            this.tutorialModalService.marcarVisto({
-              perfilId: currentUser.informacionPersonal.id,
-              key: 'contratosTutorial2-2',
-              visto: true
-            }).subscribe(result => {
+          var contratosTutorial2_2 = currentUser.tutorialModales.filter(tutorial => tutorial.key == 'contratosTutorial2-2')[0];
 
+          if (!JSON.parse(localStorage.getItem('contratosTutorial2-2')) && !contratosTutorial2_2.visto) {
+            // Modal tutorial 2/2
+            var dialogRef2 = this.dialog.open(TutorialModalComponent, {
+              data: { title: contratosTutorial2_2.contenido.title, description: contratosTutorial2_2.contenido.description }
             });
-          });
-        }
-      });
+
+            dialogRef2.afterClosed().subscribe(result => {
+              localStorage.setItem('contratosTutorial2-2', JSON.stringify(true));
+              this.tutorialModalService.marcarVisto({
+                perfilId: currentUser.informacionPersonal.id,
+                key: 'contratosTutorial2-2',
+                visto: true
+              }).subscribe(result => {
+
+              });
+            });
+          }
+        });
+      }
     }
 
     this.esCelular = this.deviceService.isMobile();
