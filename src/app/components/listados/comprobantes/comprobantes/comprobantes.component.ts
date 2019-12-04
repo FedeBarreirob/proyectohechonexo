@@ -7,6 +7,7 @@ import { DeviceDetectorService } from 'ngx-device-detector';
 import { FiltroComprobanteDescarga } from '../../../../interfaces/archivo-de-comprobantes/filtro-comprobante-descarga';
 import { TutorialModalComponent } from '../../../common/tutorial-modal/tutorial-modal.component';
 import { AuthenticationService } from '../../../../services/security/authentication.service';
+import { TutorialModalService } from '../../../../services/tutorial-modal/tutorial-modal.service';
 
 @Component({
   selector: 'app-comprobantes',
@@ -26,18 +27,29 @@ export class ComprobantesComponent implements OnInit, AfterViewInit {
     private cuentasService: CuentaAlgService,
     private deviceService: DeviceDetectorService,
     private dialog: MatDialog,
-    private authenticationService: AuthenticationService
+    private authenticationService: AuthenticationService,
+    private tutorialModalService: TutorialModalService
   ) { }
 
   ngOnInit() {
+    var currentUser = JSON.parse(localStorage.getItem('currentUserPerfil'));
+    var comprobantesTutorial = currentUser.tutorialModales.filter(tutorial => tutorial.key == 'comprobantesTutorial')[0];
+
     // Modal tutorial
-    if (!this.authenticationService.esAdmin && !JSON.parse(localStorage.getItem('comprobantesTutorial'))) {
+    if (this.authenticationService.esRol("PRODUCTOR") && !JSON.parse(localStorage.getItem('comprobantesTutorial')) && !comprobantesTutorial.visto) {
       const dialogRef = this.dialog.open(TutorialModalComponent, {
-        data: { title: 'Comprobante', description: 'En esta sección encontrarás todos tus comprobantes. Agilizá tu búsqueda usando los filtros que te permiten buscar por palabra clave, origen del comprobante o período. Seleccioná uno o más comprobantes a la vez para descargarlos y compartirlos al instante.' }
+        data: { title: comprobantesTutorial.contenido.title, description: comprobantesTutorial.contenido.description }
       });
 
       dialogRef.afterClosed().subscribe(result => {
         localStorage.setItem('comprobantesTutorial', JSON.stringify(true));
+        this.tutorialModalService.marcarVisto({
+          perfilId: currentUser.informacionPersonal.id,
+          key: 'comprobantesTutorial',
+          visto: true
+        }).subscribe(result => {
+
+        });
       });
     }
 

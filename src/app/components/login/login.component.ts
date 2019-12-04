@@ -85,7 +85,8 @@ export class LoginComponent implements OnInit {
 						localStorage.setItem('comprobantesTutorial', JSON.stringify(false));
 						localStorage.setItem('reportesTutorial', JSON.stringify(false));
 						localStorage.setItem('perfilTutorial', JSON.stringify(false));
-						localStorage.setItem('welcomeTutorial', JSON.stringify(false));
+						localStorage.setItem('welcomeTutorial1-2', JSON.stringify(false));
+						localStorage.setItem('welcomeTutorial2-2', JSON.stringify(false));
 						this.authenticationService.guardarTokenUsuarioLogueado(frm.username, respuesta.token);
 
 						if (frm.recuerdame == true) {

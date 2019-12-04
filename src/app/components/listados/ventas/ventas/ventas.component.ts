@@ -17,6 +17,7 @@ import { ComprobantesDownloaderService } from '../../../../services/sharedServic
 import { VentasExportacionesService } from '../../../../services/ventas/ventas-exportaciones.service';
 import { TutorialModalComponent } from '../../../common/tutorial-modal/tutorial-modal.component';
 import { AuthenticationService } from '../../../../services/security/authentication.service';
+import { TutorialModalService } from '../../../../services/tutorial-modal/tutorial-modal.service';
 
 @Component({
   selector: 'app-ventas',
@@ -66,18 +67,29 @@ export class VentasComponent implements OnInit, OnDestroy, AfterViewInit {
     private comprobanteDownloaderService: ComprobantesDownloaderService,
     private snackBar: MatSnackBar,
     private ventasExportacionesService: VentasExportacionesService,
-    private authenticationService: AuthenticationService
+    private authenticationService: AuthenticationService,
+    private tutorialModalService: TutorialModalService
   ) { }
 
   ngOnInit() {
+    var currentUser = JSON.parse(localStorage.getItem('currentUserPerfil'));
+    var ventasTutorial = currentUser.tutorialModales.filter(tutorial => tutorial.key == 'ventasTutorial')[0];
+
     // Modal tutorial
-    if (!this.authenticationService.esAdmin && !JSON.parse(localStorage.getItem('ventasTutorial'))) {
+    if (this.authenticationService.esRol("PRODUCTOR") && !JSON.parse(localStorage.getItem('ventasTutorial')) && !ventasTutorial.visto) {
       const dialogRef = this.dialog.open(TutorialModalComponent, {
-        data: { title: 'Ventas', description: 'En esta sección encontrarás todas tus ventas de grano. Podés acceder al detalle de cada fijación y sus comprobantes asociados haciendo click en cada venta. Usá los filtros para acceder al producto, campaña o fecha que desees para agilizar tu búsqueda.' }
+        data: { title: ventasTutorial.contenido.title, description: ventasTutorial.contenido.description }
       });
 
       dialogRef.afterClosed().subscribe(result => {
         localStorage.setItem('ventasTutorial', JSON.stringify(true));
+        this.tutorialModalService.marcarVisto({
+          perfilId: currentUser.informacionPersonal.id,
+          key: 'ventasTutorial',
+          visto: true
+        }).subscribe(result => {
+
+        });
       });
     }
 

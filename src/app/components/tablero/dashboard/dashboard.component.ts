@@ -11,6 +11,7 @@ import { PerfilesService } from '../../../services/perfiles/perfiles.service';
 import { PerfilBasico } from '../../../interfaces/perfiles/perfil-basico';
 import { takeUntil } from 'rxjs/operators';
 import { window } from 'rxjs/internal/operators/window';
+import { TutorialModalService } from '../../../services/tutorial-modal/tutorial-modal.service';
 
 @Component({
   selector: 'app-dashboard',
@@ -36,50 +37,84 @@ export class DashboardComponent implements OnInit {
     private notificacionService: NotificacionesService,
     private authenticationService: AuthenticationService,
     private dialog: MatDialog,
-    private perfilService: PerfilesService
+    private perfilService: PerfilesService,
+    private tutorialModalService: TutorialModalService
   ) { }
 
   ngOnInit() {
+    var currentUser = JSON.parse(localStorage.getItem('currentUserPerfil'));
+    var welcomeTutorial1_2 = currentUser.tutorialModales.filter(tutorial => tutorial.key == 'welcomeTutorial1-2')[0];
+
     // Modal tutorial bienvenida 1/2
-    if (!this.authenticationService.esAdmin && !JSON.parse(localStorage.getItem('welcomeTutorial'))) {
+    if (this.authenticationService.esRol("PRODUCTOR") && !JSON.parse(localStorage.getItem('welcomeTutorial1-2')) && !welcomeTutorial1_2.visto) {
       const dialogRef = this.dialog.open(TutorialModalComponent, {
-        data: { buttonText: 'OK!', title: '¡Bienvenido a Gaviglio Digital! 1/2', description: 'Ya puedes acceder a toda la información de tu cuenta de manera sencilla y ágil, en cualquier momento o lugar, desde tu celular o tu computadora.' }
+        data: { buttonText: welcomeTutorial1_2.contenido.buttonText, title: welcomeTutorial1_2.contenido.title, description: welcomeTutorial1_2.contenido.description }
       });
 
       dialogRef.afterClosed().subscribe(result => {
+        localStorage.setItem('welcomeTutorial1-2', JSON.stringify(true));
+        this.tutorialModalService.marcarVisto({
+          perfilId: currentUser.informacionPersonal.id,
+          key: 'welcomeTutorial1-2',
+          visto: true
+        }).subscribe(result => {
+
+        });
+
+        var welcomeTutorial2_2 = currentUser.tutorialModales.filter(tutorial => tutorial.key == 'welcomeTutorial2-2')[0];
+
         // Modal tutorial bienvenida 2/2
-        const dialogRef2 = this.dialog.open(TutorialModalComponent, {
-          data: { buttonText: 'Adelante!', title: '¡Bienvenido a Gaviglio Digital! 2/2', description: 'Escribe tu nombre para personalizar tu experiencia:', description2: 'Recuerda que puedes editarlo también en la sección Perfil.', userName: ' ' }
-        });
+        if (this.authenticationService.esRol("PRODUCTOR") && !JSON.parse(localStorage.getItem('welcomeTutorial2-2')) && !welcomeTutorial2_2.visto) {
+          const dialogRef2 = this.dialog.open(TutorialModalComponent, {
+            data: { buttonText: welcomeTutorial2_2.contenido.buttonText, title: welcomeTutorial2_2.contenido.title, description: welcomeTutorial2_2.contenido.description, description2: welcomeTutorial2_2.contenido.description2, userName: welcomeTutorial2_2.contenido.userName }
+          });
 
-        dialogRef2.afterClosed().subscribe(userName => {
-          localStorage.setItem('welcomeTutorial', JSON.stringify(true));
-          this.authenticationService.perfilActivo$
-            .pipe(takeUntil(this.destroy$))
-            .subscribe(
-            perfil => {
-              perfil.informacionPersonal.nombre = userName;
-              this.perfilService.actualizarDatosPersonales(perfil);
-            });
+          dialogRef2.afterClosed().subscribe(userName => {
+            localStorage.setItem('welcomeTutorial2-2', JSON.stringify(true));
+            this.tutorialModalService.marcarVisto({
+              perfilId: currentUser.informacionPersonal.id,
+              key: 'welcomeTutorial2-2',
+              visto: true
+            }).subscribe(result => {
 
-          // Modal tutorial
-          if (!this.authenticationService.esAdmin && !JSON.parse(localStorage.getItem('homeTutorial'))) {
-            const dialogRef3 = this.dialog.open(TutorialModalComponent, {
-              data: {
-                title: 'Inicio',
-                description: 'En esta sección encontrarás un resumen rápido de:',
-                listItems: ['Cuánto dinero disponés para cobrar o pagar en todo concepto, contemplando el tipo de cambio correspondiente a la fecha',
-                  'Cuánto grano entregado o pendiente de entrega',
-                  'Cuánto grano vendido o pendiente de fijar, pesificar o liquidar',
-                  'Las últimas entregas y ventas realizadas']
-              }
-            });
+            });;
 
-            dialogRef3.afterClosed().subscribe(result => {
-              localStorage.setItem('homeTutorial', JSON.stringify(true));
-            });
-          }
-        });
+            if (userName) {
+              this.authenticationService.perfilActivo$
+                .pipe(takeUntil(this.destroy$))
+                .subscribe(
+                perfil => {
+                  perfil.informacionPersonal.nombre = userName;
+                  this.perfilService.actualizarDatosPersonales(perfil);
+                  this.authenticationService.renovarToken();
+                });
+            }
+
+            var homeTutorial = currentUser.tutorialModales.filter(tutorial => tutorial.key == 'homeTutorial')[0];
+
+            // Modal tutorial
+            if (this.authenticationService.esRol("PRODUCTOR") && !JSON.parse(localStorage.getItem('homeTutorial')) && !homeTutorial.visto) {
+              const dialogRef3 = this.dialog.open(TutorialModalComponent, {
+                data: {
+                  title: homeTutorial.contenido.title,
+                  description: homeTutorial.contenido.description,
+                  listItems: homeTutorial.contenido.listItems
+                }
+              });
+
+              dialogRef3.afterClosed().subscribe(result => {
+                localStorage.setItem('homeTutorial', JSON.stringify(true));
+                this.tutorialModalService.marcarVisto({
+                  perfilId: currentUser.informacionPersonal.id,
+                  key: 'homeTutorial',
+                  visto: true
+                }).subscribe(result => {
+
+                });;
+              });
+            }
+          });
+        }
       });
     }
 

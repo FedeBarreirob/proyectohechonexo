@@ -14,6 +14,7 @@ import { MovimientoCtaCte } from '../../../../interfaces/ctacte/listado.ctacte';
 import { MovimientoCtaCteAplicada } from '../../../../interfaces/ctacte-aplicada/listado-ctacte-aplicada';
 import { TutorialModalComponent } from '../../../common/tutorial-modal/tutorial-modal.component';
 import { AuthenticationService } from '../../../../services/security/authentication.service';
+import { TutorialModalService } from '../../../../services/tutorial-modal/tutorial-modal.service';
 
 @Component({
   selector: 'app-cuenta-corriente',
@@ -55,18 +56,29 @@ export class CuentaCorrienteComponent implements OnInit, OnDestroy, AfterViewIni
     private datePipe: DatePipe,
     private monedaService: MonedaService,
     private snackBar: MatSnackBar,
-    private authenticationService: AuthenticationService
+    private authenticationService: AuthenticationService,
+    private tutorialModalService: TutorialModalService
   ) { }
 
   ngOnInit() {
+    var currentUser = JSON.parse(localStorage.getItem('currentUserPerfil'));
+    var cuentasTutorial = currentUser.tutorialModales.filter(tutorial => tutorial.key == 'cuentasTutorial')[0];
+
     // Modal tutorial
-    if (!this.authenticationService.esAdmin && !JSON.parse(localStorage.getItem('cuentasTutorial'))) {
+    if (this.authenticationService.esRol("PRODUCTOR") && !JSON.parse(localStorage.getItem('cuentasTutorial')) && !cuentasTutorial.visto) {
       const dialogRef = this.dialog.open(TutorialModalComponent, {
-        data: { title: 'Cuenta', description: 'En esta sección encontrarás los movimientos y aplicaciones de tu cuenta corriente. Podés acceder al detalle de cada operación y sus comprobantes asociados. Usá los filtros para buscar por rubro de negocio, período, o estado de la operación.' }
+        data: { title: cuentasTutorial.contenido.title, description: cuentasTutorial.contenido.description }
       });
 
       dialogRef.afterClosed().subscribe(result => {
         localStorage.setItem('cuentasTutorial', JSON.stringify(true));
+        this.tutorialModalService.marcarVisto({
+          perfilId: currentUser.informacionPersonal.id,
+          key: 'cuentasTutorial',
+          visto: true
+        }).subscribe(result => {
+
+        });
       });
     }
 

@@ -8,6 +8,7 @@ import { TerceroBasico } from '../../../interfaces/acceso-terceros/tercero-basic
 import { PerfilesService } from '../../../services/perfiles/perfiles.service';
 import { MatDialog } from '@angular/material';
 import { TutorialModalComponent } from '../../common/tutorial-modal/tutorial-modal.component';
+import { TutorialModalService } from '../../../services/tutorial-modal/tutorial-modal.service';
 
 @Component({
   selector: 'app-informacion-de-perfil-desktop',
@@ -34,18 +35,29 @@ export class InformacionDePerfilDesktopComponent implements OnInit {
     private authenticationService: AuthenticationService,
     private cuentaAlgService: CuentaAlgService,
     private perfilesService: PerfilesService,
-    private dialog: MatDialog
+    private dialog: MatDialog,
+    private tutorialModalService: TutorialModalService
   ) { }
 
   ngOnInit() {
+    var currentUser = JSON.parse(localStorage.getItem('currentUserPerfil'));
+    var perfilTutorial = currentUser.tutorialModales.filter(tutorial => tutorial.key == 'perfilTutorial')[0];
+
     // Modal tutorial
-    if (!this.authenticationService.esAdmin && !JSON.parse(localStorage.getItem('perfilTutorial'))) {
+    if (this.authenticationService.esRol("PRODUCTOR") && !JSON.parse(localStorage.getItem('perfilTutorial')) && !perfilTutorial.visto) {
       const dialogRef = this.dialog.open(TutorialModalComponent, {
-        data: { title: 'Perfil', description: 'En esta sección podés personalizar tu perfil y tu experiencia. Editá tu nombre, incluí una foto y agregá tus datos personales. Generá permisos para que tu equipo o contador puedan acceder a tu cuenta. También podés definir tu preferencia para ver la información de tus negocios de granos en quintales, toneladas o kilos.' }
+        data: { title: perfilTutorial.contenido.title, description: perfilTutorial.contenido.description }
       });
 
       dialogRef.afterClosed().subscribe(result => {
         localStorage.setItem('perfilTutorial', JSON.stringify(true));
+        this.tutorialModalService.marcarVisto({
+          perfilId: currentUser.informacionPersonal.id,
+          key: 'perfilTutorial',
+          visto: true
+        }).subscribe(result => {
+
+        });
       });
     }
 

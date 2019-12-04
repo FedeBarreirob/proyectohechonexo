@@ -14,6 +14,7 @@ import { ComprobantesDownloaderService } from '../../../../services/sharedServic
 import { saveAs } from 'file-saver/FileSaver';
 import { TutorialModalComponent } from '../../../common/tutorial-modal/tutorial-modal.component';
 import { AuthenticationService } from '../../../../services/security/authentication.service';
+import { TutorialModalService } from '../../../../services/tutorial-modal/tutorial-modal.service';
 
 @Component({
   selector: 'app-contratos',
@@ -60,24 +61,49 @@ export class ContratosComponent implements OnInit, OnDestroy, AfterViewInit {
     private deviceService: DeviceDetectorService,
     private comprobanteDownloaderService: ComprobantesDownloaderService,
     private snackBar: MatSnackBar,
-    private authenticationService: AuthenticationService
+    private authenticationService: AuthenticationService,
+    private tutorialModalService: TutorialModalService
   ) { }
 
   ngOnInit() {
+    var currentUser = JSON.parse(localStorage.getItem('currentUserPerfil'));
+    var contratosTutorial1_2 = currentUser.tutorialModales.filter(tutorial => tutorial.key == 'contratosTutorial1-2')[0];
+
     // Modal tutorial 1/2
-    if (!this.authenticationService.esAdmin && !JSON.parse(localStorage.getItem('contratosTutorial'))) {
+    if (this.authenticationService.esRol("PRODUCTOR") && !JSON.parse(localStorage.getItem('contratosTutorial1-2')) && !contratosTutorial1_2.visto) {
       const dialogRef = this.dialog.open(TutorialModalComponent, {
-        data: { title: 'Contratos 1/2', description: 'En esta sección encontrás todos los contratos de granos que realizaste. Rápidamente conocé para cada negocio o contrato cuánto grano tenés entregado, fijado, liquidado o pagado.' }
+        data: { title: contratosTutorial1_2.contenido.title, description: contratosTutorial1_2.contenido.description }
       });
 
       dialogRef.afterClosed().subscribe(result => {
-        localStorage.setItem('contratosTutorial', JSON.stringify(true));
+        localStorage.setItem('contratosTutorial1-2', JSON.stringify(true));
+        this.tutorialModalService.marcarVisto({
+          perfilId: currentUser.informacionPersonal.id,
+          key: 'contratosTutorial1-2',
+          visto: true
+        }).subscribe(result => {
 
-        // Modal tutorial 2/2
-        this.dialog.open(TutorialModalComponent, {
-          data: {
-            title: 'Contratos 2/2', description: 'Recordá usar los filtros para llegar más rápido a la información que querés ubicar. Podés acceder al detalle de cada operación, sus condiciones y comprobantes asociados haciendo click en cada contrato.' }
         });
+
+        var contratosTutorial2_2 = currentUser.tutorialModales.filter(tutorial => tutorial.key == 'contratosTutorial2-2')[0];
+
+        if (this.authenticationService.esRol("PRODUCTOR") && !JSON.parse(localStorage.getItem('contratosTutorial2-2')) && !contratosTutorial2_2.visto) {
+          // Modal tutorial 2/2
+          var dialogRef2 = this.dialog.open(TutorialModalComponent, {
+            data: { title: contratosTutorial2_2.contenido.title, description: contratosTutorial2_2.contenido.description }
+          });
+
+          dialogRef2.afterClosed().subscribe(result => {
+            localStorage.setItem('contratosTutorial2-2', JSON.stringify(true));
+            this.tutorialModalService.marcarVisto({
+              perfilId: currentUser.informacionPersonal.id,
+              key: 'contratosTutorial2-2',
+              visto: true
+            }).subscribe(result => {
+
+            });
+          });
+        }
       });
     }
 
