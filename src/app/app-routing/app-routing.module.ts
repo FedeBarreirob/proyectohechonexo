@@ -25,6 +25,7 @@ import { ReportesComponent } from '../components/listados/reportes/reportes/repo
 import { InformacionDePerfilDesktopComponent } from '../components/usuarios-y-perfiles/informacion-de-perfil-desktop/informacion-de-perfil-desktop.component';
 import { LoginLayoutComponent } from '../components/layouts/login-layout/login-layout.component';
 import { HomeLayoutComponent } from '../components/layouts/home-layout/home-layout.component';
+import { NotificacionDetalleUrlComponent } from '../components/notificaciones/notificacion-detalle-url/notificacion-detalle-url.component';
 
 const routes: Routes = [
 	{
@@ -59,6 +60,10 @@ const routes: Routes = [
 				data: {
 					rolAdmin: false
 				}
+			},
+			{
+				path: 'notificacion/:id',
+				component: NotificacionDetalleUrlComponent
 			},
 			{
 				path: 'ventas',

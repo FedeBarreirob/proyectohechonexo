@@ -1,0 +1,25 @@
+<div fxLayout="row" fxLayoutAlign="space-between center" class="contenedor-titulo-filtro" fxLayoutGap="20px">
+  <mat-card>
+    <div class="mat-typography" [innerHTML]="notificacion.cuerpoMensaje">
+    </div>
+
+    <div class="mat-typography">
+      <mat-list role="list">
+        <mat-list-item class="comprobante" role="listitem"
+                       *ngFor="let comprobante of (notificacion.comprobanteNovedades ? notificacion.comprobanteNovedades : [])"
+                       (click)="descargarComprobante(comprobante)">
+          <mat-icon svgIcon="pdf"></mat-icon>{{comprobante.comprobante}}
+        </mat-list-item>
+      </mat-list>
+    </div>
+
+    <div class="mat-typography" *ngIf="notificacion.confirmacionesVentasNovedades">
+      <mat-list role="list">
+        <mat-list-item class="comprobante" role="listitem"
+                       (click)="descargarConfirmacionVenta(notificacion.confirmacionesVentasNovedades)">
+          <mat-icon svgIcon="pdf"></mat-icon>{{notificacion.confirmacionesVentasNovedades.comprobante}}
+        </mat-list-item>
+      </mat-list>
+    </div>
+  </mat-card>
+</div>
