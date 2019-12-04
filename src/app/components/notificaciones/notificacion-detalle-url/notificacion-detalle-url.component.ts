@@ -22,7 +22,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 export class NotificacionDetalleUrlComponent implements OnInit {
 
   private usuarioLogueado: UserAuth;
-  private notificacion: Subject<Notificacion> = new Subject<Notificacion>();
+  private notificacion: Notificacion;
 
   constructor(
     private notificacionService: NotificacionesService,
@@ -37,18 +37,16 @@ export class NotificacionDetalleUrlComponent implements OnInit {
   ngOnInit() {
     this.activatedRouter.params.subscribe(params => {
       if (params.id) {
-        this.authenticationService.perfilActivo$.subscribe(perfil => {
-          this.notificacionService.listadoNotificaciones(perfil.informacionPersonal.id, 1, 25)
-            .subscribe(respuesta => {
-              if (respuesta.exito) {
-                this.notificacion = respuesta.datos.listado.filter(notification => notification.id === parseInt(params.id))[0];
-              }
-            });
-        });
+        var perfil = this.authenticationService.perfilUsuarioLogueado();
+        this.notificacionService.notificacionPorId(perfil.informacionPersonal.id, parseInt(params.id))
+          .subscribe(respuesta => {
+            if (respuesta.exito) {
+              this.notificacion = respuesta.datos;
+              this.marcarComoLeido();
+            }
+          });
       }
     });
-
-    //this.marcarComoLeido();
   }
 
   // funcion que inicia la descarga del comprobante
@@ -84,7 +82,7 @@ export class NotificacionDetalleUrlComponent implements OnInit {
   // funcion encargada de marcar como leido a la notificacion una vez abierto
   marcarComoLeido() {
     let notificacionModificada: Notificacion = {
-      id: 0,//this.notificacion.id,
+      id: this.notificacion.id,
       estado: EstadoNotificaciones.LEIDO
     };
 

@@ -11,7 +11,8 @@ import { Cacheable } from 'ngx-cacheable';
 })
 export class NotificacionesService {
 
-	private urlNotificacionesListado = `${environment.hostComunicaciones}/Notificaciones`;
+  private urlNotificacionesListado = `${environment.hostComunicaciones}/Notificaciones`;
+  private urlNotificacionPorId = `${environment.hostComunicaciones}/NotificacionPorId`;
 	private urlNotificacionesCantidadConEstadoDado = `${environment.hostComunicaciones}/Notificaciones/cantidadConEstadoDado`;
 	private urlNotificacionesCambiarEstado = `${environment.hostComunicaciones}/Notificaciones/cambiarEstado`;
 
@@ -33,7 +34,18 @@ export class NotificacionesService {
 
 		let urlConParametro = `${this.urlNotificacionesListado}/${perfilId}/${numeroPagina}/${cantPorPagina}`;
 		return this.http.get<ResponseServicio>(urlConParametro, httpOptions);
-	}
+  }
+
+  notificacionPorId(perfilId: number, notificacionId: number): Observable<ResponseServicio> {
+    const httpOptions = {
+      headers: new HttpHeaders({
+        'Content-Type': 'application/json'
+      })
+    };
+
+    let urlConParametro = `${this.urlNotificacionPorId}/${perfilId}/${notificacionId}`;
+    return this.http.get<ResponseServicio>(urlConParametro, httpOptions);
+  }
 
 	// funcion que retorna la cantidad de mensajes en un estado indicado
 	cantidadMensajesEnEstadoIndicado(perfilId: number, estado: number): Observable<ResponseServicio> {

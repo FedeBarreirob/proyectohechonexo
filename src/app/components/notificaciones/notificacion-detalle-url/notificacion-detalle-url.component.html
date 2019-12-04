@@ -1,5 +1,5 @@
 <div fxLayout="row" fxLayoutAlign="space-between center" class="contenedor-titulo-filtro" fxLayoutGap="20px">
-  <mat-card>
+  <mat-card *ngIf="notificacion">
     <div class="mat-typography" [innerHTML]="notificacion.cuerpoMensaje">
     </div>
 
