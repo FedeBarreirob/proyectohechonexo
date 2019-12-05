@@ -40,9 +40,13 @@
   </script>
   <!--Fix Phonegap bug-->
 
-  <!--
-  <script type="text/javascript" charset="utf-8" src="cordova.js"></script>-->
+  <script type="text/javascript" charset="utf-8" src="cordova.js"></script>
 
+  <script>
+    function handleOpenURL(url) {
+      window.open(url.replace("gavigliodigital://", ""), "_self", "location=yes");
+    }
+  </script>
 </head>
 
 <body>
