@@ -68,10 +68,11 @@ export class ContratosComponent implements OnInit, OnDestroy, AfterViewInit {
   ngOnInit() {
     if (this.authenticationService.esRol("PRODUCTOR")) {
       var currentUser = JSON.parse(localStorage.getItem('currentUserPerfil'));
-      var contratosTutorial1_2 = currentUser.tutorialModales.filter(tutorial => tutorial.key == 'contratosTutorial1-2')[0];
+
+      var contratosTutorial1_2 = currentUser.tutorialModales.find(tutorial => tutorial.key == "contratosTutorial1-2");
 
       // Modal tutorial 1/2
-      if (!JSON.parse(localStorage.getItem('contratosTutorial1-2')) && !contratosTutorial1_2.visto) {
+      if (!JSON.parse(localStorage.getItem("contratosTutorial1-2")) && !contratosTutorial1_2.visto) {
         const dialogRef = this.dialog.open(TutorialModalComponent, {
           data: { title: contratosTutorial1_2.contenido.title, description: contratosTutorial1_2.contenido.description }
         });

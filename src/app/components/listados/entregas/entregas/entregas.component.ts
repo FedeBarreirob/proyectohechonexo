@@ -65,7 +65,7 @@ export class EntregasComponent implements OnInit, OnDestroy, AfterViewInit {
   }
 
   ngOnInit() {
-    if (this.authenticationService.esRol("PRODUCTOR")) {
+    if (this.authenticationService.esRol("PRODUCTOR") && this.aplicado == false) {
       var currentUser = JSON.parse(localStorage.getItem('currentUserPerfil'));
       var entregasTutorial = currentUser.tutorialModales.filter(tutorial => tutorial.key == 'entregasTutorial')[0];
 

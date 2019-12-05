@@ -22,7 +22,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 export class NotificacionDetalleUrlComponent implements OnInit {
 
   private usuarioLogueado: UserAuth;
-  private notificacion: Notificacion;
+  public notificacion: Notificacion;
 
   constructor(
     private notificacionService: NotificacionesService,

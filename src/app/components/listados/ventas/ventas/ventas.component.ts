@@ -80,7 +80,7 @@ export class VentasComponent implements OnInit, OnDestroy, AfterViewInit {
   ) { }
 
   ngOnInit() {
-    if (this.authenticationService.esRol("PRODUCTOR")) {
+    if (this.authenticationService.esRol("PRODUCTOR") && this.filtrarPorContrato == false) {
       var currentUser = JSON.parse(localStorage.getItem('currentUserPerfil'));
       var ventasTutorial = currentUser.tutorialModales.filter(tutorial => tutorial.key == 'ventasTutorial')[0];
 
