@@ -12,7 +12,7 @@ import { Cacheable } from 'ngx-cacheable';
 export class NotificacionesService {
 
   private urlNotificacionesListado = `${environment.hostComunicaciones}/Notificaciones`;
-  private urlNotificacionPorId = `${environment.hostComunicaciones}/NotificacionPorId`;
+  private urlNotificacionPorId = `${environment.hostComunicaciones}/Notificaciones/unaNotificacion`;
 	private urlNotificacionesCantidadConEstadoDado = `${environment.hostComunicaciones}/Notificaciones/cantidadConEstadoDado`;
 	private urlNotificacionesCambiarEstado = `${environment.hostComunicaciones}/Notificaciones/cambiarEstado`;
 
@@ -43,7 +43,7 @@ export class NotificacionesService {
       })
     };
 
-    let urlConParametro = `${this.urlNotificacionPorId}/${perfilId}/${notificacionId}`;
+    let urlConParametro = `${this.urlNotificacionPorId}/${notificacionId}`;
     return this.http.get<ResponseServicio>(urlConParametro, httpOptions);
   }
 
