@@ -2,6 +2,10 @@
   overflow-x: hidden;
   padding-left: 13px;
   padding-right: 13px;
-  padding-top: 132px;
+  padding-top: 13px;
   padding-bottom: 28px;
+}
+
+.margin-desktop {
+  margin-top: 132px;
 }

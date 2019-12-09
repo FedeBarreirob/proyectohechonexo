@@ -23,12 +23,23 @@ export class AuthGuardGuard implements CanActivate {
         this.authenticationService.loginCompleto();
         return true;
       } else {
-        this.router.navigate(['/login']);
+        this.router.navigate(['/login'], {
+          queryParams: {
+            returnUrl: state.url
+          }
+        });
         return false;
       }
 
     } else {
-      let tokenOk: boolean;
+      this.router.navigate(['/login'], {
+        queryParams: {
+          returnUrl: state.url
+        }
+      });
+      return false;
+
+      /*let tokenOk: boolean;
 
       let response = this.authenticationService.renovarToken();
       response.then((renovacionOk: boolean) => {
@@ -47,10 +58,10 @@ export class AuthGuardGuard implements CanActivate {
           this.authenticationService.loginCompleto();
           return true;
         } else {
-          this.router.navigate(['/login']);
+          this.router.navigate(['/login'], { queryParams: { returnUrl: state.url } });
           return false;
         }
-      }
+      }*/
     }
   }
 

@@ -75,7 +75,11 @@ const routes: Routes = [
 			},
 			{
 				path: 'notificacion/:id',
-				component: NotificacionDetalleUrlComponent
+				component: NotificacionDetalleUrlComponent,
+				canActivate: [AuthGuardGuard],
+				data: {
+					rolAdmin: false
+				}
 			},
 			{
 				path: 'ventas',

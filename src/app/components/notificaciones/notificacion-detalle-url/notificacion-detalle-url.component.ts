@@ -13,6 +13,7 @@ import { MatSnackBar } from '@angular/material';
 import { EstadoNotificaciones } from '../../../enums/estado-notificaciones.enum';
 import { UserAuth } from '../../../models/security/user';
 import { ActivatedRoute, Router } from '@angular/router';
+import { DeviceDetectorService } from 'ngx-device-detector';
 
 @Component({
   selector: 'app-notificacion-detalle-url',
@@ -23,6 +24,7 @@ export class NotificacionDetalleUrlComponent implements OnInit {
 
   private usuarioLogueado: UserAuth;
   public notificacion: Notificacion;
+  esCelular: boolean;
 
   constructor(
     private notificacionService: NotificacionesService,
@@ -30,11 +32,15 @@ export class NotificacionDetalleUrlComponent implements OnInit {
     private comprobanteDownloaderService: ComprobantesDownloaderService,
     private downloaderUtilService: DownloaderUtilService,
     private snackBar: MatSnackBar,
-    private activatedRouter: ActivatedRoute) {
+    private activatedRouter: ActivatedRoute,
+    private deviceService: DeviceDetectorService
+    ) {
       this.usuarioLogueado = <UserAuth>this.authenticationService.usuarioLogueado();
     }
 
   ngOnInit() {
+    this.esCelular = this.deviceService.isMobile();
+    
     this.activatedRouter.params.subscribe(params => {
       if (params.id) {
         var perfil = this.authenticationService.perfilUsuarioLogueado();
