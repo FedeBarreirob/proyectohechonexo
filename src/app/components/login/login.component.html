@@ -13,12 +13,12 @@
 
             <p class="correo-o-usuario">USUARIO</p>
             <input [ngClass]="{'username': esCelular, 'username-desktop': !esCelular}" matInput
-              formControlName="username" required #inputUsername [value]="inputUsername.value.toLowerCase()">
+                   formControlName="username" required #inputUsername [value]="inputUsername.value.toLowerCase()">
 
             <p class="password-lbl">CONTRASEÑA</p>
 
             <input [ngClass]="{'password': esCelular, 'password-desktop': !esCelular}" id="password" matInput
-              showHideInput [type]="hidePassword ? 'password' : 'text'" formControlName="password" required>
+                   showHideInput [type]="hidePassword ? 'password' : 'text'" formControlName="password" required>
             <mat-icon class="passwordIcon" (click)="hidePassword = !hidePassword">
               {{hidePassword ? 'visibility_off' : 'visibility'}}</mat-icon>
 
@@ -33,11 +33,15 @@
           </form>
 
           <button
-            [ngClass]="{'botonEntrar': !formLogin.valid && esCelular, 'botonEntrarHot': formLogin.valid && esCelular, 'botonEntrar-desktop': !formLogin.valid && !esCelular, 'botonEntrarHot-desktop': formLogin.valid && !esCelular}"
-            [disabled]="logueando || !formLogin.valid" type="button" (click)="login()">Entrar</button>
+                  [ngClass]="{'botonEntrar': !formLogin.valid && esCelular, 'botonEntrarHot': formLogin.valid && esCelular, 'botonEntrar-desktop': !formLogin.valid && !esCelular, 'botonEntrarHot-desktop': formLogin.valid && !esCelular}"
+                  [disabled]="logueando || !formLogin.valid" type="button" (click)="login()">Entrar</button>
 
         </mat-card-content>
       </mat-card>
+
+      <a *ngIf="esCelular" href="https://play.google.com/store/apps/details?id=com.gaviglio.digital" target="_blank" class="google-play">
+        <img src="/assets/google-play/google-play.png" alt="Play Store" width="150" height="50" />
+      </a>
     </div>
   </div>
 </div>
