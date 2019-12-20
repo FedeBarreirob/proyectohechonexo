@@ -49,7 +49,7 @@ export class DashboardComponent implements OnInit {
       // Modal tutorial bienvenida 1/2
       if (!JSON.parse(localStorage.getItem('welcomeTutorial1-2')) && !welcomeTutorial1_2.visto) {
         const dialogRef = this.dialog.open(TutorialModalComponent, {
-          data: { buttonText: welcomeTutorial1_2.contenido.buttonText, title: welcomeTutorial1_2.contenido.title, description: welcomeTutorial1_2.contenido.description }
+          data: { buttonText: welcomeTutorial1_2.contenido.buttonText, title: welcomeTutorial1_2.contenido.title, description: welcomeTutorial1_2.contenido.description, pageId: welcomeTutorial1_2.contenido.pageId, pageCount: welcomeTutorial1_2.contenido.pageCount }
         });
 
         dialogRef.afterClosed().subscribe(result => {
@@ -67,7 +67,7 @@ export class DashboardComponent implements OnInit {
           // Modal tutorial bienvenida 2/2
           if (!JSON.parse(localStorage.getItem('welcomeTutorial2-2')) && !welcomeTutorial2_2.visto) {
             const dialogRef2 = this.dialog.open(TutorialModalComponent, {
-              data: { buttonText: welcomeTutorial2_2.contenido.buttonText, title: welcomeTutorial2_2.contenido.title, description: welcomeTutorial2_2.contenido.description, description2: welcomeTutorial2_2.contenido.description2, userName: welcomeTutorial2_2.contenido.userName }
+              data: { buttonText: welcomeTutorial2_2.contenido.buttonText, title: welcomeTutorial2_2.contenido.title, description: welcomeTutorial2_2.contenido.description, description2: welcomeTutorial2_2.contenido.description2, userName: welcomeTutorial2_2.contenido.userName, pageId: welcomeTutorial2_2.contenido.pageId, pageCount: welcomeTutorial2_2.contenido.pageCount }
             });
 
             dialogRef2.afterClosed().subscribe(userName => {
