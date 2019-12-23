@@ -7,10 +7,10 @@
 
   <div fxLayout="row" fxLayoutAlign="space-between center" *ngIf="saldoGlobal && seObtuvoSaldoExito && (saldoGlobal.aCobrarVencido != 0 || saldoGlobal.aCobrarAVencer != 0)">
     <div fxFlex="50%" class="contenedor-importe" *ngIf="saldoGlobal != null && seObtuvoSaldoExito == true"><span
-        class="importe-cobrar">{{ saldoGlobal.aCobrarVencido | number: '.0-0' }}</span> <span class="ars">ARS</span>
+        class="importe-cobrar">{{ saldoGlobal.aCobrarVencido | number: (unidadMedida == 'tn' ? '.0-1' : '.0-0') }}</span> <span class="ars">ARS</span>
     </div>
     <div fxFlex="50%" class="contenedor-importe" *ngIf="saldoGlobal != null && seObtuvoSaldoExito == true"><span
-        class="importe-cobrar">{{ saldoGlobal.aCobrarAVencer | number: '.0-0' }}</span> <span class="ars">ARS</span>
+        class="importe-cobrar">{{ saldoGlobal.aCobrarAVencer | number: (unidadMedida == 'tn' ? '.0-1' : '.0-0') }}</span> <span class="ars">ARS</span>
     </div>
 
     <div fxFlex="50%" class="contenedor-importe" *ngIf="seObtuvoSaldoExito == false"><span

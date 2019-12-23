@@ -13,7 +13,7 @@
 			</div>
 
 			<div fxFlex="100%" class="encabezado-texto-cantidad-producto">
-				{{movimiento.kilos | kilosA: unidadMedida | number: '.0-0'}} {{unidadMedida | kilosTextoA}} de
+				{{movimiento.kilos | kilosA: unidadMedida | number: (unidadMedida == 'tn' ? '.0-1' : '.0-0')}} {{unidadMedida | kilosTextoA}} de
 				{{movimiento.especieDescripcion}}
 			</div>
 
@@ -77,10 +77,10 @@
 </div>
 
 <div fxLayout="row" fxLayoutAlign="space-between none" fxLayoutGap="10px">
-	<div fxFlex="50%" class="dato-apartado">{{movimiento.kilos | kilosA: unidadMedida | number: '.0-0'}}
+	<div fxFlex="50%" class="dato-apartado">{{movimiento.kilos | kilosA: unidadMedida | number: (unidadMedida == 'tn' ? '.0-1' : '.0-0')}}
 		{{unidadMedida | kilosTextoA}}</div>
 	<div fxFlex="50%" class="dato-apartado">{{movimiento.moneda | moneda}}
-		${{movimiento.precioPorQuintal | precioQQA: unidadMedida | number: '.0-0'}}</div>
+		${{movimiento.precioPorQuintal | precioQQA: unidadMedida | number: (unidadMedida == 'tn' ? '.0-1' : '.0-0')}}</div>
 </div>
 
 <div fxLayout="row" fxLayoutAlign="space-between none" fxLayoutGap="10px">
@@ -90,5 +90,5 @@
 
 <div fxLayout="row" fxLayoutAlign="space-between none" fxLayoutGap="10px" *ngIf="movimiento.tipoDeCambio != null">
 	<div fxFlex="50%" class="dato-apartado">ARS ${{movimiento.tipoDeCambio | number: '.2-2'}}</div>
-	<div fxFlex="50%" class="dato-apartado">ARS ${{movimiento.precioQQPesificado | precioQQA: unidadMedida | number: '.0-0'}}</div>
+	<div fxFlex="50%" class="dato-apartado">ARS ${{movimiento.precioQQPesificado | precioQQA: unidadMedida | number: (unidadMedida == 'tn' ? '.0-1' : '.0-0')}}</div>
 </div>
