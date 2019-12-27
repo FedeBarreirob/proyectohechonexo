@@ -264,10 +264,8 @@ export class ContratosComponent implements OnInit, OnDestroy, AfterViewInit {
       this.descargandoArchivos = true;
       let identificadores = this.identificadoresParaDescarga.map(identificador => {
         return {
-          identificadorParaDescarga: {
             sucursal: identificador.resumen.numeroSucursalContrato,
             comprobante: identificador.resumen.numeroComprobanteContrato
-          }
         }
       });
 
