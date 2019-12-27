@@ -64,10 +64,11 @@ export class ContratosExportacionesService {
       let movimientosRows = [];
       for (let movimiento of movimimentos) {
         movimientosRows.push([
+          `${movimiento.numeroComprobanteContrato}`,
           `${movimiento.especie} ${movimiento.cosecha}`,
           movimiento.fechaVenta,
-          `${this.decimalPipe.transform(movimiento.kilosFijados, '.2')} Kg`,
-          `${this.decimalPipe.transform(movimiento.kilosAFijar, '.2')} Kg`
+          `${movimiento.tipoNegocioDescripCorta}`,
+          `${this.decimalPipe.transform(movimiento.kilosFijados, '.2')} Kg`
         ]);
       }
       rows.push(movimientosRows);
@@ -76,16 +77,17 @@ export class ContratosExportacionesService {
       let movimientosOpciones = {
         startY: 30,
         columnStyles: {
-          0: { columnWidth: '25%', halign: 'left' },
-          1: { columnWidth: '25%', halign: 'left' },
-          2: { columnWidth: '25%', halign: 'right' },
-          3: { columnWidth: '25%', halign: 'right' }
+          0: { columnWidth: '20%', halign: 'left' },
+          1: { columnWidth: '20%', halign: 'left' },
+          2: { columnWidth: '20%', halign: 'left' },
+          3: { columnWidth: '20%', halign: 'left' },
+          4: { columnWidth: '20%', halign: 'left' }
         }
       };
       opciones.push(movimientosOpciones);
 
       // .. columnas
-      let movimientosColumnas = ["Especia/Cosecha", "Fecha", "Kg.Brutos", "Kg.Netos"];
+      let movimientosColumnas = ["Nº Contrato", "Especia/Cosecha", "Fecha", "Tipo de negocio", "Kg Pactados"];
       columnas.push(movimientosColumnas);
 
       // totales

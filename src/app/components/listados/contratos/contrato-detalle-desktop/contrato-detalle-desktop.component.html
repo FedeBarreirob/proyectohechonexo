@@ -230,12 +230,33 @@
 
       <!--Columna botones exportar-->
       <div fxFlex="250px" class="info-container">
-        <button mat-button class="boton-descarga-comprobante" (click)="descargarComprobante()"
-          [disabled]="cargando==true">
-          <img src="assets/varios/pdf.png" />
-          Descargar comprobante
-        </button>
+        <div fxLayout="column" fxLayoutAlign="center stretch">
+
+          <div fxFlex>
+            <button mat-button class="boton-descarga-comprobante" (click)="descargarComprobante()"
+                    [disabled]="cargando==true">
+              <img src="assets/varios/pdf.png" />
+              Descargar comprobante
+            </button>
+          </div>
+
+          <div fxFlex>
+            <button mat-button class="boton-descarga-comprobante-alt" (click)="exportarAExcel()"
+              [disabled]="cargando==true">
+              <img src="assets/varios/excel.svg" />
+              Descargar Excel
+            </button>
+          </div>
+
+          <div fxFlex>
+            <button mat-button class="boton-descarga-comprobante-alt" (click)="exportarAPDF()"
+              [disabled]="cargando==true">
+              <img src="assets/varios/pdf-verde.svg" />
+              Descargar PDF
+            </button>
+          </div>
       </div>
+    </div>
 
     </div>
   </span>

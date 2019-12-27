@@ -134,3 +134,20 @@
 .ventas-container {
     padding-top: 20px;
 }
+
+.boton-descarga-comprobante-alt {
+    height: 40px;
+    width: 100%;
+    background-color: #FFFFFF;
+    border: 1px solid #2DA442;
+    border-radius: 4px;
+    color: #2DA442;
+    font-family: Rubik;
+    font-size: 14px;
+    font-weight: bold;
+    margin-top: 10px;
+}
+
+.boton-descarga-comprobante-alt img {
+    height: 20px;
+}
