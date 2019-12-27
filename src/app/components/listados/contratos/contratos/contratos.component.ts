@@ -262,7 +262,14 @@ export class ContratosComponent implements OnInit, OnDestroy, AfterViewInit {
     if (this.identificadoresParaDescarga && this.identificadoresParaDescarga.length > 0 && this.descargandoArchivos == false) {
 
       this.descargandoArchivos = true;
-      let identificadores = this.identificadoresParaDescarga.map(identificador => identificador.identificadorParaDescarga);
+      let identificadores = this.identificadoresParaDescarga.map(identificador => {
+        return {
+          identificadorParaDescarga: {
+            sucursal: identificador.resumen.numeroSucursalContrato,
+            comprobante: identificador.resumen.numeroComprobanteContrato
+          }
+        }
+      });
 
       this.comprobanteDownloaderService.confirmacionVentaDescargadoMasivo(identificadores)
         .pipe(takeUntil(this.destroy$))
@@ -343,7 +350,7 @@ export class ContratosComponent implements OnInit, OnDestroy, AfterViewInit {
     if (this.identificadoresParaDescarga && this.identificadoresParaDescarga.length > 0 && this.descargandoArchivos == false) {
 
       this.descargandoArchivos = true;
-      let movimientosSeleccionados = this.identificadoresParaDescarga.map(identificador => identificador.movimiento);
+      let movimientosSeleccionados = this.identificadoresParaDescarga.map(identificador => identificador.resumen);
       
       this.contratosExportacionesService.exportarListadoContratosDetalleExcel(movimientosSeleccionados);
       this.descargandoArchivos = false;
@@ -357,7 +364,7 @@ export class ContratosComponent implements OnInit, OnDestroy, AfterViewInit {
     if (this.identificadoresParaDescarga && this.identificadoresParaDescarga.length > 0 && this.descargandoArchivos == false) {
 
       this.descargandoArchivos = true;
-      let movimientosSeleccionados = this.identificadoresParaDescarga.map(identificador => identificador.movimiento);
+      let movimientosSeleccionados = this.identificadoresParaDescarga.map(identificador => identificador.resumen);
 
       this.contratosExportacionesService.exportarListadoContratosDetallePDF(movimientosSeleccionados, null);
       this.descargandoArchivos = false;

@@ -152,10 +152,7 @@ export class ContratosListaDesktopComponent implements OnInit, OnDestroy {
         .filter(contratoItem => contratoItem.seleccionado == true)
         .map(contratoItem => {
           return {
-            identificadorParaDescarga: {
-              sucursal: contratoItem.resumen.numeroSucursalContrato,
-              comprobante: contratoItem.resumen.numeroComprobanteContrato
-            }
+            resumen: contratoItem.resumen
           };
         });
 
