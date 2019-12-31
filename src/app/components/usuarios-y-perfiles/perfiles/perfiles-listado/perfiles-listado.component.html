@@ -36,16 +36,16 @@
 	</div>
 
 	<!-- Listado -->
-	<div fxLayout="row" fxLayoutAlign="space-between center">
+	<div fxLayout="row" fxLayoutAlign="space-between center" *ngIf="cargando == false">
 		<div fxFlex="100%">
 			<mat-card>
 
 				<div fxFlexFill fxLayout="row" fxLayoutAlign="space-between center" fxLayoutGap="2px">
-					<div fxFlex="15%">
+					<div fxFlex="25%">
 						<strong>Usuario</strong>
 					</div>
 
-					<div fxFlex="40%">
+					<div fxFlex="30%">
 						<strong>Nombre</strong>
 					</div>
 
@@ -68,11 +68,11 @@
 						*ngFor="let perfil of (listaPaginada.listado ? listaPaginada.listado : [])">
 
 						<div fxFlexFill fxLayout="row" fxLayoutAlign="space-between center" fxLayoutGap="2px">
-							<div fxFlex="15%">
+							<div fxFlex="25%">
 								{{perfil.credencial.username}}
 							</div>
 
-							<div fxFlex="40%">
+							<div fxFlex="30%">
 								{{perfil.informacionPersonal.nombre}}
 							</div>
 
