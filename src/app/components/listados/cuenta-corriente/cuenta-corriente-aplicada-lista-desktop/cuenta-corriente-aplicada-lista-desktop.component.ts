@@ -35,6 +35,7 @@ export class CuentaCorrienteAplicadaListaDesktopComponent implements OnInit, OnD
   listado: Array<MovimientoCtaCteAplicada> = [];
   filtro: any;
   cargando: boolean = false;
+  cargandoPDF$: Subject<boolean> = new Subject<boolean>();
   destroy$: Subject<any> = new Subject<any>();
 
   identificadoresParaDescarga: Array<any>;
@@ -230,8 +231,27 @@ export class CuentaCorrienteAplicadaListaDesktopComponent implements OnInit, OnD
     if (this.identificadoresParaDescarga && this.descargandoArchivos == false) {
       this.descargandoArchivos = true;
 
-      let movimientos: Array<MovimientoCtaCteAplicada> = this.identificadoresParaDescarga.map(identificador => identificador.movimiento);
-      this.exportacionesService.exportarListadoMovCtaCteDetallePDF(movimientos, null);
+      if (this.listado.filter(item => item.concepto != "TRANSPORTE").length == this.identificadoresParaDescarga.length) {
+        let filtroPaginado: any = (this.filtro) ? this.filtro : this.filtroPorDefecto();
+        filtroPaginado.totales = true;
+        filtroPaginado.paginado = false;
+        filtroPaginado.ordenado = false;
+        this.cargandoPDF$.next(true);
+        this.ctacteAplicadaService.listadoCtaCte(filtroPaginado)
+          .pipe(takeUntil(this.destroy$))
+          .subscribe(respuesta => {
+            this.exportacionesService.exportarListadoMovCtaCteDetallePDF(respuesta.datos.listado.filter(item => item.concepto != "TRANSPORTE"), null);
+            this.cargando = false;
+            this.cargandoPDF$.next(false);
+          }, () => {
+            this.cargando = false;
+            this.cargandoPDF$.next(false);
+          });
+      }
+      else {
+        let movimientos: Array<MovimientoCtaCteAplicada> = this.identificadoresParaDescarga.map(identificador => identificador.movimiento);
+        this.exportacionesService.exportarListadoMovCtaCteDetallePDF(movimientos, null);
+      }
 
       this.descargandoArchivos = false;
     }

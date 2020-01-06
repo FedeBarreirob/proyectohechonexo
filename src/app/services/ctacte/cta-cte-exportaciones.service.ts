@@ -60,6 +60,8 @@ export class CtaCteExportacionesService {
       // listado de movimientos
       // .. preparar datos
       let movimientosRows = [];
+      let sumaPesos = 0;
+      let sumaDolares = 0;
       for (let movimiento of movimimentos) {
         movimientosRows.push([
           movimiento.concepto,
@@ -67,23 +69,31 @@ export class CtaCteExportacionesService {
           `AR$ ${this.decimalPipe.transform(movimiento.importeComprobantePesos, '.2')}`,
           `US$ ${this.decimalPipe.transform(movimiento.importeComprobanteDolares, '.2')}`
         ]);
+        sumaPesos += movimiento.saldoPesos;
+        sumaDolares += movimiento.saldoDolares;
       }
       rows.push(movimientosRows);
 
       // .. preparar opciones
+      let headerCount = 0;
       let movimientosOpciones = {
         startY: 30,
         columnStyles: {
-          0: { columnWidth: '25%', halign: 'left' },
-          1: { columnWidth: '25%', halign: 'left' },
-          2: { columnWidth: '25%', halign: 'right' },
-          3: { columnWidth: '25%', halign: 'right' }
+          0: { columnWidth: 72, halign: 'left' },
+          1: { columnWidth: 30, halign: 'center' },
+          2: { columnWidth: 40, halign: 'right' },
+          3: { columnWidth: 40, halign: 'right' }
+        },
+        createdHeaderCell: function (cell, data) {
+          cell.styles.columnWidth = data.settings.columnStyles[headerCount].columnWidth;
+          cell.styles.halign = data.settings.columnStyles[headerCount].halign;
+          headerCount++;
         }
       };
       opciones.push(movimientosOpciones);
 
       // .. columnas
-      let movimientosColumnas = ["Concepto", "Fecha", "Pesos", "Dolares"];
+      let movimientosColumnas = ["Concepto", "Fecha", "Pesos", "Dólares"];
       columnas.push(movimientosColumnas);
 
       // saldos
@@ -125,10 +135,35 @@ export class CtaCteExportacionesService {
         columnas.push(saldosColumnas);
       }
 
+      // Totales
+      rows.push([[
+        "Totales",
+        `AR$ ${this.decimalPipe.transform(sumaPesos, '.2')}`,
+        `US$ ${this.decimalPipe.transform(sumaDolares, '.2')}`
+      ]]);
+
+      let headerTotalsCount = 0;
+      opciones.push({
+        startY: 30,
+        columnStyles: {
+          // fullWidth: 182
+          0: { columnWidth: 102, halign: 'left', fontStyle: 'bold' },
+          1: { columnWidth: 40, halign: 'right', fontStyle: 'bold' },
+          2: { columnWidth: 40, halign: 'right', fontStyle: 'bold' },
+        },
+        createdHeaderCell: function (cell, data) {
+          cell.styles.columnWidth = data.settings.columnStyles[headerTotalsCount].columnWidth;
+          cell.styles.halign = data.settings.columnStyles[headerTotalsCount].halign;
+          headerTotalsCount++;
+        }
+      });
+
+      columnas.push(["Resumen", "Pesos", "Dólares"]);
+      
       // renderizar
       this.pdfService.listaMultipleAPdf(
         rows,
-        "Movimientos de cuenta corriente",
+        "Movimientos de Cuenta Corriente",
         columnas,
         "cuenta-corriente",
         opciones
