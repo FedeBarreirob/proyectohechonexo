@@ -5,8 +5,6 @@ import { DatePipe } from '@angular/common';
 import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
 import { TenenciaImpositiva } from '../../../../../interfaces/informacion-tributaria/tenencia-impositiva/tenencia-impositiva';
-import { PerfilBasico } from '../../../../../interfaces/perfiles/perfil-basico';
-import { AuthenticationService } from '../../../../../services/security/authentication.service';
 
 @Component({
   selector: 'app-tenencias-impositivas',
@@ -25,45 +23,20 @@ export class TenenciasImpositivasComponent implements OnInit, OnDestroy {
   cargando$: Subject<boolean> = new Subject<boolean>();
   tenenciaImpositiva: TenenciaImpositiva = null;
   unidadMedida: string;
-  perfilBasico: PerfilBasico;
 
   constructor(
     private informacionTributariaService: InformacionTributariaService,
     private informacionTributariaExpService: InformacionTributariaExportacionesService,
-    private datePipe: DatePipe,
-    private authenticationService: AuthenticationService
+    private datePipe: DatePipe
   ) { }
 
   ngOnInit() {
     this.fecha = (new Date()).toISOString();
-
-    // observer de perfil
-    this.authenticationService.perfilActivo$
-      .pipe(takeUntil(this.destroy$))
-      .subscribe(
-        perfil => {
-          this.perfilBasico = perfil;
-          this.cargarUnidadMedida()
-        });
-
-    this.cargarUnidadMedida();
   }
 
   ngOnDestroy(): void {
     this.destroy$.next();
     this.destroy$.unsubscribe();
-  }
-
-  /**
-   * Función que carga la unidad de medida desde el perfil
-   */
-  cargarUnidadMedida() {
-    if (this.perfilBasico) {
-      this.unidadMedida = this.perfilBasico.informacionPersonal.unidadMedidaPeso;
-    } else {
-      this.perfilBasico = this.authenticationService.perfilUsuarioSeleccionado();
-      this.unidadMedida = this.perfilBasico.informacionPersonal.unidadMedidaPeso;
-    }
   }
 
   /**
