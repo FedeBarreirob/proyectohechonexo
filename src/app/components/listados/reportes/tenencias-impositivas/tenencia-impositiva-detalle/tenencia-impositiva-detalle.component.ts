@@ -11,9 +11,6 @@ export class TenenciaImpositivaDetalleComponent implements OnInit {
   @Input()
   tenenciaImpositiva: TenenciaImpositiva;
 
-  @Input()
-  unidadMedida: string;
-
   constructor() { }
 
   ngOnInit() {
