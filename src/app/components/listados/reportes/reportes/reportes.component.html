@@ -1,8 +1,25 @@
 <div [ngClass]="{'container-desktop': !esCelular}">
-    <app-tool-bar-general titulo="Reportes"></app-tool-bar-general>
+  <app-tool-bar-general titulo="Reportes"></app-tool-bar-general>
 
-    <p style="margin-top: 50vh; text-align: center;">Estamos realizando mejoras en los reportes, disculpe las molestias.</p>
+  <!--<p style="margin-top: 50vh; text-align: center;">Estamos realizando mejoras en los reportes, disculpe las molestias.</p>-->
 
-    <!--
-    <app-tenencias-impositivas *ngIf="cuenta != null" [cuenta]="cuenta.id.codigo"></app-tenencias-impositivas>-->
+  <mat-select placeholder="Seleccione reporte" [(ngModel)]="reportId" class="contenedores-input">
+    <mat-option [value]="1">
+      TENENCIAS IMPOSITIVAS
+    </mat-option>
+
+    <mat-option [value]="2">
+      INSUMOS PENDIENTES
+    </mat-option>
+
+    <mat-option [value]="3">
+      COMPRABANTES PENDIENTES DE FACTURAR
+    </mat-option>
+  </mat-select>
+
+  <app-tenencias-impositivas *ngIf="cuenta != null && reportId == 1" [cuenta]="cuenta.id.codigo"></app-tenencias-impositivas>
+
+  <app-insumos-pendientes *ngIf="cuenta != null && reportId == 2" [cuenta]="cuenta.id.codigo"></app-insumos-pendientes>
+
+  <app-comprobantes-pendientes-facturar *ngIf="cuenta != null && reportId == 3" [cuenta]="cuenta.id.codigo"></app-comprobantes-pendientes-facturar>
 </div>

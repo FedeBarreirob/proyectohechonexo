@@ -1,0 +1,36 @@
+<div fxLayout="row" fxLayoutAlign="space-between none" fxLayoutGap="10px">
+  <div fxFlex="100%" class="titulo-apartados">INSUMOS PENDIENTES</div>
+</div>
+
+<div fxLayout="row" fxLayoutAlign="none" class="contenedores-input">
+  <p class="input-label">Fecha</p>
+</div>
+
+<div fxLayout="row" fxLayoutAlign="none" class="contenedores-input">
+  <input readonly [(ngModel)]="fecha" matInput [matDatepicker]="fechaReporte" class="input-fecha">
+  <mat-datepicker-toggle matSuffix [for]="fechaReporte"></mat-datepicker-toggle>
+  <mat-datepicker touchUi #fechaReporte></mat-datepicker>
+</div>
+
+<app-insumo-pendiente-detalle *ngIf="insumoPendiente != null" [insumoPendiente]="insumoPendiente"
+  [unidadMedida]="unidadMedida">
+</app-insumo-pendiente-detalle>
+
+<!--Boton de descarga del comprobante-->
+<div fxLayout="row" fxLayoutAlign="space-between center" class="botonera">
+  <div fxFlex="100%">
+    <button mat-button class="boton" (click)="generar()" [disabled]="cargando==true">
+      Generar
+    </button>
+    <button mat-button *ngIf="insumoPendiente != null" class="boton" (click)="descargarExcel()"
+            [disabled]="cargando==true">
+      Descargar archivo de Excel
+    </button>
+    <button mat-button *ngIf="insumoPendiente != null" class="boton" (click)="descargarPDF()"
+            [disabled]="cargando==true">
+      Descargar archivo PDF
+    </button>
+  </div>
+</div>
+
+<app-loading [cargando$]="cargando$"></app-loading>
