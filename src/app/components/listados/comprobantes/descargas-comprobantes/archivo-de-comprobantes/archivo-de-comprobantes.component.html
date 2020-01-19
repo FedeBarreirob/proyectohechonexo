@@ -14,7 +14,7 @@
 				</div>
 
 				<div fxFlex class="identificacion-comprobante">
-					{{comprobante.comprobante}}
+					<span *ngIf="comprobante.fecha">{{comprobante.fecha}} - </span>{{comprobante.comprobante}}
 				</div>
 
 			</div>

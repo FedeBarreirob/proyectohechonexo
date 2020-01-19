@@ -178,6 +178,7 @@ export class ArchivoDeComprobantesComponent implements OnInit, OnDestroy {
   private agregarAlListado(comprobantesPagina: Array<ComprobanteParaDescarga>) {
     comprobantesPagina.forEach(
       comprobante => {
+        comprobante.fecha = comprobante.link.split(";")[5];
         this.comprobantes.push(comprobante);
       }
     );
