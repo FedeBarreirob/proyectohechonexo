@@ -17,90 +17,54 @@ import { PerfilBasico } from '../../../../interfaces/perfiles/perfil-basico';
 })
 export class MercPendEntregarComponent implements OnInit {
 
-  public listadoMercPendEntregar: Array<MovimientoMercPendEntregar>;
-  public totales: MercPendEntregarTotales = null;
+  public listadoMercPendEntregar: Array<MovimientoMercPendEntregar> = [];
   public cargando: boolean;
 
-  public cuenta: string = "";
-  public perfilBasico: PerfilBasico;
-  public fechaDesde: string;
-  public fechaHasta: string = (new Date()).toISOString();
+  public cuenta: string = "484";
+
+  private todosSeleccionados: boolean = false;
+  get estanTodosSeleccionados(): boolean {
+    for (var i = 0; i < this.listadoMercPendEntregar.length; i++) {
+      if (!this.listadoMercPendEntregar[i].seleccionado) {
+        this.todosSeleccionados = false;
+        return this.todosSeleccionados;
+      }
+    }
+
+    this.todosSeleccionados = true;
+    return this.todosSeleccionados;
+  };
 
   constructor(private mercPendEntregarService: MercPendEntregarService,
-    private authenticationService: AuthenticationService,
-    private datePipe: DatePipe,
-    public dialog: MatDialog) {
-    this.establecerFiltrosPorDefecto();
+    private authenticationService: AuthenticationService
+  ) {
   }
 
   ngOnInit() {
-    this.cargando = false;
+    this.cargando = true;
 
-    this.authenticationService.perfilActivo$.subscribe(
-      perfil => this.perfilBasico = perfil);
-  }
-
-  // funcion que ejecuta la carga del listado de mercaderia pendiente de entregar
-  cargarListado() {
-    if (this.cargando == false) {
-      this.cargando = true;
-      this.limpiar();
-
-      let filtro: FiltroMercaderiaPendEntregar = {
-        cuenta: this.cuenta,
-        fechaDesde: this.datePipe.transform(new Date(this.fechaDesde), 'dd/MM/yyyy'),
-        fechaHasta: this.datePipe.transform(new Date(this.fechaHasta), 'dd/MM/yyyy')
-      }
-
-
-      return this.mercPendEntregarService.listadoMercPendEntregar(filtro).subscribe(respuesta => {
-        this.listadoMercPendEntregar = respuesta.datos.listado;
-        this.totales = respuesta.datos.totales;
-
-        this.cargando = false;
-      }, () => {
-        this.cargando = false;
-      });
+    let filtro: FiltroMercaderiaPendEntregar = {
+      cuenta: this.cuenta,
+      fechaDesde: '01/01/2015',
+      fechaHasta: '01/02/2015'
     }
-  }
 
-  // funcion que muestra el detalle de un movimiento seleccionado
-  verDetalle(movimiento: MovimientoMercPendEntregar) {
-
-    this.dialog.open(MercPendEntregarDetalleComponent, {
-      data: movimiento
-    });
-  }
-
-  // funcion que muestra las operaciones extras
-  verOpcionesExtras() {
-    this.dialog.open(MercPendEntregarMasOperacionesComponent, {
-      data: {
-        movimientos: this.listadoMercPendEntregar,
-        totales: this.totales
+    this.mercPendEntregarService.listadoMercPendEntregar(filtro).subscribe(respuesta => {
+      if (respuesta.datos && respuesta.datos.listado) {
+        this.listadoMercPendEntregar = respuesta.datos.listado;
       }
+
+      this.cargando = false;
+    }, () => {
+      this.cargando = false;
     });
   }
 
-  // funcion encargada de capturar el valor de la cuenta
-  seleccionarCuenta(cuentaSeleccionada?: string) {
-    this.cuenta = cuentaSeleccionada;
-    this.establecerFiltrosPorDefecto();
-    this.cargarListado();
-  }
-
-  // funcion que acomoda los filtros a default
-  establecerFiltrosPorDefecto() {
-    let sieteDiasAtras: Date = new Date();
-    sieteDiasAtras.setDate(sieteDiasAtras.getDate() - 7);
-    this.fechaDesde = sieteDiasAtras.toISOString();
-
-    this.fechaHasta = (new Date()).toISOString();
-  }
-
-  // funcion encargada de limpiar para nueva generacion
-  limpiar() {
-    this.listadoMercPendEntregar = [];
-    this.totales = null;
+  seleccionarTodos = function () {
+    for (var i = 0; i < this.listadoMercPendEntregar.length; i++) {
+      if (!this.listadoMercPendEntregar[i].seleccionado) {
+        return false;
+      }
+    }
   }
 }

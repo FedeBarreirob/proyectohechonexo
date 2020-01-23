@@ -1,4 +1,4 @@
-import { Component, OnInit, Inject } from '@angular/core';
+import { Component, OnInit, Inject, Input } from '@angular/core';
 import { MAT_DIALOG_DATA, MatDialog } from '@angular/material';
 import { MovimientoMercPendEntregar } from '../../../../interfaces/mercaderia-pend-entregar/listado-merc-pend-entregar';
 import { MercPendEntregarDetalleMasOperacionesComponent } from '../merc-pend-entregar-detalle-mas-operaciones/merc-pend-entregar-detalle-mas-operaciones.component';
@@ -10,18 +10,11 @@ import { MercPendEntregarDetalleMasOperacionesComponent } from '../merc-pend-ent
 })
 export class MercPendEntregarDetalleComponent implements OnInit {
 
-  constructor(
-    @Inject(MAT_DIALOG_DATA) public data: MovimientoMercPendEntregar,
-    public dialog: MatDialog
-  ) { }
+  @Input()
+  mercPendEntregar: MovimientoMercPendEntregar;
+
+  constructor() { }
 
   ngOnInit() {
-  }
-
-  // funcion que muestra las operaciones extras
-  verOpcionesExtras() {
-    this.dialog.open(MercPendEntregarDetalleMasOperacionesComponent, {
-      data: this.data
-    });
   }
 }

@@ -1,42 +1,44 @@
-<h2 mat-dialog-title>Detalle</h2>
+<div fxLayout="row" fxLayoutAlign="space-around center" class="container">
 
-<mat-dialog-content class="mat-typography">
+  <!--Check de descarga-->
+  <div fxFlex="28px">
+    <mat-checkbox [(ngModel)]="mercPendEntregar.seleccionado"></mat-checkbox>
+  </div>
 
-  <table class="tabla-movimiento">
-    <tr>
-      <td>Fecha</td>
-      <td align="end">{{data.fecha}}</td>
-    </tr>
+  <div fxFlex (click)="notificarVerDetalle()">
 
-    <tr>
-      <td>Artículo</td>
-      <td align="end">{{data.codArticulo}} {{data.descripcionArticulo}}</td>
-    </tr>
+    <div fxLayout="row" fxLayoutAlign="space-around center">
 
-    <tr>
-      <td>Cantidad</td>
-      <td align="end">{{data.cantidad | number: '.2'}}</td>
-    </tr>
+      <div fxFlex="100px">
+        {{ mercPendEntregar.comprobante }}
+      </div>
 
-    <tr>
-      <td>Cantidad pendiente</td>
-      <td align="end">{{data.cantidadPendiente | number: '.2'}}</td>
-    </tr>
+      <div fxFlex="100px">
+        Fecha
+      </div>
 
-    <tr>
-      <td>Total</td>
-      <td align="end">US$ {{data.totalUsd | number: '.2'}}</td>
-    </tr>
+      <div fxFlex="100px">
+        Artículo
+      </div>
 
-    <tr>
-      <td>Comprobante</td>
-      <td align="end">{{data.tipoComprobante}} {{data.comprobante}}</td>
-    </tr>
-  </table>
+      <div fxFlex="100px">
+        Descripción
+      </div>
 
-</mat-dialog-content>
+      <div fxFlex="100px">
+        Cantidad
+      </div>
 
-<mat-dialog-actions align="end">
-  <button mat-button (click)="verOpcionesExtras()">Acciones</button>
-  <button mat-button mat-dialog-close>Cerrar</button>
-</mat-dialog-actions>
+      <div fxFlex="100px">
+        Pendiente
+      </div>
+
+      <div fxFlex="100px">
+        Total
+      </div>
+
+    </div>
+
+  </div>
+
+</div>
