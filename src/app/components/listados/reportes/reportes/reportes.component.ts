@@ -16,7 +16,7 @@ export class ReportesComponent implements OnInit, AfterViewInit {
 
   cuenta: EntidadAlg;
   esCelular: boolean;
-  reportId: number = 1;
+  reportId: number;
 
   constructor(
     private cuentasService: CuentaAlgService,

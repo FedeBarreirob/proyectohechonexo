@@ -1,7 +1,12 @@
 .container-desktop {
-    padding-top: 122px;
+  padding-top: 122px;
 }
 
-.contenedores-input {
+.title-center {
+  text-align: center;
+}
+
+.select-report {
+  width: 35%;
   margin-left: 20px;
 }

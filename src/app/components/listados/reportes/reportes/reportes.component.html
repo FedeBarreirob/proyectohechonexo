@@ -1,9 +1,7 @@
 <div [ngClass]="{'container-desktop': !esCelular}">
-  <app-tool-bar-general titulo="Reportes"></app-tool-bar-general>
+  <h3 class="title-center">Reportes</h3>
 
-  <!--<p style="margin-top: 50vh; text-align: center;">Estamos realizando mejoras en los reportes, disculpe las molestias.</p>-->
-
-  <mat-select placeholder="Seleccione reporte" [(ngModel)]="reportId" class="contenedores-input">
+  <mat-select placeholder="Seleccione el reporte que desea visualizar" [(ngModel)]="reportId" class="select-report">
     <mat-option [value]="1">
       TENENCIAS IMPOSITIVAS
     </mat-option>
@@ -19,7 +17,7 @@
 
   <app-tenencias-impositivas *ngIf="cuenta != null && reportId == 1" [cuenta]="cuenta.id.codigo"></app-tenencias-impositivas>
 
-  <app-insumos-pendientes *ngIf="cuenta != null && reportId == 2" [cuenta]="cuenta.id.codigo"></app-insumos-pendientes>
+  <app-merc-pend-entregar *ngIf="cuenta != null && reportId == 2" [cuenta]="cuenta.id.codigo"></app-merc-pend-entregar>
 
-  <app-comprobantes-pendientes-facturar *ngIf="cuenta != null && reportId == 3" [cuenta]="cuenta.id.codigo"></app-comprobantes-pendientes-facturar>
+  <app-comprobantes-pend-facturar *ngIf="cuenta != null && reportId == 3" [cuenta]="cuenta.id.codigo"></app-comprobantes-pend-facturar>
 </div>

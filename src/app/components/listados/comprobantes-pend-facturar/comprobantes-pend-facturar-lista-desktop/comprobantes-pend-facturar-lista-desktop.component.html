@@ -1,0 +1,28 @@
+<div class="contenedor-header">
+  <app-comprobantes-pend-facturar-header-item-desktop *ngIf="listadoCompPendFact && listadoCompPendFact.length > 0"
+    (cambioSeleccion)="seleccionarTodos($event)"></app-comprobantes-pend-facturar-header-item-desktop>
+</div>
+
+<div class="contenedor-listado" fxLayout="column" fxLayoutWrap fxLayoutAlign="none"
+  infiniteScroll [infiniteScrollDistance]="2" [infiniteScrollThrottle]="50" (scrolled)="onScroll()" [scrollWindow]="false">
+
+  <app-comprobantes-pend-facturar-item-desktop *ngFor="let movimiento of listadoCompPendFact"
+    [movimiento]="movimiento" (cambioSeleccion)="rearmarListaSeleccionados()"
+    (verDetalle)="verDetalle($event)"></app-comprobantes-pend-facturar-item-desktop>
+
+  <!--Spinner-->
+  <div fxLayout="row" fxLayoutAlign="center center" *ngIf="cargando" style="margin-top: 10px">
+    <mat-spinner diameter="24"></mat-spinner>
+  </div>
+
+  <!--Si no hay datos a mostrar-->
+  <div fxLayout="column" fxLayoutAlign="center center" *ngIf="!cargando && listadoCompPendFact && listadoCompPendFact.length == 0" class="info-sin-data-container">
+    <div fxFlex="nogrow">
+      <img src="assets/varios/sin-data.png" class="info-sin-data-img" />
+    </div>
+
+    <div fxFlex="nogrow" class="info-sin-data-text">
+      Cuando tengamos información de tus entregas la podrás ver aquí.
+    </div>
+  </div>
+</div>

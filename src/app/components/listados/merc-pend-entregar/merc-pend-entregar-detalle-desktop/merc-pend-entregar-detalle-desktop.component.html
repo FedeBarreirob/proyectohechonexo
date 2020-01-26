@@ -1,0 +1,109 @@
+<div *ngIf="movimiento">
+  <mat-progress-bar *ngIf="cargando" mode="indeterminate"></mat-progress-bar>
+
+  <div fxLayout="row" fxLayoutAlign="start start" fxLayoutGap="5px" class="miga-container">
+    <div fxflex="nogrow">
+      <span (click)="cerrar()" class="boton-merc-pend-entregar">Mercadería pendiente de entregar</span>
+    </div>
+
+    <div fxflex="nogrow">
+      <mat-icon class="flecha">keyboard_arrow_right</mat-icon>
+    </div>
+
+    <div fxflex="nogrow">
+      <span class="merc-pend-entregar-numero-miga">{{movimiento.comprobante}}</span>
+    </div>
+  </div>
+
+  <div fxLayout="row" fxLayoutAlign="space-between start" fxLayoutGap="13px" class="movimiento-info-container">
+
+    <!--Columna info prod-->
+    <div fxFlex class="info-container">
+
+      <!--Encabezado-->
+      <div fxLayout="row" fxLayoutAlign="space-between center">
+
+        <!--Icono y tn-->
+        <div fxFlex="nogrow">
+          <div fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="10px">
+            <div fxFlex="40px">
+              <img class="icono-producto" src="assets/cereal-filtro/maiz.png" />
+            </div>
+
+            <div fxFlex class="catidad-producto-encabezado">
+              {{movimiento.comprobante}}
+            </div>
+          </div>
+        </div>
+
+      </div>
+
+      <!--Datos del comprobante pendiente de facturar-->
+      <div fxLayout="row" fxLayoutAlign="space-between none" fxLayoutGap="10px">
+        <div fxFlex="100%" class="titulo-apartados">DATOS DE LA MERCADERIA PENDIENTE DE ENTREGAR</div>
+      </div>
+
+      <div fxLayout="row" fxLayoutAlign="space-between none" fxLayoutGap="10px">
+        <div fxFlex="50%" class="subtitulo-apartados">FECHA</div>
+        <div fxFlex="50%" class="subtitulo-apartados">ARTICULO</div>
+      </div>
+
+      <div fxLayout="row" fxLayoutAlign="space-between none" fxLayoutGap="10px">
+        <div fxFlex="50%" class="dato-apartado">{{movimiento.fecha | date:'dd/MM/yyyy'}}</div>
+        <div fxFlex="50%" class="dato-apartado">{{movimiento.codArticulo}} - {{movimiento.descripcionArticulo}}</div>
+      </div>
+
+      <div fxLayout="row" fxLayoutAlign="space-between none" fxLayoutGap="10px">
+        <div fxFlex="50%" class="subtitulo-apartados">CANTIDAD</div>
+        <div fxFlex="50%" class="subtitulo-apartados">CANTIDAD PENDIENTE</div>
+      </div>
+
+      <div fxLayout="row" fxLayoutAlign="space-between none" fxLayoutGap="10px">
+        <div fxFlex="50%" class="dato-apartado">{{movimiento.cantidad}}</div>
+        <div fxFlex="50%" class="dato-apartado">{{movimiento.cantidadPendiente}}</div>
+      </div>
+
+      <div fxLayout="row" fxLayoutAlign="space-between none" fxLayoutGap="10px">
+        <div fxFlex="50%" class="subtitulo-apartados">TOTAL</div>
+      </div>
+
+      <div fxLayout="row" fxLayoutAlign="space-between none" fxLayoutGap="10px">
+        <div fxFlex="50%" class="dato-apartado">{{movimiento.moneda}} {{movimiento.totalUsd | number: '.0-0'}}</div>
+      </div>
+
+    </div>
+
+    <!--Columna botones exportar-->
+    <div fxFlex="250px" class="info-container">
+
+      <div fxLayout="column" fxLayoutAlign="center stretch">
+
+        <div fxFlex>
+          <button mat-button class="boton-descarga-comprobante" (click)="descargarCertificado()"
+                  [disabled]="cargando==true">
+            <img src="assets/varios/pdf.png" />
+            Descargar certificado
+          </button>
+        </div>
+
+        <div fxFlex>
+          <button mat-button class="boton-descarga-comprobante-alt" (click)="exportarAExcel()"
+                  [disabled]="cargando==true">
+            <img src="assets/varios/excel.svg" />
+            Descargar Excel
+          </button>
+        </div>
+
+        <div fxFlex>
+          <button mat-button class="boton-descarga-comprobante-alt" (click)="exportarAPDF()"
+                  [disabled]="cargando==true">
+            <img src="assets/varios/pdf-verde.svg" />
+            Descargar PDF
+          </button>
+        </div>
+      </div>
+
+    </div>
+
+  </div>
+</div>

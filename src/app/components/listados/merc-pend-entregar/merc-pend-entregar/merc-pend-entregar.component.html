@@ -1,62 +1,20 @@
-<div class="contenedor-header">
-  <div fxLayout="row" fxLayoutAlign="space-around center" class="container" *ngIf="listadoMercPendEntregar.length > 0">
-    <div fxFlex="28px">
-      <mat-checkbox [(ngModel)]="estanTodosSeleccionados" (change)="seleccionarTodos($event)"></mat-checkbox>
-    </div>
-
-    <div fxFlex>
-      <div fxLayout="row" fxLayoutAlign="space-around center">
-
-        <div fxFlex="100px">
-          Comprobante
-        </div>
-
-        <div fxFlex="100px">
-          Fecha
-        </div>
-
-        <div fxFlex="100px">
-          Artículo
-        </div>
-
-        <div fxFlex="100px">
-          Descripción
-        </div>
-
-        <div fxFlex="100px">
-          Cantidad
-        </div>
-
-        <div fxFlex="100px">
-          Pendiente
-        </div>
-
-        <div fxFlex="100px">
-          Total
-        </div>
-      </div>
+<div [ngClass]="{'hide': modoDetalleDesktop}" class="data-container">
+  <div fxLayout="row" fxLayoutAlign="space-between center" fxLayoutGap="20px" *ngIf="esCelular != null && esCelular == false">
+    <div fxFlex *ngIf="identificadoresParaDescarga && identificadoresParaDescarga.length > 0">
+      <app-tool-bar-descargas (descargarComprobanteChange)="descargarSeleccionados()" [botonesExtras]="botonesBarraDescargaExtras" [disabled]="descargandoArchivos" (botonPresionado)="exportarSegunOpcion($event)"></app-tool-bar-descargas>
     </div>
   </div>
+
+  <mat-progress-bar *ngIf="descargandoArchivos" mode="indeterminate"></mat-progress-bar>
+
+  <app-merc-pend-entregar-lista-desktop *ngIf="esCelular != null && esCelular == false" [cuenta]="cuenta"
+    (seleccionMovimiento)="verDetalleDesktop($event)" (cargandoChange)="mostrarIndicadorLoading($event)"
+    (compPendFactSeleccionados)="compPendFactSeleccionados($event)"></app-merc-pend-entregar-lista-desktop>
+
 </div>
 
-<div class="contenedor-listado" fxLayout="column" fxLayoutWrap fxLayoutAlign="none" infiniteScroll
-     [infiniteScrollDistance]="2" [infiniteScrollThrottle]="50" (scrolled)="onScroll()" [scrollWindow]="false">
-
-  <app-merc-pend-entregar-detalle [mercPendEntregar]="mercPendEntregar" *ngFor="let mercPendEntregar of listadoMercPendEntregar"></app-merc-pend-entregar-detalle>
-
-  <!--Spinner-->
-  <div fxLayout="row" fxLayoutAlign="center center" *ngIf="cargando" style="margin-top: 10px">
-    <mat-spinner diameter="24"></mat-spinner>
-  </div>
-
-  <!--Si no hay datos a mostrar-->
-  <div fxLayout="column" fxLayoutAlign="center center" *ngIf="!cargando && listadoMercPendEntregar && listadoMercPendEntregar.length == 0" class="info-sin-data-container">
-    <div fxFlex="nogrow">
-      <img src="assets/varios/sin-data.png" class="info-sin-data-img" />
-    </div>
-
-    <div fxFlex="nogrow" class="info-sin-data-text">
-      Cuando tengamos información de tu mercadería pendiente de entregar la podrás ver aquí.
-    </div>
-  </div>
-</div>
+<span [ngClass]="{'hide': !modoDetalleDesktop}">
+  <app-merc-pend-entregar-detalle-desktop (salir)="salirModoDetalleDesktop()"
+    [modoDetalleDesktopMovimiento$]="modoDetalleDesktopMovimiento$" [aplicado]="aplicado">
+  </app-merc-pend-entregar-detalle-desktop>
+</span>

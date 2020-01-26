@@ -1,0 +1,23 @@
+<div fxLayout="row" fxLayoutAlign="space-around center" class="container">
+  <div fxFlex="28px">
+    <mat-checkbox [(ngModel)]="seleccionado" (change)="notificarCambioSeleccion($event)"></mat-checkbox>
+  </div>
+
+  <div fxFlex (click)="notificarVerDetalle()">
+    <div fxLayout="row" fxLayoutAlign="space-around center">
+      <div fxFlex="25%">{{ movimiento.comprobante }}</div>
+
+      <div fxFlex="10%">{{ movimiento.fecha | date:'dd/MM/yyyy' }}</div>
+
+      <div fxFlex="7%">{{ movimiento.codArticulo }}</div>
+
+      <div fxFlex>{{ movimiento.descripcionArticulo }}</div>
+
+      <div fxFlex="8%">{{ movimiento.cantidad }}</div>
+
+      <div fxFlex="8%">{{ movimiento.cantidadPendiente }}</div>
+
+      <div fxFlex="12%">{{ movimiento.moneda }} {{ movimiento.totalUsd | number: '.0-0' }}</div>
+    </div>
+  </div>
+</div>

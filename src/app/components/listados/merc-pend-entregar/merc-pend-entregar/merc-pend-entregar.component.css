@@ -1,39 +1,7 @@
-.contenedor-listado {
-  height: 60vh;
-  overflow-y: scroll;
-  overflow-x: hidden;
+.data-container {
   padding-left: 13px;
-  padding-right: 13px;
 }
 
-.contenedor-header {
-  overflow-x: hidden;
-  padding-left: 13px;
-  padding-right: 13px;
-  margin-top: 10%;
-}
-
-.info-sin-data-text {
-  color: #333333;
-  font-family: Rubik;
-  font-size: 14px;
-  text-align: center;
-}
-
-.info-sin-data-img {
-  width: 130px;
-  margin-bottom: 15px;
-}
-
-.info-sin-data-container {
-  margin: 50px;
-}
-
-.container {
-  width: 100%;
-  padding: 13px;
-  margin: 2px;
-  color: #333333;
-  font-family: Rubik;
-  font-size: 14px;
+.hide {
+  display: none;
 }
