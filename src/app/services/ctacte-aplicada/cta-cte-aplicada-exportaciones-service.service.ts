@@ -69,8 +69,8 @@ export class CtaCteAplicadaExportacionesServiceService {
           `AR$ ${this.decimalPipe.transform(movimiento.importeComprobantePesos, '.2')}`,
           `US$ ${this.decimalPipe.transform(movimiento.importeComprobanteDolares, '.2')}`
         ]);
-        sumaPesos += movimiento.saldoPesos;
-        sumaDolares += movimiento.saldoDolares;
+        sumaPesos += movimiento.importeComprobantePesos;
+        sumaDolares += movimiento.importeComprobanteDolares;
       }
       rows.push(movimientosRows);
 

@@ -60,8 +60,6 @@ export class CtaCteExportacionesService {
       // listado de movimientos
       // .. preparar datos
       let movimientosRows = [];
-      let sumaPesos = 0;
-      let sumaDolares = 0;
       for (let movimiento of movimimentos) {
         movimientosRows.push([
           movimiento.concepto,
@@ -69,8 +67,6 @@ export class CtaCteExportacionesService {
           `AR$ ${this.decimalPipe.transform(movimiento.importeComprobantePesos, '.2')}`,
           `US$ ${this.decimalPipe.transform(movimiento.importeComprobanteDolares, '.2')}`
         ]);
-        sumaPesos += movimiento.saldoPesos;
-        sumaDolares += movimiento.saldoDolares;
       }
       rows.push(movimientosRows);
 
@@ -134,31 +130,6 @@ export class CtaCteExportacionesService {
         let saldosColumnas = ["Concepto", "Valor"];
         columnas.push(saldosColumnas);
       }
-
-      // Totales
-      rows.push([[
-        "Totales",
-        `AR$ ${this.decimalPipe.transform(sumaPesos, '.2')}`,
-        `US$ ${this.decimalPipe.transform(sumaDolares, '.2')}`
-      ]]);
-
-      let headerTotalsCount = 0;
-      opciones.push({
-        startY: 30,
-        columnStyles: {
-          // fullWidth: 182
-          0: { columnWidth: 102, halign: 'left', fontStyle: 'bold' },
-          1: { columnWidth: 40, halign: 'right', fontStyle: 'bold' },
-          2: { columnWidth: 40, halign: 'right', fontStyle: 'bold' },
-        },
-        createdHeaderCell: function (cell, data) {
-          cell.styles.columnWidth = data.settings.columnStyles[headerTotalsCount].columnWidth;
-          cell.styles.halign = data.settings.columnStyles[headerTotalsCount].halign;
-          headerTotalsCount++;
-        }
-      });
-
-      columnas.push(["Resumen", "Pesos", "Dólares"]);
       
       // renderizar
       this.pdfService.listaMultipleAPdf(
