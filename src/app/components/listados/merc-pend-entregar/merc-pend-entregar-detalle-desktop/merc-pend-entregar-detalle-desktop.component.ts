@@ -20,7 +20,7 @@ import { saveAs } from 'file-saver/FileSaver';
 export class MercPendEntregarDetalleDesktopComponent implements OnInit {
 
   @Input()
-  modoDetalleDesktopMovimiento$: Subject<MovimientoComprobantesPendFact>;
+  modoDetalleDesktopMovimiento$: Subject<MovimientoMercPendEntregar>;
 
   @Input()
   aplicado: boolean = false;
@@ -29,7 +29,7 @@ export class MercPendEntregarDetalleDesktopComponent implements OnInit {
   salir: EventEmitter<any> = new EventEmitter<any>();
 
   destroy$: Subject<any> = new Subject<any>();
-  movimiento: MovimientoComprobantesPendFact;
+  movimiento: MovimientoMercPendEntregar;
   cuenta: EntidadAlg;
   //contrato: ResumenContratoCompraVenta;
   cargando: boolean = false;
@@ -63,7 +63,7 @@ export class MercPendEntregarDetalleDesktopComponent implements OnInit {
    * Función encargada de cargar todos los datos
    * @param movimiento 
    */
-  cargar(movimiento: MovimientoComprobantesPendFact) {
+  cargar(movimiento: MovimientoMercPendEntregar) {
     this.movimiento = movimiento;
     //this.cargarContrato();
   }

@@ -135,12 +135,8 @@ import { ComprobantesComponent } from './components/listados/comprobantes/compro
 import { FiltroArchivosComprobantesComponent } from './components/listados/comprobantes/descargas-comprobantes/filtro-archivos-comprobantes/filtro-archivos-comprobantes.component';
 import { PrecioQQAPipe } from './pipes/precio-qqa.pipe';
 import { TenenciasImpositivasComponent } from './components/listados/reportes/tenencias-impositivas/tenencias-impositivas/tenencias-impositivas.component';
-import { InsumosPendientesComponent } from './components/listados/reportes/insumos-pendientes/insumos-pendientes/insumos-pendientes.component';
-import { ComprobantesPendientesFacturarComponent } from './components/listados/reportes/comprobantes-pendientes-facturar/comprobantes-pendientes-facturar/comprobantes-pendientes-facturar.component';
 import { CuentaCorrienteAplicadaDetalleComponent } from './components/listados/cuenta-corriente/cuenta-corriente-aplicada-detalle/cuenta-corriente-aplicada-detalle.component';
 import { TenenciaImpositivaDetalleComponent } from './components/listados/reportes/tenencias-impositivas/tenencia-impositiva-detalle/tenencia-impositiva-detalle.component';
-import { InsumoPendienteDetalleComponent } from './components/listados/reportes/insumos-pendientes/insumo-pendiente-detalle/insumo-pendiente-detalle.component';
-import { ComprobantePendienteFacturarDetalleComponent } from './components/listados/reportes/comprobantes-pendientes-facturar/comprobante-pendiente-facturar-detalle/comprobante-pendiente-facturar-detalle.component';
 import { ReportesComponent } from './components/listados/reportes/reportes/reportes.component';
 import { NetasAPipe } from './pipes/netas-a.pipe';
 import { SaldoCtaCteAplicadaGlobalACobrarComponent } from './components/tablero/saldo-cta-cte-aplicada-global-acobrar/saldo-cta-cte-aplicada-global-acobrar.component';
@@ -294,12 +290,8 @@ export function tokenGetter() {
 		FiltroArchivosComprobantesComponent,
 		PrecioQQAPipe,
 		TenenciasImpositivasComponent,
-		InsumosPendientesComponent,
-		ComprobantesPendientesFacturarComponent,
 		CuentaCorrienteAplicadaDetalleComponent,
 		TenenciaImpositivaDetalleComponent,
-		InsumoPendienteDetalleComponent,
-		ComprobantePendienteFacturarDetalleComponent,
 		ReportesComponent,
 		NetasAPipe,
 		SaldoCtaCteAplicadaGlobalACobrarComponent,

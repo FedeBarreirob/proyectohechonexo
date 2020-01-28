@@ -1,16 +1,16 @@
 <div [ngClass]="{'container-desktop': !esCelular}">
-  <h3 class="title-center">Reportes</h3>
+  <app-tool-bar-general titulo="Reportes"></app-tool-bar-general>
 
   <mat-select placeholder="Seleccione el reporte que desea visualizar" [(ngModel)]="reportId" class="select-report">
     <mat-option [value]="1">
       TENENCIAS IMPOSITIVAS
     </mat-option>
 
-    <mat-option [value]="2">
+    <mat-option [value]="2" *ngIf="!esCelular">
       INSUMOS PENDIENTES
     </mat-option>
 
-    <mat-option [value]="3">
+    <mat-option [value]="3"  *ngIf="!esCelular">
       COMPRABANTES PENDIENTES DE FACTURAR
     </mat-option>
   </mat-select>

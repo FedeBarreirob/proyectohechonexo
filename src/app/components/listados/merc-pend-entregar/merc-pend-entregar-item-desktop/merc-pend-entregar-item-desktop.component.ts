@@ -9,13 +9,13 @@ import { MovimientoMercPendEntregar } from '../../../../interfaces/mercaderia-pe
 export class MercPendEntregarItemDesktopComponent implements OnInit {
 
   @Input()
-  movimiento: MovimientoComprobantesPendFact;
+  movimiento: MovimientoMercPendEntregar;
 
   @Output()
   cambioSeleccion: EventEmitter<any> = new EventEmitter<any>();
 
   @Output()
-  verDetalle: EventEmitter<MovimientoComprobantesPendFact> = new EventEmitter<MovimientoComprobantesPendFact>();
+  verDetalle: EventEmitter<MovimientoMercPendEntregar> = new EventEmitter<MovimientoMercPendEntregar>();
 
   public seleccionado: boolean;
 
