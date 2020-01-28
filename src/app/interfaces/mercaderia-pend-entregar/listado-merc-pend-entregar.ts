@@ -8,7 +8,6 @@ export interface ListadoMercPendEntregar {
 }
 
 export interface MovimientoMercPendEntregar {
-    seleccionado: boolean,
     tipoComprobante?: string,
     comprobante?: string,
     fecha?: Date,
