@@ -96,7 +96,6 @@ export class MercPendEntregarListaDesktopComponent implements OnInit {
         this.listadoMercPendEntregar = respuesta.datos.listado;
         if (this.listadoMercPendEntregar.length == 0) {
           this.listadoMercPendEntregar.push({
-            seleccionado: false,
             tipoComprobante: "1",
             comprobante: "Mercadería pendiente de entregar 1",
             fecha: new Date(),
