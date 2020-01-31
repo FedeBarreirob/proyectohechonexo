@@ -18,6 +18,9 @@ import { Subject } from 'rxjs';
 export class ComprobantesPendFacturarListaDesktopComponent implements OnInit {
 
   @Input()
+  observerFiltro$: Subject<any>;
+
+  @Input()
   cuenta: string;
 
   @Input()
@@ -48,12 +51,14 @@ export class ComprobantesPendFacturarListaDesktopComponent implements OnInit {
     private authenticationService: AuthenticationService) { }
 
   ngOnInit() {
-    this.filtro = {
-      cuenta: this.cuenta,
-      fechaDesde: "01/01/2020",
-      fechaHasta: "01/02/2020"
-    }
-    this.cargarListado(true);
+    // observer del filtro
+    this.observerFiltro$
+      .pipe(takeUntil(this.destroy$))
+      .subscribe(
+      filtro => {
+        this.filtro = filtro;
+        this.cargarListado(true);
+      });
 
     // observer de perfil
     this.authenticationService.perfilActivo$
@@ -61,25 +66,12 @@ export class ComprobantesPendFacturarListaDesktopComponent implements OnInit {
       .subscribe(
       perfil => {
         this.perfilBasico = perfil;
-        this.cargarUnidadMedida()
       });
-
-    this.cargarUnidadMedida();
   }
 
   ngOnDestroy(): void {
     this.destroy$.next();
     this.destroy$.unsubscribe();
-  }
-
-  // funcion que carga la unidad de medida desde el perfil 
-  cargarUnidadMedida() {
-    if (this.perfilBasico) {
-      this.unidadMedida = this.perfilBasico.informacionPersonal.unidadMedidaPeso;
-    } else {
-      this.perfilBasico = this.authenticationService.perfilUsuarioSeleccionado();
-      this.unidadMedida = this.perfilBasico.informacionPersonal.unidadMedidaPeso;
-    }
   }
 
   // funcion encargada de cargar el listado de comprobantes pendientes de facturar
@@ -94,23 +86,12 @@ export class ComprobantesPendFacturarListaDesktopComponent implements OnInit {
 
       this.compPendFactService.listadoComprobPendFact(this.filtro).subscribe(respuesta => {
         this.listadoCompPendFact = respuesta.datos.listado;
-        if (this.listadoCompPendFact.length == 0) {
-          this.listadoCompPendFact.push({
-            tipoComprobante: "1",
-            comprobante: "Comprobante pendiente de facturar 1",
-            fecha: new Date(),
-            codArticulo: "12986",
-            descripcionArticulo: "Articulo de prueba para comprobante",
-            cantidad: 1,
-            cantidadPendiente: 2,
-            moneda: "U$D",
-            totalUsd: 124
-          });
-        }
 
         this.cargando = false;
+        this.cargandoChange.emit(false);
       }, () => {
         this.cargando = false;
+        this.cargandoChange.emit(false);
       });
     }
   }
@@ -150,10 +131,10 @@ export class ComprobantesPendFacturarListaDesktopComponent implements OnInit {
     if (this.compPendFactItems && this.compPendFactItems.length > 0) {
 
       let listadoSeleccionados = this.compPendFactItems
-        .filter(entregaItem => entregaItem.seleccionado == true)
-        .map(entregaItem => {
+        .filter(item => item.seleccionado == true)
+        .map(item => {
           return {
-            movimiento: entregaItem.movimiento
+            movimiento: item.movimiento
           };
         });
 
@@ -168,7 +149,7 @@ export class ComprobantesPendFacturarListaDesktopComponent implements OnInit {
   seleccionarTodos(seleccion: boolean) {
     if (this.compPendFactItems && this.compPendFactItems.length > 0) {
 
-      this.compPendFactItems.forEach(entregaItem => entregaItem.seleccionado = seleccion);
+      this.compPendFactItems.forEach(item => item.seleccionado = seleccion);
       this.rearmarListaSeleccionados();
 
     }

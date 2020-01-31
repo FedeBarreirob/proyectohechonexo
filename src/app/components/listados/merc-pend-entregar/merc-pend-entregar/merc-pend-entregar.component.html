@@ -1,14 +1,19 @@
 <div [ngClass]="{'hide': modoDetalleDesktop}" class="data-container">
   <div fxLayout="row" fxLayoutAlign="space-between center" fxLayoutGap="20px" *ngIf="esCelular != null && esCelular == false">
+    <div fxFlex *ngIf="!identificadoresParaDescarga || identificadoresParaDescarga.length <= 0" style="padding-right: 13px;">
+      <app-reporte-filtro-desktop [cuenta]="cuenta" (botonAplicar)="cargarListado($event)" [disabled]="cargando$ | async">
+      </app-reporte-filtro-desktop>
+    </div>
+
     <div fxFlex *ngIf="identificadoresParaDescarga && identificadoresParaDescarga.length > 0">
-      <app-tool-bar-descargas (descargarComprobanteChange)="descargarSeleccionados()" [botonesExtras]="botonesBarraDescargaExtras" [disabled]="descargandoArchivos" (botonPresionado)="exportarSegunOpcion($event)"></app-tool-bar-descargas>
+      <app-tool-bar-descargas [mostrarDescargarComprobante]="false" [botonesExtras]="botonesBarraDescargaExtras" [disabled]="descargandoArchivos" (botonPresionado)="exportarSegunOpcion($event)"></app-tool-bar-descargas>
     </div>
   </div>
 
   <mat-progress-bar *ngIf="descargandoArchivos" mode="indeterminate"></mat-progress-bar>
 
   <app-merc-pend-entregar-lista-desktop *ngIf="esCelular != null && esCelular == false" [cuenta]="cuenta"
-    (seleccionMovimiento)="verDetalleDesktop($event)" (cargandoChange)="mostrarIndicadorLoading($event)"
+    (seleccionMovimiento)="verDetalleDesktop($event)" (cargandoChange)="mostrarIndicadorLoading($event)" [observerFiltro$]="observerFiltro$"
     (compPendFactSeleccionados)="compPendFactSeleccionados($event)"></app-merc-pend-entregar-lista-desktop>
 
 </div>

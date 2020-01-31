@@ -89,6 +89,7 @@ import { LinkMenuComponent } from './components/menu/link-menu/link-menu.compone
 import { ToolBarGeneralComponent } from './components/menu/tool-bar-general/tool-bar-general.component';
 import { AvatarDelPerfilComponent } from './components/common/avatar-del-perfil/avatar-del-perfil.component';
 import { CerealesFiltroComponent } from './components/filtros/cereales-filtro/cereales-filtro.component';
+import { ReporteFiltroDesktopComponent } from './components/filtros/reporte-filtro-desktop/reporte-filtro-desktop.component';
 import { ImagenEspeciePipe } from './pipes/imagen-especie.pipe';
 import { EntregasListaDesktopComponent } from './components/listados/entregas/entregas-lista-desktop/entregas-lista-desktop.component';
 import { EntregasListaMovilComponent } from './components/listados/entregas/entregas-lista-movil/entregas-lista-movil.component';
@@ -245,6 +246,7 @@ export function tokenGetter() {
 		ToolBarGeneralComponent,
 		AvatarDelPerfilComponent,
 		CerealesFiltroComponent,
+		ReporteFiltroDesktopComponent,
 		ImagenEspeciePipe,
 		EntregasListaDesktopComponent,
 		EntregasListaMovilComponent,

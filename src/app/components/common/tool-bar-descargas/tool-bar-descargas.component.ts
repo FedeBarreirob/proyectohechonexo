@@ -19,6 +19,9 @@ export class ToolBarDescargasComponent implements OnInit {
   @Output()
   botonPresionado: EventEmitter<any> = new EventEmitter<any>();
 
+  @Input()
+  mostrarDescargarComprobante: boolean = true;
+
   constructor() { }
 
   ngOnInit() {

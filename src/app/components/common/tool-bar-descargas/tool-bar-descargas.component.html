@@ -7,7 +7,7 @@
     </button>
   </div>
 
-  <div fxFlex="nogrow">
+  <div fxFlex="nogrow" *ngIf="mostrarDescargarComprobante">
     <button mat-button class="boton-descarga-comprobante" (click)="descargarComprobante()" [disabled]="disabled">
       <img src="assets/varios/pdf.png" />
       Descargar comprobantes

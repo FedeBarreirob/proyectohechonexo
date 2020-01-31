@@ -10,8 +10,7 @@ import { MatDialog, MatSidenav, MatSnackBar } from '@angular/material';
 import { MercPendEntregarService } from '../../../../services/merc-pend-entregar/merc-pend-entregar.service';
 import { MercPendEntregarDetalleDesktopComponent } from '../merc-pend-entregar-detalle-desktop/merc-pend-entregar-detalle-desktop.component';
 import { FiltroMercaderiaPendEntregar } from '../../../../interfaces/mercaderia-pend-entregar/filtro-merc-pend-entregar';
-
-import { EntregasExportacionesService } from '../../../../services/entregas/entregas-exportaciones.service';
+import { MercPendEntregarExportacionesService } from '../../../../services/merc-pend-entregar/merc-pend-entregar-exportaciones.service';
 
 @Component({
   selector: 'app-merc-pend-entregar',
@@ -22,18 +21,10 @@ import { EntregasExportacionesService } from '../../../../services/entregas/entr
 
 export class MercPendEntregarComponent implements OnInit {
 
-  @Input()
-  aplicado: boolean = false;
-
-  @Input()
-  contratoId$: Subject<any>;
-
   @ViewChild('menuFiltro') public sidenav: MatSidenav;
 
   @Input()
   cuenta: string;
-  public filtrosMercaderiaPendEntregar: FiltroMercaderiaPendEntregar;
-  public cargandoFiltros: boolean;
   cargando$: Subject<boolean> = new Subject<boolean>();
 
   observerFiltro$ = new Subject<any>();
@@ -52,7 +43,7 @@ export class MercPendEntregarComponent implements OnInit {
   constructor(private deviceService: DeviceDetectorService,
     private comprobanteDownloaderService: ComprobantesDownloaderService,
     private snackBar: MatSnackBar,
-    private entregasExportacionesService: EntregasExportacionesService,
+    private exportadorService: MercPendEntregarExportacionesService,
     private mercPendEntregarService: MercPendEntregarService,
     public dialog: MatDialog) {
 
@@ -60,13 +51,11 @@ export class MercPendEntregarComponent implements OnInit {
 
   ngOnInit() {
     this.esCelular = this.deviceService.isMobile();
-
-    if (this.contratoId$) {
-      this.contratoId$.subscribe(contratoId => {
-        this.contratoId = contratoId;
-      });
-    }
-
+    this.observerFiltro$.next({
+      cuenta: this.cuenta,
+      fechaDesde: null,
+      fechaHasta: null
+    });
     this.cargarBotonesExtrasDescarga();
   }
 
@@ -77,12 +66,6 @@ export class MercPendEntregarComponent implements OnInit {
 
   // funcion que ejecuta la carga del listado de comprobantes pendientes de facturar
   cargarListado(filtro: any) {
-
-    if (this.contratoId) {
-      filtro.contratoId = this.contratoId;
-      filtro.aplicado = true;
-    }
-
     this.observerFiltro$.next(filtro);
   }
 
@@ -124,11 +107,7 @@ export class MercPendEntregarComponent implements OnInit {
    * Muestra el indicador de carga mientras haya un proceso ejecutándose
    */
   mostrarIndicadorLoading(cargando: boolean) {
-    if (cargando == true) {
-      this.cargando$.next(true);
-    } else {
-      this.cargando$.next(false);
-    }
+    this.cargando$.next(cargando);
   }
 
   /**
@@ -153,36 +132,6 @@ export class MercPendEntregarComponent implements OnInit {
    */
   compPendFactSeleccionados(listadoSeleccionados: any) {
     this.identificadoresParaDescarga = listadoSeleccionados;
-  }
-
-  /**
-   * Función que ejecuta el proceso de descarga de comprobantes seleccionados
-   */
-  descargarSeleccionados() {
-    if (this.identificadoresParaDescarga && this.identificadoresParaDescarga.length > 0 && this.descargandoArchivos == false) {
-
-      this.descargandoArchivos = true;
-      let identificadores = this.identificadoresParaDescarga.map(identificador => identificador.movimiento.n1116A);
-
-      this.comprobanteDownloaderService.certificadoAfipDescargadoMasivo(identificadores)
-        .pipe(takeUntil(this.destroy$))
-        .subscribe(respuesta => {
-          var mediaType = 'application/zip';
-          var blob = new Blob([respuesta], { type: mediaType });
-          var filename = `certificados.zip`;
-
-          if (blob.size !== 0) {
-            saveAs(blob, filename);
-          } else {
-            this.openSnackBar("Los certificados no se encuentra disponible para su descarga.", "Descarga de comprobantes");
-          }
-
-          this.descargandoArchivos = false;
-        }, error => {
-          console.log(error);
-          this.descargandoArchivos = false;
-        });
-    }
   }
 
   /**
@@ -224,11 +173,11 @@ export class MercPendEntregarComponent implements OnInit {
   exportarSegunOpcion(exportador: any) {
     switch (exportador) {
       case "excel":
-        this.exportacionMasivaExcel();
+        this.identificadoresParaDescarga.length > 1 ? this.exportacionMasivaExcel() : this.exportadorService.exportarMercPendEntregarDetalleExcel(this.identificadoresParaDescarga[0].movimiento);
         break;
 
       case "pdf":
-        this.exportacionMasivaPDF();
+        this.identificadoresParaDescarga.length > 1 ? this.exportacionMasivaPDF() : this.exportadorService.exportarMercPendEntregarDetallePDF(this.identificadoresParaDescarga[0].movimiento);
         break;
 
       default:
@@ -245,7 +194,7 @@ export class MercPendEntregarComponent implements OnInit {
       this.descargandoArchivos = true;
       let movimientosSeleccionados = this.identificadoresParaDescarga.map(identificador => identificador.movimiento);
 
-      this.entregasExportacionesService.exportarListadoEntregasDetalleExcel(movimientosSeleccionados);
+      this.exportadorService.exportarListadoMercPendEntregarDetalleExcel(movimientosSeleccionados);
       this.descargandoArchivos = false;
     }
   }
@@ -259,7 +208,7 @@ export class MercPendEntregarComponent implements OnInit {
       this.descargandoArchivos = true;
       let movimientosSeleccionados = this.identificadoresParaDescarga.map(identificador => identificador.movimiento);
 
-      this.entregasExportacionesService.exportarListadoEntregasDetallePDF(movimientosSeleccionados, null);
+      this.exportadorService.exportarListadoMercPendEntregarDetallePDF(movimientosSeleccionados, null);
       this.descargandoArchivos = false;
     }
   }

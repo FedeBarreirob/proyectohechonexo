@@ -1,0 +1,33 @@
+<div fxLayout="row" fxLayoutAlign="end center" *ngIf="cuenta" fxLayoutGap="5px">
+  <!--Fecha desde-->
+  <div fxFlex="nogrow" class="boton-container">
+    <input readonly [(ngModel)]="fechaDesde" matInput [matDatepicker]="desde" class="input-fecha" placeholder="Desde">
+
+    <mat-datepicker-toggle matSuffix [for]="desde" [disabled]="disabled"></mat-datepicker-toggle>
+
+    <mat-datepicker touchUi #desde></mat-datepicker>
+  </div>
+
+  <!--Fecha hasta-->
+  <div fxFlex="nogrow" class="boton-container">
+    <input readonly [(ngModel)]="fechaHasta" matInput [matDatepicker]="hasta" class="input-fecha" placeholder="Hasta">
+
+    <mat-datepicker-toggle matSuffix [for]="hasta" [disabled]="disabled"></mat-datepicker-toggle>
+
+    <mat-datepicker touchUi #hasta></mat-datepicker>
+  </div>
+
+  <!--Ejecutar filtro-->
+  <div fxFlex="nogrow">
+    <!--botones-->
+    <div fxLayout="row" fxLayoutAlign="space-between center" class="contenedor-botones">
+      <div fxFlex="50%">
+        <button mat-button class="boton-limpiar" (click)="limpiar()" [disabled]="disabled">Limpiar</button>
+      </div>
+
+      <div fxFlex="50%">
+        <button mat-button class="boton-aplicar" (click)="aplicar()" [disabled]="disabled">Aplicar</button>
+      </div>
+    </div>
+  </div>
+</div>
