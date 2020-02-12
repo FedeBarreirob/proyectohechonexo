@@ -286,4 +286,16 @@ export class CuentaCorrienteAplicadaListaDesktopComponent implements OnInit, OnD
       duration: 2000,
     });
   }
+
+  get totalPesos(): number {
+    var totalPesos = 0;
+    this.identificadoresParaDescarga.forEach(x => totalPesos += x.saldoPesos);
+    return totalPesos;
+  }
+
+  get totalDolares(): number {
+    var totalDolares = 0;
+    this.identificadoresParaDescarga.forEach(x => totalDolares += x.saldoDolares);
+    return totalDolares;
+  }
 }
