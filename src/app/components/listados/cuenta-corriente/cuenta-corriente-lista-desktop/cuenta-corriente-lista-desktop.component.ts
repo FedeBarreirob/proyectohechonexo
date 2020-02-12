@@ -312,13 +312,17 @@ export class CuentaCorrienteListaDesktopComponent implements OnInit, OnDestroy {
 
   get totalPesos(): number {
     var totalPesos = 0;
-    this.identificadoresParaDescarga.forEach(x => totalPesos += x.saldoPesos);
+    if (this.identificadoresParaDescarga) {
+      this.identificadoresParaDescarga.forEach(x => totalPesos += x.movimiento.saldoPesos);
+    }
     return totalPesos;
   }
 
   get totalDolares(): number {
     var totalDolares = 0;
-    this.identificadoresParaDescarga.forEach(x => totalDolares += x.saldoDolares);
+    if (this.identificadoresParaDescarga) {
+      this.identificadoresParaDescarga.forEach(x => totalDolares += x.movimiento.saldoDolares);
+    }
     return totalDolares;
   }
 }

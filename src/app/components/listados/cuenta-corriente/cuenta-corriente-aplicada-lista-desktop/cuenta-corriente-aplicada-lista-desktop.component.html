@@ -2,7 +2,7 @@
 <div fxLayout="row" fxLayoutAlign="space-between center" class="contenedor-titulo-filtro" fxLayoutGap="20px">
 
   <div fxFlex="250px" class="titulo-seccion">
-    Ficha de cuenta corriente
+    Ficha de cuenta corriente <br /> Total en Pesos: $ {{totalPesos | number: '.0'}} <br /> Total en Dolares: $ {{totalDolares | number: '.0'}}
   </div>
 
   <div fxFlex *ngIf="!identificadoresParaDescarga || identificadoresParaDescarga.length <= 0">
