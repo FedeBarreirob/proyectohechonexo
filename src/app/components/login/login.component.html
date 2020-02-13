@@ -9,7 +9,7 @@
     <div fxFlex="nogrow">
       <mat-card [ngClass]="{'card-base': esCelular, 'card-base-desktop': !esCelular}">
         <mat-card-content>
-          <form [formGroup]="frmLogin" #formLogin="ngForm">
+          <form [formGroup]="frmLogin" #formLogin="ngForm" (keydown)="keyDownFunction($event)">
 
             <p class="correo-o-usuario">USUARIO</p>
             <input [ngClass]="{'username': esCelular, 'username-desktop': !esCelular}" matInput

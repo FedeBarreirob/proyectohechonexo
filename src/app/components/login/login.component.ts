@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ElementRef, ViewChild } from '@angular/core';
 import { FormGroup, FormBuilder } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { AuthenticationService } from '../../services/security/authentication.service';
@@ -14,6 +14,9 @@ import { DeviceDetectorService } from 'ngx-device-detector';
 	templateUrl: './login.component.html',
 	styleUrls: ['./login.component.css']
 })
+
+
+
 export class LoginComponent implements OnInit {
 
 	frmLogin: FormGroup;
@@ -22,7 +25,8 @@ export class LoginComponent implements OnInit {
 	hidePassword = true;
 	cargando$: Subject<boolean> = new Subject<boolean>();
 	esCelular: boolean;
-
+	@ViewChild('inputUsername') inputEl: ElementRef;
+	
 	constructor(
 		private formBuilder: FormBuilder,
 		private route: ActivatedRoute,
@@ -39,6 +43,8 @@ export class LoginComponent implements OnInit {
 		this.esCelular = this.deviceService.isMobile();
 		this.inicializarFormulario();
 
+		//Setear fucus en campo usuario
+        this.inputEl.nativeElement.focus()
 		// reset login status
 		this.authenticationService.logout();
 		this.oneSignalService.stop();
@@ -145,5 +151,11 @@ export class LoginComponent implements OnInit {
 		this.snackBar.open(message, action, {
 			duration: 2000,
 		});
+	}
+
+	keyDownFunction(event) {
+		if(event.keyCode == 13) {
+			this.login();
+		}
 	}
 }
