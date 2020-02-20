@@ -34,6 +34,7 @@
 
 		<div fxFlex *ngIf="identificadoresParaDescarga && identificadoresParaDescarga.length > 0">
 			<app-tool-bar-descargas (descargarComprobanteChange)="descargarSeleccionados()"
+				[botonesExtras]="botonesBarraDescargaExtras" (botonPresionado)="exportarSegunOpcion($event)"
 				[disabled]="descargandoArchivos"></app-tool-bar-descargas>
 		</div>
 	</div>
