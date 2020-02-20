@@ -77,7 +77,7 @@ export class ContratosComponent implements OnInit, OnDestroy, AfterViewInit {
       // Modal tutorial 1/2
       if (!JSON.parse(localStorage.getItem("contratosTutorial1-2")) && !contratosTutorial1_2.visto) {
         const dialogRef = this.dialog.open(TutorialModalComponent, {
-          data: { title: contratosTutorial1_2.contenido.title, description: contratosTutorial1_2.contenido.description }
+          data: { title: contratosTutorial1_2.contenido.title, description: contratosTutorial1_2.contenido.description, pageId: contratosTutorial1_2.contenido.pageId, pageCount: contratosTutorial1_2.contenido.pageCount }
         });
 
         dialogRef.afterClosed().subscribe(result => {
@@ -95,7 +95,7 @@ export class ContratosComponent implements OnInit, OnDestroy, AfterViewInit {
           if (!JSON.parse(localStorage.getItem('contratosTutorial2-2')) && !contratosTutorial2_2.visto) {
             // Modal tutorial 2/2
             var dialogRef2 = this.dialog.open(TutorialModalComponent, {
-              data: { title: contratosTutorial2_2.contenido.title, description: contratosTutorial2_2.contenido.description }
+              data: { title: contratosTutorial2_2.contenido.title, description: contratosTutorial2_2.contenido.description, pageId: contratosTutorial2_2.contenido.pageId, pageCount: contratosTutorial2_2.contenido.pageCount }
             });
 
             dialogRef2.afterClosed().subscribe(result => {
