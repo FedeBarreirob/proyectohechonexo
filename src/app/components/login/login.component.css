@@ -219,3 +219,9 @@
     font-weight: bold;
     color: white;
 }
+
+a.google-play {
+  display: block;
+  text-align: center;
+  margin-top: 5%;
+}
