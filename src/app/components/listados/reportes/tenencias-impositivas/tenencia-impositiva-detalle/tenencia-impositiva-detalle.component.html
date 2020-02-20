@@ -26,14 +26,14 @@
       <span [ngClass]="{'signo-positivo': stock.kgNetos > 0, 'signo-negativo': stock.kgNetos < 0 }">
         {{ (stock.kgNetos < 0) ? '-' : (stock.kgNetos > 0) ? '+' : ''}}
       </span>
-      {{ ((stock.kgNetos > 0) ? stock.kgNetos : stock.kgNetos * (-1)) | kilosA: unidadMedida | number: '.0-0'}}
+      {{ ((stock.kgNetos > 0) ? stock.kgNetos : stock.kgNetos * (-1)) | kilosA: unidadMedida | number: (unidadMedida == 'tn' ? '.0-1' : '.0-0')}}
     </div>
 
     <div fxFlex class="valor" align="end">
       <span [ngClass]="{'signo-positivo': stock.kgPendCertificar > 0, 'signo-negativo': stock.kgPendCertificar < 0 }">
         {{ (stock.kgPendCertificar < 0) ? '-' : (stock.kgPendCertificar > 0) ? '+' : ''}}
       </span>
-      {{ ((stock.kgPendCertificar > 0) ? stock.kgPendCertificar : stock.kgPendCertificar * (-1)) | kilosA: unidadMedida | number: '.0-0'}}
+      {{ ((stock.kgPendCertificar > 0) ? stock.kgPendCertificar : stock.kgPendCertificar * (-1)) | kilosA: unidadMedida | number: (unidadMedida == 'tn' ? '.0-1' : '.0-0')}}
     </div>
   </div>
 

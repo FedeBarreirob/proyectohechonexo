@@ -32,11 +32,11 @@
       </div>
 
       <div fxFlex="150px">
-        {{movimiento.kilos | kilosA: unidadMedida | number: '.0-0'}}
+        {{movimiento.kilos | kilosA: unidadMedida | number: (unidadMedida == 'tn' ? '.0-1' : '.0-0')}}
       </div>
 
       <div fxFlex="150px">
-        ${{movimiento.precioPorQuintal | precioQQA: unidadMedida | number: '.0-0'}}
+        ${{movimiento.precioPorQuintal | precioQQA: unidadMedida | number: (unidadMedida == 'tn' ? '.0-1' : '.0-0')}}
       </div>
 
       <div fxFlex="100px">

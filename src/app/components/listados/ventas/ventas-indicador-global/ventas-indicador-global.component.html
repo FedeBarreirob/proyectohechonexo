@@ -2,14 +2,14 @@
 
   <!--Indicador pactadas-->
   <div fxFlex="250px">
-    <app-contrato-indicador-grafico-porcentual [mostrarPorcentual]="false" title="Pactadas" texto="{{indicadorGlobal.indicadoresFijaciones.kgPactados | kilosA: unidadMedida | number: '.0-0'}}
+    <app-contrato-indicador-grafico-porcentual [mostrarPorcentual]="false" title="Pactadas" texto="{{indicadorGlobal.indicadoresFijaciones.kgPactados | kilosA: unidadMedida | number: (unidadMedida == 'tn' ? '.0-1' : '.0-0')}}
       {{unidadMedida | kilosTextoA}}">
     </app-contrato-indicador-grafico-porcentual>
   </div>
 
   <!--Indicador fijadas-->
   <div fxFlex="250px">
-    <app-contrato-indicador-grafico-porcentual title="Fijadas" texto="{{indicadorGlobal.indicadoresFijaciones.kgFijados | kilosA: unidadMedida | number: '.0-0'}}
+    <app-contrato-indicador-grafico-porcentual title="Fijadas" texto="{{indicadorGlobal.indicadoresFijaciones.kgFijados | kilosA: unidadMedida | number: (unidadMedida == 'tn' ? '.0-1' : '.0-0')}}
     {{unidadMedida | kilosTextoA}}"
       subtexto="{{(100 - indicadorGlobal.indicadoresFijaciones.porcentajeKilosFijados) | number: '.2'}}% entregas pendientes de fijar"
       [porcentual]="100 - indicadorGlobal.indicadoresFijaciones.porcentajeKilosFijados">
@@ -18,7 +18,7 @@
 
   <!--Indicador pesificadas-->
   <div fxFlex="250px">
-    <app-contrato-indicador-grafico-porcentual title="Pesificadas" texto="{{indicadorGlobal.indicadoresPesificacion.pesificado | kilosA: unidadMedida | number: '.0-0'}}
+    <app-contrato-indicador-grafico-porcentual title="Pesificadas" texto="{{indicadorGlobal.indicadoresPesificacion.pesificado | kilosA: unidadMedida | number: (unidadMedida == 'tn' ? '.0-1' : '.0-0')}}
     {{unidadMedida | kilosTextoA}}"
       subtexto="{{(100 - indicadorGlobal.indicadoresPesificacion.porcentajeKilosPesificados) | number: '.2'}}% entregas pendientes de pesificar"
       [porcentual]="100 - indicadorGlobal.indicadoresPesificacion.porcentajeKilosPesificados">
@@ -27,7 +27,7 @@
 
   <!--Indicador liquidadas-->
   <div fxFlex="250px">
-    <app-contrato-indicador-grafico-porcentual title="Liquidadas" texto="{{indicadorGlobal.indicadoresLiquidacion.kgFacturados | kilosA: unidadMedida | number: '.0-0'}}
+    <app-contrato-indicador-grafico-porcentual title="Liquidadas" texto="{{indicadorGlobal.indicadoresLiquidacion.kgFacturados | kilosA: unidadMedida | number: (unidadMedida == 'tn' ? '.0-1' : '.0-0')}}
     {{unidadMedida | kilosTextoA}}"
       subtexto="{{(100 - indicadorGlobal.indicadoresLiquidacion.porcentajeKilosFacturados) | number: '.2'}}% entregas pendientes de liquidar"
       [porcentual]="100 - indicadorGlobal.indicadoresLiquidacion.porcentajeKilosFacturados">
@@ -36,7 +36,7 @@
 
   <!--Indicador pagadas-->
   <div fxFlex="250px">
-    <app-contrato-indicador-grafico-porcentual title="Pagadas" texto="{{indicadorGlobal.indicadoresPagos.kgPagados | kilosA: unidadMedida | number: '.0-0'}}
+    <app-contrato-indicador-grafico-porcentual title="Pagadas" texto="{{indicadorGlobal.indicadoresPagos.kgPagados | kilosA: unidadMedida | number: (unidadMedida == 'tn' ? '.0-1' : '.0-0')}}
     {{unidadMedida | kilosTextoA}}"
       subtexto="{{(100 - indicadorGlobal.indicadoresPagos.porcentajeKilosPagados) | number: '.2'}}% entregas pendientes de pagar"
       [porcentual]="100 - indicadorGlobal.indicadoresPagos.porcentajeKilosPagados">

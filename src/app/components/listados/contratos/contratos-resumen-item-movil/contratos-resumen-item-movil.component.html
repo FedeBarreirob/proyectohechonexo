@@ -14,7 +14,7 @@
           <div class="etiqueta" *ngIf="resumen.moneda != null">{{resumen.moneda=='P' ? 'En pesos' : 'En dólares'}}</div>
           <div class="etiqueta" *ngIf="resumen.tipoDescripcion != null">{{resumen.tipoNegocioDescripCorta}}</div>
         </div>
-        <div fxFlex="100%" class="info-kg-pactados">{{resumen.kilosPactados | kilosA: unidadMedida | number: '.0-0'}}
+        <div fxFlex="100%" class="info-kg-pactados">{{resumen.kilosPactados | kilosA: unidadMedida | number: (unidadMedida == 'tn' ? '.0-1' : '.0-0')}}
           {{unidadMedida | kilosTextoA}}
           de {{resumen.especieDescripcion}}</div>
       </div>
@@ -30,7 +30,7 @@
       <div fxFlex="100%">
         <div fxLayout="column" fxLayoutAlign="none">
           <div fxFlex="100%" class="info-kilos-entregados-fijados">
-            {{resumen.kilosPendientesEntregar | kilosA: unidadMedida | number: '.0-0'}} {{unidadMedida | kilosTextoA}}
+            {{resumen.kilosPendientesEntregar | kilosA: unidadMedida | number: (unidadMedida == 'tn' ? '.0-1' : '.0-0')}} {{unidadMedida | kilosTextoA}}
             Pendientes de entrega
           </div>
           <div fxFlex="100%">
@@ -60,7 +60,7 @@
       <div fxFlex="100%">
         <div fxLayout="column" fxLayoutAlign="none">
           <div fxFlex="100%" class="info-kilos-entregados-fijados">
-            {{resumen.kilosAFijar | kilosA: unidadMedida | number: '.0-0'}} {{unidadMedida | kilosTextoA}} Pendientes de
+            {{resumen.kilosAFijar | kilosA: unidadMedida | number: (unidadMedida == 'tn' ? '.0-1' : '.0-0')}} {{unidadMedida | kilosTextoA}} Pendientes de
             fijación
           </div>
           <div fxFlex="100%">
@@ -95,7 +95,7 @@
       <div fxFlex="100%">
         <div fxLayout="column" fxLayoutAlign="none">
           <div fxFlex="100%" class="info-kilos-entregados-fijados">
-            {{resumen.kilosPendientesPesificar | kilosA: unidadMedida | number: '.0-0'}} {{unidadMedida | kilosTextoA}}
+            {{resumen.kilosPendientesPesificar | kilosA: unidadMedida | number: (unidadMedida == 'tn' ? '.0-1' : '.0-0')}} {{unidadMedida | kilosTextoA}}
             Pendientes de pesificar
           </div>
           <div fxFlex="100%">
@@ -121,7 +121,7 @@
       <div fxFlex="100%">
         <div fxLayout="column" fxLayoutAlign="none">
           <div fxFlex="100%" class="info-kilos-entregados-fijados">
-            {{resumen.pendienteFacturar | kilosA: unidadMedida | number: '.0-0'}} {{unidadMedida | kilosTextoA}}
+            {{resumen.pendienteFacturar | kilosA: unidadMedida | number: (unidadMedida == 'tn' ? '.0-1' : '.0-0')}} {{unidadMedida | kilosTextoA}}
             Pendientes de liquidar
           </div>
           <div fxFlex="100%">

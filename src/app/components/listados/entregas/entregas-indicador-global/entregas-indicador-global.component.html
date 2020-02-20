@@ -2,14 +2,14 @@
 
   <!--Indicador pactadas-->
   <div fxFlex="250px">
-    <app-contrato-indicador-grafico-porcentual [mostrarPorcentual]="false" [title]="pactadasTitulo" texto="{{indicadorGlobal.kgPactados | kilosA: unidadMedida | number: '.0-0'}}
+    <app-contrato-indicador-grafico-porcentual [mostrarPorcentual]="false" [title]="pactadasTitulo" texto="{{indicadorGlobal.kgPactados | kilosA: unidadMedida | number: (unidadMedida == 'tn' ? '.0-1' : '.0-0')}}
       {{unidadMedida | kilosTextoA}}">
     </app-contrato-indicador-grafico-porcentual>
   </div>
 
   <!--Indicador descargadas-->
   <div fxFlex="250px">
-    <app-contrato-indicador-grafico-porcentual [title]="descargadasTitulo" texto="{{indicadorGlobal.kgEntregados | kilosA: unidadMedida | number: '.0-0'}}
+    <app-contrato-indicador-grafico-porcentual [title]="descargadasTitulo" texto="{{indicadorGlobal.kgEntregados | kilosA: unidadMedida | number: (unidadMedida == 'tn' ? '.0-1' : '.0-0')}}
     {{unidadMedida | kilosTextoA}}"
       subtexto="{{(indicadorGlobal.porcentajeKilosPendientesDeEntregar) | number: '.2'}}% entregas pendientes"
       [porcentual]="indicadorGlobal.porcentajeKilosPendientesDeEntregar">
@@ -18,7 +18,7 @@
 
   <!--Indicador aplicadas-->
   <div fxFlex="250px">
-    <app-contrato-indicador-grafico-porcentual [title]="aplicadasTitulo" texto="{{indicadorGlobal.kgAplicados | kilosA: unidadMedida | number: '.0-0'}}
+    <app-contrato-indicador-grafico-porcentual [title]="aplicadasTitulo" texto="{{indicadorGlobal.kgAplicados | kilosA: unidadMedida | number: (unidadMedida == 'tn' ? '.0-1' : '.0-0')}}
     {{unidadMedida | kilosTextoA}}"
       subtexto="{{(indicadorGlobal.porcentajeKilosPendientesDeAplicar) | number: '.2'}}% entregas pendientes de aplicar"
       [porcentual]="indicadorGlobal.porcentajeKilosPendientesDeAplicar">
