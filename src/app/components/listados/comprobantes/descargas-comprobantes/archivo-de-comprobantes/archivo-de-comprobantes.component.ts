@@ -2,7 +2,7 @@ import { Component, OnInit, Input, OnDestroy, ViewChildren, ViewChild } from '@a
 import { FiltroCtaCteComprobanteDescarga } from '../../../../../interfaces/archivo-de-comprobantes/filtro-cta-cte-comprobante-descarga';
 import { ArchivoDeComprobantesService } from '../../../../../services/archivo-de-comprobantes/archivo-de-comprobantes.service';
 import { ComprobanteParaDescarga } from '../../../../../interfaces/archivo-de-comprobantes/comprobante-para-descarga';
-import { MatSlideToggleChange, MatSnackBar, MatSelectionList } from '@angular/material';
+import { MatSlideToggleChange, MatSnackBar, MatSelectionList, MatDialog } from '@angular/material';
 import { ComprobantesDownloaderService } from '../../../../../services/sharedServices/downloader/comprobantes-downloader.service';
 import { saveAs } from 'file-saver/FileSaver';
 import { Subject, Observable } from 'rxjs';
@@ -14,6 +14,7 @@ import { environment } from '../../../../../../environments/environment';
 import { FiltroComprobanteDescarga } from '../../../../../interfaces/archivo-de-comprobantes/filtro-comprobante-descarga';
 import { OrigenComprobante } from '../../../../../enums/origen-comprobante.enum';
 import { ResponseServicio } from '../../../../../interfaces/varios/response-servicio';
+import { SeleccionadosModalComponent } from '../../../../../components/listados/comprobantes/descargas-comprobantes/seleccionados-modal/seleccionados-modal.component';
 
 @Component({
   selector: 'app-archivo-de-comprobantes',
@@ -45,6 +46,7 @@ export class ArchivoDeComprobantesComponent implements OnInit, OnDestroy {
   // listado de las referencias a los comprobantes
   comprobantes: Array<ComprobanteParaDescarga> = [];
   comprobantesSeleccionados: Array<ComprobanteParaDescarga> = [];
+  comprobantesSeleccionadosADescargar: Array<ComprobanteParaDescarga> = [];
 
   constructor(
     private archivoDeComprobantesService: ArchivoDeComprobantesService,
@@ -52,7 +54,8 @@ export class ArchivoDeComprobantesComponent implements OnInit, OnDestroy {
     private snackBar: MatSnackBar,
     private datePipe: DatePipe,
     private deviceService: DeviceDetectorService,
-    private downloaderUtilService: DownloaderUtilService
+    private downloaderUtilService: DownloaderUtilService,
+    private dialog: MatDialog
   ) { }
 
   ngOnDestroy(): void {
@@ -186,7 +189,7 @@ export class ArchivoDeComprobantesComponent implements OnInit, OnDestroy {
 
   // funcion que actualiza el listado de comprobantes seleccionados
   actualizarSeleccion($event) {
-    this.comprobantesSeleccionados = $event;
+    this.comprobantesSeleccionadosADescargar = $event;
 
     // actualizar estado del seleccionador de todos
     this.toggleSeleccionTodo = this.sonTodosSeleccionados();
@@ -195,7 +198,7 @@ export class ArchivoDeComprobantesComponent implements OnInit, OnDestroy {
   // funcion que determina si todos los item se encuentran seleccionados
   private sonTodosSeleccionados(): boolean {
     try {
-      if (this.comprobantes.length == this.comprobantesSeleccionados.length) {
+      if (this.comprobantes.length == this.comprobantesSeleccionadosADescargar.length) {
         return true;
       } else {
         return false;
@@ -209,9 +212,9 @@ export class ArchivoDeComprobantesComponent implements OnInit, OnDestroy {
   // funcion encargada de seleccionar todos o ningun comprobante
   seleccionarTodoONada($event: MatSlideToggleChange) {
     if ($event.checked) {
-      this.comprobantesSeleccionados = this.comprobantes;
+      this.comprobantesSeleccionadosADescargar = this.comprobantes;
     } else {
-      this.comprobantesSeleccionados = [];
+      this.comprobantesSeleccionadosADescargar = [];
     }
   }
 
@@ -244,6 +247,21 @@ export class ArchivoDeComprobantesComponent implements OnInit, OnDestroy {
       default:
         break;
     }
+  }
+
+  /**
+   * Muestra lista de comprobantes a descargar
+   */
+  verSeleccionados() {
+    const dialogRef = this.dialog.open(SeleccionadosModalComponent, {
+      data: { comprobantesSeleccionados: this.comprobantesSeleccionadosADescargar }
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      if (result) {
+        this.descargar();
+      }
+    });
   }
 
   /**

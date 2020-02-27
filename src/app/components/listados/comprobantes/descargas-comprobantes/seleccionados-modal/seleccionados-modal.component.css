@@ -1,0 +1,13 @@
+.modal {
+  font-family: Rubik;
+}
+
+.title-modal {
+  font-weight: bold;
+  text-align: center;
+}
+
+.btn-modal {
+  background-color: #00cb75;
+  color: white;
+}
