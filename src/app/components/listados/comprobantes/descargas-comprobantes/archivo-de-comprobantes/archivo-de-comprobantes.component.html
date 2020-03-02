@@ -1,9 +1,9 @@
 <div class="contenedor-listado" fxLayout="column" fxLayoutWrap fxLayoutAlign="none" infiniteScroll
-	[infiniteScrollDistance]="2" [infiniteScrollThrottle]="50" (scrolled)="onScroll()" [scrollWindow]="false">
+		 [infiniteScrollDistance]="2" [infiniteScrollThrottle]="50" (scrolled)="onScroll()" [scrollWindow]="false">
 
 	<mat-selection-list (ngModelChange)="actualizarSeleccion($event)" [(ngModel)]="comprobantesSeleccionados">
 		<mat-list-option *ngFor="let comprobante of comprobantes" [value]="comprobante" class="comprobante-fila"
-			[disabled]="comprobante.existeArchivo == false">
+										 [disabled]="comprobante.existeArchivo == false">
 
 			<div fxLayout="row" fxLayoutAlign="space-between center">
 
@@ -28,6 +28,17 @@
 	<!--Spinner-->
 	<div fxLayout="row" fxLayoutAlign="center center" *ngIf="cargando == true" style="margin-top: 10px">
 		<mat-spinner diameter="24"></mat-spinner>
+	</div>
+
+	<!--Si no hay datos a mostrar-->
+	<div fxLayout="column" fxLayoutAlign="center center" *ngIf="!cargando && comprobantes && comprobantes.length == 0" class="info-sin-data-container">
+		<div fxFlex="nogrow">
+			<img src="assets/varios/sin-data.png" class="info-sin-data-img" />
+		</div>
+
+		<div fxFlex="nogrow" class="info-sin-data-text">
+			Cuando tengamos información de tus comprobantes la podrás ver aquí.
+		</div>
 	</div>
 
 </div>
