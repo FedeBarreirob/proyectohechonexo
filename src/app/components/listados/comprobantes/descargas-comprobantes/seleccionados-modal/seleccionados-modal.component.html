@@ -2,10 +2,8 @@
   <h1 class="modal title-modal title-modal-count" mat-dialog-title fxFlex="50%">Seleccionados</h1>
 </div>
 
-<div class="modal">
-  <ul *ngIf="data.comprobantesSeleccionados">
-    <li *ngFor="let item of data.comprobantesSeleccionados"><mat-icon svgIcon="pdf"></mat-icon> <span *ngIf="item.fecha">{{item.fecha}} - </span>{{item.comprobante}} {{ item.concepto }}</li>
-  </ul>
+<div class="modal" *ngIf="data.comprobantesSeleccionados" cdkFocusInitial>
+    <div *ngFor="let item of data.comprobantesSeleccionados"><mat-icon svgIcon="pdf"></mat-icon> <span *ngIf="item.fecha">{{item.fecha}} - </span>{{item.comprobante}} {{ item.concepto }}</div>
 </div>
 
 <div mat-dialog-actions align="end">
