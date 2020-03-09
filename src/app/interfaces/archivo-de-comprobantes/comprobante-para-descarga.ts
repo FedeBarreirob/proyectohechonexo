@@ -3,5 +3,6 @@ export interface ComprobanteParaDescarga {
     link: string,
     existeArchivo: boolean,
     concepto?: string,
-    fecha?: string
+    fecha?: string,
+    seleccionado?: boolean
 }

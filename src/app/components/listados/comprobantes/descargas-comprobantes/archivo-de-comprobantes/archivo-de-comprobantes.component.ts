@@ -46,7 +46,6 @@ export class ArchivoDeComprobantesComponent implements OnInit, OnDestroy {
   // listado de las referencias a los comprobantes
   comprobantes: Array<ComprobanteParaDescarga> = [];
   comprobantesSeleccionados: Array<ComprobanteParaDescarga> = [];
-  comprobantesSeleccionadosADescargar: Array<ComprobanteParaDescarga> = [];
 
   constructor(
     private archivoDeComprobantesService: ArchivoDeComprobantesService,
@@ -182,6 +181,8 @@ export class ArchivoDeComprobantesComponent implements OnInit, OnDestroy {
     comprobantesPagina.forEach(
       comprobante => {
         comprobante.fecha = comprobante.fecha;
+        var comprobanteSeleccionado = this.comprobantesSeleccionados.filter(function (x) { return x.comprobante == comprobante.comprobante });
+        comprobante.seleccionado = comprobanteSeleccionado.length > 0 ? comprobanteSeleccionado[0].seleccionado : false;
         this.comprobantes.push(comprobante);
       }
     );
@@ -189,8 +190,6 @@ export class ArchivoDeComprobantesComponent implements OnInit, OnDestroy {
 
   // funcion que actualiza el listado de comprobantes seleccionados
   actualizarSeleccion($event) {
-    this.comprobantesSeleccionadosADescargar = $event;
-
     // actualizar estado del seleccionador de todos
     this.toggleSeleccionTodo = this.sonTodosSeleccionados();
   }
@@ -198,7 +197,7 @@ export class ArchivoDeComprobantesComponent implements OnInit, OnDestroy {
   // funcion que determina si todos los item se encuentran seleccionados
   private sonTodosSeleccionados(): boolean {
     try {
-      if (this.comprobantes.length == this.comprobantesSeleccionadosADescargar.length) {
+      if (this.comprobantes.length == this.comprobantesSeleccionados.length) {
         return true;
       } else {
         return false;
@@ -212,9 +211,9 @@ export class ArchivoDeComprobantesComponent implements OnInit, OnDestroy {
   // funcion encargada de seleccionar todos o ningun comprobante
   seleccionarTodoONada($event: MatSlideToggleChange) {
     if ($event.checked) {
-      this.comprobantesSeleccionadosADescargar = this.comprobantes;
+      this.comprobantesSeleccionados = this.comprobantes;
     } else {
-      this.comprobantesSeleccionadosADescargar = [];
+      this.comprobantesSeleccionados = [];
     }
   }
 
@@ -254,7 +253,7 @@ export class ArchivoDeComprobantesComponent implements OnInit, OnDestroy {
    */
   verSeleccionados() {
     const dialogRef = this.dialog.open(SeleccionadosModalComponent, {
-      data: { comprobantesSeleccionados: this.comprobantesSeleccionadosADescargar }
+      data: { comprobantesSeleccionados: this.comprobantesSeleccionados }
     });
 
     dialogRef.afterClosed().subscribe(result => {
@@ -391,10 +390,12 @@ export class ArchivoDeComprobantesComponent implements OnInit, OnDestroy {
    * Selecciona o deselecciona todo
    */
   toggleSelection() {
+    this.comprobantes.forEach(x => { x.seleccionado = !this.sonTodosSeleccionados() });
+
     if (this.sonTodosSeleccionados()) {
-      this.lista.deselectAll();
+      this.comprobantesSeleccionados = [];
     } else {
-      this.lista.selectAll();
+      this.comprobantesSeleccionados = this.comprobantes;
     }
   }
 
@@ -406,6 +407,16 @@ export class ArchivoDeComprobantesComponent implements OnInit, OnDestroy {
       return "Quitar selección";
     } else {
       return "Seleccionar todos"
+    }
+  }
+
+  cambioSeleccion(event) {
+    if (event.option._selected) {
+      event.option._value.seleccionado = true;
+      this.comprobantesSeleccionados.push(event.option._value);
+    }
+    else {
+      this.comprobantesSeleccionados = this.comprobantesSeleccionados.filter(function (obj) { return obj.comprobante != event.option._value.comprobante });
     }
   }
 }

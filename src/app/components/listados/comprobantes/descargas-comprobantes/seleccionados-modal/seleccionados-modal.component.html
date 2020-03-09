@@ -3,7 +3,7 @@
 </div>
 
 <div class="modal" *ngIf="data.comprobantesSeleccionados" cdkFocusInitial>
-    <div *ngFor="let item of data.comprobantesSeleccionados"><mat-icon svgIcon="pdf"></mat-icon> <span *ngIf="item.fecha">{{item.fecha}} - </span>{{item.comprobante}} {{ item.concepto }}</div>
+    <div *ngFor="let item of data.comprobantesSeleccionados"><mat-icon svgIcon="pdf"></mat-icon> <span *ngIf="item.fecha">{{item.fecha}} - </span>{{item.comprobante}} / {{ item.concepto }}<mat-divider></mat-divider></div>
 </div>
 
 <div mat-dialog-actions align="end">

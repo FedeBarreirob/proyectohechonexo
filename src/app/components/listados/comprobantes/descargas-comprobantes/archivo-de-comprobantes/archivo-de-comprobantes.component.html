@@ -3,9 +3,9 @@
 <div class="contenedor-listado" fxLayout="column" fxLayoutWrap fxLayoutAlign="none" infiniteScroll
 	[infiniteScrollDistance]="2" [infiniteScrollThrottle]="50" (scrolled)="onScroll()" [scrollWindow]="false">
 
-	<mat-selection-list #lista (ngModelChange)="actualizarSeleccion($event)" [(ngModel)]="comprobantesSeleccionados">
+	<mat-selection-list #lista (selectionChange)="cambioSeleccion($event)">
 		<mat-list-option *ngFor="let comprobante of comprobantes" [value]="comprobante" class="comprobante-fila"
-			[disabled]="comprobante.existeArchivo == false">
+			[disabled]="comprobante.existeArchivo == false" [selected]="comprobante.seleccionado">
 
 			<div fxLayout="row" fxLayoutAlign="space-between center">
 
@@ -48,7 +48,7 @@
 
 		<div fxFlex="50%">
 			<button mat-button
-				[disabled]="(cargando==true || descargandoArchivos==true || comprobantesSeleccionadosADescargar.length == 0 || comprobantes.length == 0)"
+				[disabled]="(cargando==true || descargandoArchivos==true || comprobantesSeleccionados.length == 0 || comprobantes.length == 0)"
 				class="boton-descarga-comprobante" (click)="verSeleccionados()">
 				Ver Seleccionados
 			</button>
