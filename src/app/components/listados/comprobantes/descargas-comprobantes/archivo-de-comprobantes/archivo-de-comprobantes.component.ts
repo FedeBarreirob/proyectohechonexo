@@ -253,29 +253,57 @@ export class ArchivoDeComprobantesComponent implements OnInit, OnDestroy {
     if (this.descargandoArchivos == false) {
       this.descargandoArchivos = true;
 
-      this.comprobantesDownloaderService.comprobanteDescargadoMasivo(this.comprobantesSeleccionados)
-        .subscribe(respuesta => {
-          var mediaType = 'application/zip';
-          var blob = new Blob([respuesta], { type: mediaType });
-          var filename = 'comprobantes.zip';
+      if (this.comprobantesSeleccionados.length > 1) {
+        this.comprobantesDownloaderService.comprobanteDescargadoMasivo(this.comprobantesSeleccionados)
+          .subscribe(respuesta => {
+            var mediaType = 'application/zip';
+            var blob = new Blob([respuesta], { type: mediaType });
+            var filename = 'comprobantes.zip';
 
-          if (blob.size !== 0) {
+            if (blob.size !== 0) {
 
-            if (environment.inPhonegap) {
-              this.downloaderUtilService.download(filename, blob, mediaType);
+              if (environment.inPhonegap) {
+                this.downloaderUtilService.download(filename, blob, mediaType);
+              } else {
+                saveAs(blob, filename);
+              }
+
             } else {
-              saveAs(blob, filename);
+              this.openSnackBar("Ninguno de los comprobantes indicados se encuentran para su descarga.");
             }
 
-          } else {
-            this.openSnackBar("Ninguno de los comprobantes indicados se encuentran para su descarga.");
-          }
+            this.descargandoArchivos = false;
+          }, error => {
+            console.log(error);
+            this.descargandoArchivos = false;
+          });
+      }
+      else {
+        var movimiento = this.comprobantesSeleccionados[0];
+        this.comprobantesDownloaderService.comprobanteDescargado(movimiento.link, movimiento.comprobante)
+          .subscribe(respuesta => {
+            var mediaType = 'application/pdf';
+            var blob = new Blob([respuesta], { type: mediaType });
+            var filename = movimiento.comprobante + '.pdf';
 
-          this.descargandoArchivos = false;
-        }, error => {
-          console.log(error);
-          this.descargandoArchivos = false;
-        });
+            if (blob.size !== 0) {
+
+              if (environment.inPhonegap) {
+                this.downloaderUtilService.download(filename, blob, mediaType);
+              } else {
+                saveAs(blob, filename);
+              }
+
+            } else {
+              this.openSnackBar("Ninguno de los comprobantes indicados se encuentran para su descarga.");
+            }
+
+            this.descargandoArchivos = false;
+          }, error => {
+            console.log(error);
+            this.descargandoArchivos = false;
+          });
+      }
     }
   }
 

@@ -220,11 +220,11 @@ export class CuentaCorrienteListaDesktopComponent implements OnInit, OnDestroy {
   exportarSegunOpcion(exportador: any) {
     switch (exportador) {
       case "excel":
-        this.exportacionMasivaExcel();
+        this.identificadoresParaDescarga.length > 1 ? this.exportacionMasivaExcel() : this.exportacionesService.exportarMovCtaCteDetalleExcel(this.identificadoresParaDescarga[0].movimiento);
         break;
 
       case "pdf":
-        this.exportacionMasivaPDF();
+        this.identificadoresParaDescarga.length > 1 ? this.exportacionMasivaPDF() : this.exportacionesService.exportarMovCtaCteDetallePDF(this.identificadoresParaDescarga[0].movimiento);
         break;
 
       default:
