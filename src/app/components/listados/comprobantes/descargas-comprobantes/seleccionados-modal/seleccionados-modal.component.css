@@ -11,3 +11,22 @@
   background-color: #2DA442;
   color: white;
 }
+
+.container {
+  max-height: 250px;
+  overflow-y: auto;
+}
+
+.btn-close {
+  background: lightgray;
+}
+
+.concepto-comprobante {
+  color: #666666;
+  font-family: Rubik;
+  font-size: 12px;
+}
+
+.fila {
+  margin-bottom: 5%;
+}
