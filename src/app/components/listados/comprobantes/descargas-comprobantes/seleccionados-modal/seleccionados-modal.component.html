@@ -1,5 +1,13 @@
-<div fxLayout="row">
-  <h1 class="modal title-modal title-modal-count" mat-dialog-title fxFlex="50%">Seleccionados</h1>
+<div fxLayout="row" fxLayoutAlign="center" class="encabezado">
+  <div fxFlex="80%" class="modal title-modal">
+    Seleccionados
+  </div>
+
+  <div fxFlex="20%">
+    <button mat-icon-button class="boton-close cdk-focused cdk-program-focused" (click)="onNoClick()">
+      <mat-icon>close</mat-icon>
+    </button>
+  </div>
 </div>
 
 <div class="modal container" *ngIf="data.comprobantesSeleccionados" cdkFocusInitial>
@@ -16,6 +24,4 @@
 
 <div mat-dialog-actions align="end">
   <button mat-button [mat-dialog-close]="data.comprobantesSeleccionados" class="modal btn-modal">Descargar todos</button>
-
-  <button mat-button mat-dialog-close class="btn-close">Cerrar</button>
 </div>

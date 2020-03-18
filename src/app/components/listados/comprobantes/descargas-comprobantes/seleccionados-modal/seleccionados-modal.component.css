@@ -2,6 +2,10 @@
   font-family: Rubik;
 }
 
+.encabezado {
+  margin-bottom: 5%;
+}
+
 .title-modal {
   font-weight: bold;
   text-align: center;
@@ -17,8 +21,9 @@
   overflow-y: auto;
 }
 
-.btn-close {
-  background: lightgray;
+.boton-close {
+  margin-top: -35px;
+  margin-left: 60%;
 }
 
 .concepto-comprobante {
