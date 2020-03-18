@@ -1,19 +1,32 @@
 <div [ngClass]="{'container-desktop': !esCelular}">
   <app-tool-bar-general titulo="Reportes"></app-tool-bar-general>
 
-  <mat-select placeholder="Seleccione el reporte que desea visualizar" [(ngModel)]="reportId" class="select-report">
-    <mat-option [value]="1">
-      TENENCIAS IMPOSITIVAS
-    </mat-option>
+  <div fxLayout="row" fxLayoutAlign="none" [ngClass]="{'contenedor': (reportId === 2 || reportId === 3) }">
+    <div fxFlex="nogrow" class="boton-container">
+      <button mat-button [matMenuTriggerFor]="menuProductos" [disabled]="disabled">
+        Seleccione el reporte que desea visualizar<mat-icon>expand_more</mat-icon>
+      </button>
 
-    <mat-option [value]="2" *ngIf="!esCelular">
-      INSUMOS PENDIENTES
-    </mat-option>
+      <mat-menu #menuProductos="matMenu">
+        <button mat-menu-item (click)="reportId = null" [ngClass]="{'activo': reportId === null, 'inactivo': reportId !== null }">
+          Seleccione el reporte que desea visualizar
+        </button>
 
-    <mat-option [value]="3"  *ngIf="!esCelular">
-      COMPRABANTES PENDIENTES DE FACTURAR
-    </mat-option>
-  </mat-select>
+        <button mat-menu-item (click)="reportId = 1" [ngClass]="{'activo': reportId === 1, 'inactivo': reportId !== 1 }">
+          TENENCIAS IMPOSITIVAS
+        </button>
+
+        <button mat-menu-item (click)="reportId = 2" [ngClass]="{'activo': reportId === 2, 'inactivo': reportId !== 2 }">
+          INSUMOS PENDIENTES
+        </button>
+
+        <button mat-menu-item (click)="reportId = 3" [ngClass]="{'activo': reportId === 3, 'inactivo': reportId !== 3 }">
+          COMPRABANTES PENDIENTES DE FACTURAR
+        </button>
+
+      </mat-menu>
+    </div>
+  </div>
 
   <app-tenencias-impositivas *ngIf="cuenta != null && reportId == 1" [cuenta]="cuenta.id.codigo"></app-tenencias-impositivas>
 
