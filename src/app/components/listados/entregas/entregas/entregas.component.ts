@@ -319,11 +319,11 @@ export class EntregasComponent implements OnInit, OnDestroy, AfterViewInit {
   exportarSegunOpcion(exportador: any) {
     switch (exportador) {
       case "excel":
-        this.exportacionMasivaExcel();
+        this.identificadoresParaDescarga.length > 1 ? this.exportacionMasivaExcel() : this.entregasExportacionesService.exportarEntregasDetalleExcel(this.identificadoresParaDescarga[0].movimiento);
         break;
 
       case "pdf":
-        this.exportacionMasivaPDF();
+        this.identificadoresParaDescarga.length > 1 ? this.exportacionMasivaPDF() : this.entregasExportacionesService.exportarEntregasDetallePDF(this.identificadoresParaDescarga[0].movimiento);
         break;
 
       default:
