@@ -1,19 +1,42 @@
 <!--Filtro-->
 <div fxLayout="row" fxLayoutAlign="space-between center" class="contenedor-titulo-filtro" fxLayoutGap="20px">
 
-  <div fxFlex="250px" class="titulo-seccion">
-    Ficha de cuenta corriente <br /> Total en Pesos: $ {{totalPesos | number: '.0'}} <br /> Total en Dolares: $ {{totalDolares | number: '.0'}}
+  <div fxFlex="30%" *ngIf="cargando == false" class="contenedor-saldo">
+    <div fxLayout="row" fxLayoutAlign="space-between center">
+      <div fxFlex class="subtitulo-apartados">Saldo ARS</div>
+
+      <div fxFlex class="subtitulo-apartados">Saldo USD</div>
+    </div>
+
+    <div fxLayout="row" fxLayoutAlign="space-between center">
+      <div fxFlex class="monto">
+        <span [ngClass]="{'signo-positivo': totalPesos > 0, 'signo-negativo': totalPesos < 0 }">{{ (totalPesos < 0) ? '-' : (totalPesos > 0) ? '+' : ''}}</span>
+
+        {{ ((totalPesos > 0) ? totalPesos : totalPesos * (-1)) | number: '.2'}}
+
+        <span class="moneda">ARS</span>
+      </div>
+
+      <div fxFlex class="monto">
+        <span [ngClass]="{'signo-positivo': totalDolares > 0, 'signo-negativo': totalDolares < 0 }">{{ (totalDolares < 0) ? '-' : (totalDolares > 0) ? '+' : ''}}</span>
+
+        {{ ((totalDolares > 0) ? totalDolares : totalDolares * (-1)) | number: '.2'}}
+
+        <span class="moneda">USD</span>
+      </div>
+    </div>
+
   </div>
 
   <div fxFlex *ngIf="(!identificadoresParaDescarga || identificadoresParaDescarga.length <= 0) && semanaAtras && hoy">
     <app-cta-cte-filtro-desktop [cuenta]="cuenta" [desde]="semanaAtras" [hasta]="hoy" [infoCtaCteActivo]="infoCtaCte.CUENTA_CORRIENTE"
-      [filtroPersonalizado]="filtroPersonalizado" (botonAplicar)="aplicar($event)" [disabled]="cargando"></app-cta-cte-filtro-desktop>
+                                [filtroPersonalizado]="filtroPersonalizado" (botonAplicar)="aplicar($event)" [disabled]="cargando"></app-cta-cte-filtro-desktop>
   </div>
 
   <div fxFlex *ngIf="identificadoresParaDescarga && identificadoresParaDescarga.length > 0">
     <app-tool-bar-descargas (descargarComprobanteChange)="descargarSeleccionados()"
-      [botonesExtras]="botonesBarraDescargaExtras" [disabled]="descargandoArchivos"
-      (botonPresionado)="exportarSegunOpcion($event)"></app-tool-bar-descargas>
+                            [botonesExtras]="botonesBarraDescargaExtras" [disabled]="descargandoArchivos"
+                            (botonPresionado)="exportarSegunOpcion($event)"></app-tool-bar-descargas>
   </div>
 
 </div>
