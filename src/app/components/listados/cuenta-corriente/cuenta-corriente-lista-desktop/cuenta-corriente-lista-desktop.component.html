@@ -1,11 +1,13 @@
 <!--Filtro-->
 <div fxLayout="row" fxLayoutAlign="space-between center" class="contenedor-titulo-filtro" fxLayoutGap="20px">
 
-  <div fxFlex="30%" *ngIf="cargando == false" class="contenedor-saldo">
+  <div fxFlex="40%" *ngIf="cargando == false" class="contenedor-saldo">
     <div fxLayout="row" fxLayoutAlign="space-between center">
       <div fxFlex class="subtitulo-apartados">Saldo ARS</div>
 
       <div fxFlex class="subtitulo-apartados">Saldo USD</div>
+
+      <div fxFlex class="subtitulo-apartados">Saldo Contable</div>
     </div>
 
     <div fxLayout="row" fxLayoutAlign="space-between center">
@@ -23,6 +25,14 @@
         {{ ((totalDolares > 0) ? totalDolares : totalDolares * (-1)) | number: '.2'}}
 
         <span class="moneda">USD</span>
+      </div>
+
+      <div fxFlex class="monto">
+        <span [ngClass]="{'signo-positivo': totalContable > 0, 'signo-negativo': totalContable < 0 }">{{ (totalContable < 0) ? '-' : (totalContable > 0) ? '+' : ''}}</span>
+
+        {{ ((totalContable > 0) ? totalContable : totalContable * (-1)) | number: '.2'}}
+
+        <span class="moneda">ARS</span>
       </div>
     </div>
 

@@ -325,4 +325,12 @@ export class CuentaCorrienteListaDesktopComponent implements OnInit, OnDestroy {
     }
     return totalDolares;
   }
+
+  get totalContable(): number {
+    var totalContable = 0;
+    if (this.identificadoresParaDescarga) {
+      this.identificadoresParaDescarga.forEach(x => totalContable += x.movimiento.saldoContable);
+    }
+    return totalContable;
+  }
 }
