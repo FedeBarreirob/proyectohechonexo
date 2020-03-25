@@ -39,9 +39,10 @@
         </mat-card-content>
       </mat-card>
 
-      <a *ngIf="esCelular" href="https://play.google.com/store/apps/details?id=com.gaviglio.digital" target="_blank" class="google-play">
+      <a *ngIf="esCelular && !inPhonegap" href="https://play.google.com/store/apps/details?id=com.gaviglio.digital" target="_blank" class="google-play">
         <img src="/assets/google-play/google-play.png" alt="Play Store" width="150" height="50" />
       </a>
+
     </div>
   </div>
 </div>

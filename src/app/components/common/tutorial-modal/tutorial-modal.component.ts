@@ -18,7 +18,7 @@ export class TutorialModalComponent implements OnInit {
   username: string;
 
   constructor(
-    @Inject(MAT_DIALOG_DATA) public data: TutorialModalComponent,
+    @Inject(MAT_DIALOG_DATA) public data: any,
     public dialogRef: MatDialogRef<any>) { }
 
   ngOnInit() {

@@ -8,6 +8,7 @@ import { Observable, Subject } from 'rxjs';
 import { NotificacionesService } from '../../services/notificaciones/notificaciones.service';
 import { OneSignalService } from '../../services/push/one-signal.service';
 import { DeviceDetectorService } from 'ngx-device-detector';
+import { environment } from '../../../environments/environment';
 
 @Component({
 	selector: 'app-login',
@@ -22,7 +23,8 @@ export class LoginComponent implements OnInit {
 	hidePassword = true;
 	cargando$: Subject<boolean> = new Subject<boolean>();
 	esCelular: boolean;
-	
+	inPhonegap: boolean = environment.inPhonegap;
+
 	constructor(
 		private formBuilder: FormBuilder,
 		private route: ActivatedRoute,
