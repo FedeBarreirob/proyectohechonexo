@@ -181,6 +181,8 @@ import { CuentaCorrienteItemMovilComponent } from './components/listados/cuenta-
 import { CuentaCorrienteAplicadaItemMovilComponent } from './components/listados/cuenta-corriente/cuenta-corriente-aplicada-item-movil/cuenta-corriente-aplicada-item-movil.component';
 import { TutorialModalComponent } from './components/common/tutorial-modal/tutorial-modal.component';
 import { NotificacionDetalleUrlComponent } from './components/notificaciones/notificacion-detalle-url/notificacion-detalle-url.component';
+import { DateAdapter, MAT_DATE_FORMATS } from '@angular/material/core';
+import { AppDateAdapter, APP_DATE_FORMATS } from './format-datepicker';
 
 registerLocaleData(localeEsAr, 'es-AR');
 
@@ -371,6 +373,8 @@ export function tokenGetter() {
 	providers: [
 		{ provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true },
 		{ provide: LOCALE_ID, useValue: 'es-AR' },
+		{ provide: DateAdapter, useClass: AppDateAdapter },
+		{ provide: MAT_DATE_FORMATS, useValue: APP_DATE_FORMATS },
 		DecimalPipe,
 		{ provide: MatPaginatorIntl, useClass: CustomPaginatorEspanol },
 		JwtHelperService,

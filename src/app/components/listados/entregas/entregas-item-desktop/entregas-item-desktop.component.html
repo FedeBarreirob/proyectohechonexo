@@ -28,7 +28,7 @@
       </div>
 
       <div fxFlex="100px">
-        {{movimiento.kilosBrutos | kilosA: unidadMedida | number: '.0-0'}}
+        {{movimiento.kilosBrutos | kilosA: unidadMedida | number: (unidadMedida == 'tn' ? '.0-1' : '.0-0')}}
       </div>
 
       <div fxFlex="100px">
@@ -48,7 +48,7 @@
       </div>
 
       <div fxFlex="100px">
-        {{movimiento.kilosNetos | kilosA: unidadMedida | number: '.0-0'}}
+        {{movimiento.kilosNetos | kilosA: unidadMedida | number: (unidadMedida == 'tn' ? '.0-1' : '.0-0')}}
       </div>
 
       <div fxFlex="100px">

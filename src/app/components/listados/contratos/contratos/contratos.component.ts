@@ -15,6 +15,7 @@ import { saveAs } from 'file-saver/FileSaver';
 import { TutorialModalComponent } from '../../../common/tutorial-modal/tutorial-modal.component';
 import { AuthenticationService } from '../../../../services/security/authentication.service';
 import { TutorialModalService } from '../../../../services/tutorial-modal/tutorial-modal.service';
+import { ContratosExportacionesService } from '../../../../services/contratos/contratos-exportaciones.service';
 
 @Component({
   selector: 'app-contratos',
@@ -39,6 +40,7 @@ export class ContratosComponent implements OnInit, OnDestroy, AfterViewInit {
 
   identificadoresParaDescarga: Array<any>;
   descargandoArchivos: boolean = false;
+  botonesBarraDescargaExtras: Array<any> = [];
 
   // filtro a utilizar en la barra de filtros de cereales
   filtroPersonalizado: Array<FiltroPersonalizadoParaFiltroCereal> = [
@@ -62,7 +64,8 @@ export class ContratosComponent implements OnInit, OnDestroy, AfterViewInit {
     private comprobanteDownloaderService: ComprobantesDownloaderService,
     private snackBar: MatSnackBar,
     private authenticationService: AuthenticationService,
-    private tutorialModalService: TutorialModalService
+    private tutorialModalService: TutorialModalService,
+    private contratosExportacionesService: ContratosExportacionesService
   ) { }
 
   ngOnInit() {
@@ -74,7 +77,7 @@ export class ContratosComponent implements OnInit, OnDestroy, AfterViewInit {
       // Modal tutorial 1/2
       if (!JSON.parse(localStorage.getItem("contratosTutorial1-2")) && !contratosTutorial1_2.visto) {
         const dialogRef = this.dialog.open(TutorialModalComponent, {
-          data: { title: contratosTutorial1_2.contenido.title, description: contratosTutorial1_2.contenido.description }
+          data: { title: contratosTutorial1_2.contenido.title, description: contratosTutorial1_2.contenido.description, pageId: contratosTutorial1_2.contenido.pageId, pageCount: contratosTutorial1_2.contenido.pageCount }
         });
 
         dialogRef.afterClosed().subscribe(result => {
@@ -92,7 +95,7 @@ export class ContratosComponent implements OnInit, OnDestroy, AfterViewInit {
           if (!JSON.parse(localStorage.getItem('contratosTutorial2-2')) && !contratosTutorial2_2.visto) {
             // Modal tutorial 2/2
             var dialogRef2 = this.dialog.open(TutorialModalComponent, {
-              data: { title: contratosTutorial2_2.contenido.title, description: contratosTutorial2_2.contenido.description }
+              data: { title: contratosTutorial2_2.contenido.title, description: contratosTutorial2_2.contenido.description, pageId: contratosTutorial2_2.contenido.pageId, pageCount: contratosTutorial2_2.contenido.pageCount }
             });
 
             dialogRef2.afterClosed().subscribe(result => {
@@ -123,6 +126,8 @@ export class ContratosComponent implements OnInit, OnDestroy, AfterViewInit {
         },
         error => console.log(error)
       );
+
+    this.cargarBotonesExtrasDescarga();
   }
 
   ngAfterViewInit(): void {
@@ -257,7 +262,12 @@ export class ContratosComponent implements OnInit, OnDestroy, AfterViewInit {
     if (this.identificadoresParaDescarga && this.identificadoresParaDescarga.length > 0 && this.descargandoArchivos == false) {
 
       this.descargandoArchivos = true;
-      let identificadores = this.identificadoresParaDescarga.map(identificador => identificador.identificadorParaDescarga);
+      let identificadores = this.identificadoresParaDescarga.map(identificador => {
+        return {
+            sucursal: identificador.resumen.numeroSucursalContrato,
+            comprobante: identificador.resumen.numeroComprobanteContrato
+        }
+      });
 
       this.comprobanteDownloaderService.confirmacionVentaDescargadoMasivo(identificadores)
         .pipe(takeUntil(this.destroy$))
@@ -289,5 +299,73 @@ export class ContratosComponent implements OnInit, OnDestroy, AfterViewInit {
     this.snackBar.open(message, action, {
       duration: 2000,
     });
+  }
+
+  /**
+   * Función encargada de cargar los botones extras en la barra de descargas
+   */
+  cargarBotonesExtrasDescarga() {
+    if (!this.esCelular) {
+
+      this.botonesBarraDescargaExtras.push({
+        id: "excel",
+        nombre: "Exportar a Excel",
+        img: "assets/varios/excel.svg"
+      });
+
+      this.botonesBarraDescargaExtras.push({
+        id: "pdf",
+        nombre: "Exportar a PDF",
+        img: "assets/varios/pdf-verde.svg"
+      });
+
+    }
+  }
+
+  /**
+   * Ejecuta la exportación indicada
+   * @param exportador 
+   */
+  exportarSegunOpcion(exportador: any) {
+    switch (exportador) {
+      case "excel":
+        this.exportacionMasivaExcel();
+        break;
+
+      case "pdf":
+        this.exportacionMasivaPDF();
+        break;
+
+      default:
+        break;
+    }
+  }
+
+  /**
+   * Exporta todos los movimientos seleccionados a una planilla excel
+   */
+  exportacionMasivaExcel() {
+    if (this.identificadoresParaDescarga && this.identificadoresParaDescarga.length > 0 && this.descargandoArchivos == false) {
+
+      this.descargandoArchivos = true;
+      let movimientosSeleccionados = this.identificadoresParaDescarga.map(identificador => identificador.resumen);
+      
+      this.contratosExportacionesService.exportarListadoContratosDetalleExcel(movimientosSeleccionados);
+      this.descargandoArchivos = false;
+    }
+  }
+
+  /**
+   * Exporta todos los movimientos seleccionados a un archivo pdf
+   */
+  exportacionMasivaPDF() {
+    if (this.identificadoresParaDescarga && this.identificadoresParaDescarga.length > 0 && this.descargandoArchivos == false) {
+
+      this.descargandoArchivos = true;
+      let movimientosSeleccionados = this.identificadoresParaDescarga.map(identificador => identificador.resumen);
+
+      this.contratosExportacionesService.exportarListadoContratosDetallePDF(movimientosSeleccionados, null);
+      this.descargandoArchivos = false;
+    }
   }
 }

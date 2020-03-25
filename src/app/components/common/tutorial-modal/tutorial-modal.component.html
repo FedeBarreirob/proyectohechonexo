@@ -1,4 +1,8 @@
-<h1 class="tutorial-modal" mat-dialog-title>{{data.title}}</h1>
+<div fxLayout="row">
+  <h1 class="tutorial-modal title-modal" mat-dialog-title fxFlex="{{data.pageCount ? 50 : 100}}%">{{data.title}}</h1>
+
+  <h1 *ngIf="data.pageCount" class="tutorial-modal title-modal title-modal-count" mat-dialog-title fxFlex="50%">({{data.pageId}}/{{data.pageCount}})</h1>
+</div>
 
 <div class="tutorial-modal">
   {{data.description}}
@@ -9,7 +13,7 @@
 
   <div fxLayout="row" fxLayoutAlign="start center" class="contenedor-control" *ngIf="data.userName">
     <div fxFlex="100%">
-      <input class="input" matInput cdkFocusInitial placeholder="Campo de carga: Ej. Juan, Laura" [(ngModel)]="data.username">
+      <input class="input" matInput cdkFocusInitial placeholder="Ej. Juan, Laura" [(ngModel)]="data.username">
     </div>
   </div>
 
@@ -17,5 +21,5 @@
 </div>
 
 <div mat-dialog-actions align="end">
-  <button mat-button [mat-dialog-close]="data.username" class="tutorial-modal">{{data.buttonText ? data.buttonText : "Entendido"}}</button>
+  <button mat-button [mat-dialog-close]="data.username" class="tutorial-modal btn-modal">{{data.buttonText ? data.buttonText : "Entendido"}}</button>
 </div>

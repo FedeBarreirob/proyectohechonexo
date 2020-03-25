@@ -22,7 +22,7 @@
     </div>
 
     <div fxFlex class="kg-netos" align="end">
-      {{movimiento.kilosNetos | kilosA: unidadMedida | number: '.0-0'}}
+      {{movimiento.kilosNetos | kilosA: unidadMedida | number: (unidadMedida == 'tn' ? '.0-1' : '.0-0')}}
     </div>
 
   </div>

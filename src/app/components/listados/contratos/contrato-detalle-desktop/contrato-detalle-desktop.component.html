@@ -32,7 +32,7 @@
               </div>
 
               <div fxFlex class="catidad-producto-encabezado">
-                {{resumenContrato.kilosPactados | kilosA: unidadMedida | number: '.0-0'}}
+                {{resumenContrato.kilosPactados | kilosA: unidadMedida | number: (unidadMedida == 'tn' ? '.0-1' : '.0-0')}}
                 {{unidadMedida | kilosTextoA}}
                 de {{resumenContrato.especieDescripcion}}
               </div>
@@ -54,7 +54,7 @@
         <!--Titulo de indicadores-->
         <div fxLayout="row" fxLayoutAlign="space-between center">
           <div fxFlex="nogrow" class="titulo-indicadores">
-            DE {{resumenContrato.kilosPactados | kilosA: unidadMedida | number: '.0-0'}}
+            DE {{resumenContrato.kilosPactados | kilosA: unidadMedida | number: (unidadMedida == 'tn' ? '.0-1' : '.0-0')}}
             {{unidadMedida | kilosTextoA}} PACTADAS:
           </div>
         </div>
@@ -62,14 +62,14 @@
         <!--Indicadores entregas y fijaciones-->
         <div fxLayout="row" fxLayoutAlign="space-between none" fxLayoutGap="10px">
           <div fxFlex="50%" class="indicador-contenedor">
-            <app-contrato-indicador-grafico-porcentual texto="{{resumenContrato.kilosEntregados | kilosA: unidadMedida | number: '.0-0'}}
+            <app-contrato-indicador-grafico-porcentual texto="{{resumenContrato.kilosEntregados | kilosA: unidadMedida | number: (unidadMedida == 'tn' ? '.0-1' : '.0-0')}}
           {{unidadMedida | kilosTextoA}} aplicadas"
               subtexto="{{(100 - resumenContrato.porcentajeKilosEntregados) | number: '.2'}}% entregas pendientes"
               [porcentual]="100 - resumenContrato.porcentajeKilosEntregados">
             </app-contrato-indicador-grafico-porcentual>
           </div>
           <div fxFlex="50%" class="indicador-contenedor">
-            <app-contrato-indicador-grafico-porcentual texto="{{resumenContrato.kilosFijados | kilosA: unidadMedida | number: '.0-0'}}
+            <app-contrato-indicador-grafico-porcentual texto="{{resumenContrato.kilosFijados | kilosA: unidadMedida | number: (unidadMedida == 'tn' ? '.0-1' : '.0-0')}}
             {{unidadMedida | kilosTextoA}} fijadas"
               subtexto="{{(100 - resumenContrato.porcentajeKilosFijados) | number: '.2'}}% fijaciones pendientes"
               [porcentual]="100 - resumenContrato.porcentajeKilosFijados">
@@ -80,14 +80,14 @@
         <!--Indicadores pesificaciones y pagos-->
         <div fxLayout="row" fxLayoutAlign="space-between none" fxLayoutGap="10px">
           <div fxFlex="50%" class="indicador-contenedor">
-            <app-contrato-indicador-grafico-porcentual texto="{{(resumenContrato.kilosPactados-resumenContrato.kilosPendientesPesificar) | kilosA: unidadMedida | number: '.0-0'}}
+            <app-contrato-indicador-grafico-porcentual texto="{{(resumenContrato.kilosPactados-resumenContrato.kilosPendientesPesificar) | kilosA: unidadMedida | number: (unidadMedida == 'tn' ? '.0-1' : '.0-0')}}
             {{unidadMedida | kilosTextoA}} pesificadas"
               subtexto="{{(100 - resumenContrato.porcentajeKilosPesificados) | number: '.2'}}% pesificaciones pendientes"
               [porcentual]="100 - resumenContrato.porcentajeKilosPesificados">
             </app-contrato-indicador-grafico-porcentual>
           </div>
           <div fxFlex="50%" class="indicador-contenedor">
-            <app-contrato-indicador-grafico-porcentual texto="{{resumenContrato.kilosPagados | kilosA: unidadMedida | number: '.0-0'}}
+            <app-contrato-indicador-grafico-porcentual texto="{{resumenContrato.kilosPagados | kilosA: unidadMedida | number: (unidadMedida == 'tn' ? '.0-1' : '.0-0')}}
               {{unidadMedida | kilosTextoA}} pagadas"
               subtexto="{{(100 - resumenContrato.porcentajeKilosPagados) | number: '.2'}}% pagos pendientes"
               [porcentual]="100 - resumenContrato.porcentajeKilosPagados">
@@ -137,7 +137,7 @@
 
         <div fxLayout="row" fxLayoutAlign="space-between none" fxLayoutGap="10px">
           <div fxFlex="50%" class="dato-apartado">
-            {{resumenContrato.kilosPactados | kilosA: unidadMedida | number: '.0-0'}}
+            {{resumenContrato.kilosPactados | kilosA: unidadMedida | number: (unidadMedida == 'tn' ? '.0-1' : '.0-0')}}
           </div>
           <div fxFlex="50%" class="dato-apartado">{{resumenContrato.tipoNegocioDescripCorta}}</div>
         </div>
@@ -149,7 +149,7 @@
 
         <div fxLayout="row" fxLayoutAlign="space-between none" fxLayoutGap="10px">
           <div fxFlex="50%" class="dato-apartado" *ngIf="boleto && resumenContrato.aFijar == 0">
-            ${{boleto.encabezado.precioQQ | precioQQA: unidadMedida | number: '.0-0'}}</div>
+            ${{boleto.encabezado.precioQQ | precioQQA: unidadMedida | number: (unidadMedida == 'tn' ? '.0-1' : '.0-0')}}</div>
           <div fxFlex="50%" class="dato-apartado" *ngIf="boleto && resumenContrato.aFijar == 1">-</div>
           <div fxFlex="50%" class="dato-apartado">{{boleto.encabezado.moneda}}</div>
         </div>
@@ -230,12 +230,33 @@
 
       <!--Columna botones exportar-->
       <div fxFlex="250px" class="info-container">
-        <button mat-button class="boton-descarga-comprobante" (click)="descargarComprobante()"
-          [disabled]="cargando==true">
-          <img src="assets/varios/pdf.png" />
-          Descargar comprobante
-        </button>
+        <div fxLayout="column" fxLayoutAlign="center stretch">
+
+          <div fxFlex>
+            <button mat-button class="boton-descarga-comprobante" (click)="descargarComprobante()"
+                    [disabled]="cargando==true">
+              <img src="assets/varios/pdf.png" />
+              Descargar comprobante
+            </button>
+          </div>
+
+          <div fxFlex>
+            <button mat-button class="boton-descarga-comprobante-alt" (click)="exportarAExcel()"
+              [disabled]="cargando==true">
+              <img src="assets/varios/excel.svg" />
+              Descargar Excel
+            </button>
+          </div>
+
+          <div fxFlex>
+            <button mat-button class="boton-descarga-comprobante-alt" (click)="exportarAPDF()"
+              [disabled]="cargando==true">
+              <img src="assets/varios/pdf-verde.svg" />
+              Descargar PDF
+            </button>
+          </div>
       </div>
+    </div>
 
     </div>
   </span>

@@ -21,7 +21,7 @@
   <div fxLayout="column" fxLayoutAlign="center center" class="contenedor-realizado">
     <div fxFlex="100%" class="realizado-titulo">Pesificado</div>
     <div fxFlex="100%" class="realizado-cantidad">
-      {{indicador.pesificado | kilosA: unidadMedida | number: '.0-0'}}{{unidadMedida | kilosTextoA}}
+      {{indicador.pesificado | kilosA: unidadMedida | number: (unidadMedida == 'tn' ? '.0-1' : '.0-0')}}{{unidadMedida | kilosTextoA}}
     </div>
   </div>
 
@@ -37,12 +37,12 @@
 
   <div fxLayout="row" fxLayoutAlign="space-between center">
     <div fxFlex="50%" class="subtitulo-cantidad">
-      {{indicador.kgPactadosUSD | kilosA: unidadMedida | number: '.0-0'}}{{unidadMedida | kilosTextoA}}
+      {{indicador.kgPactadosUSD | kilosA: unidadMedida | number: (unidadMedida == 'tn' ? '.0-1' : '.0-0')}}{{unidadMedida | kilosTextoA}}
     </div>
 
     <div fxFlex="50%"
       [ngClass]="{'subtitulo-cantidad': indicador.kgAFijarTC == 0, 'subtitulo-cantidad-pendiente': indicador.kgAFijarTC != 0}">
-      {{indicador.kgAFijarTC | kilosA: unidadMedida | number: '.0-0'}}{{unidadMedida | kilosTextoA}}
+      {{indicador.kgAFijarTC | kilosA: unidadMedida | number: (unidadMedida == 'tn' ? '.0-1' : '.0-0')}}{{unidadMedida | kilosTextoA}}
     </div>
   </div>
 </mat-card>

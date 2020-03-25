@@ -9,11 +9,29 @@
 }
 
 .input {
-  border: 1px solid rgba(45, 164, 66, 0.1);
+  border: 1px solid gray;
   border-radius: 4px;
   color: #111111;
   font-family: Rubik;
   font-size: 14px;
   padding: 10px;
   width: 100%;
+}
+
+.input:focus {
+  outline: none;
+}
+
+.btn-modal {
+  background-color: #00cb75;
+  color: white;
+}
+
+.title-modal {
+  font-weight: bold;
+}
+
+.title-modal-count {
+  text-align: right;
+  color: gray;
 }

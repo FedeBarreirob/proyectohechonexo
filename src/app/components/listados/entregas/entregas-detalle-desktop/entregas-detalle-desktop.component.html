@@ -31,7 +31,7 @@
             </div>
 
             <div fxFlex class="catidad-producto-encabezado">
-              {{movimiento.kilosNetos | kilosA: unidadMedida | number: '.0-0'}}
+              {{movimiento.kilosNetos | kilosA: unidadMedida | number: (unidadMedida == 'tn' ? '.0-1' : '.0-0')}}
               {{unidadMedida | kilosTextoA}}
               de {{movimiento.especieDescripcion}}
             </div>
@@ -86,8 +86,8 @@
 
       <!--kilos-->
       <div fxLayout="row" fxLayoutAlign="space-between none" fxLayoutGap="10px">
-        <div fxFlex="50%" class="kilos-datos">{{movimiento.kilosBrutos | kilosA: unidadMedida | number: '.0-0'}}</div>
-        <div fxFlex="50%" class="kilos-datos">{{movimiento.kilosNetos | kilosA: unidadMedida | number: '.0-0'}}</div>
+        <div fxFlex="50%" class="kilos-datos">{{movimiento.kilosBrutos | kilosA: unidadMedida | number: (unidadMedida == 'tn' ? '.0-1' : '.0-0')}}</div>
+        <div fxFlex="50%" class="kilos-datos">{{movimiento.kilosNetos | kilosA: unidadMedida | number: (unidadMedida == 'tn' ? '.0-1' : '.0-0')}}</div>
       </div>
 
       <div fxLayout="row" fxLayoutAlign="space-between none" fxLayoutGap="10px">
