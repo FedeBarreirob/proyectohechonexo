@@ -10,7 +10,7 @@ if (environment.production) {
   enableProdMode();
 }
 
-document.addEventListener("deviceready", () => {
+//document.addEventListener("deviceready", () => {
   platformBrowserDynamic().bootstrapModule(AppModule)
     .catch(err => console.log(err));
-}, false);
+//}, false);
