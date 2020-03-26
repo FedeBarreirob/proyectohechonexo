@@ -67,7 +67,6 @@ export class ReportesComponent implements OnInit, AfterViewInit {
    * Devuelve el nombre del filtro de producto según el filtro efectuado
    */
   leyendaFiltro(): string {
-    debugger;
     switch (this.reportId) {
       case null: return "Seleccione el reporte que desea visualizar";
       case 1: return "TENENCIAS IMPOSITIVAS";
