@@ -85,7 +85,7 @@ export class MercPendEntregarListaDesktopComponent implements OnInit {
       }
 
       this.mercPendEntregarService.listadoMercPendEntregar(this.filtro).subscribe(respuesta => {
-        this.listadoMercPendEntregar = respuesta.datos.listado;
+        this.listadoMercPendEntregar = respuesta.datos.listado ? respuesta.datos.listado : [];
 
         this.cargando = false;
         this.cargandoChange.emit(false);

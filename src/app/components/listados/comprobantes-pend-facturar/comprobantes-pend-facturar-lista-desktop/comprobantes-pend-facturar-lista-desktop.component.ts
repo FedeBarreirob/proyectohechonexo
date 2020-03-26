@@ -85,7 +85,7 @@ export class ComprobantesPendFacturarListaDesktopComponent implements OnInit {
       }
 
       this.compPendFactService.listadoComprobPendFact(this.filtro).subscribe(respuesta => {
-        this.listadoCompPendFact = respuesta.datos.listado;
+        this.listadoCompPendFact = respuesta.datos.listado ? respuesta.datos.listado : [];
 
         this.cargando = false;
         this.cargandoChange.emit(false);
