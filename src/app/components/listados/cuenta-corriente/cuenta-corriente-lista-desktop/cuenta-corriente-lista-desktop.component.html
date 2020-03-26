@@ -1,7 +1,7 @@
 <!--Filtro-->
 <div fxLayout="row" fxLayoutAlign="space-between center" class="contenedor-titulo-filtro" fxLayoutGap="20px">
 
-  <div fxFlex="40%" *ngIf="cargando == false" class="contenedor-saldo">
+  <div fxFlex="40%" *ngIf="cargando == false && identificadoresParaDescarga && identificadoresParaDescarga.length > 0" class="contenedor-saldo">
     <div fxLayout="row" fxLayoutAlign="space-between center">
       <div fxFlex class="subtitulo-apartados">Saldo ARS</div>
 
