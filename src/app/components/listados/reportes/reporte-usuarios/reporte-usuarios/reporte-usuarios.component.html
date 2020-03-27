@@ -1,0 +1,77 @@
+<div fxLayout="row" fxLayoutAlign="space-between none" fxLayoutGap="10px">
+  <div fxFlex="100%" class="titulo-apartados">Reporte de usuarios</div>
+</div>
+
+<mat-progress-bar *ngIf="dataSource.loading$ | async" mode="indeterminate"></mat-progress-bar>
+
+<div class="container" fxLayout="column" fxLayout.xs="column" fxLayoutWrap fxLayoutGap="0.5%"
+  fxLayoutAlign="space-around stretch">
+
+  <table class="tabla" mat-table matSort matSortActive="nombre" matSortDirection="asc" matSortDisableClear
+    [dataSource]="dataSource">
+
+    <!-- Nombre del usuarios -->
+    <ng-container matColumnDef="nombre">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header>Nombre</th>
+      <td mat-cell *matCellDef="let registro"> {{registro.nombre}} </td>
+    </ng-container>
+
+    <!-- Email -->
+    <ng-container matColumnDef="email">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header>Email</th>
+      <td mat-cell *matCellDef="let registro"> {{registro.email}} </td>
+    </ng-container>
+
+    <!-- Codigo de la entidad -->
+    <ng-container matColumnDef="entidadCodigo">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header>Cód.</th>
+      <td mat-cell *matCellDef="let registro"> {{registro.entidadCodigo}} </td>
+    </ng-container>
+
+    <!-- Codigo del comercial -->
+    <ng-container matColumnDef="codComercial">
+      <th mat-header-cell *matHeaderCellDef>Comercial</th>
+      <td mat-cell *matCellDef="let registro"> {{registro.codComercial}} </td>
+    </ng-container>
+
+    <!-- Localidad -->
+    <ng-container matColumnDef="localidad">
+      <th mat-header-cell *matHeaderCellDef>Localidad</th>
+      <td mat-cell *matCellDef="let registro"> {{registro.localidad}} </td>
+    </ng-container>
+
+    <!-- Ingreso al app -->
+    <ng-container matColumnDef="entroAlApp">
+      <th mat-header-cell *matHeaderCellDef>Ingresó a GD</th>
+      <td mat-cell *matCellDef="let registro">
+        <span *ngIf="registro.entroAlApp == true">Sí</span>
+        <span *ngIf="registro.entroAlApp == false">No</span>
+      </td>
+    </ng-container>
+
+    <!-- Ingreso al app movil -->
+    <ng-container matColumnDef="ejecutoElAppMovil">
+      <th mat-header-cell *matHeaderCellDef>App en celular</th>
+      <td mat-cell *matCellDef="let registro">
+        <span *ngIf="registro.ejecutoElAppMovil == true">Sí</span>
+        <span *ngIf="registro.ejecutoElAppMovil == false">No</span>
+      </td>
+    </ng-container>
+
+    <!-- Recibe push -->
+    <ng-container matColumnDef="pushSuscripto">
+      <th mat-header-cell *matHeaderCellDef>Push</th>
+      <td mat-cell *matCellDef="let registro">
+        <span *ngIf="registro.pushSuscripto == true">Sí</span>
+        <span *ngIf="registro.pushSuscripto == false">No</span>
+      </td>
+    </ng-container>
+
+    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+    <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+  </table>
+
+  <mat-paginator [length]="dataSource.dataLength" [pageSize]="10" [pageSizeOptions]="[10, 20, 50, 100]">
+  </mat-paginator>
+
+</div>

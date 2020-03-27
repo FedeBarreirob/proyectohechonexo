@@ -183,6 +183,7 @@ import { TutorialModalComponent } from './components/common/tutorial-modal/tutor
 import { NotificacionDetalleUrlComponent } from './components/notificaciones/notificacion-detalle-url/notificacion-detalle-url.component';
 import { DateAdapter, MAT_DATE_FORMATS } from '@angular/material/core';
 import { AppDateAdapter, APP_DATE_FORMATS } from './format-datepicker';
+import { ReporteUsuariosComponent } from './components/listados/reportes/reporte-usuarios/reporte-usuarios/reporte-usuarios.component';
 
 registerLocaleData(localeEsAr, 'es-AR');
 
@@ -335,7 +336,8 @@ export function tokenGetter() {
 		CuentaCorrienteItemMovilComponent,
 		CuentaCorrienteAplicadaItemMovilComponent,
 		TutorialModalComponent,
-		NotificacionDetalleUrlComponent
+		NotificacionDetalleUrlComponent,
+		ReporteUsuariosComponent
 	],
 	imports: [
 		HttpClientModule,
