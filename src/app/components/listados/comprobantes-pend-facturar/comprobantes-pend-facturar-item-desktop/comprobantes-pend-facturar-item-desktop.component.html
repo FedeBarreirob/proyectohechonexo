@@ -5,19 +5,19 @@
 
   <div fxFlex (click)="notificarVerDetalle()">
     <div fxLayout="row" fxLayoutAlign="space-around center">
-      <div fxFlex="10%">{{ movimiento.comprobante }}</div>
+      <div fxFlex="13%">{{ movimiento.comprobante }}</div>
 
-      <div fxFlex="10%">{{ movimiento.fecha | date:'dd/MM/yyyy' }}</div>
+      <div fxFlex="100px">{{ movimiento.fecha }}</div>
 
-      <div fxFlex="7%">{{ movimiento.codArticulo }}</div>
-
-      <div fxFlex>{{ movimiento.descripcionArticulo }}</div>
+      <div fxFlex="200px" class="descripcionArticulo" [matTooltip]="movimiento.descripcionArticulo">{{ movimiento.codArticulo }} - {{ movimiento.descripcionArticulo }}</div>
 
       <div fxFlex="8%">{{ movimiento.cantidad }}</div>
 
       <div fxFlex="8%">{{ movimiento.cantidadPendiente }}</div>
 
-      <div fxFlex="12%">{{ movimiento.moneda }} {{ movimiento.totalUsd | number: '.0-0' }}</div>
+      <div fxFlex="30px" class="moneda">{{ movimiento.moneda | moneda }}</div>
+
+      <div fxFlex="12%">{{ movimiento.totalUsd | number: '.0-0' }}</div>
     </div>
   </div>
 </div>

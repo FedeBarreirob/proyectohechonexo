@@ -22,3 +22,15 @@
   font-family: Rubik;
   font-size: 14px;
 }
+
+.moneda {
+  color: #666666;
+  font-family: Rubik;
+  font-size: 11px;
+}
+
+.descripcionArticulo {
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  overflow: hidden;
+}

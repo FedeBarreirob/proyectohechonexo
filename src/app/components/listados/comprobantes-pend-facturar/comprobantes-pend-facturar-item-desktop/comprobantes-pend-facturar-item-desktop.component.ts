@@ -23,6 +23,8 @@ export class ComprobantesPendFacturarItemDesktopComponent implements OnInit {
   constructor() { }
 
   ngOnInit() {
+    this.movimiento.cantidad = Math.round(this.movimiento.cantidad);
+    this.movimiento.cantidadPendiente = Math.round(this.movimiento.cantidadPendiente);
   }
 
   /**

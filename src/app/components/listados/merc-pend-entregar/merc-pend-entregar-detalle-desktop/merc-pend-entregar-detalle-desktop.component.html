@@ -1,4 +1,4 @@
-<div *ngIf="movimiento">
+<div *ngIf="movimiento" class="margin">
   <mat-progress-bar *ngIf="cargando" mode="indeterminate"></mat-progress-bar>
 
   <div fxLayout="row" fxLayoutAlign="start start" fxLayoutGap="5px" class="miga-container">
@@ -49,7 +49,7 @@
       </div>
 
       <div fxLayout="row" fxLayoutAlign="space-between none" fxLayoutGap="10px">
-        <div fxFlex="50%" class="dato-apartado">{{movimiento.fecha | date:'dd/MM/yyyy'}}</div>
+        <div fxFlex="50%" class="dato-apartado">{{movimiento.fecha}}</div>
         <div fxFlex="50%" class="dato-apartado">{{movimiento.codArticulo}} - {{movimiento.descripcionArticulo}}</div>
       </div>
 
@@ -64,11 +64,13 @@
       </div>
 
       <div fxLayout="row" fxLayoutAlign="space-between none" fxLayoutGap="10px">
+        <div fxFlex="50%" class="subtitulo-apartados">MONEDA</div>
         <div fxFlex="50%" class="subtitulo-apartados">TOTAL</div>
       </div>
 
       <div fxLayout="row" fxLayoutAlign="space-between none" fxLayoutGap="10px">
-        <div fxFlex="50%" class="dato-apartado">{{movimiento.moneda}} {{movimiento.totalUsd | number: '.0-0'}}</div>
+        <div fxFlex="50%" class="dato-apartado">{{movimiento.moneda | moneda}}</div>
+        <div fxFlex="50%" class="dato-apartado">{{movimiento.totalUsd | number: '.0-0'}}</div>
       </div>
 
     </div>

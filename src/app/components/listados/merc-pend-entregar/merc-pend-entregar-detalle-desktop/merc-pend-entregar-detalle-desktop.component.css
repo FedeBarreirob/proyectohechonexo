@@ -146,3 +146,8 @@
 .boton-descarga-comprobante-alt img {
   height: 20px;
 }
+
+.margin {
+  margin-top: 5%;
+  margin-left: 10px;
+}
