@@ -24,11 +24,16 @@ export class ReporteUsuariosDataSource implements DataSource<ReporteUsuarioItem>
         this.loadingSubject.complete();
     }
 
-    load(pagina: number = 0, cantPorPagina: number = 10, campoOrden: string = "nombre", orden: string = "asc") {
+    load(pagina: number = 0,
+        cantPorPagina: number = 10,
+        campoOrden: string = "nombre",
+        orden: string = "asc",
+        desde?: Date,
+        hasta?: Date) {
 
         this.loadingSubject.next(true);
 
-        this.reporteUsuariosService.reporte(pagina + 1, cantPorPagina, campoOrden, orden).pipe(
+        this.reporteUsuariosService.reporte(pagina + 1, cantPorPagina, campoOrden, orden, desde, hasta).pipe(
             catchError(() => of([])),
             finalize(() => this.loadingSubject.next(false))
         )

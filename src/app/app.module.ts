@@ -21,7 +21,7 @@ const DEFAULT_SWIPER_CONFIG: SwiperConfigInterface = {
 };
 
 // locale
-import { registerLocaleData, DecimalPipe, CommonModule } from '@angular/common';
+import { registerLocaleData, DecimalPipe, CommonModule, DatePipe } from '@angular/common';
 import localeEsAr from '@angular/common/locales/es-AR';
 import { CustomPaginatorEspanol } from './internacionalizacion/paginador-espanol';
 
@@ -184,6 +184,7 @@ import { NotificacionDetalleUrlComponent } from './components/notificaciones/not
 import { DateAdapter, MAT_DATE_FORMATS } from '@angular/material/core';
 import { AppDateAdapter, APP_DATE_FORMATS } from './format-datepicker';
 import { ReporteUsuariosComponent } from './components/listados/reportes/reporte-usuarios/reporte-usuarios/reporte-usuarios.component';
+import { ReporteUsuariosToolbarComponent } from './components/listados/reportes/reporte-usuarios/reporte-usuarios-toolbar/reporte-usuarios-toolbar.component';
 
 registerLocaleData(localeEsAr, 'es-AR');
 
@@ -337,7 +338,8 @@ export function tokenGetter() {
 		CuentaCorrienteAplicadaItemMovilComponent,
 		TutorialModalComponent,
 		NotificacionDetalleUrlComponent,
-		ReporteUsuariosComponent
+		ReporteUsuariosComponent,
+		ReporteUsuariosToolbarComponent
 	],
 	imports: [
 		HttpClientModule,
@@ -380,7 +382,8 @@ export function tokenGetter() {
 		DecimalPipe,
 		{ provide: MatPaginatorIntl, useClass: CustomPaginatorEspanol },
 		JwtHelperService,
-		{ provide: SWIPER_CONFIG, useValue: DEFAULT_SWIPER_CONFIG }
+		{ provide: SWIPER_CONFIG, useValue: DEFAULT_SWIPER_CONFIG },
+		DatePipe
 	],
 	entryComponents: [
 		CtacteDetalleComponent,
