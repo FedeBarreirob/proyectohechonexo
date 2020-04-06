@@ -186,6 +186,7 @@ import { TutorialModalComponent } from './components/common/tutorial-modal/tutor
 import { NotificacionDetalleUrlComponent } from './components/notificaciones/notificacion-detalle-url/notificacion-detalle-url.component';
 import { DateAdapter, MAT_DATE_FORMATS } from '@angular/material/core';
 import { AppDateAdapter, APP_DATE_FORMATS } from './format-datepicker';
+import { SeleccionadosModalComponent } from './components/listados/comprobantes/descargas-comprobantes/seleccionados-modal/seleccionados-modal.component';
 import { ReporteUsuariosComponent } from './components/listados/reportes/reporte-usuarios/reporte-usuarios/reporte-usuarios.component';
 import { ReporteUsuariosToolbarComponent } from './components/listados/reportes/reporte-usuarios/reporte-usuarios-toolbar/reporte-usuarios-toolbar.component';
 
@@ -344,6 +345,7 @@ export function tokenGetter() {
 		CuentaCorrienteAplicadaItemMovilComponent,
 		TutorialModalComponent,
 		NotificacionDetalleUrlComponent,
+		SeleccionadosModalComponent,
 		ReporteUsuariosComponent,
 		ReporteUsuariosToolbarComponent
 	],
@@ -425,7 +427,8 @@ export function tokenGetter() {
 		InfoPerfilEdicionComponent,
 		CuentaCorrienteAplicadaDetalleComponent,
 		TutorialModalComponent,
-		NotificacionDetalleUrlComponent
+		NotificacionDetalleUrlComponent,
+		SeleccionadosModalComponent
 	],
 	bootstrap: [AppComponent]
 })

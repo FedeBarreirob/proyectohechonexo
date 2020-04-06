@@ -2,7 +2,7 @@ import { Component, OnInit, Input, OnDestroy, ViewChildren, ViewChild } from '@a
 import { FiltroCtaCteComprobanteDescarga } from '../../../../../interfaces/archivo-de-comprobantes/filtro-cta-cte-comprobante-descarga';
 import { ArchivoDeComprobantesService } from '../../../../../services/archivo-de-comprobantes/archivo-de-comprobantes.service';
 import { ComprobanteParaDescarga } from '../../../../../interfaces/archivo-de-comprobantes/comprobante-para-descarga';
-import { MatSlideToggleChange, MatSnackBar, MatSelectionList } from '@angular/material';
+import { MatSlideToggleChange, MatSnackBar, MatSelectionList, MatDialog } from '@angular/material';
 import { ComprobantesDownloaderService } from '../../../../../services/sharedServices/downloader/comprobantes-downloader.service';
 import { saveAs } from 'file-saver/FileSaver';
 import { Subject, Observable } from 'rxjs';
@@ -14,6 +14,7 @@ import { environment } from '../../../../../../environments/environment';
 import { FiltroComprobanteDescarga } from '../../../../../interfaces/archivo-de-comprobantes/filtro-comprobante-descarga';
 import { OrigenComprobante } from '../../../../../enums/origen-comprobante.enum';
 import { ResponseServicio } from '../../../../../interfaces/varios/response-servicio';
+import { SeleccionadosModalComponent } from '../../../../../components/listados/comprobantes/descargas-comprobantes/seleccionados-modal/seleccionados-modal.component';
 
 @Component({
   selector: 'app-archivo-de-comprobantes',
@@ -52,7 +53,8 @@ export class ArchivoDeComprobantesComponent implements OnInit, OnDestroy {
     private snackBar: MatSnackBar,
     private datePipe: DatePipe,
     private deviceService: DeviceDetectorService,
-    private downloaderUtilService: DownloaderUtilService
+    private downloaderUtilService: DownloaderUtilService,
+    private dialog: MatDialog
   ) { }
 
   ngOnDestroy(): void {
@@ -179,6 +181,8 @@ export class ArchivoDeComprobantesComponent implements OnInit, OnDestroy {
     comprobantesPagina.forEach(
       comprobante => {
         comprobante.fecha = comprobante.fecha;
+        var comprobanteSeleccionado = this.comprobantesSeleccionados.filter(function (x) { return x.comprobante == comprobante.comprobante });
+        comprobante.seleccionado = comprobanteSeleccionado.length > 0 ? comprobanteSeleccionado[0].seleccionado : false;
         this.comprobantes.push(comprobante);
       }
     );
@@ -186,8 +190,6 @@ export class ArchivoDeComprobantesComponent implements OnInit, OnDestroy {
 
   // funcion que actualiza el listado de comprobantes seleccionados
   actualizarSeleccion($event) {
-    this.comprobantesSeleccionados = $event;
-
     // actualizar estado del seleccionador de todos
     this.toggleSeleccionTodo = this.sonTodosSeleccionados();
   }
@@ -244,6 +246,21 @@ export class ArchivoDeComprobantesComponent implements OnInit, OnDestroy {
       default:
         break;
     }
+  }
+
+  /**
+   * Muestra lista de comprobantes a descargar
+   */
+  verSeleccionados() {
+    const dialogRef = this.dialog.open(SeleccionadosModalComponent, {
+      data: { comprobantesSeleccionados: this.comprobantesSeleccionados }
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      if (result) {
+        this.descargar();
+      }
+    });
   }
 
   /**
@@ -401,10 +418,12 @@ export class ArchivoDeComprobantesComponent implements OnInit, OnDestroy {
    * Selecciona o deselecciona todo
    */
   toggleSelection() {
+    this.comprobantes.forEach(x => { x.seleccionado = !this.sonTodosSeleccionados() });
+
     if (this.sonTodosSeleccionados()) {
-      this.lista.deselectAll();
+      this.comprobantesSeleccionados = [];
     } else {
-      this.lista.selectAll();
+      this.comprobantesSeleccionados = this.comprobantes;
     }
   }
 
@@ -416,6 +435,16 @@ export class ArchivoDeComprobantesComponent implements OnInit, OnDestroy {
       return "Quitar selección";
     } else {
       return "Seleccionar todos"
+    }
+  }
+
+  cambioSeleccion(event) {
+    if (event.option._selected) {
+      event.option._value.seleccionado = true;
+      this.comprobantesSeleccionados.push(event.option._value);
+    }
+    else {
+      this.comprobantesSeleccionados = this.comprobantesSeleccionados.filter(function (obj) { return obj.comprobante != event.option._value.comprobante });
     }
   }
 }

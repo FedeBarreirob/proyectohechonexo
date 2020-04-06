@@ -1,0 +1,27 @@
+<div fxLayout="row" fxLayoutAlign="center" class="encabezado">
+  <div fxFlex="80%" class="modal title-modal">
+    Seleccionados
+  </div>
+
+  <div fxFlex="20%">
+    <button mat-icon-button class="boton-close cdk-focused cdk-program-focused" (click)="onNoClick()">
+      <mat-icon>close</mat-icon>
+    </button>
+  </div>
+</div>
+
+<div class="modal container" *ngIf="data.comprobantesSeleccionados" cdkFocusInitial>
+  <div fxLayout="row" fxLayoutAlign="space-between center" *ngFor="let comprobante of data.comprobantesSeleccionados" class="fila">
+    <div fxFlex="24px">
+      <mat-icon svgIcon="pdf"></mat-icon>
+    </div>
+
+    <div fxFlex class="identificacion-comprobante">
+      <div><span *ngIf="comprobante.fecha">{{comprobante.fecha}} - </span>{{comprobante.comprobante}}</div><div class="concepto-comprobante">{{ comprobante.concepto }}</div>
+    </div>
+  </div>
+</div>
+
+<div mat-dialog-actions align="end">
+  <button mat-button [mat-dialog-close]="data.comprobantesSeleccionados" class="modal btn-modal">Descargar todos</button>
+</div>

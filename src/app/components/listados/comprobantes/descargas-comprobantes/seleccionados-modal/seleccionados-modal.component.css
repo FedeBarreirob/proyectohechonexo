@@ -1,0 +1,37 @@
+.modal {
+  font-family: Rubik;
+}
+
+.encabezado {
+  margin-bottom: 5%;
+}
+
+.title-modal {
+  font-weight: bold;
+  text-align: center;
+}
+
+.btn-modal {
+  background-color: #2DA442;
+  color: white;
+}
+
+.container {
+  max-height: 250px;
+  overflow-y: auto;
+}
+
+.boton-close {
+  margin-top: -35px;
+  margin-left: 60%;
+}
+
+.concepto-comprobante {
+  color: #666666;
+  font-family: Rubik;
+  font-size: 12px;
+}
+
+.fila {
+  margin-bottom: 5%;
+}
