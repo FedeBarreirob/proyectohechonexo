@@ -1,6 +1,6 @@
 import { Component, OnInit, OnDestroy, Input, Output, EventEmitter } from '@angular/core';
 import { MovimientoComprobantesPendFact } from '../../../../interfaces/comprobantes-pend-facturar/listado-comp-pend-fact';
-import { EntregasExportacionesService } from '../../../../services/entregas/entregas-exportaciones.service';
+import { CompPendFactExportacionesService } from '../../../../services/comprobantes-pend-facturar/comp-pend-fact-exportaciones.service';
 import { MatDialog, MatSnackBar } from '@angular/material';
 import { Subject } from 'rxjs';
 import { EntidadAlg } from '../../../../interfaces/perfiles/entidad-alg';
@@ -40,7 +40,7 @@ export class ComprobantesPendFacturarDetalleDesktopComponent implements OnInit {
     public dialog: MatDialog,
     private comprobanteDownloaderService: ComprobantesDownloaderService,
     private snackBar: MatSnackBar,
-    private exportadorService: EntregasExportacionesService
+    private exportadorService: CompPendFactExportacionesService
   ) { }
 
   ngOnInit() {
@@ -151,13 +151,13 @@ export class ComprobantesPendFacturarDetalleDesktopComponent implements OnInit {
    * Función encargada de exportar a excel
    */
   exportarAExcel() {
-    this.exportadorService.exportarEntregasDetalleExcel(this.movimiento);
+    this.exportadorService.exportarCompPendFactDetalleExcel(this.movimiento);
   }
 
   /**
  * Función encargada de exportar a pdf
  */
   exportarAPDF() {
-    this.exportadorService.exportarEntregasDetallePDF(this.movimiento);
+    this.exportadorService.exportarCompPendFactDetallePDF(this.movimiento);
   }
 }

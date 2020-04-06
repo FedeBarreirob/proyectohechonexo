@@ -1,6 +1,6 @@
 import { Component, OnInit, OnDestroy, Input, Output, EventEmitter } from '@angular/core';
 import { MovimientoMercPendEntregar } from '../../../../interfaces/mercaderia-pend-entregar/listado-merc-pend-entregar';
-import { EntregasExportacionesService } from '../../../../services/entregas/entregas-exportaciones.service';
+import { MercPendEntregarExportacionesService } from '../../../../services/merc-pend-entregar/merc-pend-entregar-exportaciones.service';
 import { MatDialog, MatSnackBar } from '@angular/material';
 import { Subject } from 'rxjs';
 import { EntidadAlg } from '../../../../interfaces/perfiles/entidad-alg';
@@ -41,7 +41,7 @@ export class MercPendEntregarDetalleDesktopComponent implements OnInit {
     public dialog: MatDialog,
     private comprobanteDownloaderService: ComprobantesDownloaderService,
     private snackBar: MatSnackBar,
-    private exportadorService: EntregasExportacionesService
+    private exportadorService: MercPendEntregarExportacionesService
   ) { }
 
   ngOnInit() {
@@ -152,13 +152,13 @@ export class MercPendEntregarDetalleDesktopComponent implements OnInit {
    * Función encargada de exportar a excel
    */
   exportarAExcel() {
-    this.exportadorService.exportarEntregasDetalleExcel(this.movimiento);
+    this.exportadorService.exportarMercPendEntregarDetalleExcel(this.movimiento);
   }
 
   /**
  * Función encargada de exportar a pdf
  */
   exportarAPDF() {
-    this.exportadorService.exportarEntregasDetallePDF(this.movimiento);
+    this.exportadorService.exportarMercPendEntregarDetallePDF(this.movimiento);
   }
 }
