@@ -17,6 +17,7 @@ export class ReportesComponent implements OnInit, AfterViewInit {
   cuenta: EntidadAlg;
   esCelular: boolean;
   reportId: number = null;
+  esAdmin: boolean = false;
 
   constructor(
     private cuentasService: CuentaAlgService,
@@ -51,10 +52,16 @@ export class ReportesComponent implements OnInit, AfterViewInit {
     }
 
     this.esCelular = this.deviceService.isMobile();
+    this.esAdmin = this.authenticationService.esRol("ADMINISTRADOR");
 
     this.cuentasService.cuentaSeleccionada$.subscribe(
-      cuenta => this.cuenta = cuenta
+      cuenta => {
+        this.cuenta = cuenta;
+        this.esAdmin = this.authenticationService.esRol("ADMINISTRADOR");
+      }
     );
+
+    this.reportId = (this.esAdmin && !this.esCelular) ? 4 : 1;//TODO: cambiar esos numeros mágicos por enums
   }
 
   ngAfterViewInit(): void {
@@ -72,6 +79,7 @@ export class ReportesComponent implements OnInit, AfterViewInit {
       case 1: return "TENENCIAS IMPOSITIVAS";
       case 2: return "INSUMOS PENDIENTES";
       case 3: return "COMPRABANTES PENDIENTES DE FACTURAR";
+      case 4: return "REPORTE DE USUARIOS";
     }
   }
 }

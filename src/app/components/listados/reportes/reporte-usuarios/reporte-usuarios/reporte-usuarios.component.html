@@ -1,4 +1,4 @@
-<div fxLayout="row" fxLayoutAlign="space-between none" fxLayoutGap="10px">
+<div fxLayout="row" fxLayoutAlign="space-between none" fxLayoutGap="10px" style="margin-top: 20px;">
   <div fxFlex="nogrow" class="titulo-apartados">Reporte de usuarios</div>
   <div fxFlex="nogrow">
     <app-reporte-usuarios-toolbar (botonAplicar)="botonAplicar($event)" (botonDescargarExcel)="botonDescargarExcel()"
@@ -7,7 +7,7 @@
   </div>
 </div>
 
-<mat-progress-bar *ngIf="(dataSource.loading$ | async) || loading" mode="indeterminate"></mat-progress-bar>
+<mat-progress-bar *ngIf="(dataSource.loading$ | async) || loading" mode="indeterminate" style="margin-top: 5px;"></mat-progress-bar>
 
 <div class="container" fxLayout="column" fxLayout.xs="column" fxLayoutWrap fxLayoutGap="0.5%"
   fxLayoutAlign="space-around stretch">
