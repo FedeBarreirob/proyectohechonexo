@@ -1,4 +1,36 @@
 <div [ngClass]="{'container-desktop': !esCelular}">
-    <app-tool-bar-general titulo="Reportes"></app-tool-bar-general>
-    <app-tenencias-impositivas *ngIf="cuenta != null" [cuenta]="cuenta.id.codigo"></app-tenencias-impositivas>
+  <app-tool-bar-general titulo="Reportes"></app-tool-bar-general>
+
+  <div fxLayout="row" fxLayoutAlign="none" [ngClass]="{'contenedor': (reportId === 2 || reportId === 3) }">
+    <div fxFlex="nogrow" class="boton-container">
+      <button mat-button [matMenuTriggerFor]="menuProductos" [disabled]="disabled">
+        {{ leyendaFiltro() }}<mat-icon>expand_more</mat-icon>
+      </button>
+
+      <mat-menu #menuProductos="matMenu">
+        <button mat-menu-item (click)="reportId = null" [ngClass]="{'activo': reportId === null, 'inactivo': reportId !== null }">
+          Seleccione el reporte que desea visualizar
+        </button>
+
+        <button mat-menu-item (click)="reportId = 1" [ngClass]="{'activo': reportId === 1, 'inactivo': reportId !== 1 }">
+          TENENCIAS IMPOSITIVAS
+        </button>
+
+        <button mat-menu-item (click)="reportId = 2" [ngClass]="{'activo': reportId === 2, 'inactivo': reportId !== 2 }">
+          INSUMOS PENDIENTES
+        </button>
+
+        <button mat-menu-item (click)="reportId = 3" [ngClass]="{'activo': reportId === 3, 'inactivo': reportId !== 3 }">
+          COMPRABANTES PENDIENTES DE FACTURAR
+        </button>
+
+      </mat-menu>
+    </div>
+  </div>
+
+  <app-tenencias-impositivas *ngIf="cuenta != null && reportId == 1" [cuenta]="cuenta.id.codigo"></app-tenencias-impositivas>
+
+  <app-merc-pend-entregar *ngIf="cuenta != null && reportId == 2" [cuenta]="cuenta.id.codigo"></app-merc-pend-entregar>
+
+  <app-comprobantes-pend-facturar *ngIf="cuenta != null && reportId == 3" [cuenta]="cuenta.id.codigo"></app-comprobantes-pend-facturar>
 </div>

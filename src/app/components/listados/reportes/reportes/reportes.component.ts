@@ -16,6 +16,7 @@ export class ReportesComponent implements OnInit, AfterViewInit {
 
   cuenta: EntidadAlg;
   esCelular: boolean;
+  reportId: number = null;
 
   constructor(
     private cuentasService: CuentaAlgService,
@@ -59,6 +60,18 @@ export class ReportesComponent implements OnInit, AfterViewInit {
   ngAfterViewInit(): void {
     if (this.cuentasService.cuentaPreviamenteSeleccionada && !this.esCelular) {
       this.cuenta = this.cuentasService.cuentaPreviamenteSeleccionada;
+    }
+  }
+
+  /**
+   * Devuelve el nombre del filtro de producto según el filtro efectuado
+   */
+  leyendaFiltro(): string {
+    switch (this.reportId) {
+      case null: return "Seleccione el reporte que desea visualizar";
+      case 1: return "TENENCIAS IMPOSITIVAS";
+      case 2: return "INSUMOS PENDIENTES";
+      case 3: return "COMPRABANTES PENDIENTES DE FACTURAR";
     }
   }
 }

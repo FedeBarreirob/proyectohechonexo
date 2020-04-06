@@ -49,19 +49,19 @@ import { EntregasDetalleComponent } from './components/listados/entregas/entrega
 import { VentasComponent } from './components/listados/ventas/ventas/ventas.component';
 import { VentasDetalleComponent } from './components/listados/ventas/ventas-detalle/ventas-detalle.component';
 import { MercPendEntregarComponent } from './components/listados/merc-pend-entregar/merc-pend-entregar/merc-pend-entregar.component';
-import { MercPendEntregarDetalleComponent } from './components/listados/merc-pend-entregar/merc-pend-entregar-detalle/merc-pend-entregar-detalle.component';
+import { MercPendEntregarDetalleDesktopComponent } from './components/listados/merc-pend-entregar/merc-pend-entregar-detalle-desktop/merc-pend-entregar-detalle-desktop.component';
 import { ComprobantesPendFacturarComponent } from './components/listados/comprobantes-pend-facturar/comprobantes-pend-facturar/comprobantes-pend-facturar.component';
-import { ComprobantesPendFacturarDetalleComponent } from './components/listados/comprobantes-pend-facturar/comprobantes-pend-facturar-detalle/comprobantes-pend-facturar-detalle.component';
+import { ComprobantesPendFacturarDetalleDesktopComponent } from './components/listados/comprobantes-pend-facturar/comprobantes-pend-facturar-detalle-desktop/comprobantes-pend-facturar-detalle-desktop.component';
 import { CtacteMasOperacionesComponent } from './components/listados/cta-cte/ctacte-mas-operaciones/ctacte-mas-operaciones.component';
 import { CtacteDetalleMasOperacionesComponent } from './components/listados/cta-cte/ctacte-detalle-mas-operaciones/ctacte-detalle-mas-operaciones.component';
 import { CtaCteAplicadaMasOperacionesComponent } from './components/listados/cta-cte-aplicada/cta-cte-aplicada-mas-operaciones/cta-cte-aplicada-mas-operaciones.component';
 import { CtaCteAplicadaDetalleMasOperacionesComponent } from './components/listados/cta-cte-aplicada/cta-cte-aplicada-detalle-mas-operaciones/cta-cte-aplicada-detalle-mas-operaciones.component';
 import { EntregasMasOperacionesComponent } from './components/listados/entregas/entregas-mas-operaciones/entregas-mas-operaciones.component';
 import { VentasMasOperacionesComponent } from './components/listados/ventas/ventas-mas-operaciones/ventas-mas-operaciones.component';
-import { MercPendEntregarMasOperacionesComponent } from './components/listados/merc-pend-entregar/merc-pend-entregar-mas-operaciones/merc-pend-entregar-mas-operaciones.component';
-import { MercPendEntregarDetalleMasOperacionesComponent } from './components/listados/merc-pend-entregar/merc-pend-entregar-detalle-mas-operaciones/merc-pend-entregar-detalle-mas-operaciones.component';
-import { ComprobantesPendFacturarMasOperacionesComponent } from './components/listados/comprobantes-pend-facturar/comprobantes-pend-facturar-mas-operaciones/comprobantes-pend-facturar-mas-operaciones.component';
-import { ComprobantesPendFacturarDetalleMasOperacionesComponent } from './components/listados/comprobantes-pend-facturar/comprobantes-pend-facturar-detalle-mas-operaciones/comprobantes-pend-facturar-detalle-mas-operaciones.component';
+import { MercPendEntregarHeaderItemDesktopComponent } from './components/listados/merc-pend-entregar/merc-pend-entregar-header-item-desktop/merc-pend-entregar-header-item-desktop.component';
+import { MercPendEntregarItemDesktopComponent } from './components/listados/merc-pend-entregar/merc-pend-entregar-item-desktop/merc-pend-entregar-item-desktop.component';
+import { ComprobantesPendFacturarListaDesktopComponent } from './components/listados/comprobantes-pend-facturar/comprobantes-pend-facturar-lista-desktop/comprobantes-pend-facturar-lista-desktop.component';
+import { MercPendEntregarListaDesktopComponent } from './components/listados/merc-pend-entregar/merc-pend-entregar-lista-desktop/merc-pend-entregar-lista-desktop.component';
 import { PerfilesListadoComponent } from './components/usuarios-y-perfiles/perfiles/perfiles-listado/perfiles-listado.component';
 import { PerfilesEdicionComponent } from './components/usuarios-y-perfiles/perfiles/perfiles-edicion/perfiles-edicion.component';
 import { JwtHelperService, JwtModule } from '@auth0/angular-jwt';
@@ -89,6 +89,7 @@ import { LinkMenuComponent } from './components/menu/link-menu/link-menu.compone
 import { ToolBarGeneralComponent } from './components/menu/tool-bar-general/tool-bar-general.component';
 import { AvatarDelPerfilComponent } from './components/common/avatar-del-perfil/avatar-del-perfil.component';
 import { CerealesFiltroComponent } from './components/filtros/cereales-filtro/cereales-filtro.component';
+import { ReporteFiltroDesktopComponent } from './components/filtros/reporte-filtro-desktop/reporte-filtro-desktop.component';
 import { ImagenEspeciePipe } from './pipes/imagen-especie.pipe';
 import { EntregasListaDesktopComponent } from './components/listados/entregas/entregas-lista-desktop/entregas-lista-desktop.component';
 import { EntregasListaMovilComponent } from './components/listados/entregas/entregas-lista-movil/entregas-lista-movil.component';
@@ -148,7 +149,9 @@ import { CerealesFiltroDesktopComponent } from './components/filtros/cereales-fi
 import { ContratoDetalleDesktopComponent } from './components/listados/contratos/contrato-detalle-desktop/contrato-detalle-desktop.component';
 import { ContratoIndicadorGraficoPorcentualComponent } from './components/listados/contratos/contrato-indicador-grafico-porcentual/contrato-indicador-grafico-porcentual.component';
 import { EntregasHeaderItemDesktopComponent } from './components/listados/entregas/entregas-header-item-desktop/entregas-header-item-desktop.component';
+import { ComprobantesPendFacturarHeaderItemDesktopComponent } from './components/listados/comprobantes-pend-facturar/comprobantes-pend-facturar-header-item-desktop/comprobantes-pend-facturar-header-item-desktop.component';
 import { EntregasItemDesktopComponent } from './components/listados/entregas/entregas-item-desktop/entregas-item-desktop.component';
+import { ComprobantesPendFacturarItemDesktopComponent } from './components/listados/comprobantes-pend-facturar/comprobantes-pend-facturar-item-desktop/comprobantes-pend-facturar-item-desktop.component';
 import { EntregasDetalleDesktopComponent } from './components/listados/entregas/entregas-detalle-desktop/entregas-detalle-desktop.component';
 import { VentasHeaderItemDesktopComponent } from './components/listados/ventas/ventas-header-item-desktop/ventas-header-item-desktop.component';
 import { VentasItemDesktopComponent } from './components/listados/ventas/ventas-item-desktop/ventas-item-desktop.component';
@@ -206,19 +209,19 @@ export function tokenGetter() {
 		VentasComponent,
 		VentasDetalleComponent,
 		MercPendEntregarComponent,
-		MercPendEntregarDetalleComponent,
+		MercPendEntregarDetalleDesktopComponent,
 		ComprobantesPendFacturarComponent,
-		ComprobantesPendFacturarDetalleComponent,
+		ComprobantesPendFacturarDetalleDesktopComponent,
 		CtacteMasOperacionesComponent,
 		CtacteDetalleMasOperacionesComponent,
 		CtaCteAplicadaMasOperacionesComponent,
 		CtaCteAplicadaDetalleMasOperacionesComponent,
 		EntregasMasOperacionesComponent,
 		VentasMasOperacionesComponent,
-		MercPendEntregarMasOperacionesComponent,
-		MercPendEntregarDetalleMasOperacionesComponent,
-		ComprobantesPendFacturarMasOperacionesComponent,
-		ComprobantesPendFacturarDetalleMasOperacionesComponent,
+		MercPendEntregarHeaderItemDesktopComponent,
+		MercPendEntregarItemDesktopComponent,
+		ComprobantesPendFacturarListaDesktopComponent,
+		MercPendEntregarListaDesktopComponent,
 		PerfilesListadoComponent,
 		PerfilesEdicionComponent,
 		AccesoTercerosComponent,
@@ -245,6 +248,7 @@ export function tokenGetter() {
 		ToolBarGeneralComponent,
 		AvatarDelPerfilComponent,
 		CerealesFiltroComponent,
+		ReporteFiltroDesktopComponent,
 		ImagenEspeciePipe,
 		EntregasListaDesktopComponent,
 		EntregasListaMovilComponent,
@@ -303,7 +307,9 @@ export function tokenGetter() {
 		ContratoDetalleDesktopComponent,
 		ContratoIndicadorGraficoPorcentualComponent,
 		EntregasHeaderItemDesktopComponent,
+		ComprobantesPendFacturarHeaderItemDesktopComponent,
 		EntregasItemDesktopComponent,
+		ComprobantesPendFacturarItemDesktopComponent,
 		EntregasDetalleDesktopComponent,
 		VentasHeaderItemDesktopComponent,
 		VentasItemDesktopComponent,
@@ -385,18 +391,18 @@ export function tokenGetter() {
 		CtacteAplicadaDetalleComponent,
 		EntregasDetalleComponent,
 		VentasDetalleComponent,
-		MercPendEntregarDetalleComponent,
-		ComprobantesPendFacturarDetalleComponent,
+		MercPendEntregarDetalleDesktopComponent,
+		ComprobantesPendFacturarDetalleDesktopComponent,
 		CtacteMasOperacionesComponent,
 		CtacteDetalleMasOperacionesComponent,
 		CtaCteAplicadaMasOperacionesComponent,
 		CtaCteAplicadaDetalleMasOperacionesComponent,
 		EntregasMasOperacionesComponent,
 		VentasMasOperacionesComponent,
-		MercPendEntregarMasOperacionesComponent,
-		MercPendEntregarDetalleMasOperacionesComponent,
-		ComprobantesPendFacturarMasOperacionesComponent,
-		ComprobantesPendFacturarDetalleMasOperacionesComponent,
+		MercPendEntregarHeaderItemDesktopComponent,
+		MercPendEntregarItemDesktopComponent,
+		ComprobantesPendFacturarListaDesktopComponent,
+		MercPendEntregarListaDesktopComponent,
 		PerfilesEdicionComponent,
 		AccesoTercerosEdicionComponent,
 		OtrosMovimientosDetalleComponent,
