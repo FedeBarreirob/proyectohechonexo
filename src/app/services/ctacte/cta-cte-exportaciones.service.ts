@@ -71,19 +71,25 @@ export class CtaCteExportacionesService {
       rows.push(movimientosRows);
 
       // .. preparar opciones
+      let headerCount = 0;
       let movimientosOpciones = {
         startY: 30,
         columnStyles: {
-          0: { columnWidth: '25%', halign: 'left' },
-          1: { columnWidth: '25%', halign: 'left' },
-          2: { columnWidth: '25%', halign: 'right' },
-          3: { columnWidth: '25%', halign: 'right' }
+          0: { columnWidth: 72, halign: 'left' },
+          1: { columnWidth: 30, halign: 'center' },
+          2: { columnWidth: 40, halign: 'right' },
+          3: { columnWidth: 40, halign: 'right' }
+        },
+        createdHeaderCell: function (cell, data) {
+          cell.styles.columnWidth = data.settings.columnStyles[headerCount].columnWidth;
+          cell.styles.halign = data.settings.columnStyles[headerCount].halign;
+          headerCount++;
         }
       };
       opciones.push(movimientosOpciones);
 
       // .. columnas
-      let movimientosColumnas = ["Concepto", "Fecha", "Pesos", "Dolares"];
+      let movimientosColumnas = ["Concepto", "Fecha", "Pesos", "Dólares"];
       columnas.push(movimientosColumnas);
 
       // saldos
@@ -124,11 +130,11 @@ export class CtaCteExportacionesService {
         let saldosColumnas = ["Concepto", "Valor"];
         columnas.push(saldosColumnas);
       }
-
+      
       // renderizar
       this.pdfService.listaMultipleAPdf(
         rows,
-        "Movimientos de cuenta corriente",
+        "Movimientos de Cuenta Corriente",
         columnas,
         "cuenta-corriente",
         opciones
