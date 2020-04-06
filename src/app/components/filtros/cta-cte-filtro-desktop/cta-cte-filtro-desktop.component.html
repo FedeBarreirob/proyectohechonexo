@@ -39,16 +39,14 @@
   </div>
 
   <!--Fecha desde-->
-  <div fxFlex="nogrow" class="boton-container" style="overflow: hidden"
-    *ngIf="infoCtaCteActivo === infoCtaCte.CUENTA_CORRIENTE">
+  <div fxFlex="nogrow" class="boton-container" style="overflow: hidden">
     <input readonly [(ngModel)]="fechaDesde" matInput [matDatepicker]="desde" class="input-fecha" placeholder="Desde">
     <mat-datepicker-toggle matSuffix [for]="desde" [disabled]="disabled"></mat-datepicker-toggle>
     <mat-datepicker touchUi #desde></mat-datepicker>
   </div>
 
   <!--Fecha hasta-->
-  <div fxFlex="nogrow" class="boton-container" style="overflow: hidden"
-    *ngIf="infoCtaCteActivo === infoCtaCte.CUENTA_CORRIENTE">
+  <div fxFlex="nogrow" class="boton-container" style="overflow: hidden">
     <input readonly [(ngModel)]="fechaHasta" matInput [matDatepicker]="hasta" class="input-fecha" placeholder="Hasta">
     <mat-datepicker-toggle matSuffix [for]="hasta" [disabled]="disabled"></mat-datepicker-toggle>
     <mat-datepicker touchUi #hasta></mat-datepicker>

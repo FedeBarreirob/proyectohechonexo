@@ -309,4 +309,28 @@ export class CuentaCorrienteListaDesktopComponent implements OnInit, OnDestroy {
       duration: 2000,
     });
   }
+
+  get totalPesos(): number {
+    var totalPesos = 0;
+    if (this.identificadoresParaDescarga) {
+      this.identificadoresParaDescarga.forEach(x => totalPesos += x.movimiento.saldoPesos);
+    }
+    return totalPesos;
+  }
+
+  get totalDolares(): number {
+    var totalDolares = 0;
+    if (this.identificadoresParaDescarga) {
+      this.identificadoresParaDescarga.forEach(x => totalDolares += x.movimiento.saldoDolares);
+    }
+    return totalDolares;
+  }
+
+  get totalContable(): number {
+    var totalContable = 0;
+    if (this.identificadoresParaDescarga) {
+      this.identificadoresParaDescarga.forEach(x => totalContable += x.movimiento.saldoContable);
+    }
+    return totalContable;
+  }
 }
