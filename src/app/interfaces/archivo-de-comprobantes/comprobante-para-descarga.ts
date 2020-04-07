@@ -4,5 +4,6 @@ export interface ComprobanteParaDescarga {
     existeArchivo: boolean,
     concepto?: string,
     fecha?: string,
-    seleccionado?: boolean
+  seleccionado?: boolean,
+  origen?: number
 }
