@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild, OnDestroy, Input } from '@angular/core';
+import { Component, OnInit, ViewChild, OnDestroy, Input, AfterViewInit } from '@angular/core';
 import { DatePipe } from '@angular/common';
 import { DeviceDetectorService } from 'ngx-device-detector';
 import { MovimientoComprobantesPendFact } from '../../../../interfaces/comprobantes-pend-facturar/listado-comp-pend-fact';
@@ -18,7 +18,7 @@ import { CompPendFactExportacionesService } from '../../../../services/comproban
   providers: [DatePipe]
 })
 
-export class ComprobantesPendFacturarComponent implements OnInit, OnDestroy {
+export class ComprobantesPendFacturarComponent implements OnInit, OnDestroy, AfterViewInit {
 
   @ViewChild('menuFiltro') public sidenav: MatSidenav;
 
@@ -36,13 +36,17 @@ export class ComprobantesPendFacturarComponent implements OnInit, OnDestroy {
   identificadoresParaDescarga: Array<any>;
   descargandoArchivos: boolean = false;
   botonesBarraDescargaExtras: Array<any> = [];
+  
+  desdeDef: Date = new Date(new Date().getFullYear(), 0, 1);
+  hastaDef: Date = new Date();
 
   constructor(private deviceService: DeviceDetectorService,
     private comprobanteDownloaderService: ComprobantesDownloaderService,
     private snackBar: MatSnackBar,
     private exportadorService: CompPendFactExportacionesService,
     private compPendFactService: ComprobantesPendFacturarService,
-    public dialog: MatDialog) {
+    public dialog: MatDialog,
+    private datePipe: DatePipe) {
 
   }
 
@@ -54,6 +58,14 @@ export class ComprobantesPendFacturarComponent implements OnInit, OnDestroy {
       fechaHasta: null
     });
     this.cargarBotonesExtrasDescarga();
+  }
+
+  ngAfterViewInit(): void {
+    this.cargarListado({
+      cuenta: this.cuenta,
+      fechaDesde: this.datePipe.transform(this.desdeDef, 'dd/MM/yyyy'),
+      fechaHasta: this.datePipe.transform(this.hastaDef, 'dd/MM/yyyy')
+    })
   }
 
   ngOnDestroy(): void {

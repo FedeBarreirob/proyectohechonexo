@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild, OnDestroy, Input } from '@angular/core';
+import { Component, OnInit, ViewChild, OnDestroy, Input, AfterViewInit } from '@angular/core';
 import { DatePipe } from '@angular/common';
 import { DeviceDetectorService } from 'ngx-device-detector';
 import { MovimientoMercPendEntregar } from '../../../../interfaces/mercaderia-pend-entregar/listado-merc-pend-entregar';
@@ -19,7 +19,7 @@ import { MercPendEntregarExportacionesService } from '../../../../services/merc-
   providers: [DatePipe]
 })
 
-export class MercPendEntregarComponent implements OnInit {
+export class MercPendEntregarComponent implements OnInit, AfterViewInit {
 
   @ViewChild('menuFiltro') public sidenav: MatSidenav;
 
@@ -39,14 +39,26 @@ export class MercPendEntregarComponent implements OnInit {
   botonesBarraDescargaExtras: Array<any> = [];
 
   contratoId: number;
+  desdeDef: Date = new Date(new Date().getFullYear(), 0, 1);
+  hastaDef: Date = new Date();
 
   constructor(private deviceService: DeviceDetectorService,
     private comprobanteDownloaderService: ComprobantesDownloaderService,
     private snackBar: MatSnackBar,
     private exportadorService: MercPendEntregarExportacionesService,
     private mercPendEntregarService: MercPendEntregarService,
-    public dialog: MatDialog) {
+    public dialog: MatDialog,
+    private datePipe: DatePipe
+    ) {
 
+  }
+
+  ngAfterViewInit(): void {
+    this.cargarListado({
+      cuenta: this.cuenta,
+      fechaDesde: this.datePipe.transform(this.desdeDef, 'dd/MM/yyyy'),
+      fechaHasta: this.datePipe.transform(this.hastaDef, 'dd/MM/yyyy')
+    })
   }
 
   ngOnInit() {

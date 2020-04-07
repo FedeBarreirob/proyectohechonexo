@@ -60,13 +60,6 @@ export class ComprobantesPendFacturarListaDesktopComponent implements OnInit {
         this.cargarListado(true);
       });
 
-    var today = new Date();
-    this.observerFiltro$.next({
-      cuenta: this.cuenta,
-      fechaDesde: "01/01/2018",
-      fechaHasta: today.toLocaleDateString()
-    });
-
     // observer de perfil
     this.authenticationService.perfilActivo$
       .pipe(takeUntil(this.destroy$))

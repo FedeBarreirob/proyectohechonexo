@@ -89,26 +89,28 @@ export class MercPendEntregarExportacionesService {
 
       // totales
       // .. preparar datos
-      let totalesRow = [];
-      totalesRow.push(
-        [
-          "Total Cantidad",
-          this.decimalPipe.transform(totales.totalCantidad, '.0')
-        ]
-      );
-      totalesRow.push(
-        [
-          "Total Cantidad Pendiente",
-          this.decimalPipe.transform(totales.totalCantidadPendiente, '.0')
-        ]
-      );
-      totalesRow.push(
-        [
-          "Total",
-          `US$ ${this.decimalPipe.transform(totales.totalTotal, '.2')}`
-        ]
-      );
-      rows.push(totalesRow);
+      if (totales) {
+        let totalesRow = [];
+        totalesRow.push(
+          [
+            "Total Cantidad",
+            this.decimalPipe.transform(totales.totalCantidad, '.0')
+          ]
+        );
+        totalesRow.push(
+          [
+            "Total Cantidad Pendiente",
+            this.decimalPipe.transform(totales.totalCantidadPendiente, '.0')
+          ]
+        );
+        totalesRow.push(
+          [
+            "Total",
+            `US$ ${this.decimalPipe.transform(totales.totalTotal, '.2')}`
+          ]
+        );
+        rows.push(totalesRow);
+      }
 
       // .. preparar opciones
       let totalesOpciones = {
