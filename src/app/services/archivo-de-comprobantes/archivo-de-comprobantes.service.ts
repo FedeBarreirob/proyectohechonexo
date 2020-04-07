@@ -6,6 +6,8 @@ import { ResponseServicio } from '../../interfaces/varios/response-servicio';
 import { Observable } from 'rxjs';
 import { Cacheable } from 'ngx-cacheable';
 import { FiltroComprobanteDescarga } from '../../interfaces/archivo-de-comprobantes/filtro-comprobante-descarga';
+import { map } from 'rxjs/operators';
+import { TLSSocket } from 'tls';
 
 @Injectable({
   providedIn: 'root'
@@ -66,7 +68,19 @@ export class ArchivoDeComprobantesService {
       })
     };
 
-    return this.http.post<ResponseServicio>(this.urlEntregasArchivoDeComprobantesComprobantes, JSON.stringify(filtro), httpOptions);
+    return this.http.post<ResponseServicio>(this.urlEntregasArchivoDeComprobantesComprobantes, JSON.stringify(filtro), httpOptions)
+      .pipe(
+        map(tickets => {
+          if (tickets && tickets.exito && tickets.datos && tickets.datos.length > 0) {
+            let ticketsConLinkDescarga = tickets.datos.filter(ticket => ticket.link != "0");
+            tickets.datos = ticketsConLinkDescarga;
+            return tickets;
+          } else {
+            return tickets;
+          }
+        }
+        )
+      );
   }
 
   /**
