@@ -365,7 +365,13 @@ export class ArchivoDeComprobantesComponent implements OnInit, OnDestroy {
         var filename = `boletos.zip`;
 
         if (blob.size !== 0) {
-          saveAs(blob, filename);
+          
+          if (environment.inPhonegap) {
+            this.downloaderUtilService.download(filename, blob, mediaType);
+          } else {
+            saveAs(blob, filename);
+          }
+
         } else {
           this.openSnackBar("Ninguno de los comprobantes indicados se encuentran para su descarga.");
         }
@@ -391,7 +397,13 @@ export class ArchivoDeComprobantesComponent implements OnInit, OnDestroy {
         var filename = `certificados.zip`;
 
         if (blob.size !== 0) {
-          saveAs(blob, filename);
+          
+          if (environment.inPhonegap) {
+            this.downloaderUtilService.download(filename, blob, mediaType);
+          } else {
+            saveAs(blob, filename);
+          }
+
         } else {
           this.openSnackBar("Ninguno de los comprobantes indicados se encuentran para su descarga.");
         }

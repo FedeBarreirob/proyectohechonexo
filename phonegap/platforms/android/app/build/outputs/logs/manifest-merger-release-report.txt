@@ -64,19 +64,19 @@ INJECTED from /home/alberto/Desarrollos/Gaviglio/Digital/DigitalUIClientes/phone
 INJECTED from /home/alberto/Desarrollos/Gaviglio/Digital/DigitalUIClientes/phonegap/platforms/android/app/src/main/AndroidManifest.xml:2:1-74:12
 INJECTED from /home/alberto/Desarrollos/Gaviglio/Digital/DigitalUIClientes/phonegap/platforms/android/app/src/main/AndroidManifest.xml:2:1-74:12
 	package
-		ADDED from /home/alberto/Desarrollos/Gaviglio/Digital/DigitalUIClientes/phonegap/platforms/android/app/src/main/AndroidManifest.xml:2:98-128
+		ADDED from /home/alberto/Desarrollos/Gaviglio/Digital/DigitalUIClientes/phonegap/platforms/android/app/src/main/AndroidManifest.xml:2:99-129
 		INJECTED from /home/alberto/Desarrollos/Gaviglio/Digital/DigitalUIClientes/phonegap/platforms/android/app/src/main/AndroidManifest.xml
 		INJECTED from /home/alberto/Desarrollos/Gaviglio/Digital/DigitalUIClientes/phonegap/platforms/android/app/src/main/AndroidManifest.xml
 	android:versionName
-		ADDED from /home/alberto/Desarrollos/Gaviglio/Digital/DigitalUIClientes/phonegap/platforms/android/app/src/main/AndroidManifest.xml:2:70-97
+		ADDED from /home/alberto/Desarrollos/Gaviglio/Digital/DigitalUIClientes/phonegap/platforms/android/app/src/main/AndroidManifest.xml:2:71-98
 		INJECTED from /home/alberto/Desarrollos/Gaviglio/Digital/DigitalUIClientes/phonegap/platforms/android/app/src/main/AndroidManifest.xml
 		INJECTED from /home/alberto/Desarrollos/Gaviglio/Digital/DigitalUIClientes/phonegap/platforms/android/app/src/main/AndroidManifest.xml
 	android:hardwareAccelerated
 		ADDED from /home/alberto/Desarrollos/Gaviglio/Digital/DigitalUIClientes/phonegap/platforms/android/app/src/main/AndroidManifest.xml:2:11-45
 	xmlns:android
-		ADDED from /home/alberto/Desarrollos/Gaviglio/Digital/DigitalUIClientes/phonegap/platforms/android/app/src/main/AndroidManifest.xml:2:129-187
+		ADDED from /home/alberto/Desarrollos/Gaviglio/Digital/DigitalUIClientes/phonegap/platforms/android/app/src/main/AndroidManifest.xml:2:130-188
 	android:versionCode
-		ADDED from /home/alberto/Desarrollos/Gaviglio/Digital/DigitalUIClientes/phonegap/platforms/android/app/src/main/AndroidManifest.xml:2:46-69
+		ADDED from /home/alberto/Desarrollos/Gaviglio/Digital/DigitalUIClientes/phonegap/platforms/android/app/src/main/AndroidManifest.xml:2:46-70
 		INJECTED from /home/alberto/Desarrollos/Gaviglio/Digital/DigitalUIClientes/phonegap/platforms/android/app/src/main/AndroidManifest.xml
 		INJECTED from /home/alberto/Desarrollos/Gaviglio/Digital/DigitalUIClientes/phonegap/platforms/android/app/src/main/AndroidManifest.xml
 supports-screens

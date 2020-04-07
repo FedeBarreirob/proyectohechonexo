@@ -7,7 +7,6 @@ import { Observable } from 'rxjs';
 import { Cacheable } from 'ngx-cacheable';
 import { FiltroComprobanteDescarga } from '../../interfaces/archivo-de-comprobantes/filtro-comprobante-descarga';
 import { map } from 'rxjs/operators';
-import { TLSSocket } from 'tls';
 
 @Injectable({
   providedIn: 'root'
