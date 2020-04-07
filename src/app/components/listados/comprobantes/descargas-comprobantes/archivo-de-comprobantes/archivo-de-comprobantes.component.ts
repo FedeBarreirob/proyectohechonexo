@@ -15,6 +15,7 @@ import { FiltroComprobanteDescarga } from '../../../../../interfaces/archivo-de-
 import { OrigenComprobante } from '../../../../../enums/origen-comprobante.enum';
 import { ResponseServicio } from '../../../../../interfaces/varios/response-servicio';
 import { SeleccionadosModalComponent } from '../../../../../components/listados/comprobantes/descargas-comprobantes/seleccionados-modal/seleccionados-modal.component';
+import { forEach } from '@angular/router/src/utils/collection';
 
 @Component({
   selector: 'app-archivo-de-comprobantes',
@@ -183,6 +184,7 @@ export class ArchivoDeComprobantesComponent implements OnInit, OnDestroy {
         comprobante.fecha = comprobante.fecha;
         var comprobanteSeleccionado = this.comprobantesSeleccionados.filter(function (x) { return x.comprobante == comprobante.comprobante });
         comprobante.seleccionado = comprobanteSeleccionado.length > 0 ? comprobanteSeleccionado[0].seleccionado : false;
+        comprobante.origen = comprobanteSeleccionado.length > 0 ? comprobanteSeleccionado[0].origen : null;
         this.comprobantes.push(comprobante);
       }
     );
@@ -196,16 +198,13 @@ export class ArchivoDeComprobantesComponent implements OnInit, OnDestroy {
 
   // funcion que determina si todos los item se encuentran seleccionados
   private sonTodosSeleccionados(): boolean {
-    try {
-      if (this.comprobantes.length == this.comprobantesSeleccionados.length) {
-        return true;
-      } else {
+    for (var i = 0; i < this.comprobantes.length; i++) {
+      if (!this.comprobantesSeleccionados.includes(this.comprobantes[i])) {
         return false;
       }
-    } catch (e) {
-      console.log(e);
-      return false;
     }
+
+    return true;
   }
 
   // funcion encargada de seleccionar todos o ningun comprobante
@@ -221,30 +220,54 @@ export class ArchivoDeComprobantesComponent implements OnInit, OnDestroy {
    * Ejecuta el proceso de descarga segun tipo de comprobantes
    */
   descargar() {
-    switch (this.filtro.origen) {
+    var comprobantesCtaCte = [];
+    var comprobantesCtaCteApl = [];
+    var comprobantesContratos = [];
+    var comprobantesEntregas = [];
+    var comprobantesVentas = [];
 
-      case OrigenComprobante.CUENTA_CORRIENTE:
-        this.descargarCtaCte();
-        break;
+    for (var i = 0; i < this.comprobantesSeleccionados.length; i++) {
+      switch (this.comprobantesSeleccionados[i].origen) {
+        case OrigenComprobante.CUENTA_CORRIENTE:
+          comprobantesCtaCte.push(this.comprobantesSeleccionados[i]);
+          break;
 
-      case OrigenComprobante.CUENTA_CORRIENTE_APLICADA:
-        this.descargarCtaCte();
-        break;
+        case OrigenComprobante.CUENTA_CORRIENTE_APLICADA:
+          comprobantesCtaCteApl.push(this.comprobantesSeleccionados[i]);
+          break;
 
-      case OrigenComprobante.CONTRATOS:
-        this.descargarContratos();
-        break;
+        case OrigenComprobante.CONTRATOS:
+          comprobantesContratos.push(this.comprobantesSeleccionados[i]);
+          break;
 
-      case OrigenComprobante.ENTREGAS:
-        this.descargarEntregas();
-        break;
+        case OrigenComprobante.ENTREGAS:
+          comprobantesEntregas.push(this.comprobantesSeleccionados[i]);
+          break;
 
-      case OrigenComprobante.VENTAS:
-        this.descargarContratos();
-        break;
+        case OrigenComprobante.VENTAS:
+          comprobantesVentas.push(this.comprobantesSeleccionados[i]);
+          break;
+      }
+    }
 
-      default:
-        break;
+    if (comprobantesCtaCte.length > 0) {
+      this.descargarCtaCte(comprobantesCtaCte);
+    }
+
+    if (comprobantesCtaCteApl.length > 0) {
+      this.descargarCtaCte(comprobantesCtaCteApl);
+    }
+
+    if (comprobantesContratos.length > 0) {
+      this.descargarContratos(comprobantesContratos);
+    }
+
+    if (comprobantesEntregas.length > 0) {
+      this.descargarEntregas(comprobantesEntregas);
+    }
+
+    if (comprobantesVentas.length > 0) {
+      this.descargarContratos(comprobantesVentas);
     }
   }
 
@@ -266,11 +289,9 @@ export class ArchivoDeComprobantesComponent implements OnInit, OnDestroy {
   /**
    * Ejecuta el proceso de descarga de los comprobantes de ctacte y aplicada
    */
-  descargarCtaCte() {
-    if (this.descargandoArchivos == false) {
-      this.descargandoArchivos = true;
+  descargarCtaCte(comprobantesSeleccionados) {
 
-      this.comprobantesDownloaderService.comprobanteDescargadoMasivo(this.comprobantesSeleccionados)
+      this.comprobantesDownloaderService.comprobanteDescargadoMasivo(comprobantesSeleccionados)
         .subscribe(respuesta => {
           var mediaType = 'application/zip';
           var blob = new Blob([respuesta], { type: mediaType });
@@ -293,16 +314,12 @@ export class ArchivoDeComprobantesComponent implements OnInit, OnDestroy {
           console.log(error);
           this.descargandoArchivos = false;
         });
-    }
   }
 
   /**
    * Función que ejecuta el proceso de descarga de comprobantes seleccionados
    */
-  descargarContratos() {
-    if (this.descargandoArchivos == false && this.comprobantesSeleccionados && this.comprobantesSeleccionados.length > 0) {
-      this.descargandoArchivos = true;
-
+  descargarContratos(comprobantesSeleccionados) {
       let identificadores: Array<any> = this.comprobantesSeleccionados.map(comprobantes => {
 
         let comprobantePartes = comprobantes.link.split("-");
@@ -331,16 +348,12 @@ export class ArchivoDeComprobantesComponent implements OnInit, OnDestroy {
           console.log(error);
           this.descargandoArchivos = false;
         });
-    }
   }
 
   /**
    * Función que ejecuta el proceso de descarga de comprobantes seleccionados
    */
-  descargarEntregas() {
-    if (this.descargandoArchivos == false && this.comprobantesSeleccionados && this.comprobantesSeleccionados.length > 0) {
-      this.descargandoArchivos = true;
-
+  descargarEntregas(comprobantesSeleccionados) {
       let identificadores = this.comprobantesSeleccionados.map(comrpobante => comrpobante.link);
 
       this.comprobantesDownloaderService.certificadoAfipDescargadoMasivo(identificadores)
@@ -361,7 +374,6 @@ export class ArchivoDeComprobantesComponent implements OnInit, OnDestroy {
           console.log(error);
           this.descargandoArchivos = false;
         });
-    }
   }
 
   // abre una notificacion
@@ -390,7 +402,7 @@ export class ArchivoDeComprobantesComponent implements OnInit, OnDestroy {
    * Selecciona o deselecciona todo
    */
   toggleSelection() {
-    this.comprobantes.forEach(x => { x.seleccionado = !this.sonTodosSeleccionados() });
+    this.comprobantes.forEach(x => { x.seleccionado = !this.sonTodosSeleccionados(), x.origen = this.filtro.origen });
 
     if (this.sonTodosSeleccionados()) {
       this.comprobantesSeleccionados = [];
@@ -413,6 +425,7 @@ export class ArchivoDeComprobantesComponent implements OnInit, OnDestroy {
   cambioSeleccion(event) {
     if (event.option._selected) {
       event.option._value.seleccionado = true;
+      event.option._value.origen = this.filtro.origen;
       this.comprobantesSeleccionados.push(event.option._value);
     }
     else {
