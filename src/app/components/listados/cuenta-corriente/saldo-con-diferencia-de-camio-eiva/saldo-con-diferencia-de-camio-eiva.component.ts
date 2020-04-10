@@ -44,7 +44,7 @@ export class SaldoConDiferenciaDeCamioEIvaComponent implements OnInit, OnDestroy
       .subscribe(
         respuesta => {
           if (respuesta.exito == true) {
-            this.saldo = respuesta.datos * (-1); // se cambia signo para que quede signo del lado del cliente
+            this.saldo = respuesta.datos;
           } else {
             this.saldo = null;
           }
