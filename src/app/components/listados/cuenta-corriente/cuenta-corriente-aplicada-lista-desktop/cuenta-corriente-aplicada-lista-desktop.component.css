@@ -48,9 +48,8 @@
   border-radius: 4px;
   background-color: white;
   margin-top: 17px;
-  margin-left: 17px;
-  margin-right: 17px;
   padding: 17px;
+  min-height: 79px;
 }
 
 .subtitulo-apartados {

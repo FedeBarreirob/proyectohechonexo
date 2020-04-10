@@ -37,6 +37,7 @@ export class CuentaCorrienteAplicadaListaDesktopComponent implements OnInit, OnD
   cargando: boolean = false;
   cargandoPDF$: Subject<boolean> = new Subject<boolean>();
   destroy$: Subject<any> = new Subject<any>();
+  movimientosSeleccionados$: Subject<Array<MovimientoCtaCteAplicada>> = new Subject<Array<MovimientoCtaCteAplicada>>();
 
   identificadoresParaDescarga: Array<any>;
   descargandoArchivos: boolean = false;
@@ -156,6 +157,23 @@ export class CuentaCorrienteAplicadaListaDesktopComponent implements OnInit, OnD
         });
 
       this.identificadoresParaDescarga = listadoSeleccionados;
+    }
+
+    this.notificarMovimientosSeleccionadoParaCalculoSaldo();
+  }
+
+  /**
+   * Notifica los movimientos seleccionados para que se calcule el saldo a pagar por el cliente con diferencia de cambio e iva
+   */
+  notificarMovimientosSeleccionadoParaCalculoSaldo() {
+    if (this.ctacteItems && this.ctacteItems.length > 0) {
+      let movSeleccionados = this.ctacteItems
+        .filter(ctacteItem => ctacteItem.seleccionado == true)
+        .map(ctacteItem => ctacteItem.movimiento);
+
+      this.movimientosSeleccionados$.next(movSeleccionados);
+    } else {
+      this.movimientosSeleccionados$.next([]);
     }
   }
 

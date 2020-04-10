@@ -1,0 +1,26 @@
+<div class="contenedor-saldo" *ngIf="saldo">
+
+    <div fxLayout="row" fxLayoutAlign="space-between center">
+        <div fxFlex class="subtitulo-apartados">Total a pagar</div>
+    </div>
+
+    <!--Spinner-->
+    <div fxLayout="row" fxLayoutAlign="center center" *ngIf="loading">
+        <mat-spinner diameter="24"></mat-spinner>
+    </div>
+
+    <div fxLayout="row" fxLayoutAlign="space-between center" *ngIf="!loading">
+        <div fxFlex class="monto">
+            <span
+                [ngClass]="{'signo-positivo': saldo > 0, 'signo-negativo': saldo < 0 }">{{ (saldo < 0) ? '-' : (saldo > 0) ? '+' : ''}}</span>
+
+            {{ ((saldo > 0) ? saldo : saldo * (-1)) | number: '.2'}}
+
+            <span class="moneda">ARS</span>
+        </div>
+    </div>
+
+    <div fxLayout="row" fxLayoutAlign="space-between center">
+        <div fxFlex class="leyenda">Incluye diferencias de cambio e IVA</div>
+    </div>
+</div>

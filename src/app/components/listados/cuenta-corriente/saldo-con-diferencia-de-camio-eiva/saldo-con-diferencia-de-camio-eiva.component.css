@@ -1,0 +1,42 @@
+.monto {
+    color: #333333;
+    font-family: Rubik;
+    font-size: 14px;
+}
+
+.subtitulo-apartados {
+    color: #999999;
+    font-family: Rubik;
+    font-size: 12px;
+    letter-spacing: 1.2px;
+}
+
+.signo-positivo {
+    color: green;
+    font-weight: bold;
+}
+
+.signo-negativo {
+    color: red;
+    font-weight: bold;
+}
+
+.moneda {
+    color: #666666;
+    font-family: Rubik;
+    font-size: 11px;
+}
+
+.contenedor-saldo {
+    border: 1px solid rgba(35, 185, 80, 0.08);
+    border-radius: 4px;
+    background-color: white;
+    margin-top: 17px;
+    padding: 17px;
+}
+
+.leyenda {
+    color: #999999;
+    font-family: Rubik;
+    font-size: 10px;
+}
