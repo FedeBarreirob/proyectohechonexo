@@ -189,6 +189,7 @@ import { AppDateAdapter, APP_DATE_FORMATS } from './format-datepicker';
 import { SeleccionadosModalComponent } from './components/listados/comprobantes/descargas-comprobantes/seleccionados-modal/seleccionados-modal.component';
 import { ReporteUsuariosComponent } from './components/listados/reportes/reporte-usuarios/reporte-usuarios/reporte-usuarios.component';
 import { ReporteUsuariosToolbarComponent } from './components/listados/reportes/reporte-usuarios/reporte-usuarios-toolbar/reporte-usuarios-toolbar.component';
+import { SaldoConDiferenciaDeCamioEIvaComponent } from './components/listados/cuenta-corriente/saldo-con-diferencia-de-camio-eiva/saldo-con-diferencia-de-camio-eiva.component';
 
 registerLocaleData(localeEsAr, 'es-AR');
 
@@ -347,7 +348,8 @@ export function tokenGetter() {
 		NotificacionDetalleUrlComponent,
 		SeleccionadosModalComponent,
 		ReporteUsuariosComponent,
-		ReporteUsuariosToolbarComponent
+		ReporteUsuariosToolbarComponent,
+		SaldoConDiferenciaDeCamioEIvaComponent
 	],
 	imports: [
 		HttpClientModule,

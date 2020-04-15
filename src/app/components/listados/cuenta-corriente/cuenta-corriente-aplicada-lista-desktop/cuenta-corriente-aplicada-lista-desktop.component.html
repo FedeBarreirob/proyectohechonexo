@@ -1,7 +1,14 @@
 <!--Filtro-->
-<div fxLayout="row" fxLayoutAlign="space-between center" class="contenedor-titulo-filtro" fxLayoutGap="20px">
+<div fxLayout="row" fxLayoutAlign="space-between center" class="contenedor-titulo-filtro" fxLayoutGap="5px">
 
-  <div fxFlex="30%" *ngIf="cargando == false && identificadoresParaDescarga && identificadoresParaDescarga.length > 0" class="contenedor-saldo">
+  <div fxFlex="grow">
+    <app-saldo-con-diferencia-de-camio-eiva [movimientos$]="movimientosSeleccionados$">
+    </app-saldo-con-diferencia-de-camio-eiva>
+  </div>
+
+  <div fxFlex="grow"
+    *ngIf="cargando == false && identificadoresParaDescarga && identificadoresParaDescarga.length > 0"
+    class="contenedor-saldo">
     <div fxLayout="row" fxLayoutAlign="space-between center">
       <div fxFlex class="subtitulo-apartados">Saldo ARS</div>
 
@@ -10,7 +17,8 @@
 
     <div fxLayout="row" fxLayoutAlign="space-between center">
       <div fxFlex class="monto">
-        <span [ngClass]="{'signo-positivo': totalPesos > 0, 'signo-negativo': totalPesos < 0 }">{{ (totalPesos < 0) ? '-' : (totalPesos > 0) ? '+' : ''}}</span>
+        <span
+          [ngClass]="{'signo-positivo': totalPesos > 0, 'signo-negativo': totalPesos < 0 }">{{ (totalPesos < 0) ? '-' : (totalPesos > 0) ? '+' : ''}}</span>
 
         {{ ((totalPesos > 0) ? totalPesos : totalPesos * (-1)) | number: '.2'}}
 
@@ -18,7 +26,8 @@
       </div>
 
       <div fxFlex class="monto">
-        <span [ngClass]="{'signo-positivo': totalDolares > 0, 'signo-negativo': totalDolares < 0 }">{{ (totalDolares < 0) ? '-' : (totalDolares > 0) ? '+' : ''}}</span>
+        <span
+          [ngClass]="{'signo-positivo': totalDolares > 0, 'signo-negativo': totalDolares < 0 }">{{ (totalDolares < 0) ? '-' : (totalDolares > 0) ? '+' : ''}}</span>
 
         {{ ((totalDolares > 0) ? totalDolares : totalDolares * (-1)) | number: '.2'}}
 
@@ -29,13 +38,14 @@
 
   <div fxFlex *ngIf="!identificadoresParaDescarga || identificadoresParaDescarga.length <= 0">
     <app-cta-cte-filtro-desktop [cuenta]="cuenta" [infoCtaCteActivo]="infoCtaCte.CUENTA_CORRIENTE_APLICADA"
-                                [filtroPersonalizado]="filtroPersonalizado" (botonAplicar)="aplicar($event)" [disabled]="cargando"></app-cta-cte-filtro-desktop>
+      [filtroPersonalizado]="filtroPersonalizado" (botonAplicar)="aplicar($event)" [disabled]="cargando">
+    </app-cta-cte-filtro-desktop>
   </div>
 
   <div fxFlex *ngIf="identificadoresParaDescarga && identificadoresParaDescarga.length > 0">
     <app-tool-bar-descargas (descargarComprobanteChange)="descargarSeleccionados()"
-                            [botonesExtras]="botonesBarraDescargaExtras" [disabled]="descargandoArchivos"
-                            (botonPresionado)="exportarSegunOpcion($event)"></app-tool-bar-descargas>
+      [botonesExtras]="botonesBarraDescargaExtras" [disabled]="descargandoArchivos"
+      (botonPresionado)="exportarSegunOpcion($event)"></app-tool-bar-descargas>
   </div>
 
 </div>
@@ -52,7 +62,7 @@
 <div class="contenedor-listado" fxLayout="column" fxLayoutWrap fxLayoutAlign="none">
 
   <app-cuenta-corriente-aplicada-item-desktop *ngFor="let movimiento of listado" [movimiento]="movimiento"
-                                              (cambioSeleccion)="rearmarListaSeleccionados()" (verDetalle)="verDetalle(movimiento)">
+    (cambioSeleccion)="rearmarListaSeleccionados()" (verDetalle)="verDetalle(movimiento)">
   </app-cuenta-corriente-aplicada-item-desktop>
 
   <!--Spinner-->
@@ -61,7 +71,8 @@
   </div>
 
   <!--Si no hay datos a mostrar-->
-  <div fxLayout="column" fxLayoutAlign="center center" *ngIf="!cargando && listado && listado.length == 0" class="info-sin-data-container">
+  <div fxLayout="column" fxLayoutAlign="center center" *ngIf="!cargando && listado && listado.length == 0"
+    class="info-sin-data-container">
     <div fxFlex="nogrow">
       <img src="assets/varios/sin-data.png" class="info-sin-data-img" />
     </div>
