@@ -16,6 +16,7 @@ import { EntregasExportacionesService } from '../../../../services/entregas/entr
 import { TutorialModalComponent } from '../../../common/tutorial-modal/tutorial-modal.component';
 import { AuthenticationService } from '../../../../services/security/authentication.service';
 import { TutorialModalService } from '../../../../services/tutorial-modal/tutorial-modal.service';
+import { DecimalPipe } from '@angular/common';
 
 @Component({
   selector: 'app-entregas',
@@ -51,6 +52,10 @@ export class EntregasComponent implements OnInit, OnDestroy, AfterViewInit {
 
   contratoId: number;
 
+  sumaBrutos: number = 0;
+  sumaNetos: number = 0;
+  unidadMedida: string;
+
   constructor(
     private entregasService: EntregasService,
     public dialog: MatDialog,
@@ -60,7 +65,8 @@ export class EntregasComponent implements OnInit, OnDestroy, AfterViewInit {
     private comprobanteDownloaderService: ComprobantesDownloaderService,
     private entregasExportacionesService: EntregasExportacionesService,
     private authenticationService: AuthenticationService,
-    private tutorialModalService: TutorialModalService
+    private tutorialModalService: TutorialModalService,
+    private decimalPipe: DecimalPipe
   ) {
   }
 
@@ -112,6 +118,7 @@ export class EntregasComponent implements OnInit, OnDestroy, AfterViewInit {
       );
 
     this.cargarBotonesExtrasDescarga();
+    this.unidadMedida = this.authenticationService.perfilUsuarioSeleccionado().informacionPersonal.unidadMedidaPeso;
   }
 
   ngAfterViewInit(): void {
@@ -248,6 +255,12 @@ export class EntregasComponent implements OnInit, OnDestroy, AfterViewInit {
    */
   entregasSeleccionados(listadoSeleccionados: any) {
     this.identificadoresParaDescarga = listadoSeleccionados;
+
+    this.sumaBrutos = this.sumaNetos = 0;
+    for (var i = 0; i < listadoSeleccionados.length; i++) {
+      this.sumaBrutos += listadoSeleccionados[i].movimiento.kilosBrutos;
+      this.sumaNetos += listadoSeleccionados[i].movimiento.kilosNetos;
+    }
   }
 
   /**
@@ -338,7 +351,30 @@ export class EntregasComponent implements OnInit, OnDestroy, AfterViewInit {
     if (this.identificadoresParaDescarga && this.identificadoresParaDescarga.length > 0 && this.descargandoArchivos == false) {
 
       this.descargandoArchivos = true;
-      let movimientosSeleccionados = this.identificadoresParaDescarga.map(identificador => identificador.movimiento);
+      var internalDecimalPipe = this.decimalPipe;
+      let movimientosSeleccionados = this.identificadoresParaDescarga.map(function (x) {
+        return {
+          Especie: x.movimiento.especie,
+          Cosecha: x.movimiento.cosecha,
+          Campo: x.movimiento.campo,
+          Fecha: x.movimiento.fecha,
+          Comprobante: x.movimiento.comprobante,
+          'Kilos Brutos': Number(internalDecimalPipe.transform(x.movimiento.kilosBrutos, '.0').replace('.','').replace(',','')),
+          '% Humedad': x.movimiento.porcentajeHumedad,
+          'Kg Merma Humedad': x.movimiento.kgMermaHumedad,
+          '% Zarandeo': x.movimiento.porcentajeZarandeo,
+          'Kg Merma Zarandeo': x.movimiento.kgMermaZarandeo,
+          '% Volátil': x.movimiento.porcentajeVolatil,
+          'Kg Merma Volátil': x.movimiento.kgMermaVolatil,
+          Factor: x.movimiento.factor,
+          Grado: x.movimiento.grado,
+          'Kilos Netos': Number(internalDecimalPipe.transform(x.movimiento.kilosNetos, '.0').replace('.','').replace(',','')),
+          CP: x.movimiento.numeroComprobanteExterno,
+          'Empresa Transporte': x.movimiento.empresaTransporte
+        }
+      });
+
+      console.log(movimientosSeleccionados);
 
       this.entregasExportacionesService.exportarListadoEntregasDetalleExcel(movimientosSeleccionados);
       this.descargandoArchivos = false;

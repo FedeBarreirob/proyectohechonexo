@@ -186,4 +186,23 @@ export class ContratoDetalleDesktopComponent implements OnInit, OnDestroy {
   exportarAPDF() {
     this.exportadorService.exportarContratosDetallePDF(this.resumenContrato);
   }
+
+  /**
+   * Obtiene decimales segun unidad de medida
+   */
+  get obtieneDecimales(): string {
+    switch (this.unidadMedida) {
+      case 'tn':
+        return '0.1';
+
+      case 'kg':
+        return '0.3';
+
+      case 'qq':
+        return '0.0';
+
+      default:
+        return '0.0';
+    }
+  }
 }
