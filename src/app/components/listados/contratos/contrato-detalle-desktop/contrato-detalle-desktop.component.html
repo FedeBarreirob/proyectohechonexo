@@ -149,7 +149,7 @@
 
         <div fxLayout="row" fxLayoutAlign="space-between none" fxLayoutGap="10px">
           <div fxFlex="50%" class="dato-apartado" *ngIf="boleto && resumenContrato.aFijar == 0">
-            ${{boleto.encabezado.precioQQ | precioQQA: unidadMedida | number: (unidadMedida == 'tn' ? '.0-1' : '.0-0')}}</div>
+            ${{boleto.encabezado.precioQQ | precioQQA: unidadMedida | number: obtieneDecimales}} {{unidadMedida}}</div>
           <div fxFlex="50%" class="dato-apartado" *ngIf="boleto && resumenContrato.aFijar == 1">-</div>
           <div fxFlex="50%" class="dato-apartado">{{boleto.encabezado.moneda}}</div>
         </div>
