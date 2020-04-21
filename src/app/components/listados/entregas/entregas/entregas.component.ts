@@ -359,7 +359,7 @@ export class EntregasComponent implements OnInit, OnDestroy, AfterViewInit {
           Campo: x.movimiento.campo,
           Fecha: x.movimiento.fecha,
           Comprobante: x.movimiento.comprobante,
-          'Kilos Brutos': internalDecimalPipe.transform(x.movimiento.kilosBrutos, '.0'),
+          'Kilos Brutos': Number(internalDecimalPipe.transform(x.movimiento.kilosBrutos, '.0').replace('.','').replace(',','')),
           '% Humedad': x.movimiento.porcentajeHumedad,
           'Kg Merma Humedad': x.movimiento.kgMermaHumedad,
           '% Zarandeo': x.movimiento.porcentajeZarandeo,
@@ -368,11 +368,13 @@ export class EntregasComponent implements OnInit, OnDestroy, AfterViewInit {
           'Kg Merma Volátil': x.movimiento.kgMermaVolatil,
           Factor: x.movimiento.factor,
           Grado: x.movimiento.grado,
-          'Kilos Netos': internalDecimalPipe.transform(x.movimiento.kilosNetos, '.0'),
+          'Kilos Netos': Number(internalDecimalPipe.transform(x.movimiento.kilosNetos, '.0').replace('.','').replace(',','')),
           CP: x.movimiento.numeroComprobanteExterno,
           'Empresa Transporte': x.movimiento.empresaTransporte
         }
       });
+
+      console.log(movimientosSeleccionados);
 
       this.entregasExportacionesService.exportarListadoEntregasDetalleExcel(movimientosSeleccionados);
       this.descargandoArchivos = false;
