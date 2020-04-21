@@ -38,6 +38,24 @@
       Listado de entregas
     </div>
 
+    <div fxFlex="nogrow" *ngIf="identificadoresParaDescarga && identificadoresParaDescarga.length > 0" class="contenedor-saldo">
+      <div fxLayout="row" fxLayoutAlign="space-between center">
+        <div fxFlex class="subtitulo-apartados">{{unidadMedida | kilosTextoA}} Brutos</div>
+
+        <div fxFlex class="subtitulo-apartados">{{unidadMedida | kilosTextoA}} Netos</div>
+      </div>
+
+      <div fxLayout="row" fxLayoutAlign="space-between center">
+        <div fxFlex class="monto">
+          {{sumaBrutos | kilosA: unidadMedida | number: (unidadMedida == 'tn' ? '.0-1' : '.0-0')}}
+        </div>
+
+        <div fxFlex class="monto">
+          {{sumaNetos | kilosA: unidadMedida | number: (unidadMedida == 'tn' ? '.0-1' : '.0-0')}}
+        </div>
+      </div>
+    </div>
+
     <div fxFlex *ngIf="!identificadoresParaDescarga || identificadoresParaDescarga.length <= 0"
       style="padding-right: 13px;">
       <app-cereales-filtro-desktop [filtrosEspecieCosecha]="filtrosEspecieCosecha" [cuenta]="cuenta"
