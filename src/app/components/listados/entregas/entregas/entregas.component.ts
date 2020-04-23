@@ -394,4 +394,16 @@ export class EntregasComponent implements OnInit, OnDestroy, AfterViewInit {
       this.descargandoArchivos = false;
     }
   }
+
+  /**
+   * Exporta todos los movimientos seleccionados
+   */
+  exportarListaSeleccionada(tipo: string, datos: Array<MovimientoEntrega>) {
+    this.identificadoresParaDescarga = datos.map(function (x) {
+      return {
+        movimiento: x
+      }
+    });
+    this.exportarSegunOpcion(tipo);
+  }
 }

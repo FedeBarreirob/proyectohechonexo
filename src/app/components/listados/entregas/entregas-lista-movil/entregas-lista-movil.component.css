@@ -2,14 +2,14 @@
     color: #666666;
     font-family: Rubik;
     font-size: 14px;
-    margin-top: 30px;
+    margin-top: 25px;
     padding-left: 17px;
     padding-right: 17px;
     padding-bottom: 10px;
 }
 
 .contenedor-listado {
-    height: 82vh;
+    height: 75vh;
     overflow-y: scroll;
 }
 
@@ -54,4 +54,26 @@
 
 .info-sin-data-container {
     margin: 50px;
+}
+
+.download-section {
+  width: 100%;
+}
+
+.boton-extra {
+  height: 40px;
+  width: 45%;
+  background-color: white;
+  border: 1px solid #2DA442;
+  border-radius: 4px;
+  color: #2DA442;
+  font-family: Rubik;
+  font-size: 14px;
+  font-weight: bold;
+  margin-top: 10px;
+  margin-left: 12px;
+}
+
+.boton-extra img {
+  height: 20px;
 }

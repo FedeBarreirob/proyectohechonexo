@@ -1,4 +1,4 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { MovimientoEntrega } from '../../../../interfaces/entregas/listado-entregas';
 
 @Component({
@@ -14,9 +14,35 @@ export class EntregasItemMovilComponent implements OnInit {
   @Input()
   unidadMedida: string;
 
+  @Output()
+  cambioSeleccion: EventEmitter<any> = new EventEmitter<any>();
+
+  @Output()
+  detalle: EventEmitter<any> = new EventEmitter<any>();
+
+  public seleccionado: boolean;
+
   constructor() { }
 
   ngOnInit() {
   }
 
+  /**
+   * Notifica que se ha cambiado la seleccion 
+   * @param $event 
+   */
+  notificarCambioSeleccion($event) {
+    this.cambioSeleccion.emit({
+      checked: $event.checked,
+      movimiento: this.movimiento
+    });
+  }
+
+  /**
+   * Click para ver detalle 
+   * @param $event 
+   */
+  verDetalle() {
+    this.detalle.emit(this.movimiento);
+  }
 }

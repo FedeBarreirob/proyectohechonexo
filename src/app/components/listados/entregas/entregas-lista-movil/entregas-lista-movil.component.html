@@ -20,18 +20,35 @@
 </mat-menu>
 -->
 
+<div class="download-section" *ngIf="identificadoresParaDescarga && identificadoresParaDescarga.length > 0">
+  <button mat-button class="boton-extra" [disabled]="disabled" (click)="exportarDatos('excel')">
+    <img src="assets/varios/excel.svg" />
+    Exportar a Excel
+  </button>
+
+  <button mat-button class="boton-extra" [disabled]="disabled" (click)="exportarDatos('pdf')">
+    <img src="assets/varios/pdf-verde.svg" />
+    Exportar a PDF
+  </button>
+</div>
+
 <div fxLayout="row" fxLayoutAlign="space-between center" class="titulos">
+  <!--Check de descarga-->
+  <div fxFlex="28px" style="margin-left: 10px;">
+    <mat-checkbox (change)="seleccionarTodoNada($event)"></mat-checkbox>
+  </div>
   <div fxFlex="nogrow">Entrega</div>
   <div fxFlex="nogrow">CP</div>
-  <div fxFlex="nogrow">{{unidadMedida | kilosTextoA}} {{unidadMedida | netasA }}</div>
+  <div fxFlex="nogrow" style="margin-right: 10px;">{{unidadMedida | kilosTextoA}} {{unidadMedida | netasA }}</div>
 </div>
 
 <div fxLayout="column" fxLayoutWrap fxLayoutAlign="none" infiniteScroll [infiniteScrollDistance]="2"
-  [infiniteScrollThrottle]="50" (scrolled)="onScroll()" [scrollWindow]="false"
-  [ngClass]="{'contenedor-listado' : cargarOnScroll == true, 'contenedor-listado-sin-alto' : cargarOnScroll == false}">
+     [infiniteScrollThrottle]="50" (scrolled)="onScroll()" [scrollWindow]="false"
+     [ngClass]="{'contenedor-listado' : cargarOnScroll == true, 'contenedor-listado-sin-alto' : cargarOnScroll == false}">
 
   <app-entregas-item-movil *ngFor="let movimiento of (listadoEntregas ? listadoEntregas : [])" [movimiento]="movimiento"
-    [unidadMedida]="unidadMedida" (click)="verDetalle(movimiento)"></app-entregas-item-movil>
+                           [unidadMedida]="unidadMedida" (cambioSeleccion)="cambioSeleccionSimple($event.checked, $event.movimiento)"
+                           (detalle)="verDetalle(movimiento)"></app-entregas-item-movil>
 
   <!--Spinner-->
   <div fxLayout="row" fxLayoutAlign="center center" *ngIf="cargando == true" style="margin-top: 10px">
@@ -40,12 +57,12 @@
 
   <!--Si no hay datos a mostrar-->
   <div fxLayout="column" fxLayoutAlign="center center" *ngIf="!cargando && listadoEntregas && listadoEntregas.length == 0" class="info-sin-data-container">
-      <div fxFlex="nogrow">
-          <img src="assets/varios/sin-data.png" class="info-sin-data-img"/>
-      </div>
+    <div fxFlex="nogrow">
+      <img src="assets/varios/sin-data.png" class="info-sin-data-img" />
+    </div>
 
-      <div fxFlex="nogrow" class="info-sin-data-text">
-          Cuando tengamos información de tus entregas la podrás ver aquí.
-      </div>
+    <div fxFlex="nogrow" class="info-sin-data-text">
+      Cuando tengamos información de tus entregas la podrás ver aquí.
+    </div>
   </div>
 </div>

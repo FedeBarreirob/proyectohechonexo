@@ -1,4 +1,4 @@
-import { Component, OnInit, Input, Output, EventEmitter, OnDestroy } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter, OnDestroy, ViewChildren, QueryList } from '@angular/core';
 import { MovimientoEntrega } from '../../../../interfaces/entregas/listado-entregas';
 import { Subject } from 'rxjs';
 import { EntregasService } from '../../../../services/entregas/entregas.service';
@@ -6,6 +6,8 @@ import { FiltroEntregas } from '../../../../interfaces/entregas/filtro-entregas'
 import { PerfilBasico } from '../../../../interfaces/perfiles/perfil-basico';
 import { AuthenticationService } from '../../../../services/security/authentication.service';
 import { takeUntil } from 'rxjs/operators';
+import { MatCheckboxChange } from '@angular/material';
+import { EntregasItemMovilComponent } from '../entregas-item-movil/entregas-item-movil.component';
 
 @Component({
   selector: 'app-entregas-lista-movil',
@@ -40,6 +42,17 @@ export class EntregasListaMovilComponent implements OnInit, OnDestroy {
   unidadMedida: string;
   perfilBasico: PerfilBasico;
   destroy$: Subject<any> = new Subject<any>();
+
+  @Output()
+  cambioSeleccion: EventEmitter<boolean> = new EventEmitter<boolean>();
+
+  identificadoresParaDescarga: Array<MovimientoEntrega> = [];
+
+  @ViewChildren(EntregasItemMovilComponent)
+  entregasItems: QueryList<EntregasItemMovilComponent>;
+
+  @Output()
+  exportar: EventEmitter<any> = new EventEmitter<any>();
 
   constructor(
     private entregasService: EntregasService,
@@ -176,5 +189,40 @@ export class EntregasListaMovilComponent implements OnInit, OnDestroy {
     } else {
       return "-";
     }
+  }
+
+  /**
+   * Selecciona todas o ninguna entrega 
+   * @param $event 
+   */
+  seleccionarTodoNada($event: MatCheckboxChange) {
+    this.entregasItems.forEach(x => x.seleccionado = $event.checked);
+    if ($event.checked) {
+      this.identificadoresParaDescarga = this.listadoEntregas;
+    }
+    else {
+      this.identificadoresParaDescarga = [];
+    }
+  }
+
+  /**
+   * Selecciona todas o ninguna entrega 
+   * @param $event 
+   */
+  cambioSeleccionSimple(checked: boolean, movimiento: MovimientoEntrega) {
+    if (checked) {
+      this.identificadoresParaDescarga.push(movimiento);
+    }
+    else {
+      this.identificadoresParaDescarga = this.identificadoresParaDescarga.filter(x => x.comprobante != movimiento.comprobante);
+    }
+  }
+
+  /**
+   * Exporta datos seleccionados 
+   * @param tipo 
+   */
+  exportarDatos(tipo: string) {
+    this.exportar.emit({ tipo: tipo, datos: this.identificadoresParaDescarga});
   }
 }

@@ -1,11 +1,15 @@
 <div class="movimiento-fila">
   <div fxLayout="row" fxLayoutAlign="space-between center" fxLayoutGap="5px">
 
-    <div fxFlex="38px">
+    <div fxFlex="28px">
+      <mat-checkbox [(ngModel)]="seleccionado" (change)="notificarCambioSeleccion($event)"></mat-checkbox>
+    </div>
+
+    <div fxFlex="38px" (click)="verDetalle()">
       <img class="movimiento-icono" src="{{movimiento.especie | imagenEspecie}}" />
     </div>
 
-    <div fxFlex="100px">
+    <div fxFlex="100px" (click)="verDetalle()">
       <div fxLayout="column" fxLayoutAlign="space-between start">
         <div fxFlex="nogrow" class="especie-cosecha">
           {{movimiento.especieDescripcion}} {{movimiento.cosecha}}
@@ -17,13 +21,12 @@
       </div>
     </div>
 
-    <div fxFlex="nogrow" class="cp">
+    <div fxFlex="nogrow" class="cp" (click)="verDetalle()">
       {{movimiento.numeroComprobanteExterno}}
     </div>
 
-    <div fxFlex class="kg-netos" align="end">
+    <div fxFlex class="kg-netos" align="end" (click)="verDetalle()">
       {{movimiento.kilosNetos | kilosA: unidadMedida | number: (unidadMedida == 'tn' ? '.0-1' : '.0-0')}}
     </div>
-
   </div>
 </div>
