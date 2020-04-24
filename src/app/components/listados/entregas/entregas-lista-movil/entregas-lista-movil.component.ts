@@ -54,6 +54,8 @@ export class EntregasListaMovilComponent implements OnInit, OnDestroy {
   @Output()
   exportar: EventEmitter<any> = new EventEmitter<any>();
 
+  private mostrarCheck: boolean = false;
+
   constructor(
     private entregasService: EntregasService,
     private authenticationService: AuthenticationService
@@ -202,6 +204,8 @@ export class EntregasListaMovilComponent implements OnInit, OnDestroy {
     }
     else {
       this.identificadoresParaDescarga = [];
+      this.mostrarCheck = false;
+      this.entregasItems.forEach(x => x.mostrarCheck = false);
     }
   }
 
@@ -215,6 +219,10 @@ export class EntregasListaMovilComponent implements OnInit, OnDestroy {
     }
     else {
       this.identificadoresParaDescarga = this.identificadoresParaDescarga.filter(x => x.comprobante != movimiento.comprobante);
+      if (this.identificadoresParaDescarga.length == 0) {
+        this.mostrarCheck = false;
+        this.entregasItems.forEach(x => x.mostrarCheck = false);
+      }
     }
   }
 
@@ -224,5 +232,15 @@ export class EntregasListaMovilComponent implements OnInit, OnDestroy {
    */
   exportarDatos(tipo: string) {
     this.exportar.emit({ tipo: tipo, datos: this.identificadoresParaDescarga});
+  }
+
+  /**
+   * Mostrar check 
+   * @param tipo 
+   */
+  mostrarCheckFunc(movimiento: MovimientoEntrega) {
+    this.mostrarCheck = true;
+    this.entregasItems.forEach(x => x.mostrarCheck = true);
+    this.identificadoresParaDescarga.push(movimiento);
   }
 }

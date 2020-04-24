@@ -9,7 +9,7 @@
 }
 
 .contenedor-listado {
-    height: 75vh;
+    height: 82vh;
     overflow-y: scroll;
 }
 
@@ -58,15 +58,20 @@
 
 .download-section {
   width: 100%;
+  position: absolute;
+  bottom: 0;
+  padding-bottom: 10px;
+  background: white;
+  z-index: 1;
 }
 
 .boton-extra {
   height: 40px;
   width: 45%;
-  background-color: white;
-  border: 1px solid #2DA442;
+  background-color: #2DA442;
+  border: 1px solid white;
   border-radius: 4px;
-  color: #2DA442;
+  color: white;
   font-family: Rubik;
   font-size: 14px;
   font-weight: bold;

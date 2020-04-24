@@ -20,7 +20,14 @@ export class EntregasItemMovilComponent implements OnInit {
   @Output()
   detalle: EventEmitter<any> = new EventEmitter<any>();
 
+  @Output()
+  mostrarCheck$: EventEmitter<MovimientoEntrega> = new EventEmitter<MovimientoEntrega>();
+
+  @Input()
   public seleccionado: boolean;
+
+  @Input()
+  public mostrarCheck: boolean = false;
 
   constructor() { }
 
@@ -44,5 +51,14 @@ export class EntregasItemMovilComponent implements OnInit {
    */
   verDetalle() {
     this.detalle.emit(this.movimiento);
+  }
+
+  /**
+   * Presionado para ver check 
+   * @param $event 
+   */
+  onPress() {
+    this.seleccionado = true;
+    this.mostrarCheck$.emit(this.movimiento);
   }
 }

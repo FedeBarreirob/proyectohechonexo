@@ -1,7 +1,7 @@
-<div class="movimiento-fila">
+<div class="movimiento-fila" (press)="onPress()">
   <div fxLayout="row" fxLayoutAlign="space-between center" fxLayoutGap="5px">
 
-    <div fxFlex="28px">
+    <div fxFlex="28px" *ngIf="mostrarCheck">
       <mat-checkbox [(ngModel)]="seleccionado" (change)="notificarCambioSeleccion($event)"></mat-checkbox>
     </div>
 
