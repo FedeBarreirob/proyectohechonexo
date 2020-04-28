@@ -17,12 +17,16 @@
     overflow-y: scroll;
 }
 
+.contenedor-seleccion {
+  height: 70vh;
+}
+
 .activo {
-    color: #23B950;
-    font-family: Rubik;
-    font-size: 14px;
-    min-width: 200px;
-    background-color: rgba(45, 164, 66, 0.1);
+  color: #23B950;
+  font-family: Rubik;
+  font-size: 14px;
+  min-width: 200px;
+  background-color: rgba(45, 164, 66, 0.1);
 }
 
 .inactivo {

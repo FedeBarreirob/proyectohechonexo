@@ -44,7 +44,7 @@
 
 <div fxLayout="column" fxLayoutWrap fxLayoutAlign="none" infiniteScroll [infiniteScrollDistance]="2"
      [infiniteScrollThrottle]="50" (scrolled)="onScroll()" [scrollWindow]="false"
-     [ngClass]="{'contenedor-listado' : cargarOnScroll == true, 'contenedor-listado-sin-alto' : cargarOnScroll == false}">
+     [ngClass]="{'contenedor-listado' : cargarOnScroll == true, 'contenedor-listado-sin-alto' : cargarOnScroll == false, 'contenedor-seleccion': (cargando && mostrarCheck)}">
 
   <app-entregas-item-movil *ngFor="let movimiento of (listadoEntregas ? listadoEntregas : [])" [movimiento]="movimiento"
                            [unidadMedida]="unidadMedida" (cambioSeleccion)="cambioSeleccionSimple($event.checked, $event.movimiento)"
