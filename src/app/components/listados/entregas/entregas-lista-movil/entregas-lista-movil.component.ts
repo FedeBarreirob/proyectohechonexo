@@ -54,7 +54,7 @@ export class EntregasListaMovilComponent implements OnInit, OnDestroy {
   @Output()
   exportar: EventEmitter<any> = new EventEmitter<any>();
 
-  private mostrarCheck: boolean = false;
+  mostrarCheck: boolean = false;
 
   @Input()
   public permitirSeleccion: boolean = false;
