@@ -56,6 +56,9 @@ export class EntregasListaMovilComponent implements OnInit, OnDestroy {
 
   private mostrarCheck: boolean = false;
 
+  @Input()
+  public permitirSeleccion: boolean = false;
+
   constructor(
     private entregasService: EntregasService,
     private authenticationService: AuthenticationService
@@ -100,7 +103,7 @@ export class EntregasListaMovilComponent implements OnInit, OnDestroy {
   }
 
   // funcion encargada de cargar el listado de entregas
-  cargarListado(limpiar: boolean) {
+  cargarListado(limpiar: boolean, borrarSeleccion: boolean = true) {
     if (!this.cargando) {
       this.cargando = true;
       this.cargandoChange.emit(true);
@@ -112,6 +115,12 @@ export class EntregasListaMovilComponent implements OnInit, OnDestroy {
       this.filtro.paginado = true;
       this.filtro.pagina = this.pagina;
       this.filtro.cantPorPagina = this.cantidadPorPagina;
+
+      if (borrarSeleccion) {
+        this.mostrarCheck = false;
+        this.identificadoresParaDescarga = [];
+        this.entregasItems.forEach(x => { x.seleccionado = false, x.mostrarCheck = false });
+      }
 
       this.entregasService.listadoEntregas(this.filtro)
         .pipe(takeUntil(this.destroy$))
@@ -154,7 +163,7 @@ export class EntregasListaMovilComponent implements OnInit, OnDestroy {
   onScroll() {
     if (this.cargando == false && this.cargarOnScroll == true) {
       this.pagina = this.pagina + 1;
-      this.cargarListado(false);
+      this.cargarListado(false, false);
     }
   }
 
@@ -236,11 +245,20 @@ export class EntregasListaMovilComponent implements OnInit, OnDestroy {
 
   /**
    * Mostrar check 
-   * @param tipo 
+   * @param movimiento
    */
   mostrarCheckFunc(movimiento: MovimientoEntrega) {
     this.mostrarCheck = true;
     this.entregasItems.forEach(x => x.mostrarCheck = true);
     this.identificadoresParaDescarga.push(movimiento);
+  }
+
+  /**
+   * Cancelar seleccion 
+   */
+  cancelarSeleccion() {
+    this.mostrarCheck = false;
+    this.entregasItems.forEach(x => { x.mostrarCheck = false, x.seleccionado = false });
+    this.identificadoresParaDescarga = [];
   }
 }

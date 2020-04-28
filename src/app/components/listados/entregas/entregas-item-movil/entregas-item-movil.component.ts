@@ -29,6 +29,9 @@ export class EntregasItemMovilComponent implements OnInit {
   @Input()
   public mostrarCheck: boolean = false;
 
+  @Input()
+  public permitirSeleccion: boolean = false;
+
   constructor() { }
 
   ngOnInit() {
@@ -58,7 +61,9 @@ export class EntregasItemMovilComponent implements OnInit {
    * @param $event 
    */
   onPress() {
-    this.seleccionado = true;
-    this.mostrarCheck$.emit(this.movimiento);
+    if (this.permitirSeleccion) {
+      this.seleccionado = true;
+      this.mostrarCheck$.emit(this.movimiento);
+    }
   }
 }
