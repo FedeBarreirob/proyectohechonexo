@@ -61,6 +61,7 @@ export class EntregasItemMovilComponent implements OnInit {
    * @param $event 
    */
   onPress() {
+    $event.preventDefault();
     if (this.permitirSeleccion) {
       this.seleccionado = true;
       this.mostrarCheck$.emit(this.movimiento);
