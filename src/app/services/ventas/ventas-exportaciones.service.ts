@@ -62,6 +62,7 @@ export class VentasExportacionesService {
       // listado de movimientos
       // .. preparar datos
       let movimientosRows = [];
+      let sumaNetos = 0;
       for (let movimiento of movimimentos) {
 
         let signoMonetario = (movimiento.moneda == 'P') ? 'AR$' : 'US$';
@@ -72,10 +73,12 @@ export class VentasExportacionesService {
           `${this.decimalPipe.transform(movimiento.kilos, '.2')} Kg`,
           `${signoMonetario} ${this.decimalPipe.transform(movimiento.precioPorQuintal, '.2')}`
         ]);
+        sumaNetos += movimiento.kilos;
       }
       rows.push(movimientosRows);
 
       // .. preparar opciones
+      let headerTotalsCountDatos = 0;
       let movimientosOpciones = {
         startY: 30,
         columnStyles: {
@@ -83,6 +86,11 @@ export class VentasExportacionesService {
           1: { columnWidth: '25%', halign: 'left' },
           2: { columnWidth: '25%', halign: 'right' },
           3: { columnWidth: '25%', halign: 'right' }
+        },
+        createdHeaderCell: function (cell, data) {
+          cell.styles.columnWidth = data.settings.columnStyles[headerTotalsCountDatos].columnWidth;
+          cell.styles.halign = data.settings.columnStyles[headerTotalsCountDatos].halign;
+          headerTotalsCountDatos++;
         }
       };
       opciones.push(movimientosOpciones);
@@ -90,6 +98,29 @@ export class VentasExportacionesService {
       // .. columnas
       let movimientosColumnas = ["Especia/Cosecha", "Fecha", "Kg.Netos", "Precio QQ"];
       columnas.push(movimientosColumnas);
+
+      // Totales
+      rows.push([[
+        "Totales",
+        `${this.decimalPipe.transform(sumaNetos, '.2')} Kg`,
+        ""
+      ]]);
+      let headerTotalsCount = 0;
+      opciones.push({
+        startY: 30,
+        columnStyles: {
+          // fullWidth: 182
+          0: { columnWidth: 102, halign: 'left', fontStyle: 'bold' },
+          1: { columnWidth: 40, halign: 'right', fontStyle: 'bold' },
+          2: { columnWidth: 40, halign: 'right', fontStyle: 'bold' }
+        },
+        createdHeaderCell: function (cell, data) {
+          cell.styles.columnWidth = data.settings.columnStyles[headerTotalsCount].columnWidth;
+          cell.styles.halign = data.settings.columnStyles[headerTotalsCount].halign;
+          headerTotalsCount++;
+        }
+      });
+      columnas.push(["Resumen", "Netos", ""]);
 
       // totales
       if (totales) {

@@ -4,7 +4,7 @@
 
 export const environment = {
   production: false,
-  inPhonegap: false,
+  inPhonegap: true,
   oneSignalApiKey: '39901250-6212-4942-9d7a-413712e251fb',
   googleAnalyticsID: 'UA-144101541-1',
   trackear: false,

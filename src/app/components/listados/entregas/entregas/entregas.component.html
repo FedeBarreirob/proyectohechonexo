@@ -10,7 +10,8 @@
       [urlImagenAccionPersonalizada]="'assets/toolbar/embudo.png'"></app-tool-bar-general>
 
     <app-entregas-lista-movil *ngIf="esCelular===true" [observerFiltro$]="observerFiltro$"
-      (seleccionMovimiento)="verDetalle($event)" (cargandoChange)="mostrarIndicadorLoading($event)">
+      (seleccionMovimiento)="verDetalle($event)" (cargandoChange)="mostrarIndicadorLoading($event)"
+      (exportar)="exportarListaSeleccionada($event.tipo, $event.datos)" [permitirSeleccion]="true">
     </app-entregas-lista-movil>
 
   </section>

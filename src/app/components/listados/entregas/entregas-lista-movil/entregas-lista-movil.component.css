@@ -9,20 +9,29 @@
 }
 
 .contenedor-listado {
-    height: 82vh;
-    overflow-y: scroll;
+  height: 82vh;
+  overflow-y: scroll;
+  -moz-user-select: none; /* Firefox */
+  -ms-user-select: none; /* Internet Explorer */
+  -khtml-user-select: none; /* KHTML browsers (e.g. Konqueror) */
+  -webkit-user-select: none; /* Chrome, Safari, and Opera */
+  -webkit-touch-callout: none; /* Disable Android and iOS callouts*/
 }
 
 .contenedor-listado-sin-alto {
     overflow-y: scroll;
 }
 
+.contenedor-seleccion {
+  height: 70vh;
+}
+
 .activo {
-    color: #23B950;
-    font-family: Rubik;
-    font-size: 14px;
-    min-width: 200px;
-    background-color: rgba(45, 164, 66, 0.1);
+  color: #23B950;
+  font-family: Rubik;
+  font-size: 14px;
+  min-width: 200px;
+  background-color: rgba(45, 164, 66, 0.1);
 }
 
 .inactivo {
@@ -54,4 +63,31 @@
 
 .info-sin-data-container {
     margin: 50px;
+}
+
+.seccion-descarga {
+  width: 100%;
+  position: absolute;
+  bottom: 0;
+  padding-bottom: 10px;
+  background: white;
+  z-index: 1;
+}
+
+.boton-extra {
+  height: 40px;
+  width: 45%;
+  background-color: #2DA442;
+  border: 1px solid white;
+  border-radius: 4px;
+  color: white;
+  font-family: Rubik;
+  font-size: 14px;
+  font-weight: bold;
+  margin-top: 10px;
+  margin-left: 12px;
+}
+
+.boton-extra img {
+  height: 20px;
 }

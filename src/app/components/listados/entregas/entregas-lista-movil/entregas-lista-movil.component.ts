@@ -1,4 +1,4 @@
-import { Component, OnInit, Input, Output, EventEmitter, OnDestroy } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter, OnDestroy, ViewChildren, QueryList } from '@angular/core';
 import { MovimientoEntrega } from '../../../../interfaces/entregas/listado-entregas';
 import { Subject } from 'rxjs';
 import { EntregasService } from '../../../../services/entregas/entregas.service';
@@ -6,6 +6,8 @@ import { FiltroEntregas } from '../../../../interfaces/entregas/filtro-entregas'
 import { PerfilBasico } from '../../../../interfaces/perfiles/perfil-basico';
 import { AuthenticationService } from '../../../../services/security/authentication.service';
 import { takeUntil } from 'rxjs/operators';
+import { MatCheckboxChange } from '@angular/material';
+import { EntregasItemMovilComponent } from '../entregas-item-movil/entregas-item-movil.component';
 
 @Component({
   selector: 'app-entregas-lista-movil',
@@ -40,6 +42,22 @@ export class EntregasListaMovilComponent implements OnInit, OnDestroy {
   unidadMedida: string;
   perfilBasico: PerfilBasico;
   destroy$: Subject<any> = new Subject<any>();
+
+  @Output()
+  cambioSeleccion: EventEmitter<boolean> = new EventEmitter<boolean>();
+
+  identificadoresParaDescarga: Array<MovimientoEntrega> = [];
+
+  @ViewChildren(EntregasItemMovilComponent)
+  entregasItems: QueryList<EntregasItemMovilComponent>;
+
+  @Output()
+  exportar: EventEmitter<any> = new EventEmitter<any>();
+
+  mostrarCheck: boolean = false;
+
+  @Input()
+  public permitirSeleccion: boolean = false;
 
   constructor(
     private entregasService: EntregasService,
@@ -85,7 +103,7 @@ export class EntregasListaMovilComponent implements OnInit, OnDestroy {
   }
 
   // funcion encargada de cargar el listado de entregas
-  cargarListado(limpiar: boolean) {
+  cargarListado(limpiar: boolean, borrarSeleccion: boolean = true) {
     if (!this.cargando) {
       this.cargando = true;
       this.cargandoChange.emit(true);
@@ -97,6 +115,12 @@ export class EntregasListaMovilComponent implements OnInit, OnDestroy {
       this.filtro.paginado = true;
       this.filtro.pagina = this.pagina;
       this.filtro.cantPorPagina = this.cantidadPorPagina;
+
+      if (borrarSeleccion) {
+        this.mostrarCheck = false;
+        this.identificadoresParaDescarga = [];
+        this.entregasItems.forEach(x => { x.seleccionado = false, x.mostrarCheck = false });
+      }
 
       this.entregasService.listadoEntregas(this.filtro)
         .pipe(takeUntil(this.destroy$))
@@ -139,7 +163,7 @@ export class EntregasListaMovilComponent implements OnInit, OnDestroy {
   onScroll() {
     if (this.cargando == false && this.cargarOnScroll == true) {
       this.pagina = this.pagina + 1;
-      this.cargarListado(false);
+      this.cargarListado(false, false);
     }
   }
 
@@ -176,5 +200,65 @@ export class EntregasListaMovilComponent implements OnInit, OnDestroy {
     } else {
       return "-";
     }
+  }
+
+  /**
+   * Selecciona todas o ninguna entrega 
+   * @param $event 
+   */
+  seleccionarTodoNada($event: MatCheckboxChange) {
+    this.entregasItems.forEach(x => x.seleccionado = $event.checked);
+    if ($event.checked) {
+      this.identificadoresParaDescarga = this.listadoEntregas;
+    }
+    else {
+      this.identificadoresParaDescarga = [];
+      this.mostrarCheck = false;
+      this.entregasItems.forEach(x => x.mostrarCheck = false);
+    }
+  }
+
+  /**
+   * Selecciona todas o ninguna entrega 
+   * @param $event 
+   */
+  cambioSeleccionSimple(checked: boolean, movimiento: MovimientoEntrega) {
+    if (checked) {
+      this.identificadoresParaDescarga.push(movimiento);
+    }
+    else {
+      this.identificadoresParaDescarga = this.identificadoresParaDescarga.filter(x => x.comprobante != movimiento.comprobante);
+      if (this.identificadoresParaDescarga.length == 0) {
+        this.mostrarCheck = false;
+        this.entregasItems.forEach(x => x.mostrarCheck = false);
+      }
+    }
+  }
+
+  /**
+   * Exporta datos seleccionados 
+   * @param tipo 
+   */
+  exportarDatos(tipo: string) {
+    this.exportar.emit({ tipo: tipo, datos: this.identificadoresParaDescarga});
+  }
+
+  /**
+   * Mostrar check 
+   * @param movimiento
+   */
+  mostrarCheckFunc(movimiento: MovimientoEntrega) {
+    this.mostrarCheck = true;
+    this.entregasItems.forEach(x => x.mostrarCheck = true);
+    this.identificadoresParaDescarga.push(movimiento);
+  }
+
+  /**
+   * Cancelar seleccion 
+   */
+  cancelarSeleccion() {
+    this.mostrarCheck = false;
+    this.entregasItems.forEach(x => { x.mostrarCheck = false, x.seleccionado = false });
+    this.identificadoresParaDescarga = [];
   }
 }
