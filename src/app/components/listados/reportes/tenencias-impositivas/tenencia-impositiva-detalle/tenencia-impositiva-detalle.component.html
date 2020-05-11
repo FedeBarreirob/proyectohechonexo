@@ -77,8 +77,8 @@
     <div fxFlex class="dato-apartado">
 
       <span
-        [ngClass]="{'signo-positivo': tenenciaImpositiva.saldoCtaCte.saldoContable > 0, 'signo-negativo': tenenciaImpositiva.saldoCtaCte.saldoContable < 0 }">
-        {{ (tenenciaImpositiva.saldoCtaCte.saldoContable < 0) ? '-' : (tenenciaImpositiva.saldoCtaCte.saldoContable > 0) ? '+' : ''}}
+        [ngClass]="{'signo-positivo': tenenciaImpositiva.saldoCtaCte.saldoContable < 0, 'signo-negativo': tenenciaImpositiva.saldoCtaCte.saldoContable > 0 }">
+        {{ (tenenciaImpositiva.saldoCtaCte.saldoContable > 0) ? '-' : (tenenciaImpositiva.saldoCtaCte.saldoContable < 0) ? '+' : ''}}
       </span>
       {{ ((tenenciaImpositiva.saldoCtaCte.saldoContable > 0) ? tenenciaImpositiva.saldoCtaCte.saldoContable : tenenciaImpositiva.saldoCtaCte.saldoContable * (-1)) | number: '.2'}}
       <span class="moneda">ARS</span>
