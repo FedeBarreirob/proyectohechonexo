@@ -119,7 +119,7 @@ export class PdfService {
           pdf.save(`${nombreArchivo}.pdf`);
         }
       };
-      img.src = "/assets/logo.png"; // Firma de gaviglio (Logo de App)
+      img.src = "assets/logo.png"; // Firma de gaviglio (Logo de App)
     } catch (e) {
       console.log(e);
     }
