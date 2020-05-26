@@ -108,6 +108,7 @@ export class PdfService {
 
           // Firma de Gaviglio por pagina
           opciones.addPageContent = function (data) { pdf.addImage(img, 'PNG', 10, 5, 50, 13, 'Gaviglio') };
+          opciones.margin = { top: 20};
           pdf.autoTable(columnas, rows, opciones);
         }
 
