@@ -119,7 +119,7 @@ export class InformacionTributariaExportacionesService {
         rows,
         `Reporte de Tenencias Impositivas - ${fecha}`,
         columnas,
-        "reporte-tenencias-impositivas",
+        tenenciaImpositiva.saldoCtaCte.codigo.trim() + " - " + tenenciaImpositiva.saldoCtaCte.nombre,
         opciones
       );
     } catch (e) {
