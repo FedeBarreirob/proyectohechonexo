@@ -95,7 +95,7 @@ export class InformacionTributariaExportacionesService {
       saldosRow.push(
         [
           "Saldo en contable",
-          `AR$ ${this.decimalPipe.transform(tenenciaImpositiva.saldoCtaCte.saldoContable, '.2-2')}`
+          `AR$ ${this.decimalPipe.transform(tenenciaImpositiva.saldoCtaCte.saldoContable * -1, '.2-2')}`
         ]
       );
       rows.push(saldosRow);
