@@ -53,16 +53,16 @@
   <div fxLayout="row" fxLayoutAlign="space-between center">
     <div fxFlex class="monto">
       <span
-        [ngClass]="{'signo-positivo': tenenciaImpositiva.saldoCtaCte.saldoPesos > 0, 'signo-negativo': tenenciaImpositiva.saldoCtaCte.saldoPesos < 0 }">
-        {{ (tenenciaImpositiva.saldoCtaCte.saldoPesos < 0) ? '-' : (tenenciaImpositiva.saldoCtaCte.saldoPesos > 0) ? '+' : ''}}
+        [ngClass]="{'signo-positivo': tenenciaImpositiva.saldoCtaCte.saldoPesos < 0, 'signo-negativo': tenenciaImpositiva.saldoCtaCte.saldoPesos > 0 }">
+        {{ (tenenciaImpositiva.saldoCtaCte.saldoPesos > 0) ? '-' : (tenenciaImpositiva.saldoCtaCte.saldoPesos < 0) ? '+' : ''}}
       </span>
       {{ ((tenenciaImpositiva.saldoCtaCte.saldoPesos > 0) ? tenenciaImpositiva.saldoCtaCte.saldoPesos : tenenciaImpositiva.saldoCtaCte.saldoPesos * (-1)) | number: '.2'}}
       <span class="moneda">ARS</span>
     </div>
     <div fxFlex class="monto">
       <span
-        [ngClass]="{'signo-positivo': tenenciaImpositiva.saldoCtaCte.saldoDolar > 0, 'signo-negativo': tenenciaImpositiva.saldoCtaCte.saldoDolar < 0 }">
-        {{ (tenenciaImpositiva.saldoCtaCte.saldoDolar < 0) ? '-' : (tenenciaImpositiva.saldoCtaCte.saldoDolar > 0) ? '+' : ''}}
+        [ngClass]="{'signo-positivo': tenenciaImpositiva.saldoCtaCte.saldoDolar < 0, 'signo-negativo': tenenciaImpositiva.saldoCtaCte.saldoDolar > 0 }">
+        {{ (tenenciaImpositiva.saldoCtaCte.saldoDolar > 0) ? '-' : (tenenciaImpositiva.saldoCtaCte.saldoDolar < 0) ? '+' : ''}}
       </span>
       {{ ((tenenciaImpositiva.saldoCtaCte.saldoDolar > 0) ? tenenciaImpositiva.saldoCtaCte.saldoDolar : tenenciaImpositiva.saldoCtaCte.saldoDolar * (-1)) | number: '.2'}}
       <span class="moneda">USD</span>
