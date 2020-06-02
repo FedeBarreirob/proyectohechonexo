@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { DownloaderUtilService } from '../../downloader/downloader-util.service';
 import { environment } from '../../../../../environments/environment';
+import { CuentaAlgService } from '../../../../services/observers/cuentas-alg/cuenta-alg.service';
 declare let jsPDF;
 
 @Injectable({
@@ -8,16 +9,20 @@ declare let jsPDF;
 })
 export class PdfService {
 
-  constructor(private downloaderUtilService: DownloaderUtilService) { }
+  constructor(private downloaderUtilService: DownloaderUtilService,
+    private cuentaAlgService: CuentaAlgService) { }
 
   // funcion encargada de generar un pdf a partir de un objeto
   objetoAPdf(objeto: any, titulo: string, columnas: Array<string>, nombreArchivo: string, opcionesExtras: any = null) {
     try {
       var img = new Image();
       var downloaderUtilService = this.downloaderUtilService;
+      var cuenta = this.cuentaAlgService.cuentaPreviamenteSeleccionada;
       img.onload = function () {
         let pdf = new jsPDF('p', 'mm', 'a4');
         pdf.text(10, 25, titulo);
+        pdf.setFontSize(10);
+        pdf.text(100, 10, (cuenta.id.codigo + " - " + cuenta.nombre));
 
         // convertir objeto a array 
         let rows = [];
@@ -42,7 +47,7 @@ export class PdfService {
 
         // renderizar
         // Firma de Gaviglio por pagina
-        opciones.addPageContent = function (data) { pdf.addImage(img, 'PNG', 10, 5, 50, 13, 'Gaviglio') };
+        opciones.addPageContent = function (data) { pdf.addImage(img, 'PNG', 10, 5, 40, 10, 'Gaviglio') };
         opciones.margin = { top: 20 };
         pdf.autoTable(columnas, rows, opciones);
 
@@ -64,9 +69,12 @@ export class PdfService {
     try {
       var img = new Image();
       var downloaderUtilService = this.downloaderUtilService;
+      var cuenta = this.cuentaAlgService.cuentaPreviamenteSeleccionada;
       img.onload = function () {
         let pdf = new jsPDF('p', 'mm', 'a4');
         pdf.text(10, 25, titulo);
+        pdf.setFontSize(10);
+        pdf.text(100, 10, (cuenta.id.codigo + " - " + cuenta.nombre));
 
         // opciones
         let opciones = null;
@@ -84,7 +92,7 @@ export class PdfService {
 
         // renderizar
         // Firma de Gaviglio por pagina
-        opciones.addPageContent = function (data) { pdf.addImage(img, 'PNG', 10, 5, 50, 13, 'Gaviglio') };
+        opciones.addPageContent = function (data) { pdf.addImage(img, 'PNG', 10, 5, 40, 10, 'Gaviglio') };
         opciones.margin = { top: 20 };
         pdf.autoTable(columnas, lista, opciones);
 
@@ -107,9 +115,12 @@ export class PdfService {
     try {
       var img = new Image();
       var downloaderUtilService = this.downloaderUtilService;
+      var cuenta = this.cuentaAlgService.cuentaPreviamenteSeleccionada;
       img.onload = function () {
         let pdf = new jsPDF('p', 'mm', 'a4');
         pdf.text(10, 25, titulo);
+        pdf.setFontSize(10);
+        pdf.text(100, 10, (cuenta.id.codigo + " - " + cuenta.nombre));
 
         for (let i = 0; i < lista.length; i++) {
           let rows = lista[i];
@@ -123,7 +134,7 @@ export class PdfService {
           }
 
           // Firma de Gaviglio por pagina
-          opciones.addPageContent = function (data) { pdf.addImage(img, 'PNG', 10, 5, 50, 13, 'Gaviglio') };
+          opciones.addPageContent = function (data) { pdf.addImage(img, 'PNG', 10, 5, 40, 10, 'Gaviglio') };
           opciones.margin = { top: 20};
           pdf.autoTable(columnas, rows, opciones);
         }
