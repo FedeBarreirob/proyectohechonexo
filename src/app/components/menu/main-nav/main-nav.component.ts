@@ -135,6 +135,7 @@ export class MainNavComponent implements OnInit, OnDestroy {
 				permitido: true,
 				ocultarDesktop: false
 			},
+
 			/*{
 				nombre: "Merc. Pend. Entregar",
 				rutaLink: "/mercaderia-pendiente-entregar",
@@ -167,6 +168,16 @@ export class MainNavComponent implements OnInit, OnDestroy {
 				permitido: true,
 				ocultarDesktop: false
 			},
+
+			{
+				nombre: "Billetera",
+				rutaLink: "/billetera",
+				imagen: "assets/sidebar/cta-cte.png",
+				imagenActiva: "assets/sidebar/cta-cte-hot.png",
+				permitido: true,
+				ocultarDesktop: false
+			},
+
 			{
 				nombre: "Reportes",
 				rutaLink: "/reportes",
