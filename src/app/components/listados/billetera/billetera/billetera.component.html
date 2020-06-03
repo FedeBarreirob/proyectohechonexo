@@ -1,0 +1,32 @@
+<mat-sidenav-container [ngClass]="{'contenedor-billetera': esCelular, 'contenedor-desktop': !esCelular }">
+    <section>
+
+      <div class="fondo-verde" [ngClass]="{'fondo-verde': esCelular, 'fondo-verde-desktop': !esCelular}">
+        
+      </div>
+
+      <div fxLayout="column" [ngClass]="{'fondo-blanco': esCelular, 'fondo-blanco-desktop': !esCelular}">
+
+        <mat-tab-group fxFlex="100%" fxFlexAlign="space-between center" class="tab">
+          <mat-tab label="A Cobrar"> <app-tarjeta-tab-container></app-tarjeta-tab-container> </mat-tab>
+          <mat-tab label="A Pagar"> Hola soy el contenido de la segunda pestaña </mat-tab>
+        </mat-tab-group>
+
+        
+        <div class="pagar-cobrar">
+          <app-pagar-cobrar-container></app-pagar-cobrar-container>
+        </div>
+
+        <div class="op-recientes">
+          <app-tabla-operaciones-recientes></app-tabla-operaciones-recientes>
+        </div>
+        
+
+        <div style="margin-top: 30px;">
+          <app-lista-operaciones-movil></app-lista-operaciones-movil>
+        </div>
+
+      </div>
+
+    </section>
+</mat-sidenav-container>
