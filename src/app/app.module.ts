@@ -191,6 +191,13 @@ import { ReporteUsuariosComponent } from './components/listados/reportes/reporte
 import { ReporteUsuariosToolbarComponent } from './components/listados/reportes/reporte-usuarios/reporte-usuarios-toolbar/reporte-usuarios-toolbar.component';
 import { SaldoConDiferenciaDeCamioEIvaComponent } from './components/listados/cuenta-corriente/saldo-con-diferencia-de-camio-eiva/saldo-con-diferencia-de-camio-eiva.component';
 import { LongPressDirective } from './directives/long-press.directive';
+import { BilleteraComponent } from './components/listados/billetera/billetera/billetera.component';
+import { BilleteraPagarComponent } from './components/listados/billetera/billetera-pagar/billetera-pagar.component';
+import { BilleteraCobrarComponent } from './components/listados/billetera/billetera-cobrar/billetera-cobrar.component';
+import { TarjetaTabContainerComponent } from './components/listados/billetera/tarjeta-tab-container/tarjeta-tab-container.component';
+import { PagarCobrarContainerComponent } from './components/listados/billetera/pagar-cobrar-container/pagar-cobrar-container.component';
+import { TablaOperacionesRecientesComponent } from './components/listados/billetera/tabla-operaciones-recientes/tabla-operaciones-recientes.component';
+import { ListaOperacionesMovilComponent } from './components/listados/billetera/lista-operaciones-movil/lista-operaciones-movil.component';
 
 registerLocaleData(localeEsAr, 'es-AR');
 
@@ -351,7 +358,14 @@ export function tokenGetter() {
 		ReporteUsuariosComponent,
 		ReporteUsuariosToolbarComponent,
 		SaldoConDiferenciaDeCamioEIvaComponent,
-		LongPressDirective
+		LongPressDirective,
+		BilleteraComponent,
+		BilleteraPagarComponent,
+		BilleteraCobrarComponent,
+		TarjetaTabContainerComponent,
+		PagarCobrarContainerComponent,
+		TablaOperacionesRecientesComponent,
+		ListaOperacionesMovilComponent
 	],
 	imports: [
 		HttpClientModule,
