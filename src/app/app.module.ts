@@ -198,17 +198,22 @@ import { TarjetaTabContainerComponent } from './components/listados/billetera/ta
 import { PagarCobrarContainerComponent } from './components/listados/billetera/pagar-cobrar-container/pagar-cobrar-container.component';
 import { TablaOperacionesRecientesComponent } from './components/listados/billetera/tabla-operaciones-recientes/tabla-operaciones-recientes.component';
 import { ListaOperacionesMovilComponent } from './components/listados/billetera/lista-operaciones-movil/lista-operaciones-movil.component';
+import { BilleteraAcobrarDesktopComponent } from './components/listados/billetera/billetera-acobrar-desktop/billetera-acobrar-desktop.component';
+import { BilleteraApagarDesktopComponent } from './components/listados/billetera/billetera-apagar-desktop/billetera-apagar-desktop.component';
+import { BilleteraAcobrarResumenItemComponent } from './components/listados/billetera/billetera-acobrar-resumen-item/billetera-acobrar-resumen-item.component';
+import { BilleteraOperacionesItemComponent } from './components/listados/billetera/billetera-operaciones-item/billetera-operaciones-item.component';
+import { PagarCobrarContainerDesktopComponent } from './components/listados/billetera/pagar-cobrar-container-desktop/pagar-cobrar-container-desktop.component';
 
 registerLocaleData(localeEsAr, 'es-AR');
 
 export function tokenGetter() {
-	let usuario = JSON.parse(localStorage.getItem('currentUser'));
-	return usuario != null ? usuario.token : '';
+  const usuario = JSON.parse(localStorage.getItem('currentUser'));
+  return usuario != null ? usuario.token : '';
 }
 
 @NgModule({
-	declarations: [
-		AppComponent,
+  declarations: [
+    AppComponent,
 		LoginComponent,
 		DashboardComponent,
 		MainNavComponent,
@@ -365,7 +370,12 @@ export function tokenGetter() {
 		TarjetaTabContainerComponent,
 		PagarCobrarContainerComponent,
 		TablaOperacionesRecientesComponent,
-		ListaOperacionesMovilComponent
+		ListaOperacionesMovilComponent,
+		BilleteraAcobrarDesktopComponent,
+		BilleteraApagarDesktopComponent,
+		BilleteraAcobrarResumenItemComponent,
+		BilleteraOperacionesItemComponent,
+		PagarCobrarContainerDesktopComponent,
 	],
 	imports: [
 		HttpClientModule,

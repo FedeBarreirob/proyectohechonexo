@@ -1,0 +1,27 @@
+<mat-card class="card">
+
+  <div fxLayout="row" fxLayoutAlign="space-between center">
+    <div fxLayout="column" >
+      <button mat-icon-button>
+        <mat-icon class="button">system_update_alt</mat-icon>
+      </button>
+    </div>
+    <div fxFlex="grow" fxLayout="column" fxLayoutAlign="space-between" class="descripcion">
+        <div class="texto">
+          {{operacion.descripcion}}
+        </div>
+        <div>
+          <button type="button"
+          [ngClass]="{'btn-estado-efectuado w-50': operacion.estado === 'Efectuado', 'btn-estado-procesando w-50': operacion.estado === 'En proceso' }">
+            {{operacion.estado}}
+          </button>
+        </div>
+
+    </div>
+    <div fxLayout="column">
+      <div class="monto">
+        ${{operacion.monto}}
+      </div>
+    </div>
+  </div>
+</mat-card>

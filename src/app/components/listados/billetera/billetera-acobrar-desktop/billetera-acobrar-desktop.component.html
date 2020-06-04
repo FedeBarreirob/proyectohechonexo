@@ -1,0 +1,30 @@
+<mat-card class="card">
+
+  <div fxLayout="row" fxLayoutAlign="space-between" fxLayoutGap="20px" class="titulo-card"
+    style="font-size: 120%;" *ngIf="esCelular != null && esCelular == false">
+    A cobrar
+  </div>
+
+  <div fxLayout="column" fxLayoutAlign="start stretch" class="contenedor">
+    <div fxLayout="row" fxLayoutAlign="space-between center">
+      <div fxFlex="100%" class="titulo-card-1">
+        Dinero en cuenta
+      </div>
+    </div>
+    <div fxLayout="row" fxLayoutAlign="space-between center">
+      <div fxFlex="grow" class="texto">
+        ${{ total | number }}
+      </div>
+      <div fxLayout="row" fxLayoutAlign="center center" >
+        <button mat-icon-button>
+          <mat-icon class="button-info">info</mat-icon>
+        </button>
+      </div>
+    </div>
+  </div>
+  <mat-divider></mat-divider>
+
+  <app-billetera-acobrar-resumen-item *ngFor="let detail of detalleCuenta" [detail]="detail"></app-billetera-acobrar-resumen-item>
+
+
+</mat-card>
