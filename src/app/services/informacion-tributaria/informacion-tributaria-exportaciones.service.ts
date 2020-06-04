@@ -89,19 +89,19 @@ export class InformacionTributariaExportacionesService {
       saldosRow.push(
         [
           "Saldo en pesos",
-          `AR$ ${this.decimalPipe.transform(tenenciaImpositiva.saldoCtaCte.saldoPesos, '.2-2')}`
+          `AR$ ${this.decimalPipe.transform(tenenciaImpositiva.saldoCtaCte.saldoPesos * -1, '.2-2')}`
         ]
       );
       saldosRow.push(
         [
           "Saldo en dólares",
-          `US$ ${this.decimalPipe.transform(tenenciaImpositiva.saldoCtaCte.saldoDolar, '.2-2')}`
+          `US$ ${this.decimalPipe.transform(tenenciaImpositiva.saldoCtaCte.saldoDolar * -1, '.2-2')}`
         ]
       );
       saldosRow.push(
         [
           "Saldo en contable",
-          `AR$ ${this.decimalPipe.transform(tenenciaImpositiva.saldoCtaCte.saldoContable, '.2-2')}`
+          `AR$ ${this.decimalPipe.transform(tenenciaImpositiva.saldoCtaCte.saldoContable * -1, '.2-2')}`
         ]
       );
       rows.push(saldosRow);
