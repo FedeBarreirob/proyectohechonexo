@@ -7,6 +7,8 @@
     padding-top: 100px;
 }
 
+
+
 .fondo-verde {
     background: url("../../../../../assets/varios/fondo-verde.png");
     background-position: center top;
@@ -47,6 +49,7 @@
 
 .tab{
     background-color: white;
+    position: relative;
     border-radius: 5px;
 }
 

@@ -198,6 +198,9 @@ import { TarjetaTabContainerComponent } from './components/listados/billetera/ta
 import { PagarCobrarContainerComponent } from './components/listados/billetera/pagar-cobrar-container/pagar-cobrar-container.component';
 import { TablaOperacionesRecientesComponent } from './components/listados/billetera/tabla-operaciones-recientes/tabla-operaciones-recientes.component';
 import { ListaOperacionesMovilComponent } from './components/listados/billetera/lista-operaciones-movil/lista-operaciones-movil.component';
+import { TarjetaTabContainerWeb1Component } from './components/listados/billetera/tarjeta-tab-container-web1/tarjeta-tab-container-web1.component';
+import { TarjetaTabContainerWebComponent } from './components/listados/billetera/tarjeta-tab-container-web/tarjeta-tab-container-web.component';
+import { SaldoTcComponent } from './components/listados/billetera/saldo-tc/saldo-tc.component';
 
 registerLocaleData(localeEsAr, 'es-AR');
 
@@ -365,7 +368,10 @@ export function tokenGetter() {
 		TarjetaTabContainerComponent,
 		PagarCobrarContainerComponent,
 		TablaOperacionesRecientesComponent,
-		ListaOperacionesMovilComponent
+		ListaOperacionesMovilComponent,
+		TarjetaTabContainerWeb1Component,
+		TarjetaTabContainerWebComponent,
+		SaldoTcComponent
 	],
 	imports: [
 		HttpClientModule,
