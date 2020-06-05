@@ -1,28 +1,10 @@
-<mat-card class="tarjeta" fxFlex="100%">
-
-  <div fxLayout="row" fxLayoutAlign="space-between center">
-    <div fxFlex="50%" class="titulo-card-1">Cobro prog... 0001</div>
-    <div fxFlex="50%" class="contenedor-importe"><span
-      class="importe-cobrar"> $12.000 </span>
-    </div>
-  </div>
-
-  <mat-divider></mat-divider>
-
-  <div fxLayout="row" fxLayoutAlign="space-between center">
-    <div fxFlex="50%" class="titulo-card">Cobro prog... 0002</div>
-    <div fxFlex="50%" class="contenedor-importe"><span
-      class="importe-cobrar"> $25.000 </span>
-    </div>
-  </div>
-
-  <mat-divider></mat-divider>
-
-  <div fxLayout="row" fxLayoutAlign="space-between center" style="margin-bottom: -15px;">
-    <div fxFlex="50%" class="titulo-card">Cobro prog... 0003</div>
-    <div fxFlex="50%" class="contenedor-importe"><span
-      class="importe-cobrar"> $456.000 </span>
-    </div>
-  </div>
-
-</mat-card>
+<div>
+  <ul>
+    <li *ngFor="let item of cobros">
+      <span class="price">
+        ${{ item.monto }}
+      </span>
+      <p style="margin: 20px;"><img style="margin-right: 15px; width: 20px;" src="/assets/sidebar/close-session.png">Crobro prog... {{ item.cobrosnum }}</p>
+    </li>
+  </ul>
+</div>

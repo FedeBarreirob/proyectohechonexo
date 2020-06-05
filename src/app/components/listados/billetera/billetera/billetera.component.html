@@ -1,32 +1,55 @@
 <mat-sidenav-container [ngClass]="{'contenedor-billetera': esCelular, 'contenedor-desktop': !esCelular }">
-    <section>
+  
+  <section style="background-color: lightgrey;">
 
-      <div class="fondo-verde" [ngClass]="{'fondo-verde': esCelular, 'fondo-verde-desktop': !esCelular}">
-        
+    <div class="fondo-verde" [ngClass]="{'fondo-verde': esCelular, 'fondo-verde-desktop': !esCelular}">
+      <app-tool-bar-general *ngIf="esCelular" [titulo]="'Billetera'" [disabled]="false"
+      colorIndicador="white" (botonPersonalizadoEjecutado)="mostrarOcultarNotificaciones()"
+      [urlImagenAccionPersonalizada]="hayNotificacionesNuevas ? 'assets/toolbar/bell-white-hot.svg' : 'assets/toolbar/bell-white.svg'"></app-tool-bar-general>
+    
+      <app-saldo-tc (cargandoChange)="esCargandoCtaCte($event)">
+			</app-saldo-tc>
+    </div>
+
+    <div fxLayout="column" [ngClass]="{'fondo-blanco': esCelular, 'fondo-blanco-desktop': !esCelular}"></div>
+
+      <!-- CONTENEDOR DEL CARD-TAB -->
+
+    <div *ngIf="esCelular" style="padding: 20px; margin-top: 100px;">
+      <mat-tab-group fxFlex="100%" fxFlexAlign="space-between center" class="tab">
+        <mat-tab label="A Cobrar"> <app-tarjeta-tab-container></app-tarjeta-tab-container> </mat-tab>
+        <mat-tab label="A Pagar"> Hola soy el contenido de la segunda pestaña </mat-tab>
+      </mat-tab-group>
+    </div>
+
+    <div *ngIf="!esCelular" fxLayout="row" fxLayoutAlign="space-between start" style="padding: 10px;">
+      <div fxFlex="50%">
+        <app-tarjeta-tab-container-web></app-tarjeta-tab-container-web>
       </div>
 
-      <div fxLayout="column" [ngClass]="{'fondo-blanco': esCelular, 'fondo-blanco-desktop': !esCelular}">
-
-        <mat-tab-group fxFlex="100%" fxFlexAlign="space-between center" class="tab">
-          <mat-tab label="A Cobrar"> <app-tarjeta-tab-container></app-tarjeta-tab-container> </mat-tab>
-          <mat-tab label="A Pagar"> Hola soy el contenido de la segunda pestaña </mat-tab>
-        </mat-tab-group>
-
-        
-        <div class="pagar-cobrar">
-          <app-pagar-cobrar-container></app-pagar-cobrar-container>
-        </div>
-
-        <div class="op-recientes">
-          <app-tabla-operaciones-recientes></app-tabla-operaciones-recientes>
-        </div>
-        
-
-        <div style="margin-top: 30px;">
-          <app-lista-operaciones-movil></app-lista-operaciones-movil>
-        </div>
-
+      <div fxFlex="50%">
+        <app-tarjeta-tab-container-web1></app-tarjeta-tab-container-web1>
       </div>
+    </div>
+        
+    <!-- CONTENEDOR DE PAGAR Y COBRAR -->
+    
+    <div style="padding: 10px">
+      <div class="pagar-cobrar">
+        <app-pagar-cobrar-container></app-pagar-cobrar-container>
+      </div>
+    </div>
+  
+    <div class="op-recientes">
+      <app-tabla-operaciones-recientes></app-tabla-operaciones-recientes>
+    </div>
+    
+    
+    <!-- LISTA DE OPERACIONES -->
 
-    </section>
+    <div style="margin-top: 15px;" fxLayout="column">
+      <app-lista-operaciones-movil></app-lista-operaciones-movil>
+    </div>
+
+  </section>
 </mat-sidenav-container>
