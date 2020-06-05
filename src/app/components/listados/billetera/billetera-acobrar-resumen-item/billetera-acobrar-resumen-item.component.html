@@ -1,0 +1,24 @@
+<div fxLayout="row" fxLayoutAlign="space-between center" class="cuenta-item">
+  <div fxLayout="column" >
+    <button mat-icon-button>
+      <mat-icon *ngIf="detail.tipo == 'disponible'" class="button-info">monetization_on</mat-icon>
+      <mat-icon *ngIf="detail.tipo == 'por cobrar'" class="button-info">attach_money</mat-icon>
+      <mat-icon *ngIf="detail.tipo == 'retenido'" class="button-info">money_off</mat-icon>
+
+    </button>
+  </div>
+  <div fxFlex="grow" fxLayout="column" fxLayoutAlign="space-between" class="contenedor">
+      <div class="detalle">
+        Dinero {{detail.tipo}}
+      </div>
+      <div class="monto">
+        ${{ detail.monto | number }}
+      </div>
+  </div>
+  <div fxLayout="column">
+    <button mat-icon-button *ngIf="detail.tipo != 'retenido'">
+      <mat-icon class="button-info">keyboard_arrow_right</mat-icon>
+    </button>
+  </div>
+</div>
+<mat-divider *ngIf="detail.tipo != 'retenido'"></mat-divider>

@@ -201,17 +201,22 @@ import { ListaOperacionesMovilComponent } from './components/listados/billetera/
 import { TarjetaTabContainerWeb1Component } from './components/listados/billetera/tarjeta-tab-container-web1/tarjeta-tab-container-web1.component';
 import { TarjetaTabContainerWebComponent } from './components/listados/billetera/tarjeta-tab-container-web/tarjeta-tab-container-web.component';
 import { SaldoTcComponent } from './components/listados/billetera/saldo-tc/saldo-tc.component';
+import { BilleteraAcobrarDesktopComponent } from './components/listados/billetera/billetera-acobrar-desktop/billetera-acobrar-desktop.component';
+import { BilleteraApagarDesktopComponent } from './components/listados/billetera/billetera-apagar-desktop/billetera-apagar-desktop.component';
+import { BilleteraAcobrarResumenItemComponent } from './components/listados/billetera/billetera-acobrar-resumen-item/billetera-acobrar-resumen-item.component';
+import { BilleteraOperacionesItemComponent } from './components/listados/billetera/billetera-operaciones-item/billetera-operaciones-item.component';
+import { PagarCobrarContainerDesktopComponent } from './components/listados/billetera/pagar-cobrar-container-desktop/pagar-cobrar-container-desktop.component';
 
 registerLocaleData(localeEsAr, 'es-AR');
 
 export function tokenGetter() {
-	let usuario = JSON.parse(localStorage.getItem('currentUser'));
-	return usuario != null ? usuario.token : '';
+  const usuario = JSON.parse(localStorage.getItem('currentUser'));
+  return usuario != null ? usuario.token : '';
 }
 
 @NgModule({
-	declarations: [
-		AppComponent,
+  declarations: [
+    AppComponent,
 		LoginComponent,
 		DashboardComponent,
 		MainNavComponent,
@@ -371,7 +376,12 @@ export function tokenGetter() {
 		ListaOperacionesMovilComponent,
 		TarjetaTabContainerWeb1Component,
 		TarjetaTabContainerWebComponent,
-		SaldoTcComponent
+		SaldoTcComponent,
+		BilleteraAcobrarDesktopComponent,
+		BilleteraApagarDesktopComponent,
+		BilleteraAcobrarResumenItemComponent,
+		BilleteraOperacionesItemComponent,
+		PagarCobrarContainerDesktopComponent
 	],
 	imports: [
 		HttpClientModule,
