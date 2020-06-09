@@ -2,7 +2,7 @@
 
   <section>
 
-    <div class="fondo-verde" [ngClass]="{'fondo-verde': esCelular, 'fondo-verde-desktop': !esCelular}" *ngIf="!esCelular">
+    <div class="fondo-verde" [ngClass]="{'fondo-verde-desktop': !esCelular}" *ngIf="!esCelular">
       <!--Tipo de cambio modo desktop-->
       <div class="contenedor-fecha-tipocambio-desktop" fxLayout="row" fxLayoutAlign="space-between center"
           *ngIf="!esCelular">
@@ -34,10 +34,19 @@
 
     </div>
 
+    <div class="fondo-verde" [ngClass]="{'fondo-verde': esCelular, 'fondo-verde-desktop': !esCelular}">
+      <app-tool-bar-general *ngIf="esCelular" [titulo]="'Billetera'" [disabled]="false"
+      colorIndicador="white" (botonPersonalizadoEjecutado)="mostrarOcultarNotificaciones()"
+      [urlImagenAccionPersonalizada]="hayNotificacionesNuevas ? 'assets/toolbar/bell-white-hot.svg' : 'assets/toolbar/bell-white.svg'"></app-tool-bar-general>
+    
+      <app-saldo-tc (cargandoChange)="esCargandoCtaCte($event)">
+			</app-saldo-tc>
+    </div>
+
     <div fxLayout="column" [ngClass]="{'fondo-blanco': esCelular, 'fondo-blanco-desktop': !esCelular}">
 
       <!-- CONTENEDOR DEL CARD-TAB -->
-      <div *ngIf="esCelular" style="padding: 20px; margin-top: 100px;">
+      <div *ngIf="esCelular" style="padding: 20px; margin-top: -200px;">
         <mat-tab-group fxFlex="100%" fxFlexAlign="space-between center" class="tab">
           <mat-tab label="A Cobrar"> <app-tarjeta-tab-container></app-tarjeta-tab-container> </mat-tab>
           <mat-tab label="A Pagar"> Hola soy el contenido de la segunda pestaña </mat-tab>
