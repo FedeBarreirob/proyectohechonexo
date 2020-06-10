@@ -189,6 +189,8 @@ import { AppDateAdapter, APP_DATE_FORMATS } from './format-datepicker';
 import { SeleccionadosModalComponent } from './components/listados/comprobantes/descargas-comprobantes/seleccionados-modal/seleccionados-modal.component';
 import { ReporteUsuariosComponent } from './components/listados/reportes/reporte-usuarios/reporte-usuarios/reporte-usuarios.component';
 import { ReporteUsuariosToolbarComponent } from './components/listados/reportes/reporte-usuarios/reporte-usuarios-toolbar/reporte-usuarios-toolbar.component';
+import { ReporteProductoresComponent } from './components/listados/reportes/reporte-productores/reporte-productores/reporte-productores.component';
+import { ReporteProductoresToolbarComponent } from './components/listados/reportes/reporte-productores/reporte-productores-toolbar/reporte-productores-toolbar.component';
 import { SaldoConDiferenciaDeCamioEIvaComponent } from './components/listados/cuenta-corriente/saldo-con-diferencia-de-camio-eiva/saldo-con-diferencia-de-camio-eiva.component';
 import { LongPressDirective } from './directives/long-press.directive';
 
@@ -350,6 +352,8 @@ export function tokenGetter() {
 		SeleccionadosModalComponent,
 		ReporteUsuariosComponent,
 		ReporteUsuariosToolbarComponent,
+		ReporteProductoresComponent,
+		ReporteProductoresToolbarComponent,
 		SaldoConDiferenciaDeCamioEIvaComponent,
 		LongPressDirective
 	],

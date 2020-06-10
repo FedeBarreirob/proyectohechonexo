@@ -1,0 +1,57 @@
+<div fxLayout="row" fxLayoutAlign="space-between none" fxLayoutGap="10px" style="margin-top: 20px;">
+  <div fxFlex="nogrow" class="titulo-apartados">Reporte de productores</div>
+  <div fxFlex="nogrow">
+    <app-reporte-productores-toolbar (botonDescargarExcel)="botonDescargarExcel()"
+      [disabled]="(dataSource.loading$ | async) || loading">
+    </app-reporte-productores-toolbar>
+  </div>
+</div>
+
+<mat-progress-bar *ngIf="(dataSource.loading$ | async) || loading" mode="indeterminate" style="margin-top: 5px;"></mat-progress-bar>
+
+<div class="container" fxLayout="column" fxLayout.xs="column" fxLayoutWrap fxLayoutGap="0.5%"
+  fxLayoutAlign="space-around stretch">
+
+  <table class="tabla" mat-table [dataSource]="dataSource">
+
+    <!-- Código -->
+    <ng-container matColumnDef="codigo">
+      <th mat-header-cell *matHeaderCellDef>Cód.</th>
+      <td mat-cell *matCellDef="let registro"> {{registro.codigo}} </td>
+    </ng-container>
+
+    <!-- Nombre del usuarios -->
+    <ng-container matColumnDef="nombre">
+      <th mat-header-cell *matHeaderCellDef>Nombre</th>
+      <td mat-cell *matCellDef="let registro"> {{registro.nombre}} </td>
+    </ng-container>
+
+    <!-- Email -->
+    <ng-container matColumnDef="email">
+      <th mat-header-cell *matHeaderCellDef>Email</th>
+      <td mat-cell *matCellDef="let registro"> {{registro.email}} </td>
+    </ng-container>
+
+    <!-- Cuit -->
+    <ng-container matColumnDef="cuit">
+      <th mat-header-cell *matHeaderCellDef>Cuit</th>
+      <td mat-cell *matCellDef="let registro"> {{registro.cuit}} </td>
+    </ng-container>
+
+    <!-- Teléfono -->
+    <ng-container matColumnDef="telefono">
+      <th mat-header-cell *matHeaderCellDef>Teléfono</th>
+      <td mat-cell *matCellDef="let registro"> {{registro.telefono}} </td>
+    </ng-container>
+
+    <!-- Email -->
+    <ng-container matColumnDef="comercial">
+      <th mat-header-cell *matHeaderCellDef>Comercial</th>
+      <td mat-cell *matCellDef="let registro"> {{registro.comercial}} </td>
+    </ng-container>
+
+    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+    <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+  </table>
+
+</div>

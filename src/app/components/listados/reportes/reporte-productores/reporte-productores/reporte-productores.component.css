@@ -1,0 +1,46 @@
+.tabla {
+    width: 100%;
+}
+
+mat-form-field {
+    width: 100%;
+}
+
+.container {
+    padding: 10px;
+}
+
+.titulo-apartados {
+    color: #333333;
+    font-family: Rubik;
+    font-size: 14px;
+    letter-spacing: 1.2px;
+    line-height: 17px;
+    margin-left: 17px;
+}
+
+.mat-column-codigo {
+  width: 5%;
+}
+
+.mat-column-nombre {
+  width: 40%;
+}
+
+.mat-column-email {
+  width: 10%;
+}
+
+.mat-column-cuit {
+  width: 15%;
+  text-align: center;
+}
+
+.mat-column-telefono {
+  width: 25%;
+}
+
+.mat-column-comercial {
+  width: 5%;
+  text-align: center;
+}

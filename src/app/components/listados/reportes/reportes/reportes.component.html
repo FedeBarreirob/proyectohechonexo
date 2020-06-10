@@ -33,6 +33,11 @@
           REPORTE DE USUARIOS
         </button>
 
+        <button mat-menu-item *ngIf="esAdmin && !esCelular" (click)="reportId = 5"
+          [ngClass]="{'activo': reportId === 5, 'inactivo': reportId !== 5 }">
+          REPORTE DE PRODUCTORES
+        </button>
+
       </mat-menu>
     </div>
   </div>
@@ -46,4 +51,6 @@
   </app-comprobantes-pend-facturar>
 
   <app-reporte-usuarios *ngIf="esAdmin && reportId == 4"></app-reporte-usuarios>
+
+  <app-reporte-productores *ngIf="esAdmin && reportId == 5"></app-reporte-productores>
 </div>
