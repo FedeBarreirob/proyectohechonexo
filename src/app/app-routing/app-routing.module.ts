@@ -77,6 +77,29 @@ const routes: Routes = [
 				}
 			},
 			{
+				path: 'billetera',
+				component: BilleteraComponent,
+				canActivate: [AuthGuardGuard],
+				data: {
+					rolAdmin: false
+				}
+			},
+			{
+				path: 'pagar',
+				component: BilleteraPagarComponent,
+				canActivate: [AuthGuardGuard],
+				data: {
+					rolAdmin: false
+				}
+			},{
+				path: 'cobrar',
+				component: BilleteraCobrarComponent,
+				canActivate: [AuthGuardGuard],
+				data: {
+					rolAdmin: false
+				}
+			},
+			{
 				path: 'entregas',
 				component: EntregasComponent,
 				canActivate: [AuthGuardGuard],
