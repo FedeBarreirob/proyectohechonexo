@@ -208,6 +208,8 @@ import { BilleteraOperacionesItemComponent } from './components/listados/billete
 import { PagarCobrarContainerDesktopComponent } from './components/listados/billetera/pagar-cobrar-container-desktop/pagar-cobrar-container-desktop.component';
 import { BilleteraCobrarCardComponent } from './components/listados/billetera/billetera-cobrar/billetera-cobrar-card/billetera-cobrar-card.component';
 import { BilleteraCobrarListComponent } from './components/listados/billetera/billetera-cobrar/billetera-cobrar-list/billetera-cobrar-list.component';
+import { BilleteraCobrarCardCobroComponent } from './components/listados/billetera/billetera-cobrar/billetera-cobrar-card-cobro/billetera-cobrar-card-cobro.component';
+import { BilleteraCobrarCardTotalComponent } from './components/listados/billetera/billetera-cobrar/billetera-cobrar-card-total/billetera-cobrar-card-total.component';
 
 registerLocaleData(localeEsAr, 'es-AR');
 
@@ -385,7 +387,9 @@ export function tokenGetter() {
 		BilleteraOperacionesItemComponent,
 		PagarCobrarContainerDesktopComponent,
 		BilleteraCobrarCardComponent,
-		BilleteraCobrarListComponent
+		BilleteraCobrarListComponent,
+		BilleteraCobrarCardCobroComponent,
+		BilleteraCobrarCardTotalComponent
 	],
 	imports: [
 		HttpClientModule,

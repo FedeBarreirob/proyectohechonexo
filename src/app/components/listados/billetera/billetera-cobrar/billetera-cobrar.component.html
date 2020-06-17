@@ -8,6 +8,8 @@
     <h3 fxFlex="75%" style="margin-left: 20px; color: green;">Programar cobro</h3>
   </div>
   
+  <!-- VISTA MOVILE -->
+
   <mat-horizontal-stepper labelPosition="bottom" #stepper>
     <mat-step [stepControl]="firstFormGroup">
       <ng-template matStepLabel>Origen</ng-template>
@@ -21,6 +23,12 @@
     
     <mat-step [stepControl]="secondFormGroup" [optional]="isOptional">
       <ng-template matStepLabel>Importes</ng-template>
+      <p style="color: lightgrey; padding: 10px; text-align: left;">Escoge entre tu dinero disponible o el dinero por cobrar para programar tu cobro.</p>
+      <app-billetera-cobrar-card-cobro></app-billetera-cobrar-card-cobro>
+      <div fxFlex="100%" fxLayout="row" fxLayoutAlign="space-between center" class="items">
+        <button mat-button><mat-icon class="button-info">add</mat-icon>Agregar un cobro</button>
+      </div>
+      <app-billetera-cobrar-card-total></app-billetera-cobrar-card-total>
     </mat-step>
     
     
@@ -35,6 +43,10 @@
   </mat-horizontal-stepper>
 </div>
 
+
+<!-- VISTA WEB -->
+
+
 <mat-sidenav-container [ngClass]="{'contenedor-desktop': !esCelular }">
   <div *ngIf="!esCelular">
     
@@ -47,11 +59,11 @@
             <mat-icon style="color: green;">arrow_back</mat-icon>
           </button>
         </a>
-        <h3 fxFlex="75%" style="margin-left: 20px; color: green;">Programar cobro</h3>
+        <h3 fxFlex="85%" style="margin-left: 20px; color: green;">Programar cobro</h3>
       </div>
 
-      <mat-horizontal-stepper labelPosition="top" #stepper>
-        <mat-step [stepControl]="firstFormGroup">
+      <mat-horizontal-stepper labelPosition="bottom" #stepper>
+        <mat-step >
           <ng-template matStepLabel>Origen</ng-template>
           <p style="color: lightgrey; padding: 10px; text-align: left;">Escoge entre tu dinero disponible o el dinero por cobrar para programar tu cobro.</p>
           <h3>Dinero disponible</h3>
@@ -61,8 +73,12 @@
         </mat-step>
         
         
-        <mat-step [stepControl]="secondFormGroup" [optional]="isOptional">
+        <mat-step >
           <ng-template matStepLabel>Importes</ng-template>
+          <div>
+            <p style="color: lightgrey; padding: 10px; text-align: left;">Define los importes, medios y destinatarios de cada cobro.</p>
+            
+          </div>
         </mat-step>
         
         
@@ -75,6 +91,8 @@
           </div>
         </mat-step>
       </mat-horizontal-stepper>
+
+      
     </div>
 
   </div>

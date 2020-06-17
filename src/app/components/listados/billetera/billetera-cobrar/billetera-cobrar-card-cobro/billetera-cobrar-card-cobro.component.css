@@ -1,0 +1,47 @@
+.card-container{
+    padding: 10px;
+    padding-top: 0px;
+    margin-top: 10px;
+    background-color: white;
+    border-radius: 4px;
+}
+
+.title{
+    text-align: left;
+}
+
+.button{
+    text-align: right;
+}
+
+.cerrar{
+    color: lightgray;
+}
+
+.monto{
+    text-align: center;
+}
+
+.montot{
+    text-align: center;
+    color: rgb(109, 109, 109);
+    margin-top: -10px;
+}
+
+.fecha{
+    color: rgb(109, 109, 109);
+    text-align: left;
+    margin-top: -20px;
+}
+
+.items{
+    color: green;
+    text-align: right;
+    margin-top: -10px;
+}
+
+.button-info{
+    cursor: pointer;
+    color: #23B950;
+    text-align: center;
+}

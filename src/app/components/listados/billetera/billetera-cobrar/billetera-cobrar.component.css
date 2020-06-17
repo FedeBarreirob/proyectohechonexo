@@ -20,3 +20,16 @@
 .button{
     background-color: white;
 }
+
+.button-info{
+  cursor: pointer;
+  color: #23B950;
+  text-align: center;
+}
+
+.items{
+  color: #23B950;
+  text-align: center;
+  padding: 20px;
+  margin-left: 50px;
+}

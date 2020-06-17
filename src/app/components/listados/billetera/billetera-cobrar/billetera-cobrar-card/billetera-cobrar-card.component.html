@@ -1,33 +1,67 @@
-<div class="card-container">
-  <div fxLayout="row" fxLayoutAlign="space-between center" class="cuenta-item">
-    <div fxLayout="column" >
-      <button mat-icon-button>
-        <mat-icon class="button-info">monetization_on</mat-icon>
-      </button>
-    </div>
-    <div fxFlex="grow" fxLayout="column" fxLayoutAlign="space-between" class="contenedor">
-      <div class="monto">
-        ${{ total | number }}
+<!--vista celular-->
+<div *ngIf="esCelular">
+  <div class="card-container">
+    <div fxLayout="row" fxLayoutAlign="space-between center" class="cuenta-item">
+      <div fxLayout="column" >
+        <button mat-icon-button>
+          <mat-icon class="button-info">monetization_on</mat-icon>
+        </button>
       </div>
-      
-      <div class="detalle">
-        Disponible ahora
-      </div>
+      <div fxFlex="grow" fxLayout="column" fxLayoutAlign="space-between" class="contenedor">
+        <div class="monto">
+          ${{ total | number }}
+        </div>
         
+        <div class="detalle">
+          Disponible ahora
+        </div>
+          
+      </div>
     </div>
-  </div>
-  <mat-divider></mat-divider>
-
-  <div fxLayout="row" class="more-items">
-    <div fxFlex="75%" class="items" align="end">
-      <button mat-button class="link-ver-todas">Ver detalles </button>
+    <mat-divider></mat-divider>
+  
+    <div fxLayout="row" class="more-items">
+      <div fxFlex="70%" class="items" align="end">
+        <button mat-button class="link-ver-todas">Ver detalles </button>
+      </div>
+      <div fxFlex="30%" class="items" align="end">
+        <button mat-button matStepperNext class="link-ver-todas">Cobrar <mat-icon class="button-info">keyboard_arrow_right</mat-icon></button>
+      </div>
     </div>
-    <div fxFlex="25%" class="items" align="end">
-      <button mat-button class="link-ver-todas">Cobrar</button>
-    </div>
-    <button mat-icon-button>
-      <mat-icon class="button-info">keyboard_arrow_right</mat-icon>
-    </button>
-  </div>
+  </div>  
 </div>
 
+<!--vista web-->
+
+<div *ngIf="!esCelular">
+  <div class="card-container">
+    <div fxLayout="row" fxLayoutAlign="space-between center" class="cuenta-item">
+      <div fxLayout="column" >
+        <button mat-icon-button>
+          <mat-icon class="button-info">monetization_on</mat-icon>
+        </button>
+      </div>
+      <div fxFlex="grow" fxLayout="column" fxLayoutAlign="space-between" class="contenedor">
+        <div class="monto">
+          ${{ total | number }}
+        </div>
+        
+        <div class="detalle">
+          Disponible ahora
+        </div>
+          
+      </div>
+
+      <div fxLayout="row" class="more-items">
+        <div fxFlex="50%" class="items" align="end">
+          <button mat-button class="link-ver-todas">Ver detalles </button>
+        </div>
+        <div fxFlex="50%" class="items" align="end">
+          <button mat-button matStepperNext class="link-ver-todas">Cobrar <mat-icon class="button-info">keyboard_arrow_right</mat-icon></button>
+        </div>
+      </div>
+    </div>
+  
+    
+  </div>  
+</div>

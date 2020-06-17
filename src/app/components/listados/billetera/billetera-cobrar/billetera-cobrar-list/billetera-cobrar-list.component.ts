@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { DeviceDetectorService } from 'ngx-device-detector';
 
 @Component({
   selector: 'app-billetera-cobrar-list',
@@ -21,9 +22,14 @@ export class BilleteraCobrarListComponent implements OnInit {
     'monto': '125,000'
   }];
 
-  constructor() { }
+  esCelular = false;
+
+  constructor(
+    private deviceService: DeviceDetectorService,
+  ) { }
 
   ngOnInit() {
+    this.esCelular = this.deviceService.isMobile();
   }
 
 }

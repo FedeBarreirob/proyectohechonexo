@@ -1,0 +1,13 @@
+<div *ngIf="esCelular">
+  <div fxLayout="column" class="card-container" *ngFor="let item of cobros">
+    <div fxLayout="row">
+      <div fxFlex="50%" fxLayout="column" fxLayoutALign="space-between center" class="title">
+        <h6>Total</h6>
+        <div class="monto">$ {{ item.monto }}</div>
+      </div>
+      <div fxFlex="50%" fxLayoutALign="space-between center" class="button">
+        <button mat-raised-button matStepperNext class="btn">Siguiente</button>
+      </div>
+    </div>
+  </div>
+</div>

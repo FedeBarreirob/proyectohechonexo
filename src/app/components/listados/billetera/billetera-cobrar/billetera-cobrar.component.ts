@@ -12,6 +12,17 @@ export class BilleteraCobrarComponent implements OnInit {
   firstFormGroup: FormGroup;
   secondFormGroup: FormGroup;
   isOptional = false;
+  cobros=[];
+  agregarcobro(){
+    this.cobros= [
+      {
+        'id': 2,
+        'fecha': '23/12/20',
+        'monto': '13,000',
+        'montototal': '111,000'
+      },
+    ];
+  }
 
   constructor(
     private deviceService: DeviceDetectorService,
