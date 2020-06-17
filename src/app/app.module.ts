@@ -193,17 +193,36 @@ import { ReporteProductoresComponent } from './components/listados/reportes/repo
 import { ReporteProductoresToolbarComponent } from './components/listados/reportes/reporte-productores/reporte-productores-toolbar/reporte-productores-toolbar.component';
 import { SaldoConDiferenciaDeCamioEIvaComponent } from './components/listados/cuenta-corriente/saldo-con-diferencia-de-camio-eiva/saldo-con-diferencia-de-camio-eiva.component';
 import { LongPressDirective } from './directives/long-press.directive';
+import { BilleteraComponent } from './components/listados/billetera/billetera/billetera.component';
+import { BilleteraPagarComponent } from './components/listados/billetera/billetera-pagar/billetera-pagar.component';
+import { BilleteraCobrarComponent } from './components/listados/billetera/billetera-cobrar/billetera-cobrar.component';
+import { TarjetaTabContainerComponent } from './components/listados/billetera/tarjeta-tab-container/tarjeta-tab-container.component';
+import { PagarCobrarContainerComponent } from './components/listados/billetera/pagar-cobrar-container/pagar-cobrar-container.component';
+import { TablaOperacionesRecientesComponent } from './components/listados/billetera/tabla-operaciones-recientes/tabla-operaciones-recientes.component';
+import { ListaOperacionesMovilComponent } from './components/listados/billetera/lista-operaciones-movil/lista-operaciones-movil.component';
+import { TarjetaTabContainerWeb1Component } from './components/listados/billetera/tarjeta-tab-container-web1/tarjeta-tab-container-web1.component';
+import { TarjetaTabContainerWebComponent } from './components/listados/billetera/tarjeta-tab-container-web/tarjeta-tab-container-web.component';
+import { SaldoTcComponent } from './components/listados/billetera/saldo-tc/saldo-tc.component';
+import { BilleteraAcobrarDesktopComponent } from './components/listados/billetera/billetera-acobrar-desktop/billetera-acobrar-desktop.component';
+import { BilleteraApagarDesktopComponent } from './components/listados/billetera/billetera-apagar-desktop/billetera-apagar-desktop.component';
+import { BilleteraAcobrarResumenItemComponent } from './components/listados/billetera/billetera-acobrar-resumen-item/billetera-acobrar-resumen-item.component';
+import { BilleteraOperacionesItemComponent } from './components/listados/billetera/billetera-operaciones-item/billetera-operaciones-item.component';
+import { PagarCobrarContainerDesktopComponent } from './components/listados/billetera/pagar-cobrar-container-desktop/pagar-cobrar-container-desktop.component';
+import { BilleteraCobrarCardComponent } from './components/listados/billetera/billetera-cobrar/billetera-cobrar-card/billetera-cobrar-card.component';
+import { BilleteraCobrarListComponent } from './components/listados/billetera/billetera-cobrar/billetera-cobrar-list/billetera-cobrar-list.component';
+import { BilleteraCobrarCardCobroComponent } from './components/listados/billetera/billetera-cobrar/billetera-cobrar-card-cobro/billetera-cobrar-card-cobro.component';
+import { BilleteraCobrarCardTotalComponent } from './components/listados/billetera/billetera-cobrar/billetera-cobrar-card-total/billetera-cobrar-card-total.component';
 
 registerLocaleData(localeEsAr, 'es-AR');
 
 export function tokenGetter() {
-	let usuario = JSON.parse(localStorage.getItem('currentUser'));
-	return usuario != null ? usuario.token : '';
+  const usuario = JSON.parse(localStorage.getItem('currentUser'));
+  return usuario != null ? usuario.token : '';
 }
 
 @NgModule({
-	declarations: [
-		AppComponent,
+  declarations: [
+    AppComponent,
 		LoginComponent,
 		DashboardComponent,
 		MainNavComponent,
@@ -355,7 +374,26 @@ export function tokenGetter() {
 		ReporteProductoresComponent,
 		ReporteProductoresToolbarComponent,
 		SaldoConDiferenciaDeCamioEIvaComponent,
-		LongPressDirective
+		LongPressDirective,
+		BilleteraComponent,
+		BilleteraPagarComponent,
+		BilleteraCobrarComponent,
+		TarjetaTabContainerComponent,
+		PagarCobrarContainerComponent,
+		TablaOperacionesRecientesComponent,
+		ListaOperacionesMovilComponent,
+		TarjetaTabContainerWeb1Component,
+		TarjetaTabContainerWebComponent,
+		SaldoTcComponent,
+		BilleteraAcobrarDesktopComponent,
+		BilleteraApagarDesktopComponent,
+		BilleteraAcobrarResumenItemComponent,
+		BilleteraOperacionesItemComponent,
+		PagarCobrarContainerDesktopComponent,
+		BilleteraCobrarCardComponent,
+		BilleteraCobrarListComponent,
+		BilleteraCobrarCardCobroComponent,
+		BilleteraCobrarCardTotalComponent
 	],
 	imports: [
 		HttpClientModule,

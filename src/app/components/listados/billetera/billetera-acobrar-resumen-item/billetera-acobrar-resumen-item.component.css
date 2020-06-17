@@ -1,0 +1,29 @@
+.detalle {
+  color: #666666;
+  font-family: Rubik;
+  font-size: 12px;
+  letter-spacing: 1.2px;
+  text-align: left;
+  margin-top: 5px;
+}
+
+.button-info{
+  cursor: pointer;
+  color: #23B950;
+  text-align: center;
+}
+
+.monto {
+  color: #333333;
+  font-family: RubikLight;
+  font-size: 20px;
+}
+
+.cuenta-item {
+  margin-bottom: 10px;
+  margin-top: 20px;
+}
+
+.contenedor {
+  margin-left: 5px;
+}

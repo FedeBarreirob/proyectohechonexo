@@ -1,8 +1,8 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { MatSidenav, MatDialog, MatSnackBar } from '@angular/material';
 import { Subject } from 'rxjs';
-import { DeviceDetectorService } from 'ngx-device-detector';
 import { NotificacionesService } from '../../../services/notificaciones/notificaciones.service';
+import { DeviceDetectorService } from 'ngx-device-detector';
 import { AuthenticationService } from '../../../services/security/authentication.service';
 import { UserAuth } from '../../../models/security/user';
 import { EstadoNotificaciones } from '../../../enums/estado-notificaciones.enum';

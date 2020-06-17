@@ -1,0 +1,35 @@
+.contenedor-desktop {
+  height: 100%;
+  padding-top: 100px;
+}
+
+.mat-stepper-horizontal {
+    margin-top: 0px;
+    background-color: rgb(247, 247, 247);
+  }
+  
+  .mat-form-field {
+    margin-top: 16px;
+  }
+
+.tittle{
+    margin-top: 15px;
+    background-color: white;
+}
+
+.button{
+    background-color: white;
+}
+
+.button-info{
+  cursor: pointer;
+  color: #23B950;
+  text-align: center;
+}
+
+.items{
+  color: #23B950;
+  text-align: center;
+  padding: 20px;
+  margin-left: 50px;
+}

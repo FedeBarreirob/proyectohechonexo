@@ -1,0 +1,54 @@
+<!--vista movile-->
+
+<div *ngIf="esCelular">
+  <div fxLayout="column" class="card-container" *ngFor="let item of cobros">
+    <div style="padding: 10px;">
+      <div fxLayout="row">
+        <div fxFlex="50%" fxLayoutALign="space-between center" class="title">
+          <h5>Cobro {{ item.id }} </h5>
+        </div>
+        <div fxFlex="50%" fxLayoutALign="space-between center" class="button">
+          <button mat-icon-button class="cerrar">
+            <mat-icon>close</mat-icon>
+          </button>
+        </div>
+      </div>
+      <div fxLayout="row">
+        <div fxFlex="100%" fxLayoutALign="space-between center" class="monto">
+          <h3>$ {{ item.monto }} </h3>
+        </div>
+      </div>
+  
+      <mat-divider></mat-divider>
+  
+      <div fxLayout="row">
+        <div fxFlex="100%" fxLayoutALign="space-between center" class="montot">
+          <h6>Hasta $ {{ item.montototal }} </h6>
+        </div>
+      </div>
+      <div fxLayout="row">
+        <div fxFlex="50%" fxLayoutALign="space-between center" class="fecha">
+          <h5>Fecha programada</h5>
+        </div>
+        <div fxFlex="50%" fxLayoutALign="space-between center" class="items">
+          <button mat-button> {{ item.fecha }} <mat-icon class="button-info">keyboard_arrow_right</mat-icon></button>
+        </div>
+      </div>
+      <div fxLayout="row">
+        <div fxFlex="50%" fxLayoutALign="space-between center" class="fecha">
+          <h5>Medio de cobro</h5>
+        </div>
+        <div fxFlex="50%" fxLayoutALign="space-between center" class="items">
+          <button mat-button> Seleccionar</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<!--vista web-->
+
+<div *ngIf="!esCelular">
+
+</div>

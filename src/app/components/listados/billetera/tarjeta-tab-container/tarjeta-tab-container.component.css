@@ -1,0 +1,40 @@
+.tarjeta {
+    margin-left: 15px;
+    margin-right: 15px;
+    margin-bottom: 10px;
+    min-height: 67px;
+}
+
+.indicador{
+    float: right;
+    margin-top: -5px;
+    color: greenyellow;
+}
+
+.titulo-card-1 {
+    color: #666666;
+    font-family: Rubik;
+    font-size: 12px;
+    letter-spacing: 1.2px;
+    text-align: left;
+}
+
+.titulo-card {
+    margin-top: 15px;
+    color: #666666;
+    font-family: Rubik;
+    font-size: 12px;
+    letter-spacing: 1.2px;
+    text-align: left;
+}
+
+.importe-cobrar {
+    color: #23B950;
+    font-family: RubikLight;
+    font-size: 20px;
+}
+
+.contenedor-importe {
+    text-align: left;
+    margin-bottom: 12px;
+}

@@ -1,0 +1,31 @@
+.card{
+  margin-left: 15px;
+  margin-right: 15px;
+  margin-bottom: 10px;
+}
+
+.titulo-card{
+  color: #666666;
+  font-family: Rubik;
+  font-size: 18px;
+  letter-spacing: 1.2px;
+  text-align: center;
+  margin-left: 10px;
+}
+
+.contenedor {
+  text-align: center;
+}
+
+.button{
+  background-color: #319B43;
+}
+
+.button-icon{
+  font-size: x-large;
+  font-weight: 500;
+  cursor: pointer;
+  color: white;
+  text-align: center;
+  vertical-align: auto;
+}

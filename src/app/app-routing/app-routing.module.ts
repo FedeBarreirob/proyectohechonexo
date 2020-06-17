@@ -26,6 +26,9 @@ import { InformacionDePerfilDesktopComponent } from '../components/usuarios-y-pe
 import { LoginLayoutComponent } from '../components/layouts/login-layout/login-layout.component';
 import { HomeLayoutComponent } from '../components/layouts/home-layout/home-layout.component';
 import { NotificacionDetalleUrlComponent } from '../components/notificaciones/notificacion-detalle-url/notificacion-detalle-url.component';
+import { BilleteraComponent } from '../components/listados/billetera/billetera/billetera.component';
+import { BilleteraPagarComponent } from '../components/listados/billetera/billetera-pagar/billetera-pagar.component';
+import { BilleteraCobrarComponent } from '../components/listados/billetera/billetera-cobrar/billetera-cobrar.component';
 
 const routes: Routes = [
 	{
@@ -60,6 +63,37 @@ const routes: Routes = [
 			{
 				path: 'ctacte',
 				component: CuentaCorrienteComponent,
+				canActivate: [AuthGuardGuard],
+				data: {
+					rolAdmin: false
+				}
+			},
+			{
+				path: 'billetera',
+				component: BilleteraComponent,
+				canActivate: [AuthGuardGuard],
+				data: {
+					rolAdmin: false
+				}
+			},
+			{
+				path: 'billetera',
+				component: BilleteraComponent,
+				canActivate: [AuthGuardGuard],
+				data: {
+					rolAdmin: false
+				}
+			},
+			{
+				path: 'pagar',
+				component: BilleteraPagarComponent,
+				canActivate: [AuthGuardGuard],
+				data: {
+					rolAdmin: false
+				}
+			},{
+				path: 'cobrar',
+				component: BilleteraCobrarComponent,
 				canActivate: [AuthGuardGuard],
 				data: {
 					rolAdmin: false
