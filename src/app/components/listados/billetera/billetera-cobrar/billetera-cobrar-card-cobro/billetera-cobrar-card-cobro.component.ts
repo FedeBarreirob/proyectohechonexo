@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { DeviceDetectorService } from 'ngx-device-detector';
 
+
 @Component({
   selector: 'app-billetera-cobrar-card-cobro',
   templateUrl: './billetera-cobrar-card-cobro.component.html',
@@ -9,6 +10,10 @@ import { DeviceDetectorService } from 'ngx-device-detector';
 export class BilleteraCobrarCardCobroComponent implements OnInit {
 
   esCelular: boolean;
+  isTransferencia: boolean = true;
+  isChequeFisico: boolean = true;
+  isCard: boolean = true;
+  labelPosition: 'before' | 'after' = 'after';
 
   cobros = [{
     'id': 1,
@@ -20,6 +25,18 @@ export class BilleteraCobrarCardCobroComponent implements OnInit {
   constructor(
     private deviceService: DeviceDetectorService
   ) { }
+
+  Transferencia(){
+    this.isTransferencia = !this.isTransferencia;
+  }
+
+  chequeFisico(){
+    this.isChequeFisico = !this.isChequeFisico;
+  }
+
+  cerrarVentana(){
+    this.isCard = !this.isCard;
+  }
 
   ngOnInit() {
     this.esCelular = this.deviceService.isMobile();

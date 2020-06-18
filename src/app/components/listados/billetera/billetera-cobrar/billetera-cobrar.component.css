@@ -4,21 +4,21 @@
 }
 
 .mat-stepper-horizontal {
-    margin-top: 0px;
-    background-color: rgb(247, 247, 247);
-  }
+  margin-top: 0px;
+  background-color: rgb(247, 247, 247);
+}
   
-  .mat-form-field {
-    margin-top: 16px;
-  }
+.mat-form-field {
+  margin-top: 16px;
+}
 
 .tittle{
-    margin-top: 15px;
-    background-color: white;
+  margin-top: 15px;
+  background-color: white;
 }
 
 .button{
-    background-color: white;
+  background-color: white;
 }
 
 .button-info{
@@ -31,5 +31,5 @@
   color: #23B950;
   text-align: center;
   padding: 20px;
-  margin-left: 50px;
+  margin-left: auto;
 }

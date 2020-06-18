@@ -1,0 +1,61 @@
+<div *ngIf="esCelular">
+
+  <div fxLayout="column" fxFlex="80%" fxLayoutALign="space-between center" style="padding: 20px;">
+    <h3>Agregar una cuenta</h3>
+
+    <div fxLayout="column" >
+      <h5>NOMBRE DEL PROPIETARIO</h5>
+      <mat-form-field style="margin-top: -20px;">
+        <input matInput placeholder="">
+      </mat-form-field>
+      <h5>CBU/CVU</h5>
+      <mat-form-field style="margin-top: -20px;">
+        <input matInput placeholder="">
+      </mat-form-field>
+      <h5>REFERENCIA</h5>
+      <mat-form-field style="margin-top: -20px;">
+        <input matInput placeholder="">
+        <mat-hint>Agrega una referencia para recordar más fácil esta cuenta</mat-hint>
+      </mat-form-field>
+    </div>
+    <div fxLayout="row" style="padding: 20px; margin-top: 30px; margin-left: 60%; text-align: center;">
+      <a routerLink="/cobrar">
+        <button mat-button class="button">
+          Volver
+        </button>
+      </a>
+      <button mat-button style="margin-left: 20px; margin-right: 20px;" (click)="agregar">Agregar</button>
+    </div>
+  </div>
+
+</div>
+
+<div *ngIf="!esCelular">
+  <div fxLayout="column" fxFlex="60%" fxLayoutALign="space-between center" style="padding: 20px; margin-top: 150px; margin-left: 50px;">
+    <h3>Agregar una cuenta</h3>
+
+    <div fxLayout="column" >
+      <h5>NOMBRE DEL PROPIETARIO</h5>
+      <mat-form-field style="margin-top: -20px;">
+        <input matInput placeholder="">
+      </mat-form-field>
+      <h5>CBU/CVU</h5>
+      <mat-form-field style="margin-top: -20px;">
+        <input matInput placeholder="">
+      </mat-form-field>
+      <h5>REFERENCIA</h5>
+      <mat-form-field style="margin-top: -20px;">
+        <input matInput placeholder="">
+        <mat-hint>Agrega una referencia para recordar más fácil esta cuenta</mat-hint>
+      </mat-form-field>
+    </div>
+    <div fxLayout="row" style="padding: 20px; margin-top: 30px; margin-left: 60%; text-align: center;">
+      <a routerLink="/cobrar">
+        <button mat-button class="button">
+          Volver
+        </button>
+      </a>
+      <button mat-button style="margin-left: 20px; margin-right: 20px;" (click)="agregar">Agregar</button>
+    </div>
+  </div>
+</div>

@@ -1,10 +1,28 @@
+.cont{
+    margin: -23px;
+}
+
 .card-container{
+    padding: 10px;
     margin-top: 100px;
+    background-color: white;
+}
+
+.card-container-desktop{
+    margin-top: 100px;
+    margin-bottom: 20px;
     background-color: white;
 }
 
 .title{
     padding: 10px;
+    text-align: left;
+    color: rgb(122, 122, 122);
+}
+
+.title-desk{
+    padding: 0px;
+    margin-left: 30px;
     text-align: left;
     color: rgb(122, 122, 122);
 }
@@ -21,8 +39,17 @@
     color: white;
 }
 
+.button-desk{
+    margin-top: 30px;
+    margin-left: 250px;
+}
+
 .btn{
-    margin-top: 20px;
-    margin-bottom: 15px;
+    margin-top: 25px;
+    background-color: rgb(33, 179, 33);
+}
+
+.btn-desk{
+    margin-left: 30px;
     background-color: rgb(33, 179, 33);
 }
