@@ -14,18 +14,18 @@ export class BilleteraCobrarCardCobroComponent implements OnInit {
   esCelular: boolean;
   isTransferencia: boolean = true;
   isChequeFisico: boolean = true;
-  isCard: boolean = true;
+  
   labelPosition: 'before' | 'after' = 'after';
 
   cobrosArray: cobro[] = [
-    {id: 1, 'fecha': new Date(), 'monto': '12,000', 'montototal': '123,000'},
+    {'id': 1, 'fecha': new Date(), 'monto': '12,000', 'montototal': '123,000'},
   ];
 
   selectedCobros: cobro = new cobro();
 
   cuentasArray: cuentas[] = [
     {'id': 1, 'nombre': 'José Gaviglio', 'cbu': 123456789, 'ref': 'José'},
-    {'id': 1, 'nombre': 'Pedro Oliveira', 'cbu': 123466789, 'ref': 'Pedro'}
+    {'id': 2, 'nombre': 'Pedro Oliveira', 'cbu': 123466789, 'ref': 'Pedro'}
   ];
 
   constructor(

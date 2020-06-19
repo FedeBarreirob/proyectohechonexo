@@ -2,7 +2,7 @@
 
 <div *ngIf="esCelular">
   <div fxLayout="column">
-    <div class="card-container" *ngIf="isCard">
+    <div class="card-container" >
       <div fxLayout="row" *ngFor="let item of cobrosArray">
         <div fxFlex="50%" fxLayoutALign="space-between center" class="title">
           <h5>Cobro {{ item.id }} </h5>
@@ -87,8 +87,7 @@
     </div>
 
     <div fxFlex="100%" fxLayout="row" fxLayoutAlign="space-between center" class="items" style="margin-left: 60px; margin-top: 50px;">
-      <button mat-stroked-button style="color: green; border: solid 1px green; width: 200px;"
-        (click)="AgregarCobro()">
+      <button mat-stroked-button style="color: green; border: solid 1px green; width: 200px;" (click)="AgregarCobro()">
         <mat-icon class="button-info">add</mat-icon>Agregar un cobro
       </button>
     </div>
@@ -100,7 +99,7 @@
 
 <div *ngIf="!esCelular">
   <div fxLayout="column">
-    <div class="card-container" *ngIf="isCard">
+    <div class="card-container">
       <div fxLayout="row"  *ngFor="let item of cobrosArray">
         <div fxFlex="50%" fxLayoutALign="space-between center" class="title">
           <h5>Cobro {{ item.id }} </h5>
@@ -183,14 +182,13 @@
               </section>
             </div>
           </div>
-
+          
         </div>
       </div>
     </div>
 
     <div fxFlex="100%" fxLayout="row" fxLayoutAlign="space-between center" class="items" style="margin-left: 350px; margin-top: 50px;">
-      <button mat-stroked-button style="color: green; border: solid 1px green; width: 300px;"
-        (click)="AgregarCobro()">
+      <button mat-stroked-button style="color: green; border: solid 1px green; width: 300px;" (click)= "AgregarCobro()">
         <mat-icon class="button-info">add</mat-icon>Agregar un cobro
       </button>
     </div>
