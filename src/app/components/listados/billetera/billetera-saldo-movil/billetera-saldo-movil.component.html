@@ -1,0 +1,33 @@
+<div class="contenedor-fecha-tipocambio" fxLayout="row" fxLayoutAlign="space-between center">
+  <div fxFlex="50%" class="contenedor-fecha-hora">
+    <app-fecha-hora></app-fecha-hora>
+  </div>
+  <div fxFlex="50%">
+    <div fxFlex class="contenedor-tipo-cambio">
+      <img src="assets/varios/tc.png" class="img-tc" />
+      <span *ngIf="saldoGlobal != null && seObtuvoSaldoExito == true && saldoGlobal.esTipoCambioDeHoy == true">TC
+        ${{ saldoGlobal.tipoDeCambio | number: '.2' }}</span>
+
+      <span *ngIf="saldoGlobal != null && seObtuvoSaldoExito == true && saldoGlobal.esTipoCambioDeHoy == false">TC
+        ${{ saldoGlobal.tipoDeCambio | number: '.2' }} <span class="fecha-tc">al
+          {{saldoGlobal.fechaTipoCambio}}</span></span>
+
+      <span *ngIf="saldoGlobal == null || seObtuvoSaldoExito == false">TC no disp.</span>
+    </div>
+  </div>
+</div>
+
+<div style="padding: 20px">
+
+   <!--Spinner-->
+   <div fxLayout="row" fxLayoutAlign="center center" *ngIf="cargando == true" style="margin-top: 10px; width: 100%;">
+    <mat-spinner diameter="24"></mat-spinner>
+  </div>
+
+  <mat-tab-group fxFlex="100%" fxFlexAlign="space-between center" class="tab" *ngIf="!cargando">
+    <mat-tab label="A Cobrar">
+      <app-tarjeta-tab-container *ngIf="saldoGlobal != null && seObtuvoSaldoExito == true" [saldoGlobal]="saldoGlobal"></app-tarjeta-tab-container>
+    </mat-tab>
+    <mat-tab label="A Pagar"> Hola soy el contenido de la segunda pestaña </mat-tab>
+  </mat-tab-group>
+</div>

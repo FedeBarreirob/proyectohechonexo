@@ -62,6 +62,7 @@ export class InformacionTributariaExportacionesService {
       rows.push(stockGranosNoLiquidadosRows);
 
       // .. preparar opciones
+      var headerTotalsCount = 0;
       let stockGranosNoLiquidadosOpciones = {
         startY: 30,
         columnStyles: {
@@ -69,6 +70,11 @@ export class InformacionTributariaExportacionesService {
           1: { columnWidth: '25%', halign: 'left' },
           2: { columnWidth: '25%', halign: 'right' },
           3: { columnWidth: '25%', halign: 'right' }
+        },
+        createdHeaderCell: function (cell, data) {
+          cell.styles.columnWidth = data.settings.columnStyles[headerTotalsCount].columnWidth;
+          cell.styles.halign = data.settings.columnStyles[headerTotalsCount].halign;
+          headerTotalsCount++;
         }
       };
       opciones.push(stockGranosNoLiquidadosOpciones);
@@ -83,29 +89,35 @@ export class InformacionTributariaExportacionesService {
       saldosRow.push(
         [
           "Saldo en pesos",
-          `AR$ ${this.decimalPipe.transform(tenenciaImpositiva.saldoCtaCte.saldoPesos, '.2-2')}`
+          `AR$ ${this.decimalPipe.transform(tenenciaImpositiva.saldoCtaCte.saldoPesos * -1, '.2-2')}`
         ]
       );
       saldosRow.push(
         [
           "Saldo en dólares",
-          `US$ ${this.decimalPipe.transform(tenenciaImpositiva.saldoCtaCte.saldoDolar, '.2-2')}`
+          `US$ ${this.decimalPipe.transform(tenenciaImpositiva.saldoCtaCte.saldoDolar * -1, '.2-2')}`
         ]
       );
       saldosRow.push(
         [
           "Saldo en contable",
-          `AR$ ${this.decimalPipe.transform(tenenciaImpositiva.saldoCtaCte.saldoContable, '.2-2')}`
+          `AR$ ${this.decimalPipe.transform(tenenciaImpositiva.saldoCtaCte.saldoContable * -1, '.2-2')}`
         ]
       );
       rows.push(saldosRow);
 
       // .. preparar opciones
+      var headerTotalsCountResumen = 0;
       let saldosOpciones = {
         startY: 30,
         columnStyles: {
           0: { columnWidth: '50%', halign: 'left' },
           1: { columnWidth: '50%', halign: 'right' },
+        },
+        createdHeaderCell: function (cell, data) {
+          cell.styles.columnWidth = data.settings.columnStyles[headerTotalsCountResumen].columnWidth;
+          cell.styles.halign = data.settings.columnStyles[headerTotalsCountResumen].halign;
+          headerTotalsCountResumen++;
         }
       };
       opciones.push(saldosOpciones);
@@ -119,7 +131,7 @@ export class InformacionTributariaExportacionesService {
         rows,
         `Reporte de Tenencias Impositivas - ${fecha}`,
         columnas,
-        "reporte-tenencias-impositivas",
+        tenenciaImpositiva.saldoCtaCte.codigo.trim() + " - " + tenenciaImpositiva.saldoCtaCte.nombre,
         opciones
       );
     } catch (e) {

@@ -9,11 +9,11 @@
   </div>
 
   <div fxLayout="row" fxLayoutAlign="space-between center">
-    
-    <div fxFlex="100%" class="contenedor-importe"><span
-        class="importe-cobrar"> 50.000 </span>
+
+    <div fxFlex="100%" class="contenedor-importe"><span class="importe-cobrar">
+        {{ saldoGlobal.aCobrarVencido + saldoGlobal.aCobrarAVencer | number: '.0-0' }} </span>
     </div>
-    
+
   </div>
   <mat-divider></mat-divider>
 
@@ -26,11 +26,11 @@
   </div>
 
   <div fxLayout="row" fxLayoutAlign="space-between center">
-    
-    <div fxFlex="100%" class="contenedor-importe"><span
-        class="importe-cobrar"> 123.000 </span>
+
+    <div fxFlex="100%" class="contenedor-importe"><span class="importe-cobrar">
+        {{ saldoGlobal.aCobrarVencido | number: '.0-0' }} </span>
     </div>
-    
+
   </div>
   <mat-divider></mat-divider>
 
@@ -43,9 +43,9 @@
   </div>
 
   <div fxLayout="row" fxLayoutAlign="space-between center">
-    
-    <div fxFlex="100%" class="contenedor-importe"><span
-        class="importe-cobrar"> 123.000 </span>
+
+    <div fxFlex="100%" class="contenedor-importe"><span class="importe-cobrar">
+        {{ saldoGlobal.aCobrarAVencer | number: '.0-0' }} </span>
     </div>
 
   </div>
@@ -56,11 +56,10 @@
   </div>
 
   <div fxLayout="row" fxLayoutAlign="space-between center">
-    
-    <div fxFlex="100%" class="contenedor-importe"><span
-        class="importe-cobrar"> 23.000 </span>
+
+    <div fxFlex="100%" class="contenedor-importe"><span class="importe-cobrar"> 0 </span>
     </div>
-    
+
   </div>
 
 </mat-card>
