@@ -1,7 +1,65 @@
+/*sidebar*/
+
+.contenedor-notificaciones {
+  height: 100%;
+}
+
+.contenedor-desktop {
+  height: 100%;
+  padding-top: 100px;
+}
+
+
+.sidenav-notificaciones {
+  box-shadow: 3px 0 6px rgba(0, 0, 0, .24);
+  width: 70%;
+  max-width: 270px;
+}
+
+.fondo-verde {
+  background: url("../../../../../assets/varios/fondo-verde.png");
+  background-position: center top;
+  background-repeat: no-repeat;
+  background-size: 100%;
+  position: absolute;
+  top: 0px;
+  left: 0px;
+  right: 0px;
+  height: 100%;
+}
+
+.fondo-verde-desktop {
+  background: url("../../../../../assets/varios/fondo-verde-desktop.png");
+  background-position: center top;
+  background-repeat: no-repeat;
+  background-size: 100%;
+  position: absolute;
+  height: 100%;
+  top: 0px;
+  left: 0px;
+  right: 0px;
+}
+
+.fondo-blanco {
+  position: absolute;
+  top: 530px;
+  left: 0px;
+  right: 0px;
+}
+
+.fondo-blanco-desktop {
+  position: absolute;
+  top: 250px;
+  left: 0px;
+  right: 0px;
+}
+
+
 .contenedor-billetera {
     height: 100%;
 }
 
+/*
 .contenedor-desktop {
     height: 100%;
     padding-top: 100px;
@@ -113,3 +171,4 @@
   font-size: 20px;
   padding-left: 12px;
 }
+*/

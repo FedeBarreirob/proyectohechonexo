@@ -1,75 +1,21 @@
-<mat-sidenav-container [ngClass]="{'contenedor-billetera': esCelular, 'contenedor-desktop': !esCelular }">
+<mat-sidenav-container [ngClass]="{'contenedor-notificaciones': esCelular, 'contenedor-desktop': !esCelular }">
+  <mat-sidenav #menuNotificaciones position="end" class="sidenav-notificaciones" *ngIf="esCelular">
 
+    <app-panel-notificaciones (botonCerrar)="menuNotificaciones.toggle()"></app-panel-notificaciones>
+
+  </mat-sidenav>
   <section>
 
-    <div class="fondo-verde" [ngClass]="{'fondo-verde-desktop': !esCelular}" *ngIf="!esCelular">
-      <!--Tipo de cambio modo desktop-->
-      <div class="contenedor-fecha-tipocambio-desktop" fxLayout="row" fxLayoutAlign="space-between center"
-          *ngIf="!esCelular">
-        <div fxFlex="50%" class="contenedor-saludo-desktop">
-          Esta es tu nueva <b>billetera digital Gaviglio</b>
-        </div>
-        <div fxFlex="50%">
-          <div fxLayout="column" fxLayoutAlign="space-between end" class="tc-y-fecha-desktop-container">
-
-            <div fxFlex="100%" class="contenedor-tipo-cambio">
-              <img src="assets/varios/tc.png" class="img-tc" />
-              <span *ngIf="saldoGlobal != null && seObtuvoSaldoExito == true && saldoGlobal.esTipoCambioDeHoy == true">TC
-                ${{ saldoGlobal.tipoDeCambio | number: '.2' }}</span>
-
-              <span *ngIf="saldoGlobal != null && seObtuvoSaldoExito == true && saldoGlobal.esTipoCambioDeHoy == false">TC
-                ${{ saldoGlobal.tipoDeCambio | number: '.2' }} <span class="fecha-tc">al
-                  {{saldoGlobal.fechaTipoCambio}}</span></span>
-
-              <span *ngIf="saldoGlobal == null || seObtuvoSaldoExito == false">TC no disp.</span>
-            </div>
-
-            <div fxFlex="100%">
-              <app-fecha-hora></app-fecha-hora>
-            </div>
-
-          </div>
-        </div>
-      </div>
-
-    </div>
-
     <div class="fondo-verde" [ngClass]="{'fondo-verde': esCelular, 'fondo-verde-desktop': !esCelular}">
-      <app-tool-bar-general *ngIf="esCelular" [titulo]="'Billetera'" [disabled]="false"
-      colorIndicador="white" (botonPersonalizadoEjecutado)="mostrarOcultarNotificaciones()"
-      [urlImagenAccionPersonalizada]="hayNotificacionesNuevas ? 'assets/toolbar/bell-white-hot.svg' : 'assets/toolbar/bell-white.svg'"></app-tool-bar-general>
-    
-      <app-saldo-tc (cargandoChange)="esCargandoCtaCte($event)">
-			</app-saldo-tc>
+      <app-tool-bar-general *ngIf="esCelular" titulo="Billetera" [disabled]="false" colorIndicador="white"
+        (botonPersonalizadoEjecutado)="mostrarOcultarNotificaciones()"
+        [urlImagenAccionPersonalizada]="hayNotificacionesNuevas ? 'assets/toolbar/bell-white-hot.svg' : 'assets/toolbar/bell-white.svg'">
+      </app-tool-bar-general>
+
+      <app-billetera-saldo-movil *ngIf="esCelular"></app-billetera-saldo-movil>
     </div>
 
-    <div fxLayout="column" [ngClass]="{'fondo-blanco': esCelular, 'fondo-blanco-desktop': !esCelular}">
-
-      <!-- CONTENEDOR DEL CARD-TAB -->
-      <div *ngIf="esCelular" style="padding: 20px; margin-top: -200px;">
-        <mat-tab-group fxFlex="100%" fxFlexAlign="space-between center" class="tab">
-          <mat-tab label="A Cobrar"> <app-tarjeta-tab-container></app-tarjeta-tab-container> </mat-tab>
-          <mat-tab label="A Pagar"> Hola soy el contenido de la segunda pestaña </mat-tab>
-        </mat-tab-group>
-      </div>
-
-      <div style="padding: 10px;" *ngIf="!esCelular">
-        <table width="100%">
-          <tr>
-            <td style="width: 50%;">
-              <app-billetera-acobrar-desktop *ngIf="cargando == false"></app-billetera-acobrar-desktop>
-            </td>
-            <td style="width: 50%;">
-              <app-billetera-apagar-desktop *ngIf="cargando == false"></app-billetera-apagar-desktop>
-            </td>
-          </tr>
-        </table>
-
-        <!--Spinner-->
-        <div fxLayout="row" fxLayoutAlign="center center" *ngIf="cargando" style="margin-top: 10px">
-          <mat-spinner diameter="24"></mat-spinner>
-        </div>
-      </div>
+    <div [ngClass]="{'fondo-blanco': esCelular, 'fondo-blanco-desktop': !esCelular}">
 
       <!-- CONTENEDOR DE PAGAR Y COBRAR -->
       <div style="padding: 10px" *ngIf="esCelular">

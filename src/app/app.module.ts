@@ -213,8 +213,13 @@ import { BilleteraCobrarListComponent } from './components/listados/billetera/bi
 import { BilleteraCobrarCardCobroComponent } from './components/listados/billetera/billetera-cobrar/billetera-cobrar-card-cobro/billetera-cobrar-card-cobro.component';
 import { BilleteraCobrarCardTotalComponent } from './components/listados/billetera/billetera-cobrar/billetera-cobrar-card-total/billetera-cobrar-card-total.component';
 import { BilleteraCobrarCuentaComponent } from './components/listados/billetera/billetera-cobrar/billetera-cobrar-cuenta/billetera-cobrar-cuenta.component';
+import { BilleteraSaldoMovilComponent } from './components/listados/billetera/billetera-saldo-movil/billetera-saldo-movil.component';
+import { BilleteraLiquidacionesDetalleComponent } from './components/listados/billetera/billetera-liquidaciones-detalle/billetera-liquidaciones-detalle.component';
+import { BilleteraLiquidacionesDetalleUnaLiquidacionComponent } from './components/listados/billetera/billetera-liquidaciones-detalle-una-liquidacion/billetera-liquidaciones-detalle-una-liquidacion.component';
+import { BilleteraCobrarIndicacionImportesComponent } from './components/listados/billetera/billetera-cobrar/billetera-cobrar-indicacion-importes/billetera-cobrar-indicacion-importes/billetera-cobrar-indicacion-importes.component';
 import { BilleteraCobrarResumenComponent } from './components/listados/billetera/billetera-cobrar/billetera-cobrar-resumen/billetera-cobrar-resumen.component';
 import { BilleteraCobrarResumenTotalComponent } from './components/listados/billetera/billetera-cobrar/billetera-cobrar-resumen-total/billetera-cobrar-resumen-total.component';
+
 
 registerLocaleData(localeEsAr, 'es-AR');
 
@@ -398,6 +403,10 @@ export function tokenGetter() {
 		BilleteraCobrarCardCobroComponent,
 		BilleteraCobrarCardTotalComponent,
 		BilleteraCobrarCuentaComponent,
+		BilleteraSaldoMovilComponent,
+		BilleteraLiquidacionesDetalleComponent,
+		BilleteraLiquidacionesDetalleUnaLiquidacionComponent,
+		BilleteraCobrarIndicacionImportesComponent
 		BilleteraCobrarResumenComponent,
 		BilleteraCobrarResumenTotalComponent
 	],
@@ -480,7 +489,8 @@ export function tokenGetter() {
 		CuentaCorrienteAplicadaDetalleComponent,
 		TutorialModalComponent,
 		NotificacionDetalleUrlComponent,
-		SeleccionadosModalComponent
+		SeleccionadosModalComponent,
+		BilleteraLiquidacionesDetalleComponent
 	],
 	bootstrap: [AppComponent]
 })

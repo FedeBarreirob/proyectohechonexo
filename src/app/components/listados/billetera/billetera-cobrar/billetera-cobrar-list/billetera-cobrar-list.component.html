@@ -1,30 +1,31 @@
 <div *ngIf="esCelular">
-  <div class="card-container" *ngFor="let item of cobros" style="margin-top: 10px;">
+  <div class="card-container" *ngFor="let item of dinerosPorCobrar" style="margin-top: 10px;">
     <div fxLayout="row" fxLayoutAlign="space-between center" class="cuenta-item">
-      <div fxLayout="column" >
+      <div fxLayout="column">
         <button mat-icon-button>
           <mat-icon class="button-info">monetization_on</mat-icon>
         </button>
       </div>
       <div fxFlex="grow" fxLayout="column" fxLayoutAlign="space-between" class="contenedor">
         <div class="monto">
-          ${{ item.monto }}
+          ${{ item.totalPesos | number }}
         </div>
-        
+
         <div class="detalle">
-          Disponible desde el {{ item.fecha }}
+          Disponible desde el {{ item.fechaVencimiento }}
         </div>
-          
+
       </div>
     </div>
     <mat-divider></mat-divider>
-  
+
     <div fxLayout="row" class="more-items">
       <div fxFlex="50%" class="items" align="end">
-        <button mat-button class="link-ver-todas">Ver detalles </button>
+        <button mat-button class="link-ver-todas" (click)="verDetalle(item.movimientosPorCobrar)">Ver detalles </button>
       </div>
       <div fxFlex="50%" fxLayout="row" fxLayoutAlign="space-between center" class="items" align="end">
-        <button mat-button matStepperNext class="link-ver-todas">Programar cobro <mat-icon class="button-info">keyboard_arrow_right</mat-icon></button>
+        <button mat-button matStepperNext class="link-ver-todas" (click)="notificarVencimientoACobrar(item)">Programar cobro <mat-icon class="button-info">
+            keyboard_arrow_right</mat-icon></button>
       </div>
     </div>
   </div>
@@ -32,34 +33,35 @@
 
 
 <div *ngIf="!esCelular">
-  <div class="card-container" *ngFor="let item of cobros" style="margin-top: 10px;">
+  <div class="card-container" *ngFor="let item of dinerosPorCobrar" style="margin-top: 10px;">
     <div fxLayout="row" fxLayoutAlign="space-between center" class="cuenta-item">
-      <div fxLayout="column" >
+      <div fxLayout="column">
         <button mat-icon-button>
           <mat-icon class="button-info">monetization_on</mat-icon>
         </button>
       </div>
       <div fxFlex="grow" fxLayout="column" fxLayoutAlign="space-between" class="contenedor">
         <div class="monto">
-          ${{ item.monto }}
+          ${{ item.totalPesos | number }}
         </div>
-        
+
         <div class="detalle">
-          Disponible desde el {{ item.fecha }}
+          Disponible desde el {{ item.fechaVencimiento }}
         </div>
-          
+
       </div>
 
       <div fxLayout="row" class="more-items">
         <div fxFlex="50%" class="items" align="end">
-          <button mat-button class="link-ver-todas">Ver detalles </button>
+          <button mat-button class="link-ver-todas" (click)="verDetalle(item.movimientosPorCobrar)">Ver detalles </button>
         </div>
         <div fxFlex="50%" fxLayout="row" fxLayoutAlign="space-between center" class="items" align="end">
-          <button mat-button matStepperNext class="link-ver-todas">Programar cobro <mat-icon class="button-info">keyboard_arrow_right</mat-icon></button>
+          <button mat-button matStepperNext class="link-ver-todas" (click)="notificarVencimientoACobrar(item)">Programar cobro <mat-icon class="button-info">
+              keyboard_arrow_right</mat-icon></button>
         </div>
       </div>
     </div>
-  
-    
+
+
   </div>
 </div>
