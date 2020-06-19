@@ -4,58 +4,51 @@
     <h3>Agregar una cuenta</h3>
 
     <div fxLayout="column" >
-      <h5>NOMBRE DEL PROPIETARIO</h5>
-      <mat-form-field style="margin-top: -20px;">
-        <input matInput placeholder="">
-      </mat-form-field>
-      <h5>CBU/CVU</h5>
-      <mat-form-field style="margin-top: -20px;">
-        <input matInput placeholder="">
-      </mat-form-field>
-      <h5>REFERENCIA</h5>
-      <mat-form-field style="margin-top: -20px;">
-        <input matInput placeholder="">
-        <mat-hint>Agrega una referencia para recordar más fácil esta cuenta</mat-hint>
-      </mat-form-field>
+      <form action="">
+        <h5>NOMBRE DEL PROPIETARIO</h5>
+        <input class="field" type="text">  
+        
+        <h5>CBU/CVU</h5>
+        <input class="field" type="number">
+
+        <h5>REFERENCIA</h5>
+        <input class="field" type="text"><br>
+        <mat-hint style="font-size: 12px;">Agrega una referencia para recordar más fácil esta cuenta</mat-hint>
+      </form>
     </div>
-    <div fxLayout="row" style="padding: 20px; margin-top: 30px; margin-left: 60%; text-align: center;">
-      <a routerLink="/cobrar">
-        <button mat-button class="button">
-          Volver
-        </button>
+    <div fxLayout="row" style="margin-left: 150px; margin-top: 20px;">
+      <a routerLink="/cobrar" style="margin-right: 10px">
+        <button mat-stroked-button style="color: green; border: solid 1px green;">Volver</button>
       </a>
-      <button mat-button style="margin-left: 20px; margin-right: 20px;" (click)="agregar">Agregar</button>
+      <button mat-flat-button style="background-color: green; color: white;" (click)="agregar">Agregar</button>
     </div>
   </div>
 
 </div>
 
 <div *ngIf="!esCelular">
-  <div fxLayout="column" fxFlex="60%" fxLayoutALign="space-between center" style="padding: 20px; margin-top: 150px; margin-left: 50px;">
+  
+  <div fxLayout="column" fxFlex="80%" fxLayoutALign="space-between center" style="padding: 20px; margin-top: 150px; margin-left: 150px">
     <h3>Agregar una cuenta</h3>
 
-    <div fxLayout="column" >
-      <h5>NOMBRE DEL PROPIETARIO</h5>
-      <mat-form-field style="margin-top: -20px;">
-        <input matInput placeholder="">
-      </mat-form-field>
-      <h5>CBU/CVU</h5>
-      <mat-form-field style="margin-top: -20px;">
-        <input matInput placeholder="">
-      </mat-form-field>
-      <h5>REFERENCIA</h5>
-      <mat-form-field style="margin-top: -20px;">
-        <input matInput placeholder="">
-        <mat-hint>Agrega una referencia para recordar más fácil esta cuenta</mat-hint>
-      </mat-form-field>
+    <div fxLayout="column" style="margin-left: -970px;">
+      <form action="">
+        <h5>NOMBRE DEL PROPIETARIO</h5>
+        <input class="field1" [(ngModel)]="selectedCuentas.nombre" type="text">  
+        
+        <h5>CBU/CVU</h5>
+        <input class="field1" [(ngModel)]="selectedCuentas.cbu" type="number">
+
+        <h5>REFERENCIA</h5>
+        <input class="field1" [(ngModel)]="selectedCuentas.ref" type="text"><br>
+        <mat-hint style="font-size: 12px;">Agrega una referencia para recordar más fácil esta cuenta</mat-hint>
+      </form>
     </div>
-    <div fxLayout="row" style="padding: 20px; margin-top: 30px; margin-left: 60%; text-align: center;">
-      <a routerLink="/cobrar">
-        <button mat-button class="button">
-          Volver
-        </button>
+    <div fxLayout="row" style="margin-left: 360px; margin-top: 20px;">
+      <a routerLink="/cobrar" style="margin-right: 10px">
+        <button mat-stroked-button style="color: green; border: solid 1px green;">Volver</button>
       </a>
-      <button mat-button style="margin-left: 20px; margin-right: 20px;" (click)="agregar">Agregar</button>
+      <button mat-flat-button style="background-color: green; color: white;" (click)="AgregarCuenta()">Agregar</button>
     </div>
   </div>
 </div>
