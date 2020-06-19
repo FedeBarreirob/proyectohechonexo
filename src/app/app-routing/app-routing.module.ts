@@ -29,6 +29,7 @@ import { NotificacionDetalleUrlComponent } from '../components/notificaciones/no
 import { BilleteraComponent } from '../components/listados/billetera/billetera/billetera.component';
 import { BilleteraPagarComponent } from '../components/listados/billetera/billetera-pagar/billetera-pagar.component';
 import { BilleteraCobrarComponent } from '../components/listados/billetera/billetera-cobrar/billetera-cobrar.component';
+import { BilleteraCobrarCuentaComponent } from '../components/listados/billetera/billetera-cobrar/billetera-cobrar-cuenta/billetera-cobrar-cuenta.component';
 
 const routes: Routes = [
 	{
@@ -94,6 +95,14 @@ const routes: Routes = [
 			},{
 				path: 'cobrar',
 				component: BilleteraCobrarComponent,
+				canActivate: [AuthGuardGuard],
+				data: {
+					rolAdmin: false
+				}
+			},
+			{
+				path: 'nuevacuenta',
+				component: BilleteraCobrarCuentaComponent,
 				canActivate: [AuthGuardGuard],
 				data: {
 					rolAdmin: false

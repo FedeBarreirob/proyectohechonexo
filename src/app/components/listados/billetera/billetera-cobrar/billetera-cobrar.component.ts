@@ -1,6 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import { DeviceDetectorService } from 'ngx-device-detector';
+import { BilleteraCobrarCardCobroComponent } from '../billetera-cobrar/billetera-cobrar-card-cobro/billetera-cobrar-card-cobro.component';
+import { ShowHideDirective } from '@angular/flex-layout';
+
 
 @Component({
   selector: 'app-billetera-cobrar',
@@ -12,17 +15,7 @@ export class BilleteraCobrarComponent implements OnInit {
   firstFormGroup: FormGroup;
   secondFormGroup: FormGroup;
   isOptional = false;
-  cobros=[];
-  agregarcobro(){
-    this.cobros= [
-      {
-        'id': 2,
-        'fecha': '23/12/20',
-        'monto': '13,000',
-        'montototal': '111,000'
-      },
-    ];
-  }
+
 
   constructor(
     private deviceService: DeviceDetectorService,

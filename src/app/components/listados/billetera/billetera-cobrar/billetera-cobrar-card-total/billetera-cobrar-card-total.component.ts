@@ -11,10 +11,7 @@ export class BilleteraCobrarCardTotalComponent implements OnInit {
   esCelular: boolean;
 
   cobros = [{
-    'id': 1,
-    'fecha': '23/12/20',
-    'monto': '12,000',
-    'montototal': '123,000',
+    'monto': '12,000'
   },];
 
   constructor(

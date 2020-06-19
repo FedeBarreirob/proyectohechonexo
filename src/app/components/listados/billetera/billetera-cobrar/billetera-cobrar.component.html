@@ -7,34 +7,38 @@
     </a>
     <h3 fxFlex="75%" style="margin-left: 20px; color: green;">Programar cobro</h3>
   </div>
-  
+
   <!-- VISTA MOVILE -->
 
   <mat-horizontal-stepper labelPosition="bottom" #stepper>
     <mat-step [stepControl]="firstFormGroup">
       <ng-template matStepLabel>Origen</ng-template>
-      <p style="color: lightgrey; padding: 10px; text-align: left;">Escoge entre tu dinero disponible o el dinero por cobrar para programar tu cobro.</p>
+      <p style="color: lightgrey; padding: 10px; text-align: left;">Escoge entre tu dinero disponible o el dinero por
+        cobrar para programar tu cobro.</p>
       <h3>Dinero disponible</h3>
-        <app-billetera-cobrar-card></app-billetera-cobrar-card>
+      <app-billetera-cobrar-card></app-billetera-cobrar-card>
       <h3>Dinero por cobrar</h3>
-        <app-billetera-cobrar-list></app-billetera-cobrar-list>
+      <app-billetera-cobrar-list></app-billetera-cobrar-list>
     </mat-step>
-    
-    
+
+
     <mat-step [stepControl]="secondFormGroup" [optional]="isOptional">
       <ng-template matStepLabel>Importes</ng-template>
-      <p style="color: lightgrey; padding: 10px; text-align: left;">Escoge entre tu dinero disponible o el dinero por cobrar para programar tu cobro.</p>
+      <p style="color: lightgrey; padding: 10px; text-align: left;">Escoge entre tu dinero disponible o el dinero por
+        cobrar para programar tu cobro.</p>
       <app-billetera-cobrar-card-cobro></app-billetera-cobrar-card-cobro>
       <div fxFlex="100%" fxLayout="row" fxLayoutAlign="space-between center" class="items">
-        <button mat-button><mat-icon class="button-info">add</mat-icon>Agregar un cobro</button>
+        <button mat-button>
+          <mat-icon class="button-info">add</mat-icon>Agregar un cobro
+        </button>
       </div>
       <app-billetera-cobrar-card-total></app-billetera-cobrar-card-total>
     </mat-step>
-    
-    
+
+
     <mat-step>
       <ng-template matStepLabel>Done</ng-template>
-      
+
       <div>
         <button mat-button matStepperPrevious>Back</button>
         <button mat-button (click)="stepper.reset()">Reset</button>
@@ -49,7 +53,7 @@
 
 <mat-sidenav-container [ngClass]="{'contenedor-desktop': !esCelular }">
   <div *ngIf="!esCelular">
-    
+
 
     <div style="padding-left: 200px; padding-right: 400px; padding-top: 20px;">
 
@@ -63,28 +67,34 @@
       </div>
 
       <mat-horizontal-stepper labelPosition="bottom" #stepper>
-        <mat-step >
+        <mat-step>
           <ng-template matStepLabel>Origen</ng-template>
-          <p style="color: lightgrey; padding: 10px; text-align: left;">Escoge entre tu dinero disponible o el dinero por cobrar para programar tu cobro.</p>
+          <p style="color: lightgrey; padding: 10px; text-align: left;">Escoge entre tu dinero disponible o el dinero
+            por cobrar para programar tu cobro.</p>
           <h3>Dinero disponible</h3>
-            <app-billetera-cobrar-card></app-billetera-cobrar-card>
+          <app-billetera-cobrar-card></app-billetera-cobrar-card>
           <h3>Dinero por cobrar</h3>
-            <app-billetera-cobrar-list></app-billetera-cobrar-list>
+          <app-billetera-cobrar-list></app-billetera-cobrar-list>
         </mat-step>
-        
-        
-        <mat-step >
+
+
+        <mat-step>
           <ng-template matStepLabel>Importes</ng-template>
-          <div>
-            <p style="color: lightgrey; padding: 10px; text-align: left;">Define los importes, medios y destinatarios de cada cobro.</p>
-            
+          <p style="color: lightgrey; padding: 10px; text-align: left;">Define los importes, medios y destinatarios de
+            cada cobro.</p>
+          <app-billetera-cobrar-card-cobro></app-billetera-cobrar-card-cobro>
+          <div fxFlex="100%" fxLayout="row" fxLayoutAlign="space-between center" class="items">
+            <button mat-button (click)="AgregarCobro()">
+              <mat-icon class="button-info">add</mat-icon>Agregar un cobro
+            </button>
           </div>
+          <app-billetera-cobrar-card-total></app-billetera-cobrar-card-total>
         </mat-step>
-        
-        
+
+
         <mat-step>
           <ng-template matStepLabel>Done</ng-template>
-          
+
           <div>
             <button mat-button matStepperPrevious>Back</button>
             <button mat-button (click)="stepper.reset()">Reset</button>
@@ -92,7 +102,7 @@
         </mat-step>
       </mat-horizontal-stepper>
 
-      
+
     </div>
 
   </div>
