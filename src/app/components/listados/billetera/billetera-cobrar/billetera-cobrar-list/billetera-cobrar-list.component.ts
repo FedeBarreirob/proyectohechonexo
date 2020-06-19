@@ -1,5 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 import { DeviceDetectorService } from 'ngx-device-detector';
+import { MatDialog } from '@angular/material';
+import { BilleteraLiquidacionesDetalleComponent } from '../../billetera-liquidaciones-detalle/billetera-liquidaciones-detalle.component';
 
 @Component({
   selector: 'app-billetera-cobrar-list',
@@ -8,28 +10,29 @@ import { DeviceDetectorService } from 'ngx-device-detector';
 })
 export class BilleteraCobrarListComponent implements OnInit {
 
-  cobros = [{
-    'id': 1,
-    'fecha': '23/12/20',
-    'monto': '123,000'
-  }, {
-    'id': 2,
-    'fecha': '27/12/20',
-    'monto': '124,000'
-  }, {
-    'id': 3,
-    'fecha': '31/12/20',
-    'monto': '125,000'
-  }];
+  @Input()
+  dinerosPorCobrar: any;
 
   esCelular = false;
 
   constructor(
     private deviceService: DeviceDetectorService,
+    public dialog: MatDialog
   ) { }
 
   ngOnInit() {
     this.esCelular = this.deviceService.isMobile();
   }
 
+  verDetalle(movimientosPorCobrar: Array<any>) {
+    if (movimientosPorCobrar) {
+      this.dialog.open(BilleteraLiquidacionesDetalleComponent, {
+        data: movimientosPorCobrar,
+        maxWidth: '90vw',
+        width: '90%',
+        maxHeight: '90vh',
+        height: '90%'
+      });
+    }
+  }
 }

@@ -1,0 +1,24 @@
+<div fxLayout="row" fxLayoutAlign="space-between center" style="width: 100%;">
+
+  <div fxFlex="70%">
+
+    <div fxLayout="column" fxLayoutAlign="space-between start">
+
+      <div fxFlex>
+        {{ liquidacion.comprobanteAfectado }}
+      </div>
+
+      <div fxFlex>
+        Vence: {{ liquidacion.fechaVencimiento }}
+      </div>
+
+    </div>
+
+  </div>
+
+  <div fxFlex="25%" style="text-align: right;">
+    ${{liquidacion.saldoPesos | number}}
+  </div>
+
+</div>
+<mat-divider></mat-divider>

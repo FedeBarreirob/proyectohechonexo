@@ -1,6 +1,7 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { DeviceDetectorService } from 'ngx-device-detector';
-import { BilleteraService, DetalleCuenta } from '../../../../../services/billetera/billetera.service';
+import { MatDialog } from '@angular/material';
+import { BilleteraLiquidacionesDetalleComponent } from '../../billetera-liquidaciones-detalle/billetera-liquidaciones-detalle.component';
 
 @Component({
   selector: 'app-billetera-cobrar-card',
@@ -9,24 +10,31 @@ import { BilleteraService, DetalleCuenta } from '../../../../../services/billete
 })
 export class BilleteraCobrarCardComponent implements OnInit {
 
-  esCelular = false;
-  total = 123000;
+  @Input()
+  dineroDisponible: any;
 
-  detalleCuenta: DetalleCuenta[] = [];
+  esCelular = false;
+  total: number = 0;
 
   constructor(
     private deviceService: DeviceDetectorService,
-    private billeteraService: BilleteraService
-    ) { }
+    public dialog: MatDialog
+  ) { }
 
   ngOnInit() {
     this.esCelular = this.deviceService.isMobile();
-    this.detalleCuenta = this.billeteraService.getDetalle();
-
+    this.total = this.dineroDisponible.totalPesos;
   }
 
-  get details(): Array<any> {
-    return this.detalleCuenta;
+  verDetalle() {
+    if (this.dineroDisponible) {
+      this.dialog.open(BilleteraLiquidacionesDetalleComponent, {
+        data: this.dineroDisponible.movimientosACobrarVencido,
+        maxWidth: '90vw',
+        width: '90%',
+        maxHeight: '90vh',
+        height: '90%'
+      });
+    }
   }
-
 }

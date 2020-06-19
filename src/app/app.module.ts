@@ -214,6 +214,8 @@ import { BilleteraCobrarCardCobroComponent } from './components/listados/billete
 import { BilleteraCobrarCardTotalComponent } from './components/listados/billetera/billetera-cobrar/billetera-cobrar-card-total/billetera-cobrar-card-total.component';
 import { BilleteraCobrarCuentaComponent } from './components/listados/billetera/billetera-cobrar/billetera-cobrar-cuenta/billetera-cobrar-cuenta.component';
 import { BilleteraSaldoMovilComponent } from './components/listados/billetera/billetera-saldo-movil/billetera-saldo-movil.component';
+import { BilleteraLiquidacionesDetalleComponent } from './components/listados/billetera/billetera-liquidaciones-detalle/billetera-liquidaciones-detalle.component';
+import { BilleteraLiquidacionesDetalleUnaLiquidacionComponent } from './components/listados/billetera/billetera-liquidaciones-detalle-una-liquidacion/billetera-liquidaciones-detalle-una-liquidacion.component';
 
 registerLocaleData(localeEsAr, 'es-AR');
 
@@ -397,7 +399,9 @@ export function tokenGetter() {
 		BilleteraCobrarCardCobroComponent,
 		BilleteraCobrarCardTotalComponent,
 		BilleteraCobrarCuentaComponent,
-		BilleteraSaldoMovilComponent
+		BilleteraSaldoMovilComponent,
+		BilleteraLiquidacionesDetalleComponent,
+		BilleteraLiquidacionesDetalleUnaLiquidacionComponent
 	],
 	imports: [
 		HttpClientModule,
@@ -478,7 +482,8 @@ export function tokenGetter() {
 		CuentaCorrienteAplicadaDetalleComponent,
 		TutorialModalComponent,
 		NotificacionDetalleUrlComponent,
-		SeleccionadosModalComponent
+		SeleccionadosModalComponent,
+		BilleteraLiquidacionesDetalleComponent
 	],
 	bootstrap: [AppComponent]
 })

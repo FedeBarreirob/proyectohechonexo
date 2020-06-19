@@ -16,6 +16,7 @@ export class CtacteAplicadaService {
   private urlCuentaCorrienteAplicadaSaldoGlobal = `${environment.hostCtaCte}/CuentaAplicadaCorriente/saldoGlobal`;
   private urlCuentaCorrienteAplicadaSaldo = `${environment.hostCtaCte}/CuentaAplicadaCorriente/saldo`;
   private urlCuentaCorrienteAplicadaSaldoSegunComprobantes = `${environment.hostCtaCte}/CuentaAplicadaCorriente/saldoComprobantes`;
+  private urlCuentaCorrienteAplicadaComprobantesAgrupadosPorVencimiento = `${environment.hostCtaCte}/CuentaAplicadaCorriente/comprobantesAgrupadosPorVencimiento`;
 
   constructor(private http: HttpClient) { }
 
@@ -82,5 +83,21 @@ export class CtacteAplicadaService {
     };
 
     return this.http.post<ResponseServicio>(this.urlCuentaCorrienteAplicadaSaldoSegunComprobantes, movimientosCtaCteAplicada, httpOptions);
+  }
+
+  /**
+   * Retorna lo disponble a cobrar, a cobrar vencido agrupado por fecha de vencimiento junto a sus comprobantes
+   * @param cuenta 
+   */
+  comprobantesAgrupadosPorVencimiento(cuenta: string): Observable<ResponseServicio> {
+
+    const httpOptions = {
+      headers: new HttpHeaders({
+        'Content-Type': 'application/json'
+      })
+    };
+
+    let urlConParametro = `${this.urlCuentaCorrienteAplicadaComprobantesAgrupadosPorVencimiento}/${cuenta}`;
+    return this.http.get<ResponseServicio>(urlConParametro, httpOptions);
   }
 }
