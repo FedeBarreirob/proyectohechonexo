@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { DeviceDetectorService } from 'ngx-device-detector';
+import { cobro } from '../../../../../models/security/cobro';
+import { cuentas } from '../../../../../models/security/cuentas';
 
 
 @Component({
@@ -15,12 +17,16 @@ export class BilleteraCobrarCardCobroComponent implements OnInit {
   isCard: boolean = true;
   labelPosition: 'before' | 'after' = 'after';
 
-  cobros = [{
-    'id': 1,
-    'fecha': '23/12/20',
-    'monto': '12,000',
-    'montototal': '123,000',
-  },];
+  cobrosArray: cobro[] = [
+    {id: 1, 'fecha': new Date(), 'monto': '12,000', 'montototal': '123,000'},
+  ];
+
+  selectedCobros: cobro = new cobro();
+
+  cuentasArray: cuentas[] = [
+    {'id': 1, 'nombre': 'José Gaviglio', 'cbu': 123456789, 'ref': 'José'},
+    {'id': 1, 'nombre': 'Pedro Oliveira', 'cbu': 123466789, 'ref': 'Pedro'}
+  ];
 
   constructor(
     private deviceService: DeviceDetectorService
@@ -35,7 +41,15 @@ export class BilleteraCobrarCardCobroComponent implements OnInit {
   }
 
   cerrarVentana(){
-    this.isCard = !this.isCard;
+    this.cobrosArray = this.cobrosArray.filter(x => x != this.selectedCobros);
+    this.selectedCobros = new cobro();
+  }
+
+  AgregarCobro(){
+    this.selectedCobros.id = this.selectedCobros.id + 1;
+    this.selectedCobros.monto = '13,000'; //ejemplo prueba
+    this.selectedCobros.montototal = '123,000'; //ejemplo prueba
+    this.cobrosArray.push(this.selectedCobros);
   }
 
   ngOnInit() {
