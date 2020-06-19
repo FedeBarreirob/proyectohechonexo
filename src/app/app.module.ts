@@ -406,7 +406,7 @@ export function tokenGetter() {
 		BilleteraSaldoMovilComponent,
 		BilleteraLiquidacionesDetalleComponent,
 		BilleteraLiquidacionesDetalleUnaLiquidacionComponent,
-		BilleteraCobrarIndicacionImportesComponent
+		BilleteraCobrarIndicacionImportesComponent,
 		BilleteraCobrarResumenComponent,
 		BilleteraCobrarResumenTotalComponent
 	],
