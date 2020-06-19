@@ -1,5 +1,5 @@
-import { Component, OnInit } from '@angular/core';
-import { BilleteraComponent } from '../billetera/billetera.component';
+import { Component, OnInit, Input } from '@angular/core';
+import { SaldoGlobalCtaCteAplicada } from '../../../../interfaces/ctacte-aplicada/saldo-global-cta-cte-aplicada';
 
 @Component({
   selector: 'app-tarjeta-tab-container',
@@ -8,9 +8,13 @@ import { BilleteraComponent } from '../billetera/billetera.component';
 })
 export class TarjetaTabContainerComponent implements OnInit {
 
+  @Input()
+  saldoGlobal: SaldoGlobalCtaCteAplicada;
+
   constructor() { }
 
   ngOnInit() {
+    console.log(this.saldoGlobal);
   }
 
 }
