@@ -1,13 +1,22 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { DeviceDetectorService } from 'ngx-device-detector';
-
+import { DatePipe } from '@angular/common';
 
 @Component({
   selector: 'app-billetera-cobrar-card-cobro',
   templateUrl: './billetera-cobrar-card-cobro.component.html',
-  styleUrls: ['./billetera-cobrar-card-cobro.component.css']
+  styleUrls: ['./billetera-cobrar-card-cobro.component.css'],
+  providers: [DatePipe]
 })
 export class BilleteraCobrarCardCobroComponent implements OnInit {
+
+  @Input()
+  cobroProgramado: any;
+
+  @Output()
+  quitar: EventEmitter<any> = new EventEmitter<any>();
+
+  fechaCobroProgramado: string;
 
   esCelular: boolean;
   isTransferencia: boolean = true;
@@ -23,23 +32,26 @@ export class BilleteraCobrarCardCobroComponent implements OnInit {
   },];
 
   constructor(
-    private deviceService: DeviceDetectorService
+    private deviceService: DeviceDetectorService,
+    private datePipe: DatePipe
   ) { }
 
-  Transferencia(){
+  ngOnInit() {
+    console.log(this.cobroProgramado);
+    this.esCelular = this.deviceService.isMobile();
+    this.fechaCobroProgramado = this.cobroProgramado.fechaCobroProgramado.toISOString();
+  }
+
+  Transferencia() {
     this.isTransferencia = !this.isTransferencia;
   }
 
-  chequeFisico(){
+  chequeFisico() {
     this.isChequeFisico = !this.isChequeFisico;
   }
 
-  cerrarVentana(){
-    this.isCard = !this.isCard;
-  }
-
-  ngOnInit() {
-    this.esCelular = this.deviceService.isMobile();
+  cerrarVentana() {
+    this.quitar.emit(this.cobroProgramado);
   }
 
 }

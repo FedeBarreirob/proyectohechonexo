@@ -1,7 +1,8 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { DeviceDetectorService } from 'ngx-device-detector';
 import { MatDialog } from '@angular/material';
 import { BilleteraLiquidacionesDetalleComponent } from '../../billetera-liquidaciones-detalle/billetera-liquidaciones-detalle.component';
+import { FechasUtilService } from '../../../../../services/sharedServices/convertidores/fechas-util.service';
 
 @Component({
   selector: 'app-billetera-cobrar-list',
@@ -13,11 +14,15 @@ export class BilleteraCobrarListComponent implements OnInit {
   @Input()
   dinerosPorCobrar: any;
 
+  @Output()
+  cobrar: EventEmitter<any> = new EventEmitter<any>();
+
   esCelular = false;
 
   constructor(
     private deviceService: DeviceDetectorService,
-    public dialog: MatDialog
+    public dialog: MatDialog,
+    private fechasUtilService: FechasUtilService
   ) { }
 
   ngOnInit() {
@@ -34,5 +39,12 @@ export class BilleteraCobrarListComponent implements OnInit {
         height: '90%'
       });
     }
+  }
+
+  notificarVencimientoACobrar(unDineroPorCobrar: any) {
+    this.cobrar.emit({
+      montoMaximoACobrar: unDineroPorCobrar.totalPesos,
+      fechaVencimiento: this.fechasUtilService.fechaEsADate(unDineroPorCobrar.fechaVencimiento)
+    });
   }
 }

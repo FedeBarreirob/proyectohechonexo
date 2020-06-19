@@ -1,4 +1,4 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { DeviceDetectorService } from 'ngx-device-detector';
 import { MatDialog } from '@angular/material';
 import { BilleteraLiquidacionesDetalleComponent } from '../../billetera-liquidaciones-detalle/billetera-liquidaciones-detalle.component';
@@ -12,6 +12,9 @@ export class BilleteraCobrarCardComponent implements OnInit {
 
   @Input()
   dineroDisponible: any;
+
+  @Output()
+  cobrar: EventEmitter<any> = new EventEmitter<any>();
 
   esCelular = false;
   total: number = 0;
@@ -36,5 +39,12 @@ export class BilleteraCobrarCardComponent implements OnInit {
         height: '90%'
       });
     }
+  }
+
+  notificarVencimientoACobrar() {
+    this.cobrar.emit({
+      montoMaximoACobrar: this.dineroDisponible.totalPesos,
+      fechaVencimiento: new Date()
+    });
   }
 }

@@ -1,100 +1,101 @@
 <!--vista movile-->
+<div *ngIf="esCelular" class="card-container">
 
-<div *ngIf="esCelular">
-  <div fxLayout="column" *ngFor="let item of cobros">
-    <div  class="card-container" *ngIf="isCard">
-      <div fxLayout="row">
-        <div fxFlex="50%" fxLayoutALign="space-between center" class="title">
-          <h5>Cobro {{ item.id }} </h5>
-        </div>
-        <div fxFlex="50%" fxLayoutALign="space-between center" class="button">
-          <button mat-icon-button class="cerrar" (click)="cerrarVentana()">
-            <mat-icon>close</mat-icon>
-          </button>
-        </div>
-      </div>
-      <div fxLayout="row">
-        <div fxFlex="100%" fxLayoutALign="space-between center" class="monto">
-          <h3>$ {{ item.monto }} </h3>
-        </div>
-      </div>
-  
-      <mat-divider></mat-divider>
-  
-      <div fxLayout="row">
-        <div fxFlex="100%" fxLayoutALign="space-between center" class="montot">
-          <h6>Hasta $ {{ item.montototal }} </h6>
-        </div>
-      </div>
-      <div fxLayout="column">
+  <!--Titulo y boton cierre-->
+  <div fxLayout="row" fxLayoutAlign="space-between center">
+    <div fxFlex="nogrow" class="title">
+      <h5>Cobro</h5>
+    </div>
+
+    <div fxFlex="nogrow" class="button">
+      <button mat-icon-button class="cerrar" (click)="cerrarVentana()">
+        <mat-icon>close</mat-icon>
+      </button>
+    </div>
+  </div>
+
+  <!--Monto-->
+  <div fxLayout="column" fxLayoutAlign="space-between center">
+    <div fxFlex style="border-bottom: 1px solid gray;">
+      <input [(ngModel)]="cobroProgramado.monto" style="border: none;" />
+    </div>
+
+    <div fxFlex>
+      <h6>Hasta $ {{ cobroProgramado.montoMaximoACobrar }} </h6>
+    </div>
+  </div>
+
+  <!--Fecha programada-->
+  <div fxLayout="row" fxLayoutAlign="space-between center" fxLayoutGap="10px">
+    <div fxFlex="nogrow" class="fecha">
+      FECHA PROGRAMADA
+    </div>
+
+    <div fxFlex="grow">
+      <mat-form-field>
+        <input matInput [matDatepicker]="picker" [(ngModel)]="fechaCobroProgramado">
+        <mat-datepicker-toggle matSuffix [for]="picker">
+          <mat-icon matDatepickerToggleIcon>date_range</mat-icon>
+        </mat-datepicker-toggle>
+        <mat-datepicker #picker></mat-datepicker>
+      </mat-form-field>
+    </div>
+  </div>
+
+
+  <div fxLayout="column">
+    <div fxFlex="50%" fxLayoutALign="space-between center" class="fecha">
+      <h5>MEDIO DE COBRO</h5>
+    </div>
+    <div fxFlex="50%" fxLayoutALign="space-between center">
+      <mat-form-field>
+        <mat-select>
+          <mat-option value="transferencia" (click)="Transferencia()">Transferencia bancaria</mat-option>
+          <mat-option value="chequef" (click)="chequeFisico()">Cheque físico</mat-option>
+          <mat-option value="chequed" disabled>Cheque digital (disabled)</mat-option>
+        </mat-select>
+      </mat-form-field>
+      <div *ngIf="!isTransferencia" fxLayout="column">
         <div fxFlex="50%" fxLayoutALign="space-between center" class="fecha">
-          <h5>FECHA PROGRAMADA</h5>
+          <h5>DESTINATARIO</h5>
         </div>
-        <div fxFlex="50%" fxLayoutALign="space-between center">
-          <mat-form-field class="example-full-width">
-            <input matInput [matDatepicker]="picker">
-            <mat-datepicker-toggle matSuffix [for]="picker">
-              <mat-icon matDatepickerToggleIcon>date_range</mat-icon>
-            </mat-datepicker-toggle>
-            <mat-datepicker #picker></mat-datepicker>
-          </mat-form-field>
-        </div>
-      </div>
-      <div fxLayout="column">
-        <div fxFlex="50%" fxLayoutALign="space-between center" class="fecha">
-          <h5>MEDIO DE COBRO</h5>
-        </div>
-        <div fxFlex="50%" fxLayoutALign="space-between center">
+        <div fxFlex="50%">
           <mat-form-field>
             <mat-select>
-              <mat-option value="transferencia" (click)="Transferencia()" >Transferencia bancaria</mat-option>
-              <mat-option value="chequef" (click)="chequeFisico()" >Cheque físico</mat-option>
-              <mat-option value="chequed" disabled>Cheque digital (disabled)</mat-option>
+              <mat-option value="user1">Cuenta José</mat-option>
+              <mat-option value="user2">Cuenta Pedro</mat-option>
+              <a routerLink="/nuevacuenta">
+                <button mat-button>
+                  <mat-icon>add</mat-icon>Agregar cuenta
+                </button>
+              </a>
             </mat-select>
           </mat-form-field>
-          <div *ngIf="!isTransferencia" fxLayout="column">
-            <div fxFlex="50%" fxLayoutALign="space-between center" class="fecha">
-              <h5>DESTINATARIO</h5>
-            </div>
-            <div fxFlex="50%">
-              <mat-form-field>
-                <mat-select>
-                  <mat-option value="user1">Cuenta José</mat-option>
-                  <mat-option value="user2">Cuenta Pedro</mat-option>
-                  <a routerLink="/nuevacuenta">
-                    <button mat-button>
-                      <mat-icon>add</mat-icon>Agregar cuenta
-                    </button>
-                  </a>
-                </mat-select>
-              </mat-form-field>
-            </div>
-          </div>
-        </div>
-        <div *ngIf="!isChequeFisico" fxLayout="column">
-          <div fxFlex="50%" fxLayoutALign="space-between center" class="fecha">
-            <h5>RETIRO</h5>
-          </div>
-          <div fxFlex="50%">
-            <section class="section">
-              <mat-radio-group [(ngModel)]="labelPosition">
-                <mat-radio-button class="margin" value="after">Banco Macro</mat-radio-button>
-                <mat-radio-button class="margin" value="before">Casa Central</mat-radio-button>
-              </mat-radio-group>
-            </section>
-          </div>
         </div>
       </div>
     </div>
+    <div *ngIf="!isChequeFisico" fxLayout="column">
+      <div fxFlex="50%" fxLayoutALign="space-between center" class="fecha">
+        <h5>RETIRO</h5>
+      </div>
+      <div fxFlex="50%">
+        <section class="section">
+          <mat-radio-group [(ngModel)]="labelPosition">
+            <mat-radio-button class="margin" value="after">Banco Macro</mat-radio-button>
+            <mat-radio-button class="margin" value="before">Casa Central</mat-radio-button>
+          </mat-radio-group>
+        </section>
+      </div>
+    </div>
   </div>
+
+
 </div>
-
-
 <!--vista web-->
 
 <div *ngIf="!esCelular">
   <div fxLayout="column" *ngFor="let item of cobros">
-    <div  class="card-container" *ngIf="isCard">
+    <div class="card-container" *ngIf="isCard">
       <div fxLayout="row">
         <div fxFlex="50%" fxLayoutALign="space-between center" class="title">
           <h5>Cobro {{ item.id }} </h5>
@@ -110,20 +111,20 @@
           <h3>$ {{ item.monto }} </h3>
         </div>
       </div>
-  
+
       <mat-divider></mat-divider>
-  
+
       <div fxLayout="row">
         <div fxFlex="100%" fxLayoutALign="space-between center" class="montot">
           <h6>Hasta $ {{ item.montototal }} </h6>
         </div>
       </div>
-      
+
       <div fxLayout="column">
         <div fxLayout="row" fxLayoutALign="space-between center" class="fecha">
           <h5>FECHA PROGRAMADA</h5>
         </div>
-        <div fxLayout="row" fxLayoutALign="space-between center" >
+        <div fxLayout="row" fxLayoutALign="space-between center">
           <mat-form-field class="forms">
             <input matInput [matDatepicker]="picker">
             <mat-datepicker-toggle matSuffix [for]="picker">
@@ -141,8 +142,8 @@
         <div fxFlex="50%" fxLayout="row" fxLayoutALign="space-between center">
           <mat-form-field class="forms">
             <mat-select>
-              <mat-option value="transferencia" (click)="Transferencia()" >Transferencia bancaria</mat-option>
-              <mat-option value="chequef" (click)="chequeFisico()" >Cheque físico</mat-option>
+              <mat-option value="transferencia" (click)="Transferencia()">Transferencia bancaria</mat-option>
+              <mat-option value="chequef" (click)="chequeFisico()">Cheque físico</mat-option>
               <mat-option value="chequed" disabled>Cheque digital (disabled)</mat-option>
             </mat-select>
           </mat-form-field>
@@ -182,5 +183,5 @@
         </div>
       </div>
     </div>
-  </div>  
+  </div>
 </div>

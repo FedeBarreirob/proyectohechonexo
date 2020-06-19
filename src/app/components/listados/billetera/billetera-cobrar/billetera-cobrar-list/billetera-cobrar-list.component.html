@@ -24,7 +24,7 @@
         <button mat-button class="link-ver-todas" (click)="verDetalle(item.movimientosPorCobrar)">Ver detalles </button>
       </div>
       <div fxFlex="50%" fxLayout="row" fxLayoutAlign="space-between center" class="items" align="end">
-        <button mat-button matStepperNext class="link-ver-todas">Programar cobro <mat-icon class="button-info">
+        <button mat-button matStepperNext class="link-ver-todas" (click)="notificarVencimientoACobrar(item)">Programar cobro <mat-icon class="button-info">
             keyboard_arrow_right</mat-icon></button>
       </div>
     </div>
@@ -56,7 +56,7 @@
           <button mat-button class="link-ver-todas" (click)="verDetalle(item.movimientosPorCobrar)">Ver detalles </button>
         </div>
         <div fxFlex="50%" fxLayout="row" fxLayoutAlign="space-between center" class="items" align="end">
-          <button mat-button matStepperNext class="link-ver-todas">Programar cobro <mat-icon class="button-info">
+          <button mat-button matStepperNext class="link-ver-todas" (click)="notificarVencimientoACobrar(item)">Programar cobro <mat-icon class="button-info">
               keyboard_arrow_right</mat-icon></button>
         </div>
       </div>

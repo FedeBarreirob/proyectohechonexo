@@ -1,9 +1,8 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { DeviceDetectorService } from 'ngx-device-detector';
 import { CtacteAplicadaService } from '../../../../services/ctacte-aplicada/ctacte-aplicada.service';
 import { CuentaAlgService } from '../../../../services/observers/cuentas-alg/cuenta-alg.service';
-import { Subject } from 'rxjs';
+import { Subject, BehaviorSubject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
 import { EntidadAlg } from '../../../../interfaces/perfiles/entidad-alg';
 
@@ -15,29 +14,20 @@ import { EntidadAlg } from '../../../../interfaces/perfiles/entidad-alg';
 export class BilleteraCobrarComponent implements OnInit, OnDestroy {
 
   esCelular: boolean;
-  firstFormGroup: FormGroup;
-  secondFormGroup: FormGroup;
-  isOptional = false;
   conceptosACobrar: any;
   destroy$: Subject<any> = new Subject<any>();
   cargando: boolean = false;
   cuenta: EntidadAlg;
+  vencimientoACobrarSeleccionado$: BehaviorSubject<any> = new BehaviorSubject<any>(null);
 
   constructor(
     private deviceService: DeviceDetectorService,
-    private _formBuilder: FormBuilder,
     private ctacteAplicadaService: CtacteAplicadaService,
     private cuentaService: CuentaAlgService
   ) { }
 
   ngOnInit() {
     this.esCelular = this.deviceService.isMobile();
-    this.firstFormGroup = this._formBuilder.group({
-      firstCtrl: ['', Validators.required]
-    });
-    this.secondFormGroup = this._formBuilder.group({
-      secondCtrl: ''
-    });
 
     this.cuentaService.cuentaAlgSeleccionadaV2$.asObservable()
       .pipe(takeUntil(this.destroy$))
@@ -83,5 +73,13 @@ export class BilleteraCobrarComponent implements OnInit, OnDestroy {
           () => this.cargando = false
         );
     }
+  }
+
+  /**
+   * Selecciona un vencimiento a cobrar
+   * @param vencimientoACobrar 
+   */
+  seleccionarVencimientoACobrar(vencimientoACobrar: any) {
+    this.vencimientoACobrarSeleccionado$.next(vencimientoACobrar);
   }
 }
