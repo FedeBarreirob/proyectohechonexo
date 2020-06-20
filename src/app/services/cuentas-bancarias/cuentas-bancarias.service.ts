@@ -19,7 +19,6 @@ export class CuentasBancariasService {
    * Devuelve las cuentas bancarias de una cuanta dada
    * @param cuenta 
    */
-  @Cacheable()
   cuentasBancarias(cuenta: string): Observable<ResponseServicio> {
 
     const httpOptions = {

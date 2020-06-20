@@ -1,10 +1,12 @@
-import { Component, OnInit, OnDestroy } from '@angular/core';
+import { Component, OnInit, OnDestroy, EventEmitter, Output } from '@angular/core';
 import { CuentasBancariasService } from '../../../services/cuentas-bancarias/cuentas-bancarias.service';
 import { EntidadAlg } from '../../../interfaces/perfiles/entidad-alg';
 import { CuentaAlgService } from '../../../services/observers/cuentas-alg/cuenta-alg.service';
 import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
 import { CuentaBancariaEstado } from '../../../enums/cuenta-bancaria-estado.enum';
+import { MatDialog } from '@angular/material';
+import { BilleteraCobrarCuentaComponent } from '../../listados/billetera/billetera-cobrar/billetera-cobrar-cuenta/billetera-cobrar-cuenta.component';
 
 @Component({
   selector: 'app-cuenta-bancaria-selector',
@@ -12,6 +14,9 @@ import { CuentaBancariaEstado } from '../../../enums/cuenta-bancaria-estado.enum
   styleUrls: ['./cuenta-bancaria-selector.component.css']
 })
 export class CuentaBancariaSelectorComponent implements OnInit, OnDestroy {
+
+  @Output()
+  cuentaSeleccionadaEvent: EventEmitter<any> = new EventEmitter<any>();
 
   cuenta: EntidadAlg;
   destroy$: Subject<any> = new Subject<any>();
@@ -22,7 +27,8 @@ export class CuentaBancariaSelectorComponent implements OnInit, OnDestroy {
 
   constructor(
     private cuentasBancariasService: CuentasBancariasService,
-    private cuentaService: CuentaAlgService
+    private cuentaService: CuentaAlgService,
+    private dialog: MatDialog
   ) { }
 
   ngOnInit() {
@@ -72,7 +78,31 @@ export class CuentaBancariaSelectorComponent implements OnInit, OnDestroy {
     }
   }
 
+  /**
+   * Selecciona y notifica la cuenta bancaria seleccionada
+   * @param cuentaSeleccionada 
+   */
   seleccionarCuenta(cuentaSeleccionada: any) {
     this.cuentaSeleccionada = cuentaSeleccionada;
+    this.cuentaSeleccionadaEvent.emit(this.cuentaSeleccionada);
+  }
+
+  /**
+   * Abre el dialogo para agregar nueva cuenta
+   */
+  agregarCuenta() {
+    let dialogRef = this.dialog.open(BilleteraCobrarCuentaComponent, {
+      data: this.cuenta,
+      maxWidth: '100vw',
+      width: '100%',
+      maxHeight: '100vh',
+      height: '100%'
+    });
+
+    dialogRef.afterClosed().subscribe(cuentaCreada => {
+      if (cuentaCreada == true) {
+        this.cargarCuentasBancarias();
+      }
+    });
   }
 }

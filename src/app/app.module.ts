@@ -492,7 +492,8 @@ export function tokenGetter() {
 		TutorialModalComponent,
 		NotificacionDetalleUrlComponent,
 		SeleccionadosModalComponent,
-		BilleteraLiquidacionesDetalleComponent
+		BilleteraLiquidacionesDetalleComponent,
+		BilleteraCobrarCuentaComponent
 	],
 	bootstrap: [AppComponent]
 })

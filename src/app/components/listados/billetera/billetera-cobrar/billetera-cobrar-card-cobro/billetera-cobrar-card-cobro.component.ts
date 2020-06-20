@@ -45,6 +45,15 @@ export class BilleteraCobrarCardCobroComponent implements OnInit {
     this.fechaCobroProgramado = this.cobroProgramado.fechaCobroProgramado.toISOString();
   }
 
+  /**
+   * Indica la cuenta bancaria
+   * @param cuentaBancaria 
+   */
+  seleccionarCuentaBancaria(cuentaBancaria: any) {
+    this.cobroProgramado.cuentaBancaria = cuentaBancaria;
+  }
+
+
   Transferencia() {
     this.isTransferencia = !this.isTransferencia;
   }
