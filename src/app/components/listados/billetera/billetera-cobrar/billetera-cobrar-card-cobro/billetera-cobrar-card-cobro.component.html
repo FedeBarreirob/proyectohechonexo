@@ -17,7 +17,8 @@
   <!--Monto-->
   <div fxLayout="column" fxLayoutAlign="space-between center">
     <div fxFlex style="border-bottom: 1px solid gray;">
-      <input [(ngModel)]="cobroProgramado.monto" style="border: none;" />
+      <input [(ngModel)]="cobroProgramado.monto" (change)="notificarCambioMonto()" (keyup)="notificarCambioMonto()"
+        style="border: none;" />
     </div>
 
     <div fxFlex>
@@ -33,7 +34,8 @@
 
     <div fxFlex="grow">
       <mat-form-field>
-        <input matInput [matDatepicker]="picker" [(ngModel)]="fechaCobroProgramado">
+        <input matInput [matDatepicker]="picker" [(ngModel)]="fechaCobroProgramado"
+          [min]="cobroProgramado.fechaVencimiento">
         <mat-datepicker-toggle matSuffix [for]="picker">
           <mat-icon matDatepickerToggleIcon>date_range</mat-icon>
         </mat-datepicker-toggle>
@@ -60,54 +62,32 @@
   </div>
 
   <!--Destinatario de cuenta bancaria-->
-  <div fxLayout="row" fxLayoutAlign="space-between center" fxLayoutGap="10px" *ngIf="medioDeCobroSeleccionado == mediosCobroEnum.TRANSFERENCIA_BANCARIA">
+  <div fxLayout="row" fxLayoutAlign="space-between center" fxLayoutGap="10px"
+    *ngIf="medioDeCobroSeleccionado == mediosCobroEnum.TRANSFERENCIA_BANCARIA">
     <div fxFlex="nogrow" class="fecha">
       DESTINATARIO
     </div>
 
     <div fxFlex="grow">
-      <app-cuenta-bancaria-selector (cuentaSeleccionadaEvent)="seleccionarCuentaBancaria($event)"></app-cuenta-bancaria-selector>
+      <app-cuenta-bancaria-selector (cuentaSeleccionadaEvent)="seleccionarCuentaBancaria($event)">
+      </app-cuenta-bancaria-selector>
     </div>
   </div>
 
-  <div fxLayout="column">
-    
-    <div fxFlex="50%" fxLayoutALign="space-between center">
-      
-      <div *ngIf="!isTransferencia" fxLayout="column">
-        <div fxFlex="50%" fxLayoutALign="space-between center" class="fecha">
-          <h5>DESTINATARIO</h5>
-        </div>
-        <div fxFlex="50%">
-          <mat-form-field>
-            <mat-select>
-              <mat-option value="user1">Cuenta José</mat-option>
-              <mat-option value="user2">Cuenta Pedro</mat-option>
-              <a routerLink="/nuevacuenta">
-                <button mat-button>
-                  <mat-icon>add</mat-icon>Agregar cuenta
-                </button>
-              </a>
-            </mat-select>
-          </mat-form-field>
-        </div>
-      </div>
+  <!--Retiro cheques-->
+  <div fxLayout="row" fxLayoutAlign="space-between center" fxLayoutGap="10px"
+    *ngIf="medioDeCobroSeleccionado == mediosCobroEnum.CHEQUE_FISICO">
+    <div fxFlex="nogrow" class="fecha">
+      RETIRO
     </div>
-    <div *ngIf="!isChequeFisico" fxLayout="column">
-      <div fxFlex="50%" fxLayoutALign="space-between center" class="fecha">
-        <h5>RETIRO</h5>
-      </div>
-      <div fxFlex="50%">
-        <section class="section">
-          <mat-radio-group [(ngModel)]="labelPosition">
-            <mat-radio-button class="margin" value="after">Banco Macro</mat-radio-button>
-            <mat-radio-button class="margin" value="before">Casa Central</mat-radio-button>
-          </mat-radio-group>
-        </section>
-      </div>
+
+    <div fxFlex="grow">
+      <mat-radio-group [(ngModel)]="lugarRetiroSeleccionado">
+        <mat-radio-button class="margin" [value]="lugarRetiro.BANCO_MACRO">Banco Macro</mat-radio-button>
+        <mat-radio-button class="margin" [value]="lugarRetiro.CASA_CENTRAL">Casa Central</mat-radio-button>
+      </mat-radio-group>
     </div>
   </div>
-
 
 </div>
 <!--vista web-->

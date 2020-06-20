@@ -2,6 +2,7 @@ import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { DeviceDetectorService } from 'ngx-device-detector';
 import { DatePipe } from '@angular/common';
 import { ProgramadorCobroMediosCobro } from '../../../../../enums/programador-cobro-medios-cobro.enum';
+import { ChequeLugarRetiro } from '../../../../../enums/cheque-lugar-retiro.enum';
 
 @Component({
   selector: 'app-billetera-cobrar-card-cobro',
@@ -17,10 +18,16 @@ export class BilleteraCobrarCardCobroComponent implements OnInit {
   @Output()
   quitar: EventEmitter<any> = new EventEmitter<any>();
 
+  @Output()
+  montoChange: EventEmitter<any> = new EventEmitter<any>();
+
   mediosCobroEnum = ProgramadorCobroMediosCobro;
   medioDeCobroSeleccionado: ProgramadorCobroMediosCobro;
   fechaCobroProgramado: string;
-  
+  lugarRetiroSeleccionado: ChequeLugarRetiro;
+
+  lugarRetiro = ChequeLugarRetiro;
+
   esCelular: boolean;
   isTransferencia: boolean = true;
   isChequeFisico: boolean = true;
@@ -51,6 +58,13 @@ export class BilleteraCobrarCardCobroComponent implements OnInit {
    */
   seleccionarCuentaBancaria(cuentaBancaria: any) {
     this.cobroProgramado.cuentaBancaria = cuentaBancaria;
+  }
+
+  /**
+   * Notifica que ha cambiado el monto
+   */
+  notificarCambioMonto() {
+    this.montoChange.emit();
   }
 
 
