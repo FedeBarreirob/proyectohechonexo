@@ -1,0 +1,47 @@
+::ng-deep button.mat-menu-item {
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+    cursor: pointer;
+    outline: 0;
+    border: none;
+    -webkit-tap-highlight-color: transparent;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: block;
+    line-height: 18px;
+    height: auto;
+    padding: 0 16px;
+    text-align: left;
+    text-decoration: none;
+    max-width: 100%;
+    position: relative;
+}
+
+::ng-deep div.mat-menu-panel {
+    min-width: 112px;
+    max-width: 500px;
+    overflow: auto;
+    -webkit-overflow-scrolling: touch;
+    max-height: calc(100vh - 48px);
+    border-radius: 4px;
+    outline: 0;
+}
+
+.activo {
+    color: #23B950;
+    font-family: Rubik;
+    font-size: 14px;
+    min-width: 200px;
+    background-color: rgba(45, 164, 66, 0.1);
+}
+
+.inactivo {
+    color: #333333;
+    font-family: Rubik;
+    font-size: 14px;
+    height: 48px;
+    min-width: 200px;
+}
