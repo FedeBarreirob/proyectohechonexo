@@ -77,10 +77,32 @@ export class BilleteraCobrarIndicacionImportesComponent implements OnInit {
   }
 
   notificarCambiosEnMontosIngresados() {
+    this.actualizarMontoMaximoTodosLosCobros();
     this.actualizarTotal$.next(this.cobrosProgramados);
   }
 
   notificarCambiosEnCobrosProgramados() {
     this.cobrosProgramados$.next(this.cobrosProgramados);
+  }
+
+  /**
+   * Actualiza el monto máximo indicado en cada cobro deacuero a los importes ingresados
+   */
+  actualizarMontoMaximoTodosLosCobros() {
+    if (this.cobrosProgramados && this.cobrosProgramados.length > 1) {
+
+      let vencimientoACobrar = this.vencimientoACobrarSeleccionado$.getValue();
+
+      let montoMaximo: number = vencimientoACobrar.montoMaximoACobrar;
+      let sumatoriaMontos: number = this.cobrosProgramados[0].monto;
+      for (let i = 1; i < this.cobrosProgramados.length; i++) {
+
+        let montoMaximoACobrar: number = montoMaximo - sumatoriaMontos;
+        this.cobrosProgramados[i].montoMaximoACobrar = (montoMaximoACobrar > 0) ? montoMaximoACobrar : 0;
+
+        sumatoriaMontos += Number.parseFloat(this.cobrosProgramados[i].monto);
+      }
+
+    }
   }
 }
