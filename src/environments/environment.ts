@@ -25,6 +25,7 @@ export const environment = {
   hostEntregasYVentas: 'http://192.168.20.66:8080/DigitalEntregasYVentas-1.0-SNAPSHOT/api',
   hostComunicaciones: 'http://192.168.20.66:8080/Comunicaciones-1.0-SNAPSHOT/api',
   hostGeneradorComprobantes: 'http://192.168.20.66:8080/GeneradorComprobantes-1.0-SNAPSHOT/api',
+  hostFinanzas: 'http://192.168.20.66:8080/DigitalFinanzas-1.0-SNAPSHOT/api',
   baseUrl: 'http://192.168.20.66/DigitalUIClientes/#'
 
   //produccion por vpn

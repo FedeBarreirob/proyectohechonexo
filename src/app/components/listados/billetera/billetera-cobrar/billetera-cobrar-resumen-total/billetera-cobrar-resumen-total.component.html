@@ -7,11 +7,18 @@
       <p style="font-size: 20px;">$ {{total | number}}</p>
     </div>
   </mat-card>
+
+  <!--Spinner-->
+  <div fxLayout="row" fxLayoutAlign="center center" *ngIf="guardando == true" style="margin-top: 10px; width: 100%;">
+    <mat-spinner diameter="24"></mat-spinner>
+  </div>
+
   <div fxLayout="row" style="margin-left: 150px; margin-top: 20px;">
     <a style="margin-right: 10px">
       <button mat-stroked-button style="color: green; border: solid 1px green;" matStepperPrevious>Volver</button>
     </a>
-    <button mat-flat-button style="background-color: green; color: white;">Siguiente</button>
+    <button [disabled]="!hayCobrosProgramados" mat-flat-button style="background-color: green; color: white;"
+      (click)="registrarSolicitudDeCobro()">Siguiente</button>
   </div>
 </div>
 

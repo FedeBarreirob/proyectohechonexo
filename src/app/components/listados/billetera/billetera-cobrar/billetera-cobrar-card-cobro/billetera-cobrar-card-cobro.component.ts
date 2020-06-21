@@ -62,4 +62,8 @@ export class BilleteraCobrarCardCobroComponent implements OnInit {
     this.cobroProgramado.medioDeCobroSeleccionado = this.medioDeCobroSeleccionado;
     this.cobroProgramado.lugarRetiroSeleccionado = this.lugarRetiroSeleccionado;
   }
+
+  cerrarVentana() {
+    this.quitar.emit(this.cobroProgramado);
+  }
 }
