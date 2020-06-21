@@ -1,8 +1,10 @@
 <div *ngIf="esCelular">
-  <div fxLayout="row"><h3>Total</h3></div>
-  <mat-card class="container" fxLayout="row" *ngFor="let item of total">
+  <div fxLayout="row">
+    <h3>Total</h3>
+  </div>
+  <mat-card class="container" fxLayout="row">
     <div fxLayout="row">
-      <p style="font-size: 20px;">$ {{item.monto}}</p>
+      <p style="font-size: 20px;">$ {{total | number}}</p>
     </div>
   </mat-card>
   <div fxLayout="row" style="margin-left: 150px; margin-top: 20px;">
@@ -14,10 +16,12 @@
 </div>
 
 <div *ngIf="!esCelular" fxFlex="80%">
-  <div fxLayout="row"><h3>Total</h3></div>
-  <mat-card class="container" fxLayout="row" *ngFor="let item of total">
+  <div fxLayout="row">
+    <h3>Total</h3>
+  </div>
+  <mat-card class="container" fxLayout="row">
     <div fxLayout="row">
-      <p style="font-size: 20px;">$ {{item.monto}}</p>
+      <p style="font-size: 20px;">$ {{total | number}}</p>
     </div>
   </mat-card>
   <div fxLayout="row" style="margin-left: 620px; margin-top: 20px;">
@@ -27,4 +31,3 @@
     <button mat-flat-button style="background-color: green; color: white;">Siguiente</button>
   </div>
 </div>
-

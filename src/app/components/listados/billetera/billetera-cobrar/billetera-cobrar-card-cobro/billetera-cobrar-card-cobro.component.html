@@ -17,7 +17,7 @@
   <!--Monto-->
   <div fxLayout="column" fxLayoutAlign="space-between center">
     <div fxFlex style="border-bottom: 1px solid gray;">
-      <input [(ngModel)]="cobroProgramado.monto" (change)="notificarCambioMonto()" (keyup)="notificarCambioMonto()"
+      <input [(ngModel)]="cobroProgramado.monto" (change)="notificarCambios()" (keyup)="notificarCambios()"
         style="border: none;" />
     </div>
 
@@ -35,7 +35,8 @@
     <div fxFlex="grow">
       <mat-form-field>
         <input matInput [matDatepicker]="picker" [(ngModel)]="fechaCobroProgramado"
-          [min]="cobroProgramado.fechaVencimiento">
+          [min]="cobroProgramado.fechaVencimiento" (change)="notificarCambios()" (keyup)="notificarCambios()"
+          (dateChange)="notificarCambios()">
         <mat-datepicker-toggle matSuffix [for]="picker">
           <mat-icon matDatepickerToggleIcon>date_range</mat-icon>
         </mat-datepicker-toggle>
@@ -52,7 +53,7 @@
 
     <div fxFlex="grow">
       <mat-form-field>
-        <mat-select [(value)]="medioDeCobroSeleccionado">
+        <mat-select [(value)]="medioDeCobroSeleccionado" (selectionChange)="notificarCambios()">
           <mat-option [value]="mediosCobroEnum.TRANSFERENCIA_BANCARIA">Transferencia bancaria</mat-option>
           <mat-option [value]="mediosCobroEnum.CHEQUE_FISICO">Cheque físico</mat-option>
           <mat-option [value]="mediosCobroEnum.CHEQUE_DIGITAL" disabled>Cheque digital (disabled)</mat-option>
@@ -82,9 +83,11 @@
     </div>
 
     <div fxFlex="grow">
-      <mat-radio-group [(ngModel)]="lugarRetiroSeleccionado">
-        <mat-radio-button class="margin" [value]="lugarRetiro.BANCO_MACRO">Banco Macro</mat-radio-button>
-        <mat-radio-button class="margin" [value]="lugarRetiro.CASA_CENTRAL">Casa Central</mat-radio-button>
+      <mat-radio-group [(ngModel)]="lugarRetiroSeleccionado" (change)="notificarCambios()">
+        <mat-radio-button class="margin" [value]="lugarRetiro.BANCO_MACRO" (change)="notificarCambios()">Banco Macro
+        </mat-radio-button>
+        <mat-radio-button class="margin" [value]="lugarRetiro.CASA_CENTRAL" (change)="notificarCambios()">Casa Central
+        </mat-radio-button>
       </mat-radio-group>
     </div>
   </div>

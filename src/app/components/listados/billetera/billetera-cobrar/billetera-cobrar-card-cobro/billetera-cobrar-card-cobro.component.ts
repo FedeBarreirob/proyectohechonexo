@@ -19,7 +19,7 @@ export class BilleteraCobrarCardCobroComponent implements OnInit {
   quitar: EventEmitter<any> = new EventEmitter<any>();
 
   @Output()
-  montoChange: EventEmitter<any> = new EventEmitter<any>();
+  change: EventEmitter<any> = new EventEmitter<any>();
 
   mediosCobroEnum = ProgramadorCobroMediosCobro;
   medioDeCobroSeleccionado: ProgramadorCobroMediosCobro;
@@ -27,19 +27,7 @@ export class BilleteraCobrarCardCobroComponent implements OnInit {
   lugarRetiroSeleccionado: ChequeLugarRetiro;
 
   lugarRetiro = ChequeLugarRetiro;
-
   esCelular: boolean;
-  isTransferencia: boolean = true;
-  isChequeFisico: boolean = true;
-  isCard: boolean = true;
-  labelPosition: 'before' | 'after' = 'after';
-
-  cobros = [{
-    'id': 1,
-    'fecha': '23/12/20',
-    'monto': '12,000',
-    'montototal': '123,000',
-  },];
 
   constructor(
     private deviceService: DeviceDetectorService,
@@ -58,26 +46,20 @@ export class BilleteraCobrarCardCobroComponent implements OnInit {
    */
   seleccionarCuentaBancaria(cuentaBancaria: any) {
     this.cobroProgramado.cuentaBancaria = cuentaBancaria;
+    this.notificarCambios();
   }
 
   /**
-   * Notifica que ha cambiado el monto
+   * Notifica que ha cambiado el cobro programado
    */
-  notificarCambioMonto() {
-    this.montoChange.emit();
+  notificarCambios() {
+    this.actualizarDatosCobroProgramado();
+    this.change.emit();
   }
 
-
-  Transferencia() {
-    this.isTransferencia = !this.isTransferencia;
+  actualizarDatosCobroProgramado() {
+    this.cobroProgramado.fechaCobroProgramado = (this.fechaCobroProgramado) ? new Date(this.fechaCobroProgramado) : null;
+    this.cobroProgramado.medioDeCobroSeleccionado = this.medioDeCobroSeleccionado;
+    this.cobroProgramado.lugarRetiroSeleccionado = this.lugarRetiroSeleccionado;
   }
-
-  chequeFisico() {
-    this.isChequeFisico = !this.isChequeFisico;
-  }
-
-  cerrarVentana() {
-    this.quitar.emit(this.cobroProgramado);
-  }
-
 }

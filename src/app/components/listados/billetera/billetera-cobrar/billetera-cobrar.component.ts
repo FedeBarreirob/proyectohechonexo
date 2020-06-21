@@ -19,6 +19,7 @@ export class BilleteraCobrarComponent implements OnInit, OnDestroy {
   cargando: boolean = false;
   cuenta: EntidadAlg;
   vencimientoACobrarSeleccionado$: BehaviorSubject<any> = new BehaviorSubject<any>(null);
+  cobrosProgramados$: BehaviorSubject<any> = new BehaviorSubject<any>(null);
 
   constructor(
     private deviceService: DeviceDetectorService,

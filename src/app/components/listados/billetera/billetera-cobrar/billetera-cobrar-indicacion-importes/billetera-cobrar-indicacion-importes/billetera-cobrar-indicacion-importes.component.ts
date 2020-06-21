@@ -11,6 +11,9 @@ export class BilleteraCobrarIndicacionImportesComponent implements OnInit {
   @Input()
   vencimientoACobrarSeleccionado$: BehaviorSubject<any>;
 
+  @Input()
+  cobrosProgramados$: BehaviorSubject<any>;
+
   cobrosProgramados: Array<any>;
   actualizarTotal$: Subject<any> = new Subject<any>();
 
@@ -41,7 +44,7 @@ export class BilleteraCobrarIndicacionImportesComponent implements OnInit {
       this.cobrosProgramados.push(primerCobro);
     }
 
-    this.notificarCambiosEnMontosIngresados();
+    this.notificarCambios();
   }
 
   agregarCobro() {
@@ -56,7 +59,7 @@ export class BilleteraCobrarIndicacionImportesComponent implements OnInit {
       });
     }
 
-    this.notificarCambiosEnMontosIngresados();
+    this.notificarCambios();
   }
 
   /**
@@ -65,10 +68,19 @@ export class BilleteraCobrarIndicacionImportesComponent implements OnInit {
    */
   quitarCobro(cobroProgramado: any) {
     this.cobrosProgramados = this.cobrosProgramados.filter(cobro => cobro !== cobroProgramado);
+    this.notificarCambios();
+  }
+
+  notificarCambios() {
     this.notificarCambiosEnMontosIngresados();
+    this.notificarCambiosEnCobrosProgramados();
   }
 
   notificarCambiosEnMontosIngresados() {
     this.actualizarTotal$.next(this.cobrosProgramados);
+  }
+
+  notificarCambiosEnCobrosProgramados() {
+    this.cobrosProgramados$.next(this.cobrosProgramados);
   }
 }
