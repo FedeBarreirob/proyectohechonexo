@@ -189,6 +189,8 @@ import { AppDateAdapter, APP_DATE_FORMATS } from './format-datepicker';
 import { SeleccionadosModalComponent } from './components/listados/comprobantes/descargas-comprobantes/seleccionados-modal/seleccionados-modal.component';
 import { ReporteUsuariosComponent } from './components/listados/reportes/reporte-usuarios/reporte-usuarios/reporte-usuarios.component';
 import { ReporteUsuariosToolbarComponent } from './components/listados/reportes/reporte-usuarios/reporte-usuarios-toolbar/reporte-usuarios-toolbar.component';
+import { ReporteProductoresComponent } from './components/listados/reportes/reporte-productores/reporte-productores/reporte-productores.component';
+import { ReporteProductoresToolbarComponent } from './components/listados/reportes/reporte-productores/reporte-productores-toolbar/reporte-productores-toolbar.component';
 import { SaldoConDiferenciaDeCamioEIvaComponent } from './components/listados/cuenta-corriente/saldo-con-diferencia-de-camio-eiva/saldo-con-diferencia-de-camio-eiva.component';
 import { LongPressDirective } from './directives/long-press.directive';
 import { BilleteraComponent } from './components/listados/billetera/billetera/billetera.component';
@@ -211,8 +213,13 @@ import { BilleteraCobrarListComponent } from './components/listados/billetera/bi
 import { BilleteraCobrarCardCobroComponent } from './components/listados/billetera/billetera-cobrar/billetera-cobrar-card-cobro/billetera-cobrar-card-cobro.component';
 import { BilleteraCobrarCardTotalComponent } from './components/listados/billetera/billetera-cobrar/billetera-cobrar-card-total/billetera-cobrar-card-total.component';
 import { BilleteraCobrarCuentaComponent } from './components/listados/billetera/billetera-cobrar/billetera-cobrar-cuenta/billetera-cobrar-cuenta.component';
+import { BilleteraSaldoMovilComponent } from './components/listados/billetera/billetera-saldo-movil/billetera-saldo-movil.component';
+import { BilleteraLiquidacionesDetalleComponent } from './components/listados/billetera/billetera-liquidaciones-detalle/billetera-liquidaciones-detalle.component';
+import { BilleteraLiquidacionesDetalleUnaLiquidacionComponent } from './components/listados/billetera/billetera-liquidaciones-detalle-una-liquidacion/billetera-liquidaciones-detalle-una-liquidacion.component';
+import { BilleteraCobrarIndicacionImportesComponent } from './components/listados/billetera/billetera-cobrar/billetera-cobrar-indicacion-importes/billetera-cobrar-indicacion-importes/billetera-cobrar-indicacion-importes.component';
 import { BilleteraCobrarResumenComponent } from './components/listados/billetera/billetera-cobrar/billetera-cobrar-resumen/billetera-cobrar-resumen.component';
 import { BilleteraCobrarResumenTotalComponent } from './components/listados/billetera/billetera-cobrar/billetera-cobrar-resumen-total/billetera-cobrar-resumen-total.component';
+
 
 registerLocaleData(localeEsAr, 'es-AR');
 
@@ -372,6 +379,8 @@ export function tokenGetter() {
 		SeleccionadosModalComponent,
 		ReporteUsuariosComponent,
 		ReporteUsuariosToolbarComponent,
+		ReporteProductoresComponent,
+		ReporteProductoresToolbarComponent,
 		SaldoConDiferenciaDeCamioEIvaComponent,
 		LongPressDirective,
 		BilleteraComponent,
@@ -394,6 +403,10 @@ export function tokenGetter() {
 		BilleteraCobrarCardCobroComponent,
 		BilleteraCobrarCardTotalComponent,
 		BilleteraCobrarCuentaComponent,
+		BilleteraSaldoMovilComponent,
+		BilleteraLiquidacionesDetalleComponent,
+		BilleteraLiquidacionesDetalleUnaLiquidacionComponent,
+		BilleteraCobrarIndicacionImportesComponent,
 		BilleteraCobrarResumenComponent,
 		BilleteraCobrarResumenTotalComponent
 	],
@@ -476,7 +489,8 @@ export function tokenGetter() {
 		CuentaCorrienteAplicadaDetalleComponent,
 		TutorialModalComponent,
 		NotificacionDetalleUrlComponent,
-		SeleccionadosModalComponent
+		SeleccionadosModalComponent,
+		BilleteraLiquidacionesDetalleComponent
 	],
 	bootstrap: [AppComponent]
 })

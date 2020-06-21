@@ -1,0 +1,14 @@
+<app-billetera-cobrar-card-cobro *ngFor="let cobroProgramado of cobrosProgramados" [cobroProgramado]="cobroProgramado"
+  (quitar)="quitarCobro($event)">
+</app-billetera-cobrar-card-cobro>
+
+<div fxLayout="row" fxLayoutAlign="space-between center" class="items">
+  <div fxFlex>
+    <button mat-button (click)="agregarCobro()">
+      <mat-icon class="button-info">add</mat-icon>Agregar un cobro
+    </button>
+  </div>
+</div>
+
+<!--
+<app-billetera-cobrar-card-total></app-billetera-cobrar-card-total>-->

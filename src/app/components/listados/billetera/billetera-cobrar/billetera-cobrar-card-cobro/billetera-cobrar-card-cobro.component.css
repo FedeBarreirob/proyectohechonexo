@@ -35,7 +35,7 @@
 .fecha{
     color: rgb(109, 109, 109);
     text-align: left;
-    margin-top: -20px;
+    font-size: 10px;
 }
 
 .items{
