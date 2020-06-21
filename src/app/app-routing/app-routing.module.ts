@@ -92,14 +92,14 @@ const routes: Routes = [
 					rolAdmin: false
 				}
 			},
-			{
+			/*{
 				path: 'nuevacuenta',
 				component: BilleteraCobrarCuentaComponent,
 				canActivate: [AuthGuardGuard],
 				data: {
 					rolAdmin: false
 				}
-			},
+			},*/
 			{
 				path: 'entregas',
 				component: EntregasComponent,

@@ -1,5 +1,5 @@
 <app-billetera-cobrar-card-cobro *ngFor="let cobroProgramado of cobrosProgramados" [cobroProgramado]="cobroProgramado"
-  (quitar)="quitarCobro($event)">
+  (quitar)="quitarCobro($event)" (montoChange)="notificarCambiosEnMontosIngresados()">
 </app-billetera-cobrar-card-cobro>
 
 <div fxLayout="row" fxLayoutAlign="space-between center" class="items">
@@ -10,5 +10,5 @@
   </div>
 </div>
 
-<!--
-<app-billetera-cobrar-card-total></app-billetera-cobrar-card-total>-->
+<app-billetera-cobrar-card-total [actualizarTotal$]="actualizarTotal$">
+</app-billetera-cobrar-card-total>

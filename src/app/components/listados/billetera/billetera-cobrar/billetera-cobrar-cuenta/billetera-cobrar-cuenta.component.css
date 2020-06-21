@@ -1,4 +1,4 @@
-form{
+form {
     padding: 10px;
     margin: 0 auto;
     width: 300px;
@@ -6,19 +6,23 @@ form{
     color: #999;
 }
 
-input, textarea{
+input, textarea {
     border: 0;
     outline: none;
 }
 
-.field{
+.field {
     border: solid 1px #ccc;
     padding: 5px;
     width: 280px;
 }
 
-.field1{
+.field1 {
     border: solid 1px #ccc;
     padding: 10px;
     width: 500px;
+}
+
+mat-form-field {
+    width: 100%;
 }

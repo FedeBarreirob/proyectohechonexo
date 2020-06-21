@@ -1,5 +1,5 @@
 import { Component, OnInit, Input } from '@angular/core';
-import { BehaviorSubject } from 'rxjs';
+import { BehaviorSubject, Subject } from 'rxjs';
 
 @Component({
   selector: 'app-billetera-cobrar-indicacion-importes',
@@ -12,6 +12,7 @@ export class BilleteraCobrarIndicacionImportesComponent implements OnInit {
   vencimientoACobrarSeleccionado$: BehaviorSubject<any>;
 
   cobrosProgramados: Array<any>;
+  actualizarTotal$: Subject<any> = new Subject<any>();
 
   constructor() { }
 
@@ -39,6 +40,8 @@ export class BilleteraCobrarIndicacionImportesComponent implements OnInit {
       this.cobrosProgramados = [];
       this.cobrosProgramados.push(primerCobro);
     }
+
+    this.notificarCambiosEnMontosIngresados();
   }
 
   agregarCobro() {
@@ -52,6 +55,8 @@ export class BilleteraCobrarIndicacionImportesComponent implements OnInit {
         fechaCobroProgramado: vencimientoACobrar.fechaVencimiento
       });
     }
+
+    this.notificarCambiosEnMontosIngresados();
   }
 
   /**
@@ -60,5 +65,10 @@ export class BilleteraCobrarIndicacionImportesComponent implements OnInit {
    */
   quitarCobro(cobroProgramado: any) {
     this.cobrosProgramados = this.cobrosProgramados.filter(cobro => cobro !== cobroProgramado);
+    this.notificarCambiosEnMontosIngresados();
+  }
+
+  notificarCambiosEnMontosIngresados() {
+    this.actualizarTotal$.next(this.cobrosProgramados);
   }
 }

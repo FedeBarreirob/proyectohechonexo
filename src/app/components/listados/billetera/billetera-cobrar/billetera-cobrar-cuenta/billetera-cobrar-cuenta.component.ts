@@ -1,7 +1,8 @@
-import { Component, OnInit, Input } from '@angular/core';
-import { DeviceDetectorService } from 'ngx-device-detector';
-import { cuentas } from '../../../../../models/security/cuentas';
-
+import { Component, OnInit, Inject } from '@angular/core';
+import { MAT_DIALOG_DATA, MatDialogRef, MatSnackBar } from '@angular/material';
+import { CuentaBancariaTipo } from '../../../../../enums/cuenta-bancaria-tipo.enum';
+import { CuentasBancariasService } from '../../../../../services/cuentas-bancarias/cuentas-bancarias.service';
+import { EntidadAlg } from '../../../../../interfaces/perfiles/entidad-alg';
 
 @Component({
   selector: 'app-billetera-cobrar-cuenta',
@@ -10,25 +11,79 @@ import { cuentas } from '../../../../../models/security/cuentas';
 })
 export class BilleteraCobrarCuentaComponent implements OnInit {
 
-  esCelular: boolean;
+  cuenta: EntidadAlg;
+  nombrePropietario: string;
+  referencia: string;
+  cbuCvu: string;
+  tipoCuentaSeleccionada: CuentaBancariaTipo;
 
-  cuentasArray: cuentas[] = [];
-
-  selectedCuentas: cuentas = new cuentas();
+  tipoCuenta = CuentaBancariaTipo;
+  guardando: boolean = false;
 
   constructor(
-    private deviceService: DeviceDetectorService,
-  ) { }
-
-  AgregarCuenta(){
-    this.selectedCuentas.id = this.selectedCuentas.id + 1;
-    this.cuentasArray.push(this.selectedCuentas);
-
-    this.selectedCuentas = new cuentas();
+    @Inject(MAT_DIALOG_DATA) public data: EntidadAlg,
+    private dialogRef: MatDialogRef<BilleteraCobrarCuentaComponent>,
+    private snackBar: MatSnackBar,
+    private cuentasBancariasService: CuentasBancariasService
+  ) {
+    this.cuenta = data;
   }
 
   ngOnInit() {
-    this.esCelular = this.deviceService.isMobile();
   }
 
+  /**
+   * Cierra el dialogo, si indica cuenta creada true indicar que se ha creado una cuenta
+   * @param cuentaCreada 
+   */
+  cerrar(cuentaCreada: boolean) {
+    this.dialogRef.close(cuentaCreada);
+  }
+
+  /**
+   * Muestra una notificacion
+   * @param message 
+   */
+  openSnackBar(message: string) {
+    this.snackBar.open(message, null, {
+      duration: 2000,
+    });
+  }
+
+  /**
+   * Registra la cuenta bancaria
+   */
+  registrarCuenta() {
+    if (this.guardando == false) {
+
+      this.guardando = true;
+
+      this.cuentasBancariasService.cuentasBancariasRegistro(this.datosAGuardar())
+        .subscribe(respuesta => {
+          this.openSnackBar(respuesta.mensaje);
+
+          if (respuesta.exito == true) {
+            this.cerrar(true);
+          }
+        },
+          error => {
+            console.log(error);
+            this.guardando = false;
+          },
+          () => this.guardando = false);
+    }
+  }
+
+  /**
+   * Devuelve el objeto con los datos listos para enviar al servicio del registro
+   */
+  datosAGuardar() {
+    return {
+      entidadCodigo: this.cuenta.id.codigo,
+      nombrePropietario: this.nombrePropietario,
+      referencia: this.referencia,
+      cbuCvu: this.cbuCvu,
+      tipoCuenta: this.tipoCuentaSeleccionada
+    };
+  }
 }
