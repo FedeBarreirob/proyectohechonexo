@@ -10,6 +10,7 @@ import { ResponseServicio } from '../../interfaces/varios/response-servicio';
 export class FinanzasProgramadorCobrosService {
 
   private urlRegistrarSolicitudDeCobro = `${environment.hostFinanzas}/programadorDeCobros/registrarSolicitudDeCobro`;
+  private urlUltimasPrevisionesRegistradas = `${environment.hostFinanzas}/previsionesDeCobros/ultimasPrevisionesDeCobros`;
 
   constructor(private http: HttpClient) { }
 
@@ -26,5 +27,22 @@ export class FinanzasProgramadorCobrosService {
     };
 
     return this.http.post<ResponseServicio>(this.urlRegistrarSolicitudDeCobro, solicitudDeCobro, httpOptions);
+  }
+
+  /**
+   * Devuelve las últimas previsiones registradas 
+   * @param cuenta 
+   * @param cantidad 
+   */
+  ultimasPrevisionesRegistradas(cuenta: string, cantidad: number): Observable<ResponseServicio> {
+
+    const httpOptions = {
+      headers: new HttpHeaders({
+        'Content-Type': 'application/json'
+      })
+    };
+
+    let url = `${this.urlUltimasPrevisionesRegistradas}/${cuenta}/${cantidad}`;
+    return this.http.get<ResponseServicio>(url, httpOptions);
   }
 }

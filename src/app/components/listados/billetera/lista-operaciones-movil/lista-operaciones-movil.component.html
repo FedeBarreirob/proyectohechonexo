@@ -1,10 +1,34 @@
-<div>
-  <ul>
-    <li *ngFor="let item of cobros">
-      <span class="price">
-        ${{ item.monto }}
-      </span>
-      <p style="margin: 20px;"><img style="margin-right: 15px; width: 20px;" src="/assets/sidebar/close-session.png">Crobro prog... {{ item.cobrosnum }}</p>
-    </li>
-  </ul>
+<!--Spinner-->
+<div fxLayout="row" fxLayoutAlign="center center" *ngIf="cargando == true" style="margin-top: 10px; width: 100%;">
+  <mat-spinner diameter="24"></mat-spinner>
+</div>
+
+<div *ngIf="!cargando">
+  <mat-card *ngFor="let prevision of ultimasPrevisiones" style="margin: 10px">
+
+    <div fxLayout="row" fxLayoutAlign="space-between center">
+
+      <div fxFlex="nogrow">
+        <mat-icon>system_update_alt</mat-icon>
+      </div>
+
+      <div fxFlex="nogrow">
+        <div fxLayout="column" fxLayoutAlign="space-between start">
+          <div fxFlex>Cobro</div>
+          <div fxFlex>{{ prevision.fechaDeCobro }}</div>
+        </div>
+      </div>
+
+      <div fxFlex="nogrow">
+        <div fxLayout="column" fxLayoutAlign="space-between end">
+          <div fxFlex>$ {{ prevision.importeACobrarPesos | number }}</div>
+          <div fxFlex>
+            <mat-chip>{{ prevision.estado }}</mat-chip>
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+  </mat-card>
 </div>
