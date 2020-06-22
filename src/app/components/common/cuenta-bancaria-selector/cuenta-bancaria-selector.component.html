@@ -17,8 +17,7 @@
 
   <button mat-menu-item style="white-space: normal" *ngFor="let unaCuenta of cuentasBancarias"
     (click)="seleccionarCuenta(unaCuenta)"
-    [ngClass]="{'activo': cuentaSeleccionada === unaCuenta, 'inactivo': cuentaSeleccionada !== unaCuenta }"
-    [disabled]="unaCuenta.estado == cuentaBancariaEstado.PENDIENTE">
+    [ngClass]="{'activo': cuentaSeleccionada === unaCuenta, 'inactivo': cuentaSeleccionada !== unaCuenta }">
 
     <div fxLayout="column" fxLayoutAlign="center start">
       <div fxFlex>
