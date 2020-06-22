@@ -1,4 +1,5 @@
 import { Component, OnInit, Input } from '@angular/core';
+import { Operaciones } from 'src/app/services/billetera/billetera.service';
 
 @Component({
   selector: 'app-billetera-operaciones-item',

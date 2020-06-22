@@ -7,15 +7,61 @@
   <section>
 
     <div class="fondo-verde" [ngClass]="{'fondo-verde': esCelular, 'fondo-verde-desktop': !esCelular}">
+
+      <!-- TIPO CAMBIO Y NAV MODO MOVILE -->
       <app-tool-bar-general *ngIf="esCelular" titulo="Billetera" [disabled]="false" colorIndicador="white"
         (botonPersonalizadoEjecutado)="mostrarOcultarNotificaciones()"
         [urlImagenAccionPersonalizada]="hayNotificacionesNuevas ? 'assets/toolbar/bell-white-hot.svg' : 'assets/toolbar/bell-white.svg'">
       </app-tool-bar-general>
 
       <app-billetera-saldo-movil *ngIf="esCelular"></app-billetera-saldo-movil>
+
+      <!--TIPO CAMBIO MODO DESKTOP-->
+      <div class="contenedor-fecha-tipocambio-desktop" fxLayout="row" fxLayoutAlign="space-between center"
+          *ngIf="!esCelular">
+        <div fxFlex="50%" class="contenedor-saludo-desktop">
+          Esta es tu nueva <b>billetera digital Gaviglio</b>
+        </div>
+        <div fxFlex="50%">
+          <div fxLayout="column" fxLayoutAlign="space-between end" class="tc-y-fecha-desktop-container">
+            <div fxFlex="100%" class="contenedor-tipo-cambio">
+              <img src="assets/varios/tc.png" class="img-tc" />
+              <span *ngIf="saldoGlobal != null && seObtuvoSaldoExito == true && saldoGlobal.esTipoCambioDeHoy == true">TC
+                ${{ saldoGlobal.tipoDeCambio | number: '.2' }}</span>
+              <span *ngIf="saldoGlobal != null && seObtuvoSaldoExito == true && saldoGlobal.esTipoCambioDeHoy == false">TC
+                ${{ saldoGlobal.tipoDeCambio | number: '.2' }} <span class="fecha-tc">al
+                  {{saldoGlobal.fechaTipoCambio}}</span></span>
+              <span *ngIf="saldoGlobal == null || seObtuvoSaldoExito == false">TC no disp.</span>
+            </div>
+            <div fxFlex="100%">
+              <app-fecha-hora></app-fecha-hora>
+            </div>
+          </div>
+        </div>
+      </div>
+
     </div>
 
     <div [ngClass]="{'fondo-blanco': esCelular, 'fondo-blanco-desktop': !esCelular}">
+
+      <!-- TABLA DE COBROS WEB -->
+
+      <div style="padding: 10px;" *ngIf="!esCelular">
+        <table width="100%">
+          <tr>
+            <td style="width: 50%;">
+              <app-billetera-acobrar-desktop *ngIf="cargando == false"></app-billetera-acobrar-desktop>
+            </td>
+            <td style="width: 50%;">
+              <app-billetera-apagar-desktop *ngIf="cargando == false"></app-billetera-apagar-desktop>
+            </td>
+          </tr>
+        </table>
+        <!--Spinner-->
+        <div fxLayout="row" fxLayoutAlign="center center" *ngIf="cargando" style="margin-top: 10px">
+          <mat-spinner diameter="24"></mat-spinner>
+        </div>
+      </div>
 
       <!-- CONTENEDOR DE PAGAR Y COBRAR -->
       <div style="padding: 10px" *ngIf="esCelular">
@@ -36,9 +82,11 @@
       <div style="margin-top: 30px;" *ngIf="esCelular">
         <app-lista-operaciones-movil></app-lista-operaciones-movil>
       </div>
-
-      <div style="margin-top: 30px; margin-bottom: 100px;" *ngIf="!esCelular">
-        <app-billetera-operaciones-item *ngFor="let operacion of operaciones" [operacion]="operacion"></app-billetera-operaciones-item>
+      
+      <div style="margin-top: 30px;" *ngIf="!esCelular">
+        <!-- LA LINEA DE ABAJO ES LA QUE HIZO MATIAS Y NO SE COMO HACER QUE LE AGREGUE ITEMS A LA LISTA, PONGO DEBAJO DE ESA LA LISTA QUE HICE PARA EL CELULAR-->
+        <!--<app-billetera-operaciones-item *ngFor="let operacion of operaciones" [operacion]="operacion"></app-billetera-operaciones-item>-->
+        <app-lista-operaciones-movil></app-lista-operaciones-movil>
       </div>
 
     </div>

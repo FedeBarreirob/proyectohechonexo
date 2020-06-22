@@ -18,7 +18,7 @@
   <div fxLayout="column" fxLayoutAlign="space-between center">
     <div fxFlex style="border-bottom: 1px solid gray;">
       <input [(ngModel)]="cobroProgramado.monto" (change)="notificarCambioMonto()" (keyup)="notificarCambioMonto()"
-        style="border: none;" />
+        style="border: none; margin-left: 35%;" />
     </div>
 
     <div fxFlex>
@@ -90,103 +90,96 @@
   </div>
 
 </div>
+
+
 <!--vista web-->
 
-<div *ngIf="!esCelular">
-  <div fxLayout="column" *ngFor="let item of cobros">
-    <div class="card-container" *ngIf="isCard">
-      <div fxLayout="row">
-        <div fxFlex="50%" fxLayoutALign="space-between center" class="title">
-          <h5>Cobro {{ item.id }} </h5>
-        </div>
-        <div fxFlex="50%" fxLayoutALign="space-between center" class="button">
-          <button mat-icon-button class="cerrar" (click)="cerrarVentana()">
-            <mat-icon>close</mat-icon>
-          </button>
-        </div>
-      </div>
-      <div fxLayout="row">
-        <div fxFlex="100%" fxLayoutALign="space-between center" class="monto">
-          <h3>$ {{ item.monto }} </h3>
-        </div>
-      </div>
-
-      <mat-divider></mat-divider>
-
-      <div fxLayout="row">
-        <div fxFlex="100%" fxLayoutALign="space-between center" class="montot">
-          <h6>Hasta $ {{ item.montototal }} </h6>
-        </div>
-      </div>
-
-      <div fxLayout="column">
-        <div fxLayout="row" fxLayoutALign="space-between center" class="fecha">
-          <h5>FECHA PROGRAMADA</h5>
-        </div>
-        <div fxLayout="row" fxLayoutALign="space-between center">
-          <mat-form-field class="forms">
-            <input matInput [matDatepicker]="picker">
-            <mat-datepicker-toggle matSuffix [for]="picker">
-              <mat-icon matDatepickerToggleIcon>date_range</mat-icon>
-            </mat-datepicker-toggle>
-            <mat-datepicker #picker></mat-datepicker>
-          </mat-form-field>
-        </div>
-      </div>
-
-      <div fxLayout="column">
-        <div fxFlex="50%" fxLayoutALign="space-between center" class="fecha">
-          <h5>MEDIO DE COBRO</h5>
-        </div>
-        <div fxFlex="50%" fxLayout="row" fxLayoutALign="space-between center">
-          <mat-form-field class="forms">
-            <mat-select>
-              <mat-option value="transferencia" (click)="Transferencia()">Transferencia bancaria</mat-option>
-              <mat-option value="chequef" (click)="chequeFisico()">Cheque físico</mat-option>
-              <mat-option value="chequed" disabled>Cheque digital (disabled)</mat-option>
-            </mat-select>
-          </mat-form-field>
-          <div *ngIf="!isTransferencia" fxLayout="column" style="margin-top: -30px; margin-left: 40px;">
-            <div fxFlex="50%" fxLayoutALign="space-between center" class="fecha">
-              <h5>DESTINATARIO</h5>
-            </div>
-            <div fxFlex="50%">
-              <mat-form-field class="forms">
-                <mat-select>
-                  <mat-option value="user1">Cuenta José</mat-option>
-                  <mat-option value="user2">Cuenta Pedro</mat-option>
-                  <a routerLink="/nuevacuenta">
-                    <button mat-button>
-                      <mat-icon>add</mat-icon>Agregar cuenta
-                    </button>
-                  </a>
-                </mat-select>
-              </mat-form-field>
-            </div>
-          </div>
-
-          <div *ngIf="!isChequeFisico" fxLayout="column" style="margin-top: -30px; margin-left: 40px;">
-            <div fxFlex="50%" fxLayoutALign="space-between center" class="fecha">
-              <h5>RETIRO</h5>
-            </div>
-            <div fxFlex="50%">
-              <section class="section">
-                <mat-radio-group [(ngModel)]="labelPosition" class="forms">
-                  <mat-radio-button class="margin" value="after">Banco Macro</mat-radio-button>
-                  <mat-radio-button class="margin" value="before">Casa Central</mat-radio-button>
-                </mat-radio-group>
-              </section>
-            </div>
-          </div>
-          
-        </div>
-      </div>
+<div *ngIf="!esCelular" class="card-container">
+  <!--Titulo y boton cierre-->
+  <div fxLayout="row" fxLayoutAlign="space-between center">
+    <div fxFlex="nogrow" class="title">
+      <h5>Cobro</h5>
     </div>
 
-    <div fxFlex="100%" fxLayout="row" fxLayoutAlign="space-between center" class="items" style="margin-left: 350px; margin-top: 50px;">
-      <button mat-stroked-button style="color: green; border: solid 1px green; width: 300px;" (click)= "AgregarCobro()">
-        <mat-icon class="button-info">add</mat-icon>Agregar un cobro
+    <div fxFlex="nogrow" class="button">
+      <button mat-icon-button class="cerrar" (click)="cerrarVentana()">
+        <mat-icon>close</mat-icon>
       </button>
+    </div>
+  </div>
+
+  <!--Monto-->
+  <div fxLayout="column" fxLayoutAlign="space-between center">
+    <div fxFlex style="border-bottom: 1px solid gray; width: 60%;">
+      <input [(ngModel)]="cobroProgramado.monto" (change)="notificarCambioMonto()" (keyup)="notificarCambioMonto()"
+        style="border: none; font-size: 20px; text-align: center; width: 100%;" />
+    </div>
+
+    <div fxFlex>
+      <h6>Hasta $ {{ cobroProgramado.montoMaximoACobrar }} </h6>
+    </div>
+  </div>
+
+  <!--Fecha programada-->
+  <div fxLayout="column" fxLayoutAlign="space-between start" fxLayoutGap="10px">
+    <div fxFlex="nogrow" class="fecha">
+      FECHA PROGRAMADA
+    </div>
+
+    <div fxFlex="50%">
+      <mat-form-field style="width: 400px;">
+        <input matInput [matDatepicker]="picker" [(ngModel)]="fechaCobroProgramado"
+          [min]="cobroProgramado.fechaVencimiento">
+        <mat-datepicker-toggle matSuffix [for]="picker">
+          <mat-icon matDatepickerToggleIcon>date_range</mat-icon>
+        </mat-datepicker-toggle>
+        <mat-datepicker #picker></mat-datepicker>
+      </mat-form-field>
+    </div>
+  </div>
+
+  <!--Medio de cobro-->
+  <div fxLayout="column" fxLayoutAlign="space-between start" fxLayoutGap="10px" style="margin-top: 20px;">
+    <div fxFlex="nogrow" class="fecha">
+      MEDIO DE COBRO
+    </div>
+
+    <div fxFlex="50%">
+      <mat-form-field style="width: 400px;">
+        <mat-select [(value)]="medioDeCobroSeleccionado">
+          <mat-option [value]="mediosCobroEnum.TRANSFERENCIA_BANCARIA">Transferencia bancaria</mat-option>
+          <mat-option [value]="mediosCobroEnum.CHEQUE_FISICO">Cheque físico</mat-option>
+          <mat-option [value]="mediosCobroEnum.CHEQUE_DIGITAL" disabled>Cheque digital (disabled)</mat-option>
+        </mat-select>
+      </mat-form-field>
+    </div>
+  </div>
+
+  <!--Destinatario de cuenta bancaria-->
+  <div fxLayout="column" fxLayoutAlign="space-between end" fxLayoutGap="10px"
+    *ngIf="medioDeCobroSeleccionado == mediosCobroEnum.TRANSFERENCIA_BANCARIA" style="margin-top: -95px; margin-right: 10px;">
+    <div fxFlex="nogrow" class="fecha">
+      DESTINATARIO
+    </div>
+
+    <div fxFlex="50%">
+      <app-cuenta-bancaria-selector (cuentaSeleccionadaEvent)="seleccionarCuentaBancaria($event)">
+      </app-cuenta-bancaria-selector>
+    </div>
+  </div>
+
+  <!--Retiro cheques-->
+  <div fxLayout="row" fxLayoutAlign="space-between center" fxLayoutGap="10px"
+    *ngIf="medioDeCobroSeleccionado == mediosCobroEnum.CHEQUE_FISICO">
+    <div fxFlex="nogrow" class="fecha">
+      RETIRO
+    </div>
+
+    <div fxFlex="grow">
+      <mat-radio-group [(ngModel)]="lugarRetiroSeleccionado">
+        <mat-radio-button class="margin" [value]="lugarRetiro.BANCO_MACRO">Banco Macro</mat-radio-button>
+        <mat-radio-button class="margin" [value]="lugarRetiro.CASA_CENTRAL">Casa Central</mat-radio-button>
+      </mat-radio-group>
     </div>
   </div>
 </div>

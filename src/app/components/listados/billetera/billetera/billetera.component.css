@@ -56,67 +56,22 @@
 
 
 .contenedor-billetera {
-    height: 100%;
-}
-
-/*
-.contenedor-desktop {
-    height: 100%;
-    padding-top: 100px;
-}
-
-
-
-.fondo-verde {
-    background: url("../../../../../assets/varios/fondo-verde.png");
-    background-position: center top;
-    background-repeat: no-repeat;
-    background-size: 100%;
-    position: absolute;
-    height: 100%;
-    top: 0px;
-    left: 0px;
-    right: 0px;
-}
-
-.fondo-verde-desktop {
-    background: url("../../../../../assets/varios/fondo-verde-desktop.png");
-    background-position: center top;
-    background-repeat: no-repeat;
-    background-size: 100%;
-    position: absolute;
-    height: 100%;
-    top: 0px;
-    left: 0px;
-    right: 0px;
-}
-
-.fondo-blanco {
-    position: absolute;
-    top: 310px;
-    left: 0px;
-    right: 0px;
-}
-
-.fondo-blanco-desktop {
-    position: absolute;
-    top: 250px;
-    left: 0px;
-    right: 0px;
-}
-
-.tab{
-    background-color: white;
-    position: relative;
-    border-radius: 5px;
+  height: 100%;
 }
 
 .pagar-cobrar{
-    margin-top: 30px;
+  margin-top: 20px;
+  padding: 15px;
 }
 
 .op-recientes{
-    margin-top: 30px;
+  margin-top: 10px;
+}
+
+.tab{
+  background-color: white;
+  position: relative;
+  border-radius: 5px;
 }
 
 .contenedor-tipo-cambio {
@@ -171,4 +126,3 @@
   font-size: 20px;
   padding-left: 12px;
 }
-*/
