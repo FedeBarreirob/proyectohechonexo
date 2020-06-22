@@ -16,6 +16,7 @@
 
 .title{
     padding: 10px;
+    padding-top: 0px;
     text-align: left;
     color: rgb(122, 122, 122);
 }
@@ -40,8 +41,8 @@
 }
 
 .button-desk{
-    margin-top: 30px;
-    margin-left: 250px;
+    margin-top: 10px;
+    margin-left: 350px;
 }
 
 .btn{
@@ -50,5 +51,5 @@
 }
 
 .btn-desk{
-    margin-left: 30px;
+    margin-left: 20px;
 }
