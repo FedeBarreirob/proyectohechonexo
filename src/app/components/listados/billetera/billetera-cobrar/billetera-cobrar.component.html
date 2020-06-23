@@ -101,10 +101,9 @@
           <mat-step>
             <ng-template matStepLabel>Importes</ng-template>
             <p style="color: lightgrey; padding: 10px; text-align: left;">Escoge entre tu dinero disponible o el dinero
-              por
-              cobrar para programar tu cobro.</p>
-            <app-billetera-cobrar-indicacion-importes
-              [vencimientoACobrarSeleccionado$]="vencimientoACobrarSeleccionado$">
+              por cobrar para programar tu cobro.</p>
+              <app-billetera-cobrar-indicacion-importes [vencimientoACobrarSeleccionado$]="vencimientoACobrarSeleccionado$"
+              [cobrosProgramados$]="cobrosProgramados$">
             </app-billetera-cobrar-indicacion-importes>
           </mat-step>
 
@@ -113,8 +112,9 @@
             <ng-template matStepLabel>Resumen</ng-template>
             <p style="color: #999; padding: 10px; text-align: left;">Verifica que todos los datos de tu cobro etuvieron
               correctos y presiona confirmar para terminar la operación.</p>
-            <app-billetera-cobrar-resumen></app-billetera-cobrar-resumen>
-            <app-billetera-cobrar-resumen-total></app-billetera-cobrar-resumen-total>
+              <app-billetera-cobrar-resumen [cobrosProgramados$]="cobrosProgramados$"></app-billetera-cobrar-resumen>
+              <app-billetera-cobrar-resumen-total [cobrosProgramados$]="cobrosProgramados$" [cuenta]="cuenta">
+              </app-billetera-cobrar-resumen-total>
             
           </mat-step>
         </mat-horizontal-stepper>

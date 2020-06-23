@@ -23,13 +23,13 @@
   <div fxLayout="row">
     <h3>Importe(s) a cobrar</h3>
   </div>
-  <mat-card class="container" fxLayout="row" *ngFor="let item of resumenArray">
+  <mat-card class="container" fxLayout="row" *ngFor="let item of cobrosProgramados">
 
     <div fxLayout="row" style="padding: 10px;">
       <div fxLayout="column" fxFlex="90%">
-        <p style="font-size: 20px;">$ {{item.monto}}</p>
-        <p style="margin-top: -10px;">Fecha de cobro: {{item.fecha}} - Medio de cobro: {{item.modoCobro}} -
-          Destinatario: {{item.nombre}} </p>
+        <p style="font-size: 20px;">$ {{item.monto | number}}</p>
+        <p style="margin-top: -10px;">Fecha de cobro: {{item.fechaCobroProgramado | date: 'dd/MM/yyyy'}} - Medio de
+          cobro: {{medioCobro(item)}} - {{infoAdicionalMedioCobroSeleccionado(item)}} </p>
       </div>
     </div>
     <a fxLayoutAlign="space-between center">

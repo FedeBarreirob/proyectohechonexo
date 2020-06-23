@@ -1,3 +1,17 @@
+.card-container{
+    padding: 10px;
+    background-color: #ccc;
+    width: 60%;
+    margin-top: 100px;
+    margin-left: 350px;
+    border-radius: 5px;
+    border: solid 2px #999;
+}
+
+.titulo{
+    text-align: center;
+}
+
 form {
     padding: 10px;
     margin: 0 auto;
@@ -21,6 +35,7 @@ input, textarea {
     border: solid 1px #ccc;
     padding: 10px;
     width: 500px;
+    border-radius: 4px;
 }
 
 mat-form-field {
