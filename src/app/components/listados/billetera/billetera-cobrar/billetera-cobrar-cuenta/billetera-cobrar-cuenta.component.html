@@ -1,56 +1,130 @@
-<h3>Agregar una cuenta</h3>
+<div *ngIf="esCelular">
 
-<div fxLayout="column" fxLayoutAlign="space-between start">
-
-  <div fxFlex>
-    <h5>NOMBRE DEL PROPIETARIO</h5>
-    <input class="field" type="text" [(ngModel)]="nombrePropietario">
+  <div style="text-align: center;">
+    <h3>Agregar una cuenta</h3>
   </div>
 
-  <div fxFlex>
-    <h5>CBU/CVU</h5>
-    <input class="field" type="text" [(ngModel)]="cbuCvu">
-  </div>
+  <div fxLayout="column" fxLayoutAlign="space-between start">
 
-  <div fxFlex>
-    <h5>REFERENCIA</h5>
-    <input class="field" type="text" [(ngModel)]="referencia"><br>
-    <mat-hint style="font-size: 12px;">Agrega una referencia para recordar más fácil esta cuenta</mat-hint>
-  </div>
+    <div fxFlex>
+      <h5>NOMBRE DEL PROPIETARIO</h5>
+      <input class="field" type="text" [(ngModel)]="nombrePropietario">
+    </div>
 
-  <div fxFlex>
-    <h5>TIPO</h5>
-    <mat-form-field>
-      <mat-select [(value)]="tipoCuentaSeleccionada">
-        <mat-option [value]="tipoCuenta.CTACTE_PESOS">Cuenta corriente en pesos</mat-option>
-        <mat-option [value]="tipoCuenta.CAJA_AHORRO_PESOS">Caja de ahorro en pesos</mat-option>
-        <mat-option [value]="tipoCuenta.CTACTE_DOLARES">Cuenta corriente en dólares</mat-option>
-        <mat-option [value]="tipoCuenta.CAJA_AHORRO_DOLARES">Caja de ahorro en dólares</mat-option>
-      </mat-select>
-    </mat-form-field>
-  </div>
+    <div fxFlex>
+      <h5>CBU/CVU</h5>
+      <input class="field" type="text" [(ngModel)]="cbuCvu">
+    </div>
 
-  <div fxFlex>
-    <div fxLayout="row" fxLayoutAlign="center center" *ngIf="guardando == true" style="margin-top: 10px; width: 100%;">
-      <mat-spinner diameter="24"></mat-spinner>
+    <div fxFlex>
+      <h5>REFERENCIA</h5>
+      <input class="field" type="text" [(ngModel)]="referencia"><br>
+      <mat-hint style="font-size: 12px;">Agrega una referencia para recordar más fácil esta cuenta</mat-hint>
+    </div>
+
+    <div fxFlex>
+      <h5>TIPO</h5>
+      <mat-form-field>
+        <mat-select [(value)]="tipoCuentaSeleccionada">
+          <mat-option [value]="tipoCuenta.CTACTE_PESOS">Cuenta corriente en pesos</mat-option>
+          <mat-option [value]="tipoCuenta.CAJA_AHORRO_PESOS">Caja de ahorro en pesos</mat-option>
+          <mat-option [value]="tipoCuenta.CTACTE_DOLARES">Cuenta corriente en dólares</mat-option>
+          <mat-option [value]="tipoCuenta.CAJA_AHORRO_DOLARES">Caja de ahorro en dólares</mat-option>
+        </mat-select>
+      </mat-form-field>
+    </div>
+
+    <div fxFlex>
+      <div fxLayout="row" fxLayoutAlign="center center" *ngIf="guardando == true"
+        style="margin-top: 10px; width: 100%;">
+        <mat-spinner diameter="24"></mat-spinner>
+      </div>
+    </div>
+
+    <div fxFlex style="margin-left: 90px;">
+
+      <div fxLayout="row" fxLayoutAlign="end center" fxLayoutGap="5px">
+
+        <div fxFlex="nogrow">
+          <button mat-stroked-button style="color: green; border: solid 1px green;" (click)="cerrar(false)"
+            [disabled]="guardando">Volver</button>
+        </div>
+
+        <div fxFlex="nogrow">
+          <button mat-flat-button style="background-color: green; color: white;" (click)="registrarCuenta()"
+            [disabled]="guardando">Agregar</button>
+        </div>
+
+      </div>
+
     </div>
   </div>
 
-  <div fxFlex>
+</div>
 
-    <div fxLayout="row" fxLayoutAlign="end center" fxLayoutGap="5px">
+<!-- VISTA DESKTOP -->
+<div *ngIf="!esCelular">
 
-      <div fxFlex="nogrow">
-        <button mat-stroked-button style="color: green; border: solid 1px green;" (click)="cerrar(false)"
-          [disabled]="guardando">Volver</button>
-      </div>
-
-      <div fxFlex="nogrow">
-        <button mat-flat-button style="background-color: green; color: white;" (click)="registrarCuenta()"
-          [disabled]="guardando">Agregar</button>
-      </div>
-
+  <div class="card-container">
+    <div class="titulo">
+      <h1>Agregar una cuenta</h1>
     </div>
-
+  
+    <div fxLayout="column" fxLayoutAlign="space-between center">
+  
+      <div fxFlex>
+        <h5>NOMBRE DEL PROPIETARIO</h5>
+        <input class="field1" type="text" [(ngModel)]="nombrePropietario">
+      </div>
+  
+      <div fxFlex>
+        <h5>CBU/CVU</h5>
+        <input class="field1" type="text" [(ngModel)]="cbuCvu">
+      </div>
+  
+      <div fxFlex>
+        <h5>REFERENCIA</h5>
+        <input class="field1" type="text" [(ngModel)]="referencia"><br>
+        <mat-hint style="font-size: 12px;">Agrega una referencia para recordar más fácil esta cuenta</mat-hint>
+      </div>
+  
+      <div fxFlex>
+        <h5>TIPO</h5>
+        <mat-form-field>
+          <mat-select [(value)]="tipoCuentaSeleccionada">
+            <mat-option [value]="tipoCuenta.CTACTE_PESOS">Cuenta corriente en pesos</mat-option>
+            <mat-option [value]="tipoCuenta.CAJA_AHORRO_PESOS">Caja de ahorro en pesos</mat-option>
+            <mat-option [value]="tipoCuenta.CTACTE_DOLARES">Cuenta corriente en dólares</mat-option>
+            <mat-option [value]="tipoCuenta.CAJA_AHORRO_DOLARES">Caja de ahorro en dólares</mat-option>
+          </mat-select>
+        </mat-form-field>
+      </div>
+  
+      <div fxFlex>
+        <div fxLayout="row" fxLayoutAlign="center center" *ngIf="guardando == true"
+          style="margin-top: 10px; width: 100%;">
+          <mat-spinner diameter="24"></mat-spinner>
+        </div>
+      </div>
+  
+      <div fxFlex>
+  
+        <div fxLayout="row" fxLayoutAlign="end center" fxLayoutGap="5px">
+  
+          <div fxFlex="nogrow">
+            <button mat-stroked-button style="color: green; border: solid 1px green;" (click)="cerrar(false)"
+              [disabled]="guardando">Volver</button>
+          </div>
+  
+          <div fxFlex="nogrow">
+            <button mat-flat-button style="background-color: green; color: white;" (click)="registrarCuenta()"
+              [disabled]="guardando">Agregar</button>
+          </div>
+  
+        </div>
+  
+      </div>
+    </div>
   </div>
+
 </div>

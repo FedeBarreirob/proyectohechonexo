@@ -16,9 +16,9 @@
 
   <!--Monto-->
   <div fxLayout="column" fxLayoutAlign="space-between center">
-    <div fxFlex style="border-bottom: 1px solid gray;">
+    <div fxFlex style="border-bottom: 1px solid gray; width: 80%;">
       <input [(ngModel)]="cobroProgramado.monto" (change)="notificarCambios()" (keyup)="notificarCambios()"
-        style="border: none;" />
+        style="border: none; width: 100%; text-align: center; font-size: 14px;" />
     </div>
 
     <div fxFlex>
@@ -27,8 +27,8 @@
   </div>
 
   <!--Fecha programada-->
-  <div fxLayout="row" fxLayoutAlign="space-between center" fxLayoutGap="10px">
-    <div fxFlex="nogrow" class="fecha">
+  <div fxLayout="column" fxLayoutAlign="space-between start" fxLayoutGap="10px">
+    <div fxFlex="nogrow" class="fecha1">
       FECHA PROGRAMADA
     </div>
 
@@ -46,13 +46,13 @@
   </div>
 
   <!--Medio de cobro-->
-  <div fxLayout="row" fxLayoutAlign="space-between center" fxLayoutGap="10px">
-    <div fxFlex="nogrow" class="fecha">
+  <div fxLayout="column" fxLayoutAlign="space-between start" fxLayoutGap="10px">
+    <div fxFlex="nogrow" class="fecha1">
       MEDIO DE COBRO
     </div>
 
     <div fxFlex="grow">
-      <mat-form-field>
+      <mat-form-field style="width: 114%;">
         <mat-select [(value)]="medioDeCobroSeleccionado" (selectionChange)="notificarCambios()">
           <mat-option [value]="mediosCobroEnum.TRANSFERENCIA_BANCARIA">Transferencia bancaria</mat-option>
           <mat-option [value]="mediosCobroEnum.CHEQUE_FISICO">Cheque físico</mat-option>
@@ -65,7 +65,7 @@
   <!--Destinatario de cuenta bancaria-->
   <div fxLayout="row" fxLayoutAlign="space-between center" fxLayoutGap="10px"
     *ngIf="medioDeCobroSeleccionado == mediosCobroEnum.TRANSFERENCIA_BANCARIA">
-    <div fxFlex="nogrow" class="fecha">
+    <div fxFlex="nogrow" class="fecha1">
       DESTINATARIO
     </div>
 
@@ -78,7 +78,7 @@
   <!--Retiro cheques-->
   <div fxLayout="row" fxLayoutAlign="space-between center" fxLayoutGap="10px"
     *ngIf="medioDeCobroSeleccionado == mediosCobroEnum.CHEQUE_FISICO">
-    <div fxFlex="nogrow" class="fecha">
+    <div fxFlex="nogrow" class="fecha1">
       RETIRO
     </div>
 
@@ -113,13 +113,13 @@
 
   <!--Monto-->
   <div fxLayout="column" fxLayoutAlign="space-between center">
-    <div fxFlex style="border-bottom: 1px solid gray; width: 60%;">
-      <input [(ngModel)]="cobroProgramado.monto" (change)="notificarCambioMonto()" (keyup)="notificarCambioMonto()"
-        style="border: none; font-size: 20px; text-align: center; width: 100%;" />
+    <div fxFlex style="border-bottom: 2px solid gray; width: 80%;">
+      <input [(ngModel)]="cobroProgramado.monto" (change)="notificarCambios()" (keyup)="notificarCambios()"
+        style="border: none; text-align: center; font-size: 20px; width: 100%;" />
     </div>
 
     <div fxFlex>
-      <h6>Hasta $ {{ cobroProgramado.montoMaximoACobrar }} </h6>
+      <h6>Hasta $ {{ cobroProgramado.montoMaximoACobrar | number: '.2-2' }} </h6>
     </div>
   </div>
 
@@ -129,10 +129,11 @@
       FECHA PROGRAMADA
     </div>
 
-    <div fxFlex="50%">
+    <div fxFlex="grow">
       <mat-form-field style="width: 400px;">
         <input matInput [matDatepicker]="picker" [(ngModel)]="fechaCobroProgramado"
-          [min]="cobroProgramado.fechaVencimiento">
+          [min]="cobroProgramado.fechaVencimiento" (change)="notificarCambios()" (keyup)="notificarCambios()"
+          (dateChange)="notificarCambios()">
         <mat-datepicker-toggle matSuffix [for]="picker">
           <mat-icon matDatepickerToggleIcon>date_range</mat-icon>
         </mat-datepicker-toggle>
@@ -142,14 +143,14 @@
   </div>
 
   <!--Medio de cobro-->
-  <div fxLayout="column" fxLayoutAlign="space-between start" fxLayoutGap="10px" style="margin-top: 20px;">
+  <div fxLayout="column" fxLayoutAlign="space-between start" fxLayoutGap="10px">
     <div fxFlex="nogrow" class="fecha">
       MEDIO DE COBRO
     </div>
 
-    <div fxFlex="50%">
+    <div fxFlex="grow">
       <mat-form-field style="width: 400px;">
-        <mat-select [(value)]="medioDeCobroSeleccionado">
+        <mat-select [(value)]="medioDeCobroSeleccionado" (selectionChange)="notificarCambios()">
           <mat-option [value]="mediosCobroEnum.TRANSFERENCIA_BANCARIA">Transferencia bancaria</mat-option>
           <mat-option [value]="mediosCobroEnum.CHEQUE_FISICO">Cheque físico</mat-option>
           <mat-option [value]="mediosCobroEnum.CHEQUE_DIGITAL" disabled>Cheque digital (disabled)</mat-option>
@@ -160,12 +161,12 @@
 
   <!--Destinatario de cuenta bancaria-->
   <div fxLayout="column" fxLayoutAlign="space-between end" fxLayoutGap="10px"
-    *ngIf="medioDeCobroSeleccionado == mediosCobroEnum.TRANSFERENCIA_BANCARIA" style="margin-top: -95px; margin-right: 10px;">
+    *ngIf="medioDeCobroSeleccionado == mediosCobroEnum.TRANSFERENCIA_BANCARIA" style="margin-top: -95px;">
     <div fxFlex="nogrow" class="fecha">
       DESTINATARIO
     </div>
 
-    <div fxFlex="50%">
+    <div fxFlex="grow">
       <app-cuenta-bancaria-selector (cuentaSeleccionadaEvent)="seleccionarCuentaBancaria($event)">
       </app-cuenta-bancaria-selector>
     </div>
@@ -179,9 +180,11 @@
     </div>
 
     <div fxFlex="grow">
-      <mat-radio-group [(ngModel)]="lugarRetiroSeleccionado">
-        <mat-radio-button class="margin" [value]="lugarRetiro.BANCO_MACRO">Banco Macro</mat-radio-button>
-        <mat-radio-button class="margin" [value]="lugarRetiro.CASA_CENTRAL">Casa Central</mat-radio-button>
+      <mat-radio-group [(ngModel)]="lugarRetiroSeleccionado" (change)="notificarCambios()">
+        <mat-radio-button class="margin" [value]="lugarRetiro.BANCO_MACRO" (change)="notificarCambios()">Banco Macro
+        </mat-radio-button>
+        <mat-radio-button class="margin" [value]="lugarRetiro.CASA_CENTRAL" (change)="notificarCambios()">Casa Central
+        </mat-radio-button>
       </mat-radio-group>
     </div>
   </div>

@@ -1,4 +1,5 @@
 import { Component, OnInit, Inject } from '@angular/core';
+import { DeviceDetectorService } from 'ngx-device-detector';
 import { MAT_DIALOG_DATA, MatDialogRef, MatSnackBar } from '@angular/material';
 import { CuentaBancariaTipo } from '../../../../../enums/cuenta-bancaria-tipo.enum';
 import { CuentasBancariasService } from '../../../../../services/cuentas-bancarias/cuentas-bancarias.service';
@@ -16,6 +17,7 @@ export class BilleteraCobrarCuentaComponent implements OnInit {
   referencia: string;
   cbuCvu: string;
   tipoCuentaSeleccionada: CuentaBancariaTipo;
+  esCelular: boolean;
 
   tipoCuenta = CuentaBancariaTipo;
   guardando: boolean = false;
@@ -24,12 +26,14 @@ export class BilleteraCobrarCuentaComponent implements OnInit {
     @Inject(MAT_DIALOG_DATA) public data: EntidadAlg,
     private dialogRef: MatDialogRef<BilleteraCobrarCuentaComponent>,
     private snackBar: MatSnackBar,
-    private cuentasBancariasService: CuentasBancariasService
+    private cuentasBancariasService: CuentasBancariasService,
+    private deviceService: DeviceDetectorService
   ) {
     this.cuenta = data;
   }
 
   ngOnInit() {
+    this.esCelular = this.deviceService.isMobile();
   }
 
   /**
