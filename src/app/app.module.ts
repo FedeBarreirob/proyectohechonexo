@@ -220,6 +220,12 @@ import { BilleteraCobrarIndicacionImportesComponent } from './components/listado
 import { BilleteraCobrarResumenComponent } from './components/listados/billetera/billetera-cobrar/billetera-cobrar-resumen/billetera-cobrar-resumen.component';
 import { BilleteraCobrarResumenTotalComponent } from './components/listados/billetera/billetera-cobrar/billetera-cobrar-resumen-total/billetera-cobrar-resumen-total.component';
 import { CuentaBancariaSelectorComponent } from './components/common/cuenta-bancaria-selector/cuenta-bancaria-selector.component';
+import { PagarFiltroComponent } from './components/listados/billetera/billetera-pagar/pagar-filtro/pagar-filtro.component';
+import { PagarListadoCardPesosComponent } from './components/listados/billetera/billetera-pagar/pagar-listado-card-pesos/pagar-listado-card-pesos.component';
+import { PagarListadoCardDolaresComponent } from './components/listados/billetera/billetera-pagar/pagar-listado-card-dolares/pagar-listado-card-dolares.component';
+import { PagarInfoComponent } from './components/listados/billetera/billetera-pagar/pagar-info/pagar-info.component';
+import { PagarListadoComponent } from './components/listados/billetera/billetera-pagar/pagar-listado/pagar-listado.component';
+import { PagarComprobantesTotalComponent } from './components/listados/billetera/billetera-pagar/pagar-comprobantes-total/pagar-comprobantes-total.component';
 
 
 registerLocaleData(localeEsAr, 'es-AR');
@@ -410,7 +416,13 @@ export function tokenGetter() {
 		BilleteraCobrarIndicacionImportesComponent,
 		BilleteraCobrarResumenComponent,
 		BilleteraCobrarResumenTotalComponent,
-		CuentaBancariaSelectorComponent
+		CuentaBancariaSelectorComponent,
+		PagarFiltroComponent,
+		PagarListadoCardPesosComponent,
+		PagarListadoCardDolaresComponent,
+		PagarInfoComponent,
+		PagarListadoComponent,
+		PagarComprobantesTotalComponent
 	],
 	imports: [
 		HttpClientModule,
