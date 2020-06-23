@@ -1,3 +1,46 @@
-<p>
-  billetera-pagar works!
-</p>
+<div *ngIf="esCelular">
+  <div class="title">
+    <a routerLink="/billetera" fxFlex="25%" fxLayoutAlign="center center">
+      <button mat-mini-fab class="button">
+        <mat-icon style="color: green;">arrow_back</mat-icon>
+      </button>
+    </a>
+    <h3 fxFlex="75%" style="margin-left: 20px; color: green;">Programar pago</h3>
+  </div>
+
+  <!-- VISTA MOVILE -->
+
+  <div>
+    <mat-horizontal-stepper fxLayout="column" labelPosition="bottom" #stepper>
+      
+      <!--step comprobantes-->
+      <mat-step>
+        <ng-template matStepLabel>Comprobantes</ng-template>
+        <app-pagar-filtro></app-pagar-filtro>
+        <app-pagar-info></app-pagar-info>
+        <app-pagar-listado></app-pagar-listado>
+        <app-pagar-comprobantes-total></app-pagar-comprobantes-total>
+      </mat-step>
+      
+      <!--step medio-->
+      <mat-step>
+        <ng-template matStepLabel>Medio</ng-template>
+      </mat-step>
+      
+      <!--step pago-->
+      <mat-step>
+        <ng-template matStepLabel>Pago</ng-template>
+      </mat-step>
+      
+      <!--step resumen-->
+      <mat-step>
+        <ng-template matStepLabel>Resumen</ng-template>
+      </mat-step>
+
+    </mat-horizontal-stepper>
+  </div>
+</div>
+
+<div *ngIf="!esCelular">
+
+</div>

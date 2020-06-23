@@ -1,0 +1,19 @@
+/*
+.contenedor-desktop {
+  height: 100%;
+  padding-top: 100px;
+}*/
+
+.mat-stepper-horizontal {
+    margin-top: 0px;
+    background-color: rgb(247, 247, 247);
+}
+
+.tittle{
+    margin-top: 15px;
+    background-color: white;
+}
+  
+.button{
+    background-color: white;
+}
