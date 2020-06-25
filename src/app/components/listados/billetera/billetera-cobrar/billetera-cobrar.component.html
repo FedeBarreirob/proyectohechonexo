@@ -66,7 +66,7 @@
 <mat-sidenav-container [ngClass]="{'contenedor-desktop': !esCelular }">
   <div *ngIf="!esCelular">
 
-    <div style="padding-left: 200px; padding-right: 400px; padding-top: 20px;">
+    <div style="padding-left: 200px; padding-right: 250px; padding-top: 20px;">
 
       <div class="title">
         <a routerLink="/billetera" fxFlex="15%" style="padding: 10px;">
@@ -75,6 +75,11 @@
           </button>
         </a>
         <h3 fxFlex="85%" style="margin-left: 20px; color: green;">Programar cobro</h3>
+      </div>
+
+      <!--Spinner-->
+      <div fxLayout="row" fxLayoutAlign="center center" *ngIf="cargando == true" style="margin-top: 10px; width: 100%;">
+        <mat-spinner diameter="24"></mat-spinner>
       </div>
 
       <div *ngIf="conceptosACobrar && !cargando">
@@ -102,7 +107,8 @@
             <ng-template matStepLabel>Importes</ng-template>
             <p style="color: lightgrey; padding: 10px; text-align: left;">Escoge entre tu dinero disponible o el dinero
               por cobrar para programar tu cobro.</p>
-              <app-billetera-cobrar-indicacion-importes [vencimientoACobrarSeleccionado$]="vencimientoACobrarSeleccionado$"
+            <app-billetera-cobrar-indicacion-importes
+              [vencimientoACobrarSeleccionado$]="vencimientoACobrarSeleccionado$"
               [cobrosProgramados$]="cobrosProgramados$">
             </app-billetera-cobrar-indicacion-importes>
           </mat-step>
@@ -112,10 +118,10 @@
             <ng-template matStepLabel>Resumen</ng-template>
             <p style="color: #999; padding: 10px; text-align: left;">Verifica que todos los datos de tu cobro etuvieron
               correctos y presiona confirmar para terminar la operación.</p>
-              <app-billetera-cobrar-resumen [cobrosProgramados$]="cobrosProgramados$"></app-billetera-cobrar-resumen>
-              <app-billetera-cobrar-resumen-total [cobrosProgramados$]="cobrosProgramados$" [cuenta]="cuenta">
-              </app-billetera-cobrar-resumen-total>
-            
+            <app-billetera-cobrar-resumen [cobrosProgramados$]="cobrosProgramados$"></app-billetera-cobrar-resumen>
+            <app-billetera-cobrar-resumen-total [cobrosProgramados$]="cobrosProgramados$" [cuenta]="cuenta">
+            </app-billetera-cobrar-resumen-total>
+
           </mat-step>
         </mat-horizontal-stepper>
 

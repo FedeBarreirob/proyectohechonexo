@@ -5,6 +5,13 @@
     min-height: 67px;
 }
 
+.tarjeta1 {
+    margin-left: 0px;
+    margin-right: 0px;
+    margin-bottom: 0px;
+    min-height: 0px;
+}
+
 .indicador{
     float: right;
     margin-top: -5px;

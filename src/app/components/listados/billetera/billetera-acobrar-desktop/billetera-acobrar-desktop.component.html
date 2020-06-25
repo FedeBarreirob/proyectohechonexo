@@ -1,30 +1,21 @@
-<mat-card class="card">
+<mat-card fxLayout="column" class="card">
 
-  <div fxLayout="row" fxLayoutAlign="space-between" fxLayoutGap="20px" class="titulo-card"
-    style="font-size: 120%;" *ngIf="esCelular != null && esCelular == false">
+  <div fxLayout="row" fxFlex="100%" fxLayoutAlign="space-between" fxLayoutGap="20px" class="titulo-card" style="font-size: 20px;"
+    *ngIf="esCelular != null && esCelular == false">
     A cobrar
   </div>
 
-  <div fxLayout="column" fxLayoutAlign="start stretch" class="contenedor">
-    <div fxLayout="row" fxLayoutAlign="space-between center">
-      <div fxFlex="100%" class="titulo-card-1">
-        Dinero en cuenta
-      </div>
-    </div>
-    <div fxLayout="row" fxLayoutAlign="space-between center">
-      <div fxFlex="grow" class="texto">
-        ${{ total | number }}
-      </div>
-      <div fxLayout="row" fxLayoutAlign="center center" >
-        <button mat-icon-button>
-          <mat-icon class="button-info">info</mat-icon>
-        </button>
-      </div>
-    </div>
-  </div>
-  <mat-divider></mat-divider>
+  <div fxLayout="column" fxFlex="100%" fxLayoutAlign="space-between" class="contenedor">
 
-  <app-billetera-acobrar-resumen-item *ngFor="let detail of detalleCuenta" [detail]="detail"></app-billetera-acobrar-resumen-item>
+    <!--Spinner-->
+    <div fxLayout="row" fxLayoutAlign="center center" *ngIf="cargando == true" style="margin-top: 10px; width: 100%;">
+      <mat-spinner diameter="24"></mat-spinner>
+    </div>
+    <app-tarjeta-tab-container *ngIf="saldoGlobal != null && seObtuvoSaldoExito == true" [saldoGlobal]="saldoGlobal"></app-tarjeta-tab-container>
+  </div>
+
+  <app-billetera-acobrar-resumen-item *ngFor="let detail of detalleCuenta" [detail]="detail">
+  </app-billetera-acobrar-resumen-item>
 
 
 </mat-card>

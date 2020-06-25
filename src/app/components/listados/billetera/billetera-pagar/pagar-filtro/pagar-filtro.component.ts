@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { DeviceDetectorService } from 'ngx-device-detector';
 
 @Component({
   selector: 'app-pagar-filtro',
@@ -7,9 +8,12 @@ import { Component, OnInit } from '@angular/core';
 })
 export class PagarFiltroComponent implements OnInit {
 
-  constructor() { }
+  esCelular: boolean;
+
+  constructor(private deviceService: DeviceDetectorService) { }
 
   ngOnInit() {
+    this.esCelular = this.deviceService.isMobile();
   }
 
 }
