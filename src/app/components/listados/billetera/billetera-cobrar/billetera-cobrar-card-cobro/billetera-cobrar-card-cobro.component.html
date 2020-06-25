@@ -130,7 +130,7 @@
     </div>
 
     <div fxFlex="grow">
-      <mat-form-field style="width: 400px;">
+      <mat-form-field style="width: 250px;">
         <input matInput [matDatepicker]="picker" [(ngModel)]="fechaCobroProgramado"
           [min]="cobroProgramado.fechaVencimiento" (change)="notificarCambios()" (keyup)="notificarCambios()"
           (dateChange)="notificarCambios()">
@@ -149,7 +149,7 @@
     </div>
 
     <div fxFlex="grow">
-      <mat-form-field style="width: 400px;">
+      <mat-form-field style="width: 250px;">
         <mat-select [(value)]="medioDeCobroSeleccionado" (selectionChange)="notificarCambios()">
           <mat-option [value]="mediosCobroEnum.TRANSFERENCIA_BANCARIA">Transferencia bancaria</mat-option>
           <mat-option [value]="mediosCobroEnum.CHEQUE_FISICO">Cheque físico</mat-option>

@@ -1,4 +1,5 @@
 import { Component, OnInit, Input } from '@angular/core';
+import { DeviceDetectorService } from 'ngx-device-detector';
 import { SaldoGlobalCtaCteAplicada } from '../../../../interfaces/ctacte-aplicada/saldo-global-cta-cte-aplicada';
 
 @Component({
@@ -10,10 +11,12 @@ export class TarjetaTabContainerComponent implements OnInit {
 
   @Input()
   saldoGlobal: SaldoGlobalCtaCteAplicada;
+  esCelular: boolean;
 
-  constructor() { }
+  constructor(private deviceService: DeviceDetectorService) { }
 
   ngOnInit() {
+    this.esCelular = this.deviceService.isMobile();
   }
 
 }

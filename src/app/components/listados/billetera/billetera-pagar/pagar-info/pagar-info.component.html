@@ -1,8 +1,21 @@
-<div class="card-container">
-  <div fxFlex="10%">
-    
+<div *ngIf="esCelular">
+  <div class="card-container">
+    <div fxFlex="10%">
+      
+    </div>
+    <div fxFlex="90%" style="padding: 5px; border-radius: 4px;">
+      <p>La suma de tus comprobantes se pesifica automáticamente al cambio del día e incluye el IVA correspondiente.</p>
+    </div>
   </div>
-  <div fxFlex="90%" style="padding: 5px; border-radius: 4px;">
-    <p>La suma de tus comprobantes se pesifica automáticamente al cambio del día e incluye el IVA correspondiente.</p>
+</div>
+
+<div *ngIf="!esCelular">
+  <div class="card-container">
+    <div fxFlex="10%">
+      
+    </div>
+    <div fxFlex="90%" style="padding: 5px; border-radius: 4px;">
+      <p>La suma de tus comprobantes se pesifica automáticamente al cambio del día e incluye el IVA correspondiente.</p>
+    </div>
   </div>
 </div>

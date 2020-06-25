@@ -1,9 +1,23 @@
-<div fxLayout="row" class="card-container">
-  <div style="margin-top: 20px;">
-    <mat-checkbox></mat-checkbox>
+<div *ngIf="esCelular">
+  <div fxLayout="row" class="card-container" style="margin-bottom: 10px;" *ngFor="let item of pagoPesosArray">
+    <div style="margin-top: 20px;">
+      <mat-checkbox></mat-checkbox>
+    </div>
+    <div fxLayout="column" style="margin-left: 10px;">
+      <h4>ARS {{item.monto}}</h4>
+      <h6 style="margin-top: -25px;">{{item.tipopago}} [referencia] - Vence {{item.fecha}}</h6>
+    </div>
   </div>
-  <div fxLayout="column" style="margin-left: 10px;">
-    <h4>ARS 53,000</h4>
-    <h6 style="margin-top: -25px;">Agroinsumos [referencia] - Vence 27/07/20</h6>
+</div>
+
+<div *ngIf="!esCelular">
+  <div fxLayout="row" class="card-container" style="margin-bottom: 10px;" *ngFor="let item of pagoPesosArray">
+    <div style="margin-top: 20px;">
+      <mat-checkbox></mat-checkbox>
+    </div>
+    <div fxLayout="column" style="margin-left: 10px;">
+      <h4>ARS {{item.monto}}</h4>
+      <h6 style="margin-top: -25px;">{{item.tipopago}} [referencia] - Vence {{item.fecha}}</h6>
+    </div>
   </div>
 </div>

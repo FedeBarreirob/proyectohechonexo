@@ -1,9 +1,10 @@
-<mat-card class="card">
+<div *ngIf="!esCelular">
+  <mat-card class="card">
 
-  <div fxLayout="row" fxLayoutAlign="space-between" fxLayoutGap="20px" class="titulo-card"
-    style="font-size: 120%;" *ngIf="esCelular != null && esCelular == false">
-    A pagar
-  </div>
-  <mat-divider></mat-divider>
-
-</mat-card>
+    <div fxLayout="row" fxLayoutAlign="space-between" fxLayoutGap="20px" class="titulo-card"
+      style="font-size: 20px;" *ngIf="esCelular != null && esCelular == false">
+      A pagar
+    </div>
+  
+  </mat-card>
+</div>

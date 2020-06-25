@@ -1,6 +1,12 @@
 .card{
-  margin-left: 15px;
-  margin-right: 15px;
+  margin-left: 150px;
+  margin-right: 120px;
+  margin-bottom: 10px;
+}
+
+.card1{
+  margin-left: -55px;
+  margin-right: 150px;
   margin-bottom: 10px;
 }
 
