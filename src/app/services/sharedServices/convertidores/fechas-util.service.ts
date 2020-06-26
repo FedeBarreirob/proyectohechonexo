@@ -22,4 +22,12 @@ export class FechasUtilService {
       return null;
     }
   }
+
+  /**
+   * Retorna el Date correspondiente a la fecha de hoy con hora 0
+   */
+  hoyFechaUnicamente(): Date {
+    let hoy: Date = new Date();
+    return new Date(hoy.getFullYear(), hoy.getMonth(), hoy.getDate());
+  }
 }

@@ -1,4 +1,4 @@
-<div *ngIf="esCelular">
+<div *ngIf="esCelular && cuenta">
   <div class="title">
     <a routerLink="/billetera" fxFlex="25%" fxLayoutAlign="center center">
       <button mat-mini-fab class="button">
@@ -18,8 +18,8 @@
         <ng-template matStepLabel>Comprobantes</ng-template>
         <app-pagar-filtro></app-pagar-filtro>
         <app-pagar-info></app-pagar-info>
-        <app-pagar-listado></app-pagar-listado>
-        <app-pagar-comprobantes-total></app-pagar-comprobantes-total>
+        <app-pagar-listado [cuenta]="cuenta" [totalEvent$]="totalEvent$"></app-pagar-listado>
+        <app-pagar-comprobantes-total [totalEvent$]="totalEvent$"></app-pagar-comprobantes-total>
       </mat-step>
       
       <!--step medio-->
@@ -42,7 +42,7 @@
 </div>
 
 <mat-sidenav-container [ngClass]="{'contenedor-desktop': !esCelular }">
-  <div *ngIf="!esCelular">
+  <div *ngIf="!esCelular && cuenta">
 
     <div style="padding-left: 150px; padding-right: 150px; padding-top: 120px;">
 
@@ -65,7 +65,7 @@
             <ng-template matStepLabel>Comprobantes</ng-template>
             <app-pagar-filtro></app-pagar-filtro>
             <app-pagar-info></app-pagar-info>
-            <app-pagar-listado></app-pagar-listado>
+            <app-pagar-listado [cuenta]="cuenta"></app-pagar-listado>
             <app-pagar-comprobantes-total></app-pagar-comprobantes-total>
           </mat-step>
           

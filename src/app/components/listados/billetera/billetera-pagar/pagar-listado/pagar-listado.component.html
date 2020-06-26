@@ -1,17 +1,7 @@
-<div *ngIf="esCelular">
-  <div style="margin-top: 30px;">
-    <app-pagar-listado-card-pesos></app-pagar-listado-card-pesos>
-    <div style="margin-top: 10px;">
-      <app-pagar-listado-card-dolares></app-pagar-listado-card-dolares>
-    </div>
-  </div>
+<!--Spinner-->
+<div fxLayout="row" fxLayoutAlign="center center" *ngIf="cargando == true" style="margin-top: 10px;">
+  <mat-spinner diameter="24"></mat-spinner>
 </div>
 
-<div *ngIf="!esCelular">
-  <div style="margin-top: 30px;">
-    <app-pagar-listado-card-pesos></app-pagar-listado-card-pesos>
-    <div style="margin-top: 10px;">
-      <app-pagar-listado-card-dolares></app-pagar-listado-card-dolares>
-    </div>
-  </div>
-</div>
+<app-pagar-listado-concepto-apagar *ngFor="let concepto of listado" [concepto]="concepto" (seleccion)="seleccionarConcepto($event)">
+</app-pagar-listado-concepto-apagar>

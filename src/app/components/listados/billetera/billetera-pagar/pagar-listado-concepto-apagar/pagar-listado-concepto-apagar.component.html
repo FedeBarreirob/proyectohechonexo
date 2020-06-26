@@ -1,0 +1,25 @@
+<mat-card class="card-container">
+  <div fxLayout="row" fxLayoutAlign="space-between center" fxLayoutGap="10px">
+
+    <div fxFlex="nogrow">
+      <mat-checkbox (change)="notificarSeleccion($event.checked)"></mat-checkbox>
+    </div>
+
+    <div fxFlex="grow">
+
+      <div fxLayout="column" fxLayoutAlign="space-between start">
+        <div fxFlex>
+          {{ concepto.moneda | moneda }}
+          <span *ngIf="concepto.moneda == 'P'">{{ concepto.saldoPesos * (-1) | number }}</span>
+          <span *ngIf="concepto.moneda != 'P'">{{ concepto.saldoDolares * (-1) | number }}</span>
+        </div>
+
+        <div fxFlex>
+          {{ concepto.comprobanteAfectado }} - {{ (esVencido) ? 'Venció' : 'Vence' }}: {{ concepto.fechaVencimiento }}
+        </div>
+      </div>
+
+    </div>
+
+  </div>
+</mat-card>
