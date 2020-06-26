@@ -221,11 +221,10 @@ import { BilleteraCobrarResumenComponent } from './components/listados/billetera
 import { BilleteraCobrarResumenTotalComponent } from './components/listados/billetera/billetera-cobrar/billetera-cobrar-resumen-total/billetera-cobrar-resumen-total.component';
 import { CuentaBancariaSelectorComponent } from './components/common/cuenta-bancaria-selector/cuenta-bancaria-selector.component';
 import { PagarFiltroComponent } from './components/listados/billetera/billetera-pagar/pagar-filtro/pagar-filtro.component';
-import { PagarListadoCardPesosComponent } from './components/listados/billetera/billetera-pagar/pagar-listado-card-pesos/pagar-listado-card-pesos.component';
-import { PagarListadoCardDolaresComponent } from './components/listados/billetera/billetera-pagar/pagar-listado-card-dolares/pagar-listado-card-dolares.component';
 import { PagarInfoComponent } from './components/listados/billetera/billetera-pagar/pagar-info/pagar-info.component';
 import { PagarListadoComponent } from './components/listados/billetera/billetera-pagar/pagar-listado/pagar-listado.component';
 import { PagarComprobantesTotalComponent } from './components/listados/billetera/billetera-pagar/pagar-comprobantes-total/pagar-comprobantes-total.component';
+import { PagarListadoConceptoAPagarComponent } from './components/listados/billetera/billetera-pagar/pagar-listado-concepto-apagar/pagar-listado-concepto-apagar.component';
 
 
 registerLocaleData(localeEsAr, 'es-AR');
@@ -418,11 +417,10 @@ export function tokenGetter() {
 		BilleteraCobrarResumenTotalComponent,
 		CuentaBancariaSelectorComponent,
 		PagarFiltroComponent,
-		PagarListadoCardPesosComponent,
-		PagarListadoCardDolaresComponent,
 		PagarInfoComponent,
 		PagarListadoComponent,
-		PagarComprobantesTotalComponent
+		PagarComprobantesTotalComponent,
+		PagarListadoConceptoAPagarComponent
 	],
 	imports: [
 		HttpClientModule,

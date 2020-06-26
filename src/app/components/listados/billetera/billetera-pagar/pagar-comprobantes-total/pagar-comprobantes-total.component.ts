@@ -1,5 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 import { DeviceDetectorService } from 'ngx-device-detector';
+import { BehaviorSubject } from 'rxjs';
 
 @Component({
   selector: 'app-pagar-comprobantes-total',
@@ -8,6 +9,9 @@ import { DeviceDetectorService } from 'ngx-device-detector';
 })
 export class PagarComprobantesTotalComponent implements OnInit {
 
+  @Input()
+  totalEvent$: BehaviorSubject<number>;
+  
   esCelular: boolean;
 
   constructor(private deviceService: DeviceDetectorService) { }

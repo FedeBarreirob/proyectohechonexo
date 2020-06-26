@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { FiltroCtacteAplicada } from '../../interfaces/ctacte-aplicada/filtro-ctacte-aplicada';
 import { environment } from '../../../environments/environment';
 import { Observable } from 'rxjs';
@@ -17,6 +17,7 @@ export class CtacteAplicadaService {
   private urlCuentaCorrienteAplicadaSaldo = `${environment.hostCtaCte}/CuentaAplicadaCorriente/saldo`;
   private urlCuentaCorrienteAplicadaSaldoSegunComprobantes = `${environment.hostCtaCte}/CuentaAplicadaCorriente/saldoComprobantes`;
   private urlCuentaCorrienteAplicadaComprobantesAgrupadosPorVencimiento = `${environment.hostCtaCte}/CuentaAplicadaCorriente/comprobantesAgrupadosPorVencimiento`;
+  private urlCuentaCorrienteAplicadaListadoFiltrado = `${environment.hostCtaCte}/CuentaAplicadaCorriente/listadoFiltrado`;
 
   constructor(private http: HttpClient) { }
 
@@ -99,5 +100,21 @@ export class CtacteAplicadaService {
 
     let urlConParametro = `${this.urlCuentaCorrienteAplicadaComprobantesAgrupadosPorVencimiento}/${cuenta}`;
     return this.http.get<ResponseServicio>(urlConParametro, httpOptions);
+  }
+
+  /**
+   * Devuelve un listado de movimientos de ctacte aplicada filtrada por get
+   * @param filtro 
+   */
+  listadoCtaCteFiltrado(filtro: FiltroCtacteAplicada) {
+
+    const httpOptions = {
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      params: <any>filtro
+    };
+
+    return this.http.get<ResponseServicio>(this.urlCuentaCorrienteAplicadaListadoFiltrado, httpOptions);
   }
 }
