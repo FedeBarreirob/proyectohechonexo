@@ -57,14 +57,14 @@ export class BilleteraComponent implements OnInit, OnDestroy {
   ) { }
 
   ngOnInit() {
-    /*this.authenticationService.perfilActivo$
+    this.authenticationService.perfilActivo$
       .pipe(takeUntil(this.destroy$));
     this.cuentaService.cuentaSeleccionada$
       .pipe(takeUntil(this.destroy$))
       .subscribe(
         cuenta => this.cargarSaldoGlobal(cuenta.id.codigo)
       );
-    this.authenticationService.setPerfilActivo(this.authenticationService.perfilUsuarioSeleccionado());*/
+    this.authenticationService.setPerfilActivo(this.authenticationService.perfilUsuarioSeleccionado());
     this.esCelular = this.deviceService.isMobile();
     /*if (this.esCelular) {
       this.actualizarIndicadorMensajes();
