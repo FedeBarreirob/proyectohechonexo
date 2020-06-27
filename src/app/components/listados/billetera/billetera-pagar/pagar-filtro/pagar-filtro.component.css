@@ -1,6 +1,6 @@
-/* botones de selector de especies*/
+/* botones de selector de rubro*/
 
-.grupo-botones-especie {
+.grupo-botones-rubro {
     width: 100%;
     display: flex;
     flex-wrap: wrap;
@@ -8,50 +8,50 @@
     border: 0 !important;
 }
 
-.boton-especie img {
+.boton-rubro img {
     height: 38px;
     width: 38px;
     margin-top: -25px;
 }
 
-.boton-especie .mat-button-toggle {
+.boton-rubro .mat-button-toggle {
     flex: 1 1 100%;
     box-sizing: border-box;
     align-items: center;
     display: flex;
     height: 89px !important;
-    width: 64px !important;
+    width: 96px !important;
     border: 1px solid rgba(35, 185, 80, 0.1);
     border-radius: 4px;
     background-color: rgba(45, 164, 66, 0.1);
     margin: 6px;
 }
 
-.boton-especie .mat-button-toggle-disabled {
+.boton-rubro .mat-button-toggle-disabled {
     border: 1px solid #c5c0c7;
     background-color: #e1dde5;
 }
 
-.boton-especie .mat-button-toggle-checked {
+.boton-rubro .mat-button-toggle-checked {
     height: 89px;
     width: 64px;
     border-radius: 4px;
     background-color: #2DA442;
 }
 
-.boton-especie .mat-button-toggle-checked .texto-epecie {
+.boton-rubro .mat-button-toggle-checked .texto-rubro {
     color: white !important;
 }
 
-.boton-especie .mat-button-toggle .texto-epecie {
+.boton-rubro .mat-button-toggle .texto-rubro {
     color: #333333;
 }
 
-.texto-epecie {
+.texto-rubro {
     position: absolute;
-    left: 5px;
+    left: -6px;
     top: 25px;
-    right: 5px;
+    right: -6px;
     font-family: Rubik;
     font-size: 14px;
     text-align: center;
@@ -74,7 +74,7 @@
 /* encabezado */
 
 .encabezado-filtro {
-   padding-top: 20px;
+    padding-top: 20px;
 }
 
 .texto-filtrar {
@@ -87,58 +87,6 @@
 
 .boton-close {
     margin-top: -35px;
-}
-
-/*campanias*/
-
-.grupo-botones-campanias {
-    width: 100%;
-    display: flex;
-    flex-wrap: wrap;
-    padding: 15px;
-    border: 0 !important;
-}
-
-.boton-campania .mat-button-toggle {
-    flex: 1 1 100%;
-    box-sizing: border-box;
-    align-items: center;
-    display: flex;
-    height: 32px !important;
-    width: 64px !important;
-    border: 1px solid rgba(45, 164, 66, 0.1);
-    border-radius: 4px;
-    background-color: rgba(45, 164, 66, 0.1);
-    margin: 6px;
-}
-
-.boton-campania .mat-button-toggle-disabled {
-    border: 1px solid #c5c0c7;
-    background-color: #e1dde5;
-}
-
-.boton-campania .mat-button-toggle-checked {
-    height: 32px;
-    width: 64px;
-    border-radius: 4px;
-    background-color: #2DA442;
-}
-
-.boton-campania .mat-button-toggle-checked {
-    color: white !important;
-}
-
-.boton-campania .mat-button-toggle {
-    color: #333333;
-}
-
-.texto-campania {
-    position: absolute;
-    left: -14px;
-    top: -27px;
-    width: "100%";
-    font-family: Rubik;
-    font-size: 13px;
 }
 
 /*fechas*/
@@ -167,4 +115,34 @@
 
 .contenedores-input {
     margin-left: 20px;
+}
+
+/*botones*/
+
+.boton-limpiar {
+    height: 40px;
+    width: 104px;
+    border: 1px solid #2DA442;
+    border-radius: 4px;
+    color: #2DA442;
+    font-family: Rubik;
+    font-size: 14px;
+}
+
+.boton-aplicar {
+    height: 40px;
+    width: 104px;
+    background-color: #2DA442;
+    border: 1px solid #2DA442;
+    border-radius: 4px;
+    color: #FFFFFF;
+    font-family: Rubik;
+    font-size: 14px;
+    font-weight: bold;
+}
+
+.contenedor-botones {
+    margin-left: 20px;
+    margin-top: 26px;
+    margin-bottom: 25px;
 }

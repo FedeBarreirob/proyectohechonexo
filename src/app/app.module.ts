@@ -226,6 +226,8 @@ import { PagarListadoComponent } from './components/listados/billetera/billetera
 import { PagarComprobantesTotalComponent } from './components/listados/billetera/billetera-pagar/pagar-comprobantes-total/pagar-comprobantes-total.component';
 import { PagarListadoConceptoAPagarComponent } from './components/listados/billetera/billetera-pagar/pagar-listado-concepto-apagar/pagar-listado-concepto-apagar.component';
 import { BilleteraCardInfoComponent } from './components/listados/billetera/billetera-card-info/billetera-card-info.component';
+import { TotalPagarPagosComponent } from './components/listados/billetera/billetera-pagar/total-pagar-pagos/total-pagar-pagos.component';
+import { PagosOpcionesComponent } from './components/listados/billetera/billetera-pagar/pagos-opciones/pagos-opciones.component';
 
 
 registerLocaleData(localeEsAr, 'es-AR');
@@ -422,7 +424,9 @@ export function tokenGetter() {
 		PagarListadoComponent,
 		PagarComprobantesTotalComponent,
 		PagarListadoConceptoAPagarComponent,
-		BilleteraCardInfoComponent
+		BilleteraCardInfoComponent,
+		TotalPagarPagosComponent,
+		PagosOpcionesComponent
 	],
 	imports: [
 		HttpClientModule,

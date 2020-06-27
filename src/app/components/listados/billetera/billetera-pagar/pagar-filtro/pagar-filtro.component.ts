@@ -1,7 +1,7 @@
-import { Component, OnInit, Input, Output } from '@angular/core';
-import { FiltroEspecieCosecha } from '../../../../../interfaces/varios/filtro-especie-cosecha';
-import { EventEmitter } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { DatePipe } from '@angular/common';
+import { Subject } from 'rxjs';
+import { InfoCtaCte } from '../../../../../enums/info-cta-cte.enum';
 
 @Component({
   selector: 'app-pagar-filtro',
@@ -12,13 +12,10 @@ import { DatePipe } from '@angular/common';
 export class PagarFiltroComponent implements OnInit {
 
   @Input()
-  filtrosEspecieCosecha: FiltroEspecieCosecha;
-
-  @Input()
   cuenta: any;
 
   @Input()
-  sePuedeFiltrarEspecieCosecha: boolean = true;
+  ctacteInfoActivo$: Subject<number>;
 
   @Output()
   botonCerrar: EventEmitter<any> = new EventEmitter<any>();
@@ -26,14 +23,38 @@ export class PagarFiltroComponent implements OnInit {
   @Output()
   botonAplicar: EventEmitter<any> = new EventEmitter<any>();
 
-  public especie: string = "";
-  public cosecha: string = "";
-  public fechaDesde: string;
-  public fechaHasta: string;
+  rubro: any;
+  fechaDesde: string;
+  fechaHasta: string;
+  infoCtaCteActivo: InfoCtaCte = InfoCtaCte.CUENTA_CORRIENTE_APLICADA;
+  infoCtaCte: any = InfoCtaCte;
+
+  rubros: Array<any> = [
+    {
+      codigo: "granos",
+      texto: "Granos",
+      imagen: "assets/cta-cte-filtro/granos.png"
+    },
+    {
+      codigo: "agroinsumos",
+      texto: "Agroinsumos",
+      imagen: "assets/cta-cte-filtro/agroinsumos.png"
+    },
+    {
+      codigo: "balanceado",
+      texto: "Nutrición Animal",
+      imagen: "assets/cta-cte-filtro/balanceado.png"
+    }
+  ];
 
   constructor(private datePipe: DatePipe) { }
 
   ngOnInit() {
+    if(this.ctacteInfoActivo$ != null) {
+      this.ctacteInfoActivo$.subscribe(
+        infoCtaCte => this.infoCtaCteActivo = infoCtaCte
+      );
+    }
   }
 
   // funcion que dispara la notificacion cuando el boton cerrar se presiona
@@ -43,8 +64,7 @@ export class PagarFiltroComponent implements OnInit {
 
   // funcion que limpiar 
   limpiar() {
-    this.especie = "";
-    this.cosecha = "";
+    this.rubro = "";
     this.fechaDesde = "";
     this.fechaHasta = "";
   }
@@ -59,10 +79,10 @@ export class PagarFiltroComponent implements OnInit {
       let filtro = {
         cuenta: this.cuenta.id.codigo,
         fechaDesde: fechaDesdeFiltro,
-        fechaHasta: fechaHastaFiltro,
-        especie: this.especie,
-        cosecha: this.cosecha
+        fechaHasta: fechaHastaFiltro
       }
+
+      filtro = this.filtroConFiltroRubros(filtro);
 
       this.botonAplicar.emit(filtro);
     } else {
@@ -70,5 +90,30 @@ export class PagarFiltroComponent implements OnInit {
     }
 
     this.cerrar();
+  }
+
+  /**
+   * Agrega filtros según rubros
+   * @param filtro Filtro sin rubros
+   */
+  filtroConFiltroRubros(filtro: any): any {
+
+    let filtroConRubros = filtro;
+
+    switch (this.rubro) {
+      case "granos":
+        filtroConRubros.granos = true;
+        break;
+
+      case "agroinsumos":
+        filtroConRubros.agroinsumos = true;
+        break;
+
+      case "balanceado":
+        filtroConRubros.nutricionAnimal = true;
+        break;
+    }
+
+    return filtroConRubros;
   }
 }

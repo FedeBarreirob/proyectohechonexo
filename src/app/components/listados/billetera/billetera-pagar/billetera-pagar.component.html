@@ -1,7 +1,7 @@
 <mat-sidenav-container class="contenedor-filtro">
   <mat-sidenav #menuFiltro position="end" class="sidenav-filtro">
-    <app-pagar-filtro [filtrosEspecieCosecha]="filtrosEspecieCosecha" [cuenta]="cuenta"
-    (botonCerrar)="menuFiltro.toggle()" (botonAplicar)="cargarListado($event)"></app-pagar-filtro>
+    <app-pagar-filtro [cuenta]="cuenta" (botonCerrar)="menuFiltro.toggle()"
+    (botonAplicar)="cargarListado($event, false)" [ctacteInfoActivo$]="ctacteInfoActivo$"></app-pagar-filtro>
   </mat-sidenav>
   <section>
     <div *ngIf="esCelular && cuenta">
@@ -34,6 +34,9 @@
           <!--step medio-->
           <mat-step>
             <ng-template matStepLabel>Medio</ng-template>
+            <app-total-pagar-pagos [totalEvent$]="totalEvent$"></app-total-pagar-pagos>
+            <p style="color: #999; padding: 10px; text-align: left; font-size: 12px;">Escoge la forma en la que se efectuará el pago.</p>
+            <app-pagos-opciones></app-pagos-opciones>
           </mat-step>
           
           <!--step pago-->
