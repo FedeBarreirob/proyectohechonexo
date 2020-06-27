@@ -1,0 +1,52 @@
+<div fxLayout="row" fxLayoutAlign="center" class="encabezado-filtro">
+  <div fxFlex="80%" class="texto-filtrar">
+    Información sobre los sueldos
+  </div>
+
+  <div fxFlex="20%">
+    <button mat-icon-button class="boton-close" (click)="salir()">
+      <mat-icon>close</mat-icon>
+    </button>
+  </div>
+</div>
+<mat-divider></mat-divider>
+<div class="titulo-card-1">
+  Dinero a cobrar
+</div>
+<div class="contenedor-importe"><span class="importe-cobrar">
+  ${{ saldoGlobal.aCobrarVencido + saldoGlobal.aCobrarAVencer | number: '.0-0' }} </span>
+</div>
+<div class="texto-card">
+  Incluye el dinero disponible, el dinero a liquidar y el dinero retenido.
+</div>
+<br>
+<div class="titulo-card-1">
+  Dinero disponible
+</div>
+<div class="contenedor-importe"><span class="importe-cobrar">
+  ${{ saldoGlobal.aCobrarVencido | number: '.0-0' }} </span>
+</div>
+<div class="texto-card">
+  Es el dinero que puedes cobrar ahora mismo por transferencia bancaria o cheque.
+</div>
+<br>
+<div class="titulo-card-1">
+  Dinero por cobrar
+</div>
+<div class="contenedor-importe"><span class="importe-cobrar">
+  ${{ saldoGlobal.aCobrarAVencer | number: '.0-0' }}</span>
+</div>
+<div class="texto-card">
+  Es el dinero que va a estar disponible próximamente. Aún no lo puedes sar pero puedes consultar cuándo estará disponible o programar su cobro.
+</div>
+<br>
+<div class="titulo-card-1">
+  Dinero retenido
+</div>
+<div class="contenedor-importe"><span class="importe-cobrar">
+  $0 </span>
+</div>
+<div class="texto-card">
+  Es el dinero retenido porque tienes algo que resolver. Facturas pendientes de pago, anticipos o conceptos impositivos.
+  Contáctate con tu asesor para saber más de que se trata.
+</div>

@@ -1,37 +1,71 @@
-<div *ngIf="esCelular">
-  <div fxLayoutAlign="space-between center" style="margin-top: 30px; padding: 10px;">
+<div fxLayout="row" fxLayoutAlign="center" class="encabezado-filtro">
+  <div fxFlex="80%" class="texto-filtrar">
+    FILTRAR
+  </div>
 
-    <div fxLayout="row" fxLayoutAlign="space-between center" fxLayoutGap="10px">
-      <div fxFlex="nogrow" class="">
-        Comprobantes
-      </div>
-  
-      <div fxFlex="grow">
-        <mat-form-field>
-          <mat-select>
-            <mat-option></mat-option>
-          </mat-select>
-        </mat-form-field>
-      </div>
-    </div>
+  <div fxFlex="20%">
+    <button mat-icon-button class="boton-close" (click)="cerrar()">
+      <mat-icon>close</mat-icon>
+    </button>
   </div>
 </div>
 
-<div *ngIf="!esCelular">
-  <div fxLayout="row" fxLayoutAlign="space-between center" style="margin-top: 30px; padding: 10px;">
+<!--Spinner-->
+<div fxLayout="row" fxLayoutAlign="center center"
+  *ngIf="filtrosEspecieCosecha == null && sePuedeFiltrarEspecieCosecha == true" style="margin-top: 10px">
+  <mat-spinner diameter="24"></mat-spinner>
+</div>
 
-    <div fxLayout="row" fxLayoutAlign="space-between center" fxLayoutGap="10px">
-      <div fxFlex="50%">
-        Comprobantes
-      </div>
-  
-      <div fxFlex="50%">
-        <mat-form-field>
-          <mat-select>
-            <mat-option></mat-option>
-          </mat-select>
-        </mat-form-field>
+<!--Productos-->
+<span
+  *ngIf="(filtrosEspecieCosecha != null && sePuedeFiltrarEspecieCosecha == true) || (filtrosEspecieCosecha == null && sePuedeFiltrarEspecieCosecha == false)">
+  <span *ngIf="sePuedeFiltrarEspecieCosecha == true">
+
+    <div fxLayout="row" fxLayoutAlign="space-around center">
+      <div fxFlex="100%" class="titulo-filtro">
+        Producto
       </div>
     </div>
+
+    <mat-button-toggle-group class="grupo-botones-especie" [(ngModel)]="especie">
+
+      <div
+        *ngFor="let especie of ((filtrosEspecieCosecha && filtrosEspecieCosecha.especies) ? filtrosEspecieCosecha.especies : [])"
+        class="boton-especie">
+        <mat-button-toggle value="{{especie.codigoEspecie}}">
+          <img src="{{especie.codigoEspecie | imagenEspecie}}" />
+          <div class="texto-epecie">{{especie.especieDescripcion}}</div>
+        </mat-button-toggle>
+      </div>
+
+    </mat-button-toggle-group>
+
+    <!--Monedas-->
+
+    <div fxLayout="row" fxLayoutAlign="space-around center">
+      <div fxFlex="100%" class="titulo-filtro">
+        Moneda
+      </div>
+    </div>
+
+    <mat-radio-group>
+      <mat-radio-button value="1">Dólares</mat-radio-button>
+      <mat-radio-button value="2">Pesos</mat-radio-button>
+    </mat-radio-group>    
+
+  </span>
+
+  <!--Vencimientos-->
+
+  <div fxLayout="row" fxLayoutAlign="space-around center">
+    <div fxFlex="100%" class="titulo-filtro">
+      Vencimiento
+    </div>
   </div>
-</div>
+
+  <mat-radio-group>
+    <mat-radio-button value="1">Vencido</mat-radio-button>
+    <mat-radio-button value="2">Por vencer</mat-radio-button>
+  </mat-radio-group>  
+  
+</span>

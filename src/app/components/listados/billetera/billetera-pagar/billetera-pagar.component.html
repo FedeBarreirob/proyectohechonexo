@@ -1,45 +1,56 @@
-<div *ngIf="esCelular && cuenta">
-  <div class="title">
-    <a routerLink="/billetera" fxFlex="25%" fxLayoutAlign="center center">
-      <button mat-mini-fab class="button">
-        <mat-icon style="color: green;">arrow_back</mat-icon>
-      </button>
-    </a>
-    <h3 fxFlex="75%" style="margin-left: 20px; color: green;">Programar pago</h3>
-  </div>
-
-  <!-- VISTA MOVILE -->
-
-  <div>
-    <mat-horizontal-stepper fxLayout="column" labelPosition="bottom" #stepper>
-      
-      <!--step comprobantes-->
-      <mat-step>
-        <ng-template matStepLabel>Comprobantes</ng-template>
-        <app-pagar-filtro></app-pagar-filtro>
-        <app-pagar-info></app-pagar-info>
-        <app-pagar-listado [cuenta]="cuenta" [totalEvent$]="totalEvent$"></app-pagar-listado>
-        <app-pagar-comprobantes-total [totalEvent$]="totalEvent$"></app-pagar-comprobantes-total>
-      </mat-step>
-      
-      <!--step medio-->
-      <mat-step>
-        <ng-template matStepLabel>Medio</ng-template>
-      </mat-step>
-      
-      <!--step pago-->
-      <mat-step>
-        <ng-template matStepLabel>Pago</ng-template>
-      </mat-step>
-      
-      <!--step resumen-->
-      <mat-step>
-        <ng-template matStepLabel>Resumen</ng-template>
-      </mat-step>
-
-    </mat-horizontal-stepper>
-  </div>
-</div>
+<mat-sidenav-container class="contenedor-filtro">
+  <mat-sidenav #menuFiltro position="end" class="sidenav-filtro">
+    <app-pagar-filtro [filtrosEspecieCosecha]="filtrosEspecieCosecha" [cuenta]="cuenta"
+    (botonCerrar)="menuFiltro.toggle()" (botonAplicar)="cargarListado($event)"></app-pagar-filtro>
+  </mat-sidenav>
+  <section>
+    <div *ngIf="esCelular && cuenta">
+      <div class="title">
+        <a routerLink="/billetera" fxFlex="25%" fxLayoutAlign="center center">
+          <button mat-mini-fab class="button">
+            <mat-icon style="color: green;">arrow_back</mat-icon>
+          </button>
+        </a>
+        <h3 fxFlex="75%" style="margin-left: 20px; color: green;">Programar pago</h3>
+      </div>
+    
+      <!-- VISTA MOVILE -->
+    
+      <div>
+        <mat-horizontal-stepper fxLayout="column" labelPosition="bottom" #stepper>
+          
+          <!--step comprobantes-->
+          <mat-step>
+            <ng-template matStepLabel>Comprobantes</ng-template>
+            <div fxFlex="row" class="">
+              Comprobantes
+              <button mat-button (click)="mostrarOcultarFiltros()">Filtrar</button>
+            </div>
+            <app-pagar-info></app-pagar-info>
+            <app-pagar-listado [cuenta]="cuenta" [totalEvent$]="totalEvent$"></app-pagar-listado>
+            <app-pagar-comprobantes-total [totalEvent$]="totalEvent$"></app-pagar-comprobantes-total>
+          </mat-step>
+          
+          <!--step medio-->
+          <mat-step>
+            <ng-template matStepLabel>Medio</ng-template>
+          </mat-step>
+          
+          <!--step pago-->
+          <mat-step>
+            <ng-template matStepLabel>Pago</ng-template>
+          </mat-step>
+          
+          <!--step resumen-->
+          <mat-step>
+            <ng-template matStepLabel>Resumen</ng-template>
+          </mat-step>
+    
+        </mat-horizontal-stepper>
+      </div>
+    </div>
+  </section>
+</mat-sidenav-container>
 
 <mat-sidenav-container [ngClass]="{'contenedor-desktop': !esCelular }">
   <div *ngIf="!esCelular && cuenta">
@@ -63,7 +74,7 @@
           <!--step comprobantes-->
           <mat-step>
             <ng-template matStepLabel>Comprobantes</ng-template>
-            <app-pagar-filtro></app-pagar-filtro>
+            
             <app-pagar-info></app-pagar-info>
             <app-pagar-listado [cuenta]="cuenta"></app-pagar-listado>
             <app-pagar-comprobantes-total></app-pagar-comprobantes-total>
