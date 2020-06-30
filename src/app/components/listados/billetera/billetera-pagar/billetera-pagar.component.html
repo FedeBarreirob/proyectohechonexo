@@ -35,13 +35,23 @@
           <mat-step>
             <ng-template matStepLabel>Medio</ng-template>
             <app-total-pagar-pagos [totalEvent$]="totalEvent$"></app-total-pagar-pagos>
-            <p style="color: #999; padding: 10px; text-align: left; font-size: 12px;">Escoge la forma en la que se efectuará el pago.</p>
+            <p style="color: #999; padding: 0px; text-align: left; font-size: 14px;">Escoge la forma en la que se efectuará el pago.</p>
             <app-pagos-opciones></app-pagos-opciones>
           </mat-step>
           
           <!--step pago-->
           <mat-step>
             <ng-template matStepLabel>Pago</ng-template>
+            <p style="color: #999; padding: 0px; text-align: left; font-size: 14px;">Usa tu grano para para hacer el pago. Selecciona las cantidades necesarias para cubrir el monto a pagar.</p>
+            <h3 style="color: #999; padding: 0px;">Pago con Canje</h3>
+            <app-pagar-canje-info></app-pagar-canje-info>
+            <app-pagar-soja></app-pagar-soja>
+            <app-pagar-maiz></app-pagar-maiz>
+            <app-pagar-trigo></app-pagar-trigo>
+            <app-pagar-canje-total [totalEvent$]="totalEvent$"></app-pagar-canje-total>
+            <div fxFlexFill fxLayout="row" fxLayoutALign="space-between center">
+              <button mat-button matStepperNext style="background-color: green; color: white; margin-top: 10px; width: 350px;">Siguiente</button>
+            </div>
           </mat-step>
           
           <!--step resumen-->

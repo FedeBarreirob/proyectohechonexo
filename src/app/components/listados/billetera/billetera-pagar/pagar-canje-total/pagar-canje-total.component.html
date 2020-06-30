@@ -1,0 +1,19 @@
+<div class="card">
+  <div fxLayout="row" fxLayoutALign="space-between center">
+    <div fxFlex="50%" style="padding: 10px; color: #ccc;">
+      <h4>Total a pagar: </h4>
+    </div>
+    <div fxFlex="50%" style="padding: 10px; margin-left: 30px; margin-top: -3px;">
+      <h3>$ {{ (totalEvent$ | async) | number }}</h3>
+    </div>
+  </div>
+  <mat-divider></mat-divider>
+  <div fxLayout="row" fxLayoutALign="space-between center">
+    <div fxFlex="50%" style="padding: 10px; color: #ccc;">
+      <h4>Total para canjear: </h4>
+    </div>
+    <div fxFlex="50%" style="padding: 10px; margin-left: 40px; margin-top: -3px;" *ngFor="let item of totalCanje">
+      <h2>${{item.monto}}</h2>
+    </div>
+  </div>
+</div>
