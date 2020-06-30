@@ -1,0 +1,19 @@
+/* encabezado */
+
+.encabezado-filtro {
+    padding-top: 0px;
+}
+ 
+.texto-filtrar {
+    color: #999999;
+    font-family: Rubik;
+    font-size: 15px;
+    letter-spacing: 1.2px;
+    text-align: left;
+    padding-left: 10px;
+    padding-bottom: 10px;
+}
+ 
+.boton-close {
+    margin-top: -35px;
+}

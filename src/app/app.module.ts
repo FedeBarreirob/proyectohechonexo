@@ -225,6 +225,16 @@ import { PagarInfoComponent } from './components/listados/billetera/billetera-pa
 import { PagarListadoComponent } from './components/listados/billetera/billetera-pagar/pagar-listado/pagar-listado.component';
 import { PagarComprobantesTotalComponent } from './components/listados/billetera/billetera-pagar/pagar-comprobantes-total/pagar-comprobantes-total.component';
 import { PagarListadoConceptoAPagarComponent } from './components/listados/billetera/billetera-pagar/pagar-listado-concepto-apagar/pagar-listado-concepto-apagar.component';
+import { BilleteraCardInfoComponent } from './components/listados/billetera/billetera-card-info/billetera-card-info.component';
+import { TotalPagarPagosComponent } from './components/listados/billetera/billetera-pagar/total-pagar-pagos/total-pagar-pagos.component';
+import { PagosOpcionesComponent } from './components/listados/billetera/billetera-pagar/pagos-opciones/pagos-opciones.component';
+import { PagarSojaComponent } from './components/listados/billetera/billetera-pagar/pagar-soja/pagar-soja.component';
+import { PagarMaizComponent } from './components/listados/billetera/billetera-pagar/pagar-maiz/pagar-maiz.component';
+import { PagarTrigoComponent } from './components/listados/billetera/billetera-pagar/pagar-trigo/pagar-trigo.component';
+import { PagarCanjeTotalComponent } from './components/listados/billetera/billetera-pagar/pagar-canje-total/pagar-canje-total.component';
+import { PagarCanjeInfoComponent } from './components/listados/billetera/billetera-pagar/pagar-canje-info/pagar-canje-info.component';
+import { CardPagarStockComponent } from './components/listados/billetera/billetera-pagar/card-pagar-stock/card-pagar-stock.component';
+import { SojaDialogComponent } from './components/listados/billetera/billetera-pagar/pagar-soja/soja-dialog/soja-dialog.component';
 
 
 registerLocaleData(localeEsAr, 'es-AR');
@@ -420,7 +430,17 @@ export function tokenGetter() {
 		PagarInfoComponent,
 		PagarListadoComponent,
 		PagarComprobantesTotalComponent,
-		PagarListadoConceptoAPagarComponent
+		PagarListadoConceptoAPagarComponent,
+		BilleteraCardInfoComponent,
+		TotalPagarPagosComponent,
+		PagosOpcionesComponent,
+		PagarSojaComponent,
+		PagarMaizComponent,
+		PagarTrigoComponent,
+		PagarCanjeTotalComponent,
+		PagarCanjeInfoComponent,
+		CardPagarStockComponent,
+		SojaDialogComponent
 	],
 	imports: [
 		HttpClientModule,
@@ -503,7 +523,9 @@ export function tokenGetter() {
 		NotificacionDetalleUrlComponent,
 		SeleccionadosModalComponent,
 		BilleteraLiquidacionesDetalleComponent,
-		BilleteraCobrarCuentaComponent
+		BilleteraCobrarCuentaComponent,
+		BilleteraCardInfoComponent,
+		SojaDialogComponent
 	],
 	bootstrap: [AppComponent]
 })

@@ -4,6 +4,16 @@
   padding-top: 100px;
 }*/
 
+.contenedor-filtro {
+    height: 100%;
+}
+
+.sidenav-filtro {
+    box-shadow: 3px 0 6px rgba(0, 0, 0, .24);
+    width: 70%;
+    max-width: 270px;
+}
+
 .mat-stepper-horizontal {
     margin-top: 0px;
     background-color: rgb(247, 247, 247);
