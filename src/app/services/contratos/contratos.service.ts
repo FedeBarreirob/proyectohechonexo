@@ -21,6 +21,7 @@ export class ContratosService {
   private urlContratosContratoResumenPorID = `${environment.hostEntregasYVentas}/contratos/contratoResumidoPorId`;
   private urlContratosIndicadoresPorEspecie = `${environment.hostEntregasYVentas}/contratos/indicadoresPorEspecie`;
   private urlContratosIndicadoresGlobalVentas = `${environment.hostEntregasYVentas}/contratos/indicadoresGlobalVentas`;
+  private urlContratosKgDisponiblesParaCanjePorEspecie = `${environment.hostEntregasYVentas}/contratos/kgDiponiblesParaCanjeAgrupadoPorEspecie`;
 
   constructor(
     private http: HttpClient
@@ -147,5 +148,21 @@ export class ContratosService {
     let dataJson = JSON.stringify(filtro);
 
     return this.http.post<ResponseServicio>(this.urlContratosIndicadoresGlobalVentas, dataJson, httpOptions);
+  }
+
+  /**
+   * Retorna un listado con los kilos disponibles para canjear indicando lo pendiente de fijar y pesificar
+   * @param cuenta 
+   */
+  contratosKgDisponiblesParaCanjePorEspecie(cuenta: string): Observable<ResponseServicio> {
+
+    const httpOptions = {
+      headers: new HttpHeaders({
+        'Content-Type': 'application/json'
+      })
+    };
+
+    let urlConParametro = `${this.urlContratosKgDisponiblesParaCanjePorEspecie}/${cuenta}`;
+    return this.http.get<ResponseServicio>(urlConParametro, httpOptions);
   }
 }
