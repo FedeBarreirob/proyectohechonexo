@@ -1,7 +1,7 @@
 <mat-sidenav-container class="contenedor-filtro">
   <mat-sidenav #menuFiltro position="end" class="sidenav-filtro">
-    <app-pagar-filtro [cuenta]="cuenta" (botonCerrar)="menuFiltro.toggle()"
-    (botonAplicar)="cargarListado($event, false)" [ctacteInfoActivo$]="ctacteInfoActivo$"></app-pagar-filtro>
+    <app-pagar-filtro [cuenta]="cuenta" (botonCerrar)="menuFiltro.toggle()" [observerFiltro$]="observerFiltro$">
+    </app-pagar-filtro>
   </mat-sidenav>
   <section>
     <div *ngIf="esCelular && cuenta">
@@ -13,12 +13,12 @@
         </a>
         <h3 fxFlex="75%" style="margin-left: 20px; color: green;">Programar pago</h3>
       </div>
-    
+
       <!-- VISTA MOVILE -->
-    
+
       <div>
         <mat-horizontal-stepper fxLayout="column" labelPosition="bottom" #stepper>
-          
+
           <!--step comprobantes-->
           <mat-step>
             <ng-template matStepLabel>Comprobantes</ng-template>
@@ -27,22 +27,25 @@
               <button mat-button (click)="mostrarOcultarFiltros()">Filtrar</button>
             </div>
             <app-pagar-info></app-pagar-info>
-            <app-pagar-listado [cuenta]="cuenta" [totalEvent$]="totalEvent$"></app-pagar-listado>
+            <app-pagar-listado [cuenta]="cuenta" [totalEvent$]="totalEvent$" [observerFiltro$]="observerFiltro$">
+            </app-pagar-listado>
             <app-pagar-comprobantes-total [totalEvent$]="totalEvent$"></app-pagar-comprobantes-total>
           </mat-step>
-          
+
           <!--step medio-->
           <mat-step>
             <ng-template matStepLabel>Medio</ng-template>
             <app-total-pagar-pagos [totalEvent$]="totalEvent$"></app-total-pagar-pagos>
-            <p style="color: #999; padding: 0px; text-align: left; font-size: 14px;">Escoge la forma en la que se efectuará el pago.</p>
+            <p style="color: #999; padding: 0px; text-align: left; font-size: 14px;">Escoge la forma en la que se
+              efectuará el pago.</p>
             <app-pagos-opciones></app-pagos-opciones>
           </mat-step>
-          
+
           <!--step pago-->
           <mat-step>
             <ng-template matStepLabel>Pago</ng-template>
-            <p style="color: #999; padding: 0px; text-align: left; font-size: 14px;">Usa tu grano para para hacer el pago. Selecciona las cantidades necesarias para cubrir el monto a pagar.</p>
+            <p style="color: #999; padding: 0px; text-align: left; font-size: 14px;">Usa tu grano para para hacer el
+              pago. Selecciona las cantidades necesarias para cubrir el monto a pagar.</p>
             <h3 style="color: #999; padding: 0px;">Pago con Canje</h3>
             <app-pagar-canje-info></app-pagar-canje-info>
             <app-pagar-soja></app-pagar-soja>
@@ -50,15 +53,16 @@
             <app-pagar-trigo></app-pagar-trigo>
             <app-pagar-canje-total [totalEvent$]="totalEvent$"></app-pagar-canje-total>
             <div fxFlexFill fxLayout="row" fxLayoutALign="space-between center">
-              <button mat-button matStepperNext style="background-color: green; color: white; margin-top: 10px; width: 350px;">Siguiente</button>
+              <button mat-button matStepperNext
+                style="background-color: green; color: white; margin-top: 10px; width: 350px;">Siguiente</button>
             </div>
           </mat-step>
-          
+
           <!--step resumen-->
           <mat-step>
             <ng-template matStepLabel>Resumen</ng-template>
           </mat-step>
-    
+
         </mat-horizontal-stepper>
       </div>
     </div>
@@ -78,40 +82,40 @@
         </a>
         <h3 fxFlex="75%" style="margin-left: 20px; color: green;">Programar pago</h3>
       </div>
-    
+
       <!-- VISTA DESKTOP -->
-      
+
       <div>
         <mat-horizontal-stepper fxLayout="column" labelPosition="bottom" #stepper>
-          
+
           <!--step comprobantes-->
           <mat-step>
             <ng-template matStepLabel>Comprobantes</ng-template>
-            
+
             <app-pagar-info></app-pagar-info>
             <app-pagar-listado [cuenta]="cuenta"></app-pagar-listado>
             <app-pagar-comprobantes-total></app-pagar-comprobantes-total>
           </mat-step>
-          
+
           <!--step medio-->
           <mat-step>
             <ng-template matStepLabel>Medio</ng-template>
           </mat-step>
-          
+
           <!--step pago-->
           <mat-step>
             <ng-template matStepLabel>Pago</ng-template>
           </mat-step>
-          
+
           <!--step resumen-->
           <mat-step>
             <ng-template matStepLabel>Resumen</ng-template>
           </mat-step>
-    
+
         </mat-horizontal-stepper>
       </div>
     </div>
-    
+
   </div>
-  
+
 </mat-sidenav-container>

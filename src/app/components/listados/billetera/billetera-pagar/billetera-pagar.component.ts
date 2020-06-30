@@ -3,8 +3,7 @@ import { DeviceDetectorService } from 'ngx-device-detector';
 import { Subject, BehaviorSubject } from 'rxjs';
 import { EntidadAlg } from '../../../../interfaces/perfiles/entidad-alg';
 import { CuentaAlgService } from '../../../../services/observers/cuentas-alg/cuenta-alg.service';
-import { FiltroEspecieCosecha } from '../../../../interfaces/varios/filtro-especie-cosecha';
-import { MatSidenav, MatDialog, MatSnackBar } from '@angular/material';
+import { MatSidenav } from '@angular/material';
 import { takeUntil } from 'rxjs/operators';
 
 @Component({
@@ -16,12 +15,11 @@ export class BilleteraPagarComponent implements OnInit, OnDestroy {
 
   @ViewChild('menuFiltro') public sidenav: MatSidenav;
 
-  public filtrosEspecieCosecha: FiltroEspecieCosecha;
   destroy$: Subject<any> = new Subject<any>();
   esCelular: boolean;
   cuenta: EntidadAlg;
   totalEvent$: BehaviorSubject<number> = new BehaviorSubject<number>(0);
-  observerFiltro$: Subject<any> = new Subject<any>();
+  observerFiltro$: BehaviorSubject<any> = new BehaviorSubject<any>(null);
 
   constructor(
     private deviceService: DeviceDetectorService,
@@ -36,11 +34,13 @@ export class BilleteraPagarComponent implements OnInit, OnDestroy {
       .subscribe(
         cuenta => {
           this.cuenta = cuenta;
+          this.cargarListadoPorDefecto();
         }
       );
 
     if (this.cuentaService.cuentaAlgSeleccionadaV2$.getValue()) {
       this.cuenta = this.cuentaService.cuentaAlgSeleccionadaV2$.getValue();
+      this.cargarListadoPorDefecto();
     }
   }
 
@@ -54,7 +54,7 @@ export class BilleteraPagarComponent implements OnInit, OnDestroy {
     this.sidenav.toggle();
   }
 
-// funcion que ejecuta la carga del listado de entregas
+  // funcion que ejecuta la carga del listado de entregas
   cargarListado(filtro: any) {
     this.observerFiltro$.next(filtro);
   }
@@ -65,10 +65,7 @@ export class BilleteraPagarComponent implements OnInit, OnDestroy {
   cargarListadoPorDefecto() {
     let filtro = {
       cuenta: this.cuenta.id.codigo,
-      fechaDesde: null,
-      fechaHasta: null,
-      especie: null,
-      cosecha: null
+      aPagar: true
     }
 
     this.cargarListado(filtro);
