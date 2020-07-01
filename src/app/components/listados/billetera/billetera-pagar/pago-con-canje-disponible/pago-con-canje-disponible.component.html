@@ -16,35 +16,60 @@
     </div>
   </div>
 
-  <p style="color: #999;">Si quisieras pagar solo con
-    {{ disponible.especieDescripcion | lowercase }}, tendrías que sumar 7,200 Tn de este cultivo.</p>
-
-    
-
-
-
-  <div class="card" fxLayoutAlign="space-between center">
-    <div class="60%" fxLayout="column">
-      <h5 style="margin-top: 5px;">Stock a fijar</h5>
-      <h3 style="margin-top: -15px; margin-bottom: 3px;">Tn</h3>
-      <mat-divider></mat-divider>
-      <h6 style="margin-top: 3px;">Disponible:  Tn</h6>
-    </div>
-    <div class="40%" fxLayout="row" align="end">
-      <button mat-button class="link-ver-todas">Definir boletos<mat-icon>keyboard_arrow_right</mat-icon></button>
-    </div>
+  <!--Spinner-->
+  <div fxLayout="row" fxLayoutAlign="center center" *ngIf="cargando == true" style="margin-top: 10px;">
+    <mat-spinner diameter="24"></mat-spinner>
   </div>
 
-  <div class="card" fxLayoutAlign="space-between center" *ngFor="let items of stockPesificar">
-    <div class="60%" fxLayout="column">
-      <h5 style="margin-top: 5px;">Stock a pesificar</h5>
-      <h3 style="margin-top: -15px; margin-bottom: 3px;"> Tn</h3>
-      <mat-divider></mat-divider>
-      <h6 style="margin-top: 3px;">Disponible:  Tn</h6>
+  <p style="color: #999;" *ngIf="!cargando && cantidadNecesariaParaSaldarConCanje">Si quisieras pagar solo con
+    {{ disponible.especieDescripcion | lowercase }}, tendrías que sumar
+    {{ cantidadNecesariaParaSaldarConCanje | number: '.0-2' }} {{unidadMedida | kilosTextoA}} de este cultivo.</p>
+
+  <mat-card>
+
+    <div fxLayout="row" fxLayoutAlign="space-between center" fxLayoutGap="5px" style="margin-bottom: 10px;">
+
+      <div fxFlex="55%">
+
+        <div fxLayout="column" fxLayoutAlign="space-between start">
+          <div fxFlex>Stock a fijar</div>
+          <div fxFlex style="border-bottom: 1px solid #999999;" (change)="notificarImporteCalculado()"
+            (keyup)="notificarImporteCalculado()"><input [(ngModel)]="stockAFijar" numeric numericType="decimal"
+              style="border: none; width: 80px;" /> {{unidadMedida | kilosTextoA}}</div>
+          <div fxFlex class="disponible-text">Disponible: {{ disponibleStockAFijar | number: '.0-2' }}
+            {{unidadMedida | kilosTextoA}} </div>
+        </div>
+
+      </div>
+
+      <div fxFlex="45%">
+        <button mat-button class="link-ver-todas">Definir boletos<mat-icon>keyboard_arrow_right</mat-icon></button>
+      </div>
+
     </div>
-    <div class="40%" fxLayout="row" align="end">
-      <button mat-button class="link-ver-todas">Definir boletos<mat-icon>keyboard_arrow_right</mat-icon></button>
+
+    <mat-divider></mat-divider>
+
+    <div fxLayout="row" fxLayoutAlign="space-between center" fxLayoutGap="5px" style="margin-top: 20px;">
+
+      <div fxFlex="55%">
+
+        <div fxLayout="column" fxLayoutAlign="space-between start">
+          <div fxFlex>Stock a pesificar</div>
+          <div fxFlex style="border-bottom: 1px solid #999999;"><input [(ngModel)]="stockAPesificar" numeric
+              numericType="decimal" style="border: none; width: 80px;" /> {{unidadMedida | kilosTextoA}} </div>
+          <div fxFlex class="disponible-text">Disponible: {{ disponibleStockAPesificar | number: '.0-2' }}
+            {{unidadMedida | kilosTextoA}} </div>
+        </div>
+
+      </div>
+
+      <div fxFlex="45%">
+        <button mat-button class="link-ver-todas">Definir boletos<mat-icon>keyboard_arrow_right</mat-icon></button>
+      </div>
+
     </div>
-  </div>
+
+  </mat-card>
 
 </mat-card>

@@ -237,7 +237,8 @@ import { CardPagarStockComponent } from './components/listados/billetera/billete
 import { SojaDialogComponent } from './components/listados/billetera/billetera-pagar/pagar-soja/soja-dialog/soja-dialog.component';
 import { PagoConCanjeComponent } from './components/listados/billetera/billetera-pagar/pago-con-canje/pago-con-canje.component';
 import { PagoConCanjeDisponibleComponent } from './components/listados/billetera/billetera-pagar/pago-con-canje-disponible/pago-con-canje-disponible.component';
-
+import { OnlyNumberDirective } from './directives/only-number.directive';
+import { PrecioTNAPipe } from './pipes/precio-tna.pipe';
 
 registerLocaleData(localeEsAr, 'es-AR');
 
@@ -444,7 +445,9 @@ export function tokenGetter() {
 		CardPagarStockComponent,
 		SojaDialogComponent,
 		PagoConCanjeComponent,
-		PagoConCanjeDisponibleComponent
+		PagoConCanjeDisponibleComponent,
+		OnlyNumberDirective,
+		PrecioTNAPipe
 	],
 	imports: [
 		HttpClientModule,

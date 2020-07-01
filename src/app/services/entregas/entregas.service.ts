@@ -15,6 +15,7 @@ export class EntregasService {
   private urlEntregasListado = `${environment.hostEntregasYVentas}/Entregas/listado`;
   private urlEntregasFiltrosEspecieCosecha = `${environment.hostEntregasYVentas}/Entregas/filtrosEspecieCosechas`;
   private urlEntregasIndicadorGlobal = `${environment.hostEntregasYVentas}/Entregas/indicadorGlobal`;
+  private urlMercadoDeGranoPrecios = `${environment.hostEntregasYVentas}/mercadoDeGrano/precios`;
 
   constructor(private http: HttpClient) { }
 
@@ -63,5 +64,26 @@ export class EntregasService {
     return this.http.post<ResponseServicio>(this.urlEntregasIndicadorGlobal,
       JSON.stringify(filtro),
       httpOptions);
+  }
+
+  /**
+   * Devuelve un listado de precios correspondientes a las especies indicada
+   * @param especies ej: SOJA,TRIG,MAIZ
+   * @param monedas ej: P,C,D
+   * @param bolsa ej: BPR (bolsa de rosario)
+   */
+  mercadoDeGranoPrecios(especies: Array<string>, monedas: Array<string>, bolsa: string): Observable<ResponseServicio> {
+
+    const httpOptions = {
+      headers: new HttpHeaders({
+        'Content-Type': 'application/json'
+      })
+    };
+
+    let especiesParam = especies.join(",");
+    let monedasParam = monedas.join(",");
+
+    let urlConParametro = `${this.urlMercadoDeGranoPrecios}/${especiesParam}/${monedasParam}/${bolsa}`;
+    return this.http.get<ResponseServicio>(urlConParametro, httpOptions);
   }
 }

@@ -8,7 +8,10 @@
   <mat-spinner diameter="24"></mat-spinner>
 </div>
 
-<app-pago-con-canje-disponible *ngFor="let disponible of disponibles" [disponible]="disponible">
-</app-pago-con-canje-disponible>
+<div *ngIf="unidadMedida && totalEvent$">
+  <app-pago-con-canje-disponible *ngFor="let disponible of disponibles" [disponible]="disponible"
+    [totalEvent$]="totalEvent$" [unidadMedida]="unidadMedida" (importeCalculadoChange)="actualizarTotalImporteCanje()">
+  </app-pago-con-canje-disponible>
 
-<app-pagar-canje-total [totalEvent$]="totalEvent$"></app-pagar-canje-total>
+  <app-pagar-canje-total [totalEvent$]="totalEvent$" [totalImporteCanje$]="totalImporteCanje$"></app-pagar-canje-total>
+</div>

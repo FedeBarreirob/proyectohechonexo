@@ -29,3 +29,9 @@
     height: 38px;
     width: 38px;
 }
+
+.disponible-text {
+    color: #333333;
+    font-family: Rubik;
+    font-size: 12px;
+}
