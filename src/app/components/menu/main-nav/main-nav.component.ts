@@ -24,6 +24,7 @@ export class MainNavComponent implements OnInit, OnDestroy {
 
 	// links que aparecen en el sidebar
 	public links: Array<ItemLinkMenu>;
+	public Adminlinks: Array<ItemLinkMenu>;
 
 	constructor(
 		private breakpointObserver: BreakpointObserver,
@@ -211,6 +212,16 @@ export class MainNavComponent implements OnInit, OnDestroy {
 				ocultarDesktop: false
 			}
 		];
+		this.Adminlinks = [
+			{
+				nombre: "Administrador de cuentas",
+				rutaLink: "/administrador-de-cuentas",
+				imagen: "assets/sidebar/admin.png",
+				imagenActiva: "assets/sidebar/admin-hot.png",
+				permitido: this.authService.esAdmin || this.authService.esRol('SUB_ADMINISTRADOR') || this.authService.esRol('COMERCIAL'),
+				ocultarDesktop: false
+			}
+		]
 	}
 
 	/**
