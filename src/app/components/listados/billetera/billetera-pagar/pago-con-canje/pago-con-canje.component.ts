@@ -3,6 +3,8 @@ import { BehaviorSubject, Subject } from 'rxjs';
 import { EntidadAlg } from '../../../../../interfaces/perfiles/entidad-alg';
 import { ContratosService } from '../../../../../services/contratos/contratos.service';
 import { takeUntil } from 'rxjs/operators';
+import { MatDialog } from '@angular/material';
+import { PreciosDeGranosComponent } from '../precios-de-granos/precios-de-granos.component';
 
 @Component({
   selector: 'app-pago-con-canje',
@@ -25,7 +27,10 @@ export class PagoConCanjeComponent implements OnInit, OnDestroy {
   destroy$: Subject<any> = new Subject<any>();
   totalImporteCanje$: BehaviorSubject<number> = new BehaviorSubject<number>(0);
 
-  constructor(private contratosService: ContratosService) { }
+  constructor(
+    private contratosService: ContratosService,
+    private dialog: MatDialog
+  ) { }
 
   ngOnInit() {
     this.cargarDisponible();
@@ -69,6 +74,27 @@ export class PagoConCanjeComponent implements OnInit, OnDestroy {
       this.totalImporteCanje$.next(total);
     } else {
       this.totalImporteCanje$.next(0);
+    }
+  }
+
+  /**
+   * Muestra la pizarra con el precio de los granos
+   */
+  mostrarPizarra() {
+    if (this.disponibles && this.disponibles.length > 0) {
+
+      let especies = this.disponibles.map(disponible => disponible.especieCodigo);
+
+      this.dialog.open(PreciosDeGranosComponent, {
+        data: {
+          especies: especies,
+          unidadMedida: this.unidadMedida
+        },
+        maxWidth: '90vw',
+        width: '90%',
+        maxHeight: '75vh',
+        height: '75%'
+      });
     }
   }
 }

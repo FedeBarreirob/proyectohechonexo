@@ -4,6 +4,8 @@ import { EntregasService } from '../../../../../services/entregas/entregas.servi
 import { takeUntil } from 'rxjs/operators';
 import { KilosAPipe } from '../../../../../pipes/kilos-a.pipe';
 import { PrecioTNAPipe } from '../../../../../pipes/precio-tna.pipe';
+import { MatDialog } from '@angular/material';
+import { PreciosDeGranosComponent } from '../precios-de-granos/precios-de-granos.component';
 
 @Component({
   selector: 'app-pago-con-canje-disponible',
@@ -38,7 +40,8 @@ export class PagoConCanjeDisponibleComponent implements OnInit, OnDestroy {
   constructor(
     private entregasService: EntregasService,
     private kilosAPipe: KilosAPipe,
-    private precioTNAPipe: PrecioTNAPipe
+    private precioTNAPipe: PrecioTNAPipe,
+    private dialog: MatDialog
   ) { }
 
   ngOnInit() {
@@ -137,5 +140,23 @@ export class PagoConCanjeDisponibleComponent implements OnInit, OnDestroy {
     }
 
     this.importeCalculadoChange.emit();
+  }
+
+  /**
+   * Muestra la pizarra con el precio de los granos
+   */
+  mostrarPizarra() {
+    let especies = [this.disponible.especieCodigo];
+
+    this.dialog.open(PreciosDeGranosComponent, {
+      data: {
+        especies: especies,
+        unidadMedida: this.unidadMedida
+      },
+      maxWidth: '90vw',
+      width: '90%',
+      maxHeight: '75vh',
+      height: '75%'
+    });
   }
 }

@@ -1,7 +1,7 @@
 <mat-card class="card-container">
 
   <div fxLayout="row" fxLayoutAlign="space-between center" fxLayoutGap="5px">
-    <div fxFlex="nogrow" (click)="verDetalle()">
+    <div fxFlex="nogrow">
       <img class="icono" src="{{disponible.especieCodigo | imagenEspecie}}" />
     </div>
 
@@ -10,7 +10,7 @@
     </div>
 
     <div fxFlex="nogrow" class="titulo-principal" align="end">
-      <button mat-button class="link-ver-todas" (click)="solicitarInfo()">
+      <button mat-button class="link-ver-todas" (click)="mostrarPizarra()">
         <mat-icon>info</mat-icon>Precio de {{ disponible.especieDescripcion | lowercase }}
       </button>
     </div>
