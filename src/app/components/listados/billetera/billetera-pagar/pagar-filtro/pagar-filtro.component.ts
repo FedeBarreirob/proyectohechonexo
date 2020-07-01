@@ -1,13 +1,10 @@
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
-import { DatePipe } from '@angular/common';
-import { Subject } from 'rxjs';
-import { InfoCtaCte } from '../../../../../enums/info-cta-cte.enum';
+import { BehaviorSubject } from 'rxjs';
 
 @Component({
   selector: 'app-pagar-filtro',
   templateUrl: './pagar-filtro.component.html',
-  styleUrls: ['./pagar-filtro.component.css'],
-  providers: [DatePipe]
+  styleUrls: ['./pagar-filtro.component.css']
 })
 export class PagarFiltroComponent implements OnInit {
 
@@ -15,19 +12,34 @@ export class PagarFiltroComponent implements OnInit {
   cuenta: any;
 
   @Input()
-  ctacteInfoActivo$: Subject<number>;
+  observerFiltro$: BehaviorSubject<any>
 
   @Output()
   botonCerrar: EventEmitter<any> = new EventEmitter<any>();
 
-  @Output()
-  botonAplicar: EventEmitter<any> = new EventEmitter<any>();
+  monedasOptions = [
+    {
+      descripcion: "Pesos (ARS)",
+      value: "P"
+    },
+    {
+      descripcion: "Dólares (USD)",
+      value: "D"
+    }
+  ];
+  monedaSeleccionada: string;
 
-  rubro: any;
-  fechaDesde: string;
-  fechaHasta: string;
-  infoCtaCteActivo: InfoCtaCte = InfoCtaCte.CUENTA_CORRIENTE_APLICADA;
-  infoCtaCte: any = InfoCtaCte;
+  vencimientoOptions = [
+    {
+      descripcion: "Vencido",
+      value: 1
+    },
+    {
+      descripcion: "Por vencer",
+      value: 2
+    }
+  ];
+  vencimientoSeleccionado: number;
 
   rubros: Array<any> = [
     {
@@ -46,15 +58,11 @@ export class PagarFiltroComponent implements OnInit {
       imagen: "assets/cta-cte-filtro/balanceado.png"
     }
   ];
+  rubro: any;
 
-  constructor(private datePipe: DatePipe) { }
+  constructor() { }
 
   ngOnInit() {
-    if(this.ctacteInfoActivo$ != null) {
-      this.ctacteInfoActivo$.subscribe(
-        infoCtaCte => this.infoCtaCteActivo = infoCtaCte
-      );
-    }
   }
 
   // funcion que dispara la notificacion cuando el boton cerrar se presiona
@@ -65,28 +73,36 @@ export class PagarFiltroComponent implements OnInit {
   // funcion que limpiar 
   limpiar() {
     this.rubro = "";
-    this.fechaDesde = "";
-    this.fechaHasta = "";
+    this.vencimientoSeleccionado = null;
+    this.monedaSeleccionada = null;
   }
 
   // funcion que arma un filtro y lo notifica al llamador 
   aplicar() {
-    if (this.cuenta && this.cuenta.id && this.cuenta.id.codigo) {
+    if (this.cuenta && this.cuenta.id && this.cuenta.id.codigo && this.observerFiltro$) {
 
-      let fechaDesdeFiltro = (this.fechaDesde) ? this.datePipe.transform(new Date(this.fechaDesde), 'dd/MM/yyyy') : null;
-      let fechaHastaFiltro = (this.fechaHasta) ? this.datePipe.transform(new Date(this.fechaHasta), 'dd/MM/yyyy') : null;
-
-      let filtro = {
+      let filtro: any = {
         cuenta: this.cuenta.id.codigo,
-        fechaDesde: fechaDesdeFiltro,
-        fechaHasta: fechaHastaFiltro
+        aPagar: true
       }
 
       filtro = this.filtroConFiltroRubros(filtro);
 
-      this.botonAplicar.emit(filtro);
+      if (this.vencimientoSeleccionado) {
+        if (this.vencimientoSeleccionado === 1) {
+          filtro.vencido = true;
+        } else {
+          filtro.AVencer = true;
+        }
+      }
+
+      if (this.monedaSeleccionada) {
+        filtro.moneda = this.monedaSeleccionada
+      }
+
+      this.observerFiltro$.next(filtro);
     } else {
-      this.botonAplicar.emit(null);
+      this.observerFiltro$.next(null);
     }
 
     this.cerrar();

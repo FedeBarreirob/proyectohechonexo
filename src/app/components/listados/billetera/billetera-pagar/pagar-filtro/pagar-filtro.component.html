@@ -31,36 +31,42 @@
 <mat-divider></mat-divider>
 
 <!--Monedas-->
-<span>
-  <div fxLayout="row" fxLayoutAlign="space-around center">
-    <div fxFlex="100%" class="titulo-filtro" style="padding-top: 20px;">
-      Moneda
-    </div>
+<div fxLayout="row" fxLayoutAlign="space-around center">
+  <div fxFlex="100%" class="titulo-filtro" style="padding-top: 20px;">
+    Moneda
   </div>
-  
-  <div class="button" style="padding-top: 20px;">
-    <mat-radio-group fxLayout="column" style="padding-left: 20px;">
-      <mat-radio-button style="margin-top: 10px;" value="1">Dolares (USD)</mat-radio-button>
-      <mat-radio-button style="margin-top: 10px; margin-bottom: 10px;" value="2">Pesos (ARS)</mat-radio-button>
-    </mat-radio-group>
-  </div>
-  
-</span>
+</div>
+
+<div class="button" style="padding-top: 20px; margin-bottom: 10px;">
+  <mat-radio-group fxLayout="column" style="padding-left: 20px;" [(ngModel)]="monedaSeleccionada">
+    <mat-radio-button style="margin-top: 10px;" *ngFor="let moneda of monedasOptions" [value]="moneda.value">
+      {{ moneda.descripcion }}</mat-radio-button>
+  </mat-radio-group>
+</div>
 
 <mat-divider></mat-divider>
 
 <!--Vencimientos-->
-<span>
-  <div fxLayout="row" fxLayoutAlign="space-around center">
-    <div fxFlex="100%" class="titulo-filtro" style="padding-top: 20px;">
-      Vencimiento
-    </div>
+<div fxLayout="row" fxLayoutAlign="space-around center">
+  <div fxFlex="100%" class="titulo-filtro" style="padding-top: 20px;">
+    Vencimiento
   </div>
-  
-  <div class="button" style="padding-top: 20px;">
-    <mat-radio-group fxLayout="column" style="padding-left: 20px;">
-      <mat-radio-button style="margin-top: 10px;" value="1">Vencidos</mat-radio-button>
-      <mat-radio-button style="margin-top: 10px; margin-bottom: 10px;" value="2">Por vencer</mat-radio-button>
-    </mat-radio-group>
+</div>
+
+<div class="button" style="padding-top: 20px; margin-bottom: 10px;">
+  <mat-radio-group fxLayout="column" style="padding-left: 20px;" [(ngModel)]="vencimientoSeleccionado">
+    <mat-radio-button style="margin-top: 10px;" *ngFor="let vencimiento of vencimientoOptions"
+      [value]="vencimiento.value">{{ vencimiento.descripcion }}</mat-radio-button>
+  </mat-radio-group>
+</div>
+
+<!--Ejecutar filtro-->
+<div fxLayout="row" fxLayoutAlign="space-between center" class="contenedor-botones">
+  <div fxFlex="50%">
+    <button mat-button class="boton-limpiar" (click)="limpiar()">Limpiar</button>
   </div>
-</span>
+
+  <div fxFlex="50%">
+    <button mat-button class="boton-aplicar" (click)="aplicar()">Aplicar</button>
+  </div>
+</div>

@@ -20,6 +20,9 @@ export class PagarListadoComponent implements OnInit, OnDestroy {
   @Input()
   totalEvent$: BehaviorSubject<number>;
 
+  @Input()
+  observerFiltro$: BehaviorSubject<any>
+
   esCelular: boolean;
   cargando: boolean = false;
   destroy$: Subject<any> = new Subject<any>();
@@ -34,7 +37,11 @@ export class PagarListadoComponent implements OnInit, OnDestroy {
 
   ngOnInit() {
     this.esCelular = this.deviceService.isMobile();
-    this.cargarConceptosAPagar();
+
+    if (this.observerFiltro$) {
+      this.observerFiltro$
+        .subscribe(filtro => this.cargarConceptosAPagar(filtro));
+    }
   }
 
   ngOnDestroy(): void {
@@ -43,16 +50,13 @@ export class PagarListadoComponent implements OnInit, OnDestroy {
   }
 
   /**
-   * Funcion encargada de cargar el listado de conceptos a cobrar
+   * Función encargada de cargar el listado de conceptos a cobrar
+   * @param filtro 
    */
-  cargarConceptosAPagar() {
-    if (this.cargando == false) {
+  cargarConceptosAPagar(filtro: FiltroCtacteAplicada) {
+    if (this.cargando == false && filtro) {
       this.cargando = true;
-
-      let filtro: FiltroCtacteAplicada = {
-        cuenta: this.cuenta.id.codigo,
-        aPagar: true
-      }
+      this.limpiar();
 
       this.ctacteAplicadaService.listadoCtaCteFiltrado(filtro)
         .pipe(takeUntil(this.destroy$))
@@ -69,6 +73,16 @@ export class PagarListadoComponent implements OnInit, OnDestroy {
           () => this.cargando = false
         );
     }
+  }
+
+  /**
+   * Limpia el listado para una nueva búsqueda
+   */
+  limpiar() {
+    this.listado = [];
+    this.listadoConceptosSeleccionados = [];
+    this.total = 0;
+    this.notificarTotal();
   }
 
   /**
