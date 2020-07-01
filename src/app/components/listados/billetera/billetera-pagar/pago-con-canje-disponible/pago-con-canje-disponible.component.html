@@ -1,7 +1,7 @@
-<mat-card class="card">
+<mat-card class="card-container">
 
-  <div fxLayout="row" fxFlex="100%" style="padding: 5px;" fxLayoutAlign="space-between center">
-    <div fxFlex="38px" (click)="verDetalle()">
+  <div fxLayout="row" fxLayoutAlign="space-between center" fxLayoutGap="5px">
+    <div fxFlex="nogrow" (click)="verDetalle()">
       <img class="icono" src="{{disponible.especieCodigo | imagenEspecie}}" />
     </div>
 
@@ -9,24 +9,26 @@
       {{ disponible.especieDescripcion }}
     </div>
 
-    <div fxFlex="40%" class="titulo-principal" align="end">
+    <div fxFlex="nogrow" class="titulo-principal" align="end">
       <button mat-button class="link-ver-todas" (click)="solicitarInfo()">
         <mat-icon>info</mat-icon>Precio de {{ disponible.especieDescripcion | lowercase }}
       </button>
     </div>
   </div>
 
-  <div fxLayout="row" fxFlex="100%" style="padding: 5px; padding-top: 10px;" fxLayoutAlign="space-between center">
-    <p style="color: #999; margin-left: 10px;">Si quisieras pagar solo con
-      {{ disponible.especieDescripcion | lowercase }}, tendrías que sumar 7,200 Tn de este cultivo.</p>
-  </div>
+  <p style="color: #999;">Si quisieras pagar solo con
+    {{ disponible.especieDescripcion | lowercase }}, tendrías que sumar 7,200 Tn de este cultivo.</p>
+
+    
+
+
 
   <div class="card" fxLayoutAlign="space-between center">
     <div class="60%" fxLayout="column">
       <h5 style="margin-top: 5px;">Stock a fijar</h5>
-      <h3 style="margin-top: -15px; margin-bottom: 3px;">{{item.cantidadF}} Tn</h3>
+      <h3 style="margin-top: -15px; margin-bottom: 3px;">Tn</h3>
       <mat-divider></mat-divider>
-      <h6 style="margin-top: 3px;">Disponible: {{item.cantidadFDisponible}} Tn</h6>
+      <h6 style="margin-top: 3px;">Disponible:  Tn</h6>
     </div>
     <div class="40%" fxLayout="row" align="end">
       <button mat-button class="link-ver-todas">Definir boletos<mat-icon>keyboard_arrow_right</mat-icon></button>
@@ -36,9 +38,9 @@
   <div class="card" fxLayoutAlign="space-between center" *ngFor="let items of stockPesificar">
     <div class="60%" fxLayout="column">
       <h5 style="margin-top: 5px;">Stock a pesificar</h5>
-      <h3 style="margin-top: -15px; margin-bottom: 3px;">{{items.cantidadP}} Tn</h3>
+      <h3 style="margin-top: -15px; margin-bottom: 3px;"> Tn</h3>
       <mat-divider></mat-divider>
-      <h6 style="margin-top: 3px;">Disponible: {{items.cantidadPDisponible}} Tn</h6>
+      <h6 style="margin-top: 3px;">Disponible:  Tn</h6>
     </div>
     <div class="40%" fxLayout="row" align="end">
       <button mat-button class="link-ver-todas">Definir boletos<mat-icon>keyboard_arrow_right</mat-icon></button>
