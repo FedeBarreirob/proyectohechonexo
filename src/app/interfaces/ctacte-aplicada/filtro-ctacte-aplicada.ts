@@ -14,5 +14,6 @@ export interface FiltroCtacteAplicada {
     granos?: boolean,
     agroinsumos?: boolean,
     nutricionAnimal?: boolean,
-    moneda?: string
+    moneda?: string,
+    servicios?: boolean
 }

@@ -56,6 +56,11 @@ export class PagarFiltroComponent implements OnInit {
       codigo: "balanceado",
       texto: "Nutrición Animal",
       imagen: "assets/cta-cte-filtro/balanceado.png"
+    },
+    {
+      codigo: "servicios",
+      texto: "Servicios",
+      imagen: "assets/cta-cte-filtro/servicios.png"
     }
   ];
   rubro: any;
@@ -127,6 +132,10 @@ export class PagarFiltroComponent implements OnInit {
 
       case "balanceado":
         filtroConRubros.nutricionAnimal = true;
+        break;
+
+      case "servicios":
+        filtroConRubros.servicios = true;
         break;
     }
 
