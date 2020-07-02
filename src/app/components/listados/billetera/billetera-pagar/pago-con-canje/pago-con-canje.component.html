@@ -1,0 +1,17 @@
+<p style="color: #999; padding: 0px; text-align: left; font-size: 14px;">Usa tu grano para para hacer el
+  pago. Selecciona las cantidades necesarias para cubrir el monto a pagar.</p>
+<h3 style="color: #999; padding: 0px;">Pago con Canje</h3>
+<app-pagar-canje-info (click)="mostrarPizarra()"></app-pagar-canje-info>
+
+<!--Spinner-->
+<div fxLayout="row" fxLayoutAlign="center center" *ngIf="cargando == true" style="margin-top: 10px;">
+  <mat-spinner diameter="24"></mat-spinner>
+</div>
+
+<div *ngIf="unidadMedida && totalEvent$">
+  <app-pago-con-canje-disponible *ngFor="let disponible of disponibles" [disponible]="disponible"
+    [totalEvent$]="totalEvent$" [unidadMedida]="unidadMedida" (importeCalculadoChange)="actualizarTotalImporteCanje()">
+  </app-pago-con-canje-disponible>
+
+  <app-pagar-canje-total [totalEvent$]="totalEvent$" [totalImporteCanje$]="totalImporteCanje$"></app-pagar-canje-total>
+</div>

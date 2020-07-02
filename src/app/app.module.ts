@@ -228,14 +228,14 @@ import { PagarListadoConceptoAPagarComponent } from './components/listados/bille
 import { BilleteraCardInfoComponent } from './components/listados/billetera/billetera-card-info/billetera-card-info.component';
 import { TotalPagarPagosComponent } from './components/listados/billetera/billetera-pagar/total-pagar-pagos/total-pagar-pagos.component';
 import { PagosOpcionesComponent } from './components/listados/billetera/billetera-pagar/pagos-opciones/pagos-opciones.component';
-import { PagarSojaComponent } from './components/listados/billetera/billetera-pagar/pagar-soja/pagar-soja.component';
-import { PagarMaizComponent } from './components/listados/billetera/billetera-pagar/pagar-maiz/pagar-maiz.component';
-import { PagarTrigoComponent } from './components/listados/billetera/billetera-pagar/pagar-trigo/pagar-trigo.component';
 import { PagarCanjeTotalComponent } from './components/listados/billetera/billetera-pagar/pagar-canje-total/pagar-canje-total.component';
 import { PagarCanjeInfoComponent } from './components/listados/billetera/billetera-pagar/pagar-canje-info/pagar-canje-info.component';
 import { CardPagarStockComponent } from './components/listados/billetera/billetera-pagar/card-pagar-stock/card-pagar-stock.component';
-import { SojaDialogComponent } from './components/listados/billetera/billetera-pagar/pagar-soja/soja-dialog/soja-dialog.component';
-
+import { PagoConCanjeComponent } from './components/listados/billetera/billetera-pagar/pago-con-canje/pago-con-canje.component';
+import { PagoConCanjeDisponibleComponent } from './components/listados/billetera/billetera-pagar/pago-con-canje-disponible/pago-con-canje-disponible.component';
+import { OnlyNumberDirective } from './directives/only-number.directive';
+import { PrecioTNAPipe } from './pipes/precio-tna.pipe';
+import { PreciosDeGranosComponent } from './components/listados/billetera/billetera-pagar/precios-de-granos/precios-de-granos.component';
 
 registerLocaleData(localeEsAr, 'es-AR');
 
@@ -434,13 +434,14 @@ export function tokenGetter() {
 		BilleteraCardInfoComponent,
 		TotalPagarPagosComponent,
 		PagosOpcionesComponent,
-		PagarSojaComponent,
-		PagarMaizComponent,
-		PagarTrigoComponent,
 		PagarCanjeTotalComponent,
 		PagarCanjeInfoComponent,
 		CardPagarStockComponent,
-		SojaDialogComponent
+		PagoConCanjeComponent,
+		PagoConCanjeDisponibleComponent,
+		OnlyNumberDirective,
+		PrecioTNAPipe,
+		PreciosDeGranosComponent
 	],
 	imports: [
 		HttpClientModule,
@@ -525,7 +526,7 @@ export function tokenGetter() {
 		BilleteraLiquidacionesDetalleComponent,
 		BilleteraCobrarCuentaComponent,
 		BilleteraCardInfoComponent,
-		SojaDialogComponent
+		PreciosDeGranosComponent
 	],
 	bootstrap: [AppComponent]
 })

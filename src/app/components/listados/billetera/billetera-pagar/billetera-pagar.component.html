@@ -44,14 +44,7 @@
           <!--step pago-->
           <mat-step>
             <ng-template matStepLabel>Pago</ng-template>
-            <p style="color: #999; padding: 0px; text-align: left; font-size: 14px;">Usa tu grano para para hacer el
-              pago. Selecciona las cantidades necesarias para cubrir el monto a pagar.</p>
-            <h3 style="color: #999; padding: 0px;">Pago con Canje</h3>
-            <app-pagar-canje-info></app-pagar-canje-info>
-            <app-pagar-soja></app-pagar-soja>
-            <app-pagar-maiz></app-pagar-maiz>
-            <app-pagar-trigo></app-pagar-trigo>
-            <app-pagar-canje-total [totalEvent$]="totalEvent$"></app-pagar-canje-total>
+            <app-pago-con-canje *ngIf="unidadMedida" [totalEvent$]="totalEvent$" [cuenta]="cuenta" [unidadMedida]="unidadMedida"></app-pago-con-canje>
             <div fxFlexFill fxLayout="row" fxLayoutALign="space-between center">
               <button mat-button matStepperNext
                 style="background-color: green; color: white; margin-top: 10px; width: 350px;">Siguiente</button>

@@ -1,19 +1,31 @@
 <div class="card">
   <div fxLayout="row" fxLayoutALign="space-between center">
-    <div fxFlex="50%" style="padding: 10px; color: #ccc;">
+    <div fxFlex="nogrow" style="padding: 10px; color: #ccc;">
       <h4>Total a pagar: </h4>
     </div>
-    <div fxFlex="50%" style="padding: 10px; margin-left: 30px; margin-top: -3px;">
+    <div fxFlex="nogrow" style="padding: 10px;">
       <h3>$ {{ (totalEvent$ | async) | number }}</h3>
     </div>
   </div>
   <mat-divider></mat-divider>
   <div fxLayout="row" fxLayoutALign="space-between center">
-    <div fxFlex="50%" style="padding: 10px; color: #ccc;">
+    <div fxFlex="nogrow" style="padding: 10px; color: #ccc;">
       <h4>Total para canjear: </h4>
     </div>
-    <div fxFlex="50%" style="padding: 10px; margin-left: 40px; margin-top: -3px;" *ngFor="let item of totalCanje">
-      <h2>${{item.monto}}</h2>
+    <div fxFlex="nogrow" style="padding: 10px;">
+      <h2>$ {{ (totalImporteCanje$ | async) | number }}</h2>
     </div>
   </div>
+
+  <div fxLayout="row" class="card-indicador" fxLayoutAlign="space-between center" *ngIf="esMontoInsuficiente">
+    <div fxFlex="15%">
+      <button mat-icon-button>
+        <mat-icon style="color: green;">info</mat-icon>
+      </button>
+    </div>
+    <div fxFlex="85%">
+      <p style="font-size: 10px;">Aún no cubres el monto total a pagar. El pago se hará de manera parcial.</p>
+    </div>
+  </div>
+
 </div>

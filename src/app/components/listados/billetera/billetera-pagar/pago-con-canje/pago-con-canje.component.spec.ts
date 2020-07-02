@@ -1,20 +1,20 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { SojaDialogComponent } from './soja-dialog.component';
+import { PagoConCanjeComponent } from './pago-con-canje.component';
 
-describe('SojaDialogComponent', () => {
-  let component: SojaDialogComponent;
-  let fixture: ComponentFixture<SojaDialogComponent>;
+describe('PagoConCanjeComponent', () => {
+  let component: PagoConCanjeComponent;
+  let fixture: ComponentFixture<PagoConCanjeComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ SojaDialogComponent ]
+      declarations: [ PagoConCanjeComponent ]
     })
     .compileComponents();
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(SojaDialogComponent);
+    fixture = TestBed.createComponent(PagoConCanjeComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });
