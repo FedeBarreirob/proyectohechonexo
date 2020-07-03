@@ -1,0 +1,23 @@
+<mat-sidenav-container [ngClass]="{'contenedor-solicitudes': esCelular, 'contenedor-desktop': !esCelular }">
+  
+  <div class="title">
+    <a routerLink="/gestion-de-solicitudes" fxFlex="25%" fxLayoutAlign="center center">
+      <button mat-mini-fab style="background-color: transparent;">
+        <mat-icon style="color: green;">arrow_back</mat-icon>
+      </button>
+    </a>
+    <h3 fxFlex="75%" style="margin-left: 10px; color: black; font-family: Rubik;">Gestión de solicitudes</h3>
+  </div>
+
+  <section>
+    <div style="padding: 20px;" fxLayoutAlign="space-between center">
+      <p style="font-family: Rubik; font-size: 12px; color: #999;">El productor eligió canjear su grano. Define los boletos que se canjearan para continuar.</p>
+    </div>
+
+    <div style="padding: 20px;">
+      <app-total-pagar-pagos [totalEvent$]="totalEvent$"></app-total-pagar-pagos> <!--Total-->
+      <h3>Pago con canje</h3>
+      <app-pagar-con-canje-disponible></app-pagar-con-canje-disponible> <!--cards-->
+    </div>
+  </section>
+</mat-sidenav-container>

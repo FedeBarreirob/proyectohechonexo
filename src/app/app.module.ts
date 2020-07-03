@@ -236,6 +236,16 @@ import { PagoConCanjeDisponibleComponent } from './components/listados/billetera
 import { OnlyNumberDirective } from './directives/only-number.directive';
 import { PrecioTNAPipe } from './pipes/precio-tna.pipe';
 import { PreciosDeGranosComponent } from './components/listados/billetera/billetera-pagar/precios-de-granos/precios-de-granos.component';
+import { GestionDeSolicitudesComponent } from './components/listados/gestion-de-solicitudes/gestion-de-solicitudes.component';
+import { InicioFiltroComponent } from './components/listados/gestion-de-solicitudes/inicio-filtro/inicio-filtro.component';
+import { InicioCardComponent } from './components/listados/gestion-de-solicitudes/inicio-card/inicio-card.component';
+import { DefinirBoletosComponent } from './components/listados/gestion-de-solicitudes/definir-boletos/definir-boletos.component';
+import { SolicitudesTotalComponent } from './components/listados/gestion-de-solicitudes/solicitudes-total/solicitudes-total.component';
+import { PagarConCanjeDisponibleComponent } from './components/listados/gestion-de-solicitudes/pagar-con-canje-disponible/pagar-con-canje-disponible.component';
+import { DefinicionDeBoletosComponent } from './components/listados/gestion-de-solicitudes/definicion-de-boletos/definicion-de-boletos.component';
+import { DefinicionInfoComponent } from './components/listados/gestion-de-solicitudes/definicion-de-boletos/definicion-info/definicion-info.component';
+import { DefinicionBoletosComponent } from './components/listados/gestion-de-solicitudes/definicion-de-boletos/definicion-boletos/definicion-boletos.component';
+import { DefinicionFiltroComponent } from './components/listados/gestion-de-solicitudes/definicion-de-boletos/definicion-filtro/definicion-filtro.component';
 
 registerLocaleData(localeEsAr, 'es-AR');
 
@@ -441,7 +451,17 @@ export function tokenGetter() {
 		PagoConCanjeDisponibleComponent,
 		OnlyNumberDirective,
 		PrecioTNAPipe,
-		PreciosDeGranosComponent
+		PreciosDeGranosComponent,
+		GestionDeSolicitudesComponent,
+		InicioFiltroComponent,
+		InicioCardComponent,
+		DefinirBoletosComponent,
+		SolicitudesTotalComponent,
+		PagarConCanjeDisponibleComponent,
+		DefinicionDeBoletosComponent,
+		DefinicionInfoComponent,
+		DefinicionBoletosComponent,
+		DefinicionFiltroComponent
 	],
 	imports: [
 		HttpClientModule,

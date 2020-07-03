@@ -30,6 +30,9 @@ import { BilleteraComponent } from '../components/listados/billetera/billetera/b
 import { BilleteraPagarComponent } from '../components/listados/billetera/billetera-pagar/billetera-pagar.component';
 import { BilleteraCobrarComponent } from '../components/listados/billetera/billetera-cobrar/billetera-cobrar.component';
 import { BilleteraCobrarCuentaComponent } from '../components/listados/billetera/billetera-cobrar/billetera-cobrar-cuenta/billetera-cobrar-cuenta.component';
+import { GestionDeSolicitudesComponent } from '../components/listados/gestion-de-solicitudes/gestion-de-solicitudes.component';
+import { DefinirBoletosComponent } from '../components/listados/gestion-de-solicitudes/definir-boletos/definir-boletos.component';
+import { DefinicionDeBoletosComponent } from '../components/listados/gestion-de-solicitudes/definicion-de-boletos/definicion-de-boletos.component';
 
 const routes: Routes = [
 	{
@@ -151,6 +154,30 @@ const routes: Routes = [
 			{
 				path: 'administrador-de-cuentas',
 				component: PerfilesListadoComponent,
+				canActivate: [AuthGuardGuard],
+				data: {
+					rolAdmin: false
+				}
+			},
+			{
+				path: 'gestion-de-solicitudes',
+				component: GestionDeSolicitudesComponent,
+				canActivate: [AuthGuardGuard],
+				data: {
+					rolAdmin: false
+				}
+			},
+			{
+				path: 'definir-boletos',
+				component: DefinirBoletosComponent,
+				canActivate: [AuthGuardGuard],
+				data: {
+					rolAdmin: false
+				}
+			},
+			{
+				path: 'definicion-de-boletos',
+				component: DefinicionDeBoletosComponent,
 				canActivate: [AuthGuardGuard],
 				data: {
 					rolAdmin: false

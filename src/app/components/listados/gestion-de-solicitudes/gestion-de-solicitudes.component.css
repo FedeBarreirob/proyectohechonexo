@@ -1,0 +1,46 @@
+/*sidebar*/
+
+.contenedor-solicitudes {
+    height: 100%;
+    background-color: #fafafa;
+}
+
+.contenedor-desktop {
+    height: 100%;
+    padding-top: 100px;
+}
+
+.sidenav-filtro {
+    box-shadow: 3px 0 6px rgba(0, 0, 0, .24);
+    width: 70%;
+    max-width: 270px;
+}
+
+.fondo-gris {
+    background-color: #fafafa;
+    background-position: center top;
+    background-repeat: no-repeat;
+    background-size: 100%;
+    position: absolute;
+    top: 0px;
+    left: 0px;
+    right: 0px;
+}
+
+.fondo-gris-desktop {
+    background-color: #fafafa;
+    background-position: center top;
+    background-repeat: no-repeat;
+    background-size: 100%;
+    position: absolute;
+    top: 0px;
+    left: 0px;
+    right: 0px;
+}
+
+.titulo-card{
+    color: #999;
+    font-family: Rubik;
+    font-size: 20px;
+    padding: 10px;
+}
