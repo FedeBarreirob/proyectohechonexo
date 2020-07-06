@@ -54,6 +54,10 @@
           <!--step resumen-->
           <mat-step>
             <ng-template matStepLabel>Resumen</ng-template>
+            <app-resumen-pago></app-resumen-pago>
+            <div fxFlexFill fxLayout="row" fxLayoutALign="space-between center">
+              <button mat-button style="background-color: green; color: white; margin-top: 10px; width: 350px;" (click)="mostrarComprobante()">Pagar</button>
+            </div>
           </mat-step>
 
         </mat-horizontal-stepper>

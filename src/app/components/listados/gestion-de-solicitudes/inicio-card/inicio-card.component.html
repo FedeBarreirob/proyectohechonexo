@@ -1,0 +1,14 @@
+<div fxLayout="row" fxFlex="100%" fxLayoutAlign="space-between center" class="card" *ngFor="let item of infoPerfil">
+  <div fxLayout="row">
+    <img src="../../../../../assets/perfil/sin-foto.jpg" class="img-perfil">
+  </div>
+
+  <div fxLayout="column" style="margin-left: 10px;">
+    <h3>${{item.monto}}</h3>
+    <h4 style="margin-top: 0px; font-family: Ribik; font-size: 14px;">{{item.nombre}}, pago con {{item.metodo}}</h4>
+  </div>
+
+  <div fxLayout="row">
+    <a routerLink="/definir-boletos"><button mat-button style="background-color: transparent;"><mat-icon style="color: green;">keyboard_arrow_right</mat-icon></button></a>
+  </div>
+</div>

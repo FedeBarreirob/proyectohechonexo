@@ -1,0 +1,168 @@
+/* botones de selector de rubro*/
+
+.grupo-botones-rubro {
+    width: 100%;
+    display: flex;
+    flex-wrap: wrap;
+    padding: 15px;
+    border: 0 !important;
+}
+
+.boton-rubro img {
+    height: 38px;
+    width: 38px;
+    margin-top: -25px;
+}
+
+.boton-rubro .mat-button-toggle {
+    flex: 1 1 100%;
+    box-sizing: border-box;
+    align-items: center;
+    display: flex;
+    height: 89px !important;
+    width: 96px !important;
+    border: 1px solid rgba(35, 185, 80, 0.1);
+    border-radius: 4px;
+    background-color: rgba(45, 164, 66, 0.1);
+    margin: 6px;
+}
+
+.boton-rubro .mat-button-toggle-disabled {
+    border: 1px solid #c5c0c7;
+    background-color: #e1dde5;
+}
+
+.boton-rubro .mat-button-toggle-checked {
+    height: 89px;
+    width: 64px;
+    border-radius: 4px;
+    background-color: #2DA442;
+}
+
+.boton-rubro .mat-button-toggle-checked .texto-rubro {
+    color: white !important;
+}
+
+.boton-rubro .mat-button-toggle .texto-rubro {
+    color: #333333;
+}
+
+.texto-rubro {
+    position: absolute;
+    left: -6px;
+    top: 25px;
+    right: -6px;
+    font-family: Rubik;
+    font-size: 14px;
+    text-align: center;
+    text-overflow: ellipsis !important;
+    overflow-x: hidden;
+}
+
+/* titulos */
+
+.titulo-filtro {
+    margin-top: 10px;
+    height: 17px;
+    width: 60px;
+    color: #111111;
+    font-family: Rubik;
+    font-size: 14px;
+    line-height: 17px;
+    padding-left: 20px;
+}
+
+/* encabezado */
+
+.encabezado-filtro {
+    padding-top: 20px;
+}
+
+.texto-filtrar {
+    color: #999999;
+    font-family: Rubik;
+    font-size: 12px;
+    letter-spacing: 1.2px;
+    padding-left: 20px;
+}
+
+.boton-close {
+    margin-top: -35px;
+}
+
+/*botones*/
+
+.boton-limpiar {
+    height: 40px;
+    width: 104px;
+    border: 1px solid #2DA442;
+    border-radius: 4px;
+    color: #2DA442;
+    font-family: Rubik;
+    font-size: 14px;
+}
+
+.boton-aplicar {
+    height: 40px;
+    width: 104px;
+    background-color: #2DA442;
+    border: 1px solid #2DA442;
+    border-radius: 4px;
+    color: #FFFFFF;
+    font-family: Rubik;
+    font-size: 14px;
+    font-weight: bold;
+}
+
+.contenedor-botones {
+    margin-left: 20px;
+    margin-top: 26px;
+    margin-bottom: 25px;
+}
+
+.checkbox{
+    padding: 10px;
+    font-family: Rubik;
+    font-size: 16px;
+}
+
+.grupo-botones-cosecha {
+    width: 100%;
+    display: flex;
+    flex-wrap: wrap;
+    padding: 15px;
+    border: 0 !important;
+}
+
+.boton-cosecha .mat-button-toggle {
+    flex: 1 1 100%;
+    box-sizing: border-box;
+    align-items: center;
+    display: flex;
+    height: 32px !important;
+    width: 64px !important;
+    border: 1px solid rgba(45, 164, 66, 0.1);
+    border-radius: 4px;
+    background-color: rgba(45, 164, 66, 0.1);
+    margin: 6px;
+}
+
+.boton-cosecha .mat-button-toggle-disabled {
+    border: 1px solid #c5c0c7;
+    background-color: #e1dde5;
+}
+
+.boton-cosecha .mat-button-toggle-checked {
+    height: 32px;
+    width: 64px;
+    border-radius: 4px;
+    background-color: #2DA442;
+}
+
+.boton-cosecha .mat-button-toggle-checked {
+    color: white !important;
+}
+
+.boton-cosecha .mat-button-toggle {
+    color: #333333;
+}

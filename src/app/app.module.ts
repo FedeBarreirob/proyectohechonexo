@@ -236,6 +236,27 @@ import { PagoConCanjeDisponibleComponent } from './components/listados/billetera
 import { OnlyNumberDirective } from './directives/only-number.directive';
 import { PrecioTNAPipe } from './pipes/precio-tna.pipe';
 import { PreciosDeGranosComponent } from './components/listados/billetera/billetera-pagar/precios-de-granos/precios-de-granos.component';
+import { GestionDeSolicitudesComponent } from './components/listados/gestion-de-solicitudes/gestion-de-solicitudes.component';
+import { InicioFiltroComponent } from './components/listados/gestion-de-solicitudes/inicio-filtro/inicio-filtro.component';
+import { InicioCardComponent } from './components/listados/gestion-de-solicitudes/inicio-card/inicio-card.component';
+import { DefinirBoletosComponent } from './components/listados/gestion-de-solicitudes/definir-boletos/definir-boletos.component';
+import { SolicitudesTotalComponent } from './components/listados/gestion-de-solicitudes/solicitudes-total/solicitudes-total.component';
+import { PagarConCanjeDisponibleComponent } from './components/listados/gestion-de-solicitudes/pagar-con-canje-disponible/pagar-con-canje-disponible.component';
+import { DefinicionDeBoletosComponent } from './components/listados/gestion-de-solicitudes/definicion-de-boletos/definicion-de-boletos.component';
+import { DefinicionInfoComponent } from './components/listados/gestion-de-solicitudes/definicion-de-boletos/definicion-info/definicion-info.component';
+import { DefinicionBoletosComponent } from './components/listados/gestion-de-solicitudes/definicion-de-boletos/definicion-boletos/definicion-boletos.component';
+import { DefinicionFiltroComponent } from './components/listados/gestion-de-solicitudes/definicion-de-boletos/definicion-filtro/definicion-filtro.component';
+import { ResumenPagoComponent } from './components/listados/billetera/billetera-pagar/resumen-pago/resumen-pago.component';
+import { ResumenPesosComponent } from './components/listados/billetera/billetera-pagar/resumen-pesos/resumen-pesos.component';
+import { ResumenDolaresComponent } from './components/listados/billetera/billetera-pagar/resumen-dolares/resumen-dolares.component';
+import { ResumenTipoPagoComponent } from './components/listados/billetera/billetera-pagar/resumen-tipo-pago/resumen-tipo-pago.component';
+import { ResumenTotalPagoComponent } from './components/listados/billetera/billetera-pagar/resumen-total-pago/resumen-total-pago.component';
+import { ResumenTotalPagoInfoComponent } from './components/listados/billetera/billetera-pagar/resumen-total-pago-info/resumen-total-pago-info.component';
+import { ResumenComprobanteDialogComponent } from './components/listados/billetera/billetera-pagar/resumen-comprobante-dialog/resumen-comprobante-dialog.component';
+import { ResumenComprobantePagosInfoComponent } from './components/listados/billetera/billetera-pagar/resumen-comprobante-pagos-info/resumen-comprobante-pagos-info.component';
+import { ResumenInfoSumaComponent } from './components/listados/billetera/billetera-pagar/resumen-info-suma/resumen-info-suma.component';
+import { ResumenInfoOperacionComponent } from './components/listados/billetera/billetera-pagar/resumen-info-operacion/resumen-info-operacion.component';
+import { ResumenResumenComponent } from './components/listados/billetera/billetera-pagar/resumen-resumen/resumen-resumen.component';
 
 registerLocaleData(localeEsAr, 'es-AR');
 
@@ -441,7 +462,28 @@ export function tokenGetter() {
 		PagoConCanjeDisponibleComponent,
 		OnlyNumberDirective,
 		PrecioTNAPipe,
-		PreciosDeGranosComponent
+		PreciosDeGranosComponent,
+		GestionDeSolicitudesComponent,
+		InicioFiltroComponent,
+		InicioCardComponent,
+		DefinirBoletosComponent,
+		SolicitudesTotalComponent,
+		PagarConCanjeDisponibleComponent,
+		DefinicionDeBoletosComponent,
+		DefinicionInfoComponent,
+		DefinicionBoletosComponent,
+		DefinicionFiltroComponent,
+		ResumenPagoComponent,
+		ResumenPesosComponent,
+		ResumenDolaresComponent,
+		ResumenTipoPagoComponent,
+		ResumenTotalPagoComponent,
+		ResumenTotalPagoInfoComponent,
+		ResumenComprobanteDialogComponent,
+		ResumenComprobantePagosInfoComponent,
+		ResumenInfoSumaComponent,
+		ResumenInfoOperacionComponent,
+		ResumenResumenComponent
 	],
 	imports: [
 		HttpClientModule,
@@ -526,7 +568,8 @@ export function tokenGetter() {
 		BilleteraLiquidacionesDetalleComponent,
 		BilleteraCobrarCuentaComponent,
 		BilleteraCardInfoComponent,
-		PreciosDeGranosComponent
+		PreciosDeGranosComponent,
+		ResumenComprobanteDialogComponent
 	],
 	bootstrap: [AppComponent]
 })

@@ -214,10 +214,10 @@ export class MainNavComponent implements OnInit, OnDestroy {
 		];
 		this.Adminlinks = [
 			{
-				nombre: "Administrador de cuentas",
-				rutaLink: "/administrador-de-cuentas",
-				imagen: "assets/sidebar/admin.png",
-				imagenActiva: "assets/sidebar/admin-hot.png",
+				nombre: "Gestión de solicitudes",
+				rutaLink: "/gestion-de-solicitudes",
+				imagen: "assets/sidebar/close-session.png",
+				imagenActiva: "assets/sidebar/close-session-hot.png",
 				permitido: this.authService.esAdmin || this.authService.esRol('SUB_ADMINISTRADOR') || this.authService.esRol('COMERCIAL'),
 				ocultarDesktop: false
 			}

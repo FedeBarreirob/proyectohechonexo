@@ -3,10 +3,11 @@ import { DeviceDetectorService } from 'ngx-device-detector';
 import { Subject, BehaviorSubject } from 'rxjs';
 import { EntidadAlg } from '../../../../interfaces/perfiles/entidad-alg';
 import { CuentaAlgService } from '../../../../services/observers/cuentas-alg/cuenta-alg.service';
-import { MatSidenav } from '@angular/material';
+import { MatSidenav, MatDialog } from '@angular/material';
 import { takeUntil } from 'rxjs/operators';
 import { AuthenticationService } from '../../../../services/security/authentication.service';
 import { PerfilBasico } from '../../../../interfaces/perfiles/perfil-basico';
+import { ResumenComprobanteDialogComponent } from './resumen-comprobante-dialog/resumen-comprobante-dialog.component';
 
 @Component({
   selector: 'app-billetera-pagar',
@@ -28,7 +29,8 @@ export class BilleteraPagarComponent implements OnInit, OnDestroy {
   constructor(
     private deviceService: DeviceDetectorService,
     private cuentaService: CuentaAlgService,
-    private authenticationService: AuthenticationService
+    private authenticationService: AuthenticationService,
+    private dialog: MatDialog
   ) { }
 
   ngOnInit() {
@@ -73,6 +75,16 @@ export class BilleteraPagarComponent implements OnInit, OnDestroy {
       this.perfilBasico = this.authenticationService.perfilUsuarioSeleccionado();
       this.unidadMedida = (this.perfilBasico.informacionPersonal.unidadMedidaPeso) ? this.perfilBasico.informacionPersonal.unidadMedidaPeso : 'tn';
     }
+  }
+
+  // Muestra el comprobante en un dialog
+  mostrarComprobante(){
+    let dialogRef = this.dialog.open(ResumenComprobanteDialogComponent, {
+      maxWidth: '100vw',
+      width: '100%',
+      maxHeight: '100vh',
+      height: '100%',
+    })
   }
 
   // funcion encargada de mostrar u ocultar los filtros

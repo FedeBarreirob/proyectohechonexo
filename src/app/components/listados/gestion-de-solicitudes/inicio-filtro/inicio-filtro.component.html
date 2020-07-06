@@ -1,0 +1,94 @@
+<div fxLayout="row" fxLayoutAlign="center" class="encabezado-filtro">
+  <div fxFlex="80%" class="texto-filtrar">
+    FILTRAR
+  </div>
+
+  <div fxFlex="20%">
+    <button mat-icon-button class="boton-close" (click)="cerrar()">
+      <mat-icon>close</mat-icon>
+    </button>
+  </div>
+</div>
+
+<mat-divider></mat-divider>
+
+<!--Vencimientos-->
+<div fxLayout="row" fxLayoutAlign="space-around center">
+  <div fxFlex="100%" class="titulo-filtro" style="padding-top: 20px;">
+    Estado
+  </div>
+</div>
+
+<div>
+  <span>
+    <ul>
+      <li *ngFor="let estado of estadoOptions" class="checkbox">
+        <mat-checkbox [(ngModel)]="estadoSeleccionado" [value]="estado.value">
+          {{estado.descripcion}}
+        </mat-checkbox>
+      </li>
+    </ul>
+  </span>
+</div>
+
+<mat-divider></mat-divider>
+
+<!--Productor-->
+<div fxLayout="row" fxLayoutAlign="space-around center">
+  <div fxFlex="100%" class="titulo-filtro">
+    Productor
+  </div>
+</div>
+
+<div style="padding: 10px;">
+  <mat-form-field appearance="fill">
+    <mat-label>Selecciona el productor</mat-label>
+    <mat-select fxLayoutALign="space-between center">
+      <mat-option>
+        Example
+      </mat-option>
+    </mat-select>
+  </mat-form-field>
+</div>
+
+<mat-divider></mat-divider>
+
+<!--Granos-->
+<div fxLayout="row" fxLayoutAlign="space-around center">
+  <div fxFlex="100%" class="titulo-filtro">
+    Granos
+  </div>
+</div>
+
+<mat-button-toggle-group class="grupo-botones-rubro" [(ngModel)]="rubro">
+
+  <div *ngFor="let rubro of (rubros ? rubros : [])" class="boton-rubro">
+    <mat-button-toggle value="{{rubro.codigo}}">
+      <img src="{{rubro.imagen}}" />
+      <div class="texto-rubro">{{rubro.texto}}</div>
+    </mat-button-toggle>
+  </div>
+
+</mat-button-toggle-group>
+
+<mat-divider></mat-divider>
+
+<!--Método-->
+<div fxLayout="row" fxLayoutAlign="space-around center">
+  <div fxFlex="100%" class="titulo-filtro" style="padding-top: 20px;">
+    Método
+  </div>
+</div>
+
+<div >
+  <span>
+    <ul>
+      <li *ngFor="let metodo of metodoOptions" class="checkbox">
+        <mat-checkbox [(ngModel)]="metodoSeleccionado" [value]="metodo.value">
+          {{metodo.descripcion}}
+        </mat-checkbox>
+      </li>
+    </ul>
+  </span>
+</div>
+
