@@ -246,6 +246,17 @@ import { DefinicionDeBoletosComponent } from './components/listados/gestion-de-s
 import { DefinicionInfoComponent } from './components/listados/gestion-de-solicitudes/definicion-de-boletos/definicion-info/definicion-info.component';
 import { DefinicionBoletosComponent } from './components/listados/gestion-de-solicitudes/definicion-de-boletos/definicion-boletos/definicion-boletos.component';
 import { DefinicionFiltroComponent } from './components/listados/gestion-de-solicitudes/definicion-de-boletos/definicion-filtro/definicion-filtro.component';
+import { ResumenPagoComponent } from './components/listados/billetera/billetera-pagar/resumen-pago/resumen-pago.component';
+import { ResumenPesosComponent } from './components/listados/billetera/billetera-pagar/resumen-pesos/resumen-pesos.component';
+import { ResumenDolaresComponent } from './components/listados/billetera/billetera-pagar/resumen-dolares/resumen-dolares.component';
+import { ResumenTipoPagoComponent } from './components/listados/billetera/billetera-pagar/resumen-tipo-pago/resumen-tipo-pago.component';
+import { ResumenTotalPagoComponent } from './components/listados/billetera/billetera-pagar/resumen-total-pago/resumen-total-pago.component';
+import { ResumenTotalPagoInfoComponent } from './components/listados/billetera/billetera-pagar/resumen-total-pago-info/resumen-total-pago-info.component';
+import { ResumenComprobanteDialogComponent } from './components/listados/billetera/billetera-pagar/resumen-comprobante-dialog/resumen-comprobante-dialog.component';
+import { ResumenComprobantePagosInfoComponent } from './components/listados/billetera/billetera-pagar/resumen-comprobante-pagos-info/resumen-comprobante-pagos-info.component';
+import { ResumenInfoSumaComponent } from './components/listados/billetera/billetera-pagar/resumen-info-suma/resumen-info-suma.component';
+import { ResumenInfoOperacionComponent } from './components/listados/billetera/billetera-pagar/resumen-info-operacion/resumen-info-operacion.component';
+import { ResumenResumenComponent } from './components/listados/billetera/billetera-pagar/resumen-resumen/resumen-resumen.component';
 
 registerLocaleData(localeEsAr, 'es-AR');
 
@@ -461,7 +472,18 @@ export function tokenGetter() {
 		DefinicionDeBoletosComponent,
 		DefinicionInfoComponent,
 		DefinicionBoletosComponent,
-		DefinicionFiltroComponent
+		DefinicionFiltroComponent,
+		ResumenPagoComponent,
+		ResumenPesosComponent,
+		ResumenDolaresComponent,
+		ResumenTipoPagoComponent,
+		ResumenTotalPagoComponent,
+		ResumenTotalPagoInfoComponent,
+		ResumenComprobanteDialogComponent,
+		ResumenComprobantePagosInfoComponent,
+		ResumenInfoSumaComponent,
+		ResumenInfoOperacionComponent,
+		ResumenResumenComponent
 	],
 	imports: [
 		HttpClientModule,
@@ -546,7 +568,8 @@ export function tokenGetter() {
 		BilleteraLiquidacionesDetalleComponent,
 		BilleteraCobrarCuentaComponent,
 		BilleteraCardInfoComponent,
-		PreciosDeGranosComponent
+		PreciosDeGranosComponent,
+		ResumenComprobanteDialogComponent
 	],
 	bootstrap: [AppComponent]
 })
