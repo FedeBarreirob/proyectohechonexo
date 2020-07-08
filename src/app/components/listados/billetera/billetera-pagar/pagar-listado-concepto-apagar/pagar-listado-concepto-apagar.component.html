@@ -10,11 +10,11 @@
       <div fxLayout="column" fxLayoutAlign="space-between start">
         <div fxFlex>
           {{ concepto.moneda | moneda }}
-          <span *ngIf="concepto.moneda == 'P'">{{ concepto.saldoPesos * (-1) | number }}</span>
-          <span *ngIf="concepto.moneda != 'P'">{{ concepto.saldoDolares * (-1) | number }}</span>
+          <span style="color: red;" *ngIf="concepto.moneda == 'P'">{{ concepto.saldoPesos * (-1) | number }}</span>
+          <span style="color: red;" *ngIf="concepto.moneda != 'P'">{{ concepto.saldoDolares * (-1) | number }}</span>
         </div>
 
-        <div fxFlex>
+        <div fxFlex style="font-family: Rubik; font-size: 12px; color: #999;">
           {{ concepto.comprobanteAfectado }} - {{ (esVencido) ? 'Venció' : 'Vence' }}: {{ concepto.fechaVencimiento }}
         </div>
       </div>
