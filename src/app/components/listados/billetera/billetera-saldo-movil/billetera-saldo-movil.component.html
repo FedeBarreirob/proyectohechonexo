@@ -28,6 +28,8 @@
     <mat-tab label="A Cobrar">
       <app-tarjeta-tab-container *ngIf="saldoGlobal != null && seObtuvoSaldoExito == true" [saldoGlobal]="saldoGlobal"></app-tarjeta-tab-container>
     </mat-tab>
-    <mat-tab label="A Pagar"> Hola soy el contenido de la segunda pestaña </mat-tab>
+    <mat-tab label="A Pagar">
+      <app-tarjeta-tab-container-pagar *ngIf="saldoGlobal != null && seObtuvoSaldoExito == true" [saldoGlobal]="saldoGlobal"></app-tarjeta-tab-container-pagar>
+    </mat-tab>
   </mat-tab-group>
 </div>

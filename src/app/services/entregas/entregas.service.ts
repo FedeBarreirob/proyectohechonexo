@@ -16,6 +16,7 @@ export class EntregasService {
   private urlEntregasFiltrosEspecieCosecha = `${environment.hostEntregasYVentas}/Entregas/filtrosEspecieCosechas`;
   private urlEntregasIndicadorGlobal = `${environment.hostEntregasYVentas}/Entregas/indicadorGlobal`;
   private urlMercadoDeGranoPrecios = `${environment.hostEntregasYVentas}/mercadoDeGrano/precios`;
+  private urlcontratosConDispPendFijarPesificar = `${environment.hostEntregasYVentas}/contratos/contratosConDispPendFijarPesificar`;
 
   constructor(private http: HttpClient) { }
 
@@ -64,6 +65,22 @@ export class EntregasService {
     return this.http.post<ResponseServicio>(this.urlEntregasIndicadorGlobal,
       JSON.stringify(filtro),
       httpOptions);
+  }
+
+  /**
+   * Devuelve un listado de movimientos de ctacte aplicada filtrada por get
+   * @param filtro 
+   */
+  listadocontratosConDispPendFijarPesificar(filtro: any) { //crear interface ng g i FiltroCtoDisp
+
+    const httpOptions = {
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      params: <any>filtro
+    };
+
+    return this.http.get<ResponseServicio>(this.urlcontratosConDispPendFijarPesificar, httpOptions);
   }
 
   /**

@@ -257,6 +257,7 @@ import { ResumenComprobantePagosInfoComponent } from './components/listados/bill
 import { ResumenInfoSumaComponent } from './components/listados/billetera/billetera-pagar/resumen-info-suma/resumen-info-suma.component';
 import { ResumenInfoOperacionComponent } from './components/listados/billetera/billetera-pagar/resumen-info-operacion/resumen-info-operacion.component';
 import { ResumenResumenComponent } from './components/listados/billetera/billetera-pagar/resumen-resumen/resumen-resumen.component';
+import { TarjetaTabContainerPagarComponent } from './components/listados/billetera/tarjeta-tab-container-pagar/tarjeta-tab-container-pagar.component';
 
 registerLocaleData(localeEsAr, 'es-AR');
 
@@ -483,7 +484,8 @@ export function tokenGetter() {
 		ResumenComprobantePagosInfoComponent,
 		ResumenInfoSumaComponent,
 		ResumenInfoOperacionComponent,
-		ResumenResumenComponent
+		ResumenResumenComponent,
+		TarjetaTabContainerPagarComponent
 	],
 	imports: [
 		HttpClientModule,

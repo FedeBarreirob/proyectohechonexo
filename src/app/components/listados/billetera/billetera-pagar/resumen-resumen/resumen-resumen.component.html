@@ -1,3 +1,29 @@
 <div class="card">
-  <p>resumen-resumen works!</p>
+  <div class="pesos" fxLayout="column">
+    <p>Comprobantes pagados</p>
+    <h4 style="color: black; font-family: Rubik; font-size: 14px; margin-top: -5px; margin-left: 10px;">ARS 123,000</h4>
+    <p style="margin-top: -5px;">Agroinsumos [referencia]</p>
+    <p style="margin-top: -5px;">Venció: 01/12/20</p>
+  </div>
+
+  <div class="dolares" fxLayout="column" style="margin-top: 5px; margin-bottom: 10px;">
+    <h4 style="color: black; font-family: Rubik; font-size: 14px; margin-top: -5px; margin-left: 10px;">USD 1,853.57</h4>
+    <p style="margin-top: -5px;">Grano [referencia]</p>
+    <p style="margin-top: -5px;">Venció: 01/12/20</p>
+    <app-resumen-info-suma style="padding: 10px;"></app-resumen-info-suma>
+  </div>
+  <mat-divider style="margin-bottom: 10px;"></mat-divider>
+  <div class="medio" fxLayout="column">
+    <p>Medio</p>
+    <h4 style="color: black; font-family: Rubik; font-size: 14px; margin-top: -5px; margin-left: 10px;">Canje</h4>
+    <p style="margin-top: -5px; color: black;">Soja: 2,400 Tn</p>
+    <p style="margin-top: -5px; color: black;">Maíz: 2,400 Tn</p>
+    <p style="margin-top: -5px; color: black;">Trigo: 2,400 Tn</p>
+    <app-resumen-info-operacion style="padding: 10px;"></app-resumen-info-operacion>
+  </div>
+  <mat-divider style="margin-bottom: 10px;"></mat-divider>
+  <div class="total" fxLayout="column">
+    <p>Total pagado</p>
+    <h2 style="color: black; font-family: Rubik; font-size: 18px; margin-top: -5px; margin-left: 10px;">$246,000</h2>
+  </div>
 </div>

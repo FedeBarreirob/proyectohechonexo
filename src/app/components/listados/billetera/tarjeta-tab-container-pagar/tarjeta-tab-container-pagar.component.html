@@ -1,0 +1,135 @@
+<div *ngIf="esCelular">
+  <mat-card class="tarjeta">
+
+    <div fxLayout="row" fxLayoutAlign="space-between center">
+      <div fxFlex="100%" class="titulo-card-1">Dinero a Pagar
+        <button mat-icon-button color="primary" class="indicador" >
+          <mat-icon>info</mat-icon>
+        </button>
+      </div>
+    </div>
+  
+    <div fxLayout="row" fxLayoutAlign="space-between center">
+  
+      <div fxFlex="100%" class="contenedor-importe"><span class="importe-cobrar">
+          {{ saldoGlobal.aPagarVencido + saldoGlobal.aPagarAVencer | number: '.0-0' }} </span>
+      </div>
+  
+    </div>
+    <mat-divider></mat-divider>
+  
+    <div fxLayout="row" fxLayoutAlign="space-between center">
+      <div fxFlex="100%" class="titulo-card">Dinero disponible
+        <button mat-icon-button class="indicador">
+          <mat-icon>keyboard_arrow_right</mat-icon>
+        </button>
+      </div>
+    </div>
+  
+    <div fxLayout="row" fxLayoutAlign="space-between center">
+  
+      <div fxFlex="100%" class="contenedor-importe"><span class="importe-cobrar">
+          {{ saldoGlobal.aPagarVencido | number: '.0-0' }} </span>
+      </div>
+  
+    </div>
+    <mat-divider></mat-divider>
+  
+    <div fxLayout="row" fxLayoutAlign="space-between center">
+      <div fxFlex="100%" class="titulo-card">Dinero por cobrar
+        <button mat-icon-button class="indicador">
+          <mat-icon>keyboard_arrow_right</mat-icon>
+        </button>
+      </div>
+    </div>
+  
+    <div fxLayout="row" fxLayoutAlign="space-between center">
+  
+      <div fxFlex="100%" class="contenedor-importe"><span class="importe-cobrar">
+          {{ saldoGlobal.aPagarAVencer | number: '.0-0' }} </span>
+      </div>
+  
+    </div>
+    <mat-divider></mat-divider>
+  
+    <div fxLayout="row" fxLayoutAlign="space-between center">
+      <div fxFlex="100%" class="titulo-card">Dinero retenido</div>
+    </div>
+  
+    <div fxLayout="row" fxLayoutAlign="space-between center">
+  
+      <div fxFlex="100%" class="contenedor-importe"><span class="importe-cobrar"> 0 </span>
+      </div>
+  
+    </div>
+  
+  </mat-card>
+</div>
+
+<div *ngIf="!esCelular" >
+  <mat-card class="tarjeta1">
+
+    <div fxLayout="row" fxLayoutAlign="space-between center">
+      <div fxFlex="100%" class="titulo-card-1">Dinero en cuenta
+        <button mat-icon-button color="primary" class="indicador" (click)="solicitarInfo">
+          <mat-icon>info</mat-icon>
+        </button>
+      </div>
+    </div>
+  
+    <div fxLayout="row" fxLayoutAlign="space-between center">
+  
+      <div fxFlex="100%" class="contenedor-importe"><span class="importe-cobrar">
+          {{ saldoGlobal.aPagarVencido + saldoGlobal.aPagarAVencer | number: '.0-0' }} </span>
+      </div>
+  
+    </div>
+    <mat-divider></mat-divider>
+  
+    <div fxLayout="row" fxLayoutAlign="space-between center">
+      <div fxFlex="100%" class="titulo-card">Dinero disponible
+        <button mat-icon-button class="indicador">
+          <mat-icon>keyboard_arrow_right</mat-icon>
+        </button>
+      </div>
+    </div>
+  
+    <div fxLayout="row" fxLayoutAlign="space-between center">
+  
+      <div fxFlex="100%" class="contenedor-importe"><span class="importe-cobrar">
+          {{ saldoGlobal.aPagarVencido | number: '.0-0' }} </span>
+      </div>
+  
+    </div>
+    <mat-divider></mat-divider>
+  
+    <div fxLayout="row" fxLayoutAlign="space-between center">
+      <div fxFlex="100%" class="titulo-card">Dinero por pagar
+        <button mat-icon-button class="indicador">
+          <mat-icon>keyboard_arrow_right</mat-icon>
+        </button>
+      </div>
+    </div>
+  
+    <div fxLayout="row" fxLayoutAlign="space-between center">
+  
+      <div fxFlex="100%" class="contenedor-importe"><span class="importe-cobrar">
+          {{ saldoGlobal.aPagarAVencer | number: '.0-0' }} </span>
+      </div>
+  
+    </div>
+    <mat-divider></mat-divider>
+  
+    <div fxLayout="row" fxLayoutAlign="space-between center">
+      <div fxFlex="100%" class="titulo-card">Dinero retenido</div>
+    </div>
+  
+    <div fxLayout="row" fxLayoutAlign="space-between center">
+  
+      <div fxFlex="100%" class="contenedor-importe"><span class="importe-cobrar"> 0 </span>
+      </div>
+  
+    </div>
+  
+  </mat-card>
+</div>
