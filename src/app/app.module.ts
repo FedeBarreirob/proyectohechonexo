@@ -258,6 +258,8 @@ import { ResumenInfoSumaComponent } from './components/listados/billetera/billet
 import { ResumenInfoOperacionComponent } from './components/listados/billetera/billetera-pagar/resumen-info-operacion/resumen-info-operacion.component';
 import { ResumenResumenComponent } from './components/listados/billetera/billetera-pagar/resumen-resumen/resumen-resumen.component';
 import { TarjetaTabContainerPagarComponent } from './components/listados/billetera/tarjeta-tab-container-pagar/tarjeta-tab-container-pagar.component';
+import { DefinicionDeBoletosAFijarComponent } from './components/listados/billetera/billetera-pagar/definicion-de-boletos/definicion-de-boletos-afijar/definicion-de-boletos-afijar.component';
+import { DefinicionDeUnBoletoAFijarComponent } from './components/listados/billetera/billetera-pagar/definicion-de-boletos/definicion-de-un-boleto-afijar/definicion-de-un-boleto-afijar.component';
 
 registerLocaleData(localeEsAr, 'es-AR');
 
@@ -485,7 +487,9 @@ export function tokenGetter() {
 		ResumenInfoSumaComponent,
 		ResumenInfoOperacionComponent,
 		ResumenResumenComponent,
-		TarjetaTabContainerPagarComponent
+		TarjetaTabContainerPagarComponent,
+		DefinicionDeBoletosAFijarComponent,
+		DefinicionDeUnBoletoAFijarComponent
 	],
 	imports: [
 		HttpClientModule,
@@ -571,7 +575,8 @@ export function tokenGetter() {
 		BilleteraCobrarCuentaComponent,
 		BilleteraCardInfoComponent,
 		PreciosDeGranosComponent,
-		ResumenComprobanteDialogComponent
+		ResumenComprobanteDialogComponent,
+		DefinicionDeBoletosAFijarComponent
 	],
 	bootstrap: [AppComponent]
 })
