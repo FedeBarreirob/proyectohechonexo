@@ -260,6 +260,7 @@ import { ResumenResumenComponent } from './components/listados/billetera/billete
 import { TarjetaTabContainerPagarComponent } from './components/listados/billetera/tarjeta-tab-container-pagar/tarjeta-tab-container-pagar.component';
 import { DefinicionDeBoletosAFijarComponent } from './components/listados/billetera/billetera-pagar/definicion-de-boletos/definicion-de-boletos-afijar/definicion-de-boletos-afijar.component';
 import { DefinicionDeUnBoletoAFijarComponent } from './components/listados/billetera/billetera-pagar/definicion-de-boletos/definicion-de-un-boleto-afijar/definicion-de-un-boleto-afijar.component';
+import { DefinicionDeBoletosAFijarTotalComponent } from './components/listados/billetera/billetera-pagar/definicion-de-boletos/definicion-de-boletos-afijar-total/definicion-de-boletos-afijar-total.component';
 
 registerLocaleData(localeEsAr, 'es-AR');
 
@@ -489,7 +490,8 @@ export function tokenGetter() {
 		ResumenResumenComponent,
 		TarjetaTabContainerPagarComponent,
 		DefinicionDeBoletosAFijarComponent,
-		DefinicionDeUnBoletoAFijarComponent
+		DefinicionDeUnBoletoAFijarComponent,
+		DefinicionDeBoletosAFijarTotalComponent
 	],
 	imports: [
 		HttpClientModule,
