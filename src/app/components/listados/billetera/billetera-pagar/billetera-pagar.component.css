@@ -1,11 +1,12 @@
-/*
-.contenedor-desktop {
-  height: 100%;
-  padding-top: 100px;
-}*/
+/*sidebar*/
 
 .contenedor-filtro {
     height: 100%;
+}
+
+.contenedor-filtro-desktop {
+    height: 100%;
+    padding-top: 122px;
 }
 
 .sidenav-filtro {
@@ -14,9 +15,16 @@
     max-width: 270px;
 }
 
+.sidenav-filtro-desktop {
+    padding-top: 122px;
+    box-shadow: 3px 0 6px rgba(0, 0, 0, .24);
+    width: 70%;
+    max-width: 270px;
+}
+
 .mat-stepper-horizontal {
     margin-top: 0px;
-    background-color: rgb(247, 247, 247);
+    background-color: #fafafa;
 }
 
 .tittle{
@@ -25,5 +33,5 @@
 }
   
 .button{
-    background-color: white;
+    background-color: transparent;
 }
