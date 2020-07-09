@@ -6,15 +6,16 @@
   </div>
 
   <div class="tn-a-fijar">
-    <mat-checkbox [(ngModel)]="boletoSeleccionado">
+    <mat-checkbox [(ngModel)]="boletoSeleccionado" (change)="notificarCambios()">
       {{ boletoAFijar.kgDisponiblesPendientesDeFijar | kilosA: unidadMedida | number: (unidadMedida == 'tn' ? '.0-1' : '.0-0')}}
       {{unidadMedida | kilosTextoA}}
     </mat-checkbox>
   </div>
 
-  <mat-radio-group [(ngModel)]="tipoFijacion" [disabled]="!boletoSeleccionado">
+  <mat-radio-group [(ngModel)]="tipoFijacion" [disabled]="!boletoSeleccionado" (change)="notificarCambios()">
     <mat-radio-button [value]="contratoTipoFijacion.PARCIAL" style="margin-bottom: 10px;">Fijación parcial: <input
-        style="width: 50%;" [(ngModel)]="stockAFijar" numeric numericType="decimal"></mat-radio-button>
+        style="width: 50%;" [(ngModel)]="stockAFijar" numeric numericType="decimal" (change)="notificarCambios()"
+        (keyup)="notificarCambios()"></mat-radio-button>
     <mat-radio-button [value]="contratoTipoFijacion.TOTAL">Fijación total</mat-radio-button>
   </mat-radio-group>
 
@@ -23,11 +24,12 @@
     {{unidadMedida | kilosTextoA}}
   </div>
 
-  <mat-radio-group [(ngModel)]="tipoPrecioFijacion" [disabled]="!boletoSeleccionado">
+  <mat-radio-group [(ngModel)]="tipoPrecioFijacion" [disabled]="!boletoSeleccionado" (change)="notificarCambios()">
     <mat-radio-button [value]="contratoTipoPrecioFijacion.PIZARRA" style="margin-bottom: 10px;">Precio de pizarra
     </mat-radio-button>
     <mat-radio-button [value]="contratoTipoPrecioFijacion.PRECIO_DEL_DIA">Precio del día: $<input style="width: 50%;"
-        [(ngModel)]="precioDelDia" numeric numericType="decimal"></mat-radio-button>
+        [(ngModel)]="precioDelDia" numeric numericType="decimal" (change)="notificarCambios()"
+        (keyup)="notificarCambios()"></mat-radio-button>
   </mat-radio-group>
 
   <!--Detalle-->

@@ -174,7 +174,8 @@ export class PagoConCanjeDisponibleComponent implements OnInit, OnDestroy {
         especie: this.disponible.especieCodigo,
         cuenta: this.cuenta,
         especieDescripcion: this.disponible.especieDescripcion,
-        unidadMedida: this.unidadMedida
+        unidadMedida: this.unidadMedida,
+        stockAFijar: this.stockAFijar
       },
       maxWidth: '100vw',
       width: '100%',

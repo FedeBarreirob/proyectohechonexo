@@ -24,6 +24,9 @@ export class DefinicionDeBoletosAFijarComponent implements OnInit, OnDestroy {
   observerFiltro$: BehaviorSubject<any> = new BehaviorSubject<any>(null);
   cargando: boolean = false;
   boletosAFijar: Array<any>;
+  totalMercaderiaACanjear$: BehaviorSubject<number> = new BehaviorSubject<number>(0);
+  fijaciones: Array<any> = [];
+  stockAFijar: number;
 
   constructor(
     @Inject(MAT_DIALOG_DATA) public data: any,
@@ -35,6 +38,7 @@ export class DefinicionDeBoletosAFijarComponent implements OnInit, OnDestroy {
     this.cuenta = data.cuenta;
     this.especieDescripcion = data.especieDescripcion;
     this.unidadMedida = data.unidadMedida;
+    this.stockAFijar = data.stockAFijar;
   }
 
   ngOnInit() {
@@ -91,6 +95,47 @@ export class DefinicionDeBoletosAFijarComponent implements OnInit, OnDestroy {
     return {
       cuenta: this.cuenta.id.codigo,
       especie: this.especie
+    }
+  }
+
+  /**
+   * Agrega, quita o actualiza una fijación dada
+   * @param fijacion 
+   */
+  agregarQuitarOActualizarBoletoFijadoSeleccionado(fijacion: any) {
+    if (fijacion) {
+
+      if (fijacion.boletoSeleccionado == true) {
+
+        let unaFijacion = this.fijaciones.find(unaFijacion => unaFijacion.boleto.contratoAlgId == fijacion.boleto.contratoAlgId);
+        if (unaFijacion) {
+          unaFijacion = Object.assign(unaFijacion, fijacion);
+        } else {
+          this.fijaciones.push(fijacion);
+        }
+
+      } else {
+        this.fijaciones = this.fijaciones.filter(unaFijacion => unaFijacion.boleto.contratoAlgId != fijacion.boleto.contratoAlgId);
+      }
+
+    }
+
+    this.actualizarTotalizador();
+  }
+
+  /**
+   * Función encargada de actualizar el totalizador
+   */
+  actualizarTotalizador() {
+    if (this.fijaciones && this.fijaciones.length > 0) {
+
+      let total: number = this.fijaciones
+        .map(fijacion => fijacion.stockAFijar)
+        .reduce((acum, current) => Number.parseFloat(acum) + Number.parseFloat(current), 0);
+
+      this.totalMercaderiaACanjear$.next(total);
+    } else {
+      this.totalMercaderiaACanjear$.next(0);
     }
   }
 }

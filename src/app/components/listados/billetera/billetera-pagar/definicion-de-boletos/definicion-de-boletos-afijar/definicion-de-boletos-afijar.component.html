@@ -33,12 +33,14 @@
       </div>
 
       <app-definicion-de-un-boleto-afijar *ngFor="let boletoAFijar of boletosAFijar" [boletoAFijar]="boletoAFijar"
-        [unidadMedida]="unidadMedida">
+        [unidadMedida]="unidadMedida" (change)="agregarQuitarOActualizarBoletoFijadoSeleccionado($event)">
       </app-definicion-de-un-boleto-afijar>
 
-      
-      <app-definicion-de-boletos-afijar-total></app-definicion-de-boletos-afijar-total>
     </div>
+
+    <app-definicion-de-boletos-afijar-total [totalMercaderiaACanjear$]="totalMercaderiaACanjear$"
+      [stockAFijar]="stockAFijar">
+    </app-definicion-de-boletos-afijar-total>
 
   </section>
 </mat-sidenav-container>

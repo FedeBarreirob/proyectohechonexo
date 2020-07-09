@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
+import { BehaviorSubject } from 'rxjs';
 
 @Component({
   selector: 'app-definicion-de-boletos-afijar-total',
@@ -6,6 +7,12 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./definicion-de-boletos-afijar-total.component.css']
 })
 export class DefinicionDeBoletosAFijarTotalComponent implements OnInit {
+
+  @Input()
+  totalMercaderiaACanjear$: BehaviorSubject<number>;
+
+  @Input()
+  stockAFijar: number;
 
   constructor() { }
 
