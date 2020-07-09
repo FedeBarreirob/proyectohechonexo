@@ -6,6 +6,8 @@ import { KilosAPipe } from '../../../../../pipes/kilos-a.pipe';
 import { PrecioTNAPipe } from '../../../../../pipes/precio-tna.pipe';
 import { MatDialog } from '@angular/material';
 import { PreciosDeGranosComponent } from '../precios-de-granos/precios-de-granos.component';
+import { EntidadAlg } from '../../../../../interfaces/perfiles/entidad-alg';
+import { DefinicionDeBoletosAFijarComponent } from '../definicion-de-boletos/definicion-de-boletos-afijar/definicion-de-boletos-afijar.component';
 
 @Component({
   selector: 'app-pago-con-canje-disponible',
@@ -23,6 +25,9 @@ export class PagoConCanjeDisponibleComponent implements OnInit, OnDestroy {
 
   @Input()
   unidadMedida: string;
+
+  @Input()
+  cuenta: EntidadAlg;
 
   @Output()
   importeCalculadoChange: EventEmitter<any> = new EventEmitter<any>();
@@ -157,6 +162,25 @@ export class PagoConCanjeDisponibleComponent implements OnInit, OnDestroy {
       width: '90%',
       maxHeight: '75vh',
       height: '75%'
+    });
+  }
+
+  /**
+   * Muestra en formulario para definir los boletos a fijar y la cantidad a fijar
+   */
+  definirBoletosAFijar() {
+    this.dialog.open(DefinicionDeBoletosAFijarComponent, {
+      data: {
+        especie: this.disponible.especieCodigo,
+        cuenta: this.cuenta,
+        especieDescripcion: this.disponible.especieDescripcion,
+        unidadMedida: this.unidadMedida
+      },
+      maxWidth: '100vw',
+      width: '100%',
+      maxHeight: '100vh',
+      height: '100%',
+      panelClass: 'modal-sin-padding'
     });
   }
 }

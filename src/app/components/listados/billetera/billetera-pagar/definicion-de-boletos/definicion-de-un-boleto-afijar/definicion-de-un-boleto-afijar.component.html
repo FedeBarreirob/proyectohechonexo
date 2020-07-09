@@ -1,0 +1,100 @@
+<mat-card class="card">
+
+  <div class="num-boleto">
+    Boleto #{{ boletoAFijar.numeroComprobanteContrato }} <mat-chip *ngIf="boletoAFijar.vencidoFijacion">Vencido
+    </mat-chip>
+  </div>
+
+  <div class="tn-a-fijar">
+    <mat-checkbox [(ngModel)]="boletoSeleccionado">
+      {{ boletoAFijar.kgDisponiblesPendientesDeFijar | kilosA: unidadMedida | number: (unidadMedida == 'tn' ? '.0-1' : '.0-0')}}
+      {{unidadMedida | kilosTextoA}}
+    </mat-checkbox>
+  </div>
+
+  <mat-radio-group [(ngModel)]="tipoFijacion" [disabled]="!boletoSeleccionado">
+    <mat-radio-button [value]="contratoTipoFijacion.PARCIAL" style="margin-bottom: 10px;">Fijación parcial: <input
+        style="width: 50%;" [(ngModel)]="stockAFijar" numeric numericType="decimal"></mat-radio-button>
+    <mat-radio-button [value]="contratoTipoFijacion.TOTAL">Fijación total</mat-radio-button>
+  </mat-radio-group>
+
+  <div class="saldo-boleto">
+    Saldo del boleto: {{ saldoBoleto | number: (unidadMedida == 'tn' ? '.0-1' : '.0-0') }}
+    {{unidadMedida | kilosTextoA}}
+  </div>
+
+  <mat-radio-group [(ngModel)]="tipoPrecioFijacion" [disabled]="!boletoSeleccionado">
+    <mat-radio-button [value]="contratoTipoPrecioFijacion.PIZARRA" style="margin-bottom: 10px;">Precio de pizarra
+    </mat-radio-button>
+    <mat-radio-button [value]="contratoTipoPrecioFijacion.PRECIO_DEL_DIA">Precio del día: $<input style="width: 50%;"
+        [(ngModel)]="precioDelDia" numeric numericType="decimal"></mat-radio-button>
+  </mat-radio-group>
+
+  <!--Detalle-->
+  <div *ngIf="modoVerDetalle">
+
+    <div fxLayout="row" fxLayoutAlign="space-between center" fxLayoutGap="5px" class="titulo-detalle">
+      <div fxFlex="50%">
+        Fecha
+      </div>
+
+      <div fxFlex="50%">
+        Cosecha
+      </div>
+    </div>
+
+    <div fxLayout="row" fxLayoutAlign="space-between center" fxLayoutGap="5px" class="texto-detalle">
+      <div fxFlex="50%">
+        {{ boletoAFijar.fechaVenta }}
+      </div>
+
+      <div fxFlex="50%">
+        {{ boletoAFijar.cosecha }}
+      </div>
+    </div>
+
+    <div fxLayout="row" fxLayoutAlign="space-between center" fxLayoutGap="5px" class="titulo-detalle">
+      <div fxFlex="50%">
+        Fijación desde
+      </div>
+
+      <div fxFlex="50%">
+        Fijación hasta
+      </div>
+    </div>
+
+    <div fxLayout="row" fxLayoutAlign="space-between center" fxLayoutGap="5px" class="texto-detalle">
+      <div fxFlex="50%">
+        {{ boletoAFijar.fechaFijacionDesde }}
+      </div>
+
+      <div fxFlex="50%">
+        {{ boletoAFijar.fechaFijacionHasta }}
+      </div>
+    </div>
+
+    <div fxLayout="row" fxLayoutAlign="space-between center" fxLayoutGap="5px" class="titulo-detalle">
+      <div fxFlex>
+        Destino de mercadería
+      </div>
+    </div>
+
+    <div fxLayout="row" fxLayoutAlign="space-between center" fxLayoutGap="5px" class="texto-detalle">
+      <div fxFlex>
+        {{ boletoAFijar.destinoDescripcion }}
+      </div>
+    </div>
+
+  </div>
+  <!--Fin Detalle-->
+
+  <div fxLayout="row" fxLayoutAlign="center center">
+    <div fxFlex="nogrow">
+      <button class="button-detalle" mat-button (click)="toggleModoVerDetalle()" *ngIf="!modoVerDetalle">Mostrar
+        detalles</button>
+      <button class="button-detalle" mat-button (click)="toggleModoVerDetalle()" *ngIf="modoVerDetalle">Ocultar
+        detalles</button>
+    </div>
+  </div>
+
+</mat-card>
