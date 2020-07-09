@@ -17,7 +17,7 @@
     <div fxLayout="row" fxLayoutAlign="space-between center">
       <div fxLayout="column">
         <h5>Total</h5>
-        <h3 style="margin-top: -20px;">$53,000</h3>
+        <h3 style="margin-top: -20px;">$ {{ (totalEvent$ | async) | number }}</h3>
       </div>
       <div fxLayout="row">
         <button mat-flat-button matStepperNext style="background-color: green; color: white;">Siguiente</button>

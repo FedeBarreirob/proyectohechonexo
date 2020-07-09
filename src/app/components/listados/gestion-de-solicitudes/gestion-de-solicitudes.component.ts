@@ -1,8 +1,9 @@
-import { Component, OnInit, ViewChild, OnDestroy } from '@angular/core';
+import { Component, OnInit, ViewChild, OnDestroy, Inject } from '@angular/core';
 import { DeviceDetectorService } from 'ngx-device-detector';
 import { Subject, BehaviorSubject } from 'rxjs';
 import { EntidadAlg } from '../../../interfaces/perfiles/entidad-alg';
-import { MatSidenav } from '@angular/material';
+import { MatSidenav, MAT_DIALOG_DATA } from '@angular/material';
+import { EntregasService } from 'src/app/services/entregas/entregas.service';
 
 @Component({
   selector: 'app-gestion-de-solicitudes',
@@ -10,6 +11,7 @@ import { MatSidenav } from '@angular/material';
   styleUrls: ['./gestion-de-solicitudes.component.css']
 })
 export class GestionDeSolicitudesComponent implements OnInit, OnDestroy {
+  
 
   @ViewChild('menuSolicitudes') public sidenav: MatSidenav;
 
@@ -17,13 +19,23 @@ export class GestionDeSolicitudesComponent implements OnInit, OnDestroy {
   esCelular: boolean;
   cuenta: EntidadAlg;
   observerFiltro$: BehaviorSubject<any> = new BehaviorSubject<any>(null);
+  especie: string;
 
   constructor(
-    private deviceService: DeviceDetectorService
-  ) { }
+    @Inject(MAT_DIALOG_DATA) public data: any,
+    private deviceService: DeviceDetectorService,
+    private EntregasService: EntregasService
+  ) { 
+    this.cuenta = data.cuenta
+    this.especie = data.especie
+   }
 
   ngOnInit() {
     this.esCelular = this.deviceService.isMobile();
+
+  }
+
+  cargarDatosEntrega(){
 
   }
 
