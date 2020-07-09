@@ -10,13 +10,8 @@
 <div *ngIf="!esCelular">
   <div class="card-container">
     <div fxLayout="row" fxLayoutAlign="space-between center">
-      <div fxLayout="column">
-        <h5>Total</h5>
-        <h3 style="margin-top: -20px;">$53,000</h3>
-      </div>
-      <div fxLayout="row">
-        <button mat-flat-button matStepperNext style="background-color: green; color: white;">Siguiente</button>
-      </div>
+      <h5 fxFlex="50%" style="padding-left: 10px;color: #999; font-size: 18px;">Total a pagar</h5>
+      <h3 fxFlex="50%" style="font-size: 25px; font-family: Rubik; margin-left: 350px;">$ {{ (totalEvent$ | async) | number }}</h3>
     </div>
   </div>
 </div>
