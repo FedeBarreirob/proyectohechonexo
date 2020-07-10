@@ -5,6 +5,7 @@ import { EntregasService } from '../../../../../../services/entregas/entregas.se
 import { DeviceDetectorService } from 'ngx-device-detector';
 import { Subject, BehaviorSubject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
+import { ContratoTipoFijacion } from '../../../../../../enums/contrato-tipo-fijacion.enum';
 
 @Component({
   selector: 'app-definicion-de-boletos-afijar',
@@ -129,9 +130,17 @@ export class DefinicionDeBoletosAFijarComponent implements OnInit, OnDestroy {
   actualizarTotalizador() {
     if (this.fijaciones && this.fijaciones.length > 0) {
 
-      let total: number = this.fijaciones
+      let totalFijacionParcial: number = this.fijaciones
+        .filter(fijacion => fijacion.tipoFijacion == ContratoTipoFijacion.PARCIAL)
         .map(fijacion => fijacion.stockAFijar)
         .reduce((acum, current) => Number.parseFloat(acum) + Number.parseFloat(current), 0);
+
+      let totalFijacionTotal: number = this.fijaciones
+        .filter(fijacion => fijacion.tipoFijacion == ContratoTipoFijacion.TOTAL)
+        .map(fijacion => fijacion.boleto.kgDisponiblesPendientesDeFijar)
+        .reduce((acum, current) => Number.parseFloat(acum) + Number.parseFloat(current), 0);
+
+      let total = totalFijacionParcial + totalFijacionTotal;
 
       this.totalMercaderiaACanjear$.next(total);
     } else {
