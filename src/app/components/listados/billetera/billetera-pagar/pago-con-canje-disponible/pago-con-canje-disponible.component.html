@@ -34,8 +34,8 @@
         <div fxLayout="column" fxLayoutAlign="space-between start">
           <div fxFlex>Stock a fijar</div>
           <div fxFlex style="border-bottom: 1px solid #999999;" (change)="notificarImporteCalculado()"
-            (keyup)="notificarImporteCalculado()"><input [(ngModel)]="stockAFijar" numeric numericType="decimal"
-              style="border: none; width: 80px;" /> {{unidadMedida | kilosTextoA}}</div>
+            (keyup)="notificarImporteCalculado()"><input [readonly]="boletosFijacionDefinidos" [(ngModel)]="stockAFijar"
+              numeric numericType="decimal" style="border: none; width: 80px;" /> {{unidadMedida | kilosTextoA}}</div>
           <div fxFlex class="disponible-text">Disponible: {{ disponibleStockAFijar | number: '.0-2' }}
             {{unidadMedida | kilosTextoA}} </div>
         </div>
@@ -43,8 +43,13 @@
       </div>
 
       <div fxFlex="45%">
-        <button (click)="definirBoletosAFijar()" mat-button class="link-ver-todas">Definir boletos<mat-icon>
+        <button *ngIf="!boletosFijacionDefinidos && stockAFijar > 0" (click)="definirBoletosAFijar()" mat-button
+          class="link-ver-todas">Definir boletos<mat-icon>
             keyboard_arrow_right</mat-icon></button>
+
+        <button *ngIf="boletosFijacionDefinidos && stockAFijar > 0" (click)="definirBoletosAFijar()" mat-button
+          class="link-ver-todas">Definido<mat-icon>
+            check_circle</mat-icon></button>
       </div>
 
     </div>

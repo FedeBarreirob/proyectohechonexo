@@ -1,5 +1,5 @@
 import { Component, OnInit, Inject, OnDestroy, ViewChild } from '@angular/core';
-import { MAT_DIALOG_DATA, MatDialogRef, MatSidenav } from '@angular/material';
+import { MAT_DIALOG_DATA, MatDialogRef, MatSidenav, MatSnackBar } from '@angular/material';
 import { EntidadAlg } from '../../../../../../interfaces/perfiles/entidad-alg';
 import { EntregasService } from '../../../../../../services/entregas/entregas.service';
 import { DeviceDetectorService } from 'ngx-device-detector';
@@ -33,13 +33,18 @@ export class DefinicionDeBoletosAFijarComponent implements OnInit, OnDestroy {
     @Inject(MAT_DIALOG_DATA) public data: any,
     private dialogRef: MatDialogRef<DefinicionDeBoletosAFijarComponent>,
     private entregasService: EntregasService,
-    private deviceService: DeviceDetectorService
+    private deviceService: DeviceDetectorService,
+    private snackBar: MatSnackBar
   ) {
     this.especie = data.especie;
     this.cuenta = data.cuenta;
     this.especieDescripcion = data.especieDescripcion;
     this.unidadMedida = data.unidadMedida;
     this.stockAFijar = data.stockAFijar;
+
+    if (data.fijaciones && data.fijaciones.length > 0) {
+      this.fijaciones = data.fijaciones;
+    }
   }
 
   ngOnInit() {
@@ -82,6 +87,7 @@ export class DefinicionDeBoletosAFijarComponent implements OnInit, OnDestroy {
           respuesta => {
             if (respuesta.exito == true && respuesta.datos && respuesta.datos.length > 0) {
               this.boletosAFijar = respuesta.datos.filter((boleto: any) => boleto.kgDisponiblesPendientesDeFijar > 0);
+              this.agregarInformacionDeFijacionPrevia();
             }
           },
           error => {
@@ -146,5 +152,60 @@ export class DefinicionDeBoletosAFijarComponent implements OnInit, OnDestroy {
     } else {
       this.totalMercaderiaACanjear$.next(0);
     }
+  }
+
+  /**
+   * Agrega al listado de boletos, la informacion de fijacion configurada anteriormente. Esto es para que
+   * si realiza una nueva búsqueda, el resultado de boletos muestre nuevamente la información de fijaciones
+   * seteadas previamente.
+   */
+  agregarInformacionDeFijacionPrevia() {
+    if (this.fijaciones && this.fijaciones.length > 0 && this.boletosAFijar && this.boletosAFijar.length > 0) {
+      this.boletosAFijar.forEach(boleto => {
+
+        let unaFijacion = this.fijaciones.find(unaFijacion => unaFijacion.boleto.contratoAlgId == boleto.contratoAlgId);
+
+        if (unaFijacion) {
+          let unaFijacionSinInfoDeBoleto = Object.assign({}, unaFijacion);
+          unaFijacionSinInfoDeBoleto.boleto = null;
+          boleto.fijacionPrevia = unaFijacionSinInfoDeBoleto;
+        }
+
+      });
+    }
+  }
+
+  /**
+   * Entrega los boletos definidos
+   */
+  definirBoletos() {
+    if (this.stockSeleccionadoSuficiente == true) {
+      this.dialogRef.close(this.fijaciones);
+    } else {
+      this.openSnackBar("La cantidad de granos indicados es insuficiente");
+    }
+  }
+
+  /**
+   * Verifica si la cantdad de mercadería a fijar seleccionada, satisface la cantidad requerida
+   */
+  get stockSeleccionadoSuficiente(): boolean {
+    let total: number = this.totalMercaderiaACanjear$.getValue();
+
+    if (total >= this.stockAFijar) {
+      return true;
+    } else {
+      return false;
+    }
+  }
+
+  /**
+   * Shows a notification
+   * @param message 
+   */
+  openSnackBar(message: string) {
+    this.snackBar.open(message, null, {
+      duration: 2000,
+    });
   }
 }

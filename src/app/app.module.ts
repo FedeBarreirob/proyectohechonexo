@@ -245,7 +245,7 @@ import { PagarConCanjeDisponibleComponent } from './components/listados/gestion-
 import { DefinicionDeBoletosComponent } from './components/listados/gestion-de-solicitudes/definicion-de-boletos/definicion-de-boletos.component';
 import { DefinicionInfoComponent } from './components/listados/billetera/billetera-pagar/definicion-de-boletos/definicion-info/definicion-info.component';
 import { DefinicionBoletosComponent } from './components/listados/gestion-de-solicitudes/definicion-de-boletos/definicion-boletos/definicion-boletos.component';
-import { DefinicionFiltroComponent } from './components/listados/gestion-de-solicitudes/definicion-de-boletos/definicion-filtro/definicion-filtro.component';
+import { DefinicionFiltroComponent } from './components/listados/billetera/billetera-pagar/definicion-de-boletos/definicion-filtro/definicion-filtro.component';
 import { ResumenPagoComponent } from './components/listados/billetera/billetera-pagar/resumen-pago/resumen-pago.component';
 import { ResumenPesosComponent } from './components/listados/billetera/billetera-pagar/resumen-pesos/resumen-pesos.component';
 import { ResumenDolaresComponent } from './components/listados/billetera/billetera-pagar/resumen-dolares/resumen-dolares.component';

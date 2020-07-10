@@ -32,6 +32,7 @@ export class DefinicionDeUnBoletoAFijarComponent implements OnInit {
   constructor() { }
 
   ngOnInit() {
+    this.cargarConfSeteadaPreviamente();
   }
 
   /**
@@ -66,5 +67,18 @@ export class DefinicionDeUnBoletoAFijarComponent implements OnInit {
     };
 
     this.change.emit(fijacion);
+  }
+
+  /**
+   * Carga las opciones seleccionadas previamente si estas se encuentran
+   */
+  cargarConfSeteadaPreviamente() {
+    if (this.boletoAFijar && this.boletoAFijar.fijacionPrevia) {
+      this.boletoSeleccionado = this.boletoAFijar.fijacionPrevia.boletoSeleccionado;
+      this.tipoFijacion = this.boletoAFijar.fijacionPrevia.tipoFijacion;
+      this.stockAFijar = this.boletoAFijar.fijacionPrevia.stockAFijar;
+      this.tipoPrecioFijacion = this.boletoAFijar.fijacionPrevia.tipoPrecioFijacion;
+      this.precioDelDia = this.boletoAFijar.fijacionPrevia.precioDelDia;
+    }
   }
 }

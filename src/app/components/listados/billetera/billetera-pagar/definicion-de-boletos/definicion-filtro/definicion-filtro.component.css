@@ -116,7 +116,7 @@
 
 .contenedor-botones {
     margin-left: 20px;
-    margin-top: 26px;
+    margin-top: 56px;
     margin-bottom: 25px;
 }
 
@@ -165,4 +165,13 @@
 
 .boton-cosecha .mat-button-toggle {
     color: #333333;
+}
+
+.texto-campania {
+    position: absolute;
+    left: -14px;
+    top: -27px;
+    width: "100%";
+    font-family: Rubik;
+    font-size: 13px;
 }

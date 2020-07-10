@@ -1,6 +1,6 @@
 <mat-sidenav-container [ngClass]="{'contenedor-solicitudes': esCelular, 'contenedor-desktop': !esCelular }">
   <mat-sidenav #menuDefiniciones position="end" class="sidenav-filtro">
-    <app-definicion-filtro [cuenta]="cuenta" (botonCerrar)="menuDefiniciones.toggle()"
+    <app-definicion-filtro [cuenta]="cuenta" [especie]="especie" (botonCerrar)="menuDefiniciones.toggle()"
       [observerFiltro$]="observerFiltro$">
     </app-definicion-filtro>
   </mat-sidenav>
@@ -39,7 +39,7 @@
     </div>
 
     <app-definicion-de-boletos-afijar-total [totalMercaderiaACanjear$]="totalMercaderiaACanjear$"
-      [stockAFijar]="stockAFijar" [unidadMedida]="unidadMedida">
+      [stockAFijar]="stockAFijar" [unidadMedida]="unidadMedida" (definirPresionado)="definirBoletos()">
     </app-definicion-de-boletos-afijar-total>
 
   </section>

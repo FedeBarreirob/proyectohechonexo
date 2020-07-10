@@ -169,13 +169,14 @@ export class PagoConCanjeDisponibleComponent implements OnInit, OnDestroy {
    * Muestra en formulario para definir los boletos a fijar y la cantidad a fijar
    */
   definirBoletosAFijar() {
-    this.dialog.open(DefinicionDeBoletosAFijarComponent, {
+    let dialogRef = this.dialog.open(DefinicionDeBoletosAFijarComponent, {
       data: {
         especie: this.disponible.especieCodigo,
         cuenta: this.cuenta,
         especieDescripcion: this.disponible.especieDescripcion,
         unidadMedida: this.unidadMedida,
-        stockAFijar: this.stockAFijar
+        stockAFijar: this.stockAFijar,
+        fijaciones: this.disponible.definicionDeBoletos
       },
       maxWidth: '100vw',
       width: '100%',
@@ -183,5 +184,22 @@ export class PagoConCanjeDisponibleComponent implements OnInit, OnDestroy {
       height: '100%',
       panelClass: 'modal-sin-padding'
     });
+
+    dialogRef.afterClosed().subscribe(definicionDeBoletos => {
+      if (definicionDeBoletos) {
+        this.disponible.definicionDeBoletos = definicionDeBoletos;
+      }
+    });
+  }
+
+  /**
+   * Determina si tiene fijacion definida
+   */
+  get boletosFijacionDefinidos(): boolean {
+    if (this.disponible && this.disponible.definicionDeBoletos) {
+      return true;
+    } else {
+      return false;
+    }
   }
 }
