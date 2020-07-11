@@ -13,6 +13,9 @@ export class ResumenPagoComponent implements OnInit {
   @Input()
   conceptosAPagarSeleccionados$: BehaviorSubject<Array<MovimientoCtaCteAplicada>>;
 
+  @Input()
+  disponiblesSeleccionados$: BehaviorSubject<Array<any>>;
+
   esCelular: boolean;
 
   constructor(private deviceService: DeviceDetectorService) { }

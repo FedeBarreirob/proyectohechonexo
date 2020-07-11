@@ -138,13 +138,15 @@ export class PagoConCanjeDisponibleComponent implements OnInit, OnDestroy {
   /**
    * Calcula el total en pesos equivalente al stock a fijar indicado
    */
-  notificarImporteCalculado() {
+  notificarImporteCalculadoYStock() {
     if (this.stockAFijar > 0) {
       this.disponible.total = this.stockAFijar * this.precioTNAPipe.transform(this.precioEspecie.precio, this.unidadMedida);
     } else {
       this.disponible.total = 0;
     }
 
+    this.disponible.stockAFijar = this.stockAFijar;
+    this.disponible.unidadMedida = this.unidadMedida;
     this.importeCalculadoChange.emit();
   }
 

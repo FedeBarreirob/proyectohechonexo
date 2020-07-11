@@ -47,7 +47,8 @@
           <mat-step>
             <ng-template matStepLabel>Pago</ng-template>
             <app-pago-con-canje *ngIf="unidadMedida" [totalEvent$]="totalEvent$" [cuenta]="cuenta"
-              [unidadMedida]="unidadMedida"></app-pago-con-canje>
+              [unidadMedida]="unidadMedida" [disponiblesSeleccionados$]="disponiblesSeleccionados$">
+            </app-pago-con-canje>
             <div fxFlexFill fxLayout="row" fxLayoutALign="space-between center">
               <button mat-button matStepperNext
                 style="background-color: green; color: white; margin-top: 10px; width: 350px;">Siguiente</button>
@@ -57,7 +58,8 @@
           <!--step resumen-->
           <mat-step>
             <ng-template matStepLabel>Resumen</ng-template>
-            <app-resumen-pago [conceptosAPagarSeleccionados$]="conceptosAPagarSeleccionados$"></app-resumen-pago>
+            <app-resumen-pago [conceptosAPagarSeleccionados$]="conceptosAPagarSeleccionados$"
+              [disponiblesSeleccionados$]="disponiblesSeleccionados$"></app-resumen-pago>
             <div fxFlexFill fxLayout="row" fxLayoutALign="space-between center">
               <button mat-button style="background-color: green; color: white; margin-top: 10px; width: 350px;"
                 (click)="mostrarComprobante()">Pagar</button>

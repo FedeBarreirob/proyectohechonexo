@@ -11,7 +11,7 @@
 <div *ngIf="unidadMedida && totalEvent$">
   <app-pago-con-canje-disponible *ngFor="let disponible of disponibles" [disponible]="disponible"
     [totalEvent$]="totalEvent$" [unidadMedida]="unidadMedida" [cuenta]="cuenta"
-    (importeCalculadoChange)="actualizarTotalImporteCanje()">
+    (importeCalculadoChange)="actualizarTodo()">
   </app-pago-con-canje-disponible>
 
   <app-pagar-canje-total [totalEvent$]="totalEvent$" [totalImporteCanje$]="totalImporteCanje$"></app-pagar-canje-total>

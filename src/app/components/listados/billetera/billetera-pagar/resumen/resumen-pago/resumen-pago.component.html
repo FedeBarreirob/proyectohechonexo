@@ -12,7 +12,9 @@
     </app-resumen-pago-comprobante-apagar>
 
     <h3>Medio</h3>
-    <app-resumen-tipo-pago></app-resumen-tipo-pago>
+    <app-resumen-pago-medio-canje [disponiblesSeleccionados$]="disponiblesSeleccionados$">
+    </app-resumen-pago-medio-canje>
+
     <h3>Total</h3>
     <app-resumen-total-pago></app-resumen-total-pago>
     <app-resumen-total-pago-info style="margin-top: 10px;"></app-resumen-total-pago-info>

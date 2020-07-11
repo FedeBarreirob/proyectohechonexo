@@ -7,7 +7,7 @@ import { MatSidenav, MatDialog } from '@angular/material';
 import { takeUntil } from 'rxjs/operators';
 import { AuthenticationService } from '../../../../services/security/authentication.service';
 import { PerfilBasico } from '../../../../interfaces/perfiles/perfil-basico';
-import { ResumenComprobanteDialogComponent } from './resumen-comprobante-dialog/resumen-comprobante-dialog.component';
+import { ResumenComprobanteDialogComponent } from './resumen/resumen-comprobante-dialog/resumen-comprobante-dialog.component';
 import { MovimientoCtaCteAplicada } from '../../../../interfaces/ctacte-aplicada/listado-ctacte-aplicada';
 
 @Component({
@@ -25,6 +25,7 @@ export class BilleteraPagarComponent implements OnInit, OnDestroy {
   totalEvent$: BehaviorSubject<number> = new BehaviorSubject<number>(0);
   observerFiltro$: BehaviorSubject<any> = new BehaviorSubject<any>(null);
   conceptosAPagarSeleccionados$: BehaviorSubject<Array<MovimientoCtaCteAplicada>> = new BehaviorSubject<Array<MovimientoCtaCteAplicada>>(null);
+  disponiblesSeleccionados$: BehaviorSubject<Array<any>> = new BehaviorSubject<Array<any>>(null);
   unidadMedida: string;
   perfilBasico: PerfilBasico;
 

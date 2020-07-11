@@ -265,6 +265,7 @@ import { DefinicionDeBoletosAPesificarComponent } from './components/listados/bi
 import { DefinicionDeUnBoletoAPesificarComponent } from './components/listados/billetera/billetera-pagar/definicion-de-boletos/definicion-de-un-boleto-apesificar/definicion-de-un-boleto-apesificar.component';
 import { DefinicionDeBoletosAPesificarTotalComponent } from './components/listados/billetera/billetera-pagar/definicion-de-boletos/definicion-de-boletos-apesificar-total/definicion-de-boletos-apesificar-total.component';
 import { ResumenPagoComprobanteAPagarComponent } from './components/listados/billetera/billetera-pagar/resumen/resumen-pago-comprobante-apagar/resumen-pago-comprobante-apagar.component';
+import { ResumenPagoMedioCanjeComponent } from './components/listados/billetera/billetera-pagar/resumen/resumen-pago-medio-canje/resumen-pago-medio-canje.component';
 
 registerLocaleData(localeEsAr, 'es-AR');
 
@@ -499,7 +500,8 @@ export function tokenGetter() {
 		DefinicionDeBoletosAPesificarComponent,
 		DefinicionDeUnBoletoAPesificarComponent,
 		DefinicionDeBoletosAPesificarTotalComponent,
-		ResumenPagoComprobanteAPagarComponent
+		ResumenPagoComprobanteAPagarComponent,
+		ResumenPagoMedioCanjeComponent
 	],
 	imports: [
 		HttpClientModule,
