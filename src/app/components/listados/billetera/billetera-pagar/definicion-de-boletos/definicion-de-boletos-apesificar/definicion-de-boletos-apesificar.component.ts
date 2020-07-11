@@ -1,18 +1,18 @@
-import { Component, OnInit, Inject, OnDestroy, ViewChild } from '@angular/core';
-import { MAT_DIALOG_DATA, MatDialogRef, MatSidenav, MatSnackBar } from '@angular/material';
+import { Component, OnInit, OnDestroy, ViewChild, Inject } from '@angular/core';
+import { MatSidenav, MAT_DIALOG_DATA, MatDialogRef, MatSnackBar } from '@angular/material';
 import { EntidadAlg } from '../../../../../../interfaces/perfiles/entidad-alg';
+import { Subject, BehaviorSubject } from 'rxjs';
 import { EntregasService } from '../../../../../../services/entregas/entregas.service';
 import { DeviceDetectorService } from 'ngx-device-detector';
-import { Subject, BehaviorSubject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
-import { ContratoTipoFijacion } from '../../../../../../enums/contrato-tipo-fijacion.enum';
+import { ContratoTipoPesificacion } from '../../../../../../enums/contrato-tipo-pesificacion.enum';
 
 @Component({
-  selector: 'app-definicion-de-boletos-afijar',
-  templateUrl: './definicion-de-boletos-afijar.component.html',
-  styleUrls: ['./definicion-de-boletos-afijar.component.css']
+  selector: 'app-definicion-de-boletos-apesificar',
+  templateUrl: './definicion-de-boletos-apesificar.component.html',
+  styleUrls: ['./definicion-de-boletos-apesificar.component.css']
 })
-export class DefinicionDeBoletosAFijarComponent implements OnInit, OnDestroy {
+export class DefinicionDeBoletosAPesificarComponent implements OnInit, OnDestroy {
 
   @ViewChild('menuDefiniciones') public sidenav: MatSidenav;
 
@@ -24,14 +24,14 @@ export class DefinicionDeBoletosAFijarComponent implements OnInit, OnDestroy {
   esCelular: boolean;
   observerFiltro$: BehaviorSubject<any> = new BehaviorSubject<any>(null);
   cargando: boolean = false;
-  boletosAFijar: Array<any>;
+  boletosAPesificar: Array<any>;
   totalMercaderiaACanjear$: BehaviorSubject<number> = new BehaviorSubject<number>(0);
-  fijaciones: Array<any> = [];
-  stockAFijar: number;
+  pesificaciones: Array<any> = [];
+  stockAPesificar: number;
 
   constructor(
     @Inject(MAT_DIALOG_DATA) public data: any,
-    private dialogRef: MatDialogRef<DefinicionDeBoletosAFijarComponent>,
+    private dialogRef: MatDialogRef<DefinicionDeBoletosAPesificarComponent>,
     private entregasService: EntregasService,
     private deviceService: DeviceDetectorService,
     private snackBar: MatSnackBar
@@ -40,10 +40,10 @@ export class DefinicionDeBoletosAFijarComponent implements OnInit, OnDestroy {
     this.cuenta = data.cuenta;
     this.especieDescripcion = data.especieDescripcion;
     this.unidadMedida = data.unidadMedida;
-    this.stockAFijar = data.stockAFijar;
+    this.stockAPesificar = data.stockAPesificar;
 
-    if (data.fijaciones && data.fijaciones.length > 0) {
-      this.fijaciones = data.fijaciones;
+    if (data.pesificaciones && data.pesificaciones.length > 0) {
+      this.pesificaciones = data.pesificaciones;
     }
   }
 
@@ -79,15 +79,15 @@ export class DefinicionDeBoletosAFijarComponent implements OnInit, OnDestroy {
     if (this.cargando == false) {
 
       this.cargando = true;
-      this.boletosAFijar = null;
+      this.boletosAPesificar = null;
 
       this.entregasService.listadocontratosConDispPendFijarPesificar(filtroAAplicar)
         .pipe(takeUntil(this.destroy$))
         .subscribe(
           respuesta => {
             if (respuesta.exito == true && respuesta.datos && respuesta.datos.length > 0) {
-              this.boletosAFijar = respuesta.datos.filter((boleto: any) => boleto.kgDisponiblesPendientesDeFijar > 0);
-              this.agregarInformacionDeFijacionPrevia();
+              this.boletosAPesificar = respuesta.datos.filter((boleto: any) => boleto.kgDisponiblesPendientesDePesificar > 0);
+              this.agregarInformacionDePesificacionPrevia();
               this.actualizarTotalizador();
             }
           },
@@ -107,23 +107,23 @@ export class DefinicionDeBoletosAFijarComponent implements OnInit, OnDestroy {
   }
 
   /**
-   * Agrega, quita o actualiza una fijación dada
-   * @param fijacion 
+   * Agrega, quita o actualiza una pesificació  dada
+   * @param pesificacion 
    */
-  agregarQuitarOActualizarBoletoFijadoSeleccionado(fijacion: any) {
-    if (fijacion) {
+  agregarQuitarOActualizarBoletoPesificadoSeleccionado(pesificacion: any) {
+    if (pesificacion) {
 
-      if (fijacion.boletoSeleccionado == true) {
+      if (pesificacion.boletoSeleccionado == true) {
 
-        let unaFijacion = this.fijaciones.find(unaFijacion => unaFijacion.boleto.contratoAlgId == fijacion.boleto.contratoAlgId);
-        if (unaFijacion) {
-          unaFijacion = Object.assign(unaFijacion, fijacion);
+        let unaPesificacion = this.pesificaciones.find(unaPesificacion => unaPesificacion.boleto.contratoAlgId == pesificacion.boleto.contratoAlgId);
+        if (unaPesificacion) {
+          unaPesificacion = Object.assign(unaPesificacion, pesificacion);
         } else {
-          this.fijaciones.push(fijacion);
+          this.pesificaciones.push(pesificacion);
         }
 
       } else {
-        this.fijaciones = this.fijaciones.filter(unaFijacion => unaFijacion.boleto.contratoAlgId != fijacion.boleto.contratoAlgId);
+        this.pesificaciones = this.pesificaciones.filter(unaPesificacion => unaPesificacion.boleto.contratoAlgId != pesificacion.boleto.contratoAlgId);
       }
 
     }
@@ -135,19 +135,19 @@ export class DefinicionDeBoletosAFijarComponent implements OnInit, OnDestroy {
    * Función encargada de actualizar el totalizador
    */
   actualizarTotalizador() {
-    if (this.fijaciones && this.fijaciones.length > 0) {
+    if (this.pesificaciones && this.pesificaciones.length > 0) {
 
-      let totalFijacionParcial: number = this.fijaciones
-        .filter(fijacion => fijacion.tipoFijacion == ContratoTipoFijacion.PARCIAL)
-        .map(fijacion => fijacion.stockAFijar)
+      let totalPesificacionParcial: number = this.pesificaciones
+        .filter(pesificacion => pesificacion.tipoPesificacion == ContratoTipoPesificacion.PARCIAL)
+        .map(pesificacion => pesificacion.stockAPesificar)
         .reduce((acum, current) => Number.parseFloat(acum) + Number.parseFloat(current), 0);
 
-      let totalFijacionTotal: number = this.fijaciones
-        .filter(fijacion => fijacion.tipoFijacion == ContratoTipoFijacion.TOTAL)
-        .map(fijacion => fijacion.boleto.kgDisponiblesPendientesDeFijar)
+      let totalPesificacionTotal: number = this.pesificaciones
+        .filter(pesificacion => pesificacion.tipoPesificacion == ContratoTipoPesificacion.TOTAL)
+        .map(pesificacion => pesificacion.boleto.kgDisponiblesPendientesDePesificar)
         .reduce((acum, current) => Number.parseFloat(acum) + Number.parseFloat(current), 0);
 
-      let total = totalFijacionParcial + totalFijacionTotal;
+      let total = totalPesificacionParcial + totalPesificacionTotal;
 
       this.totalMercaderiaACanjear$.next(total);
     } else {
@@ -156,20 +156,20 @@ export class DefinicionDeBoletosAFijarComponent implements OnInit, OnDestroy {
   }
 
   /**
-   * Agrega al listado de boletos, la informacion de fijacion configurada anteriormente. Esto es para que
-   * si realiza una nueva búsqueda, el resultado de boletos muestre nuevamente la información de fijaciones
+   * Agrega al listado de boletos, la informacion de pesificación configurada anteriormente. Esto es para que
+   * si realiza una nueva búsqueda, el resultado de boletos muestre nuevamente la información de pesificaciones
    * seteadas previamente.
    */
-  agregarInformacionDeFijacionPrevia() {
-    if (this.fijaciones && this.fijaciones.length > 0 && this.boletosAFijar && this.boletosAFijar.length > 0) {
-      this.boletosAFijar.forEach(boleto => {
+  agregarInformacionDePesificacionPrevia() {
+    if (this.pesificaciones && this.pesificaciones.length > 0 && this.boletosAPesificar && this.boletosAPesificar.length > 0) {
+      this.boletosAPesificar.forEach(boleto => {
 
-        let unaFijacion = this.fijaciones.find(unaFijacion => unaFijacion.boleto.contratoAlgId == boleto.contratoAlgId);
+        let unaPesificacion = this.pesificaciones.find(unaPesificacion => unaPesificacion.boleto.contratoAlgId == boleto.contratoAlgId);
 
-        if (unaFijacion) {
-          let unaFijacionSinInfoDeBoleto = Object.assign({}, unaFijacion);
-          unaFijacionSinInfoDeBoleto.boleto = null;
-          boleto.fijacionPrevia = unaFijacionSinInfoDeBoleto;
+        if (unaPesificacion) {
+          let unaPesificacionSinInfoDeBoleto = Object.assign({}, unaPesificacion);
+          unaPesificacionSinInfoDeBoleto.boleto = null;
+          boleto.pesificacionPrevia = unaPesificacionSinInfoDeBoleto;
         }
 
       });
@@ -181,7 +181,7 @@ export class DefinicionDeBoletosAFijarComponent implements OnInit, OnDestroy {
    */
   definirBoletos() {
     if (this.stockSeleccionadoSuficiente == true) {
-      this.dialogRef.close(this.fijaciones);
+      this.dialogRef.close(this.pesificaciones);
     } else {
       this.openSnackBar("La cantidad de granos indicados es insuficiente");
     }
@@ -193,7 +193,7 @@ export class DefinicionDeBoletosAFijarComponent implements OnInit, OnDestroy {
   get stockSeleccionadoSuficiente(): boolean {
     let total: number = this.totalMercaderiaACanjear$.getValue();
 
-    if (total >= this.stockAFijar) {
+    if (total >= this.stockAPesificar) {
       return true;
     } else {
       return false;

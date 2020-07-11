@@ -1,0 +1,26 @@
+.card {
+    background-color: white;
+}
+
+.icon-container {
+    background-color: green;
+    border-radius: 50%;
+}
+
+.icono {
+    height: 38px;
+    width: 38px;
+}
+
+.canje-container {
+    border-bottom: 1px solid #999999;
+    margin-top: 10px;
+}
+
+.button-detalle {
+    font-family: Rubik;
+    font-size: 12px;
+    font-weight: bold;
+    color: green;
+    margin-top: 20px;
+}

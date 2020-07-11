@@ -32,15 +32,16 @@
         <mat-spinner diameter="24"></mat-spinner>
       </div>
 
-      <app-definicion-de-un-boleto-afijar *ngFor="let boletoAFijar of boletosAFijar" [boletoAFijar]="boletoAFijar"
-        [unidadMedida]="unidadMedida" (change)="agregarQuitarOActualizarBoletoFijadoSeleccionado($event)">
-      </app-definicion-de-un-boleto-afijar>
+      <app-definicion-de-un-boleto-apesificar *ngFor="let boletoAPesificar of boletosAPesificar"
+        [boletoAPesificar]="boletoAPesificar" [unidadMedida]="unidadMedida"
+        (change)="agregarQuitarOActualizarBoletoPesificadoSeleccionado($event)">
+      </app-definicion-de-un-boleto-apesificar>
 
     </div>
 
-    <app-definicion-de-boletos-afijar-total [totalMercaderiaACanjear$]="totalMercaderiaACanjear$"
-      [stockAFijar]="stockAFijar" [unidadMedida]="unidadMedida" (definirPresionado)="definirBoletos()">
-    </app-definicion-de-boletos-afijar-total>
+    <app-definicion-de-boletos-apesificar-total [totalMercaderiaACanjear$]="totalMercaderiaACanjear$"
+      [stockAPesificar]="stockAPesificar" [unidadMedida]="unidadMedida" (definirPresionado)="definirBoletos()">
+    </app-definicion-de-boletos-apesificar-total>
 
   </section>
 </mat-sidenav-container>

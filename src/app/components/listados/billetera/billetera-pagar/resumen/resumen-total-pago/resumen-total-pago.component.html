@@ -1,6 +1,6 @@
 <div class="card">
   <div fxLayout="row" fxLayoutAlign="space-between center" style="padding: 10px;">
     <h4 style="color: #999;">Total a pagar:</h4>
-    <h3>$246,000</h3>
+    <h3>$ {{ (totalEvent$ | async) | number }}</h3>
   </div>
 </div>

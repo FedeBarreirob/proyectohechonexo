@@ -12,19 +12,24 @@
 
 <mat-divider></mat-divider>
 
+<!--Spinner-->
+<div fxLayout="row" fxLayoutAlign="center center" *ngIf="cargando == true" style="margin-top: 10px;">
+  <mat-spinner diameter="24"></mat-spinner>
+</div>
+
 <!--Cosecha-->
-<div fxLayout="row" fxLayoutAlign="space-around center">
+<div fxLayout="row" fxLayoutAlign="space-around center" *ngIf="!cargando && cosechas">
   <div fxFlex="100%" class="titulo-filtro" style="padding-top: 20px;">
     Cosecha
   </div>
 </div>
 
-<div>
+<div *ngIf="!cargando && cosechas">
   <mat-button-toggle-group class="grupo-botones-cosecha" [(ngModel)]="cosecha">
 
-    <div fxLayout="row" *ngFor="let estado of estadoOptions" class="boton-cosecha">
-      <mat-button-toggle [value]="estado.value">
-        <div class="texto-campania">{{estado.descripcion}}</div>
+    <div fxLayout="row" *ngFor="let unaCosecha of cosechas" class="boton-cosecha">
+      <mat-button-toggle [value]="unaCosecha.cosecha">
+        <div class="texto-campania">{{unaCosecha.cosechaDescripcion}}</div>
       </mat-button-toggle>
     </div>
 
@@ -43,41 +48,37 @@
 <div style="padding: 10px;">
   <mat-form-field appearance="fill">
     <mat-label>Fija una fecha</mat-label>
-    <input matInput [matDatepicker]="picker">
+    <input readonly matInput [matDatepicker]="picker" [(ngModel)]="fechaFijacion">
     <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
     <mat-datepicker #picker></mat-datepicker>
-  </mat-form-field>  
+  </mat-form-field>
 </div>
 
 <mat-divider></mat-divider>
 
 <!--Destino de mercadería-->
 <div fxLayout="row" fxLayoutAlign="space-around center">
-  <div fxFlex="100%" class="titulo-filtro" style="padding-top: 20px;">
+  <div fxFlex="100%" class="titulo-filtro" style="padding-top: 20px; margin-bottom: 30px;">
     Destino de mercadería
   </div>
 </div>
 
-<div >
-  <span>
-    <ul>
-      <li *ngFor="let metodo of metodoOptions" class="checkbox">
-        <mat-checkbox [(ngModel)]="metodoSeleccionado" [value]="metodo.value">
-          {{metodo.descripcion}}
-        </mat-checkbox>
-      </li>
-    </ul>
-  </span>
+<div fxLayout="row" fxLayoutAlign="space-around center">
+  <div fxFlex>
+    <mat-radio-group [(ngModel)]="tipoDestinoSeleccionado">
+      <mat-radio-button *ngFor="let destino of destinos" [value]="destino.value">{{ destino.descripcion }}
+      </mat-radio-button>
+    </mat-radio-group>
+  </div>
 </div>
 
 <!--botones-->
 <div fxLayout="row" fxLayoutAlign="space-between center" class="contenedor-botones">
   <div fxFlex="50%">
-    <button mat-button class="boton-limpiar" (click)="limpiar()">Limpiar</button>
+    <button mat-button class="boton-limpiar" (click)="limpiar()" [disabled]="cargando">Limpiar</button>
   </div>
 
   <div fxFlex="50%">
-    <button mat-button class="boton-aplicar" (click)="aplicar()">Aplicar</button>
+    <button mat-button class="boton-aplicar" (click)="aplicar()" [disabled]="cargando">Aplicar</button>
   </div>
 </div>
-

@@ -1,18 +1,18 @@
-import { Component, OnInit, Input, EventEmitter, Output } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { BehaviorSubject } from 'rxjs';
 
 @Component({
-  selector: 'app-definicion-de-boletos-afijar-total',
-  templateUrl: './definicion-de-boletos-afijar-total.component.html',
-  styleUrls: ['./definicion-de-boletos-afijar-total.component.css']
+  selector: 'app-definicion-de-boletos-apesificar-total',
+  templateUrl: './definicion-de-boletos-apesificar-total.component.html',
+  styleUrls: ['./definicion-de-boletos-apesificar-total.component.css']
 })
-export class DefinicionDeBoletosAFijarTotalComponent implements OnInit {
+export class DefinicionDeBoletosAPesificarTotalComponent implements OnInit {
 
   @Input()
   totalMercaderiaACanjear$: BehaviorSubject<number>;
 
   @Input()
-  stockAFijar: number;
+  stockAPesificar: number;
 
   @Input()
   unidadMedida: string;
@@ -30,7 +30,7 @@ export class DefinicionDeBoletosAFijarTotalComponent implements OnInit {
    */
   get stockNecesario(): number {
     let total: number = (this.totalMercaderiaACanjear$.getValue()) ? this.totalMercaderiaACanjear$.getValue() : 0;
-    return this.stockAFijar - total;
+    return this.stockAPesificar - total;
   }
 
   /**

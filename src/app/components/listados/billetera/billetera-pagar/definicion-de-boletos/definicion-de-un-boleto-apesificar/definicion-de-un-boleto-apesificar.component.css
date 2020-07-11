@@ -1,0 +1,47 @@
+.card {
+    background-color: white;
+    margin-bottom: 10px;
+}
+
+.num-boleto {
+    font-family: Rubik;
+    font-size: 12px;
+    color: #999;
+}
+
+.tn-a-fijar {
+    font-family: Rubik;
+    font-size: 24px;
+    margin-bottom: 20px;
+}
+
+.saldo-boleto {
+    font-family: Rubik;
+    font-size: 12px;
+    color: #999;
+    margin-top: 20px;
+    margin-bottom: 20px;
+}
+
+.button-detalle {
+    font-family: Rubik;
+    font-size: 12px;
+    font-weight: bold;
+    color: green;
+    margin-top: 20px;
+}
+
+.titulo-detalle {
+    font-family: Rubik;
+    font-size: 10px;
+    font-weight: bold;
+    color: #666666;
+    margin-top: 20px;
+}
+
+.texto-detalle {
+    font-family: Rubik;
+    font-size: 12px;
+    color: #333333;
+    margin-top: 10px;
+}

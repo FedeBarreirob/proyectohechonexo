@@ -17,6 +17,7 @@ export class EntregasService {
   private urlEntregasIndicadorGlobal = `${environment.hostEntregasYVentas}/Entregas/indicadorGlobal`;
   private urlMercadoDeGranoPrecios = `${environment.hostEntregasYVentas}/mercadoDeGrano/precios`;
   private urlcontratosConDispPendFijarPesificar = `${environment.hostEntregasYVentas}/contratos/contratosConDispPendFijarPesificar`;
+  private urlcontratosConDispPendFijarPesificarFiltroCosecha = `${environment.hostEntregasYVentas}/contratos/contratosConDispPendFijarPesificarFiltrosCosechas`;
 
   constructor(private http: HttpClient) { }
 
@@ -102,5 +103,23 @@ export class EntregasService {
 
     let urlConParametro = `${this.urlMercadoDeGranoPrecios}/${especiesParam}/${monedasParam}/${bolsa}`;
     return this.http.get<ResponseServicio>(urlConParametro, httpOptions);
+  }
+
+  /**
+   * Devuelve un listado de cosechas donde existen boletos pendientes de fijar y o pesificar
+   * @param cuenta 
+   * @param especie 
+   */
+  @Cacheable()
+  listadocontratosConDispPendFijarPesificarFiltroCosecha(cuenta: string, especie: string): Observable<ResponseServicio> {
+
+    const httpOptions = {
+      headers: {
+        'Content-Type': 'application/json'
+      }
+    };
+
+    let url = `${this.urlcontratosConDispPendFijarPesificarFiltroCosecha}/${cuenta}/${especie}`;
+    return this.http.get<ResponseServicio>(url, httpOptions);
   }
 }

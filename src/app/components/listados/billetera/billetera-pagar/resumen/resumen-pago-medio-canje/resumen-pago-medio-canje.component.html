@@ -1,0 +1,46 @@
+<mat-card>
+
+  <div fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="10px">
+    <div fxFlex="nogrow" class="icon-container">
+      <mat-icon style="color: white; scale: 2; margin: 10px;">cached</mat-icon>
+    </div>
+
+    <div>
+      Canje
+    </div>
+  </div>
+
+  <div *ngIf="modoVerDetalle">
+
+    <div fxLayout="row" fxLayoutAlign="space-between center" *ngFor="let canje of (disponiblesSeleccionados$ | async)"
+      class="canje-container">
+
+      <div fxFlex="nogrow">
+        <div fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="10px">
+
+          <div fxFlex="nogrow">
+            <img class="icono" src="{{canje.especieCodigo | imagenEspecie}}" />
+          </div>
+          <div fxFlex="nogrow">{{ canje.especieDescripcion }}</div>
+
+        </div>
+      </div>
+
+      <div fxFlex="nogrow">
+        {{ canje.stockAFijar | number: '.0-2' }} {{ canje.unidadMedida | kilosTextoA}}
+      </div>
+
+    </div>
+
+  </div>
+
+  <div fxLayout="row" fxLayoutAlign="center center">
+    <div fxFlex="nogrow">
+      <button class="button-detalle" mat-button (click)="toggleModoVerDetalle()" *ngIf="!modoVerDetalle">Mostrar
+        detalles</button>
+      <button class="button-detalle" mat-button (click)="toggleModoVerDetalle()" *ngIf="modoVerDetalle">Ocultar
+        detalles</button>
+    </div>
+  </div>
+
+</mat-card>

@@ -1,4 +1,4 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { ContratoTipoFijacion } from '../../../../../../enums/contrato-tipo-fijacion.enum';
 import { ContratoTipoPrecioFijacion } from '../../../../../../enums/contrato-tipo-precio-fijacion.enum';
 
@@ -15,6 +15,9 @@ export class DefinicionDeUnBoletoAFijarComponent implements OnInit {
   @Input()
   unidadMedida: string;
 
+  @Output()
+  change: EventEmitter<any> = new EventEmitter<any>();
+
   contratoTipoFijacion = ContratoTipoFijacion;
   contratoTipoPrecioFijacion = ContratoTipoPrecioFijacion;
 
@@ -29,7 +32,7 @@ export class DefinicionDeUnBoletoAFijarComponent implements OnInit {
   constructor() { }
 
   ngOnInit() {
-    console.log(this.boletoAFijar);
+    this.cargarConfSeteadaPreviamente();
   }
 
   /**
@@ -48,5 +51,34 @@ export class DefinicionDeUnBoletoAFijarComponent implements OnInit {
    */
   toggleModoVerDetalle() {
     this.modoVerDetalle = !this.modoVerDetalle;
+  }
+
+  /**
+   * Notifica cambios asociados al cambio de las opciones a fijar
+   */
+  notificarCambios() {
+    let fijacion = {
+      boleto: this.boletoAFijar,
+      boletoSeleccionado: this.boletoSeleccionado,
+      tipoFijacion: this.tipoFijacion,
+      stockAFijar: this.stockAFijar,
+      tipoPrecioFijacion: this.tipoPrecioFijacion,
+      precioDelDia: this.precioDelDia
+    };
+
+    this.change.emit(fijacion);
+  }
+
+  /**
+   * Carga las opciones seleccionadas previamente si estas se encuentran
+   */
+  cargarConfSeteadaPreviamente() {
+    if (this.boletoAFijar && this.boletoAFijar.fijacionPrevia) {
+      this.boletoSeleccionado = this.boletoAFijar.fijacionPrevia.boletoSeleccionado;
+      this.tipoFijacion = this.boletoAFijar.fijacionPrevia.tipoFijacion;
+      this.stockAFijar = this.boletoAFijar.fijacionPrevia.stockAFijar;
+      this.tipoPrecioFijacion = this.boletoAFijar.fijacionPrevia.tipoPrecioFijacion;
+      this.precioDelDia = this.boletoAFijar.fijacionPrevia.precioDelDia;
+    }
   }
 }

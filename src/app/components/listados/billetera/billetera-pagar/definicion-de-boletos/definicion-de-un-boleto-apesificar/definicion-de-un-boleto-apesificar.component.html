@@ -1,36 +1,28 @@
 <mat-card class="card">
 
   <div class="num-boleto">
-    Boleto #{{ boletoAFijar.numeroComprobanteContrato }} <mat-chip *ngIf="boletoAFijar.vencidoFijacion">Vencido
+    Boleto #{{ boletoAPesificar.numeroComprobanteContrato }} <mat-chip *ngIf="boletoAPesificar.vencidoFijacion">Vencido
     </mat-chip>
   </div>
 
   <div class="tn-a-fijar">
     <mat-checkbox [(ngModel)]="boletoSeleccionado" (change)="notificarCambios()">
-      {{ boletoAFijar.kgDisponiblesPendientesDeFijar | kilosA: unidadMedida | number: (unidadMedida == 'tn' ? '.0-1' : '.0-0')}}
+      {{ boletoAPesificar.kgDisponiblesPendientesDePesificar | kilosA: unidadMedida | number: (unidadMedida == 'tn' ? '.0-1' : '.0-0')}}
       {{unidadMedida | kilosTextoA}}
     </mat-checkbox>
   </div>
 
-  <mat-radio-group [(ngModel)]="tipoFijacion" [disabled]="!boletoSeleccionado" (change)="notificarCambios()">
-    <mat-radio-button [value]="contratoTipoFijacion.PARCIAL" style="margin-bottom: 10px;">Fijación parcial: <input
-        style="width: 50%;" [(ngModel)]="stockAFijar" numeric numericType="decimal" (change)="notificarCambios()"
-        (keyup)="notificarCambios()"></mat-radio-button>
-    <mat-radio-button [value]="contratoTipoFijacion.TOTAL">Fijación total</mat-radio-button>
+  <mat-radio-group [(ngModel)]="tipoPesificacion" [disabled]="!boletoSeleccionado" (change)="notificarCambios()">
+    <mat-radio-button [value]="contratoTipoPesificacion.PARCIAL" style="margin-bottom: 10px;">Pesificación parcial:
+      <input style="width: 50%;" [(ngModel)]="stockAPesificar" numeric numericType="decimal"
+        (change)="notificarCambios()" (keyup)="notificarCambios()"></mat-radio-button>
+    <mat-radio-button [value]="contratoTipoPesificacion.TOTAL">Pesificación total</mat-radio-button>
   </mat-radio-group>
 
   <div class="saldo-boleto">
     Saldo del boleto: {{ saldoBoleto | number: (unidadMedida == 'tn' ? '.0-1' : '.0-0') }}
     {{unidadMedida | kilosTextoA}}
   </div>
-
-  <mat-radio-group [(ngModel)]="tipoPrecioFijacion" [disabled]="!boletoSeleccionado" (change)="notificarCambios()">
-    <mat-radio-button [value]="contratoTipoPrecioFijacion.PIZARRA" style="margin-bottom: 10px;">Precio de pizarra
-    </mat-radio-button>
-    <mat-radio-button [value]="contratoTipoPrecioFijacion.PRECIO_DEL_DIA">Precio del día: $<input style="width: 50%;"
-        [(ngModel)]="precioDelDia" numeric numericType="decimal" (change)="notificarCambios()"
-        (keyup)="notificarCambios()"></mat-radio-button>
-  </mat-radio-group>
 
   <!--Detalle-->
   <div *ngIf="modoVerDetalle">
@@ -47,11 +39,11 @@
 
     <div fxLayout="row" fxLayoutAlign="space-between center" fxLayoutGap="5px" class="texto-detalle">
       <div fxFlex="50%">
-        {{ boletoAFijar.fechaVenta }}
+        {{ boletoAPesificar.fechaVenta }}
       </div>
 
       <div fxFlex="50%">
-        {{ boletoAFijar.cosecha }}
+        {{ boletoAPesificar.cosecha }}
       </div>
     </div>
 
@@ -67,11 +59,11 @@
 
     <div fxLayout="row" fxLayoutAlign="space-between center" fxLayoutGap="5px" class="texto-detalle">
       <div fxFlex="50%">
-        {{ boletoAFijar.fechaFijacionDesde }}
+        {{ boletoAPesificar.fechaFijacionDesde }}
       </div>
 
       <div fxFlex="50%">
-        {{ boletoAFijar.fechaFijacionHasta }}
+        {{ boletoAPesificar.fechaFijacionHasta }}
       </div>
     </div>
 
@@ -83,7 +75,7 @@
 
     <div fxLayout="row" fxLayoutAlign="space-between center" fxLayoutGap="5px" class="texto-detalle">
       <div fxFlex>
-        {{ boletoAFijar.destinoDescripcion }}
+        {{ boletoAPesificar.destinoDescripcion }}
       </div>
     </div>
 

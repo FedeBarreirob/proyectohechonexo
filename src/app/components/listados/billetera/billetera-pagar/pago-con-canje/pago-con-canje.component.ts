@@ -22,6 +22,9 @@ export class PagoConCanjeComponent implements OnInit, OnDestroy {
   @Input()
   unidadMedida: string;
 
+  @Input()
+  disponiblesSeleccionados$: BehaviorSubject<Array<any>>;
+
   disponibles: Array<any>;
   cargando: boolean = false;
   destroy$: Subject<any> = new Subject<any>();
@@ -95,6 +98,27 @@ export class PagoConCanjeComponent implements OnInit, OnDestroy {
         maxHeight: '75vh',
         height: '75%'
       });
+    }
+  }
+
+  /**
+   * Actualiza los totales y notifica los disponibles seleccionados
+   */
+  actualizarTodo() {
+    this.actualizarTotalImporteCanje();
+    this.notificarDisponiblesSeleccionados();
+  }
+
+  /**
+   * Notifica los disponibles donde se ha indicado su stock para pagar
+   */
+  notificarDisponiblesSeleccionados() {
+    if (this.disponibles && this.disponibles.length > 0) {
+      let disponiblesSeleccionados = this.disponibles.filter(disponible => disponible.total && disponible.total > 0);
+
+      this.disponiblesSeleccionados$.next(disponiblesSeleccionados);
+    } else {
+      this.disponiblesSeleccionados$.next(null);
     }
   }
 }

@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
+import { BehaviorSubject } from 'rxjs';
 
 @Component({
   selector: 'app-resumen-total-pago',
@@ -6,6 +7,9 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./resumen-total-pago.component.css']
 })
 export class ResumenTotalPagoComponent implements OnInit {
+
+  @Input()
+  totalEvent$: BehaviorSubject<number>;
 
   constructor() { }
 

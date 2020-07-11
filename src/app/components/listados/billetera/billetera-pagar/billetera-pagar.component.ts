@@ -3,11 +3,14 @@ import { DeviceDetectorService } from 'ngx-device-detector';
 import { Subject, BehaviorSubject } from 'rxjs';
 import { EntidadAlg } from '../../../../interfaces/perfiles/entidad-alg';
 import { CuentaAlgService } from '../../../../services/observers/cuentas-alg/cuenta-alg.service';
-import { MatSidenav, MatDialog } from '@angular/material';
+import { MatSidenav, MatDialog, MatSnackBar } from '@angular/material';
 import { takeUntil } from 'rxjs/operators';
 import { AuthenticationService } from '../../../../services/security/authentication.service';
 import { PerfilBasico } from '../../../../interfaces/perfiles/perfil-basico';
-import { ResumenComprobanteDialogComponent } from './resumen-comprobante-dialog/resumen-comprobante-dialog.component';
+import { ResumenComprobanteDialogComponent } from './resumen/resumen-comprobante-dialog/resumen-comprobante-dialog.component';
+import { MovimientoCtaCteAplicada } from '../../../../interfaces/ctacte-aplicada/listado-ctacte-aplicada';
+import { FinanzasProgramadorPagosService } from '../../../../services/finanzas/finanzas-programador-pagos.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-billetera-pagar',
@@ -23,14 +26,20 @@ export class BilleteraPagarComponent implements OnInit, OnDestroy {
   cuenta: EntidadAlg;
   totalEvent$: BehaviorSubject<number> = new BehaviorSubject<number>(0);
   observerFiltro$: BehaviorSubject<any> = new BehaviorSubject<any>(null);
+  conceptosAPagarSeleccionados$: BehaviorSubject<Array<MovimientoCtaCteAplicada>> = new BehaviorSubject<Array<MovimientoCtaCteAplicada>>(null);
+  disponiblesSeleccionados$: BehaviorSubject<Array<any>> = new BehaviorSubject<Array<any>>(null);
   unidadMedida: string;
   perfilBasico: PerfilBasico;
+  guardando: boolean = false;
 
   constructor(
     private deviceService: DeviceDetectorService,
     private cuentaService: CuentaAlgService,
     private authenticationService: AuthenticationService,
-    private dialog: MatDialog
+    private dialog: MatDialog,
+    private snackBar: MatSnackBar,
+    private finanzasProgramadorPagosService: FinanzasProgramadorPagosService,
+    private router: Router
   ) { }
 
   ngOnInit() {
@@ -78,7 +87,7 @@ export class BilleteraPagarComponent implements OnInit, OnDestroy {
   }
 
   // Muestra el comprobante en un dialog
-  mostrarComprobante(){
+  mostrarComprobante() {
     let dialogRef = this.dialog.open(ResumenComprobanteDialogComponent, {
       maxWidth: '100vw',
       width: '100%',
@@ -109,4 +118,67 @@ export class BilleteraPagarComponent implements OnInit, OnDestroy {
     this.cargarListado(filtro);
   }
 
+  /**
+   * Función encargada de guardar la solicitud de pago
+   */
+  guardar() {
+    if (this.guardando == false) {
+      this.guardando = true;
+
+      let datos = this.datosAGuardar();
+
+      this.finanzasProgramadorPagosService.registroSolicitudDePago(datos)
+        .pipe(takeUntil(this.destroy$))
+        .subscribe(
+          respuesta => {
+            this.openSnackBar(respuesta.mensaje);
+
+            if (respuesta.exito == true) {
+              this.router.navigate(["billetera"]);
+            }
+          },
+          error => {
+            console.log(error);
+            this.guardando = false;
+          },
+          () => this.guardando = false
+        );
+    }
+  }
+
+  /**
+   * Muestra una notificacion
+   * @param message 
+   */
+  openSnackBar(message: string) {
+    this.snackBar.open(message, null, {
+      duration: 2000,
+    });
+  }
+
+  /**
+   * Armar una estructura con los datos a registrar a través del servicio
+   */
+  datosAGuardar(): any {
+
+    let canjes;
+    if (this.disponiblesSeleccionados$ && this.disponiblesSeleccionados$.getValue() && this.disponiblesSeleccionados$.getValue().length > 0) {
+      canjes = this.disponiblesSeleccionados$.getValue().map(unDisponible => {
+        return {
+          especieCodExterno: unDisponible.especieCodigo,
+          kgAFijar: Number.parseFloat(unDisponible.stockAFijar), //TODO: convertir la cantidad a kilos
+          kgAPesificar: Number.parseFloat(unDisponible.stockAPesificar),//TODO: convertir la cantidad a kilos
+        }
+      });
+    }
+
+    let datos = {
+      cuenta: this.cuenta.id.codigo,
+      medioPago: 1, // por ahora se fuerza a que sea canje
+      conceptosAPagar: this.conceptosAPagarSeleccionados$.getValue(),
+      canjes
+    };
+
+    return datos;
+  }
 }
