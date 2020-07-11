@@ -146,6 +146,7 @@ export class PagoConCanjeDisponibleComponent implements OnInit, OnDestroy {
     }
 
     this.disponible.stockAFijar = this.stockAFijar;
+    this.disponible.stockAPesificar = this.stockAPesificar;
     this.disponible.unidadMedida = this.unidadMedida;
     this.importeCalculadoChange.emit();
   }

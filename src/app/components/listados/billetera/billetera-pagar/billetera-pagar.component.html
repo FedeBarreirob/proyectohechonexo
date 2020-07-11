@@ -60,10 +60,16 @@
             <ng-template matStepLabel>Resumen</ng-template>
             <app-resumen-pago [conceptosAPagarSeleccionados$]="conceptosAPagarSeleccionados$"
               [disponiblesSeleccionados$]="disponiblesSeleccionados$" [totalEvent$]="totalEvent$"></app-resumen-pago>
-            <div fxFlexFill fxLayout="row" fxLayoutALign="space-between center">
-              <button mat-button style="background-color: green; color: white; margin-top: 10px; width: 350px;"
-                (click)="mostrarComprobante()">Pagar</button>
+
+            <!--Spinner-->
+            <div fxLayout="row" fxLayoutAlign="center center" *ngIf="guardando == true" style="margin-top: 10px;">
+              <mat-spinner diameter="24"></mat-spinner>
             </div>
+
+            <button mat-button [disabled]="guardando"
+              style="background-color: green; color: white; margin-top: 10px; width: 100%;"
+              (click)="guardar()">Pagar</button>
+
           </mat-step>
 
         </mat-horizontal-stepper>
@@ -126,7 +132,7 @@
             <app-resumen-pago></app-resumen-pago>
             <div fxFlexFill fxLayout="row" fxLayoutALign="space-between center">
               <button mat-button style="background-color: green; color: white; margin-top: 10px; width: 350px;"
-                (click)="mostrarComprobante()">Pagar</button>
+                (click)="guardar()">Pagar</button>
             </div>
           </mat-step>
 
