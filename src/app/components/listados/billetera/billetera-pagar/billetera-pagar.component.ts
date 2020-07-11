@@ -8,6 +8,7 @@ import { takeUntil } from 'rxjs/operators';
 import { AuthenticationService } from '../../../../services/security/authentication.service';
 import { PerfilBasico } from '../../../../interfaces/perfiles/perfil-basico';
 import { ResumenComprobanteDialogComponent } from './resumen-comprobante-dialog/resumen-comprobante-dialog.component';
+import { MovimientoCtaCteAplicada } from '../../../../interfaces/ctacte-aplicada/listado-ctacte-aplicada';
 
 @Component({
   selector: 'app-billetera-pagar',
@@ -23,6 +24,7 @@ export class BilleteraPagarComponent implements OnInit, OnDestroy {
   cuenta: EntidadAlg;
   totalEvent$: BehaviorSubject<number> = new BehaviorSubject<number>(0);
   observerFiltro$: BehaviorSubject<any> = new BehaviorSubject<any>(null);
+  conceptosAPagarSeleccionados$: BehaviorSubject<Array<MovimientoCtaCteAplicada>> = new BehaviorSubject<Array<MovimientoCtaCteAplicada>>(null);
   unidadMedida: string;
   perfilBasico: PerfilBasico;
 
@@ -78,7 +80,7 @@ export class BilleteraPagarComponent implements OnInit, OnDestroy {
   }
 
   // Muestra el comprobante en un dialog
-  mostrarComprobante(){
+  mostrarComprobante() {
     let dialogRef = this.dialog.open(ResumenComprobanteDialogComponent, {
       maxWidth: '100vw',
       width: '100%',

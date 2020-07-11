@@ -1,5 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 import { DeviceDetectorService } from 'ngx-device-detector';
+import { BehaviorSubject } from 'rxjs';
+import { MovimientoCtaCteAplicada } from '../../../../../../interfaces/ctacte-aplicada/listado-ctacte-aplicada';
 
 @Component({
   selector: 'app-resumen-pago',
@@ -7,6 +9,9 @@ import { DeviceDetectorService } from 'ngx-device-detector';
   styleUrls: ['./resumen-pago.component.css']
 })
 export class ResumenPagoComponent implements OnInit {
+
+  @Input()
+  conceptosAPagarSeleccionados$: BehaviorSubject<Array<MovimientoCtaCteAplicada>>;
 
   esCelular: boolean;
 

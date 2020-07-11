@@ -1,4 +1,4 @@
-import { Component, OnInit, Input, OnDestroy } from '@angular/core';
+import { Component, OnInit, Input, OnDestroy, Output, EventEmitter } from '@angular/core';
 import { DeviceDetectorService } from 'ngx-device-detector';
 import { EntidadAlg } from '../../../../../interfaces/perfiles/entidad-alg';
 import { CtacteAplicadaService } from '../../../../../services/ctacte-aplicada/ctacte-aplicada.service';
@@ -22,6 +22,9 @@ export class PagarListadoComponent implements OnInit, OnDestroy {
 
   @Input()
   observerFiltro$: BehaviorSubject<any>
+
+  @Input()
+  conceptosAPagarSeleccionados$: BehaviorSubject<Array<MovimientoCtaCteAplicada>>;
 
   esCelular: boolean;
   cargando: boolean = false;
@@ -96,6 +99,7 @@ export class PagarListadoComponent implements OnInit, OnDestroy {
       this.listadoConceptosSeleccionados = this.listadoConceptosSeleccionados.filter(conceptoSeleccionado => conceptoSeleccionado !== conceptoYSuSeleccion.concepto);
     }
 
+    this.conceptosAPagarSeleccionados$.next(this.listadoConceptosSeleccionados);
     this.actualizarTotalImportesSeleccionados();
   }
 
