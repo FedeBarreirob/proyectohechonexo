@@ -261,6 +261,9 @@ import { TarjetaTabContainerPagarComponent } from './components/listados/billete
 import { DefinicionDeBoletosAFijarComponent } from './components/listados/billetera/billetera-pagar/definicion-de-boletos/definicion-de-boletos-afijar/definicion-de-boletos-afijar.component';
 import { DefinicionDeUnBoletoAFijarComponent } from './components/listados/billetera/billetera-pagar/definicion-de-boletos/definicion-de-un-boleto-afijar/definicion-de-un-boleto-afijar.component';
 import { DefinicionDeBoletosAFijarTotalComponent } from './components/listados/billetera/billetera-pagar/definicion-de-boletos/definicion-de-boletos-afijar-total/definicion-de-boletos-afijar-total.component';
+import { DefinicionDeBoletosAPesificarComponent } from './components/listados/billetera/billetera-pagar/definicion-de-boletos/definicion-de-boletos-apesificar/definicion-de-boletos-apesificar.component';
+import { DefinicionDeUnBoletoAPesificarComponent } from './components/listados/billetera/billetera-pagar/definicion-de-boletos/definicion-de-un-boleto-apesificar/definicion-de-un-boleto-apesificar.component';
+import { DefinicionDeBoletosAPesificarTotalComponent } from './components/listados/billetera/billetera-pagar/definicion-de-boletos/definicion-de-boletos-apesificar-total/definicion-de-boletos-apesificar-total.component';
 
 registerLocaleData(localeEsAr, 'es-AR');
 
@@ -491,7 +494,10 @@ export function tokenGetter() {
 		TarjetaTabContainerPagarComponent,
 		DefinicionDeBoletosAFijarComponent,
 		DefinicionDeUnBoletoAFijarComponent,
-		DefinicionDeBoletosAFijarTotalComponent
+		DefinicionDeBoletosAFijarTotalComponent,
+		DefinicionDeBoletosAPesificarComponent,
+		DefinicionDeUnBoletoAPesificarComponent,
+		DefinicionDeBoletosAPesificarTotalComponent
 	],
 	imports: [
 		HttpClientModule,
@@ -578,7 +584,8 @@ export function tokenGetter() {
 		BilleteraCardInfoComponent,
 		PreciosDeGranosComponent,
 		ResumenComprobanteDialogComponent,
-		DefinicionDeBoletosAFijarComponent
+		DefinicionDeBoletosAFijarComponent,
+		DefinicionDeBoletosAPesificarComponent
 	],
 	bootstrap: [AppComponent]
 })

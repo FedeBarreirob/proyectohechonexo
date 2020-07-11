@@ -8,6 +8,7 @@ import { MatDialog } from '@angular/material';
 import { PreciosDeGranosComponent } from '../precios-de-granos/precios-de-granos.component';
 import { EntidadAlg } from '../../../../../interfaces/perfiles/entidad-alg';
 import { DefinicionDeBoletosAFijarComponent } from '../definicion-de-boletos/definicion-de-boletos-afijar/definicion-de-boletos-afijar.component';
+import { DefinicionDeBoletosAPesificarComponent } from '../definicion-de-boletos/definicion-de-boletos-apesificar/definicion-de-boletos-apesificar.component';
 
 @Component({
   selector: 'app-pago-con-canje-disponible',
@@ -176,7 +177,7 @@ export class PagoConCanjeDisponibleComponent implements OnInit, OnDestroy {
         especieDescripcion: this.disponible.especieDescripcion,
         unidadMedida: this.unidadMedida,
         stockAFijar: this.stockAFijar,
-        fijaciones: this.disponible.definicionDeBoletos
+        fijaciones: this.disponible.definicionDeBoletosFijaciones
       },
       maxWidth: '100vw',
       width: '100%',
@@ -185,9 +186,9 @@ export class PagoConCanjeDisponibleComponent implements OnInit, OnDestroy {
       panelClass: 'modal-sin-padding'
     });
 
-    dialogRef.afterClosed().subscribe(definicionDeBoletos => {
-      if (definicionDeBoletos) {
-        this.disponible.definicionDeBoletos = definicionDeBoletos;
+    dialogRef.afterClosed().subscribe(definicionDeBoletosFijaciones => {
+      if (definicionDeBoletosFijaciones) {
+        this.disponible.definicionDeBoletosFijaciones = definicionDeBoletosFijaciones;
       }
     });
   }
@@ -196,7 +197,45 @@ export class PagoConCanjeDisponibleComponent implements OnInit, OnDestroy {
    * Determina si tiene fijacion definida
    */
   get boletosFijacionDefinidos(): boolean {
-    if (this.disponible && this.disponible.definicionDeBoletos) {
+    if (this.disponible && this.disponible.definicionDeBoletosFijaciones) {
+      return true;
+    } else {
+      return false;
+    }
+  }
+
+  /**
+   * Muestra en formulario para definir los boletos a pesificar y la cantidad a pesificar
+   */
+  definirBoletosAPesificar() {
+    let dialogRef = this.dialog.open(DefinicionDeBoletosAPesificarComponent, {
+      data: {
+        especie: this.disponible.especieCodigo,
+        cuenta: this.cuenta,
+        especieDescripcion: this.disponible.especieDescripcion,
+        unidadMedida: this.unidadMedida,
+        stockAPesificar: this.stockAPesificar,
+        pesificaciones: this.disponible.definicionDeBoletosPesificacion
+      },
+      maxWidth: '100vw',
+      width: '100%',
+      maxHeight: '100vh',
+      height: '100%',
+      panelClass: 'modal-sin-padding'
+    });
+
+    dialogRef.afterClosed().subscribe(definicionDeBoletosPesificacion => {
+      if (definicionDeBoletosPesificacion) {
+        this.disponible.definicionDeBoletosPesificacion = definicionDeBoletosPesificacion;
+      }
+    });
+  }
+
+  /**
+   * Determina si tiene pesificación definida
+   */
+  get boletosPesificacionDefinidos(): boolean {
+    if (this.disponible && this.disponible.definicionDeBoletosPesificacion) {
       return true;
     } else {
       return false;
