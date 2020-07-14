@@ -101,7 +101,8 @@
               <button style="margin-left: 50px;" mat-button (click)="mostrarOcultarFiltros()"><img style="width: 20px;" src="assets/toolbar/embudo.png"></button>
             </div>
             <app-pagar-info></app-pagar-info>
-            <app-pagar-listado [cuenta]="cuenta" [totalEvent$]="totalEvent$" [observerFiltro$]="observerFiltro$">
+            <app-pagar-listado [cuenta]="cuenta" [totalEvent$]="totalEvent$" [observerFiltro$]="observerFiltro$"
+              [conceptosAPagarSeleccionados$]="conceptosAPagarSeleccionados$">
             </app-pagar-listado>
             <app-pagar-comprobantes-total [totalEvent$]="totalEvent$"></app-pagar-comprobantes-total>
           </mat-step>
@@ -119,7 +120,8 @@
           <mat-step>
             <ng-template matStepLabel>Pago</ng-template>
             <app-pago-con-canje *ngIf="unidadMedida" [totalEvent$]="totalEvent$" [cuenta]="cuenta"
-              [unidadMedida]="unidadMedida"></app-pago-con-canje>
+              [unidadMedida]="unidadMedida" [disponiblesSeleccionados$]="disponiblesSeleccionados$">
+            </app-pago-con-canje>
             <div fxFlexFill fxLayout="row" fxLayoutALign="space-between center">
               <button mat-button matStepperNext
                 style="background-color: green; color: white; margin-top: 10px; width: 350px;">Siguiente</button>
@@ -129,11 +131,19 @@
           <!--step resumen-->
           <mat-step>
             <ng-template matStepLabel>Resumen</ng-template>
-            <app-resumen-pago></app-resumen-pago>
-            <div fxFlexFill fxLayout="row" fxLayoutALign="space-between center">
-              <button mat-button style="background-color: green; color: white; margin-top: 10px; width: 150px; margin-left: 800px;"
-                (click)="guardar()">Pagar</button>
+            
+            <app-resumen-pago [conceptosAPagarSeleccionados$]="conceptosAPagarSeleccionados$"
+              [disponiblesSeleccionados$]="disponiblesSeleccionados$" [totalEvent$]="totalEvent$"></app-resumen-pago>
+
+            <!--Spinner-->
+            <div fxLayout="row" fxLayoutAlign="center center" *ngIf="guardando == true" style="margin-top: 10px;">
+              <mat-spinner diameter="24"></mat-spinner>
             </div>
+
+            <button mat-button [disabled]="guardando"
+              style="background-color: green; color: white; margin-top: 10px; width: 100%;"
+              (click)="guardar()">Pagar</button>
+
           </mat-step>
 
         </mat-horizontal-stepper>
