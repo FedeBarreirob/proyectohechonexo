@@ -5,16 +5,14 @@
     <div fxFlex="50%">
       <div fxLayout="column" fxLayoutAlign="space-between start">
 
-        <div fxFlex>Total</div>
-
-        <div fxFlex>{{ (totalMercaderiaACanjear$ | async) | number: (unidadMedida == 'tn' ? '.0-1' : '.0-0') }}</div>
+        <div fxFlex fxLayout="row">Total {{ (totalMercaderiaACanjear$ | async) | number: (unidadMedida == 'tn' ? '.0-1' : '.0-0') }}</div>
 
         <div fxFlex>{{unidadMedida | kilosTextoA}} necesarias: {{ stockNecesario }}</div>
 
       </div>
     </div>
 
-    <div fxFlex="50%">
+    <div fxFlex="50%" fxLayoutAlign="end center">
       <button mat-flat-button style="background-color: green; color: white;"
         (click)="notificarDeficionEvento()">Definir</button>
     </div>
