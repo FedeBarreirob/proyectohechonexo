@@ -66,7 +66,7 @@
 <div fxLayout="row" fxLayoutAlign="space-around center">
   <div fxFlex>
     <mat-radio-group [(ngModel)]="tipoDestinoSeleccionado">
-      <mat-radio-button *ngFor="let destino of destinos" [value]="destino.value">{{ destino.descripcion }}
+      <mat-radio-button style="padding: 10px;" *ngFor="let destino of destinos" [value]="destino.value">{{ destino.descripcion }}
       </mat-radio-button>
     </mat-radio-group>
   </div>

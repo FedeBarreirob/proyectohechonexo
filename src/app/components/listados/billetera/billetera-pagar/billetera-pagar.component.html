@@ -98,7 +98,7 @@
             <ng-template matStepLabel>Comprobantes</ng-template>
             <div fxFlex="row" fxLayoutAlign="space-between center">
               <p style="font-size: 20px; font-family: Rubik;">Comprobantes</p>
-              <button style="margin-left: 50px;" mat-button (click)="mostrarOcultarFiltros()">Filtrar</button>
+              <button style="margin-left: 50px;" mat-button (click)="mostrarOcultarFiltros()"><img style="width: 20px;" src="assets/toolbar/embudo.png"></button>
             </div>
             <app-pagar-info></app-pagar-info>
             <app-pagar-listado [cuenta]="cuenta" [totalEvent$]="totalEvent$" [observerFiltro$]="observerFiltro$"
