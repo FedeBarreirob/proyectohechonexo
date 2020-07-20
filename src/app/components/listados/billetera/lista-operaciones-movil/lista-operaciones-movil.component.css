@@ -1,21 +1,44 @@
-ul {
-  padding: 10px;
-  margin: 20px;
-}
-
-ul li{
-  background-color: white;
-  border-radius: 4px;
-  border-top: 0px;
-  border-left: 1px solid rgb(211, 221, 211);
-  border-right: 1px solid rgb(211, 211, 211);
-  border-bottom: 1px solid rgb(150, 147, 147);
-  padding: 10px;
-  margin: 5px 0px;
-  list-style-type: none;
-}
 
 .price{
   margin-top: 20px;
   float: right;
+}
+
+.cobro{
+  color: #333333;
+  font-family: Rubik;
+  font-size: 14px;
+}
+
+.dinero{
+  color: #333333;
+  font-family: Rubik;
+  font-size: 16px;
+  text-align: right;
+}
+
+.enProceso{
+  background-color: white;
+  border-radius: 5px;
+  border: solid 1px #FFBC00;
+  color: #FFBC00;
+}
+
+.Aprobada{
+  background-color: #2DA442;
+  border-radius: 5px;
+  color: white;
+}
+
+.opEjecutada{
+  background-color: white;
+  border-radius: 5px;
+  border: solid 1px blue;
+  color: blue;
+}
+
+.Rechazada{
+  background-color: red;
+  border-radius: 5px;
+  color: white;
 }

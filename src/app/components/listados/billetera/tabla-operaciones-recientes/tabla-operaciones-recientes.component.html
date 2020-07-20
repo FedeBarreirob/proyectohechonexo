@@ -1,10 +1,27 @@
-<div fxLayout="row" fxLayoutAlign="space-between center" style="padding: 20px;">
-  <div fxFlex="60%" class="titulo-principal">
-    Operaciones Recientes
+<div *ngIf="esCelular">
+  <div fxLayout="row" style="padding: 20px;" fxLayoutAlign="space-between center">
+    <div fxFlex="70%" class="titulo-principal" style="text-align: left;">
+      Operaciones Recientes
+    </div>
+  
+    <div fxFlex="30%" class="titulo-principal" align="end">
+      <button mat-button class="link-ver-todas">Más Información</button>
+    </div>
+  
   </div>
+  
+</div>
 
-  <div fxFlex="40%" class="titulo-principal" align="end">
-    <button mat-button class="link-ver-todas">Más Información</button>
+<div *ngIf="!esCelular">
+  <div fxLayout="row" style="padding: 20px;" fxLayoutAlign="space-between center">
+    <div fxFlex="70%" class="titulo-principal" style="text-align: left;">
+      Operaciones Recientes
+    </div>
+  
+    <div fxFlex="30%" class="titulo-principal" align="end">
+      <button mat-button class="link-ver-todas">Más Información</button>
+    </div>
+  
   </div>
-
+  
 </div>

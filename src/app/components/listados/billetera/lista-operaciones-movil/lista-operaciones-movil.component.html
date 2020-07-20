@@ -14,17 +14,18 @@
 
       <div fxFlex="" style="padding-left: 20px;">
         <div fxLayout="column" fxLayoutAlign="space-between start">
-          <div fxFlex>Cobro programado </div>
-          <div fxFlex>{{ prevision.fechaDeCobro }}</div>
+          <div fxFlex class="cobro">Cobro programado </div>
+          <div fxFlex id="estados" class="estado">
+            <div style="margin-top: 5px;" [ngClass]="{'enProceso':prevision.estado == previsionEstado.PENDIENTE_DE_APROBACION,
+             'Aprobado':prevision.estado == previsionEstado.APROBADO, 'opEjecutada':prevision.estado == previsionEstado.OPERACION_EJECUTADA,
+             'Rechazada':prevision.estado == previsionEstado.RECHAZADA}">{{ prevision.estadoDenominacion }}</div>
+          </div>
         </div>
       </div>
 
       <div fxFlex="nogrow">
         <div fxLayout="column" fxLayoutAlign="space-between end">
-          <div fxFlex>$ {{ prevision.importeACobrarPesos | number }}</div>
-          <div fxFlex>
-            <mat-chip>{{ prevision.estado }}</mat-chip>
-          </div>
+          <div fxFlex class="dinero">$ {{ prevision.importeACobrarPesos | number }}</div>
         </div>
       </div>
 
