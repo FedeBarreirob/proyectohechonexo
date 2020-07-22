@@ -24,7 +24,7 @@
     <mat-spinner diameter="24"></mat-spinner>
   </div>
 
-  <mat-tab-group fxFlex="100%" fxFlexAlign="space-between center" class="tab" *ngIf="!cargando">
+  <mat-tab-group mat-stretch-tabs mat-align-tabs="center" class="tab" *ngIf="!cargando">
     <mat-tab label="A Cobrar">
       <app-tarjeta-tab-container *ngIf="saldoGlobal != null && seObtuvoSaldoExito == true" [saldoGlobal]="saldoGlobal"></app-tarjeta-tab-container>
     </mat-tab>

@@ -1,10 +1,5 @@
-.cont{
-    margin: -23px;
-}
-
 .card-container{
-    padding: 10px;
-    margin-top: 100px;
+    padding: 15px;
     background-color: white;
 }
 
@@ -30,8 +25,6 @@
 
 .monto{
     font-size: 20px;
-    margin-top: -15px;
-    margin-bottom: 20px;
 }
 
 .button{
@@ -46,8 +39,8 @@
 }
 
 .btn{
-    margin-top: 25px;
     background-color: rgb(33, 179, 33);
+    color: white;
 }
 
 .btn-desk{

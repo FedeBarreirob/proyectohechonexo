@@ -48,13 +48,13 @@
 
       <!-- TABLA DE COBROS WEB -->
 
-      <div style="padding: 10px;" *ngIf="!esCelular">
-        <table width="100%">
+      <div *ngIf="!esCelular">
+        <table width="100%" style="margin-top: -120px;">
           <tr>
-            <td style="width: 50%;">
+            <td style="width: 420px; height: 339px;">
               <app-billetera-acobrar-desktop *ngIf="cargando == false"></app-billetera-acobrar-desktop>
             </td>
-            <td style="width: 50%;">
+            <td style="width: 420px; height: 339px;">
               <app-billetera-apagar-desktop *ngIf="cargando == false"></app-billetera-apagar-desktop>
             </td>
           </tr>
@@ -62,18 +62,18 @@
       </div>
 
       <!-- CONTENEDOR DE PAGAR Y COBRAR -->
-      <div style="padding: 10px" *ngIf="esCelular">
+      <div *ngIf="esCelular">
         <div class="pagar-cobrar">
           <app-pagar-cobrar-container></app-pagar-cobrar-container>
         </div>
       </div>
 
-      <div class="pagar-cobrar" *ngIf="!esCelular">
-        <app-pagar-cobrar-container-desktop></app-pagar-cobrar-container-desktop>
+      <div class="pagar-cobrar-desktop" *ngIf="!esCelular">
+        <app-pagar-cobrar-container-desktop style="margin-left: 150px; margin-right: 150px;"></app-pagar-cobrar-container-desktop>
       </div>
 
       <!-- LISTA DE OPERACIONES -->
-      <div class="op-recientes" *ngIf="!esCelular" style="margin-left: 150px; margin-right: 150px;">
+      <div class="op-recientes-desktop" *ngIf="!esCelular" style="margin-left: 150px; margin-right: 150px;">
         <app-tabla-operaciones-recientes></app-tabla-operaciones-recientes>
       </div>
 
@@ -81,11 +81,11 @@
         <app-tabla-operaciones-recientes></app-tabla-operaciones-recientes>
       </div>
 
-      <div style="margin-top: 30px;" *ngIf="esCelular">
+      <div style="padding-right: 10px; padding-left: 10px;" *ngIf="esCelular">
         <app-lista-operaciones-movil></app-lista-operaciones-movil>
       </div>
 
-      <div style="margin-top: 30px; margin-left: 150px; margin-right: 150px;" *ngIf="!esCelular">
+      <div style="margin-top: 30px; margin-left: 140px; margin-right: 140px;" *ngIf="!esCelular">
         <!--Spinner-->
         <div fxLayout="row" fxLayoutAlign="center center" *ngIf="cargando == true" style="margin-top: 10px">
           <mat-spinner diameter="24"></mat-spinner>

@@ -1,17 +1,21 @@
 
-
 .link-ver-todas {
-    color: #23B950;
-    font-family: Rubik;
-    font-size: 16px;
+    height: 16px;
+    width: 96px;
+    color: #2DA442;
+    font-family: "Rubik Medium";
+    font-size: 12px;
+    letter-spacing: 0;
+    line-height: 16px;
     text-align: right;
 }
 
 .titulo-principal {
-    margin-left: 15px;
+    height: 24px;
+    width: 166px;
     color: #333333;
     font-family: Rubik;
-    font-size: 18px;
-    letter-spacing: 1.2px;
-    margin-bottom: -25px;
+    font-size: 16px;
+    letter-spacing: 0;
+    line-height: 24px;
 }
