@@ -2,10 +2,10 @@
 <div *ngIf="esCelular">
   <div class="card-container">
     <div fxLayout="row" fxLayoutAlign="space-between center" class="cuenta-item">
-      <div fxLayout="column" >
-        <button mat-icon-button>
-          <mat-icon class="button-info">monetization_on</mat-icon>
-        </button>
+      <div fxLayout="column" style="margin-top: -10px;" >
+        <div class="button-bill" fxLayoutAlign="center center">
+          <img src="../../../../../../assets/varios/Bill-wave-grey.png">
+        </div>
       </div>
       <div fxFlex="grow" fxLayout="column" fxLayoutAlign="space-between" class="contenedor">
         <div class="monto">
@@ -36,10 +36,10 @@
 <div *ngIf="!esCelular">
   <div class="card-container">
     <div fxLayout="row" fxLayoutAlign="space-between center" class="cuenta-item">
-      <div fxLayout="column" >
-        <button mat-icon-button>
-          <mat-icon class="button-info">monetization_on</mat-icon>
-        </button>
+      <div fxLayoutALign="center center" style="margin-top: -10px; margin-left: 10px;">
+        <div class="button-bill">
+          <img src="../../../../../../assets/varios/Bill-wave-grey.png">
+        </div>
       </div>
       <div fxFlex="grow" fxLayout="column" fxLayoutAlign="space-between" class="contenedor">
         <div class="monto">
