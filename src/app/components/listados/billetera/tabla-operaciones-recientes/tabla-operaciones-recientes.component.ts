@@ -1,5 +1,5 @@
-import { Component, OnInit, OnDestroy, Output, EventEmitter } from '@angular/core';
-import { Subject } from 'rxjs';
+import { Component, OnInit } from '@angular/core';
+import { DeviceDetectorService } from 'ngx-device-detector';
 
 
 @Component({
@@ -9,10 +9,14 @@ import { Subject } from 'rxjs';
 })
 export class TablaOperacionesRecientesComponent implements OnInit {
 
+  esCelular: boolean;
+
   constructor(
+    private deviceService: DeviceDetectorService
   ) { }
 
   ngOnInit() {
+    this.esCelular = this.deviceService.isMobile();
   }
 
 }

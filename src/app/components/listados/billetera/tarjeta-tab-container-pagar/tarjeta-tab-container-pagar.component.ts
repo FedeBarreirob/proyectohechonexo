@@ -24,9 +24,9 @@ export class TarjetaTabContainerPagarComponent implements OnInit {
   solicitarInfo(){
     let dialogRef = this.dialog.open(BilleteraCardInfoComponent, {
       maxWidth: '90vw',
-      width: '90%',
+      width: '388px',
       maxHeight: '90vh',
-      height: '90%'
+      height: '523px'
     });
   }
 }

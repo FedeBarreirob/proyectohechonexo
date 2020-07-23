@@ -1,9 +1,9 @@
 <div *ngIf="esCelular">
   <div class="card-container" *ngFor="let item of dinerosPorCobrar" style="margin-top: 10px;">
     <div fxLayout="row" fxLayoutAlign="space-between center" class="cuenta-item">
-      <div fxLayout="column">
-        <button mat-icon-button>
-          <mat-icon class="button-info">monetization_on</mat-icon>
+      <div fxLayout="column" style="margin-top: -10px;" >
+        <button class="button-bill" fxLayoutAlign="center center">
+          <img src="../../../../../../assets/varios/Bill-wave_time-disabled.png">
         </button>
       </div>
       <div fxFlex="grow" fxLayout="column" fxLayoutAlign="space-between" class="contenedor">

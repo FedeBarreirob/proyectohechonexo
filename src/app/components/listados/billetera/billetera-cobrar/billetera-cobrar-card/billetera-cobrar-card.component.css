@@ -10,12 +10,20 @@
     font-size: 12px;
     letter-spacing: 1.2px;
     text-align: left;
+    padding-top: 5px;
   }
   
   .button-info{
     cursor: pointer;
     color: #23B950;
     text-align: center;
+  }
+
+  .button-bill{
+    height: 35px;
+    width: 35px;
+    border-radius: 35px;
+    background-color: #23B950;
   }
   
   .monto {
@@ -30,7 +38,8 @@
   }
   
   .contenedor {
-    margin-left: 5px;
+    margin-top: -10px;
+    margin-left: 10px;
   }
 
   .more-items{

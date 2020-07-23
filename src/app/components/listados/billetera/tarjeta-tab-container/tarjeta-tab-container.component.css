@@ -11,29 +11,55 @@
 
 .indicador{
     float: right;
-    margin-top: -5px;
-    color: greenyellow;
+    margin-top: -10px;
+    color: #2DA442;
+    height: 18px;
+    width: 18px;
+}
+
+.indicador-d{
+    float: right;
+    margin-top: -10px;
+    color: #2DA442;
+    height: 18px;
+    width: 18px;
+    margin-right: 15px;
+}
+
+.Bill-wave{
+    float: left;
+    height: 50px;
+    width: 50px;
+    border-radius: 50px;
+}
+
+.arrow{
+    color: #2DA442;
 }
 
 .titulo-card-1 {
+    height: 16px;
+    width: 96px;
     color: #666666;
     font-family: Rubik;
     font-size: 12px;
-    letter-spacing: 1.2px;
-    text-align: left;
+    letter-spacing: 0;
+    line-height: 16px;
 }
 
 .titulo-card {
     margin-top: 15px;
+    height: 16px;
+    width: 96px;
     color: #666666;
     font-family: Rubik;
     font-size: 12px;
-    letter-spacing: 1.2px;
-    text-align: left;
+    letter-spacing: 0;
+    line-height: 16px;
 }
 
 .importe-cobrar {
-    color: #23B950;
+    color: #333333;
     font-family: RubikLight;
     font-size: 20px;
 }
@@ -41,4 +67,5 @@
 .contenedor-importe {
     text-align: left;
     margin-bottom: 12px;
+    margin-top: 12px;
 }

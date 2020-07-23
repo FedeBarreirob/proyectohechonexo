@@ -1,7 +1,7 @@
 <div *ngIf="esCelular">
   <div class="title">
     <a routerLink="/billetera" fxFlex="25%" fxLayoutAlign="center center">
-      <button mat-mini-fab class="button">
+      <button mat-button class="button">
         <mat-icon style="color: green;">arrow_back</mat-icon>
       </button>
     </a>
@@ -20,7 +20,7 @@
       <!--Selección de vencimiento a programar su cobro-->
       <mat-step>
         <ng-template matStepLabel>Origen</ng-template>
-        <p style="color: lightgrey; padding: 10px; text-align: left;">Escoge entre tu dinero disponible o el dinero por
+        <p style="color: #999999; text-align: left;">Escoge entre tu dinero disponible o el dinero por
           cobrar para programar tu cobro.</p>
         <h3>Dinero disponible</h3>
         <app-billetera-cobrar-card [dineroDisponible]="conceptosACobrar.dineroDisponible"
@@ -33,7 +33,7 @@
       <!--Indicación de importes y fechas a cobrar-->
       <mat-step>
         <ng-template matStepLabel>Importes</ng-template>
-        <p style="color: lightgrey; padding: 10px; text-align: left;">Escoge entre tu dinero disponible o el dinero por
+        <p style="color: #999999; text-align: left;">Escoge entre tu dinero disponible o el dinero por
           cobrar para programar tu cobro.</p>
         <app-billetera-cobrar-indicacion-importes [vencimientoACobrarSeleccionado$]="vencimientoACobrarSeleccionado$"
           [cobrosProgramados$]="cobrosProgramados$">
@@ -43,7 +43,7 @@
       <!--Resumen y finalización del proceso-->
       <mat-step>
         <ng-template matStepLabel>Resumen</ng-template>
-        <p style="color: #999; padding: 10px; text-align: left;">Verifica que todos los datos de tu cobro etuvieron
+        <p style="color: #999; text-align: left;">Verifica que todos los datos de tu cobro etuvieron
           correctos y presiona confirmar para terminar la operación.</p>
         <app-billetera-cobrar-resumen [cobrosProgramados$]="cobrosProgramados$"></app-billetera-cobrar-resumen>
         <app-billetera-cobrar-resumen-total [cobrosProgramados$]="cobrosProgramados$" [cuenta]="cuenta">
@@ -90,7 +90,7 @@
 
           <mat-step>
             <ng-template matStepLabel>Origen</ng-template>
-            <p style="color: lightgrey; padding: 10px; text-align: left;">Escoge entre tu dinero disponible o el dinero
+            <p style="color: #999999; padding: 10px; text-align: left;">Escoge entre tu dinero disponible o el dinero
               por
               cobrar para programar tu cobro.</p>
             <h3>Dinero disponible</h3>
@@ -105,7 +105,7 @@
           <!--Indicación de importes y fechas a cobrar-->
           <mat-step>
             <ng-template matStepLabel>Importes</ng-template>
-            <p style="color: lightgrey; padding: 10px; text-align: left;">Escoge entre tu dinero disponible o el dinero
+            <p style="color: #999999; padding: 10px; text-align: left;">Escoge entre tu dinero disponible o el dinero
               por cobrar para programar tu cobro.</p>
             <app-billetera-cobrar-indicacion-importes
               [vencimientoACobrarSeleccionado$]="vencimientoACobrarSeleccionado$"

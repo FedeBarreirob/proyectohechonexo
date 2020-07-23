@@ -34,9 +34,9 @@ export class BilleteraCobrarCardComponent implements OnInit {
       this.dialog.open(BilleteraLiquidacionesDetalleComponent, {
         data: this.dineroDisponible.movimientosACobrarVencido,
         maxWidth: '90vw',
-        width: '90%',
+        width: '370px',
         maxHeight: '90vh',
-        height: '90%'
+        height: '539px'
       });
     }
   }

@@ -16,6 +16,7 @@ export class ListaOperacionesMovilComponent implements OnInit, OnDestroy {
 
   destroy$: Subject<any> = new Subject<any>();
   cargando: boolean = false;
+  previsionEstado = PrevisionDeCobroEstado;
 
   ultimasPrevisiones: Array<any>;
   CANTIDAD_MAXIMA_PREVISIONES_A_MOSTRAR = 10;
@@ -68,11 +69,11 @@ export class ListaOperacionesMovilComponent implements OnInit, OnDestroy {
    * @param prevision 
    */
   previsionAMostrar(prevision: any) {
-
+    console.log(prevision);
     let estadoDenominacion;
     switch (prevision.estado) {
       case PrevisionDeCobroEstado.PENDIENTE_DE_APROBACION:
-        estadoDenominacion = "Pendiente de aprobación";
+        estadoDenominacion = "Pedt. de aprobación";
         break;
 
       case PrevisionDeCobroEstado.APROBADO:
@@ -94,7 +95,8 @@ export class ListaOperacionesMovilComponent implements OnInit, OnDestroy {
     return {
       fechaDeCobro: this.datePipe.transform(new Date(prevision.fechaDeCobro), 'dd/MM/yyyy'),
       importeACobrarPesos: prevision.importeACobrarPesos,
-      estado: estadoDenominacion
+      estado: prevision.estado,
+      estadoDenominacion
     };
   }
 }
