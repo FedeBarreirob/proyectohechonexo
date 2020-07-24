@@ -1,17 +1,16 @@
 <div class="card">
   <div fxLayout="column" class="cobros">
     <div style="font-size: 14px;">Cobros</div>
-    <div style="font-size: 16px;">$12,000</div>
-    <div class="datos">
-      <div>Fecha de cobro: 23/12/20</div>
-      <div>Medio: Transferencia bancaria</div>
-      <div>Destinatario: Cuenta José Banco Galicia</div>
-    </div>
+
+    <app-resumen-resumen-cobros-item *ngFor="let cobroProgramado of cobrosProgramados"
+      [cobroProgramado]="cobroProgramado"></app-resumen-resumen-cobros-item>
+
   </div>
 
   <mat-divider style="margin-bottom: 10px;"></mat-divider>
   <div class="total" fxLayout="column">
     <p>Total</p>
-    <h2 style="color: black; font-family: Rubik; font-size: 18px; margin-top: -5px; margin-left: 10px;">$246,000</h2>
+    <h2 style="color: black; font-family: Rubik; font-size: 18px; margin-top: -5px; margin-left: 10px;">
+      ${{ total | number }}</h2>
   </div>
 </div>

@@ -1,19 +1,26 @@
-import { Component, OnInit } from '@angular/core';
-import { MatDialogRef } from '@angular/material';
+import { Component, OnInit, Inject } from '@angular/core';
+import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
 
 @Component({
-  selector: 'app-resumen-comprobante-dialog',
-  templateUrl: './resumen-comprobante-dialog.component.html',
-  styleUrls: ['./resumen-comprobante-dialog.component.css']
+  selector: 'app-resumen-comprobante-dialog-cobros',
+  templateUrl: './resumen-comprobante-dialog-cobros.component.html',
+  styleUrls: ['./resumen-comprobante-dialog-cobros.component.css']
 })
 export class ResumenComprobanteDialogCobrosComponent implements OnInit {
 
-  constructor(private dialogRef: MatDialogRef<ResumenComprobanteDialogCobrosComponent>) { }
+  solicitudDeCobroCreada: any;
+
+  constructor(
+    @Inject(MAT_DIALOG_DATA) public data: any,
+    private dialogRef: MatDialogRef<ResumenComprobanteDialogCobrosComponent>
+  ) {
+    this.solicitudDeCobroCreada = data;
+  }
 
   ngOnInit() {
   }
 
-  salir(){
+  salir() {
     this.dialogRef.close();
   }
 
