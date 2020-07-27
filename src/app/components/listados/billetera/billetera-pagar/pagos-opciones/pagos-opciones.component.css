@@ -3,3 +3,11 @@
     padding: 10px;
     border-radius: 4px;
 }
+
+.card{
+    background-color: white;
+    padding: 10px;
+    border-radius: 4px;
+    width: 305px;
+    height: 70px;
+}

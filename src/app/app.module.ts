@@ -594,9 +594,9 @@ export function tokenGetter() {
 		BilleteraCardInfoComponent,
 		PreciosDeGranosComponent,
 		ResumenComprobanteDialogComponent,
-		ResumenComprobanteDialogCobrosComponent,
 		DefinicionDeBoletosAFijarComponent,
-		DefinicionDeBoletosAPesificarComponent
+		DefinicionDeBoletosAPesificarComponent,
+		ResumenComprobanteDialogCobrosComponent
 	],
 	bootstrap: [AppComponent]
 })

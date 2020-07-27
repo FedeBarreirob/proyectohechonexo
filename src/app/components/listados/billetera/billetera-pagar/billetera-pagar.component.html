@@ -8,7 +8,7 @@
     <div *ngIf="esCelular && cuenta">
       <div class="title">
         <a routerLink="/billetera" fxFlex="25%" fxLayoutAlign="center center">
-          <button mat-mini-fab class="button">
+          <button mat-button class="button">
             <mat-icon style="color: green;">arrow_back</mat-icon>
           </button>
         </a>
@@ -23,12 +23,12 @@
           <!--step comprobantes-->
           <mat-step>
             <ng-template matStepLabel>Comprobantes</ng-template>
-            <div fxFlex="row" class="">
-              Comprobantes
-              <button mat-button (click)="mostrarOcultarFiltros()">Filtrar</button>
+            <div fxFlex="row" fxLayoutAlign="space-between center" style="padding-bottom: 15px;">
+              <p style="font-size: 16px; font-family: Rubik;">Comprobantes</p>
+              <button style="margin-left: 50px;" mat-button (click)="mostrarOcultarFiltros()"><img style="width: 20px;" src="assets/toolbar/embudo.png"></button>
             </div>
             <app-pagar-info></app-pagar-info>
-            <app-pagar-listado [cuenta]="cuenta" [totalEvent$]="totalEvent$" [observerFiltro$]="observerFiltro$"
+            <app-pagar-listado style="padding-right: 10px;" [cuenta]="cuenta" [totalEvent$]="totalEvent$" [observerFiltro$]="observerFiltro$"
               [conceptosAPagarSeleccionados$]="conceptosAPagarSeleccionados$">
             </app-pagar-listado>
             <app-pagar-comprobantes-total [totalEvent$]="totalEvent$"></app-pagar-comprobantes-total>
