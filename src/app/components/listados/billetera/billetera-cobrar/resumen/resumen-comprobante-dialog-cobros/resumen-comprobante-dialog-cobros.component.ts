@@ -1,5 +1,5 @@
 import { Component, OnInit, Inject } from '@angular/core';
-import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
+import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material';
 
 @Component({
   selector: 'app-resumen-comprobante-dialog-cobros',
@@ -20,8 +20,11 @@ export class ResumenComprobanteDialogCobrosComponent implements OnInit {
   ngOnInit() {
   }
 
-  salir() {
-    this.dialogRef.close();
+  volverAlInicio() {
+    this.dialogRef.close(false);
   }
 
+  realizarNuevoCobro() {
+    this.dialogRef.close(true);
+  }
 }

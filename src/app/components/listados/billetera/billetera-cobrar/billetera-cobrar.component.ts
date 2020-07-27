@@ -7,6 +7,7 @@ import { takeUntil } from 'rxjs/operators';
 import { EntidadAlg } from '../../../../interfaces/perfiles/entidad-alg';
 import { MatDialog } from '@angular/material';
 import { ResumenComprobanteDialogCobrosComponent } from './resumen/resumen-comprobante-dialog-cobros/resumen-comprobante-dialog-cobros.component';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-billetera-cobrar',
@@ -27,7 +28,8 @@ export class BilleteraCobrarComponent implements OnInit, OnDestroy {
     private deviceService: DeviceDetectorService,
     private ctacteAplicadaService: CtacteAplicadaService,
     private cuentaService: CuentaAlgService,
-    private dialog: MatDialog
+    private dialog: MatDialog,
+    private router: Router
   ) { }
 
   ngOnInit() {
@@ -92,12 +94,20 @@ export class BilleteraCobrarComponent implements OnInit, OnDestroy {
    * @param solicitudCreada 
    */
   mostrarResumen(solicitudCreada: any) {
-    this.dialog.open(ResumenComprobanteDialogCobrosComponent, {
+    let dialogRef = this.dialog.open(ResumenComprobanteDialogCobrosComponent, {
       data: solicitudCreada,
       maxWidth: '100vw',
-        width: '100%',
-        maxHeight: '100vh',
-        height: '100%'
+      width: '100%',
+      maxHeight: '100vh',
+      height: '100%'
+    });
+
+    dialogRef.afterClosed().subscribe((nuevoCobro: boolean) => {
+      if (nuevoCobro == true) {
+        this.cargarConceptosACobrar();
+      } else {
+        this.router.navigate(["billetera"]);
+      }
     });
   }
 }

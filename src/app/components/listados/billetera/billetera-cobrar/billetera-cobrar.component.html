@@ -49,12 +49,7 @@
         <app-billetera-cobrar-resumen-total [cobrosProgramados$]="cobrosProgramados$" [cuenta]="cuenta"
           (mostrarResumen)="mostrarResumen($event)">
         </app-billetera-cobrar-resumen-total>
-        <div fxLayout="row" style="margin-left: 360px; margin-top: 20px;">
-          <a style="margin-right: 10px">
-            <button mat-stroked-button style="color: green; border: solid 1px green;" matStepperPrevious>Volver</button>
-          </a>
-          <button mat-flat-button style="background-color: green; color: white;">Siguiente</button>
-        </div>
+       
       </mat-step>
     </mat-horizontal-stepper>
   </div>
