@@ -1,13 +1,13 @@
-.card{
+.card-desktop{
     background-color: white;
     padding: 10px;
     border-radius: 4px;
+    height: 70px;
 }
 
-.card{
+.card-mobile{
     background-color: white;
     padding: 10px;
     border-radius: 4px;
-    width: 305px;
     height: 70px;
 }
