@@ -10,12 +10,16 @@ import { OneSignalService } from '../../services/push/one-signal.service';
 import { DeviceDetectorService } from 'ngx-device-detector';
 import { environment } from '../../../environments/environment';
 
+declare var require: any;
+
 @Component({
 	selector: 'app-login',
 	templateUrl: './login.component.html',
 	styleUrls: ['./login.component.css']
 })
 export class LoginComponent implements OnInit {
+
+	version: string = require( '../../../../package.json').version;
 
 	frmLogin: FormGroup;
 	logueando: boolean = false;
