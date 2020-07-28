@@ -1,6 +1,12 @@
-.card{
-    background-color: rgb(204, 204, 204);
-    padding: 0;
-    padding-right: 5px;
+.card-desktop{
+    height: 56px;
     border-radius: 4px;
+    background-color: #ECECEC;
+}
+
+.card-mobile{
+    height: 56px;
+    border-radius: 4px;
+    background-color: #ECECEC;
+    margin-bottom: 10px;
 }

@@ -90,7 +90,7 @@
 
       <!-- VISTA DESKTOP -->
 
-      <div>
+      <div style="width: 570px;">
         <mat-horizontal-stepper fxLayout="column" labelPosition="bottom" #stepper>
 
           <!--step comprobantes-->
@@ -122,9 +122,15 @@
             <app-pago-con-canje *ngIf="unidadMedida" [totalEvent$]="totalEvent$" [cuenta]="cuenta"
               [unidadMedida]="unidadMedida" [disponiblesSeleccionados$]="disponiblesSeleccionados$">
             </app-pago-con-canje>
-            <div fxFlexFill fxLayout="row" fxLayoutALign="space-between center">
+            <div fxFlexFill fxLayout="row" fxLayoutALign="space-between center" *ngIf="esCelular">
               <button mat-button matStepperNext
-                style="background-color: green; color: white; margin-top: 10px; width: 350px;">Siguiente</button>
+                style="background-color: green; color: white; margin-top: 10px; width: 100%;">Siguiente</button>
+            </div>
+            <div fxFlexFill fxLayout="row" fxLayoutALign="space-between center" *ngIf="!esCelular">
+              <button mat-button matStepperNext
+                style="background-color: #fafafa; color: green; margin-top: 10px; width: 170px;">Volver</button>
+              <button mat-button matStepperNext
+                style="background-color: green; color: white; margin-top: 10px; width: 170px;">Siguiente</button>
             </div>
           </mat-step>
 
@@ -140,8 +146,12 @@
               <mat-spinner diameter="24"></mat-spinner>
             </div>
 
-            <button mat-button [disabled]="guardando"
+            <button mat-button [disabled]="guardando" *ngIf="esCelular"
               style="background-color: green; color: white; margin-top: 10px; width: 100%;"
+              (click)="guardar()">Pagar</button>
+            
+            <button mat-button [disabled]="guardando" *ngIf="!esCelular"
+              style="background-color: green; color: white; margin-top: 10px; width: 170px;"
               (click)="guardar()">Pagar</button>
 
           </mat-step>
