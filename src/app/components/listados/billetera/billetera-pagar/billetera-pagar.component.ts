@@ -3,7 +3,7 @@ import { DeviceDetectorService } from 'ngx-device-detector';
 import { Subject, BehaviorSubject } from 'rxjs';
 import { EntidadAlg } from '../../../../interfaces/perfiles/entidad-alg';
 import { CuentaAlgService } from '../../../../services/observers/cuentas-alg/cuenta-alg.service';
-import { MatSidenav, MatDialog, MatSnackBar } from '@angular/material';
+import { MatSidenav, MatDialog, MatSnackBar, MatHorizontalStepper } from '@angular/material';
 import { takeUntil } from 'rxjs/operators';
 import { AuthenticationService } from '../../../../services/security/authentication.service';
 import { PerfilBasico } from '../../../../interfaces/perfiles/perfil-basico';
@@ -11,15 +11,19 @@ import { ResumenComprobanteDialogComponent } from './resumen/resumen-comprobante
 import { MovimientoCtaCteAplicada } from '../../../../interfaces/ctacte-aplicada/listado-ctacte-aplicada';
 import { FinanzasProgramadorPagosService } from '../../../../services/finanzas/finanzas-programador-pagos.service';
 import { Router } from '@angular/router';
+import { NumeroAKilosPipe } from '../../../../pipes/numero-akilos.pipe';
 
 @Component({
   selector: 'app-billetera-pagar',
   templateUrl: './billetera-pagar.component.html',
-  styleUrls: ['./billetera-pagar.component.css']
+  styleUrls: ['./billetera-pagar.component.css'],
+  providers: [NumeroAKilosPipe]
 })
 export class BilleteraPagarComponent implements OnInit, OnDestroy {
 
   @ViewChild('menuFiltro') public sidenav: MatSidenav;
+
+  @ViewChild('stepper') stepper: MatHorizontalStepper;
 
   destroy$: Subject<any> = new Subject<any>();
   esCelular: boolean;
@@ -31,6 +35,7 @@ export class BilleteraPagarComponent implements OnInit, OnDestroy {
   unidadMedida: string;
   perfilBasico: PerfilBasico;
   guardando: boolean = false;
+  
 
   constructor(
     private deviceService: DeviceDetectorService,
@@ -39,7 +44,8 @@ export class BilleteraPagarComponent implements OnInit, OnDestroy {
     private dialog: MatDialog,
     private snackBar: MatSnackBar,
     private finanzasProgramadorPagosService: FinanzasProgramadorPagosService,
-    private router: Router
+    private router: Router,
+    private numeroAKilosPipe: NumeroAKilosPipe
   ) { }
 
   ngOnInit() {
@@ -86,14 +92,30 @@ export class BilleteraPagarComponent implements OnInit, OnDestroy {
     }
   }
 
-  // Muestra el comprobante en un dialog
-  mostrarComprobante() {
+  /**
+   * Muestra el resumen de la solicitud de pago
+   * @param solicitudCreada 
+   */
+  mostrarResumen(solicitudCreada: any) {
     let dialogRef = this.dialog.open(ResumenComprobanteDialogComponent, {
+      data: {
+        solicitudCreada,
+        unidadMedida: this.unidadMedida,
+        total: this.totalEvent$.getValue()
+      },
       maxWidth: '100vw',
       width: '100%',
       maxHeight: '100vh',
       height: '100%',
-    })
+    });
+
+    dialogRef.afterClosed().subscribe((nuevoCobro: boolean) => {
+      if (nuevoCobro == true) {
+        this.resetearParaNuevoIngreso();
+      } else {
+        this.router.navigate(["billetera"]);
+      }
+    });
   }
 
   // funcion encargada de mostrar u ocultar los filtros
@@ -131,10 +153,10 @@ export class BilleteraPagarComponent implements OnInit, OnDestroy {
         .pipe(takeUntil(this.destroy$))
         .subscribe(
           respuesta => {
-            this.openSnackBar(respuesta.mensaje);
-
             if (respuesta.exito == true) {
-              this.router.navigate(["billetera"]);
+              this.mostrarResumen(respuesta.datos);
+            } else {
+              this.openSnackBar(respuesta.mensaje);
             }
           },
           error => {
@@ -166,8 +188,8 @@ export class BilleteraPagarComponent implements OnInit, OnDestroy {
       canjes = this.disponiblesSeleccionados$.getValue().map(unDisponible => {
         return {
           especieCodExterno: unDisponible.especieCodigo,
-          kgAFijar: Number.parseFloat(unDisponible.stockAFijar), //TODO: convertir la cantidad a kilos
-          kgAPesificar: Number.parseFloat(unDisponible.stockAPesificar),//TODO: convertir la cantidad a kilos
+          kgAFijar: this.numeroAKilosPipe.transform(Number.parseFloat(unDisponible.stockAFijar), this.unidadMedida),
+          kgAPesificar: this.numeroAKilosPipe.transform(Number.parseFloat(unDisponible.stockAPesificar), this.unidadMedida),
         }
       });
     }
@@ -180,5 +202,16 @@ export class BilleteraPagarComponent implements OnInit, OnDestroy {
     };
 
     return datos;
+  }
+
+  /**
+   * Limpia todo para nuevo pago
+   */
+  resetearParaNuevoIngreso() {
+    this.observerFiltro$.next(null);
+    this.cargarListadoPorDefecto();
+    this.conceptosAPagarSeleccionados$.next(null);
+    this.disponiblesSeleccionados$.next(null);
+    this.stepper.selectedIndex = 0;
   }
 }

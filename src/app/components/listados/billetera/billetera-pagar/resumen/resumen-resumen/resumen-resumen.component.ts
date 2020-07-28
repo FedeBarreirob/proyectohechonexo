@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 
 @Component({
   selector: 'app-resumen-resumen',
@@ -6,6 +6,15 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./resumen-resumen.component.css']
 })
 export class ResumenResumenComponent implements OnInit {
+
+  @Input()
+  solicitudDePagoCreada: any;
+
+  @Input()
+  unidadMedida: string;
+
+  @Input()
+  total: number;
 
   constructor() { }
 

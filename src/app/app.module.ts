@@ -253,7 +253,6 @@ import { ResumenTipoPagoComponent } from './components/listados/billetera/billet
 import { ResumenTotalPagoComponent } from './components/listados/billetera/billetera-pagar/resumen/resumen-total-pago/resumen-total-pago.component';
 import { ResumenTotalPagoInfoComponent } from './components/listados/billetera/billetera-pagar/resumen/resumen-total-pago-info/resumen-total-pago-info.component';
 import { ResumenComprobanteDialogComponent } from './components/listados/billetera/billetera-pagar/resumen/resumen-comprobante-dialog/resumen-comprobante-dialog.component';
-import { ResumenComprobantePagosInfoComponent } from './components/listados/billetera/billetera-pagar/resumen/resumen-comprobante-pagos-info/resumen-comprobante-pagos-info.component';
 import { ResumenInfoSumaComponent } from './components/listados/billetera/billetera-pagar/resumen/resumen-info-suma/resumen-info-suma.component';
 import { ResumenInfoOperacionComponent } from './components/listados/billetera/billetera-pagar/resumen/resumen-info-operacion/resumen-info-operacion.component';
 import { ResumenResumenComponent } from './components/listados/billetera/billetera-pagar/resumen/resumen-resumen/resumen-resumen.component';
@@ -270,6 +269,8 @@ import { ResumenComprobanteDialogCobrosComponent } from './components/listados/b
 import { ResumenResumenCobrosComponent } from './components/listados/billetera/billetera-cobrar/resumen/resumen-resumen-cobros/resumen-resumen-cobros.component';
 import { ZeropadingPipe } from './pipes/zeropading.pipe';
 import { ResumenResumenCobrosItemComponent } from './components/listados/billetera/billetera-cobrar/resumen/resumen-resumen-cobros-item/resumen-resumen-cobros-item.component';
+import { ResumenResumenComprobanteAPagarItemComponent } from './components/listados/billetera/billetera-pagar/resumen/resumen-resumen-comprobante-apagar-item/resumen-resumen-comprobante-apagar-item.component';
+import { NumeroAKilosPipe } from './pipes/numero-akilos.pipe';
 
 registerLocaleData(localeEsAr, 'es-AR');
 
@@ -493,7 +494,6 @@ export function tokenGetter() {
 		ResumenTotalPagoComponent,
 		ResumenTotalPagoInfoComponent,
 		ResumenComprobanteDialogComponent,
-		ResumenComprobantePagosInfoComponent,
 		ResumenInfoSumaComponent,
 		ResumenInfoOperacionComponent,
 		ResumenResumenComponent,
@@ -509,7 +509,9 @@ export function tokenGetter() {
 		ResumenComprobanteDialogCobrosComponent,
 		ResumenResumenCobrosComponent,
 		ZeropadingPipe,
-		ResumenResumenCobrosItemComponent
+		ResumenResumenCobrosItemComponent,
+		ResumenResumenComprobanteAPagarItemComponent,
+		NumeroAKilosPipe
 	],
 	imports: [
 		HttpClientModule,
