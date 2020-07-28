@@ -3,20 +3,19 @@
     <app-inicio-filtro [cuenta]="cuenta" (botonCerrar)="menuSolicitudes.toggle()" [observerFiltro$]="observerFiltro$">
     </app-inicio-filtro>
   </mat-sidenav>
-  
+
   <section>
     <div class="fondo-gris" [ngClass]="{'fondo-gris': esCelular, 'fondo-gris-desktop': !esCelular}">
 
-      <app-tool-bar-general *ngIf="esCelular" [titulo]="'Gestión de solicitudes'" [disabled]="false"></app-tool-bar-general>
+      <app-tool-bar-general *ngIf="esCelular" [titulo]="'Gestión de solicitudes'" [disabled]="false">
+      </app-tool-bar-general>
 
       <div fxLayout="row" fxLayoutAlign="space-between center">
         <h3 class="titulo-card">Solicitudes de pago</h3>
         <button mat-button (click)="mostrarOcultarFiltros()">Filtrar</button>
       </div>
 
-      <div style="padding: 20px;">
-        <app-inicio-card></app-inicio-card>
-      </div>
+      <app-gestion-de-solicitudes-listado [observerFiltro$]="observerFiltro$"></app-gestion-de-solicitudes-listado>
     </div>
   </section>
 
