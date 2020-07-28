@@ -1,4 +1,4 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { DeviceDetectorService } from 'ngx-device-detector';
 import { BehaviorSubject } from 'rxjs';
 import { FinanzasProgramadorCobrosService } from '../../../../../services/finanzas/finanzas-programador-cobros.service';
@@ -6,7 +6,6 @@ import { MatSnackBar } from '@angular/material';
 import { DatePipe } from '@angular/common';
 import { ProgramadorCobroMediosCobro } from '../../../../../enums/programador-cobro-medios-cobro.enum';
 import { EntidadAlg } from '../../../../../interfaces/perfiles/entidad-alg';
-import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-billetera-cobrar-resumen-total',
@@ -22,6 +21,9 @@ export class BilleteraCobrarResumenTotalComponent implements OnInit {
   @Input()
   cuenta: EntidadAlg;
 
+  @Output()
+  mostrarResumen: EventEmitter<any> = new EventEmitter<any>();
+
   esCelular: boolean;
   guardando: boolean = false;
   total: number = 0;
@@ -30,8 +32,7 @@ export class BilleteraCobrarResumenTotalComponent implements OnInit {
     private deviceService: DeviceDetectorService,
     private finanzasProgramadorCobrosService: FinanzasProgramadorCobrosService,
     private snackBar: MatSnackBar,
-    private datePipe: DatePipe,
-    private router: Router
+    private datePipe: DatePipe
   ) { }
 
   ngOnInit() {
@@ -87,7 +88,7 @@ export class BilleteraCobrarResumenTotalComponent implements OnInit {
             this.openSnackBar(respuesta.mensaje);
 
             if (respuesta.exito == true) {
-              this.router.navigate(['/billetera']);
+              this.mostrarResumen.emit(respuesta.datos);
             }
           },
           error => {

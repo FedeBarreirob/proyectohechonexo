@@ -9,8 +9,7 @@ import { PrevisionDeCobroEstado } from '../../../../enums/prevision-de-cobro-est
 @Component({
   selector: 'app-lista-operaciones-movil',
   templateUrl: './lista-operaciones-movil.component.html',
-  styleUrls: ['./lista-operaciones-movil.component.css'],
-  providers: [DatePipe]
+  styleUrls: ['./lista-operaciones-movil.component.css']
 })
 export class ListaOperacionesMovilComponent implements OnInit, OnDestroy {
 
@@ -23,8 +22,7 @@ export class ListaOperacionesMovilComponent implements OnInit, OnDestroy {
 
   constructor(
     private finanzasProgramadorCobrosService: FinanzasProgramadorCobrosService,
-    private cuentaService: CuentaAlgService,
-    private datePipe: DatePipe
+    private cuentaService: CuentaAlgService
   ) { }
 
   ngOnInit() {
@@ -69,7 +67,6 @@ export class ListaOperacionesMovilComponent implements OnInit, OnDestroy {
    * @param prevision 
    */
   previsionAMostrar(prevision: any) {
-    console.log(prevision);
     let estadoDenominacion;
     switch (prevision.estado) {
       case PrevisionDeCobroEstado.PENDIENTE_DE_APROBACION:
@@ -93,7 +90,7 @@ export class ListaOperacionesMovilComponent implements OnInit, OnDestroy {
     }
 
     return {
-      fechaDeCobro: this.datePipe.transform(new Date(prevision.fechaDeCobro), 'dd/MM/yyyy'),
+      fechaDeCobro: prevision.fechaDeCobro,
       importeACobrarPesos: prevision.importeACobrarPesos,
       estado: prevision.estado,
       estadoDenominacion

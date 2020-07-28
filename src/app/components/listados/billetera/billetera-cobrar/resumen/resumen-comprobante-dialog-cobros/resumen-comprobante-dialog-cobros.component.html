@@ -1,25 +1,53 @@
 <div fxLayout="row" fxLayoutAlign="center" class="encabezado-filtro">
   <div fxFlex="20%">
-    <button mat-icon-button class="boton-close" (click)="salir()">
+    <button mat-icon-button class="boton-close" (click)="volverAlInicio()">
       <mat-icon>close</mat-icon>
     </button>
   </div>
-  
+
   <div fxFlex="80%" class="texto-filtrar" fxLayoutAlign="space-between center">
     Comprobante
   </div>
 </div>
 
 <div style="margin-top: 10px;">
+
+
+  <div fxLayout="column" class="card" fxLayoutAlign="space-between center" style="padding: 10px;">
+    <div>
+      <button mat-icon-button>
+        <mat-icon style="color: green;">schedule</mat-icon>
+      </button>
+    </div>
+    <div>
+      <p style="font-size: 18px; font-family: Rubik;">Tu Cobro
+        #{{ solicitudDeCobroCreada.solicitudId | zeropading: 10 }} fue programado con éxito.</p>
+      <p style="font-size: 16px; font-family: Rubik; margin-top: -10px; margin-bottom: 50px;">Te notificaremos cuando
+        realizemos la(s) operación(es).</p>
+    </div>
+  </div>
+
+  <app-resumen-resumen-cobros [cobrosProgramados]="solicitudDeCobroCreada.cobrosProgramados">
+  </app-resumen-resumen-cobros>
+
+
+<--! 
   <app-resumen-comprobante-cobros-info></app-resumen-comprobante-cobros-info>
   <app-resumen-resumen-cobros></app-resumen-resumen-cobros>
+-->
+
 </div>
 
 <div fxLayout="column">
   <div fxFlexFill fxLayout="row" fxLayoutALign="space-between center">
-    <a routerLink="/billetera"><button mat-button style="background-color: green; color: white; margin-top: 10px; width: 325px;" (click)="salir()">Volver al inicio</button></a>
+    <a routerLink="/billetera"><button mat-button
+        style="background-color: green; color: white; margin-top: 10px; width: 325px;" (click)="volverAlInicio()">Volver
+        al
+        inicio</button></a>
   </div>
   <div fxFlexFill fxLayout="row" fxLayoutALign="space-between center">
-    <button mat-button style="background-color: white; color: green; border: solid 1px green; margin-top: 10px; width: 350px;">Realizar nuevo cobro</button>
+    <button mat-button (click)="realizarNuevoCobro()"
+      style="background-color: white; color: green; border: solid 1px green; margin-top: 10px; width: 350px;">Realizar
+      nuevo cobro</button>
   </div>
 </div>

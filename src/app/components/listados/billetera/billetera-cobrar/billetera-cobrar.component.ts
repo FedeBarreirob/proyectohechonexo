@@ -5,6 +5,9 @@ import { CuentaAlgService } from '../../../../services/observers/cuentas-alg/cue
 import { Subject, BehaviorSubject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
 import { EntidadAlg } from '../../../../interfaces/perfiles/entidad-alg';
+import { MatDialog } from '@angular/material';
+import { ResumenComprobanteDialogCobrosComponent } from './resumen/resumen-comprobante-dialog-cobros/resumen-comprobante-dialog-cobros.component';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-billetera-cobrar',
@@ -24,7 +27,9 @@ export class BilleteraCobrarComponent implements OnInit, OnDestroy {
   constructor(
     private deviceService: DeviceDetectorService,
     private ctacteAplicadaService: CtacteAplicadaService,
-    private cuentaService: CuentaAlgService
+    private cuentaService: CuentaAlgService,
+    private dialog: MatDialog,
+    private router: Router
   ) { }
 
   ngOnInit() {
@@ -82,5 +87,27 @@ export class BilleteraCobrarComponent implements OnInit, OnDestroy {
    */
   seleccionarVencimientoACobrar(vencimientoACobrar: any) {
     this.vencimientoACobrarSeleccionado$.next(vencimientoACobrar);
+  }
+
+  /**
+   * Muestra el resumen del proceso de creación de la solicitud de cobro
+   * @param solicitudCreada 
+   */
+  mostrarResumen(solicitudCreada: any) {
+    let dialogRef = this.dialog.open(ResumenComprobanteDialogCobrosComponent, {
+      data: solicitudCreada,
+      maxWidth: '100vw',
+      width: '100%',
+      maxHeight: '100vh',
+      height: '100%'
+    });
+
+    dialogRef.afterClosed().subscribe((nuevoCobro: boolean) => {
+      if (nuevoCobro == true) {
+        this.cargarConceptosACobrar();
+      } else {
+        this.router.navigate(["billetera"]);
+      }
+    });
   }
 }

@@ -17,3 +17,8 @@
 .boton-close {
     margin-top: -35px;
 }
+
+.card{
+    background-color: #ccc;
+    border-radius: 4px;
+}

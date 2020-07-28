@@ -253,7 +253,6 @@ import { ResumenTipoPagoComponent } from './components/listados/billetera/billet
 import { ResumenTotalPagoComponent } from './components/listados/billetera/billetera-pagar/resumen/resumen-total-pago/resumen-total-pago.component';
 import { ResumenTotalPagoInfoComponent } from './components/listados/billetera/billetera-pagar/resumen/resumen-total-pago-info/resumen-total-pago-info.component';
 import { ResumenComprobanteDialogComponent } from './components/listados/billetera/billetera-pagar/resumen/resumen-comprobante-dialog/resumen-comprobante-dialog.component';
-import { ResumenComprobantePagosInfoComponent } from './components/listados/billetera/billetera-pagar/resumen/resumen-comprobante-pagos-info/resumen-comprobante-pagos-info.component';
 import { ResumenInfoSumaComponent } from './components/listados/billetera/billetera-pagar/resumen/resumen-info-suma/resumen-info-suma.component';
 import { ResumenInfoOperacionComponent } from './components/listados/billetera/billetera-pagar/resumen/resumen-info-operacion/resumen-info-operacion.component';
 import { ResumenResumenComponent } from './components/listados/billetera/billetera-pagar/resumen/resumen-resumen/resumen-resumen.component';
@@ -267,8 +266,11 @@ import { DefinicionDeBoletosAPesificarTotalComponent } from './components/listad
 import { ResumenPagoComprobanteAPagarComponent } from './components/listados/billetera/billetera-pagar/resumen/resumen-pago-comprobante-apagar/resumen-pago-comprobante-apagar.component';
 import { ResumenPagoMedioCanjeComponent } from './components/listados/billetera/billetera-pagar/resumen/resumen-pago-medio-canje/resumen-pago-medio-canje.component';
 import { ResumenComprobanteDialogCobrosComponent } from './components/listados/billetera/billetera-cobrar/resumen/resumen-comprobante-dialog-cobros/resumen-comprobante-dialog-cobros.component';
-import { ResumenComprobanteCobrosInfoComponent } from './components/listados/billetera/billetera-cobrar/resumen/resumen-comprobante-cobros-info/resumen-comprobante-cobros-info.component';
 import { ResumenResumenCobrosComponent } from './components/listados/billetera/billetera-cobrar/resumen/resumen-resumen-cobros/resumen-resumen-cobros.component';
+import { ZeropadingPipe } from './pipes/zeropading.pipe';
+import { ResumenResumenCobrosItemComponent } from './components/listados/billetera/billetera-cobrar/resumen/resumen-resumen-cobros-item/resumen-resumen-cobros-item.component';
+import { ResumenResumenComprobanteAPagarItemComponent } from './components/listados/billetera/billetera-pagar/resumen/resumen-resumen-comprobante-apagar-item/resumen-resumen-comprobante-apagar-item.component';
+import { NumeroAKilosPipe } from './pipes/numero-akilos.pipe';
 
 registerLocaleData(localeEsAr, 'es-AR');
 
@@ -492,7 +494,6 @@ export function tokenGetter() {
 		ResumenTotalPagoComponent,
 		ResumenTotalPagoInfoComponent,
 		ResumenComprobanteDialogComponent,
-		ResumenComprobantePagosInfoComponent,
 		ResumenInfoSumaComponent,
 		ResumenInfoOperacionComponent,
 		ResumenResumenComponent,
@@ -506,8 +507,11 @@ export function tokenGetter() {
 		ResumenPagoComprobanteAPagarComponent,
 		ResumenPagoMedioCanjeComponent,
 		ResumenComprobanteDialogCobrosComponent,
-		ResumenComprobanteCobrosInfoComponent,
-		ResumenResumenCobrosComponent
+		ResumenResumenCobrosComponent,
+		ZeropadingPipe,
+		ResumenResumenCobrosItemComponent,
+		ResumenResumenComprobanteAPagarItemComponent,
+		NumeroAKilosPipe
 	],
 	imports: [
 		HttpClientModule,

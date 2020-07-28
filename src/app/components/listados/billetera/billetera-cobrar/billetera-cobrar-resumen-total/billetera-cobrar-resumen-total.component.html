@@ -14,11 +14,8 @@
   </div>
 
   <div fxLayout="row" style="margin-left: 150px; margin-top: 20px;">
-    <a style="margin-right: 10px">
-      <button mat-stroked-button style="color: green; border: solid 1px green;" matStepperPrevious>Volver</button>
-    </a>
     <button [disabled]="!hayCobrosProgramados" mat-flat-button style="background-color: green; color: white;"
-      (click)="registrarSolicitudDeCobro()">Siguiente</button>
+      (click)="registrarSolicitudDeCobro()">Confirmar</button>
   </div>
 </div>
 
@@ -38,10 +35,8 @@
   </div>
 
   <div fxLayout="row" fxLayoutAlign="end end" style="margin-left: auto; margin-top: 20px;">
-    <a style="margin-right: 10px">
-      <button mat-stroked-button style="color: green; border: solid 1px green;" matStepperPrevious>Volver</button>
-    </a>
+    
     <button [disabled]="!hayCobrosProgramados" mat-flat-button style="background-color: green; color: white;"
-      (click)="registrarSolicitudDeCobro()">Siguiente</button>
+      (click)="registrarSolicitudDeCobro()">Confirmar</button>
   </div>
 </div>
