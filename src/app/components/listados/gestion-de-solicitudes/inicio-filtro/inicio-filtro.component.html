@@ -10,25 +10,27 @@
   </div>
 </div>
 
+<!--Spinner-->
+<div fxLayout="row" fxLayoutAlign="center center" *ngIf="cargando" style="margin-top: 10px">
+  <mat-spinner diameter="24"></mat-spinner>
+</div>
+
 <mat-divider></mat-divider>
 
 <!--Vencimientos-->
 <div fxLayout="row" fxLayoutAlign="space-around center">
-  <div fxFlex="100%" class="titulo-filtro" style="padding-top: 20px;">
+  <div fxFlex="100%" class="titulo-filtro" >
     Estado
   </div>
 </div>
 
-<div>
-  <span>
-    <ul>
-      <li *ngFor="let estado of estadoOptions" class="checkbox">
-        <mat-checkbox [(ngModel)]="estadoSeleccionado" [value]="estado.value">
-          {{estado.descripcion}}
-        </mat-checkbox>
-      </li>
-    </ul>
-  </span>
+<div fxLayout="row" fxLayoutAlign="space-around center">
+  <div fxFlex>
+    <mat-radio-group [(ngModel)]="estadoSeleccionado">
+      <mat-radio-button style="padding: 10px;" *ngFor="let unEstado of estados" [value]="unEstado.value">{{ unEstado.descripcion }}
+      </mat-radio-button>
+    </mat-radio-group>
+  </div>
 </div>
 
 <mat-divider></mat-divider>
@@ -60,12 +62,12 @@
   </div>
 </div>
 
-<mat-button-toggle-group class="grupo-botones-rubro" [(ngModel)]="rubro">
+<mat-button-toggle-group class="grupo-botones-rubro" [(ngModel)]="especieIdSeleccionado">
 
-  <div *ngFor="let rubro of (rubros ? rubros : [])" class="boton-rubro">
-    <mat-button-toggle value="{{rubro.codigo}}">
-      <img src="{{rubro.imagen}}" />
-      <div class="texto-rubro">{{rubro.texto}}</div>
+  <div *ngFor="let especie of especies" class="boton-rubro">
+    <mat-button-toggle value="{{especie.id}}">
+      <img src="{{especie.codigoEspecie | imagenEspecie}}" />
+      <div class="texto-rubro">{{especie.especieDescripcion}}</div>
     </mat-button-toggle>
   </div>
 
@@ -75,20 +77,25 @@
 
 <!--Método-->
 <div fxLayout="row" fxLayoutAlign="space-around center">
-  <div fxFlex="100%" class="titulo-filtro" style="padding-top: 20px;">
+  <div fxFlex="100%" class="titulo-filtro">
     Método
   </div>
 </div>
 
-<div >
-  <span>
-    <ul>
-      <li *ngFor="let metodo of metodoOptions" class="checkbox">
-        <mat-checkbox [(ngModel)]="metodoSeleccionado" [value]="metodo.value">
-          {{metodo.descripcion}}
-        </mat-checkbox>
-      </li>
-    </ul>
-  </span>
+<div fxLayout="row" fxLayoutAlign="space-around center">
+  <div fxFlex>
+    <mat-radio-group [(ngModel)]="metodoSeleccionado">
+      <mat-radio-button style="padding: 10px;" *ngFor="let unMetodo of metodos" [value]="unMetodo.value">{{ unMetodo.descripcion }}
+      </mat-radio-button>
+    </mat-radio-group>
+  </div>
 </div>
 
+<div style="padding: 10px;">
+  <mat-form-field appearance="fill">
+    <mat-label>Fecha de solicitud</mat-label>
+    <input readonly matInput [matDatepicker]="picker" [(ngModel)]="fechaDeSolicitud">
+    <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+    <mat-datepicker #picker></mat-datepicker>
+  </mat-form-field>
+</div>

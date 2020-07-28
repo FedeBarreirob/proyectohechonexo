@@ -1,35 +1,30 @@
-import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
-import { BehaviorSubject } from 'rxjs';
+import { Component, OnInit, Input, Output, EventEmitter, OnDestroy } from '@angular/core';
+import { BehaviorSubject, Subject } from 'rxjs';
+import { FinanzasProgramadorPagosService } from '../../../../services/finanzas/finanzas-programador-pagos.service';
+import { takeUntil } from 'rxjs/operators';
+import { Especie } from '../../../../interfaces/varios/especie';
 
 @Component({
   selector: 'app-inicio-filtro',
   templateUrl: './inicio-filtro.component.html',
   styleUrls: ['./inicio-filtro.component.css']
 })
-export class InicioFiltroComponent implements OnInit {
-
-  @Input()
-  cuenta: any;
+export class InicioFiltroComponent implements OnInit, OnDestroy {
 
   @Input()
   observerFiltro$: BehaviorSubject<any>
 
   @Output()
   botonCerrar: EventEmitter<any> = new EventEmitter<any>();
-
-  metodoOptions = [
-    {
-      descripcion: "Fijación",
-      value: "F"
-    },
-    {
-      descripcion: "Pesificación",
-      value: "P"
-    }
-  ];
-  metodoSeleccionado: string;
-
-  estadoOptions = [
+  
+  cargando: boolean = false;
+  destroy$: Subject<any> = new Subject<any>();
+  especies: Array<Especie>;
+  especieIdSeleccionado: number;
+  fechaFijacion: string;
+  
+  estadoSeleccionado: number;
+  estados = [
     {
       descripcion: "Pendientes",
       value: 1
@@ -39,30 +34,28 @@ export class InicioFiltroComponent implements OnInit {
       value: 2
     }
   ];
-  estadoSeleccionado: number;
 
-  rubros: Array<any> = [
+  metodos = [
     {
-      codigo: "soja",
-      texto: "Soja",
-      imagen: "assets/cereal-filtro/soja.png"
+      descripcion: "Fijación",
+      value: 1
     },
     {
-      codigo: "maiz",
-      texto: "Maíz",
-      imagen: "assets/cereal-filtro/maiz.png"
-    },
-    {
-      codigo: "trigo",
-      texto: "Trigo",
-      imagen: "assets/cereal-filtro/trigo.png"
+      descripcion: "Pesificación",
+      value: 2
     }
   ];
-  rubro: any;
+  metodoSeleccionado: number;
 
-  constructor() { }
+  constructor(private finanzasProgramadorPagosService: FinanzasProgramadorPagosService) { }
 
   ngOnInit() {
+    this.cargarEspecies();
+  }
+
+  ngOnDestroy(): void {
+    this.destroy$.next();
+    this.destroy$.unsubscribe();
   }
 
   // funcion que dispara la notificacion cuando el boton cerrar se presiona
@@ -70,4 +63,26 @@ export class InicioFiltroComponent implements OnInit {
     this.botonCerrar.emit(null);
   }
 
+  /**
+   * Función encargada de cargar las especies
+   */
+  cargarEspecies() {
+    if (this.cargando == false) {
+      this.cargando = true;
+
+      this.finanzasProgramadorPagosService.listadoDeEspeciesEnSolicitudes()
+        .pipe(takeUntil(this.destroy$))
+        .subscribe(
+          response => {
+            if (response.exito == true) {
+              this.especies = response.datos;
+            }
+          },
+          error => {
+            console.log(error);
+            this.cargando = false;
+          },
+          () => this.cargando = false);
+    }
+  }
 }

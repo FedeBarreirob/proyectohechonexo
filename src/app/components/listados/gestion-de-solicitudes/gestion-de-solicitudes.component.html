@@ -1,6 +1,6 @@
 <mat-sidenav-container [ngClass]="{'contenedor-solicitudes': esCelular, 'contenedor-desktop': !esCelular }">
   <mat-sidenav #menuSolicitudes position="end" class="sidenav-filtro">
-    <app-inicio-filtro [cuenta]="cuenta" (botonCerrar)="menuSolicitudes.toggle()" [observerFiltro$]="observerFiltro$">
+    <app-inicio-filtro (botonCerrar)="menuSolicitudes.toggle()" [observerFiltro$]="observerFiltro$">
     </app-inicio-filtro>
   </mat-sidenav>
 
