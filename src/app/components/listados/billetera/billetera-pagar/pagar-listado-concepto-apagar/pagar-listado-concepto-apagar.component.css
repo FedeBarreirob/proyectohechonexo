@@ -2,4 +2,34 @@
     background-color: white;
     padding: 10px;
     margin-top: 10px;
+    height: 72px;
+}
+
+.check{
+    margin-top: 20px;
+    margin-left: 5px;
+}
+
+.moneda{
+    margin-top: 15px;
+    margin-bottom: 5px;
+    font-size: 18px;
+}
+
+.datos{
+    font-family: Rubik; 
+    font-size: 12px; 
+    color: #999;
+}
+
+.porVencer{
+    font-family: Rubik; 
+    font-size: 18px; 
+    color: black;
+}
+
+.estaVencido{
+    font-family: Rubik; 
+    font-size: 18px; 
+    color: red;
 }

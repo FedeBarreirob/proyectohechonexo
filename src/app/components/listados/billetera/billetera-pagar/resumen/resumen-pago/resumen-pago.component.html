@@ -1,21 +1,21 @@
 <div *ngIf="esCelular">
   <div>
-    <p style="font-family: Rubik; font-size: 12px; color: #999;">Verifica que todos los datos de tu pago estén corretos
+    <p style="font-family: Rubik; font-size: 12px; color: #666;">Verifica que todos los datos de tu pago estén corretos
       y presiona pagar para terminar la operación.</p>
   </div>
 
   <div fxLayout="column">
-    <h3>Comprobantes a pagar</h3>
+    <p style="font-family: Rubik; font-size: 16px; color: #333;">Comprobantes a pagar</p>
 
     <app-resumen-pago-comprobante-apagar *ngFor="let movimiento of (conceptosAPagarSeleccionados$ | async)"
       [movimiento]="movimiento">
     </app-resumen-pago-comprobante-apagar>
 
-    <h3>Medio</h3>
+    <p style="font-family: Rubik; font-size: 16px; color: #333;">Medio</p>
     <app-resumen-pago-medio-canje [disponiblesSeleccionados$]="disponiblesSeleccionados$">
     </app-resumen-pago-medio-canje>
 
-    <h3>Total</h3>
+    <p style="font-family: Rubik; font-size: 16px; color: #333;">Total</p>
     <app-resumen-total-pago [totalEvent$]="totalEvent$"></app-resumen-total-pago>
     <app-resumen-total-pago-info style="margin-top: 10px;"></app-resumen-total-pago-info>
   </div>

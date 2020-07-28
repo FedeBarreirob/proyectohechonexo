@@ -1,7 +1,7 @@
 <div class="card">
   <div fxLayout="row" fxLayoutALign="space-between center">
     <div fxFlex="nogrow" style="padding: 10px; color: #ccc;">
-      <h4>Total a pagar: </h4>
+      <p style="font-family: Rubik; font-size: 14px; color: #666; margin-top: 20px;">Total a pagar: </p>
     </div>
     <div fxFlex="nogrow" style="padding: 10px;">
       <h3>$ {{ (totalEvent$ | async) | number }}</h3>
@@ -10,7 +10,7 @@
   <mat-divider></mat-divider>
   <div fxLayout="row" fxLayoutALign="space-between center">
     <div fxFlex="nogrow" style="padding: 10px; color: #ccc;">
-      <h4>Total para canjear: </h4>
+      <p style="font-family: Rubik; font-size: 14px; color: #666; margin-top: 25px;">Total para canjear: </p>
     </div>
     <div fxFlex="nogrow" style="padding: 10px;">
       <h2>$ {{ (totalImporteCanje$ | async) | number }}</h2>

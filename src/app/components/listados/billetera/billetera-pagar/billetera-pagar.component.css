@@ -24,7 +24,7 @@
 
 .mat-stepper-horizontal {
     margin-top: 0px;
-    background-color: #fafafa;
+    background-color: #f7f8f8;
 }
 
 .tittle{
@@ -33,5 +33,5 @@
 }
   
 .button{
-    background-color: transparent;
+    background-color: #f7f8f8;
 }

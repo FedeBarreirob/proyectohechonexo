@@ -21,21 +21,22 @@
     <mat-spinner diameter="24"></mat-spinner>
   </div>
 
-  <p style="color: #999;" *ngIf="!cargando && cantidadNecesariaParaSaldarConCanje">Si quisieras pagar solo con
+  <p style="color: #666; font-family: Rubik; font-size: 12px;" *ngIf="!cargando && cantidadNecesariaParaSaldarConCanje">Si quisieras pagar solo con
     {{ disponible.especieDescripcion | lowercase }}, tendrías que sumar
     {{ cantidadNecesariaParaSaldarConCanje | number: '.0-2' }} {{unidadMedida | kilosTextoA}} de este cultivo.</p>
 
-  <mat-card>
+  <mat-card class="card-contenido">
 
-    <div fxLayout="row" fxLayoutAlign="space-between center" fxLayoutGap="5px" style="margin-bottom: 10px;">
+    <div fxLayout="row" fxLayoutAlign="space-between center" fxLayoutGap="5px" style="margin-bottom: 10px; height: 111px;">
 
       <div fxFlex="55%">
 
         <div fxLayout="column" fxLayoutAlign="space-between start">
-          <div fxFlex>Stock a fijar</div>
+          <div fxFlex style="font-family: Rubik; font-size: 14px; color: #333; margin-top: -20px;">Stock a fijar</div>
           <div fxFlex style="border-bottom: 1px solid #999999;" (change)="notificarImporteCalculadoYStock()"
             (keyup)="notificarImporteCalculadoYStock()"><input [readonly]="boletosFijacionDefinidos"
-              [(ngModel)]="stockAFijar" numeric numericType="decimal" style="border: none; width: 80px;" />
+              [(ngModel)]="stockAFijar" numeric numericType="decimal" style="margin-top: 15px; height: 20px; font-size: 20px; font-family: Rubik;
+              width: 80px; border: none; margin-bottom: 10px;" />
             {{unidadMedida | kilosTextoA}}</div>
           <div fxFlex class="disponible-text">Disponible: {{ disponibleStockAFijar | number: '.0-2' }}
             {{unidadMedida | kilosTextoA}} </div>
@@ -45,11 +46,11 @@
 
       <div fxFlex="45%">
         <button *ngIf="!boletosFijacionDefinidos && stockAFijar > 0" (click)="definirBoletosAFijar()" mat-button
-          class="link-ver-todas">Definir boletos<mat-icon>
+          class="button-definir">Definir boletos<mat-icon>
             keyboard_arrow_right</mat-icon></button>
 
         <button *ngIf="boletosFijacionDefinidos && stockAFijar > 0" (click)="definirBoletosAFijar()" mat-button
-          class="link-ver-todas">Definido<mat-icon>
+          class="button-definir">Definido<mat-icon>
             check_circle</mat-icon></button>
       </div>
 
@@ -57,15 +58,16 @@
 
     <mat-divider></mat-divider>
 
-    <div fxLayout="row" fxLayoutAlign="space-between center" fxLayoutGap="5px" style="margin-top: 20px;">
+    <div fxLayout="row" fxLayoutAlign="space-between center" fxLayoutGap="5px" style="margin-bottom: 10px; height: 111px;">
 
       <div fxFlex="55%">
 
         <div fxLayout="column" fxLayoutAlign="space-between start">
-          <div fxFlex>Stock a pesificar</div>
+          <div fxFlex style="font-family: Rubik; font-size: 14px; color: #333; margin-top: 10px;">Stock a pesificar</div>
           <div fxFlex style="border-bottom: 1px solid #999999;"><input [(ngModel)]="stockAPesificar" numeric
-              numericType="decimal" style="border: none; width: 80px;" [readonly]="boletosPesificacionDefinidos"
-              (change)="notificarImporteCalculadoYStock()" (keyup)="notificarImporteCalculadoYStock()" />
+              numericType="decimal" [readonly]="boletosPesificacionDefinidos"
+              (change)="notificarImporteCalculadoYStock()" (keyup)="notificarImporteCalculadoYStock()" style="margin-top: 15px; height: 20px;
+              font-size: 20px; font-family: Rubik; width: 80px; border: none; margin-bottom: 10px;"/>
             {{unidadMedida | kilosTextoA}} </div>
           <div fxFlex class="disponible-text">Disponible: {{ disponibleStockAPesificar | number: '.0-2' }}
             {{unidadMedida | kilosTextoA}} </div>
@@ -75,11 +77,11 @@
 
       <div fxFlex="45%">
         <button *ngIf="!boletosPesificacionDefinidos && stockAPesificar > 0" (click)="definirBoletosAPesificar()"
-          mat-button class="link-ver-todas">Definir boletos<mat-icon>
+          mat-button class="button-definir">Definir boletos<mat-icon>
             keyboard_arrow_right</mat-icon></button>
 
         <button *ngIf="boletosPesificacionDefinidos && stockAPesificar > 0" (click)="definirBoletosAPesificar()"
-          mat-button class="link-ver-todas">Definido<mat-icon>
+          mat-button class="button-definir">Definido<mat-icon>
             check_circle</mat-icon></button>
       </div>
 
