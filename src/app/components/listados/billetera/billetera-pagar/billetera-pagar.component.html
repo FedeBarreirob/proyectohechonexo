@@ -28,7 +28,7 @@
               <button style="margin-left: 50px;" mat-button (click)="mostrarOcultarFiltros()"><img style="width: 20px;" src="assets/toolbar/embudo.png"></button>
             </div>
             <app-pagar-info></app-pagar-info>
-            <app-pagar-listado style="padding-right: 10px;" [cuenta]="cuenta" [totalEvent$]="totalEvent$" [observerFiltro$]="observerFiltro$"
+            <app-pagar-listado [cuenta]="cuenta" [totalEvent$]="totalEvent$" [observerFiltro$]="observerFiltro$"
               [conceptosAPagarSeleccionados$]="conceptosAPagarSeleccionados$">
             </app-pagar-listado>
             <app-pagar-comprobantes-total [totalEvent$]="totalEvent$"></app-pagar-comprobantes-total>
@@ -51,7 +51,7 @@
             </app-pago-con-canje>
             <div fxFlexFill fxLayout="row" fxLayoutALign="space-between center">
               <button mat-button matStepperNext
-                style="background-color: green; color: white; margin-top: 10px; width: 350px;">Siguiente</button>
+                style="background-color: green; color: white; margin-top: 10px; width: 100%;">Siguiente</button>
             </div>
           </mat-step>
 
