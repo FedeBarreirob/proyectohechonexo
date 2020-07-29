@@ -5,11 +5,13 @@ import { ContratosService } from '../../../../../services/contratos/contratos.se
 import { takeUntil } from 'rxjs/operators';
 import { MatDialog } from '@angular/material';
 import { PreciosDeGranosComponent } from '../precios-de-granos/precios-de-granos.component';
+import { KilosAPipe } from '../../../../../pipes/kilos-a.pipe';
 
 @Component({
   selector: 'app-pago-con-canje',
   templateUrl: './pago-con-canje.component.html',
-  styleUrls: ['./pago-con-canje.component.css']
+  styleUrls: ['./pago-con-canje.component.css'],
+  providers: [KilosAPipe]
 })
 export class PagoConCanjeComponent implements OnInit, OnDestroy {
 
@@ -25,6 +27,9 @@ export class PagoConCanjeComponent implements OnInit, OnDestroy {
   @Input()
   disponiblesSeleccionados$: BehaviorSubject<Array<any>>;
 
+  @Input()
+  canjesPreviamenteSeleccionados: Array<any>;
+
   disponibles: Array<any>;
   cargando: boolean = false;
   destroy$: Subject<any> = new Subject<any>();
@@ -32,7 +37,8 @@ export class PagoConCanjeComponent implements OnInit, OnDestroy {
 
   constructor(
     private contratosService: ContratosService,
-    private dialog: MatDialog
+    private dialog: MatDialog,
+    private kilosAPipe: KilosAPipe
   ) { }
 
   ngOnInit() {
@@ -52,8 +58,8 @@ export class PagoConCanjeComponent implements OnInit, OnDestroy {
         .pipe(takeUntil(this.destroy$))
         .subscribe(
           respuesta => {
-            if (respuesta.exito == true) {
-              this.disponibles = respuesta.datos;
+            if (respuesta.exito == true && respuesta.datos && respuesta.datos.length > 0) {
+              this.disponibles = respuesta.datos.map(disponible => this.disponibleConStockDefinido(disponible));
             }
           },
           error => {
@@ -119,6 +125,60 @@ export class PagoConCanjeComponent implements OnInit, OnDestroy {
       this.disponiblesSeleccionados$.next(disponiblesSeleccionados);
     } else {
       this.disponiblesSeleccionados$.next(null);
+    }
+  }
+
+  /**
+   * Función que devuelve el diponible con información de stok indicado
+   */
+  disponibleConStockDefinido(disponible: any) {
+    if (this.canjesPreviamenteSeleccionados && this.canjesPreviamenteSeleccionados.length > 0) {
+      let informacionDeStockPreviamenteDefinido = this.canjesPreviamenteSeleccionados.find(canje => canje.especieCodExterno == disponible.especieCodigo);
+
+      if (informacionDeStockPreviamenteDefinido) {
+
+        let disponibleConInfo = Object.assign({}, disponible);
+
+        disponibleConInfo.stockAFijar = this.kilosAPipe.transform(informacionDeStockPreviamenteDefinido.kgAFijar, this.unidadMedida);
+        disponibleConInfo.stockAPesificar = this.kilosAPipe.transform(informacionDeStockPreviamenteDefinido.kgAPesificar, this.unidadMedida);
+
+        // datos de fijación previa
+        if (informacionDeStockPreviamenteDefinido.boletosAFijar && informacionDeStockPreviamenteDefinido.boletosAFijar.length > 0) {
+          disponibleConInfo.definicionDeBoletosFijaciones = informacionDeStockPreviamenteDefinido.boletosAFijar.map(fijacion => {
+            return {
+              boleto: {
+                contratoAlgId: Number.parseInt(fijacion.codContratoExterno)
+              },
+              boletoSeleccionado: true,
+              precioDelDia: fijacion.precioDelDia,
+              stockAFijar: this.kilosAPipe.transform(fijacion.kgAFijar, this.unidadMedida),
+              tipoFijacion: fijacion.tipoFijacion,
+              tipoPrecioFijacion: fijacion.tipoPrecioFijacion
+            };
+          });
+        }
+
+        // datos de pesificación previa
+        if (informacionDeStockPreviamenteDefinido.boletosAPesificar && informacionDeStockPreviamenteDefinido.boletosAPesificar.length > 0) {
+          disponibleConInfo.definicionDeBoletosPesificacion = informacionDeStockPreviamenteDefinido.boletosAPesificar.map(pesificacion => {
+            return {
+              boleto: {
+                contratoAlgId: Number.parseInt(pesificacion.codContratoExterno)
+              },
+              boletoSeleccionado: true,
+              stockAPesificar: this.kilosAPipe.transform(pesificacion.kgAPesificar, this.unidadMedida),
+              tipoPesificacion: pesificacion.tipoPesificacion
+            };
+          });
+        }
+
+        return disponibleConInfo;
+      } else {
+        return disponible;
+      }
+
+    } else {
+      return disponible;
     }
   }
 }

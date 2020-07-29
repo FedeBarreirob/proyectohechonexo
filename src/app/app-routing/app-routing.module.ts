@@ -87,7 +87,16 @@ const routes: Routes = [
 				data: {
 					rolAdmin: false
 				}
-			},{
+			},
+			{
+				path: 'pagar/:solicitudId',
+				component: BilleteraPagarComponent,
+				canActivate: [AuthGuardGuard],
+				data: {
+					rolAdmin: false
+				}
+			},
+			{
 				path: 'cobrar',
 				component: BilleteraCobrarComponent,
 				canActivate: [AuthGuardGuard],

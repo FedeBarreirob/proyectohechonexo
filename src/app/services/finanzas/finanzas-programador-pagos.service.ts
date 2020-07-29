@@ -14,6 +14,7 @@ export class FinanzasProgramadorPagosService {
   private urlRegistrarSolicitudDePago = `${environment.hostFinanzas}/programadorDePagos/registrarSolicitudDePago`;
   private urlListadoSolicitudDePago = `${environment.hostFinanzas}/programadorDePagos/listadoSolicitudes`;
   private urlFiltroEspecie = `${environment.hostFinanzas}/programadorDePagos/filtroEspecie`;
+  private urlSolicitudPorId = `${environment.hostFinanzas}/programadorDePagos/solicitudDePagoPorId`;
 
   constructor(private http: HttpClient) { }
 
@@ -61,5 +62,21 @@ export class FinanzasProgramadorPagosService {
     };
 
     return this.http.get<ResponseServicio>(this.urlFiltroEspecie, httpOptions);
+  }
+
+  /**
+   * Devuelve una solicitud de pago a partir de su id
+   * @param id 
+   */
+  solicitudDePagoPorId(id: number): Observable<ResponseServicio> {
+
+    const httpOptions = {
+      headers: {
+        'Content-Type': 'application/json'
+      }
+    };
+
+    let url = `${this.urlSolicitudPorId}/${id}`;
+    return this.http.get<ResponseServicio>(url, httpOptions);
   }
 }

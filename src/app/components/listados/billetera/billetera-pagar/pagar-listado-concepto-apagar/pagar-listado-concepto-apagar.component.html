@@ -2,7 +2,7 @@
   <div fxLayout="row" fxLayoutAlign="space-between center" fxLayoutGap="10px">
 
     <div fxFlex="nogrow" fxLayoutAlign="center start" class="check">
-      <mat-checkbox (change)="notificarSeleccion($event.checked)"></mat-checkbox>
+      <mat-checkbox [(ngModel)]="esConceptoSeleccionado" (change)="notificarSeleccion($event.checked)"></mat-checkbox>
     </div>
 
     <div fxFlex="grow">
