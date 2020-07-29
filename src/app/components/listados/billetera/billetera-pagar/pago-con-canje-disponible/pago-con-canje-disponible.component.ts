@@ -173,11 +173,11 @@ export class PagoConCanjeDisponibleComponent implements OnInit, OnDestroy {
   notificarImporteCalculadoYStock() {
 
     if (this.disponibleStockAFijar < 0) {
-      this.stockAFijar = this.kilosAPipe.transform(this.disponible.kgDisponiblesPendientesDeFijar, this.unidadMedida);
+      this.stockAFijar = Number.parseFloat(this.kilosAPipe.transform(this.disponible.kgDisponiblesPendientesDeFijar, this.unidadMedida));
     }
 
     if (this.disponibleStockAPesificar < 0) {
-      this.stockAPesificar = this.kilosAPipe.transform(this.disponible.kgDisponiblesPendientesDePesificar, this.unidadMedida);
+      this.stockAPesificar = Number.parseFloat(this.kilosAPipe.transform(this.disponible.kgDisponiblesPendientesDePesificar, this.unidadMedida));
     }
 
     if (this.stockAFijar > 0 || this.stockAPesificar > 0) {

@@ -36,7 +36,7 @@
         <div fxLayout="column" fxLayoutAlign="space-between start">
           <div fxFlex style="font-family: Rubik; font-size: 14px; color: #333; margin-top: -20px;">Stock a fijar</div>
           <div fxFlex style="border-bottom: 1px solid #999999;" (change)="notificarImporteCalculadoYStock()"
-            (keyup)="notificarImporteCalculadoYStock()"><input
+            (click)="$event.target.select()" (keyup)="notificarImporteCalculadoYStock()"><input
               [readonly]="boletosFijacionDefinidos || !sePuedeEspecificarFijaciones" [(ngModel)]="stockAFijar" numeric
               numericType="decimal" style="margin-top: 15px; height: 20px; font-size: 20px; font-family: Rubik;
               width: 80px; border: none; margin-bottom: 10px;" />
@@ -71,7 +71,8 @@
           </div>
           <div fxFlex style="border-bottom: 1px solid #999999;"><input [(ngModel)]="stockAPesificar" numeric
               numericType="decimal" [readonly]="boletosPesificacionDefinidos || !sePuedeEspecificarPesificaciones"
-              (change)="notificarImporteCalculadoYStock()" (keyup)="notificarImporteCalculadoYStock()" style="margin-top: 15px; height: 20px;
+              (click)="$event.target.select()" (change)="notificarImporteCalculadoYStock()"
+              (keyup)="notificarImporteCalculadoYStock()" style="margin-top: 15px; height: 20px;
               font-size: 20px; font-family: Rubik; width: 80px; border: none; margin-bottom: 10px;" />
             {{unidadMedida | kilosTextoA}} </div>
           <div fxFlex class="disponible-text">Disponible: {{ disponibleStockAPesificar | number: '.0-2' }}
