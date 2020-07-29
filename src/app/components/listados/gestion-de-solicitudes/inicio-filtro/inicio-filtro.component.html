@@ -10,16 +10,11 @@
   </div>
 </div>
 
-<!--Spinner-->
-<div fxLayout="row" fxLayoutAlign="center center" *ngIf="cargando" style="margin-top: 10px">
-  <mat-spinner diameter="24"></mat-spinner>
-</div>
-
 <mat-divider></mat-divider>
 
 <!--Vencimientos-->
 <div fxLayout="row" fxLayoutAlign="space-around center">
-  <div fxFlex="100%" class="titulo-filtro" >
+  <div fxFlex="100%" class="titulo-filtro">
     Estado
   </div>
 </div>
@@ -27,7 +22,8 @@
 <div fxLayout="row" fxLayoutAlign="space-around center">
   <div fxFlex>
     <mat-radio-group [(ngModel)]="estadoSeleccionado">
-      <mat-radio-button style="padding: 10px;" *ngFor="let unEstado of estados" [value]="unEstado.value">{{ unEstado.descripcion }}
+      <mat-radio-button style="padding: 10px;" *ngFor="let unEstado of estados" [value]="unEstado.value">
+        {{ unEstado.descripcion }}
       </mat-radio-button>
     </mat-radio-group>
   </div>
@@ -42,16 +38,7 @@
   </div>
 </div>
 
-<div style="padding: 10px;">
-  <mat-form-field appearance="fill">
-    <mat-label>Selecciona el productor</mat-label>
-    <mat-select fxLayoutALign="space-between center">
-      <mat-option>
-        Example
-      </mat-option>
-    </mat-select>
-  </mat-form-field>
-</div>
+<app-perfiles-autocomplete (select)="seleccionarPerfil($event)" [clearAll$]="clearAll$"></app-perfiles-autocomplete>
 
 <mat-divider></mat-divider>
 
@@ -60,6 +47,11 @@
   <div fxFlex="100%" class="titulo-filtro">
     Granos
   </div>
+</div>
+
+<!--Spinner-->
+<div fxLayout="row" fxLayoutAlign="center center" *ngIf="cargando" style="margin-top: 10px">
+  <mat-spinner diameter="24"></mat-spinner>
 </div>
 
 <mat-button-toggle-group class="grupo-botones-rubro" [(ngModel)]="especieIdSeleccionado">
@@ -85,7 +77,8 @@
 <div fxLayout="row" fxLayoutAlign="space-around center">
   <div fxFlex>
     <mat-radio-group [(ngModel)]="metodoSeleccionado">
-      <mat-radio-button style="padding: 10px;" *ngFor="let unMetodo of metodos" [value]="unMetodo.value">{{ unMetodo.descripcion }}
+      <mat-radio-button style="padding: 10px;" *ngFor="let unMetodo of metodos" [value]="unMetodo.value">
+        {{ unMetodo.descripcion }}
       </mat-radio-button>
     </mat-radio-group>
   </div>
@@ -98,4 +91,15 @@
     <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
     <mat-datepicker #picker></mat-datepicker>
   </mat-form-field>
+</div>
+
+<!--botones-->
+<div fxLayout="row" fxLayoutAlign="space-between center" class="contenedor-botones">
+  <div fxFlex="50%">
+    <button mat-button class="boton-limpiar" (click)="limpiar()" [disabled]="cargando">Limpiar</button>
+  </div>
+
+  <div fxFlex="50%">
+    <button mat-button class="boton-aplicar" (click)="aplicar()" [disabled]="cargando">Aplicar</button>
+  </div>
 </div>
