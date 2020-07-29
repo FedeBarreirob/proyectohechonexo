@@ -1,0 +1,15 @@
+<div class="ng-autocomplete">
+  <ng-autocomplete #auto [data]="data" [searchKeyword]="keyword" (selected)='selectEvent($event)'
+    (inputChanged)='onChangeSearch($event)' (inputFocused)='onFocused($event)' [itemTemplate]="itemTemplate"
+    [notFoundTemplate]="notFoundTemplate" [disabled]="disabled" [isLoading]="cargando"
+    placeHolder="Buscar usuario">
+  </ng-autocomplete>
+
+  <ng-template #itemTemplate let-item>
+    <a class="item-list" [innerHTML]="item.nombre"></a>
+  </ng-template>
+
+  <ng-template #notFoundTemplate let-notFound>
+    <div class="item-list">No se encontraron resultados</div>
+  </ng-template>
+</div>

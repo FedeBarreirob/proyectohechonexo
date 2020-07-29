@@ -221,7 +221,16 @@
 }
 
 a.google-play {
-  display: block;
-  text-align: center;
-  margin-top: 5%;
+    display: block;
+    text-align: center;
+    margin-top: 5%;
+}
+
+.version {
+    font-family: Rubik;
+    font-size: 10px;
+    color: #666666;
+    text-align: center;
+    margin-top: 10px;
+    margin-bottom: 10px;
 }

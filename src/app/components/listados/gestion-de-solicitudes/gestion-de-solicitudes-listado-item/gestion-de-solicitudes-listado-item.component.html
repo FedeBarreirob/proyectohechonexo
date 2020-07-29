@@ -1,0 +1,34 @@
+<mat-card class="card">
+
+  <div fxLayout="row" fxLayoutAlign="space-between center" fxLayoutGap="5px">
+
+    <div fxFlex="nogrow">
+      <img [src]="urlAvatar" class="img-perfil">
+    </div>
+
+    <div fxFlex="grow">
+
+      <div fxLayout="column" fxLayoutAlign="space-between start">
+
+        <div fxFlex>${{ solicitud.importeTotalPesosAPagar | number }}</div>
+
+        <div fxFlex>
+          {{ solicitud.perfilBasicoInfoPersonalDTO.nombre }}, pago con canje
+          <!-- el tipo de pago debe ser dinámico -->
+        </div>
+
+      </div>
+
+    </div>
+
+    <div fxFlex="nogrow">
+
+      <button mat-icon-button>
+        <mat-icon style="color: green;">keyboard_arrow_right</mat-icon>
+      </button>
+
+    </div>
+
+  </div>
+
+</mat-card>
