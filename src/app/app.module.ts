@@ -20,6 +20,8 @@ const DEFAULT_SWIPER_CONFIG: SwiperConfigInterface = {
 	slidesPerView: 'auto'
 };
 
+import {AutocompleteLibModule} from 'angular-ng-autocomplete';
+
 // locale
 import { registerLocaleData, DecimalPipe, CommonModule, DatePipe } from '@angular/common';
 import localeEsAr from '@angular/common/locales/es-AR';
@@ -271,6 +273,9 @@ import { ZeropadingPipe } from './pipes/zeropading.pipe';
 import { ResumenResumenCobrosItemComponent } from './components/listados/billetera/billetera-cobrar/resumen/resumen-resumen-cobros-item/resumen-resumen-cobros-item.component';
 import { ResumenResumenComprobanteAPagarItemComponent } from './components/listados/billetera/billetera-pagar/resumen/resumen-resumen-comprobante-apagar-item/resumen-resumen-comprobante-apagar-item.component';
 import { NumeroAKilosPipe } from './pipes/numero-akilos.pipe';
+import { GestionDeSolicitudesListadoComponent } from './components/listados/gestion-de-solicitudes/gestion-de-solicitudes-listado/gestion-de-solicitudes-listado.component';
+import { GestionDeSolicitudesListadoItemComponent } from './components/listados/gestion-de-solicitudes/gestion-de-solicitudes-listado-item/gestion-de-solicitudes-listado-item.component';
+import { PerfilesAutocompleteComponent } from './components/common/perfiles-autocomplete/perfiles-autocomplete.component';
 
 registerLocaleData(localeEsAr, 'es-AR');
 
@@ -511,7 +516,10 @@ export function tokenGetter() {
 		ZeropadingPipe,
 		ResumenResumenCobrosItemComponent,
 		ResumenResumenComprobanteAPagarItemComponent,
-		NumeroAKilosPipe
+		NumeroAKilosPipe,
+		GestionDeSolicitudesListadoComponent,
+		GestionDeSolicitudesListadoItemComponent,
+		PerfilesAutocompleteComponent
 	],
 	imports: [
 		HttpClientModule,
@@ -544,7 +552,8 @@ export function tokenGetter() {
 		InfiniteScrollModule,
 		NgxGaugeModule,
 		SwiperModule,
-		NgxSpinnerModule
+		NgxSpinnerModule,
+		AutocompleteLibModule
 	],
 	providers: [
 		{ provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true },

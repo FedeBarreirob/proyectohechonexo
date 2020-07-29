@@ -12,30 +12,29 @@ import { EntregasService } from 'src/app/services/entregas/entregas.service';
 })
 export class GestionDeSolicitudesComponent implements OnInit, OnDestroy {
   
-
   @ViewChild('menuSolicitudes') public sidenav: MatSidenav;
 
   destroy$: Subject<any> = new Subject<any>();
   esCelular: boolean;
   cuenta: EntidadAlg;
-  observerFiltro$: BehaviorSubject<any> = new BehaviorSubject<any>(null);
+  observerFiltro$: BehaviorSubject<any> = new BehaviorSubject<any>({});
   especie: string;
 
   constructor(
-    @Inject(MAT_DIALOG_DATA) public data: any,
+    //@Inject(MAT_DIALOG_DATA) public data: any,
     private deviceService: DeviceDetectorService,
     private EntregasService: EntregasService
-  ) { 
-    this.cuenta = data.cuenta
-    this.especie = data.especie
-   }
+  ) {
+    //this.cuenta = data.cuenta
+    //this.especie = data.especie
+  }
 
   ngOnInit() {
     this.esCelular = this.deviceService.isMobile();
 
   }
 
-  cargarDatosEntrega(){
+  cargarDatosEntrega() {
 
   }
 
