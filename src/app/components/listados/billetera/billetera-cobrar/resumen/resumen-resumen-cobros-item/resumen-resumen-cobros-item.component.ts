@@ -1,5 +1,6 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { ChequeLugarRetiro } from 'src/app/enums/cheque-lugar-retiro.enum';
+import { DeviceDetectorService } from 'ngx-device-detector';
 
 @Component({
   selector: 'app-resumen-resumen-cobros-item',
@@ -10,10 +11,12 @@ export class ResumenResumenCobrosItemComponent implements OnInit {
 
   @Input()
   cobroProgramado: any;
+  esCelular: boolean;
 
-  constructor() { }
+  constructor(private deviceService: DeviceDetectorService) { }
 
   ngOnInit() {
+    this.esCelular = this.deviceService.isMobile();
   }
 
   get medio(): string {

@@ -1,4 +1,5 @@
 import { Component, OnInit, Input } from '@angular/core';
+import { DeviceDetectorService } from 'ngx-device-detector';
 
 @Component({
   selector: 'app-resumen-resumen-cobros',
@@ -9,10 +10,12 @@ export class ResumenResumenCobrosComponent implements OnInit {
 
   @Input()
   cobrosProgramados: Array<any>;
+  esCelular: boolean;
 
-  constructor() { }
+  constructor(private deviceService: DeviceDetectorService) { }
 
   ngOnInit() {
+    this.esCelular = this.deviceService.isMobile();
   }
 
   get total(): number {

@@ -1,0 +1,46 @@
+/* encabezado */
+
+.encabezado-filtro {
+    padding-top: 10px;
+}
+ 
+.texto-filtrar {
+    color: #999999;
+    font-family: Rubik;
+    font-size: 15px;
+    letter-spacing: 1.2px;
+    text-align: left;
+    padding-left: 10px;
+    padding-bottom: 10px;
+}
+ 
+.boton-close {
+    margin-top: -35px;
+}
+
+.titulo-card-1{
+    margin-top: 10px;
+    margin-bottom: 3px;
+    color: black;
+    font-family: Rubik;
+    font-size: 14px;
+    letter-spacing: 1.2px;
+    padding-left: 10px;
+}
+
+.texto-card{
+    margin-top: 3px;
+    color: #999;
+    font-family: Rubik;
+    font-size: 12px;
+    letter-spacing: 1.2px;
+    padding-left: 10px;
+}
+
+.importe-cobrar{
+    margin-top: 3px;
+    margin-bottom: 3px;
+    color: rgb(38, 38, 38);
+    font-family: Rubik;
+    font-size: 20px;
+}

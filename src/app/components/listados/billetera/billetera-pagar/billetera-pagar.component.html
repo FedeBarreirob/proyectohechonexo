@@ -87,7 +87,7 @@
     <div *ngIf="!esCelular " style="padding-right: 150px; padding-left: 150px;">
       <div class="title">
         <a routerLink="/billetera" fxFlex="25%" fxLayoutAlign="center center">
-          <button mat-mini-fab class="button">
+          <button mat-button class="button">
             <mat-icon style="color: green;">arrow_back</mat-icon>
           </button>
         </a>
@@ -96,7 +96,7 @@
 
       <!-- VISTA DESKTOP -->
 
-      <div style="width: 570px;">
+      <div>
         <mat-horizontal-stepper fxLayout="column" labelPosition="bottom" #stepper>
 
           <!--step comprobantes-->

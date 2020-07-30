@@ -7,7 +7,14 @@
 
 .contenedor-desktop {
     height: 100%;
-    padding-top: 20px;
+    padding-top: 100px;
+}
+
+.sidenav-filtro-desktop {
+    box-shadow: 3px 0 6px rgba(0, 0, 0, .24);
+    width: 70%;
+    max-width: 270px;
+    margin-top: 100px;
 }
 
 .sidenav-filtro {
@@ -39,8 +46,16 @@
 }
 
 .titulo-card{
-    color: #999;
+    color: #3333;
     font-family: Rubik;
     font-size: 20px;
     padding: 10px;
+}
+
+.titulo-card-desktop{
+    color: #3333;
+    font-family: Rubik;
+    font-size: 20px;
+    padding: 10px;
+    margin-left: 150px;
 }
