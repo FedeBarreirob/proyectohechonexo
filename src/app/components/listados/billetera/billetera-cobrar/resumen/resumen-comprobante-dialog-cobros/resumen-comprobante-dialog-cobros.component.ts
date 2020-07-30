@@ -1,5 +1,6 @@
 import { Component, OnInit, Inject } from '@angular/core';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material';
+import { DeviceDetectorService } from 'ngx-device-detector';
 
 @Component({
   selector: 'app-resumen-comprobante-dialog-cobros',
@@ -9,15 +10,18 @@ import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material';
 export class ResumenComprobanteDialogCobrosComponent implements OnInit {
 
   solicitudDeCobroCreada: any;
+  esCelular: boolean;
 
   constructor(
     @Inject(MAT_DIALOG_DATA) public data: any,
+    private deviceService: DeviceDetectorService,
     private dialogRef: MatDialogRef<ResumenComprobanteDialogCobrosComponent>
   ) {
     this.solicitudDeCobroCreada = data;
   }
 
   ngOnInit() {
+    this.esCelular = this.deviceService.isMobile();
   }
 
   volverAlInicio() {

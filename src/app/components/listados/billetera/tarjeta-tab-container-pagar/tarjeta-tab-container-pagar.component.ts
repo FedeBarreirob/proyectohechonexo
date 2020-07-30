@@ -2,7 +2,7 @@ import { Component, OnInit, Input } from '@angular/core';
 import { DeviceDetectorService } from 'ngx-device-detector';
 import { SaldoGlobalCtaCteAplicada } from '../../../../interfaces/ctacte-aplicada/saldo-global-cta-cte-aplicada';
 import { MatDialog } from '@angular/material';
-import { BilleteraCardInfoComponent } from '../billetera-card-info/billetera-card-info.component';
+import { BilleteraCardInfoPagosComponent } from '../billetera-card-info-pagos/billetera-card-info-pagos.component';
 
 @Component({
   selector: 'app-tarjeta-tab-container-pagar',
@@ -22,7 +22,7 @@ export class TarjetaTabContainerPagarComponent implements OnInit {
   }
 
   solicitarInfo(){
-    let dialogRef = this.dialog.open(BilleteraCardInfoComponent, {
+    let dialogRef = this.dialog.open(BilleteraCardInfoPagosComponent, {
       maxWidth: '90vw',
       width: '388px',
       maxHeight: '90vh',

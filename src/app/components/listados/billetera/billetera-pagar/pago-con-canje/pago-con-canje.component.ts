@@ -5,6 +5,7 @@ import { ContratosService } from '../../../../../services/contratos/contratos.se
 import { takeUntil } from 'rxjs/operators';
 import { MatDialog } from '@angular/material';
 import { PreciosDeGranosComponent } from '../precios-de-granos/precios-de-granos.component';
+import { DeviceDetectorService } from 'ngx-device-detector';
 
 @Component({
   selector: 'app-pago-con-canje',
@@ -29,14 +30,17 @@ export class PagoConCanjeComponent implements OnInit, OnDestroy {
   cargando: boolean = false;
   destroy$: Subject<any> = new Subject<any>();
   totalImporteCanje$: BehaviorSubject<number> = new BehaviorSubject<number>(0);
+  esCelular: boolean;
 
   constructor(
     private contratosService: ContratosService,
+    private deviceService: DeviceDetectorService,
     private dialog: MatDialog
   ) { }
 
   ngOnInit() {
     this.cargarDisponible();
+    this.esCelular = this.deviceService.isMobile();
   }
 
   ngOnDestroy(): void {

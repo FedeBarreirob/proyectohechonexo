@@ -276,6 +276,8 @@ import { NumeroAKilosPipe } from './pipes/numero-akilos.pipe';
 import { GestionDeSolicitudesListadoComponent } from './components/listados/gestion-de-solicitudes/gestion-de-solicitudes-listado/gestion-de-solicitudes-listado.component';
 import { GestionDeSolicitudesListadoItemComponent } from './components/listados/gestion-de-solicitudes/gestion-de-solicitudes-listado-item/gestion-de-solicitudes-listado-item.component';
 import { PerfilesAutocompleteComponent } from './components/common/perfiles-autocomplete/perfiles-autocomplete.component';
+import { BilleteraCardInfoPagosComponent } from './components/listados/billetera/billetera-card-info-pagos/billetera-card-info-pagos.component';
+import { CardMasInformacionComponent } from './components/listados/billetera/card-mas-informacion/card-mas-informacion.component';
 
 registerLocaleData(localeEsAr, 'es-AR');
 
@@ -519,7 +521,9 @@ export function tokenGetter() {
 		NumeroAKilosPipe,
 		GestionDeSolicitudesListadoComponent,
 		GestionDeSolicitudesListadoItemComponent,
-		PerfilesAutocompleteComponent
+		PerfilesAutocompleteComponent,
+		BilleteraCardInfoPagosComponent,
+		CardMasInformacionComponent
 	],
 	imports: [
 		HttpClientModule,
@@ -609,7 +613,9 @@ export function tokenGetter() {
 		ResumenComprobanteDialogComponent,
 		DefinicionDeBoletosAFijarComponent,
 		DefinicionDeBoletosAPesificarComponent,
-		ResumenComprobanteDialogCobrosComponent
+		ResumenComprobanteDialogCobrosComponent,
+		BilleteraCardInfoPagosComponent,
+		CardMasInformacionComponent
 	],
 	bootstrap: [AppComponent]
 })
