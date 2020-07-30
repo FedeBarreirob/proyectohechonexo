@@ -8,7 +8,7 @@
 </div>
 
 <div *ngIf="!esCelular">
-  <div class="card-container">
+  <div class="card-container-desktop">
     <div fxLayout="row" fxLayoutAlign="space-between center">
       <h5 fxFlex style="padding-left: 10px;color: #999; font-size: 18px;">Total a pagar</h5>
       <h3 fxFlex style="font-size: 25px; font-family: Rubik; width: 100%;">$ {{ (totalEvent$ | async) | number }}</h3>

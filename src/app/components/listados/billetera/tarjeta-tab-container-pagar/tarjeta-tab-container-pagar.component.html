@@ -2,13 +2,13 @@
   <mat-card class="tarjeta">
 
     <div fxLayout="row" fxLayoutAlign="space-between center">
-      <div fxFlex="100%" class="titulo-card-1">Dinero en cuenta</div>
+      <div fxFlex="100%" class="titulo-card-1">Deuda total en cuenta</div>
     </div>
   
     <div fxLayout="row" fxLayoutAlign="space-between center">
   
       <div fxFlex class="contenedor-importe"><span class="importe-cobrar">
-          ${{ saldoGlobal.aCobrarVencido + saldoGlobal.aCobrarAVencer | number: '.0-0' }} </span>
+          ${{ saldoGlobal.aPagarVencido + saldoGlobal.aPagarAVencer | number: '.0-0' }} </span>
         <button mat-icon-button color="primary" class="indicador" (click)="solicitarInfo()">
           <mat-icon>info</mat-icon>
         </button>
@@ -22,123 +22,15 @@
         <div style="margin-left: -10px;">
           <div fxFlex="100%">
             <button mat-icon-button class="Bill-wave">
-              <img src="../../../../../assets/varios/Bill-wave.png" alt="">
-            </button>
-          </div>
-        </div>
-      </div>
-  
-      <div fxFlex="75%">
-        <div>
-          <div fxFlex="100%" class="titulo-card">Dinero disponible</div>
-        </div>
-      
-        <div>
-          <div fxFlex="100%" class="contenedor-importe"><span class="importe-cobrar">
-              ${{ saldoGlobal.aCobrarVencido | number: '.0-0' }} </span>
-          </div>
-        </div>
-      </div>
-
-      <div fxFlex="10%">
-        <button mat-icon-button>
-          <mat-icon class="arrow">keyboard_arrow_right</mat-icon>
-        </button>
-      </div>
-    </div>
-    <mat-divider></mat-divider>
-  
-    <div fxLayout="row" fxLayoutAlign="space-between center">
-      <div fxFlex="15%">
-        <div style="margin-left: -10px;">
-          <div fxFlex="100%">
-            <button mat-icon-button class="Bill-wave">
-              <img src="../../../../../assets/varios/Bill-wave_time.png" alt="">
-            </button>
-          </div>
-        </div>
-      </div>
-  
-      <div fxFlex="75%">
-        <div>
-          <div fxFlex="100%" class="titulo-card">Dinero por cobrar</div>
-        </div>
-      
-        <div>
-          <div fxFlex="100%" class="contenedor-importe"><span class="importe-cobrar">
-              ${{ saldoGlobal.aCobrarAVencer | number: '.0-0' }} </span>
-          </div>
-        </div>
-      </div>
-
-      <div fxFlex="10%">
-        <button mat-icon-button>
-          <mat-icon class="arrow">keyboard_arrow_right</mat-icon>
-        </button>
-      </div>
-    </div>
-    <mat-divider></mat-divider>
-  
-    <div fxLayout="row" fxLayoutAlign="space-between center">
-      <div fxFlex="15%">
-        <div style="margin-left: -10px;">
-          <div fxFlex="100%">
-            <button mat-icon-button class="Bill-wave">
               <img src="../../../../../assets/varios/Bill-wave_time-disabled.png" alt="">
             </button>
           </div>
         </div>
       </div>
   
-      <div fxFlex="85%">
-        <div>
-          <div fxFlex="100%" class="titulo-card">Dinero retenido</div>
-        </div>
-      
-        <div>
-          <div fxFlex="100%" class="contenedor-importe"><span class="importe-cobrar">
-              ${{ saldoGlobal.aCobrarAVencer | number: '.0-0' }} </span>
-          </div>
-        </div>
-      </div>
-    </div>
-  
-  </mat-card>
-</div>
-
-<div *ngIf="!esCelular" >
-  <mat-card class="tarjeta1">
-
-    <div fxLayout="row" fxLayoutAlign="space-between center">
-      <div fxFlex="100%" class="titulo-card-1">Dinero a pagar</div>
-    </div>
-  
-    <div fxLayout="row" fxLayoutAlign="space-between center">
-  
-      <div fxFlex class="contenedor-importe"><span class="importe-cobrar">
-          ${{ saldoGlobal.aPagarVencido + saldoGlobal.aPagarAVencer | number: '.0-0' }} </span>
-        <button mat-icon-button color="primary" class="indicador-d" (click)="solicitarInfo()" *ngIf="!esCelular">
-          <mat-icon>info</mat-icon>
-        </button>
-      </div>
-  
-    </div>
-    <mat-divider></mat-divider>
-    
-    <div fxLayout="row" fxLayoutAlign="space-between center">
-      <div fxFlex="15%">
-        <div style="margin-left: -10px;">
-          <div fxFlex="100%">
-            <button mat-icon-button class="Bill-wave">
-              <img src="../../../../../assets/varios/Bill-wave.png" alt="">
-            </button>
-          </div>
-        </div>
-      </div>
-  
       <div fxFlex="75%">
         <div>
-          <div fxFlex="100%" class="titulo-card">Dinero disponible</div>
+          <div fxFlex="100%" class="titulo-card">Deuda vencida</div>
         </div>
       
         <div>
@@ -169,7 +61,7 @@
   
       <div fxFlex="75%">
         <div>
-          <div fxFlex="100%" class="titulo-card">Dinero por pagar</div>
+          <div fxFlex="100%" class="titulo-card">Deuda a pagar</div>
         </div>
       
         <div>
@@ -185,11 +77,32 @@
         </button>
       </div>
     </div>
-    <mat-divider></mat-divider>
+  
+  </mat-card>
+</div>
+
+<div *ngIf="!esCelular" >
+  <mat-card class="tarjeta1">
+
+    <div fxLayout="row" fxLayoutAlign="space-between center">
+      <div fxFlex="100%" class="titulo-card-1">Deuda total en cuenta</div>
+    </div>
   
     <div fxLayout="row" fxLayoutAlign="space-between center">
+  
+      <div fxFlex class="contenedor-importe"><span class="importe-cobrar">
+          ${{ saldoGlobal.aPagarVencido + saldoGlobal.aPagarAVencer | number: '.0-0' }} </span>
+        <button mat-icon-button color="primary" class="indicador-d" (click)="solicitarInfo()" *ngIf="!esCelular">
+          <mat-icon>info</mat-icon>
+        </button>
+      </div>
+  
+    </div>
+    <mat-divider></mat-divider>
+    
+    <div fxLayout="row" fxLayoutAlign="space-between center">
       <div fxFlex="15%">
-        <div style="margin-left: -10px;">
+        <div style="margin-left: 10px;">
           <div fxFlex="100%">
             <button mat-icon-button class="Bill-wave">
               <img src="../../../../../assets/varios/Bill-wave_time-disabled.png" alt="">
@@ -198,9 +111,40 @@
         </div>
       </div>
   
-      <div fxFlex="85%">
+      <div fxFlex="75%">
         <div>
-          <div fxFlex="100%" class="titulo-card">Dinero pagado</div>
+          <div fxFlex="100%" class="titulo-card">Deuda vencida</div>
+        </div>
+      
+        <div>
+          <div fxFlex="100%" class="contenedor-importe"><span class="importe-cobrar">
+              ${{ saldoGlobal.aPagarVencido | number: '.0-0' }} </span>
+          </div>
+        </div>
+      </div>
+
+      <div fxFlex="10%">
+        <button mat-icon-button>
+          <mat-icon class="arrow">keyboard_arrow_right</mat-icon>
+        </button>
+      </div>
+    </div>
+    <mat-divider></mat-divider>
+  
+    <div fxLayout="row" fxLayoutAlign="space-between center">
+      <div fxFlex="15%">
+        <div style="margin-left: 10px;">
+          <div fxFlex="100%">
+            <button mat-icon-button class="Bill-wave">
+              <img src="../../../../../assets/varios/Bill-wave_time.png" alt="">
+            </button>
+          </div>
+        </div>
+      </div>
+  
+      <div fxFlex="75%">
+        <div>
+          <div fxFlex="100%" class="titulo-card">Deuda a pagar</div>
         </div>
       
         <div>
@@ -208,6 +152,12 @@
               ${{ saldoGlobal.aPagarAVencer | number: '.0-0' }} </span>
           </div>
         </div>
+      </div>
+
+      <div fxFlex="10%">
+        <button mat-icon-button>
+          <mat-icon class="arrow">keyboard_arrow_right</mat-icon>
+        </button>
       </div>
     </div>
   

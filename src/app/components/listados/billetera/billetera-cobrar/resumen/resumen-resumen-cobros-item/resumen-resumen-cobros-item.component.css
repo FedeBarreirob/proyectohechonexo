@@ -1,3 +1,10 @@
+.card-desktop{
+    padding: 20px;
+    text-align: left;
+}
+
 .datos {
-    font-size: 10px;
+    font-size: 11px;
+    font-family: Rubik;
+    color: #6666;
 }

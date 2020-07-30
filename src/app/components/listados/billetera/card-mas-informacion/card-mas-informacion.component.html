@@ -1,0 +1,53 @@
+<div *ngIf="esCelular">
+  <div class="card">
+    <div fxLayout="row" fxLayoutAlign="space-between start" class="encabezado-filtro">
+      <div fxFlex="90%" class="texto-filtrar">
+        Estados de las operaciones
+      </div>
+    
+      <div fxFlex="10%">
+        <button mat-icon-button class="boton-close" (click)="salir()">
+          <mat-icon>close</mat-icon>
+        </button>
+      </div>
+    </div>
+    <mat-divider></mat-divider>
+    <div>
+      <img class="img" src="../../../../../assets/fondobilletera.png">
+    </div>
+    <div class="estados">
+      <div class="title">En proceso</div>
+      <div class="texto">Tu cobro está siendo analizado por nuestros colaboradores</div>
+      <br>
+      <div class="title">Efectuado</div>
+      <div class="texto">¡Listo! Tu cobro ya se encuentra en tu cuenta. Si solicitaste cheque físico un colaborador se contactará para la entrega</div>
+    </div>
+  </div>
+</div>
+
+<div *ngIf="!esCelular">
+  <div class="card">
+    <div fxLayout="row" fxLayoutAlign="space-between start" class="encabezado-filtro">
+      <div fxFlex="90%" class="texto-filtrar">
+        Estados de las operaciones
+      </div>
+    
+      <div fxFlex="10%">
+        <button mat-icon-button class="boton-close" (click)="salir()">
+          <mat-icon>close</mat-icon>
+        </button>
+      </div>
+    </div>
+    <mat-divider></mat-divider>
+    <div>
+      <img class="img-desktop" src="../../../../../assets/fondobilletera.png">
+    </div>
+    <div class="estados-desktop">
+      <div class="title">En proceso</div>
+      <div class="texto">Tu cobro está siendo analizado por nuestros colaboradores</div>
+      <br>
+      <div class="title">Efectuado</div>
+      <div class="texto">¡Listo! Tu cobro ya se encuentra en tu cuenta. Si solicitaste cheque físico un colaborador se contactará para la entrega</div>
+    </div>
+  </div>
+</div>

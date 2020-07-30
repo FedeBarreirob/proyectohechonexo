@@ -1,53 +1,108 @@
-<div fxLayout="row" fxLayoutAlign="center" class="encabezado-filtro">
-  <div fxFlex="20%">
-    <button mat-icon-button class="boton-close" (click)="volverAlInicio()">
-      <mat-icon>close</mat-icon>
-    </button>
-  </div>
-
-  <div fxFlex="80%" class="texto-filtrar" fxLayoutAlign="space-between center">
-    Comprobante
-  </div>
-</div>
-
-<div style="margin-top: 10px;">
-
-
-  <div fxLayout="column" class="card" fxLayoutAlign="space-between center" style="padding: 10px;">
-    <div>
-      <button mat-icon-button>
-        <mat-icon style="color: green;">schedule</mat-icon>
+<div *ngIf="esCelular">
+  <div fxLayout="row" fxLayoutAlign="start center" class="encabezado-filtro">
+    <div fxFlex="100%">
+      <button mat-icon-button class="boton-close" (click)="volverAlInicio()">
+        <mat-icon>close</mat-icon>
       </button>
     </div>
-    <div>
-      <p style="font-size: 18px; font-family: Rubik;">Tu Cobro
-        #{{ solicitudDeCobroCreada.solicitudId | zeropading: 10 }} fue programado con éxito.</p>
-      <p style="font-size: 16px; font-family: Rubik; margin-top: -10px; margin-bottom: 50px;">Te notificaremos cuando
-        realizemos la(s) operación(es).</p>
+  </div>
+  
+  <div style="margin-top: 10px;">
+  
+    <div class="texto-filtrar" fxLayoutAlign="start center">
+      Comprobante
+    </div>
+  
+    <div fxLayout="column" class="card-mobile" fxLayoutAlign="space-between center" style="padding: 10px;">
+      <div>
+        <button mat-icon-button>
+          <mat-icon style="color: green;">schedule</mat-icon>
+        </button>
+      </div>
+      <div>
+        <p style="font-size: 18px; font-family: Rubik;">Tu Cobro
+          #{{ solicitudDeCobroCreada.solicitudId | zeropading: 10 }} fue programado con éxito.</p>
+        <p style="font-size: 16px; font-family: Rubik; margin-top: -10px; margin-bottom: 50px;">Te notificaremos cuando
+          realizemos la(s) operación(es).</p>
+      </div>
+    </div>
+  
+    <app-resumen-resumen-cobros [cobrosProgramados]="solicitudDeCobroCreada.cobrosProgramados">
+    </app-resumen-resumen-cobros>
+  
+  
+  <!-- 
+    <app-resumen-comprobante-cobros-info></app-resumen-comprobante-cobros-info>
+    <app-resumen-resumen-cobros></app-resumen-resumen-cobros>
+  -->
+  
+  </div>
+  
+  <div fxLayout="column">
+    <div fxFlexFill fxLayout="row" fxLayoutALign="space-between center">
+      <a routerLink="/billetera"><button mat-button
+          style="background-color: green; color: white; margin-top: 10px; width: 350px;" (click)="volverAlInicio()">Volver
+          al
+          inicio</button></a>
+    </div>
+    <div fxFlexFill fxLayout="row" fxLayoutALign="space-between center">
+      <button mat-button (click)="realizarNuevoCobro()"
+        style="background-color: white; color: green; border: solid 1px green; margin-top: 10px; width: 350px;">Realizar
+        nuevo cobro</button>
     </div>
   </div>
-
-  <app-resumen-resumen-cobros [cobrosProgramados]="solicitudDeCobroCreada.cobrosProgramados">
-  </app-resumen-resumen-cobros>
-
-
-<!-- 
-  <app-resumen-comprobante-cobros-info></app-resumen-comprobante-cobros-info>
-  <app-resumen-resumen-cobros></app-resumen-resumen-cobros>
--->
-
 </div>
 
-<div fxLayout="column">
-  <div fxFlexFill fxLayout="row" fxLayoutALign="space-between center">
-    <a routerLink="/billetera"><button mat-button
-        style="background-color: green; color: white; margin-top: 10px; width: 325px;" (click)="volverAlInicio()">Volver
-        al
-        inicio</button></a>
+
+<!-- VISTA DESKTOP-->
+<div *ngIf="!esCelular">
+  <div fxLayout="row" fxLayoutAlign="end center" class="encabezado-filtro">
+    <div fxFlex="100%">
+      <button mat-icon-button class="boton-close" (click)="volverAlInicio()">
+        <mat-icon>close</mat-icon>
+      </button>
+    </div>
   </div>
-  <div fxFlexFill fxLayout="row" fxLayoutALign="space-between center">
-    <button mat-button (click)="realizarNuevoCobro()"
-      style="background-color: white; color: green; border: solid 1px green; margin-top: 10px; width: 350px;">Realizar
-      nuevo cobro</button>
+  
+  <div style="margin-top: 10px;">
+    
+    <div class="texto-filtrar" fxLayoutAlign="space-between start">
+      Comprobante
+    </div>
+    
+    <div fxLayout="column" class="card-desktop" fxLayoutAlign="space-between start" style="padding: 10px;">
+      <div>
+        <button mat-icon-button>
+          <mat-icon style="color: green;">schedule</mat-icon>
+        </button>
+      </div>
+      <div>
+        <p style="font-size: 18px; font-family: Rubik;">Tu Cobro
+          #{{ solicitudDeCobroCreada.solicitudId | zeropading: 10 }} fue programado con éxito.</p>
+        <p style="font-size: 16px; font-family: Rubik; margin-top: -10px; margin-bottom: 50px;">Te notificaremos cuando
+          realizemos la(s) operación(es).</p>
+      </div>
+    </div>
+  
+    <app-resumen-resumen-cobros [cobrosProgramados]="solicitudDeCobroCreada.cobrosProgramados">
+    </app-resumen-resumen-cobros>
+  
+  
+  <!-- 
+    <app-resumen-comprobante-cobros-info></app-resumen-comprobante-cobros-info>
+    <app-resumen-resumen-cobros></app-resumen-resumen-cobros>
+  -->
+  
+  </div>
+  
+  <div fxLayout="row" class="card-buttons">
+    <div>
+      <a routerLink="/billetera"><button mat-button class="button-volver" (click)="volverAlInicio()">Volver 
+          al inicio</button></a>
+    </div>
+    <div style="margin-left: 10px;">
+      <button mat-button (click)="realizarNuevoCobro()" class="button-realizar">Realizar
+        nuevo cobro</button>
+    </div>
   </div>
 </div>

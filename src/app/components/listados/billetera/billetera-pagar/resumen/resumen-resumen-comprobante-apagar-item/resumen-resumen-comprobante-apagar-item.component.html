@@ -2,7 +2,7 @@
 
   <div fxFlex="grow">
 
-    <div fxLayout="column" fxLayoutAlign="space-between start">
+    <div fxLayout="column" fxLayoutAlign="space-between start" style="padding: 10px;">
       <div fxFlex>
         {{ concepto.moneda | moneda }}
         <span *ngIf="concepto.moneda == 'P'">{{ concepto.saldoPesos * (-1) | number }}</span>
