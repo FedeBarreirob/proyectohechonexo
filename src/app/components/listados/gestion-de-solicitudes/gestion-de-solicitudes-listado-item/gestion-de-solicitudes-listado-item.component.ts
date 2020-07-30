@@ -1,4 +1,5 @@
 import { Component, OnInit, Input } from '@angular/core';
+import { DeviceDetectorService } from 'ngx-device-detector';
 
 @Component({
   selector: 'app-gestion-de-solicitudes-listado-item',
@@ -9,10 +10,12 @@ export class GestionDeSolicitudesListadoItemComponent implements OnInit {
 
   @Input()
   solicitud: any;
+  esCelular: boolean;
 
-  constructor() { }
+  constructor(private deviceService: DeviceDetectorService) { }
 
   ngOnInit() {
+    this.esCelular = this.deviceService.isMobile();
   }
 
   get urlAvatar(): string {
