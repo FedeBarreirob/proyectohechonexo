@@ -15,6 +15,8 @@ export class FinanzasProgramadorPagosService {
   private urlListadoSolicitudDePago = `${environment.hostFinanzas}/programadorDePagos/listadoSolicitudes`;
   private urlFiltroEspecie = `${environment.hostFinanzas}/programadorDePagos/filtroEspecie`;
   private urlSolicitudPorId = `${environment.hostFinanzas}/programadorDePagos/solicitudDePagoPorId`;
+  private urlActualizarSolicitudDePago = `${environment.hostFinanzas}/programadorDePagos/actualizarSolicitudDePago`;
+
 
   constructor(private http: HttpClient) { }
 
@@ -78,5 +80,20 @@ export class FinanzasProgramadorPagosService {
 
     let url = `${this.urlSolicitudPorId}/${id}`;
     return this.http.get<ResponseServicio>(url, httpOptions);
+  }
+
+  /**
+   * Actualiza una solicitud de pago
+   * @param solicitudDePago 
+   */
+  actualizacionSolicitudDePago(solicitudDePago: any): Observable<ResponseServicio> {
+
+    const httpOptions = {
+      headers: new HttpHeaders({
+        'Content-Type': 'application/json'
+      })
+    };
+
+    return this.http.put<ResponseServicio>(this.urlActualizarSolicitudDePago, solicitudDePago, httpOptions);
   }
 }

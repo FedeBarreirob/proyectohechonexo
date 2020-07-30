@@ -1,4 +1,5 @@
 import { Component, OnInit, Input } from '@angular/core';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-gestion-de-solicitudes-listado-item',
@@ -10,7 +11,7 @@ export class GestionDeSolicitudesListadoItemComponent implements OnInit {
   @Input()
   solicitud: any;
 
-  constructor() { }
+  constructor(private router: Router) { }
 
   ngOnInit() {
   }
@@ -21,5 +22,10 @@ export class GestionDeSolicitudesListadoItemComponent implements OnInit {
     } else {
       return "assets/perfil/sin-foto.jpg";
     }
+  }
+
+  editar() {
+    let url = `/pagar/${this.solicitud.id}`;
+    this.router.navigate([url]);
   }
 }

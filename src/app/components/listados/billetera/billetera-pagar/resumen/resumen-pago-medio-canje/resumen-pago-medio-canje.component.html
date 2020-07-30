@@ -27,7 +27,7 @@
       </div>
 
       <div fxFlex="nogrow">
-        {{ (canje.stockAFijar + canje.stockAPesificar )| number: '.0-2' }} {{ canje.unidadMedida | kilosTextoA}}
+        {{ totalACanjear(canje) | number: '.0-2' }} {{ canje.unidadMedida | kilosTextoA}}
       </div>
 
     </div>

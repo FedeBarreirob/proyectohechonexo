@@ -90,7 +90,6 @@ export class BilleteraPagarComponent implements OnInit, OnDestroy {
            this.perfilBasico = perfil;
            this.cargarUnidadMedida()
          });*/
-
   }
 
   ngOnDestroy(): void {
@@ -127,10 +126,14 @@ export class BilleteraPagarComponent implements OnInit, OnDestroy {
     });
 
     dialogRef.afterClosed().subscribe((nuevoCobro: boolean) => {
-      if (nuevoCobro == true) {
-        this.resetearParaNuevoIngreso();
+      if (this.modoEdicion == true) {
+        this.router.navigate(["/gestion-de-solicitudes"]);
       } else {
-        this.router.navigate(["billetera"]);
+        if (nuevoCobro == true) {
+          this.resetearParaNuevoIngreso();
+        } else {
+          this.router.navigate(["billetera"]);
+        }
       }
     });
   }
@@ -166,23 +169,50 @@ export class BilleteraPagarComponent implements OnInit, OnDestroy {
 
       let datos = this.datosAGuardar();
 
-      this.finanzasProgramadorPagosService.registroSolicitudDePago(datos)
-        .pipe(takeUntil(this.destroy$))
-        .subscribe(
-          respuesta => {
-            if (respuesta.exito == true) {
-              this.mostrarResumen(respuesta.datos);
-            } else {
-              this.openSnackBar(respuesta.mensaje);
-            }
-          },
-          error => {
-            console.log(error);
-            this.guardando = false;
-          },
-          () => this.guardando = false
-        );
+      if (this.modoEdicion == true) {
+        this.actualizar(datos);
+      } else {
+        this.registrar(datos);
+      }
     }
+  }
+
+  registrar(datos: any) {
+    this.finanzasProgramadorPagosService.registroSolicitudDePago(datos)
+      .pipe(takeUntil(this.destroy$))
+      .subscribe(
+        respuesta => {
+          if (respuesta.exito == true) {
+            this.mostrarResumen(respuesta.datos);
+          } else {
+            this.openSnackBar(respuesta.mensaje);
+          }
+        },
+        error => {
+          console.log(error);
+          this.guardando = false;
+        },
+        () => this.guardando = false
+      );
+  }
+
+  actualizar(datos: any) {
+    this.finanzasProgramadorPagosService.actualizacionSolicitudDePago(datos)
+      .pipe(takeUntil(this.destroy$))
+      .subscribe(
+        respuesta => {
+          if (respuesta.exito == true) {
+            this.mostrarResumen(respuesta.datos);
+          } else {
+            this.openSnackBar(respuesta.mensaje);
+          }
+        },
+        error => {
+          console.log(error);
+          this.guardando = false;
+        },
+        () => this.guardando = false
+      );
   }
 
   /**
@@ -202,21 +232,53 @@ export class BilleteraPagarComponent implements OnInit, OnDestroy {
 
     let canjes;
     if (this.disponiblesSeleccionados$ && this.disponiblesSeleccionados$.getValue() && this.disponiblesSeleccionados$.getValue().length > 0) {
+
       canjes = this.disponiblesSeleccionados$.getValue().map(unDisponible => {
+
+        let boletosAFijar;
+        if (unDisponible.definicionDeBoletosFijaciones && unDisponible.definicionDeBoletosFijaciones.length > 0) {
+          boletosAFijar = unDisponible.definicionDeBoletosFijaciones.map(fijacion => {
+            return {
+              codContratoExterno: fijacion.boleto.contratoAlgId,
+              tipoFijacion: fijacion.tipoFijacion,
+              tipoPrecioFijacion: fijacion.tipoPrecioFijacion,
+              kgAFijar: this.numeroAKilosPipe.transform(Number.parseFloat(fijacion.stockAFijar), this.unidadMedida),
+              precioDelDia: fijacion.precioDelDia
+            };
+          });
+        }
+
+        let boletosAPesificar;
+        if (unDisponible.definicionDeBoletosPesificacion && unDisponible.definicionDeBoletosPesificacion.length > 0) {
+          boletosAPesificar = unDisponible.definicionDeBoletosPesificacion.map(pesificacion => {
+            return {
+              codContratoExterno: pesificacion.boleto.contratoAlgId,
+              tipoPesificacion: pesificacion.tipoPesificacion,
+              kgAPesificar: this.numeroAKilosPipe.transform(Number.parseFloat(pesificacion.stockAPesificar), this.unidadMedida)
+            };
+          });
+        }
+
         return {
           especieCodExterno: unDisponible.especieCodigo,
           kgAFijar: this.numeroAKilosPipe.transform(Number.parseFloat(unDisponible.stockAFijar), this.unidadMedida),
           kgAPesificar: this.numeroAKilosPipe.transform(Number.parseFloat(unDisponible.stockAPesificar), this.unidadMedida),
+          boletosAFijar,
+          boletosAPesificar
         }
       });
     }
 
-    let datos = {
+    let datos: any = {
       cuenta: this.cuenta.id.codigo,
       medioPago: 1, // por ahora se fuerza a que sea canje
       conceptosAPagar: this.conceptosAPagarSeleccionados$.getValue(),
       canjes
     };
+
+    if (this.modoEdicion == true) {
+      datos.id = this.solicitudDePagoEnEdicion.id;
+    }
 
     return datos;
   }
@@ -250,7 +312,8 @@ export class BilleteraPagarComponent implements OnInit, OnDestroy {
               this.solicitudDePagoEnEdicion = respuesta.datos;
               this.cargarCuentaDesdeSolicitudAEditar();
               this.cargarListadoPorDefecto();
-
+              this.stepper.selectedIndex = 2;
+              
             }
           },
           error => {
@@ -274,4 +337,15 @@ export class BilleteraPagarComponent implements OnInit, OnDestroy {
     }
   }
 
+
+  /**
+   * Devuelve la url de retorno
+   */
+  get backUrl(): string {
+    if (this.modoEdicion == true) {
+      return "/gestion-de-solicitudes";
+    } else {
+      return "/billetera";
+    }
+  }
 }
