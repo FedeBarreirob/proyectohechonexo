@@ -1,0 +1,93 @@
+<div *ngIf="esCelular">
+  <div class="container">
+    
+    <div class="header">
+      <div fxLayoutAlign="start center" fxFlex="50%"><img class="logo" src="../../../../assets/varios/color.png"></div>
+      <div fxLayoutAlign="end center" fxFlex="50%" fxLayout="row">
+        <button routerLink="/login" fxLayoutAlign="center center" class="button-ingreso">
+          <img class="icon-user" src="../../../../assets/varios/user.png">
+          Ingresar
+        </button>
+      </div>
+    </div>
+    <mat-divider style="margin-top: 16px; margin-bottom: 20px; width: 112.5%;margin-left: -20px;"></mat-divider>
+    <div class="body">
+      <div fxLayout="column">
+        <div fxLayoutAlign="start center"><p class="title">Estalece tu contraseña</p></div>
+        <div fxLayoutAlign="start center"><p class="subtitle">Debes tener al menos [x] letras y/o números.</p></div>
+
+        <!--form-->
+        <div class="form" fxLayout="column">
+          <div>
+            <label>
+              <p class="title-form">TU CONTRASEÑA</p>
+              <input class="entrada-datos" type="password" [formControl]="password">
+            </label>
+          </div>
+          <div>
+            <label>
+              <p class="title-form">REPITE TU CONTRASEÑA</p>
+              <input class="entrada-datos" type="password" [formControl]="passwordControl">
+            </label>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div fxLayoutAlign="start center" style="margin-top: 20px; margin-bottom: 10px;">
+      <mat-checkbox><p class="subtitle" style="margin-top: -5px;">Acepto los <b style="color: #2da442;">Términos y condiciones</b> de Gaviglio S.A</p></mat-checkbox>
+    </div>
+
+    <div fxLayoutAlign="space-between center">
+      <button routerLink="/validar-documentacion" class="button-success">Continuar</button>
+    </div>
+
+  </div>
+</div>
+
+<div *ngIf="!esCelular">
+  <div class="container-desktop">
+    <div fxLayout="row" fxLayoutAlign="center center">
+      <div fxFlex.xs="30%">
+        <img src="assets/logo.png" mat-card-image class="logo-desktop" alt="Gaviglio" />
+      </div>
+    </div>
+  </div>
+
+  <div fxLayout="row" fxLayoutAlign="center">
+    <div fxFlex="nogrow">
+      <mat-card class="card-base-desktop">
+        <mat-card-content>
+          <div fxLayout="column">
+            <div fxLayoutAlign="start center"><p class="title">Estalece tu contraseña</p></div>
+            <div fxLayoutAlign="start center"><p class="subtitle">Debes tener al menos [x] letras y/o números.</p></div>
+    
+            <!--form-->
+            <div class="form" fxLayout="row">
+              <div fxFlex="50%">
+                <label>
+                  <p class="title-form">TU CONTRASEÑA</p>
+                  <input class="entrada-datos" type="password" [formControl]="password">
+                </label>
+              </div>
+              <div fxFlex="50%">
+                <label>
+                  <p class="title-form">REPITE TU CONTRASEÑA</p>
+                  <input class="entrada-datos" type="password" [formControl]="passwordControl">
+                </label>
+              </div>
+            </div>
+          </div>
+      
+          <div fxLayoutAlign="start center" style="margin-top: 20px; margin-bottom: 10px;">
+            <mat-checkbox><p class="subtitle" style="margin-top: -5px;">Acepto los <b style="color: #2da442;">Términos y condiciones</b> de Gaviglio S.A</p></mat-checkbox>
+          </div>
+      
+          <div fxLayoutAlign="space-between center">
+            <button routerLink="/validar-documentacion" class="button-success">Continuar</button>
+          </div>
+        </mat-card-content>
+      </mat-card>
+    </div>
+  </div>
+</div>

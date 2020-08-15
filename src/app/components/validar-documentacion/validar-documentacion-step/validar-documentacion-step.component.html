@@ -1,0 +1,66 @@
+<div *ngIf="esCelular">
+  <div class="container">
+    
+    <div class="header">
+      <div fxLayoutAlign="start center" fxFlex="50%"><img class="logo" src="../../../../assets/varios/color.png"></div>
+      <div fxLayoutAlign="end center" fxFlex="50%" fxLayout="row">
+        <button routerLink="/login" fxLayoutAlign="center center" class="button-ingreso">
+          <img class="icon-user" src="../../../../assets/varios/user.png">
+          Ingresar
+        </button>
+      </div>
+    </div>
+    <mat-divider style="margin-top: 16px; margin-bottom: 20px; width: 112.5%;margin-left: -20px;"></mat-divider>
+    <mat-horizontal-stepper class="body">
+      <mat-step>
+        <div fxLayout="column">
+          <div class="contenedor-imagen">
+            <img class="imagen-mail" src="../../../../assets/varios/validar-dni.png">
+          </div>
+          <div class="title">
+            Frente de DNI
+          </div>
+          <div class="subtitle">
+            Saca una foto de tu DNI donde se vea clara la foto de tu rostro y tus datos.
+          </div>
+        </div>
+        <div fxLayoutAlign="start center">
+          <button mat-button class="button-start" matStepperNext (click)="sacarFotoFrente()">Sacar foto</button>
+        </div>
+      </mat-step>
+      <mat-step>
+        <div fxLayout="column">
+          <div class="contenedor-imagen">
+            <img class="imagen-mail" src="../../../../assets/varios/validar-dni-1.png">
+          </div>
+          <div class="title">
+            Dorso de DNI
+          </div>
+          <div class="subtitle">
+            Saca una foto de tu DNI donde se vea clara tu huella, domicilio y demás datos.
+          </div>
+        </div>
+        <div fxLayoutAlign="start center">
+          <button mat-button class="button-start" matStepperNext>Sacar foto</button>
+        </div>
+      </mat-step>
+      <mat-step>
+        <div fxLayout="column">
+          <div class="contenedor-imagen">
+            <img class="imagen-mail" src="../../../../assets/varios/selfie.png">
+          </div>
+          <div class="title">
+            Selfie
+          </div>
+          <div class="subtitle">
+            Como último paso te pedimos una selfie sosteniendo tu DNI.
+          </div>
+        </div>
+        <div routerLink="/situacion-usuario" fxLayoutAlign="start center">
+          <button mat-button class="button-start">Sacar foto</button>
+        </div>
+      </mat-step>
+    </mat-horizontal-stepper>
+
+  </div>
+</div>

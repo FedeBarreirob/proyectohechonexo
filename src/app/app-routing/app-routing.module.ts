@@ -33,6 +33,13 @@ import { BilleteraCobrarCuentaComponent } from '../components/listados/billetera
 import { GestionDeSolicitudesComponent } from '../components/listados/gestion-de-solicitudes/gestion-de-solicitudes.component';
 import { DefinirBoletosComponent } from '../components/listados/gestion-de-solicitudes/definir-boletos/definir-boletos.component';
 import { DefinicionDeBoletosComponent } from '../components/listados/gestion-de-solicitudes/definicion-de-boletos/definicion-de-boletos.component';
+import { InicioRegistroComponent } from '../components/registro-usuario/inicio-registro/inicio-registro.component';
+import { InicioRegistroDefinirCuentaComponent } from '../components/registro-usuario/inicio-registro-definir-cuenta/inicio-registro-definir-cuenta.component';
+import { InicioRegistroConfirmacionMailComponent } from '../components/registro-usuario/inicio-registro-confirmacion-mail/inicio-registro-confirmacion-mail.component';
+import { ValidarDocumentacionComponent } from '../components/validar-documentacion/validar-documentacion/validar-documentacion.component';
+import { ValidarDocumentacionStepComponent } from '../components/validar-documentacion/validar-documentacion-step/validar-documentacion-step.component';
+import { SituacionUsuarioComponent } from '../components/validar-documentacion/situacion-usuario/situacion-usuario.component';
+import { SituacionUsuarioCompletaComponent } from '../components/validar-documentacion/situacion-usuario-completa/situacion-usuario-completa.component';
 
 const routes: Routes = [
 	{
@@ -45,6 +52,48 @@ const routes: Routes = [
 		path: 'recuperacion-password', component: LoginLayoutComponent,
 		children: [{
 			path: '', component: RecuperacionPasswordComponent
+		}]
+	},
+	{
+		path: 'inicio-registro', component: LoginLayoutComponent,
+		children: [{
+			path: '', component: InicioRegistroComponent
+		}]
+	},
+	{
+		path: 'definir-cuenta', component: LoginLayoutComponent,
+		children: [{
+			path: '', component: InicioRegistroDefinirCuentaComponent
+		}]
+	},
+	{
+		path: 'confirmacion-mail', component: LoginLayoutComponent,
+		children: [{
+			path: '', component: InicioRegistroConfirmacionMailComponent
+		}]
+	},
+	{
+		path: 'validar-documentacion', component: LoginLayoutComponent,
+		children: [{
+			path: '', component: ValidarDocumentacionComponent
+		}]
+	},
+	{
+		path: 'validacion-step', component: LoginLayoutComponent,
+		children: [{
+			path: '', component: ValidarDocumentacionStepComponent
+		}]
+	},
+	{
+		path: 'situacion-usuario', component: LoginLayoutComponent,
+		children: [{
+			path: '', component: SituacionUsuarioComponent
+		}]
+	},
+	{
+		path: 'situacion-completada', component: LoginLayoutComponent,
+		children: [{
+			path: '', component: SituacionUsuarioCompletaComponent
 		}]
 	},
 	{
