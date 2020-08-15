@@ -9,6 +9,7 @@ import { EllipsisModule } from 'ngx-ellipsis';
 import { DeviceDetectorModule } from 'ngx-device-detector';
 import { NgxGaugeModule } from 'ngx-gauge';
 import { NgxSpinnerModule } from 'ngx-spinner';
+import {WebcamModule} from 'ngx-webcam';
 
 // swiper
 import { SwiperModule } from 'ngx-swiper-wrapper';
@@ -278,6 +279,16 @@ import { GestionDeSolicitudesListadoItemComponent } from './components/listados/
 import { PerfilesAutocompleteComponent } from './components/common/perfiles-autocomplete/perfiles-autocomplete.component';
 import { BilleteraCardInfoPagosComponent } from './components/listados/billetera/billetera-card-info-pagos/billetera-card-info-pagos.component';
 import { CardMasInformacionComponent } from './components/listados/billetera/card-mas-informacion/card-mas-informacion.component';
+import { InicioRegistroComponent } from './components/registro-usuario/inicio-registro/inicio-registro.component';
+import { InicioRegistroDefinirCuentaComponent } from './components/registro-usuario/inicio-registro-definir-cuenta/inicio-registro-definir-cuenta.component';
+import { InicioRegistroConfirmacionMailComponent } from './components/registro-usuario/inicio-registro-confirmacion-mail/inicio-registro-confirmacion-mail.component';
+import { ValidarDocumentacionComponent } from './components/validar-documentacion/validar-documentacion/validar-documentacion.component';
+import { ValidarDocumentacionStepComponent } from './components/validar-documentacion/validar-documentacion-step/validar-documentacion-step.component';
+import { SituacionUsuarioComponent } from './components/validar-documentacion/situacion-usuario/situacion-usuario.component';
+import { SituacionUsuarioCompletaComponent } from './components/validar-documentacion/situacion-usuario-completa/situacion-usuario-completa.component';
+import { FrenteDniComponent } from './components/validar-documentacion/frente-dni/frente-dni.component';
+import { DorsoDniComponent } from './components/validar-documentacion/dorso-dni/dorso-dni.component';
+import { SelfieComponent } from './components/validar-documentacion/selfie/selfie.component';
 
 registerLocaleData(localeEsAr, 'es-AR');
 
@@ -523,7 +534,17 @@ export function tokenGetter() {
 		GestionDeSolicitudesListadoItemComponent,
 		PerfilesAutocompleteComponent,
 		BilleteraCardInfoPagosComponent,
-		CardMasInformacionComponent
+		CardMasInformacionComponent,
+		InicioRegistroComponent,
+		InicioRegistroDefinirCuentaComponent,
+		InicioRegistroConfirmacionMailComponent,
+		ValidarDocumentacionComponent,
+		ValidarDocumentacionStepComponent,
+		SituacionUsuarioComponent,
+		SituacionUsuarioCompletaComponent,
+		FrenteDniComponent,
+		DorsoDniComponent,
+		SelfieComponent
 	],
 	imports: [
 		HttpClientModule,
@@ -557,7 +578,8 @@ export function tokenGetter() {
 		NgxGaugeModule,
 		SwiperModule,
 		NgxSpinnerModule,
-		AutocompleteLibModule
+		AutocompleteLibModule,
+		WebcamModule
 	],
 	providers: [
 		{ provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true },
@@ -615,7 +637,10 @@ export function tokenGetter() {
 		DefinicionDeBoletosAPesificarComponent,
 		ResumenComprobanteDialogCobrosComponent,
 		BilleteraCardInfoPagosComponent,
-		CardMasInformacionComponent
+		CardMasInformacionComponent,
+		FrenteDniComponent,
+		DorsoDniComponent,
+		SelfieComponent
 	],
 	bootstrap: [AppComponent]
 })
