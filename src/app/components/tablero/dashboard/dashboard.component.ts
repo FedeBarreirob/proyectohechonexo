@@ -12,6 +12,7 @@ import { PerfilBasico } from '../../../interfaces/perfiles/perfil-basico';
 import { takeUntil } from 'rxjs/operators';
 import { window } from 'rxjs/internal/operators/window';
 import { TutorialModalService } from '../../../services/tutorial-modal/tutorial-modal.service';
+import { MensajeBienvenidaDialogComponent } from '../mensaje-bienvenida-dialog/mensaje-bienvenida-dialog.component';
 
 @Component({
   selector: 'app-dashboard',

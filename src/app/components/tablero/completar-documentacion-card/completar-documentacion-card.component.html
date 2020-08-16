@@ -1,0 +1,32 @@
+<div class="container">
+  <div fxLayout="row" class="header">
+    <div fxFlex="30" fxLayoutAlign="center center">
+      <circle-progress 
+          [percent]="90"
+          [radius]="30"
+          [maxPercent]="100"
+          [outerStrokeWidth]="8"
+          [innerStrokeWidth]="4"
+          [outerStrokeColor]="'#2DA442'"
+          [innerStrokeColor]="'none'"
+          [title]="'30'"
+          [titleColor]="'#2DA442'"
+          [titleFontSize]="'20'"
+          [subtitle]="'días'"
+          [subtitleColor]="'#2DA442'"
+          [subtitleFontSize]="'10'"
+          [animation]="true"
+          [animationDuration]="300">
+      </circle-progress>
+    </div>
+    <div fxFlex="70" fxLayoutAlign="start center" class="title">Te quedan 30 días para completar tu documentación.</div>
+  </div>
+  <div fxLayout="column" class="content">
+    <div class="text">Solo te faltan por subir [x] documentos para que respaldemos tu cuenta.
+      Una vez cargados podrás operar tu cuenta con normalidad.
+    </div>
+    <div routerLink="/apertura-legajo" fxLayoutAlign="start center">
+      <button mat-button class="button-complete">Completar ahora</button>
+    </div>
+  </div>
+</div>

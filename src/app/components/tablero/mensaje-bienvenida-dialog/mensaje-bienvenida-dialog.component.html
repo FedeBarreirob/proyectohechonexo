@@ -1,0 +1,25 @@
+<div class="container">
+  <div fxLayout="row" fxLayoutAlign="center" class="header">
+    <div fxFlex="80%" class="title">
+      Bienvenido/a
+    </div>
+  
+    <div fxFlex="20%">
+      <button mat-icon-button class="boton-close" (click)="salir()">
+        <mat-icon>close</mat-icon>
+      </button>
+    </div>
+  </div>
+  <mat-divider></mat-divider>
+
+  <div fxLayout="column" class="body">
+    <div class="text">Estás a punto de poder usar todas las herramientas de Gaviglio digital. <br> 
+      <br>
+      Por seguridad y de acuerdo a la ley, necesitamos que completes una documentación que respalda tu cuenta antes 
+      de que puedas tener disponibles todas las funciones. Recuerda tener a mano tu DNI y tu documentación fiscal.
+    </div>
+    <div routerLink="/apertura-legajo" fxLayoutAlign="start center">
+      <button mat-button class="button-complete" (click)="salir()">Completar ahora</button>
+    </div>
+  </div>
+</div>

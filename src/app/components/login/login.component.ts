@@ -3,12 +3,13 @@ import { FormGroup, FormBuilder } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { AuthenticationService } from '../../services/security/authentication.service';
 import { PerfilesService } from '../../services/perfiles/perfiles.service';
-import { MatSnackBar } from '@angular/material';
+import { MatSnackBar, MatDialog } from '@angular/material';
 import { Observable, Subject } from 'rxjs';
 import { NotificacionesService } from '../../services/notificaciones/notificaciones.service';
 import { OneSignalService } from '../../services/push/one-signal.service';
 import { DeviceDetectorService } from 'ngx-device-detector';
 import { environment } from '../../../environments/environment';
+import { MensajeBienvenidaDialogComponent } from '../tablero/mensaje-bienvenida-dialog/mensaje-bienvenida-dialog.component';
 
 declare var require: any;
 
@@ -38,7 +39,8 @@ export class LoginComponent implements OnInit {
 		private snackBar: MatSnackBar,
 		private notificacionService: NotificacionesService,
 		private oneSignalService: OneSignalService,
-		private deviceService: DeviceDetectorService
+		private deviceService: DeviceDetectorService,
+		private dialog: MatDialog
 	) { }
 
 	ngOnInit() {
@@ -109,6 +111,15 @@ export class LoginComponent implements OnInit {
 								this.oneSignalService.init();
 								this.router.navigate([this.returnUrl]);
 							}
+						});
+
+						//Mensaje de bienvenida
+
+						this.dialog.open(MensajeBienvenidaDialogComponent, {
+							maxWidth: '100vw',
+							width: '312px',
+							maxHeight: '100vh',
+							height: '331px'
 						});
 					} else {
 						this.cargando$.next(false);

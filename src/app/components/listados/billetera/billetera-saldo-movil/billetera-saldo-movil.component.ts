@@ -4,6 +4,8 @@ import { SaldoGlobalCtaCteAplicada } from '../../../../interfaces/ctacte-aplicad
 import { CuentaAlgService } from '../../../../services/observers/cuentas-alg/cuenta-alg.service';
 import { CtacteAplicadaService } from '../../../../services/ctacte-aplicada/ctacte-aplicada.service';
 import { takeUntil } from 'rxjs/operators';
+import { CompletarRegistroDialogComponent } from '../completar-registro-dialog/completar-registro-dialog.component';
+import { MatDialog } from '@angular/material';
 
 @Component({
   selector: 'app-billetera-saldo-movil',
@@ -19,7 +21,8 @@ export class BilleteraSaldoMovilComponent implements OnInit, OnDestroy {
 
   constructor(
     private cuentaService: CuentaAlgService,
-    private ctacteAplicadaService: CtacteAplicadaService
+    private ctacteAplicadaService: CtacteAplicadaService,
+    private dialog: MatDialog
   ) { }
 
   ngOnInit() {
@@ -64,5 +67,16 @@ export class BilleteraSaldoMovilComponent implements OnInit, OnDestroy {
           }
         );
     }
+  }
+
+  /*Mensaje de completar registro*/
+
+  completarRegistro(){
+    this.dialog.open(CompletarRegistroDialogComponent, {
+      maxWidth: '100vw',
+      width: '312px',
+      maxHeight: '100vh',
+      height: '260px'
+    });
   }
 }

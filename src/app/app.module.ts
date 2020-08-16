@@ -10,6 +10,8 @@ import { DeviceDetectorModule } from 'ngx-device-detector';
 import { NgxGaugeModule } from 'ngx-gauge';
 import { NgxSpinnerModule } from 'ngx-spinner';
 import {WebcamModule} from 'ngx-webcam';
+import { NgCircleProgressModule } from 'ng-circle-progress';
+// import { NgCircleProgressModule } from './ng-circle-progress.module';
 
 // swiper
 import { SwiperModule } from 'ngx-swiper-wrapper';
@@ -289,6 +291,12 @@ import { SituacionUsuarioCompletaComponent } from './components/validar-document
 import { FrenteDniComponent } from './components/validar-documentacion/frente-dni/frente-dni.component';
 import { DorsoDniComponent } from './components/validar-documentacion/dorso-dni/dorso-dni.component';
 import { SelfieComponent } from './components/validar-documentacion/selfie/selfie.component';
+import { MensajeBienvenidaDialogComponent } from './components/tablero/mensaje-bienvenida-dialog/mensaje-bienvenida-dialog.component';
+import { CompletarDocumentacionCardComponent } from './components/tablero/completar-documentacion-card/completar-documentacion-card.component';
+import { CompletarDocumentacionNavComponent } from './components/menu/completar-documentacion-nav/completar-documentacion-nav.component';
+import { AperturaLegajoComponent } from './components/listados/documentacion/apertura-legajo/apertura-legajo.component';
+import { ProgressUploadFilesComponent } from './components/listados/documentacion/progress-upload-files/progress-upload-files.component';
+import { CompletarRegistroDialogComponent } from './components/listados/billetera/completar-registro-dialog/completar-registro-dialog.component';
 
 registerLocaleData(localeEsAr, 'es-AR');
 
@@ -544,7 +552,13 @@ export function tokenGetter() {
 		SituacionUsuarioCompletaComponent,
 		FrenteDniComponent,
 		DorsoDniComponent,
-		SelfieComponent
+		SelfieComponent,
+		MensajeBienvenidaDialogComponent,
+		CompletarDocumentacionCardComponent,
+		CompletarDocumentacionNavComponent,
+		AperturaLegajoComponent,
+		ProgressUploadFilesComponent,
+		CompletarRegistroDialogComponent
 	],
 	imports: [
 		HttpClientModule,
@@ -579,7 +593,8 @@ export function tokenGetter() {
 		SwiperModule,
 		NgxSpinnerModule,
 		AutocompleteLibModule,
-		WebcamModule
+		WebcamModule,
+		NgCircleProgressModule.forRoot(),
 	],
 	providers: [
 		{ provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true },
@@ -640,7 +655,9 @@ export function tokenGetter() {
 		CardMasInformacionComponent,
 		FrenteDniComponent,
 		DorsoDniComponent,
-		SelfieComponent
+		SelfieComponent,
+		MensajeBienvenidaDialogComponent,
+		CompletarRegistroDialogComponent
 	],
 	bootstrap: [AppComponent]
 })
