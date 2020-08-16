@@ -1,0 +1,23 @@
+<div class="container">
+  <div fxLayout="row" fxLayoutAlign="center" class="header">
+    <div fxFlex="90%" class="title">
+      Completa tu documentación
+    </div>
+  
+    <div fxFlex="10%">
+      <button mat-icon-button class="boton-close" (click)="salir()">
+        <mat-icon>close</mat-icon>
+      </button>
+    </div>
+  </div>
+  <mat-divider></mat-divider>
+
+  <div fxLayout="column" class="body">
+    <div class="text">
+      Solo te faltan por subir [x] documentos para que respaldemos tu cuenta. Una vez cargados podrás operar tu cuenta con normalidad.
+    </div>
+    <div routerLink="/apertura-legajo" fxLayoutAlign="start center">
+      <button mat-button class="button-complete" (click)="salir()">Completar ahora</button>
+    </div>
+  </div>
+</div>

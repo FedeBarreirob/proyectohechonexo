@@ -16,6 +16,11 @@
 		</div>
 
 		<div [ngClass]="{'fondo-blanco': esCelular, 'fondo-blanco-desktop': !esCelular}">
+
+			<div *ngIf="esCelular">
+				<app-completar-documentacion-card></app-completar-documentacion-card>
+			</div>
+
 			<app-contrato-indicador-entregas-yventas (cargandoChange)="esCargandoIndicadorContratos($event)">
 			</app-contrato-indicador-entregas-yventas>
 
