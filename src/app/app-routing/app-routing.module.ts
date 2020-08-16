@@ -40,6 +40,7 @@ import { ValidarDocumentacionComponent } from '../components/validar-documentaci
 import { ValidarDocumentacionStepComponent } from '../components/validar-documentacion/validar-documentacion-step/validar-documentacion-step.component';
 import { SituacionUsuarioComponent } from '../components/validar-documentacion/situacion-usuario/situacion-usuario.component';
 import { SituacionUsuarioCompletaComponent } from '../components/validar-documentacion/situacion-usuario-completa/situacion-usuario-completa.component';
+import { AperturaLegajoComponent } from '../components/listados/documentacion/apertura-legajo/apertura-legajo.component';
 
 const routes: Routes = [
 	{
@@ -94,6 +95,12 @@ const routes: Routes = [
 		path: 'situacion-completada', component: LoginLayoutComponent,
 		children: [{
 			path: '', component: SituacionUsuarioCompletaComponent
+		}]
+	},
+	{
+		path: 'apertura-legajo', component: LoginLayoutComponent,
+		children: [{
+			path: '', component: AperturaLegajoComponent
 		}]
 	},
 	{

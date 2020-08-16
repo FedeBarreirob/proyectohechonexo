@@ -61,6 +61,11 @@
         </table>
       </div>
 
+      <!--CARD COMPLETAR REGISTRO PARA USUARIOS DE LEGAJO-->
+      <div *ngIf="esCelular">
+        <app-completar-documentacion-card></app-completar-documentacion-card>
+      </div>
+
       <!-- CONTENEDOR DE PAGAR Y COBRAR -->
       <div *ngIf="esCelular">
         <div class="pagar-cobrar">
