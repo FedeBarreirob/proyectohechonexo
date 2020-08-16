@@ -136,12 +136,13 @@
     </div>
 
     <!--Spinner-->
-    <div fxLayout="row" fxLayoutAlign="center center" *ngIf="registrando == true" style="margin-top: 10px">
+    <div fxLayout="row" fxLayoutAlign="center center" *ngIf="registrando == true || notificando == true"
+      style="margin-top: 10px">
       <mat-spinner diameter="24"></mat-spinner>
     </div>
 
     <div fxLayoutAlign="space-between center">
-      <button class="'button-success'" class="button-success" [disabled]="registrando" type="button"
+      <button class="'button-success'" class="button-success" [disabled]="registrando || notificando" type="button"
         (click)="registrar()">Continuar</button>
     </div>
 

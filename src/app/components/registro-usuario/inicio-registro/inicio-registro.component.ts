@@ -4,6 +4,9 @@ import { FormGroup, Validators, FormBuilder } from '@angular/forms';
 import { TipoPersona } from '../../../enums/tipo-persona.enum';
 import { MatSnackBar } from '@angular/material';
 import { OnboardingUsuariosService } from '../../../services/perfiles/onboarding-usuarios.service';
+import { Router } from '@angular/router';
+import { NotificacionesService } from 'src/app/services/notificaciones/notificaciones.service';
+import { TipoEmailPlantilla } from 'src/app/enums/tipo-email-plantilla.enum';
 
 @Component({
   selector: 'app-inicio-registro',
@@ -16,12 +19,15 @@ export class InicioRegistroComponent implements OnInit {
   esCelular: boolean;
   tipoPersona = TipoPersona;
   registrando: boolean = false;
+  notificando: boolean = false;
 
   constructor(
     private deviceService: DeviceDetectorService,
     private formBuilder: FormBuilder,
     private snackBar: MatSnackBar,
-    private onboardingUsuariosService: OnboardingUsuariosService
+    private onboardingUsuariosService: OnboardingUsuariosService,
+    private router: Router,
+    private notificacionesService: NotificacionesService
   ) { }
 
   ngOnInit() {
@@ -72,7 +78,7 @@ export class InicioRegistroComponent implements OnInit {
         .subscribe(
           respuesta => {
             if (respuesta.exito) {
-              console.log("enviar email")
+              this.enviarEmail();
             } else {
               this.openSnackBar(respuesta.mensaje);
             }
@@ -94,6 +100,47 @@ export class InicioRegistroComponent implements OnInit {
       return true;
     } else {
       return false;
+    }
+  }
+
+  /**
+   * Envia email para validar el mail
+   */
+  enviarEmail() {
+    if (this.notificando == false) {
+      this.notificando = true;
+
+      let emailAEnviar = {
+        tipo: TipoEmailPlantilla.ALTA_USUARIO_VERIFICACION_EMAIL,
+        destinos: [this.profileForm.value.email],
+        campos: [
+          {
+            tag: "nombre",
+            value: this.profileForm.value.nombreCompleto
+          },
+          {
+            tag: "link",
+            value: "http://gavigliodigitaltest.eastus.cloudapp.azure.com/"
+          }
+        ]
+      }
+
+      this.notificacionesService.enviarEmailConPlantilla(emailAEnviar)
+        .subscribe(
+          respuesta => {
+            if (respuesta.exito) {
+              let url = `confirmacion-mail/${this.profileForm.value.email}`;
+              this.router.navigate([url]);
+            } else {
+              this.openSnackBar(respuesta.mensaje);
+            }
+          },
+          error => {
+            console.log(error);
+            this.notificando = false;
+          },
+          () => this.notificando = false
+        );
     }
   }
 }

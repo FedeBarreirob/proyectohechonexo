@@ -68,7 +68,7 @@ const routes: Routes = [
 		}]
 	},
 	{
-		path: 'confirmacion-mail', component: LoginLayoutComponent,
+		path: 'confirmacion-mail/:mail', component: LoginLayoutComponent,
 		children: [{
 			path: '', component: InicioRegistroConfirmacionMailComponent
 		}]
