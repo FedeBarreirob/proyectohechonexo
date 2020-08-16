@@ -19,7 +19,7 @@ export const environment = {
 
 
   // testing
-   
+
   /*hostSeguridad: 'http://192.168.20.66:8080/DigitalSeguridad-1.0-SNAPSHOT/api',
   hostCtaCte: 'http://192.168.20.66:8080/DigitalCuentaCorriente-1.0-SNAPSHOT/api',
   hostEntregasYVentas: 'http://192.168.20.66:8080/DigitalEntregasYVentas-1.0-SNAPSHOT/api',
@@ -29,15 +29,15 @@ export const environment = {
   baseUrl: 'http://192.168.20.66/DigitalUIClientes/#'*/
 
   // testing azure
-  
-     hostSeguridad: 'http://gavigliodigital.eastus.cloudapp.azure.com:8080/DigitalSeguridad-1.0-SNAPSHOT/api',
-  hostCtaCte: 'http://gavigliodigital.eastus.cloudapp.azure.com:8080/DigitalCuentaCorriente-1.0-SNAPSHOT/api',
-  hostEntregasYVentas: 'http://gavigliodigital.eastus.cloudapp.azure.com:8080/DigitalEntregasYVentas-1.0-SNAPSHOT/api',
-  hostComunicaciones: 'http://gavigliodigital.eastus.cloudapp.azure.com:8080/Comunicaciones-1.0-SNAPSHOT/api',
-  hostGeneradorComprobantes: 'http://gavigliodigital.eastus.cloudapp.azure.com:8080/GeneradorComprobantes-1.0-SNAPSHOT/api',
-  hostFinanzas: 'http://gavigliodigital.eastus.cloudapp.azure.com:8080/DigitalFinanzas-1.0-SNAPSHOT/api',
-  baseUrl: 'http://gavigliodigital.eastus.cloudapp.azure.com/DigitalUIClientes/#'
-   
+  hostSeguridad: 'http://gavigliodigitaltest.eastus.cloudapp.azure.com:8080/DigitalSeguridad-1.0-SNAPSHOT/api',
+  hostCtaCte: 'http://gavigliodigitaltest.eastus.cloudapp.azure.com:8080/DigitalCuentaCorriente-1.0-SNAPSHOT/api',
+  hostEntregasYVentas: 'http://gavigliodigitaltest.eastus.cloudapp.azure.com:8080/DigitalEntregasYVentas-1.0-SNAPSHOT/api',
+  hostComunicaciones: 'http://gavigliodigitaltest.eastus.cloudapp.azure.com:8080/Comunicaciones-1.0-SNAPSHOT/api',
+  hostGeneradorComprobantes: 'http://gavigliodigitaltest.eastus.cloudapp.azure.com:8080/GeneradorComprobantes-1.0-SNAPSHOT/api',
+  hostFinanzas: 'http://gavigliodigitaltest.eastus.cloudapp.azure.com:8080/DigitalFinanzas-1.0-SNAPSHOT/api',
+  hostFileStorage: 'http://gavigliodigitaltest.eastus.cloudapp.azure.com:8080/FileStorage-1.0-SNAPSHOT/api',
+  baseUrl: 'http://gavigliodigitaltest.eastus.cloudapp.azure.com/#'
+
 
   //produccion por vpn
   /*

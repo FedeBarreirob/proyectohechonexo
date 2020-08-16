@@ -1,11 +1,11 @@
 <div *ngIf="esCelular">
   <div class="container">
-    
+
     <div class="header">
-      <div fxLayoutAlign="start center" fxFlex="50%"><img class="logo" src="../../../../assets/varios/color.png"></div>
+      <div fxLayoutAlign="start center" fxFlex="50%"><img class="logo" src="assets/varios/color.png"></div>
       <div fxLayoutAlign="end center" fxFlex="50%" fxLayout="row">
         <button routerLink="/login" fxLayoutAlign="center center" class="button-ingreso">
-          <img class="icon-user" src="../../../../assets/varios/user.png">
+          <img class="icon-user" src="assets/varios/user.png">
           Ingresar
         </button>
       </div>
@@ -13,63 +13,141 @@
     <mat-divider style="margin-top: 16px; margin-bottom: 20px; width: 112.5%;margin-left: -20px;"></mat-divider>
     <div class="body">
       <div fxLayout="column" class="title-subtitle">
-        <div fxLayoutAlign="start center"><p class="title">Regístrate</p></div>
-        <div fxLayoutAlign="start center"><p class="subtitle">Tené en cuenta que vas a necesitar tener a la mano tu DNI.</p></div>
+        <div fxLayoutAlign="start center">
+          <p class="title">Regístrate</p>
+        </div>
+        <div fxLayoutAlign="start center">
+          <p class="subtitle">Tené en cuenta que vas a necesitar tener a la mano tu DNI.</p>
+        </div>
 
         <!--form-->
-        <div class="form" fxLayout="column">
-          <p style="color: #2da442; font-size: 14px; font-family: Rubik;">Datos del usuario</p>
-          <div style="margin-top: -10px;">
-            <label>
-              <p class="title-form">NOMBRE COMPLETO</p>
-              <input class="entrada-datos" type="text" placeholder="Ej: David Pérez" [formControl]="name">
-            </label>
+        <form [formGroup]="profileForm">
+          <div class="form" fxLayout="column">
+            <p style="color: #2da442; font-size: 14px; font-family: Rubik;">Datos del usuario</p>
+            <div style="margin-top: -10px;">
+              <label>
+                <p class="title-form">NOMBRE COMPLETO</p>
+                <input matInput class="entrada-datos" type="text" placeholder="Ej: David Pérez"
+                  formControlName="nombreCompleto">
+
+                <mat-error *ngIf="errorHandling('nombreCompleto', 'required')">
+                  <mat-icon style="color: red; font-size: 16px;">error</mat-icon>Debes ingresar un nombre para continuar
+                </mat-error>
+
+              </label>
+            </div>
+
+            <div>
+              <label>
+                <p class="title-form">DNI</p>
+                <input matInput class="entrada-datos" type="number" placeholder="12.345.678"
+                  formControlName="numDocumento">
+
+                <mat-error *ngIf="errorHandling('numDocumento', 'required')">
+                  <mat-icon style="color: red; font-size: 16px;">error</mat-icon>Ingresa un DNI válido para continuar
+                </mat-error>
+              </label>
+            </div>
+            <div>
+              <label>
+                <p class="title-form">TELÉFONO CELULAR</p>
+                <input matInput class="entrada-datos" type="number" placeholder="+54934255555"
+                  formControlName="celular">
+
+                <mat-error *ngIf="errorHandling('celular', 'required')">
+                  <mat-icon style="color: red; font-size: 16px;">error</mat-icon>Ingresa un teléfono celular válido para
+                  continuar
+                </mat-error>
+              </label>
+            </div>
+            <div>
+              <label>
+                <p class="title-form">MAIL</p>
+                <input matInput class="entrada-datos" type="mail" placeholder="ejemplo@gmail.com"
+                  formControlName="email">
+
+                <mat-error *ngIf="errorHandling('email', 'required')">
+                  <mat-icon style="color: red; font-size: 16px;">error</mat-icon>Ingresa un email válido para continuar
+                </mat-error>
+              </label>
+            </div>
+            <div>
+              <label>
+                <p class="title-form">USUARIO</p>
+                <input matInput class="entrada-datos" type="text" placeholder="Ej: jperez" formControlName="usuario">
+
+                <mat-error *ngIf="errorHandling('usuario', 'required')">
+                  <mat-icon style="color: red; font-size: 16px;">error</mat-icon>Ingresa un nombre de usuario válido
+                  para continuar
+                </mat-error>
+              </label>
+            </div>
+            <div>
+              <label>
+                <p class="title-form">CONTRASEÑA</p>
+                <input matInput class="entrada-datos" type="password" formControlName="password">
+
+                <mat-error *ngIf="errorHandling('password', 'required')">
+                  <mat-icon style="color: red; font-size: 16px;">error</mat-icon>Ingresa una contraseña para continuar
+                </mat-error>
+              </label>
+            </div>
+            <div>
+              <label>
+                <p class="title-form">CONFIRMACIÓN DE LA CONTRASEÑA</p>
+                <input matInput class="entrada-datos" type="password" formControlName="passwordConfirmacion">
+
+                <mat-error *ngIf="errorHandling('passwordConfirmacion', 'required')">
+                  <mat-icon style="color: red; font-size: 16px;">error</mat-icon>Ingresa la confirmación de la
+                  contraseña para continuar
+                </mat-error>
+              </label>
+            </div>
+
+            <div style="margin-top: 10px;">
+              <p style="color: #2da442; font-size: 14px; font-family: Rubik;">Datos de la cuenta</p>
+            </div>
+            <div style="font-family: Rubik;">
+              <mat-radio-group formControlName="tipoPersona">
+                <p class="title-form">TIPO DE CUENTA</p>
+                <mat-radio-button [value]="tipoPersona.PERSONA_FISICA">Persona física</mat-radio-button>
+                <mat-radio-button style="margin-left: 20px;" [value]="tipoPersona.PERSONA_JURIDICA">Persona jurídica
+                </mat-radio-button>
+              </mat-radio-group>
+            </div>
+            <div>
+              <label [ngStyle]="{'display': enSucesionSeleccionable ? 'block' : 'none' }">
+                <mat-checkbox formControlName="enSucesion">En sucesión</mat-checkbox>
+              </label>
+            </div>
+            <div>
+              <label>
+                <p class="title-form">CUIT</p>
+                <input matInput class="entrada-datos" type="number" placeholder="20-12345678-9" formControlName="cuit">
+
+                <mat-error *ngIf="errorHandling('cuit', 'required')">
+                  <mat-icon style="color: red; font-size: 16px;">error</mat-icon>Ingresa el CUIT para continuar
+                </mat-error>
+              </label>
+            </div>
           </div>
-          <div>
-            <label>
-              <p class="title-form">DNI</p>
-              <input class="entrada-datos" type="number" placeholder="12.345.678" [formControl]="dni">
-            </label>
-          </div>
-          <div>
-            <label>
-              <p class="title-form">TELÉFONO CELULAR</p>
-              <input class="entrada-datos" type="number" placeholder="342 555 55-55" [formControl]="celular">
-            </label>
-          </div>
-          <div>
-            <label>
-              <p class="title-form">MAIL</p>
-              <input class="entrada-datos" type="mail" placeholder="ejemplo@gmail.com" [formControl]="email">
-            </label>
-          </div>
-          <div style="margin-top: 10px;">
-            <p style="color: #2da442; font-size: 14px; font-family: Rubik;">Datos de la cuenta</p>
-          </div>
-          <div style="font-family: Rubik;">
-            <mat-radio-group>
-              <p class="title-form">TIPO DE CUENTA</p>
-              <mat-radio-button value="1">Persona física</mat-radio-button>
-              <mat-radio-button style="margin-left: 20px;" value="2">Persona jurídica</mat-radio-button>
-            </mat-radio-group>
-          </div>
-          <div>
-            <label>
-              <p class="title-form">CUIT</p>
-              <input class="entrada-datos" type="number" placeholder="20-12345678-9" [formControl]="cuit">
-            </label>
-          </div>
-        </div>
+        </form>
       </div>
     </div>
 
+    <!--Spinner-->
+    <div fxLayout="row" fxLayoutAlign="center center" *ngIf="registrando == true" style="margin-top: 10px">
+      <mat-spinner diameter="24"></mat-spinner>
+    </div>
+
     <div fxLayoutAlign="space-between center">
-      <button routerLink="/confirmacion-mail" class="button-success">Continuar</button>
+      <button class="'button-success'" class="button-success" [disabled]="registrando" type="button"
+        (click)="registrar()">Continuar</button>
     </div>
 
   </div>
 </div>
-
+<!--
 <div *ngIf="!esCelular">
   <div class="container-desktop">
     <div fxLayout="row" fxLayoutAlign="center center">
@@ -78,13 +156,17 @@
       </div>
     </div>
   </div>
-  
+
   <div fxLayout="row" fxLayoutAlign="center">
     <div fxFlex="nogrow">
       <mat-card class="card-base-desktop">
         <mat-card-content>
-          <div fxLayoutAlign="start center"><p class="title">Regístrate</p></div>
-          <div fxLayoutAlign="start center"><p class="subtitle">Tené en cuenta que vas a necesitar tener a la mano tu DNI.</p></div>
+          <div fxLayoutAlign="start center">
+            <p class="title">Regístrate</p>
+          </div>
+          <div fxLayoutAlign="start center">
+            <p class="subtitle">Tené en cuenta que vas a necesitar tener a la mano tu DNI.</p>
+          </div>
           <form class="form" fxLayaut="column">
             <p style="color: #2da442; font-size: 14px; font-family: Rubik;">Datos del usuario</p>
             <div>
@@ -105,13 +187,15 @@
               <div fxFlex="50%">
                 <label>
                   <p class="title-form">TELÉFONO CELULAR</p>
-                  <input class="entrada-datos-desktop" type="number" placeholder="342 555 55-55" [formControl]="celular">
+                  <input class="entrada-datos-desktop" type="number" placeholder="342 555 55-55"
+                    [formControl]="celular">
                 </label>
               </div>
               <div fxFlex="50%">
                 <label>
                   <p class="title-form">MAIL</p>
-                  <input class="entrada-datos-desktop" type="mail" placeholder="ejemplo@gmail.com" [formControl]="email">
+                  <input class="entrada-datos-desktop" type="mail" placeholder="ejemplo@gmail.com"
+                    [formControl]="email">
                 </label>
               </div>
             </div>
@@ -142,3 +226,4 @@
     </div>
   </div>
 </div>
+-->
