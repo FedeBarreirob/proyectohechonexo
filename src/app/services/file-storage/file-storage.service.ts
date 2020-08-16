@@ -11,6 +11,7 @@ import { ResponseServicio } from '../../interfaces/varios/response-servicio';
 export class FileStorageService {
 
   private urlPerfDocAvanceDeCarga = `${environment.hostFileStorage}/perfilesDocumentaciones/avanceDeCarga`;
+  private urlDocumentoUpload = `${environment.hostFileStorage}/upload`;
 
   constructor(private http: HttpClient) { }
 
@@ -29,5 +30,25 @@ export class FileStorageService {
 
     let url = `${this.urlPerfDocAvanceDeCarga}/${perfilId}/${grupoDeNotificacion}`;
     return this.http.get<ResponseServicio>(url, httpOptions);
+  }
+
+  /**
+   * Sube un documento al servidor, devuelve el id del documento subido
+   * @param documento 
+   * @param descripcion 
+   */
+  subirDocumento(documento: any, descripcion?: string): Observable<any> {
+
+    var fd = new FormData();
+    fd.append('file', documento);
+
+    if (descripcion) {
+      fd.append('descripcion', descripcion);
+    }
+
+    return this.http.post(this.urlDocumentoUpload, fd, {
+      reportProgress: true,
+      observe: 'events'
+    });
   }
 }
