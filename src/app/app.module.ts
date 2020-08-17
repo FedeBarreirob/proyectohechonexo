@@ -298,6 +298,7 @@ import { AperturaLegajoComponent } from './components/listados/documentacion/ape
 import { ProgressUploadFilesComponent } from './components/listados/documentacion/progress-upload-files/progress-upload-files.component';
 import { CompletarRegistroDialogComponent } from './components/listados/billetera/completar-registro-dialog/completar-registro-dialog.component';
 import { UploaderDocumentosComponent } from './components/common/documentos/uploader-documentos/uploader-documentos.component';
+import { AperturaLegajoUploadDocumentoComponent } from './components/listados/documentacion/apertura-legajo-upload-documento/apertura-legajo-upload-documento.component';
 
 registerLocaleData(localeEsAr, 'es-AR');
 
@@ -560,7 +561,8 @@ export function tokenGetter() {
 		AperturaLegajoComponent,
 		ProgressUploadFilesComponent,
 		CompletarRegistroDialogComponent,
-		UploaderDocumentosComponent
+		UploaderDocumentosComponent,
+		AperturaLegajoUploadDocumentoComponent
 	],
 	imports: [
 		HttpClientModule,

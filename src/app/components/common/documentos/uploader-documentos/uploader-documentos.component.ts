@@ -160,5 +160,9 @@ export class UploaderDocumentosComponent implements OnInit, OnDestroy {
    */
   cancelar() {
     this.destroy$.next();
+    this.porcentajeSubido.emit(0);
+    this.leyenda.emit(null);
+    this.identificadorArchivo.emit(null);
+    this.nombreArchivo.emit(null);
   }
 }

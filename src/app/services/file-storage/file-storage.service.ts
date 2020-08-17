@@ -4,6 +4,7 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { GrupoDeDocumentaciones } from '../../enums/grupo-de-documentaciones.enum';
 import { Observable } from 'rxjs';
 import { ResponseServicio } from '../../interfaces/varios/response-servicio';
+import { Documento } from '../../interfaces/documentaciones/documento';
 
 @Injectable({
   providedIn: 'root'
@@ -12,6 +13,7 @@ export class FileStorageService {
 
   private urlPerfDocAvanceDeCarga = `${environment.hostFileStorage}/perfilesDocumentaciones/avanceDeCarga`;
   private urlDocumentoUpload = `${environment.hostFileStorage}/upload`;
+  private urlPerfilDocumentaciones = `${environment.hostFileStorage}/perfilesDocumentaciones`;
 
   constructor(private http: HttpClient) { }
 
@@ -50,5 +52,38 @@ export class FileStorageService {
       reportProgress: true,
       observe: 'events'
     });
+  }
+
+  /**
+   * Devuelve las documentaciones del perfil indicando las cargadas y las pendientes de cargar
+   * verificando si tiene el archivo indicado
+   * @param perfilId 
+   * @param grupoDeNotificacion 
+   */
+  documentacionesDelPerfil(perfilId: number, grupoDeNotificacion: GrupoDeDocumentaciones): Observable<ResponseServicio> {
+
+    const httpOptions = {
+      headers: new HttpHeaders({
+        'Content-Type': 'application/json'
+      })
+    };
+
+    let url = `${this.urlPerfilDocumentaciones}/${perfilId}/${grupoDeNotificacion}`;
+    return this.http.get<ResponseServicio>(url, httpOptions);
+  }
+
+  /**
+   * Registra la documentación del usuario
+   * @param documentacion 
+   */
+  registrarDocumentacion(documentacion: Array<Documento>): Observable<ResponseServicio> {
+
+    const httpOptions = {
+      headers: new HttpHeaders({
+        'Content-Type': 'application/json'
+      })
+    };
+
+    return this.http.post<ResponseServicio>(this.urlPerfilDocumentaciones, documentacion, httpOptions);
   }
 }
