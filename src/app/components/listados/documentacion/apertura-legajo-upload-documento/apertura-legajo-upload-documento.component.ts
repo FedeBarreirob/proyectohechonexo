@@ -1,4 +1,4 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { Documento } from '../../../../interfaces/documentaciones/documento';
 
 @Component({
@@ -10,6 +10,9 @@ export class AperturaLegajoUploadDocumentoComponent implements OnInit {
 
   @Input()
   documento: Documento;
+
+  @Output()
+  cargaFinalizada: EventEmitter<any> = new EventEmitter<any>();
 
   nombreArchivo: string;
   porcentajeDeCarga: number = 0;
@@ -35,5 +38,6 @@ export class AperturaLegajoUploadDocumentoComponent implements OnInit {
 
   actualizarIdentificadorArchivo(identificador: string) {
     this.documento.archivoId = identificador;
+    this.cargaFinalizada.emit();
   }
 }

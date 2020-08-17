@@ -1,34 +1,38 @@
-<div fxLayout="row" fxLayoutAlign="space-between center" fxLayoutGap="5px">
+<div class="contenedor">
+  <div fxLayout="row" fxLayoutAlign="space-between center" fxLayoutGap="5px">
 
-  <div fxFlex="grow">
+    <div fxFlex="grow">
 
-    <div fxLayout="column" fxLayoutAlign="space-between start">
+      <div fxLayout="column" fxLayoutAlign="space-between start">
 
-      <div fxFlex class="title-files">{{ documento.tipoDeArchivo.denominacion }}</div>
-      <div fxFlex class="name-files">{{ nombreArchivo }}</div>
+        <div fxFlex class="title-files">{{ documento.tipoDeArchivo.denominacion }}</div>
+        <div fxFlex class="name-files">{{ nombreArchivo }}</div>
 
+      </div>
+
+    </div>
+
+    <div fxFlex="nogrow" *ngIf="!documento.archivoId">
+      <app-uploader-documentos descripcionDocumento="Archivo de pruebas"
+        (porcentajeSubido)="actualizarPorcentaje($event)" (leyenda)="actualizarLeyenda($event)"
+        (nombreArchivo)="actualizarNombreArchivo($event)"
+        (identificadorArchivo)="actualizarIdentificadorArchivo($event)">
+      </app-uploader-documentos>
     </div>
 
   </div>
 
-  <div fxFlex="nogrow" *ngIf="!documento.archivoId">
-    <app-uploader-documentos descripcionDocumento="Archivo de pruebas" (porcentajeSubido)="actualizarPorcentaje($event)"
-      (leyenda)="actualizarLeyenda($event)" (nombreArchivo)="actualizarNombreArchivo($event)"
-      (identificadorArchivo)="actualizarIdentificadorArchivo($event)">
-    </app-uploader-documentos>
-  </div>
+  <div fxLayout="row" fxLayoutAlign="space-between center" fxLayoutGap="5px" *ngIf="porcentajeDeCarga > 0">
 
-</div>
+    <div fxFlex>
+      <div fxFlex class="leyenda-carga">
+        <mat-progress-bar [ngClass]="{'pb-amarillo': porcentajeDeCarga < 100, 'pb-verde': porcentajeDeCarga == 100 }"
+          mode="determinate" [value]="porcentajeDeCarga"></mat-progress-bar>
+        {{ leyendaDeCarga }}
+      </div>
 
-<div fxLayout="row" fxLayoutAlign="space-between center" fxLayoutGap="5px" *ngIf="porcentajeDeCarga > 0">
-
-  <div fxFlex>
-    <div fxFlex class="leyenda-carga">
-      <mat-progress-bar mode="determinate" [value]="porcentajeDeCarga"></mat-progress-bar>
-      {{ leyendaDeCarga }}
     </div>
-
   </div>
-</div>
 
+</div>
 <mat-divider></mat-divider>

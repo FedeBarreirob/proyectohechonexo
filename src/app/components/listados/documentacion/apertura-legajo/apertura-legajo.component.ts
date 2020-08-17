@@ -6,6 +6,8 @@ import { Subject } from 'rxjs';
 import { GrupoDeDocumentaciones } from '../../../../enums/grupo-de-documentaciones.enum';
 import { takeUntil } from 'rxjs/operators';
 import { Documento } from '../../../../interfaces/documentaciones/documento';
+import { Router } from '@angular/router';
+import { MatSnackBar } from '@angular/material';
 
 @Component({
   selector: 'app-apertura-legajo',
@@ -17,10 +19,13 @@ export class AperturaLegajoComponent implements OnInit, OnDestroy {
   destroy$: Subject<any> = new Subject<any>();
   cargando: boolean = false;
   documentacion: Array<Documento>;
+  documentacion$: Subject<Array<Documento>> = new Subject<Array<Documento>>();
 
   constructor(
     private fileStorageService: FileStorageService,
-    private authenticationService: AuthenticationService
+    private authenticationService: AuthenticationService,
+    private router: Router,
+    private snackBar: MatSnackBar
   ) { }
 
   ngOnInit() {
@@ -46,6 +51,7 @@ export class AperturaLegajoComponent implements OnInit, OnDestroy {
         .subscribe(
           respuesta => {
             this.documentacion = respuesta.datos;
+            this.notificarProgresoCargaTotal();
           },
           error => {
             console.log(error);
@@ -59,15 +65,43 @@ export class AperturaLegajoComponent implements OnInit, OnDestroy {
     }
   }
 
+  /**
+   * Registra toda la documentación relevada
+   */
   registrarDocumentacion() {
-    if(this.documentacion) {
-      
+    if (this.documentacion) {
+
       this.fileStorageService.registrarDocumentacion(this.documentacion).subscribe(
         respuesta => {
-          console.log(respuesta);
+          if (respuesta.exito == true) {
+            this.salir();
+          } else {
+            this.openSnackBar(respuesta.mensaje);
+          }
         }
       );
-      
+
     }
+  }
+
+  /**
+   * Notifica al indicador de avance global
+   */
+  notificarProgresoCargaTotal() {
+    this.documentacion$.next(this.documentacion);
+  }
+
+  salir() {
+    this.router.navigate(["/"]);
+  }
+
+  /**
+   * Muestra una notificacion
+   * @param message 
+   */
+  openSnackBar(message: string) {
+    this.snackBar.open(message, null, {
+      duration: 2000,
+    });
   }
 }
