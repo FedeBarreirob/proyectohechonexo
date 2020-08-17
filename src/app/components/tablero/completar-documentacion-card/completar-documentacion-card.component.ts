@@ -22,7 +22,7 @@ export class CompletarDocumentacionCardComponent implements OnInit, OnDestroy {
   @ViewChild('circleProgress') circleProgress: CircleProgressComponent;
 
   constructor(
-    private authenticationService: AuthenticationService,
+    public authenticationService: AuthenticationService,
     private fileStorageService: FileStorageService
   ) { }
 

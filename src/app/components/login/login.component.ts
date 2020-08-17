@@ -134,7 +134,12 @@ export class LoginComponent implements OnInit {
 	}
 
 	private mostrarCuadroDeBienvenida() {
-		if (this.fileStorageService.esDocLegajoCargado.getValue() == false) {
+
+		let perfil: PerfilBasico = this.authenticationService.perfilUsuarioLogueado();
+		let perfilValidado: boolean = (perfil && (perfil.identidadValidada == true || perfil.rol && perfil.rol.id != RoleEnum.PRODUCTOR));
+		let esProductor: boolean = perfil && perfil.rol && perfil.rol.id == RoleEnum.PRODUCTOR;
+
+		if (this.fileStorageService.esDocLegajoCargado.getValue() == false && perfilValidado && esProductor) {
 			this.dialog.open(MensajeBienvenidaDialogComponent, {
 				maxWidth: '100vw',
 				width: '312px',

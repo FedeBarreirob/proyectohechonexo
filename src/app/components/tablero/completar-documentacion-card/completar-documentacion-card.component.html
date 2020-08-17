@@ -1,4 +1,4 @@
-<div class="container" *ngIf="documentosFaltantes > 0">
+<div class="container" *ngIf="documentosFaltantes > 0 && authenticationService.esRol('PRODUCTOR')">
 
   <!--Spinner-->
   <div fxLayout="row" fxLayoutAlign="center center" *ngIf="cargando" style="margin-top: 10px">

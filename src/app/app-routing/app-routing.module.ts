@@ -41,6 +41,7 @@ import { ValidarDocumentacionStepComponent } from '../components/validar-documen
 import { SituacionUsuarioComponent } from '../components/validar-documentacion/situacion-usuario/situacion-usuario.component';
 import { SituacionUsuarioCompletaComponent } from '../components/validar-documentacion/situacion-usuario-completa/situacion-usuario-completa.component';
 import { AperturaLegajoComponent } from '../components/listados/documentacion/apertura-legajo/apertura-legajo.component';
+import { ValidacionDeIdentidadGuard } from '../security/validacion-de-identidad.guard';
 
 const routes: Routes = [
 	{
@@ -115,7 +116,7 @@ const routes: Routes = [
 			{
 				path: 'dashboard',
 				component: DashboardComponent,
-				canActivate: [AuthGuardGuard],
+				canActivate: [AuthGuardGuard, ValidacionDeIdentidadGuard],
 				data: {
 					rolAdmin: false
 				}
@@ -123,7 +124,7 @@ const routes: Routes = [
 			{
 				path: 'ctacte',
 				component: CuentaCorrienteComponent,
-				canActivate: [AuthGuardGuard],
+				canActivate: [AuthGuardGuard, ValidacionDeIdentidadGuard],
 				data: {
 					rolAdmin: false
 				}
@@ -131,7 +132,7 @@ const routes: Routes = [
 			{
 				path: 'billetera',
 				component: BilleteraComponent,
-				canActivate: [AuthGuardGuard],
+				canActivate: [AuthGuardGuard, ValidacionDeIdentidadGuard],
 				data: {
 					rolAdmin: false
 				}
@@ -139,7 +140,7 @@ const routes: Routes = [
 			{
 				path: 'pagar',
 				component: BilleteraPagarComponent,
-				canActivate: [AuthGuardGuard],
+				canActivate: [AuthGuardGuard, ValidacionDeIdentidadGuard],
 				data: {
 					rolAdmin: false
 				}
@@ -147,7 +148,7 @@ const routes: Routes = [
 			{
 				path: 'pagar/:solicitudId',
 				component: BilleteraPagarComponent,
-				canActivate: [AuthGuardGuard],
+				canActivate: [AuthGuardGuard, ValidacionDeIdentidadGuard],
 				data: {
 					rolAdmin: false
 				}
@@ -155,7 +156,7 @@ const routes: Routes = [
 			{
 				path: 'cobrar',
 				component: BilleteraCobrarComponent,
-				canActivate: [AuthGuardGuard],
+				canActivate: [AuthGuardGuard, ValidacionDeIdentidadGuard],
 				data: {
 					rolAdmin: false
 				}
@@ -171,7 +172,7 @@ const routes: Routes = [
 			{
 				path: 'entregas',
 				component: EntregasComponent,
-				canActivate: [AuthGuardGuard],
+				canActivate: [AuthGuardGuard, ValidacionDeIdentidadGuard],
 				data: {
 					rolAdmin: false
 				}
@@ -179,7 +180,7 @@ const routes: Routes = [
 			{
 				path: 'notificacion/:id',
 				component: NotificacionDetalleUrlComponent,
-				canActivate: [AuthGuardGuard],
+				canActivate: [AuthGuardGuard, ValidacionDeIdentidadGuard],
 				data: {
 					rolAdmin: false
 				}
@@ -187,7 +188,7 @@ const routes: Routes = [
 			{
 				path: 'ventas',
 				component: VentasComponent,
-				canActivate: [AuthGuardGuard],
+				canActivate: [AuthGuardGuard, ValidacionDeIdentidadGuard],
 				data: {
 					rolAdmin: false
 				}
@@ -195,7 +196,7 @@ const routes: Routes = [
 			{
 				path: 'mercaderia-pendiente-entregar',
 				component: MercPendEntregarComponent,
-				canActivate: [AuthGuardGuard],
+				canActivate: [AuthGuardGuard, ValidacionDeIdentidadGuard],
 				data: {
 					rolAdmin: false
 				}
@@ -203,7 +204,7 @@ const routes: Routes = [
 			{
 				path: 'comprobantes-pendientes-facturar',
 				component: ComprobantesPendFacturarComponent,
-				canActivate: [AuthGuardGuard],
+				canActivate: [AuthGuardGuard, ValidacionDeIdentidadGuard],
 				data: {
 					rolAdmin: false
 				}
@@ -211,7 +212,7 @@ const routes: Routes = [
 			{
 				path: 'otros-movimientos',
 				component: OtrosMovimientosComponent,
-				canActivate: [AuthGuardGuard],
+				canActivate: [AuthGuardGuard, ValidacionDeIdentidadGuard],
 				data: {
 					rolAdmin: false
 				}
@@ -219,7 +220,7 @@ const routes: Routes = [
 			{
 				path: 'administrador-de-cuentas',
 				component: PerfilesListadoComponent,
-				canActivate: [AuthGuardGuard],
+				canActivate: [AuthGuardGuard, ValidacionDeIdentidadGuard],
 				data: {
 					rolAdmin: false
 				}
@@ -227,7 +228,7 @@ const routes: Routes = [
 			{
 				path: 'gestion-de-solicitudes',
 				component: GestionDeSolicitudesComponent,
-				canActivate: [AuthGuardGuard],
+				canActivate: [AuthGuardGuard, ValidacionDeIdentidadGuard],
 				data: {
 					rolAdmin: false
 				}
@@ -235,7 +236,7 @@ const routes: Routes = [
 			{
 				path: 'definir-boletos',
 				component: DefinirBoletosComponent,
-				canActivate: [AuthGuardGuard],
+				canActivate: [AuthGuardGuard, ValidacionDeIdentidadGuard],
 				data: {
 					rolAdmin: false
 				}
@@ -243,7 +244,7 @@ const routes: Routes = [
 			{
 				path: 'definicion-de-boletos',
 				component: DefinicionDeBoletosComponent,
-				canActivate: [AuthGuardGuard],
+				canActivate: [AuthGuardGuard, ValidacionDeIdentidadGuard],
 				data: {
 					rolAdmin: false
 				}
@@ -251,7 +252,7 @@ const routes: Routes = [
 			{
 				path: 'informacion-de-perfil',
 				component: InformacionDePerfilComponent,
-				canActivate: [AuthGuardGuard],
+				canActivate: [AuthGuardGuard, ValidacionDeIdentidadGuard],
 				data: {
 					rolAdmin: false
 				}
@@ -259,7 +260,7 @@ const routes: Routes = [
 			{
 				path: 'archivo-de-comprobantes',
 				component: ComprobantesComponent,
-				canActivate: [AuthGuardGuard],
+				canActivate: [AuthGuardGuard, ValidacionDeIdentidadGuard],
 				data: {
 					rolAdmin: false
 				}
@@ -267,7 +268,7 @@ const routes: Routes = [
 			{
 				path: 'buzon',
 				component: BuzonComponent,
-				canActivate: [AuthGuardGuard],
+				canActivate: [AuthGuardGuard, ValidacionDeIdentidadGuard],
 				data: {
 					rolAdmin: false
 				}
@@ -275,7 +276,7 @@ const routes: Routes = [
 			{
 				path: 'contratos',
 				component: ContratosComponent,
-				canActivate: [AuthGuardGuard],
+				canActivate: [AuthGuardGuard, ValidacionDeIdentidadGuard],
 				data: {
 					rolAdmin: false
 				}
@@ -283,7 +284,7 @@ const routes: Routes = [
 			{
 				path: 'reportes',
 				component: ReportesComponent,
-				canActivate: [AuthGuardGuard],
+				canActivate: [AuthGuardGuard, ValidacionDeIdentidadGuard],
 				data: {
 					rolAdmin: false
 				}
@@ -291,7 +292,7 @@ const routes: Routes = [
 			{
 				path: 'informacion-de-perfil-desktop',
 				component: InformacionDePerfilDesktopComponent,
-				canActivate: [AuthGuardGuard],
+				canActivate: [AuthGuardGuard, ValidacionDeIdentidadGuard],
 				data: {
 					rolAdmin: false
 				}
