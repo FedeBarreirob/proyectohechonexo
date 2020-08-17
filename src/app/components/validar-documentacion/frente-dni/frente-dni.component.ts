@@ -1,8 +1,9 @@
 import { Component, OnInit } from '@angular/core';
-import { MatDialogRef } from '@angular/material';
+import { MatDialogRef, MatDialog } from '@angular/material';
 import { DeviceDetectorService } from 'ngx-device-detector';
 import {WebcamImage} from 'ngx-webcam';
 import {Subject, Observable} from 'rxjs';
+import { MensajeFotoSubidaComponent } from '../mensaje-foto-subida/mensaje-foto-subida.component';
 
 @Component({
   selector: 'app-frente-dni',
@@ -17,7 +18,8 @@ export class FrenteDniComponent implements OnInit {
 
   constructor(
     private deviceService: DeviceDetectorService, 
-    private dialogRef: MatDialogRef<FrenteDniComponent>
+    private dialogRef: MatDialogRef<FrenteDniComponent>,
+    private dialog: MatDialog
   ) { }
 
   ngOnInit() {
@@ -26,6 +28,16 @@ export class FrenteDniComponent implements OnInit {
 
   salir(){
     this.dialogRef.close();
+  }
+
+  finalizarProceso(){
+    this.dialog.open(MensajeFotoSubidaComponent, {
+      maxWidth: '100vw',
+      width: '100%',
+      maxHeight: '100vh',
+      height: '100%',
+      panelClass: 'modal-sin-padding'
+    });
   }
 
   //prueba

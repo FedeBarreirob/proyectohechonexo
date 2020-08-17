@@ -1,3 +1,7 @@
-<p>
-  dorso-dni works!
-</p>
+<div *ngIf="esCelular">
+  <webcam [height]="680" [width]="320" [trigger]="triggerObservable" (imageCapture)="handleImage($event)"></webcam>
+  <!-- Button Takes Photo -->
+  <button class="actionBtn" (click)="triggerSnapshot();">Take A Snapshot</button>
+  
+  <button (click)="salir()" (click)="finalizarProceso()">salir</button>
+</div>

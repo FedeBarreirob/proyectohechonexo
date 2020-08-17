@@ -41,7 +41,7 @@
           </div>
         </div>
         <div fxLayoutAlign="start center">
-          <button mat-button class="button-start" matStepperNext>Sacar foto</button>
+          <button mat-button class="button-start" matStepperNext (click)="sacarFotoDorso()">Sacar foto</button>
         </div>
       </mat-step>
       <mat-step>
@@ -57,7 +57,7 @@
           </div>
         </div>
         <div routerLink="/situacion-usuario" fxLayoutAlign="start center">
-          <button mat-button class="button-start">Sacar foto</button>
+          <button mat-button class="button-start" (click)="sacarFotoSelfie()">Sacar foto</button>
         </div>
       </mat-step>
     </mat-horizontal-stepper>

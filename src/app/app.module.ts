@@ -297,6 +297,7 @@ import { CompletarDocumentacionNavComponent } from './components/menu/completar-
 import { AperturaLegajoComponent } from './components/listados/documentacion/apertura-legajo/apertura-legajo.component';
 import { ProgressUploadFilesComponent } from './components/listados/documentacion/progress-upload-files/progress-upload-files.component';
 import { CompletarRegistroDialogComponent } from './components/listados/billetera/completar-registro-dialog/completar-registro-dialog.component';
+import { MensajeFotoSubidaComponent } from './components/validar-documentacion/mensaje-foto-subida/mensaje-foto-subida.component';
 
 registerLocaleData(localeEsAr, 'es-AR');
 
@@ -558,7 +559,8 @@ export function tokenGetter() {
 		CompletarDocumentacionNavComponent,
 		AperturaLegajoComponent,
 		ProgressUploadFilesComponent,
-		CompletarRegistroDialogComponent
+		CompletarRegistroDialogComponent,
+		MensajeFotoSubidaComponent
 	],
 	imports: [
 		HttpClientModule,
@@ -657,7 +659,8 @@ export function tokenGetter() {
 		DorsoDniComponent,
 		SelfieComponent,
 		MensajeBienvenidaDialogComponent,
-		CompletarRegistroDialogComponent
+		CompletarRegistroDialogComponent,
+		MensajeFotoSubidaComponent
 	],
 	bootstrap: [AppComponent]
 })
