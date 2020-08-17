@@ -22,7 +22,7 @@
 				<app-completar-documentacion-card></app-completar-documentacion-card>
 			</div>
 
-			<span *ngIf="(fileStorageService.esDocLegajoCargado | async)">
+			<span *ngIf="(fileStorageService.esDocLegajoCargado | async) || !authenticationService.esRol('PRODUCTOR')">
 
 				<app-contrato-indicador-entregas-yventas (cargandoChange)="esCargandoIndicadorContratos($event)">
 				</app-contrato-indicador-entregas-yventas>

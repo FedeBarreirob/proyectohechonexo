@@ -70,7 +70,7 @@
 
 			<div *ngFor="let link of links">
 				<app-link-menu [link]="link"
-					*ngIf="!(link.ocultarDesktop == true && !esCelular) && (fileStorageService.esDocLegajoCargado | async)">
+					*ngIf="!(link.ocultarDesktop == true && !esCelular) && ((fileStorageService.esDocLegajoCargado | async) || !authService.esRol('PRODUCTOR'))">
 				</app-link-menu>
 			</div>
 

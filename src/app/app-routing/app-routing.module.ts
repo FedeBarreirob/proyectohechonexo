@@ -86,12 +86,12 @@ const routes: Routes = [
 			path: '', component: ValidarDocumentacionStepComponent
 		}]
 	},
-	{
+	/*{
 		path: 'situacion-usuario', component: LoginLayoutComponent,
 		children: [{
 			path: '', component: SituacionUsuarioComponent
 		}]
-	},
+	},*/
 	{
 		path: 'situacion-completada', component: LoginLayoutComponent,
 		children: [{

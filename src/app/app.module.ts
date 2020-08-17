@@ -664,7 +664,8 @@ export function tokenGetter() {
 		SelfieComponent,
 		MensajeBienvenidaDialogComponent,
 		CompletarRegistroDialogComponent,
-		MensajeFotoSubidaComponent
+		MensajeFotoSubidaComponent,
+		SituacionUsuarioComponent
 	],
 	bootstrap: [AppComponent]
 })

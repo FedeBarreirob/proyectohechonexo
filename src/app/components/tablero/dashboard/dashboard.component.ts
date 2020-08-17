@@ -34,7 +34,7 @@ export class DashboardComponent implements OnInit {
   constructor(
     private deviceService: DeviceDetectorService,
     private notificacionService: NotificacionesService,
-    private authenticationService: AuthenticationService,
+    public authenticationService: AuthenticationService,
     private dialog: MatDialog,
     private perfilService: PerfilesService,
     private tutorialModalService: TutorialModalService,

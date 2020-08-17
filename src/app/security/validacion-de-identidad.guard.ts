@@ -31,10 +31,14 @@ export class ValidacionDeIdentidadGuard implements CanActivate {
     try {
       let perfil: PerfilBasico = this.authenticationService.perfilUsuarioLogueado();
 
-      if (perfil && (perfil.identidadValidada == true || perfil.rol && perfil.rol.id != RoleEnum.PRODUCTOR)) {
-        return true;
+      if (perfil) {
+        if (perfil.identidadValidada == true || perfil.rol && perfil.rol.id != RoleEnum.PRODUCTOR) {
+          return true;
+        } else {
+          return false;
+        }
       } else {
-        return false;
+        return true;
       }
 
     } catch (e) {
