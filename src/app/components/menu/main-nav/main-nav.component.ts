@@ -7,6 +7,7 @@ import { ItemLinkMenu } from '../../../interfaces/menu/sidebar/item-link-menu';
 import { MatSidenav } from '@angular/material';
 import { SidebarService } from '../../../services/observers/sidebar/sidebar.service';
 import { DeviceDetectorService } from 'ngx-device-detector';
+import { FileStorageService } from '../../../services/file-storage/file-storage.service';
 
 @Component({
 	selector: 'app-main-nav',
@@ -25,12 +26,14 @@ export class MainNavComponent implements OnInit, OnDestroy {
 	// links que aparecen en el sidebar
 	public links: Array<ItemLinkMenu>;
 	public Adminlinks: Array<ItemLinkMenu>;
+	public sesionLinks: Array<ItemLinkMenu>;
 
 	constructor(
 		private breakpointObserver: BreakpointObserver,
 		public authService: AuthenticationService,
 		private sidebarService: SidebarService,
-		private deviceService: DeviceDetectorService
+		private deviceService: DeviceDetectorService,
+		public fileStorageService: FileStorageService
 	) {
 	}
 
@@ -202,7 +205,10 @@ export class MainNavComponent implements OnInit, OnDestroy {
 				imagenActiva: "assets/sidebar/perfil-hot.png",
 				permitido: true,
 				ocultarDesktop: true
-			},
+			}
+		];
+
+		this.sesionLinks = [
 			{
 				nombre: "Cerrar sesión",
 				rutaLink: "/login",
@@ -211,7 +217,8 @@ export class MainNavComponent implements OnInit, OnDestroy {
 				permitido: true,
 				ocultarDesktop: false
 			}
-		];
+		]
+
 		this.Adminlinks = [
 			{
 				nombre: "Gestión de solicitudes",

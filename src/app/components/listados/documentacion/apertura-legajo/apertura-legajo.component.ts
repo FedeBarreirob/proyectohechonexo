@@ -74,6 +74,7 @@ export class AperturaLegajoComponent implements OnInit, OnDestroy {
       this.fileStorageService.registrarDocumentacion(this.documentacion).subscribe(
         respuesta => {
           if (respuesta.exito == true) {
+            this.notificarProgresoCargaTotal();
             this.salir();
           } else {
             this.openSnackBar(respuesta.mensaje);
@@ -103,5 +104,15 @@ export class AperturaLegajoComponent implements OnInit, OnDestroy {
     this.snackBar.open(message, null, {
       duration: 2000,
     });
+  }
+
+  /**
+   * Notifica a todos el estado de carga del legajo
+   */
+  notificarSiElLegajoSeCargoCompletamente() {
+    if (this.documentacion && this.documentacion.length > 0) {
+      let completo: boolean = !this.documentacion.some(doc => !doc.archivoId);
+      this.fileStorageService.esDocLegajoCargado.next(completo);
+    }
   }
 }

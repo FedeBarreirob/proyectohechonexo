@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { environment } from '../../../environments/environment';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { GrupoDeDocumentaciones } from '../../enums/grupo-de-documentaciones.enum';
-import { Observable } from 'rxjs';
+import { Observable, BehaviorSubject } from 'rxjs';
 import { ResponseServicio } from '../../interfaces/varios/response-servicio';
 import { Documento } from '../../interfaces/documentaciones/documento';
 
@@ -14,6 +14,8 @@ export class FileStorageService {
   private urlPerfDocAvanceDeCarga = `${environment.hostFileStorage}/perfilesDocumentaciones/avanceDeCarga`;
   private urlDocumentoUpload = `${environment.hostFileStorage}/upload`;
   private urlPerfilDocumentaciones = `${environment.hostFileStorage}/perfilesDocumentaciones`;
+
+  public esDocLegajoCargado: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(true);
 
   constructor(private http: HttpClient) { }
 

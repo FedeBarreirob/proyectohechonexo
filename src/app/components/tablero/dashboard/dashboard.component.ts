@@ -1,5 +1,5 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
-import { MatSidenav, MatDialog, MatSnackBar } from '@angular/material';
+import { MatSidenav, MatDialog } from '@angular/material';
 import { Subject } from 'rxjs';
 import { NotificacionesService } from '../../../services/notificaciones/notificaciones.service';
 import { DeviceDetectorService } from 'ngx-device-detector';
@@ -9,10 +9,8 @@ import { EstadoNotificaciones } from '../../../enums/estado-notificaciones.enum'
 import { TutorialModalComponent } from '../../../components/common/tutorial-modal/tutorial-modal.component';
 import { PerfilesService } from '../../../services/perfiles/perfiles.service';
 import { PerfilBasico } from '../../../interfaces/perfiles/perfil-basico';
-import { takeUntil } from 'rxjs/operators';
-import { window } from 'rxjs/internal/operators/window';
 import { TutorialModalService } from '../../../services/tutorial-modal/tutorial-modal.service';
-import { MensajeBienvenidaDialogComponent } from '../mensaje-bienvenida-dialog/mensaje-bienvenida-dialog.component';
+import { FileStorageService } from '../../../services/file-storage/file-storage.service';
 
 @Component({
   selector: 'app-dashboard',
@@ -39,7 +37,8 @@ export class DashboardComponent implements OnInit {
     private authenticationService: AuthenticationService,
     private dialog: MatDialog,
     private perfilService: PerfilesService,
-    private tutorialModalService: TutorialModalService
+    private tutorialModalService: TutorialModalService,
+    public fileStorageService: FileStorageService
   ) { }
 
   ngOnInit() {
@@ -53,13 +52,13 @@ export class DashboardComponent implements OnInit {
           data: { buttonText: welcomeTutorial1_2.contenido.buttonText, title: welcomeTutorial1_2.contenido.title, description: welcomeTutorial1_2.contenido.description, pageId: welcomeTutorial1_2.contenido.pageId, pageCount: welcomeTutorial1_2.contenido.pageCount }
         });
 
-        dialogRef.afterClosed().subscribe(result => {
+        dialogRef.afterClosed().subscribe(() => {
           localStorage.setItem('welcomeTutorial1-2', JSON.stringify(true));
           this.tutorialModalService.marcarVisto({
             perfilId: currentUser.informacionPersonal.id,
             key: 'welcomeTutorial1-2',
             visto: true
-          }).subscribe(result => {
+          }).subscribe(() => {
 
           });
 
@@ -77,13 +76,13 @@ export class DashboardComponent implements OnInit {
                 perfilId: currentUser.informacionPersonal.id,
                 key: 'welcomeTutorial2-2',
                 visto: true
-              }).subscribe(result => {
+              }).subscribe(() => {
 
               });;
 
               if (userName) {
                 currentUser.informacionPersonal.nombre = userName;
-                this.perfilService.actualizarDatosPersonales(currentUser).subscribe(response => { this.authenticationService.setPerfilActivo(currentUser); });
+                this.perfilService.actualizarDatosPersonales(currentUser).subscribe(() => { this.authenticationService.setPerfilActivo(currentUser); });
               }
 
               var homeTutorial = currentUser.tutorialModales.filter(tutorial => tutorial.key == 'homeTutorial')[0];
@@ -98,13 +97,13 @@ export class DashboardComponent implements OnInit {
                   }
                 });
 
-                dialogRef3.afterClosed().subscribe(result => {
+                dialogRef3.afterClosed().subscribe(() => {
                   localStorage.setItem('homeTutorial', JSON.stringify(true));
                   this.tutorialModalService.marcarVisto({
                     perfilId: currentUser.informacionPersonal.id,
                     key: 'homeTutorial',
                     visto: true
-                  }).subscribe(result => {
+                  }).subscribe(() => {
 
                   });;
                 });
@@ -119,7 +118,7 @@ export class DashboardComponent implements OnInit {
 
     if (this.esCelular) {
       this.actualizarIndicadorMensajes();
-      this.notificacionService.huboCambiosEstadoMensajes$.subscribe(respuesta => this.actualizarIndicadorMensajes());
+      this.notificacionService.huboCambiosEstadoMensajes$.subscribe(() => this.actualizarIndicadorMensajes());
     }
   }
 
