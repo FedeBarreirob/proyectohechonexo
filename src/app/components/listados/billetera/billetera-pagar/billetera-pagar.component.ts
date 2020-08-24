@@ -10,7 +10,7 @@ import { PerfilBasico } from '../../../../interfaces/perfiles/perfil-basico';
 import { ResumenComprobanteDialogComponent } from './resumen/resumen-comprobante-dialog/resumen-comprobante-dialog.component';
 import { MovimientoCtaCteAplicada } from '../../../../interfaces/ctacte-aplicada/listado-ctacte-aplicada';
 import { FinanzasProgramadorPagosService } from '../../../../services/finanzas/finanzas-programador-pagos.service';
-import { Router } from '@angular/router';
+import { Router, ActivatedRoute } from '@angular/router';
 import { NumeroAKilosPipe } from '../../../../pipes/numero-akilos.pipe';
 
 @Component({
@@ -22,7 +22,6 @@ import { NumeroAKilosPipe } from '../../../../pipes/numero-akilos.pipe';
 export class BilleteraPagarComponent implements OnInit, OnDestroy {
 
   @ViewChild('menuFiltro') public sidenav: MatSidenav;
-
   @ViewChild('stepper') stepper: MatHorizontalStepper;
 
   destroy$: Subject<any> = new Subject<any>();
@@ -35,7 +34,10 @@ export class BilleteraPagarComponent implements OnInit, OnDestroy {
   unidadMedida: string;
   perfilBasico: PerfilBasico;
   guardando: boolean = false;
-  
+
+  solicitudDePagoEnEdicion: any;
+  cargando: boolean = false;
+  modoEdicion: boolean;
 
   constructor(
     private deviceService: DeviceDetectorService,
@@ -45,36 +47,49 @@ export class BilleteraPagarComponent implements OnInit, OnDestroy {
     private snackBar: MatSnackBar,
     private finanzasProgramadorPagosService: FinanzasProgramadorPagosService,
     private router: Router,
-    private numeroAKilosPipe: NumeroAKilosPipe
+    private numeroAKilosPipe: NumeroAKilosPipe,
+    private activatedRouter: ActivatedRoute
   ) { }
 
   ngOnInit() {
     this.esCelular = this.deviceService.isMobile();
 
-    // observer de perfil
-    this.authenticationService.perfilActivo$
-      .pipe(takeUntil(this.destroy$))
-      .subscribe(
-        perfil => {
-          this.perfilBasico = perfil;
-          this.cargarUnidadMedida()
-        });
-
+    this.perfilBasico = this.authenticationService.perfilUsuarioLogueado();
     this.cargarUnidadMedida();
 
-    this.cuentaService.cuentaAlgSeleccionadaV2$.asObservable()
-      .pipe(takeUntil(this.destroy$))
-      .subscribe(
-        cuenta => {
-          this.cuenta = cuenta;
+    this.activatedRouter.params.subscribe(params => {
+      if (params.solicitudId) {
+        this.modoEdicion = true;
+        this.cargarSolicitudDePagoAEditar(params.solicitudId);
+
+      } else {
+
+        this.modoEdicion = false;
+        this.cuentaService.cuentaAlgSeleccionadaV2$.asObservable()
+          .pipe(takeUntil(this.destroy$))
+          .subscribe(
+            cuenta => {
+              this.cuenta = cuenta;
+              this.cargarListadoPorDefecto();
+            }
+          );
+
+        if (this.cuentaService.cuentaAlgSeleccionadaV2$.getValue()) {
+          this.cuenta = this.cuentaService.cuentaAlgSeleccionadaV2$.getValue();
           this.cargarListadoPorDefecto();
         }
-      );
 
-    if (this.cuentaService.cuentaAlgSeleccionadaV2$.getValue()) {
-      this.cuenta = this.cuentaService.cuentaAlgSeleccionadaV2$.getValue();
-      this.cargarListadoPorDefecto();
-    }
+      }
+    });
+
+    // observer de perfil
+    /* this.authenticationService.perfilActivo$
+       .pipe(takeUntil(this.destroy$))
+       .subscribe(
+         perfil => {
+           this.perfilBasico = perfil;
+           this.cargarUnidadMedida()
+         });*/
   }
 
   ngOnDestroy(): void {
@@ -84,12 +99,13 @@ export class BilleteraPagarComponent implements OnInit, OnDestroy {
 
   // funcion que carga la unidad de medida desde el perfil 
   cargarUnidadMedida() {
-    if (this.perfilBasico) {
-      this.unidadMedida = (this.perfilBasico.informacionPersonal.unidadMedidaPeso) ? this.perfilBasico.informacionPersonal.unidadMedidaPeso : 'tn';
-    } else {
+    //if (this.perfilBasico) {
+    this.unidadMedida = (this.perfilBasico.informacionPersonal.unidadMedidaPeso) ? this.perfilBasico.informacionPersonal.unidadMedidaPeso : 'tn';
+
+    /*} else {
       this.perfilBasico = this.authenticationService.perfilUsuarioSeleccionado();
       this.unidadMedida = (this.perfilBasico.informacionPersonal.unidadMedidaPeso) ? this.perfilBasico.informacionPersonal.unidadMedidaPeso : 'tn';
-    }
+    }*/
   }
 
   /**
@@ -110,10 +126,14 @@ export class BilleteraPagarComponent implements OnInit, OnDestroy {
     });
 
     dialogRef.afterClosed().subscribe((nuevoCobro: boolean) => {
-      if (nuevoCobro == true) {
-        this.resetearParaNuevoIngreso();
+      if (this.modoEdicion == true) {
+        this.router.navigate(["/gestion-de-solicitudes"]);
       } else {
-        this.router.navigate(["billetera"]);
+        if (nuevoCobro == true) {
+          this.resetearParaNuevoIngreso();
+        } else {
+          this.router.navigate(["billetera"]);
+        }
       }
     });
   }
@@ -149,23 +169,50 @@ export class BilleteraPagarComponent implements OnInit, OnDestroy {
 
       let datos = this.datosAGuardar();
 
-      this.finanzasProgramadorPagosService.registroSolicitudDePago(datos)
-        .pipe(takeUntil(this.destroy$))
-        .subscribe(
-          respuesta => {
-            if (respuesta.exito == true) {
-              this.mostrarResumen(respuesta.datos);
-            } else {
-              this.openSnackBar(respuesta.mensaje);
-            }
-          },
-          error => {
-            console.log(error);
-            this.guardando = false;
-          },
-          () => this.guardando = false
-        );
+      if (this.modoEdicion == true) {
+        this.actualizar(datos);
+      } else {
+        this.registrar(datos);
+      }
     }
+  }
+
+  registrar(datos: any) {
+    this.finanzasProgramadorPagosService.registroSolicitudDePago(datos)
+      .pipe(takeUntil(this.destroy$))
+      .subscribe(
+        respuesta => {
+          if (respuesta.exito == true) {
+            this.mostrarResumen(respuesta.datos);
+          } else {
+            this.openSnackBar(respuesta.mensaje);
+          }
+        },
+        error => {
+          console.log(error);
+          this.guardando = false;
+        },
+        () => this.guardando = false
+      );
+  }
+
+  actualizar(datos: any) {
+    this.finanzasProgramadorPagosService.actualizacionSolicitudDePago(datos)
+      .pipe(takeUntil(this.destroy$))
+      .subscribe(
+        respuesta => {
+          if (respuesta.exito == true) {
+            this.mostrarResumen(respuesta.datos);
+          } else {
+            this.openSnackBar(respuesta.mensaje);
+          }
+        },
+        error => {
+          console.log(error);
+          this.guardando = false;
+        },
+        () => this.guardando = false
+      );
   }
 
   /**
@@ -185,21 +232,53 @@ export class BilleteraPagarComponent implements OnInit, OnDestroy {
 
     let canjes;
     if (this.disponiblesSeleccionados$ && this.disponiblesSeleccionados$.getValue() && this.disponiblesSeleccionados$.getValue().length > 0) {
+
       canjes = this.disponiblesSeleccionados$.getValue().map(unDisponible => {
+
+        let boletosAFijar;
+        if (unDisponible.definicionDeBoletosFijaciones && unDisponible.definicionDeBoletosFijaciones.length > 0) {
+          boletosAFijar = unDisponible.definicionDeBoletosFijaciones.map(fijacion => {
+            return {
+              codContratoExterno: fijacion.boleto.contratoAlgId,
+              tipoFijacion: fijacion.tipoFijacion,
+              tipoPrecioFijacion: fijacion.tipoPrecioFijacion,
+              kgAFijar: this.numeroAKilosPipe.transform(Number.parseFloat(fijacion.stockAFijar), this.unidadMedida),
+              precioDelDia: fijacion.precioDelDia
+            };
+          });
+        }
+
+        let boletosAPesificar;
+        if (unDisponible.definicionDeBoletosPesificacion && unDisponible.definicionDeBoletosPesificacion.length > 0) {
+          boletosAPesificar = unDisponible.definicionDeBoletosPesificacion.map(pesificacion => {
+            return {
+              codContratoExterno: pesificacion.boleto.contratoAlgId,
+              tipoPesificacion: pesificacion.tipoPesificacion,
+              kgAPesificar: this.numeroAKilosPipe.transform(Number.parseFloat(pesificacion.stockAPesificar), this.unidadMedida)
+            };
+          });
+        }
+
         return {
           especieCodExterno: unDisponible.especieCodigo,
           kgAFijar: this.numeroAKilosPipe.transform(Number.parseFloat(unDisponible.stockAFijar), this.unidadMedida),
           kgAPesificar: this.numeroAKilosPipe.transform(Number.parseFloat(unDisponible.stockAPesificar), this.unidadMedida),
+          boletosAFijar,
+          boletosAPesificar
         }
       });
     }
 
-    let datos = {
+    let datos: any = {
       cuenta: this.cuenta.id.codigo,
       medioPago: 1, // por ahora se fuerza a que sea canje
       conceptosAPagar: this.conceptosAPagarSeleccionados$.getValue(),
       canjes
     };
+
+    if (this.modoEdicion == true) {
+      datos.id = this.solicitudDePagoEnEdicion.id;
+    }
 
     return datos;
   }
@@ -213,5 +292,60 @@ export class BilleteraPagarComponent implements OnInit, OnDestroy {
     this.conceptosAPagarSeleccionados$.next(null);
     this.disponiblesSeleccionados$.next(null);
     this.stepper.selectedIndex = 0;
+  }
+
+  /**
+   * Función encargada de cargar los datos de una solicitud a editar
+   * @param solicitudId 
+   */
+  cargarSolicitudDePagoAEditar(solicitudId: number) {
+    if (this.cargando == false) {
+
+      this.cargando = true;
+
+      this.finanzasProgramadorPagosService.solicitudDePagoPorId(solicitudId)
+        .pipe(takeUntil(this.destroy$))
+        .subscribe(
+          respuesta => {
+            if (respuesta.exito == true) {
+
+              this.solicitudDePagoEnEdicion = respuesta.datos;
+              this.cargarCuentaDesdeSolicitudAEditar();
+              this.cargarListadoPorDefecto();
+              this.stepper.selectedIndex = 2;
+              
+            }
+          },
+          error => {
+            console.log(error);
+            this.cargando = false;
+          },
+          () => this.cargando = false
+        );
+
+    }
+  }
+
+  /**
+   * Carga la cuenta que se encuentra  en la solicitd de pago a editar
+   */
+  cargarCuentaDesdeSolicitudAEditar() {
+    this.cuenta = {
+      id: {
+        codigo: this.solicitudDePagoEnEdicion.cuenta
+      }
+    }
+  }
+
+
+  /**
+   * Devuelve la url de retorno
+   */
+  get backUrl(): string {
+    if (this.modoEdicion == true) {
+      return "/gestion-de-solicitudes";
+    } else {
+      return "/billetera";
+    }
   }
 }

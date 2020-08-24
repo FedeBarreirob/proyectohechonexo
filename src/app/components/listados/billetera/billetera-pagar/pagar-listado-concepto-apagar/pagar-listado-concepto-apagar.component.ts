@@ -12,6 +12,9 @@ export class PagarListadoConceptoAPagarComponent implements OnInit {
   @Input()
   concepto: MovimientoCtaCteAplicada;
 
+  @Input()
+  esConceptoSeleccionado: boolean = false;
+
   @Output()
   seleccion: EventEmitter<any> = new EventEmitter<any>();
 

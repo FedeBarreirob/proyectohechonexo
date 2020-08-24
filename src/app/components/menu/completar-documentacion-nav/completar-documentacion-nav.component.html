@@ -1,27 +1,12 @@
-<div class="container" fxLayoutAlign="center center">
+<div class="container" fxLayoutAlign="center center" *ngIf="documentosFaltantes > 0">
   <div class="content" fxLayout="column" fxLayoutAlign="center center">
-    <circle-progress 
-          [percent]="90"
-          [radius]="30"
-          [maxPercent]="100"
-          [outerStrokeWidth]="8"
-          [innerStrokeWidth]="4"
-          [outerStrokeColor]="'#2DA442'"
-          [innerStrokeColor]="'none'"
-          [title]="'30'"
-          [titleColor]="'#2DA442'"
-          [titleFontSize]="'20'"
-          [subtitle]="'días'"
-          [subtitleColor]="'#2DA442'"
-          [subtitleFontSize]="'10'"
-          [animation]="true"
-          [animationDuration]="300">
-      </circle-progress>
 
-      <div class="title">Te quedan 30 días para completar tu documentación.</div>
+    <div class="title">Tienes {{ indicador.porcentajeDeCarga | number }}% de documentación subida</div>
 
-      <div routerLink="/apertura-legajo" fxLayoutAlign="start center">
-        <button mat-button class="button-complete">Completar ahora</button>
-      </div>
+    <p class="text">Solo te queda subir {{documentosFaltantes}} documentos para operar tu cuenta</p>
+
+    <div fxLayoutAlign="start center">
+      <button mat-button (click)="abrirUploader()" class="button-complete">Completar ahora</button>
+    </div>
   </div>
 </div>

@@ -18,6 +18,13 @@
     text-align: center;
 }
 
+.text{
+    font-family: Rubik;
+    font-size: 12px;
+    color: #333333;
+    text-align: center;
+}
+
 .button-complete{
     margin-top: 20px;
     width: 100%;

@@ -27,7 +27,7 @@ export class DorsoDniComponent implements OnInit {
   }
 
   salir(){
-    this.dialogRef.close();
+    this.dialogRef.close(null);
   }
 
   finalizarProceso(){
@@ -47,8 +47,8 @@ export class DorsoDniComponent implements OnInit {
   }
   
   handleImage(webcamImage: WebcamImage): void {
-    console.info('received webcam image', webcamImage);
     this.webcamImage = webcamImage;
+    this.dialogRef.close(webcamImage.imageAsDataUrl);
   }
   
   public get triggerObservable(): Observable<void> {

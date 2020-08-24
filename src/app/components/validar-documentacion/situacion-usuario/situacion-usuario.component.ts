@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { DeviceDetectorService } from 'ngx-device-detector';
+import { MatDialogRef } from '@angular/material';
 
 @Component({
   selector: 'app-situacion-usuario',
@@ -10,10 +11,16 @@ export class SituacionUsuarioComponent implements OnInit {
 
   esCelular: boolean;
 
-  constructor(private deviceService: DeviceDetectorService) { }
+  constructor(
+    private deviceService: DeviceDetectorService,
+    private dialogRef: MatDialogRef<SituacionUsuarioComponent>
+    ) { }
 
   ngOnInit() {
     this.esCelular = this.deviceService.isMobile();
   }
 
+  salir() {
+    this.dialogRef.close();
+  }
 }
