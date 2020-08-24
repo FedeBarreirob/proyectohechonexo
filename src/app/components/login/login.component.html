@@ -1,56 +1,64 @@
 <div [ngClass]="{'contenedor': esCelular, 'contenedor-desktop': !esCelular}">
-  <div fxLayout="row" fxLayoutAlign="center center">
-    <div fxFlex.xs="30%">
-      <img src="assets/logo.png" mat-card-image class="logo" alt="Gaviglio" />
-    </div>
+  <div fxLayout="row" class="header">
+    <div fxLayoutAlign="start center"><img class="logo" src="../../../../assets/varios/color.png"></div>
   </div>
+  <mat-divider style="margin-top: 16px; margin-bottom: 20px; width: 100%;margin-left: -20px;"></mat-divider>
 
-  <div fxLayout="row" fxLayoutAlign="center">
-    <div fxFlex="nogrow">
-      <mat-card [ngClass]="{'card-base': esCelular, 'card-base-desktop': !esCelular}">
-        <mat-card-content>
-          <form [formGroup]="frmLogin" #formLogin="ngForm">
+  <mat-tab-group mat-stretch-tabs mat-align-tabs="center">
+    <mat-tab label="Iniciar sesión">
+      <div fxLayout="row" fxLayoutAlign="center">
+        <div fxFlex="nogrow">
+          <mat-card [ngClass]="{'card-base-desktop': !esCelular}">
+            <mat-card-content>
+              <form [formGroup]="frmLogin" #formLogin="ngForm">
 
-            <p class="correo-o-usuario">USUARIO</p>
-            <input [ngClass]="{'username': esCelular, 'username-desktop': !esCelular}" matInput
-              formControlName="username" required #inputUsername [value]="inputUsername.value.toLowerCase()">
+                <div class="title-header">¡Hola otra vez!</div>
+    
+                <p class="correo-o-usuario">EMAIL O USUARIO</p>
+                <input [ngClass]="{'username': esCelular, 'username-desktop': !esCelular}" matInput
+                  formControlName="username" required #inputUsername [value]="inputUsername.value.toLowerCase()">
+    
+                <p class="password-lbl">CONTRASEÑA</p>
+    
+                <input [ngClass]="{'password': esCelular, 'password-desktop': !esCelular}" id="password" matInput
+                  showHideInput [type]="hidePassword ? 'password' : 'text'" formControlName="password" required>
+                <mat-icon class="passwordIcon" (click)="hidePassword = !hidePassword">
+                  {{hidePassword ? 'visibility_off' : 'visibility'}}</mat-icon>
+    
+                <div fxLayout="row" fxLayoutAlign="center center" class="recuerdameContenedor">
+                  <div fxFlex="50%">
+                    <mat-checkbox formControlName="recuerdame">Recuérdame</mat-checkbox>
+                  </div>
+                  <div fxFlex="50%" fxLayout="column" align="right">
+                    <a routerLink="/recuperacion-password">¿Olvidó su contraseña?</a>
+                  </div>
+                </div>
+                <div fxLayout="row" class="contenedor-team">
+                  ¿Querés unirte a nuestro equipo?, <a routerLink="/inicio-registro"><b style="color: #2da442;">has click aquí</b></a>
+                </div>
+              </form>
+    
+              <button
+                [ngClass]="{'botonEntrar': !formLogin.valid && esCelular, 'botonEntrarHot': formLogin.valid && esCelular, 'botonEntrar-desktop': !formLogin.valid && !esCelular, 'botonEntrarHot-desktop': formLogin.valid && !esCelular}"
+                [disabled]="logueando || !formLogin.valid" type="button" (click)="login()">Entrar</button>
+    
+            </mat-card-content>
+          </mat-card>
+    
+          <p class="version">v{{ version }}</p>
+    
+          <a *ngIf="esCelular && !inPhonegap" href="https://play.google.com/store/apps/details?id=com.gaviglio.digital"
+            target="_blank" class="google-play">
+            <img src="assets/google-play/google-play.png" alt="Play Store" width="150" height="50" />
+          </a>
+    
+        </div>
+      </div>
+    </mat-tab>
+    <mat-tab label="Registrarse">
 
-            <p class="password-lbl">CONTRASEÑA</p>
-
-            <input [ngClass]="{'password': esCelular, 'password-desktop': !esCelular}" id="password" matInput
-              showHideInput [type]="hidePassword ? 'password' : 'text'" formControlName="password" required>
-            <mat-icon class="passwordIcon" (click)="hidePassword = !hidePassword">
-              {{hidePassword ? 'visibility_off' : 'visibility'}}</mat-icon>
-
-            <div fxLayout="row" fxLayoutAlign="center center" class="recuerdameContenedor">
-              <div fxFlex="50%">
-                <mat-checkbox formControlName="recuerdame">Recuérdame</mat-checkbox>
-              </div>
-              <div fxFlex="50%" fxLayout="column" align="right">
-                <a routerLink="/recuperacion-password">¿Olvidó su contraseña?</a>
-              </div>
-            </div>
-            <div fxLayout="row" class="contenedor-team">
-              ¿Querés unirte a nuestro equipo?, <a routerLink="/inicio-registro"><b style="color: #2da442;">has click aquí</b></a>
-            </div>
-          </form>
-
-          <button
-            [ngClass]="{'botonEntrar': !formLogin.valid && esCelular, 'botonEntrarHot': formLogin.valid && esCelular, 'botonEntrar-desktop': !formLogin.valid && !esCelular, 'botonEntrarHot-desktop': formLogin.valid && !esCelular}"
-            [disabled]="logueando || !formLogin.valid" type="button" (click)="login()">Entrar</button>
-
-        </mat-card-content>
-      </mat-card>
-
-      <p class="version">v{{ version }}</p>
-
-      <a *ngIf="esCelular && !inPhonegap" href="https://play.google.com/store/apps/details?id=com.gaviglio.digital"
-        target="_blank" class="google-play">
-        <img src="assets/google-play/google-play.png" alt="Play Store" width="150" height="50" />
-      </a>
-
-    </div>
-  </div>
+    </mat-tab>
+  </mat-tab-group>
 </div>
 
 <app-loading [cargando$]="cargando$"></app-loading>

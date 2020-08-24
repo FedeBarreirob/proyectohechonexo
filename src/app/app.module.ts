@@ -300,6 +300,10 @@ import { CompletarRegistroDialogComponent } from './components/listados/billeter
 import { UploaderDocumentosComponent } from './components/common/documentos/uploader-documentos/uploader-documentos.component';
 import { AperturaLegajoUploadDocumentoComponent } from './components/listados/documentacion/apertura-legajo-upload-documento/apertura-legajo-upload-documento.component';
 import { MensajeFotoSubidaComponent } from './components/validar-documentacion/mensaje-foto-subida/mensaje-foto-subida.component';
+import { InfoPerfilLimiteCreditoComponent } from './components/usuarios-y-perfiles/info-perfil-limite-credito/info-perfil-limite-credito.component';
+import { DocumentacionRequeridaComponent } from './components/usuarios-y-perfiles/info-perfil-limite-credito/documentacion-requerida/documentacion-requerida.component';
+import { RespondaPreguntasComponent } from './components/usuarios-y-perfiles/info-perfil-limite-credito/responda-preguntas/responda-preguntas.component';
+import { ConfirmacionEnvioComponent } from './components/usuarios-y-perfiles/info-perfil-limite-credito/confirmacion-envio/confirmacion-envio.component';
 
 registerLocaleData(localeEsAr, 'es-AR');
 
@@ -562,9 +566,17 @@ export function tokenGetter() {
 		AperturaLegajoComponent,
 		ProgressUploadFilesComponent,
 		CompletarRegistroDialogComponent,
+
+		MensajeFotoSubidaComponent,
+		InfoPerfilLimiteCreditoComponent,
+		DocumentacionRequeridaComponent,
+		RespondaPreguntasComponent,
+		ConfirmacionEnvioComponent
+
 		UploaderDocumentosComponent,
 		AperturaLegajoUploadDocumentoComponent,
 		MensajeFotoSubidaComponent
+
 	],
 	imports: [
 		HttpClientModule,
@@ -665,7 +677,11 @@ export function tokenGetter() {
 		MensajeBienvenidaDialogComponent,
 		CompletarRegistroDialogComponent,
 		MensajeFotoSubidaComponent,
+
+		InfoPerfilLimiteCreditoComponent
+
 		SituacionUsuarioComponent
+
 	],
 	bootstrap: [AppComponent]
 })

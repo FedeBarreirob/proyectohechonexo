@@ -10,6 +10,7 @@ import { InfoPerfilCambioPasswordComponent } from '../info-perfil-cambio-passwor
 import { InfoPerfilEdicionComponent } from '../info-perfil-edicion/info-perfil-edicion.component';
 import { TutorialModalComponent } from '../../common/tutorial-modal/tutorial-modal.component';
 import { TutorialModalService } from '../../../services/tutorial-modal/tutorial-modal.service';
+import { InfoPerfilLimiteCreditoComponent } from '../info-perfil-limite-credito/info-perfil-limite-credito.component';
 
 @Component({
   selector: 'app-informacion-de-perfil',
@@ -180,6 +181,19 @@ export class InformacionDePerfilComponent implements OnInit {
    */
   cambiarPassword() {
     this.dialog.open(InfoPerfilCambioPasswordComponent, {
+      maxWidth: '100vw',
+      maxHeight: '100vh',
+      height: '100%',
+      width: '100%',
+      panelClass: 'modal-sin-padding'
+    });
+  }
+
+  /**
+   * Función que abre un modal 
+   */
+  limiteCredito() {
+    this.dialog.open(InfoPerfilLimiteCreditoComponent, {
       maxWidth: '100vw',
       maxHeight: '100vh',
       height: '100%',
