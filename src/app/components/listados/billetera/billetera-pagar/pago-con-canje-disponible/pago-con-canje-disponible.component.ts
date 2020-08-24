@@ -51,6 +51,7 @@ export class PagoConCanjeDisponibleComponent implements OnInit, OnDestroy {
   ) { }
 
   ngOnInit() {
+    this.cargarDefinicionPrevia();
     this.cargarPrecioEspecie();
 
     if (this.totalEvent$) {
@@ -61,6 +62,14 @@ export class PagoConCanjeDisponibleComponent implements OnInit, OnDestroy {
   ngOnDestroy(): void {
     this.destroy$.next();
     this.destroy$.unsubscribe();
+  }
+
+  /**
+   * Función encargada de cargar los datos de definición previamente indicados 
+   */
+  cargarDefinicionPrevia() {
+    this.stockAFijar = (this.disponible.stockAFijar) ? this.disponible.stockAFijar : 0;
+    this.stockAPesificar = (this.disponible.stockAPesificar) ? this.disponible.stockAPesificar : 0;
   }
 
   /**
@@ -83,6 +92,7 @@ export class PagoConCanjeDisponibleComponent implements OnInit, OnDestroy {
               if (respuesta.datos && respuesta.datos.length > 0) {
                 this.precioEspecie = respuesta.datos[0];
                 this.actualizarCantidadNecesariaParaCanjear();
+                this.notificarImporteCalculadoYStock();
               }
 
             }
@@ -122,25 +132,56 @@ export class PagoConCanjeDisponibleComponent implements OnInit, OnDestroy {
   }
 
   /**
+   * Determina si hay diponible como para indicar fijaciones
+   */
+  get sePuedeEspecificarFijaciones(): boolean {
+    if (this.disponible.kgDisponiblesPendientesDeFijar > 0) {
+      return true;
+    } else {
+      return false;
+    }
+  }
+
+  /**
+   * Determina si hay diponible como para indicar pesificaciones
+   */
+  get sePuedeEspecificarPesificaciones(): boolean {
+    if (this.disponible.kgDisponiblesPendientesDePesificar > 0) {
+      return true;
+    } else {
+      return false;
+    }
+  }
+
+  /**
    * Retorna el saldo disponible del stock a fijar
    */
   get disponibleStockAFijar() {
-    return this.kilosAPipe.transform(this.disponible.kgDisponibles, this.unidadMedida) - this.stockAFijar;
+    return this.kilosAPipe.transform(this.disponible.kgDisponiblesPendientesDeFijar, this.unidadMedida) - this.stockAFijar;
   }
 
   /**
    * Retorna el saldo disponible del stock a pesificar
    */
   get disponibleStockAPesificar() {
-    return this.kilosAPipe.transform(this.disponible.kgDisponibles, this.unidadMedida) - this.stockAPesificar;
+    return this.kilosAPipe.transform(this.disponible.kgDisponiblesPendientesDePesificar, this.unidadMedida) - this.stockAPesificar;
   }
 
   /**
    * Calcula el total en pesos equivalente al stock a fijar indicado
    */
   notificarImporteCalculadoYStock() {
-    if (this.stockAFijar > 0) {
-      this.disponible.total = this.stockAFijar * this.precioTNAPipe.transform(this.precioEspecie.precio, this.unidadMedida);
+
+    if (this.disponibleStockAFijar < 0) {
+      this.stockAFijar = Number.parseFloat(this.kilosAPipe.transform(this.disponible.kgDisponiblesPendientesDeFijar, this.unidadMedida));
+    }
+
+    if (this.disponibleStockAPesificar < 0) {
+      this.stockAPesificar = Number.parseFloat(this.kilosAPipe.transform(this.disponible.kgDisponiblesPendientesDePesificar, this.unidadMedida));
+    }
+
+    if (this.stockAFijar > 0 || this.stockAPesificar > 0) {
+      this.disponible.total = (this.stockAFijar + this.stockAPesificar) * this.precioTNAPipe.transform(this.precioEspecie.precio, this.unidadMedida);
     } else {
       this.disponible.total = 0;
     }

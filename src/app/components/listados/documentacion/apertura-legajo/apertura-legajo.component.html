@@ -1,7 +1,7 @@
 <div class="container">
   <div class="header">
     <a fxFlex="25%" fxLayoutAlign="center center">
-      <button mat-button class="button">
+      <button mat-button class="button" (click)="salir()">
         <mat-icon style="color: #666666">arrow_back</mat-icon>
       </button>
     </a>
@@ -12,81 +12,21 @@
     <div class="title">Apertura de legajo</div>
     <div class="text">Con esta documentación respaldaremos tu cuenta y aumentaremos su seguridad.</div>
 
-    <div><app-progress-upload-files></app-progress-upload-files></div>
+    <!--Spinner-->
+    <div fxLayout="row" fxLayoutAlign="center center" *ngIf="cargando" style="margin-top: 10px">
+      <mat-spinner diameter="24"></mat-spinner>
+    </div>
 
-    <div fxLayout="row" class="files">
-      <div fxFlex="50" fxLayoutAlign="start center" class="title-files">Foto de DNI</div>
-      <div fxFlex="50" fxLayoutAlign="end center" class="upload">
-        <button mat-button fxLayoutAlign="center center" class="button-upload">
-          <img class="icon-upload" src="../../../../../assets/varios/upload.png">
-          Subir
-        </button>
-      </div>
+    <div>
+      <app-progress-upload-files [documentacion$]="documentacion$"></app-progress-upload-files>
     </div>
-    <mat-divider></mat-divider>
-    <div fxLayout="row" class="files">
-      <div fxFlex="50" fxLayoutAlign="start center" class="title-files">Constancia CBU</div>
-      <div fxFlex="50" fxLayoutAlign="end center" class="upload">
-        <button mat-button fxLayoutAlign="center center" class="button-upload">
-          <img class="icon-upload" src="../../../../../assets/varios/upload.png">
-          Subir
-        </button>
-      </div>
-    </div>
-    <mat-divider></mat-divider>
-    <div fxLayout="row" class="files">
-      <div fxFlex="50" fxLayoutAlign="start center" class="title-files">Extención IVA</div>
-      <div fxFlex="50" fxLayoutAlign="end center" class="upload">
-        <button mat-button fxLayoutAlign="center center" class="button-upload">
-          <img class="icon-upload" src="../../../../../assets/varios/upload.png">
-          Subir
-        </button>
-      </div>
-    </div>
-    <mat-divider></mat-divider>
-    <div fxLayout="row" class="files">
-      <div fxFlex="50" fxLayoutAlign="start center" class="title-files">Extención de ingresos brutos</div>
-      <div fxFlex="50" fxLayoutAlign="end center" class="upload">
-        <button mat-button fxLayoutAlign="center center" class="button-upload">
-          <img class="icon-upload" src="../../../../../assets/varios/upload.png">
-          Subir
-        </button>
-      </div>
-    </div>
-    <mat-divider></mat-divider>
-    <div fxLayout="row" class="files">
-      <div fxFlex="50" fxLayoutAlign="start center" class="title-files">Formulario F1276 WEB</div>
-      <div fxFlex="50" fxLayoutAlign="end center" class="upload">
-        <button mat-button fxLayoutAlign="center center" class="button-upload">
-          <img class="icon-upload" src="../../../../../assets/varios/upload.png">
-          Subir
-        </button>
-      </div>
-    </div>
-    <mat-divider></mat-divider>
-    <div fxLayout="row" class="files">
-      <div fxFlex="50" fxLayoutAlign="start center" class="title-files">DNI del administrador o sucesor</div>
-      <div fxFlex="50" fxLayoutAlign="end center" class="upload">
-        <button mat-button fxLayoutAlign="center center" class="button-upload">
-          <img class="icon-upload" src="../../../../../assets/varios/upload.png">
-          Subir
-        </button>
-      </div>
-    </div>
-    <mat-divider></mat-divider>
-    <div fxLayout="row" class="files">
-      <div fxFlex="50" fxLayoutAlign="start center" class="title-files">Poder de administración</div>
-      <div fxFlex="50" fxLayoutAlign="end center" class="upload">
-        <button mat-button fxLayoutAlign="center center" class="button-upload">
-          <img class="icon-upload" src="../../../../../assets/varios/upload.png">
-          Subir
-        </button>
-      </div>
-    </div>
-    <mat-divider></mat-divider>
+
+    <app-apertura-legajo-upload-documento *ngFor="let documento of documentacion" [documento]="documento"
+      (cargaFinalizada)="notificarProgresoCargaTotal()">
+    </app-apertura-legajo-upload-documento>
 
     <div fxLayoutAlign="center center">
-      <button mat-button class="button-save">Guardar</button>
+      <button mat-button class="button-save" (click)="registrarDocumentacion()">Guardar</button>
     </div>
   </div>
 </div>

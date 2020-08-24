@@ -24,4 +24,8 @@ export class ResumenPagoMedioCanjeComponent implements OnInit {
   toggleModoVerDetalle() {
     this.modoVerDetalle = !this.modoVerDetalle;
   }
+
+  totalACanjear(canje: any): number {
+    return Number.parseFloat(canje.stockAFijar) + Number.parseFloat(canje.stockAPesificar);
+  }
 }

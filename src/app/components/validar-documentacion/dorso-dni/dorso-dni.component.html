@@ -1,7 +1,14 @@
-<div *ngIf="esCelular">
-  <webcam [height]="680" [width]="320" [trigger]="triggerObservable" (imageCapture)="handleImage($event)"></webcam>
-  <!-- Button Takes Photo -->
-  <button class="actionBtn" (click)="triggerSnapshot();">Take A Snapshot</button>
-  
-  <button (click)="salir()" (click)="finalizarProceso()">salir</button>
+<div fxLayout="column" fxLayoutAlign="center center">
+
+  <div fxFlex>
+    <webcam [height]="680" [width]="320" [trigger]="triggerObservable" (imageCapture)="handleImage($event)"></webcam>
+  </div>
+
+  <div fxFlex>
+    <!-- Button Takes Photo -->
+    <button class="actionBtn" (click)="triggerSnapshot();">Sacar foto</button>
+
+    <button (click)="salir()">salir</button>
+  </div>
+
 </div>

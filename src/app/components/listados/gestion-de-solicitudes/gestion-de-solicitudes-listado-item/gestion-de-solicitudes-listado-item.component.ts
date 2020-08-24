@@ -1,4 +1,5 @@
 import { Component, OnInit, Input } from '@angular/core';
+import { Router } from '@angular/router';
 import { DeviceDetectorService } from 'ngx-device-detector';
 
 @Component({
@@ -12,7 +13,7 @@ export class GestionDeSolicitudesListadoItemComponent implements OnInit {
   solicitud: any;
   esCelular: boolean;
 
-  constructor(private deviceService: DeviceDetectorService) { }
+  constructor(private router: Router, private deviceService: DeviceDetectorService) { }
 
   ngOnInit() {
     this.esCelular = this.deviceService.isMobile();
@@ -24,5 +25,10 @@ export class GestionDeSolicitudesListadoItemComponent implements OnInit {
     } else {
       return "assets/perfil/sin-foto.jpg";
     }
+  }
+
+  editar() {
+    let url = `/pagar/${this.solicitud.id}`;
+    this.router.navigate([url]);
   }
 }

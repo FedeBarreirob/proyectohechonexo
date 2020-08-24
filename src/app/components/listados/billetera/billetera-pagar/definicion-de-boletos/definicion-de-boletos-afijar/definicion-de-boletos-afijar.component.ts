@@ -161,6 +161,7 @@ export class DefinicionDeBoletosAFijarComponent implements OnInit, OnDestroy {
    * seteadas previamente.
    */
   agregarInformacionDeFijacionPrevia() {
+
     if (this.fijaciones && this.fijaciones.length > 0 && this.boletosAFijar && this.boletosAFijar.length > 0) {
       this.boletosAFijar.forEach(boleto => {
 

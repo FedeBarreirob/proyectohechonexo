@@ -26,12 +26,16 @@ export class PagarListadoComponent implements OnInit, OnDestroy {
   @Input()
   conceptosAPagarSeleccionados$: BehaviorSubject<Array<MovimientoCtaCteAplicada>>;
 
+  @Input()
+  conceptosPreviamenteSeleccionados: Array<MovimientoCtaCteAplicada>;
+
   esCelular: boolean;
   cargando: boolean = false;
   destroy$: Subject<any> = new Subject<any>();
-  listado: Array<MovimientoCtaCteAplicada> = [];
-  listadoConceptosSeleccionados: Array<MovimientoCtaCteAplicada> = [];
+  destroyTotalizador$: Subject<any> = new Subject<any>();
+  listado: Array<any> = [];
   total: number = 0;
+  listadoConceptosSeleccionados: Array<MovimientoCtaCteAplicada> = [];
 
   constructor(
     private deviceService: DeviceDetectorService,
@@ -40,6 +44,10 @@ export class PagarListadoComponent implements OnInit, OnDestroy {
 
   ngOnInit() {
     this.esCelular = this.deviceService.isMobile();
+
+    if (this.conceptosPreviamenteSeleccionados) {
+      this.listadoConceptosSeleccionados = this.conceptosPreviamenteSeleccionados;
+    }
 
     if (this.observerFiltro$) {
       this.observerFiltro$
@@ -50,6 +58,9 @@ export class PagarListadoComponent implements OnInit, OnDestroy {
   ngOnDestroy(): void {
     this.destroy$.next();
     this.destroy$.unsubscribe();
+
+    this.destroyTotalizador$.next()
+    this.destroyTotalizador$.unsubscribe();
   }
 
   /**
@@ -66,7 +77,14 @@ export class PagarListadoComponent implements OnInit, OnDestroy {
         .subscribe(
           respuesta => {
             if (respuesta.exito == true) {
-              this.listado = respuesta.datos;
+              this.listado = respuesta.datos.map(concepto => {
+                return {
+                  concepto,
+                  esConceptoSeleccionado: this.esConceptoSeleccionado(concepto)
+                };
+              });
+
+              this.actualizarTotalImportesSeleccionados();
             }
           },
           error => {
@@ -83,9 +101,9 @@ export class PagarListadoComponent implements OnInit, OnDestroy {
    */
   limpiar() {
     this.listado = [];
-    this.listadoConceptosSeleccionados = [];
-    this.total = 0;
-    this.notificarTotal();
+    //this.listadoConceptosSeleccionados = [];
+    //this.total = 0;
+    //this.notificarTotal();
   }
 
   /**
@@ -96,11 +114,17 @@ export class PagarListadoComponent implements OnInit, OnDestroy {
     if (conceptoYSuSeleccion.seleccionado == true) {
       this.listadoConceptosSeleccionados.push(conceptoYSuSeleccion.concepto);
     } else {
-      this.listadoConceptosSeleccionados = this.listadoConceptosSeleccionados.filter(conceptoSeleccionado => conceptoSeleccionado !== conceptoYSuSeleccion.concepto);
+      this.listadoConceptosSeleccionados = this.listadoConceptosSeleccionados.filter(conceptoSeleccionado => !(conceptoSeleccionado.comprobanteAfectado == conceptoYSuSeleccion.concepto.comprobanteAfectado && conceptoSeleccionado.fechaCtaCte == conceptoYSuSeleccion.concepto.fechaCtaCte));
     }
 
-    this.conceptosAPagarSeleccionados$.next(this.listadoConceptosSeleccionados);
     this.actualizarTotalImportesSeleccionados();
+  }
+
+  /**
+   * Verifica si el concepto se encuentra previamente seleccionado
+   */
+  esConceptoSeleccionado(concepto: any): boolean {
+    return this.listadoConceptosSeleccionados.some(conceptoSeleccionado => conceptoSeleccionado.comprobanteAfectado == concepto.comprobanteAfectado && conceptoSeleccionado.fechaCtaCte == concepto.fechaCtaCte);
   }
 
   /**
@@ -108,10 +132,11 @@ export class PagarListadoComponent implements OnInit, OnDestroy {
    * de calcular el total, diferencia de cambio etc
    */
   actualizarTotalImportesSeleccionados() {
-    this.destroy$.next();
+    this.conceptosAPagarSeleccionados$.next(this.listadoConceptosSeleccionados);
+    this.destroyTotalizador$.next();
 
     this.ctacteAplicadaService.saldoSegunComprobantes(this.listadoConceptosSeleccionados)
-      .pipe(takeUntil(this.destroy$))
+      .pipe(takeUntil(this.destroyTotalizador$))
       .subscribe(
         respuesta => {
           if (respuesta.exito == true) {

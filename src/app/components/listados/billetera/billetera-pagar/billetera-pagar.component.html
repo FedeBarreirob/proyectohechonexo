@@ -5,9 +5,9 @@
     </app-pagar-filtro>
   </mat-sidenav>
   <section *ngIf="esCelular">
-    <div *ngIf="esCelular && cuenta">
+    <div *ngIf="esCelular ">
       <div class="title">
-        <a routerLink="/billetera" fxFlex="25%" fxLayoutAlign="center center">
+        <a [routerLink]="backUrl" fxFlex="25%" fxLayoutAlign="center center">
           <button mat-button class="button">
             <mat-icon style="color: green;">arrow_back</mat-icon>
           </button>
@@ -25,11 +25,14 @@
             <ng-template matStepLabel>Comprobantes</ng-template>
             <div fxFlex="row" fxLayoutAlign="space-between center" style="padding-bottom: 15px;">
               <p style="font-size: 16px; font-family: Rubik;">Comprobantes</p>
-              <button style="margin-left: 50px;" mat-button (click)="mostrarOcultarFiltros()"><img style="width: 20px;" src="assets/toolbar/embudo.png"></button>
+              <button style="margin-left: 50px;" mat-button (click)="mostrarOcultarFiltros()"><img style="width: 20px;"
+                  src="assets/toolbar/embudo.png"></button>
             </div>
             <app-pagar-info></app-pagar-info>
-            <app-pagar-listado [cuenta]="cuenta" [totalEvent$]="totalEvent$" [observerFiltro$]="observerFiltro$"
-              [conceptosAPagarSeleccionados$]="conceptosAPagarSeleccionados$">
+            <app-pagar-listado *ngIf="modoEdicion == false || (modoEdicion == true && solicitudDePagoEnEdicion)"
+              [cuenta]="cuenta" [totalEvent$]="totalEvent$" [observerFiltro$]="observerFiltro$"
+              [conceptosAPagarSeleccionados$]="conceptosAPagarSeleccionados$"
+              [conceptosPreviamenteSeleccionados]="solicitudDePagoEnEdicion?.conceptosAPagar">
             </app-pagar-listado>
             <app-pagar-comprobantes-total [totalEvent$]="totalEvent$"></app-pagar-comprobantes-total>
           </mat-step>
@@ -46,8 +49,11 @@
           <!--step pago-->
           <mat-step>
             <ng-template matStepLabel>Pago</ng-template>
-            <app-pago-con-canje *ngIf="unidadMedida" [totalEvent$]="totalEvent$" [cuenta]="cuenta"
-              [unidadMedida]="unidadMedida" [disponiblesSeleccionados$]="disponiblesSeleccionados$">
+            <app-pago-con-canje
+              *ngIf="unidadMedida && (modoEdicion == false || (modoEdicion == true && solicitudDePagoEnEdicion))"
+              [totalEvent$]="totalEvent$" [cuenta]="cuenta" [unidadMedida]="unidadMedida"
+              [disponiblesSeleccionados$]="disponiblesSeleccionados$"
+              [canjesPreviamenteSeleccionados]="solicitudDePagoEnEdicion?.canjes">
             </app-pago-con-canje>
             <div fxFlexFill fxLayout="row" fxLayoutALign="space-between center">
               <button mat-button matStepperNext
@@ -78,7 +84,7 @@
   </section>
 
   <section *ngIf="!esCelular">
-    <div *ngIf="!esCelular && cuenta" style="padding-right: 150px; padding-left: 150px;">
+    <div *ngIf="!esCelular " style="padding-right: 150px; padding-left: 150px;">
       <div class="title">
         <a routerLink="/billetera" fxFlex="25%" fxLayoutAlign="center center">
           <button mat-button class="button">
@@ -98,11 +104,14 @@
             <ng-template matStepLabel>Comprobantes</ng-template>
             <div fxFlex="row" fxLayoutAlign="space-between center">
               <p style="font-size: 20px; font-family: Rubik;">Comprobantes</p>
-              <button style="margin-left: 50px;" mat-button (click)="mostrarOcultarFiltros()"><img style="width: 20px;" src="assets/toolbar/embudo.png"></button>
+              <button style="margin-left: 50px;" mat-button (click)="mostrarOcultarFiltros()"><img style="width: 20px;"
+                  src="assets/toolbar/embudo.png"></button>
             </div>
             <app-pagar-info></app-pagar-info>
-            <app-pagar-listado [cuenta]="cuenta" [totalEvent$]="totalEvent$" [observerFiltro$]="observerFiltro$"
-              [conceptosAPagarSeleccionados$]="conceptosAPagarSeleccionados$">
+            <app-pagar-listado *ngIf="modoEdicion == false || (modoEdicion == true && solicitudDePagoEnEdicion)"
+              [cuenta]="cuenta" [totalEvent$]="totalEvent$" [observerFiltro$]="observerFiltro$"
+              [conceptosAPagarSeleccionados$]="conceptosAPagarSeleccionados$"
+              [conceptosPreviamenteSeleccionados]="solicitudDePagoEnEdicion?.conceptosAPagar">
             </app-pagar-listado>
             <app-pagar-comprobantes-total [totalEvent$]="totalEvent$"></app-pagar-comprobantes-total>
           </mat-step>
@@ -119,8 +128,11 @@
           <!--step pago-->
           <mat-step>
             <ng-template matStepLabel>Pago</ng-template>
-            <app-pago-con-canje *ngIf="unidadMedida" [totalEvent$]="totalEvent$" [cuenta]="cuenta"
-              [unidadMedida]="unidadMedida" [disponiblesSeleccionados$]="disponiblesSeleccionados$">
+            <app-pago-con-canje
+              *ngIf="unidadMedida && (modoEdicion == false || (modoEdicion == true && solicitudDePagoEnEdicion))"
+              [totalEvent$]="totalEvent$" [cuenta]="cuenta" [unidadMedida]="unidadMedida"
+              [disponiblesSeleccionados$]="disponiblesSeleccionados$"
+              [canjesPreviamenteSeleccionados]="solicitudDePagoEnEdicion?.canjes">
             </app-pago-con-canje>
             <div fxFlexFill fxLayout="row" fxLayoutALign="space-between center" *ngIf="esCelular">
               <button mat-button matStepperNext
@@ -137,7 +149,7 @@
           <!--step resumen-->
           <mat-step>
             <ng-template matStepLabel>Resumen</ng-template>
-            
+
             <app-resumen-pago [conceptosAPagarSeleccionados$]="conceptosAPagarSeleccionados$"
               [disponiblesSeleccionados$]="disponiblesSeleccionados$" [totalEvent$]="totalEvent$"></app-resumen-pago>
 
@@ -149,7 +161,7 @@
             <button mat-button [disabled]="guardando" *ngIf="esCelular"
               style="background-color: green; color: white; margin-top: 10px; width: 100%;"
               (click)="guardar()">Pagar</button>
-            
+
             <button mat-button [disabled]="guardando" *ngIf="!esCelular"
               style="background-color: green; color: white; margin-top: 10px; width: 170px;"
               (click)="guardar()">Pagar</button>

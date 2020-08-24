@@ -297,6 +297,8 @@ import { CompletarDocumentacionNavComponent } from './components/menu/completar-
 import { AperturaLegajoComponent } from './components/listados/documentacion/apertura-legajo/apertura-legajo.component';
 import { ProgressUploadFilesComponent } from './components/listados/documentacion/progress-upload-files/progress-upload-files.component';
 import { CompletarRegistroDialogComponent } from './components/listados/billetera/completar-registro-dialog/completar-registro-dialog.component';
+import { UploaderDocumentosComponent } from './components/common/documentos/uploader-documentos/uploader-documentos.component';
+import { AperturaLegajoUploadDocumentoComponent } from './components/listados/documentacion/apertura-legajo-upload-documento/apertura-legajo-upload-documento.component';
 import { MensajeFotoSubidaComponent } from './components/validar-documentacion/mensaje-foto-subida/mensaje-foto-subida.component';
 import { InfoPerfilLimiteCreditoComponent } from './components/usuarios-y-perfiles/info-perfil-limite-credito/info-perfil-limite-credito.component';
 import { DocumentacionRequeridaComponent } from './components/usuarios-y-perfiles/info-perfil-limite-credito/documentacion-requerida/documentacion-requerida.component';
@@ -567,14 +569,24 @@ export function tokenGetter() {
 		AperturaLegajoComponent,
 		ProgressUploadFilesComponent,
 		CompletarRegistroDialogComponent,
+
 		MensajeFotoSubidaComponent,
 		InfoPerfilLimiteCreditoComponent,
 		DocumentacionRequeridaComponent,
 		RespondaPreguntasComponent,
+<<<<<<< HEAD
 		ConfirmacionEnvioComponent,
 		ClienteProductorCardComponent,
 		NuevoColaboradorCardComponent,
 		FalloLoginInfoComponent
+=======
+		ConfirmacionEnvioComponent
+
+		UploaderDocumentosComponent,
+		AperturaLegajoUploadDocumentoComponent,
+		MensajeFotoSubidaComponent
+
+>>>>>>> 8179b2d84a6f53109d7a1f31544112894ede933b
 	],
 	imports: [
 		HttpClientModule,
@@ -675,7 +687,11 @@ export function tokenGetter() {
 		MensajeBienvenidaDialogComponent,
 		CompletarRegistroDialogComponent,
 		MensajeFotoSubidaComponent,
+
 		InfoPerfilLimiteCreditoComponent
+
+		SituacionUsuarioComponent
+
 	],
 	bootstrap: [AppComponent]
 })

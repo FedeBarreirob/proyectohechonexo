@@ -10,6 +10,9 @@ import { OneSignalService } from '../../services/push/one-signal.service';
 import { DeviceDetectorService } from 'ngx-device-detector';
 import { environment } from '../../../environments/environment';
 import { MensajeBienvenidaDialogComponent } from '../tablero/mensaje-bienvenida-dialog/mensaje-bienvenida-dialog.component';
+import { PerfilBasico } from '../../interfaces/perfiles/perfil-basico';
+import { FileStorageService } from '../../services/file-storage/file-storage.service';
+import { RoleEnum } from '../../enums/role-enum.enum';
 
 declare var require: any;
 
@@ -20,7 +23,7 @@ declare var require: any;
 })
 export class LoginComponent implements OnInit {
 
-	version: string = require( '../../../../package.json').version;
+	version: string = require('../../../../package.json').version;
 
 	frmLogin: FormGroup;
 	logueando: boolean = false;
@@ -41,7 +44,8 @@ export class LoginComponent implements OnInit {
 		private notificacionService: NotificacionesService,
 		private oneSignalService: OneSignalService,
 		private deviceService: DeviceDetectorService,
-		private dialog: MatDialog
+		private dialog: MatDialog,
+		private fileStorageService: FileStorageService
 	) { }
 
 	ngOnInit() {
@@ -112,16 +116,8 @@ export class LoginComponent implements OnInit {
 								this.authenticationService.loginCompleto();
 								this.oneSignalService.init();
 								this.router.navigate([this.returnUrl]);
+								this.mostrarCuadroDeBienvenida();
 							}
-						});
-
-						//Mensaje de bienvenida
-
-						this.dialog.open(MensajeBienvenidaDialogComponent, {
-							maxWidth: '100vw',
-							width: '312px',
-							maxHeight: '100vh',
-							height: '331px'
 						});
 					} else {
 						this.cargando$.next(false);
@@ -141,6 +137,22 @@ export class LoginComponent implements OnInit {
 		}
 	}
 
+	private mostrarCuadroDeBienvenida() {
+
+		let perfil: PerfilBasico = this.authenticationService.perfilUsuarioLogueado();
+		let perfilValidado: boolean = (perfil && (perfil.identidadValidada == true || perfil.rol && perfil.rol.id != RoleEnum.PRODUCTOR));
+		let esProductor: boolean = perfil && perfil.rol && perfil.rol.id == RoleEnum.PRODUCTOR;
+
+		if (this.fileStorageService.esDocLegajoCargado.getValue() == false && perfilValidado && esProductor) {
+			this.dialog.open(MensajeBienvenidaDialogComponent, {
+				maxWidth: '100vw',
+				width: '312px',
+				maxHeight: '100vh',
+				height: '331px'
+			});
+		}
+	}
+
 	// funcion encargada de cargar el perfil
 	private cargarPerfilLogueado(): Observable<boolean> {
 		return new Observable<boolean>(observer => {
@@ -148,6 +160,7 @@ export class LoginComponent implements OnInit {
 
 				if (respuesta != null && respuesta.exito == true) {
 					localStorage.setItem('currentUserPerfil', JSON.stringify(respuesta.datos));
+					this.cargarEstadoDecargaDelLegajo(respuesta.datos);
 					observer.next(true);
 				} else {
 					console.log(respuesta);
@@ -166,5 +179,25 @@ export class LoginComponent implements OnInit {
 		this.snackBar.open(message, action, {
 			duration: 2000,
 		});
+	}
+
+	/**
+	 * Notifica el estado de carga de la documentación del legajo
+	 * @param perfil 
+	 */
+	cargarEstadoDecargaDelLegajo(perfil: PerfilBasico) {
+		try {
+			if (perfil && perfil.rol.id == RoleEnum.PRODUCTOR) {
+
+				if (perfil.indicadorCargaLegajo.totalDocumentacionACompletar == perfil.indicadorCargaLegajo.cantDocumentacionCompletada) {
+					this.fileStorageService.esDocLegajoCargado.next(true);
+				} else {
+					this.fileStorageService.esDocLegajoCargado.next(false);
+				}
+
+			}
+		} catch (e) {
+			console.log(e);
+		}
 	}
 }
