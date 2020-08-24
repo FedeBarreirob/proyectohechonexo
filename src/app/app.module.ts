@@ -298,6 +298,10 @@ import { AperturaLegajoComponent } from './components/listados/documentacion/ape
 import { ProgressUploadFilesComponent } from './components/listados/documentacion/progress-upload-files/progress-upload-files.component';
 import { CompletarRegistroDialogComponent } from './components/listados/billetera/completar-registro-dialog/completar-registro-dialog.component';
 import { MensajeFotoSubidaComponent } from './components/validar-documentacion/mensaje-foto-subida/mensaje-foto-subida.component';
+import { InfoPerfilLimiteCreditoComponent } from './components/usuarios-y-perfiles/info-perfil-limite-credito/info-perfil-limite-credito.component';
+import { DocumentacionRequeridaComponent } from './components/usuarios-y-perfiles/info-perfil-limite-credito/documentacion-requerida/documentacion-requerida.component';
+import { RespondaPreguntasComponent } from './components/usuarios-y-perfiles/info-perfil-limite-credito/responda-preguntas/responda-preguntas.component';
+import { ConfirmacionEnvioComponent } from './components/usuarios-y-perfiles/info-perfil-limite-credito/confirmacion-envio/confirmacion-envio.component';
 
 registerLocaleData(localeEsAr, 'es-AR');
 
@@ -560,7 +564,11 @@ export function tokenGetter() {
 		AperturaLegajoComponent,
 		ProgressUploadFilesComponent,
 		CompletarRegistroDialogComponent,
-		MensajeFotoSubidaComponent
+		MensajeFotoSubidaComponent,
+		InfoPerfilLimiteCreditoComponent,
+		DocumentacionRequeridaComponent,
+		RespondaPreguntasComponent,
+		ConfirmacionEnvioComponent
 	],
 	imports: [
 		HttpClientModule,
@@ -660,7 +668,8 @@ export function tokenGetter() {
 		SelfieComponent,
 		MensajeBienvenidaDialogComponent,
 		CompletarRegistroDialogComponent,
-		MensajeFotoSubidaComponent
+		MensajeFotoSubidaComponent,
+		InfoPerfilLimiteCreditoComponent
 	],
 	bootstrap: [AppComponent]
 })

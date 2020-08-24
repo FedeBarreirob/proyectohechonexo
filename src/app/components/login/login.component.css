@@ -1,6 +1,26 @@
+.header{
+    width: 100%;
+    height: 40px;
+}
+
 .logo {
+    margin-top: 20px;
+    width: 148px;
+    height: 64px;
+}
+
+.logo-desktop{
     padding-top: 118.32px;
     padding-bottom: 18.096px;
+}
+
+.title-header{
+    margin-top: 20px;
+    font-family: Rubik;
+    font-size: 20px;
+    line-height: 24px;
+    text-align: left;
+    color: #333333;
 }
 
 .username {
@@ -10,7 +30,7 @@
     border-radius: 4px;
     box-shadow: 0 4px 8px -4px rgba(0, 0, 0, 0.5);
     padding-top: 13.05px;
-    padding-bottom: 13.05px;
+    padding-bottom: 15.05px;
     padding-left: 3.88vw;
     padding-right: 3.88vw;
     margin-top: -10.875px;
@@ -137,7 +157,6 @@
     width: 100vw;
     height: 100vh;
     height: calc(var(--vh, 1vh) * 100);
-    background-image: url("./../../../assets/login/fondo-globo-verde.png");
     background-repeat: no-repeat;
     background-color: white;
     background-position: center 300px;
