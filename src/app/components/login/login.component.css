@@ -44,6 +44,8 @@
     font-size: 12px;
     letter-spacing: 1px;
     line-height: 14px;
+    margin-top: 20px;
+    margin-bottom: 20px;
 }
 
 .password-lbl {
@@ -55,6 +57,7 @@
     letter-spacing: 1px;
     line-height: 14px;
     margin-top: 21.75px;
+    margin-bottom: 20px;
 }
 
 .password {
@@ -72,8 +75,8 @@
 
 .passwordIcon {
     position: absolute;
-    top: 137px;
-    right: 10%;
+    top: 190px;
+    right: 12%;
 }
 
 .password mat-form-field {
@@ -103,8 +106,8 @@
 
 .botonEntrar {
     height: 43.5px;
-    width: 82.22vw;
-    background-color: rgba(45, 164, 66, 0.5);
+    width: 100%;
+    background-color: #2da442;
     outline: none;
     border-radius: 5px 5px 5px 5px;
     -moz-border-radius: 5px 5px 5px 5px;
@@ -117,7 +120,7 @@
 
 .botonEntrarHot {
     height: 43.5px;
-    width: 82.22vw;
+    width: 100%;
     background-color: #00cb75;
     outline: none;
     border-radius: 5px 5px 5px 5px;

@@ -302,6 +302,9 @@ import { InfoPerfilLimiteCreditoComponent } from './components/usuarios-y-perfil
 import { DocumentacionRequeridaComponent } from './components/usuarios-y-perfiles/info-perfil-limite-credito/documentacion-requerida/documentacion-requerida.component';
 import { RespondaPreguntasComponent } from './components/usuarios-y-perfiles/info-perfil-limite-credito/responda-preguntas/responda-preguntas.component';
 import { ConfirmacionEnvioComponent } from './components/usuarios-y-perfiles/info-perfil-limite-credito/confirmacion-envio/confirmacion-envio.component';
+import { ClienteProductorCardComponent } from './components/registro-usuario/cliente-productor-card/cliente-productor-card.component';
+import { NuevoColaboradorCardComponent } from './components/registro-usuario/nuevo-colaborador-card/nuevo-colaborador-card.component';
+import { FalloLoginInfoComponent } from './components/registro-usuario/fallo-login-info/fallo-login-info.component';
 
 registerLocaleData(localeEsAr, 'es-AR');
 
@@ -568,7 +571,10 @@ export function tokenGetter() {
 		InfoPerfilLimiteCreditoComponent,
 		DocumentacionRequeridaComponent,
 		RespondaPreguntasComponent,
-		ConfirmacionEnvioComponent
+		ConfirmacionEnvioComponent,
+		ClienteProductorCardComponent,
+		NuevoColaboradorCardComponent,
+		FalloLoginInfoComponent
 	],
 	imports: [
 		HttpClientModule,
