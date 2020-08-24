@@ -566,17 +566,14 @@ export function tokenGetter() {
 		AperturaLegajoComponent,
 		ProgressUploadFilesComponent,
 		CompletarRegistroDialogComponent,
-
 		MensajeFotoSubidaComponent,
 		InfoPerfilLimiteCreditoComponent,
 		DocumentacionRequeridaComponent,
 		RespondaPreguntasComponent,
-		ConfirmacionEnvioComponent
-
+		ConfirmacionEnvioComponent,
 		UploaderDocumentosComponent,
 		AperturaLegajoUploadDocumentoComponent,
 		MensajeFotoSubidaComponent
-
 	],
 	imports: [
 		HttpClientModule,
@@ -677,11 +674,8 @@ export function tokenGetter() {
 		MensajeBienvenidaDialogComponent,
 		CompletarRegistroDialogComponent,
 		MensajeFotoSubidaComponent,
-
-		InfoPerfilLimiteCreditoComponent
-
+		InfoPerfilLimiteCreditoComponent,
 		SituacionUsuarioComponent
-
 	],
 	bootstrap: [AppComponent]
 })

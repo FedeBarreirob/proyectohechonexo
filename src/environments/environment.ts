@@ -36,6 +36,7 @@ export const environment = {
   hostGeneradorComprobantes: 'http://gavigliodigitaltest.eastus.cloudapp.azure.com:8080/GeneradorComprobantes-1.0-SNAPSHOT/api',
   hostFinanzas: 'http://gavigliodigitaltest.eastus.cloudapp.azure.com:8080/DigitalFinanzas-1.0-SNAPSHOT/api',
   hostFileStorage: 'http://gavigliodigitaltest.eastus.cloudapp.azure.com:8080/FileStorage-1.0-SNAPSHOT/api',
+  hostCuestionarios: 'http://gavigliodigitaltest.eastus.cloudapp.azure.com:8080/Cuestionarios-1.0-SNAPSHOT/api',
   baseUrl: 'http://gavigliodigitaltest.eastus.cloudapp.azure.com/#'
 
 
