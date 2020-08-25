@@ -301,9 +301,12 @@ import { UploaderDocumentosComponent } from './components/common/documentos/uplo
 import { AperturaLegajoUploadDocumentoComponent } from './components/listados/documentacion/apertura-legajo-upload-documento/apertura-legajo-upload-documento.component';
 import { MensajeFotoSubidaComponent } from './components/validar-documentacion/mensaje-foto-subida/mensaje-foto-subida.component';
 import { InfoPerfilLimiteCreditoComponent } from './components/usuarios-y-perfiles/info-perfil-limite-credito/info-perfil-limite-credito.component';
-import { DocumentacionRequeridaComponent } from './components/usuarios-y-perfiles/info-perfil-limite-credito/documentacion-requerida/documentacion-requerida.component';
+import { DocumentacionRequeridaComponent } from './components/usuarios-y-perfiles/info-perfil-limite-credito/documentacion/documentacion-requerida/documentacion-requerida.component';
 import { RespondaPreguntasComponent } from './components/usuarios-y-perfiles/info-perfil-limite-credito/responda-preguntas/responda-preguntas.component';
 import { ConfirmacionEnvioComponent } from './components/usuarios-y-perfiles/info-perfil-limite-credito/confirmacion-envio/confirmacion-envio.component';
+import { UploadDocumentoGenericoComponent } from './components/common/documentos/upload-documento-generico/upload-documento-generico.component';
+import { UploadListaDocumentosComponent } from './components/common/documentos/upload-lista-documentos/upload-lista-documentos.component';
+import { UploadListaDocumentosProgressComponent } from './components/common/documentos/upload-lista-documentos-progress/upload-lista-documentos-progress.component';
 
 registerLocaleData(localeEsAr, 'es-AR');
 
@@ -573,7 +576,10 @@ export function tokenGetter() {
 		ConfirmacionEnvioComponent,
 		UploaderDocumentosComponent,
 		AperturaLegajoUploadDocumentoComponent,
-		MensajeFotoSubidaComponent
+		MensajeFotoSubidaComponent,
+		UploadDocumentoGenericoComponent,
+		UploadListaDocumentosComponent,
+		UploadListaDocumentosProgressComponent
 	],
 	imports: [
 		HttpClientModule,
