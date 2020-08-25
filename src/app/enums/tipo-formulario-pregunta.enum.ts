@@ -1,0 +1,9 @@
+export enum TipoFormularioPregunta {
+    ABIERTA_TEXTO = 1,
+    ABIERTA_DOUBLE = 2,
+    ABIERTA_ENTERO = 3,
+    CERRRADA_UNA_OPCION = 4,
+    CERRRADA_MULTIPLES_OPCIONES = 5,
+    ABIERTA_MONEDA_USD = 6,
+    ABIERTA_MONEDA_PESOS = 7
+}

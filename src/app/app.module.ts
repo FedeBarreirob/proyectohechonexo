@@ -307,6 +307,9 @@ import { ConfirmacionEnvioComponent } from './components/usuarios-y-perfiles/inf
 import { UploadDocumentoGenericoComponent } from './components/common/documentos/upload-documento-generico/upload-documento-generico.component';
 import { UploadListaDocumentosComponent } from './components/common/documentos/upload-lista-documentos/upload-lista-documentos.component';
 import { UploadListaDocumentosProgressComponent } from './components/common/documentos/upload-lista-documentos-progress/upload-lista-documentos-progress.component';
+import { CuestionarioComponent } from './components/common/cuestionarios/cuestionario/cuestionario.component';
+import { CuestionarioPreguntaConRespuestaComponent } from './components/common/cuestionarios/cuestionario-pregunta-con-respuesta/cuestionario-pregunta-con-respuesta.component';
+import { CuestionarioRespuestaAbiertaTextoComponent } from './components/common/cuestionarios/respuestas/cuestionario-respuesta-abierta-texto/cuestionario-respuesta-abierta-texto.component';
 
 registerLocaleData(localeEsAr, 'es-AR');
 
@@ -579,7 +582,10 @@ export function tokenGetter() {
 		MensajeFotoSubidaComponent,
 		UploadDocumentoGenericoComponent,
 		UploadListaDocumentosComponent,
-		UploadListaDocumentosProgressComponent
+		UploadListaDocumentosProgressComponent,
+		CuestionarioComponent,
+		CuestionarioPreguntaConRespuestaComponent,
+		CuestionarioRespuestaAbiertaTextoComponent
 	],
 	imports: [
 		HttpClientModule,
