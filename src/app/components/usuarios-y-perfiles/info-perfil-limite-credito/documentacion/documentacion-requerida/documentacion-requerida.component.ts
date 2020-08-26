@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { GrupoDeDocumentaciones } from '../../../../../enums/grupo-de-documentaciones.enum';
 
 @Component({
   selector: 'app-documentacion-requerida',
@@ -7,9 +8,14 @@ import { Component, OnInit } from '@angular/core';
 })
 export class DocumentacionRequeridaComponent implements OnInit {
 
+  grupoDeDocumentaciones: GrupoDeDocumentaciones = GrupoDeDocumentaciones.ALTA_LIMITE_DE_CREDITO;
+
   constructor() { }
 
   ngOnInit() {
   }
 
+  registroEjecutado(esCargaCompleta: boolean) {
+    console.log(esCargaCompleta);
+  }
 }

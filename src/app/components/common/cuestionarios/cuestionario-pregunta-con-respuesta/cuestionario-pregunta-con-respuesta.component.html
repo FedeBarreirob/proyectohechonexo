@@ -1,0 +1,14 @@
+<div fxLayout="column" fxLayoutAlign="space-between start" class="pregunta-contenedor">
+
+  <div fxFlex>
+    {{ pregunta.pregunta }}
+  </div>
+
+  <div fxFlex>
+
+    <app-cuestionario-respuesta-abierta-texto *ngIf="pregunta.tipoPregunta == tipoFormularioPregunta.ABIERTA_TEXTO"
+      [pregunta]="pregunta"></app-cuestionario-respuesta-abierta-texto>
+
+  </div>
+
+</div>

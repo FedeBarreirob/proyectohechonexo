@@ -3,6 +3,7 @@
 <div class="title">Responda las preguntas</div>
 <div class="text">Con estas preguntas, conoceremos mas tu situación para que luego puedas acceder a tu crédito.</div>
 
+<!--
 <div class="form">
   <div class="subtitle">¿Posee algún seguro sobre la producción de cereales? Especificar cuales.</div>
   <p>
@@ -23,6 +24,9 @@
     </mat-form-field>
   </p>
 </div>
+-->
+
+<app-cuestionario *ngIf="formulario" [formulario]="formulario"></app-cuestionario>
 
 <div fxLayoutAlign="end center">
   <button mat-button matStepperNext class="button-start">Guardar</button>

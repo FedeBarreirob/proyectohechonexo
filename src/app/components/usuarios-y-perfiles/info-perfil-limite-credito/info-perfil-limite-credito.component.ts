@@ -8,7 +8,9 @@ import { MatDialogRef } from '@angular/material';
 })
 export class InfoPerfilLimiteCreditoComponent implements OnInit {
 
-  constructor(private dialogRef: MatDialogRef<InfoPerfilLimiteCreditoComponent>) { }
+  constructor(
+    private dialogRef: MatDialogRef<InfoPerfilLimiteCreditoComponent>
+    ) { }
 
   ngOnInit() {
   }
