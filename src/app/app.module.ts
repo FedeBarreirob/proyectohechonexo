@@ -313,6 +313,12 @@ import { UploadListaDocumentosProgressComponent } from './components/common/docu
 import { CuestionarioComponent } from './components/common/cuestionarios/cuestionario/cuestionario.component';
 import { CuestionarioPreguntaConRespuestaComponent } from './components/common/cuestionarios/cuestionario-pregunta-con-respuesta/cuestionario-pregunta-con-respuesta.component';
 import { CuestionarioRespuestaAbiertaTextoComponent } from './components/common/cuestionarios/respuestas/cuestionario-respuesta-abierta-texto/cuestionario-respuesta-abierta-texto.component';
+import { CuestionarioRespuestaAbiertaDoubleComponent } from './components/common/cuestionarios/respuestas/cuestionario-respuesta-abierta-double/cuestionario-respuesta-abierta-double.component';
+import { CuestionarioRespuestaAbiertaEnteroComponent } from './components/common/cuestionarios/respuestas/cuestionario-respuesta-abierta-entero/cuestionario-respuesta-abierta-entero.component';
+import { CuestionarioRespuestaCerradaUnaOpcionComponent } from './components/common/cuestionarios/respuestas/cuestionario-respuesta-cerrada-una-opcion/cuestionario-respuesta-cerrada-una-opcion.component';
+import { CuestionarioRespuestaCerradaMultiplesOpcionesComponent } from './components/common/cuestionarios/respuestas/cuestionario-respuesta-cerrada-multiples-opciones/cuestionario-respuesta-cerrada-multiples-opciones.component';
+import { CuestionarioRespuestaAbiertaPesosComponent } from './components/common/cuestionarios/respuestas/cuestionario-respuesta-abierta-pesos/cuestionario-respuesta-abierta-pesos.component';
+import { CuestionarioRespuestaAbiertaDolaresComponent } from './components/common/cuestionarios/respuestas/cuestionario-respuesta-abierta-dolares/cuestionario-respuesta-abierta-dolares.component';
 
 
 registerLocaleData(localeEsAr, 'es-AR');
@@ -592,7 +598,13 @@ export function tokenGetter() {
 		UploadListaDocumentosProgressComponent,
 		CuestionarioComponent,
 		CuestionarioPreguntaConRespuestaComponent,
-		CuestionarioRespuestaAbiertaTextoComponent
+		CuestionarioRespuestaAbiertaTextoComponent,
+		CuestionarioRespuestaAbiertaDoubleComponent,
+		CuestionarioRespuestaAbiertaEnteroComponent,
+		CuestionarioRespuestaCerradaUnaOpcionComponent,
+		CuestionarioRespuestaCerradaMultiplesOpcionesComponent,
+		CuestionarioRespuestaAbiertaPesosComponent,
+		CuestionarioRespuestaAbiertaDolaresComponent
 	],
 	imports: [
 		HttpClientModule,
