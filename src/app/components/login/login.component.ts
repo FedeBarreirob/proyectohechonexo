@@ -32,6 +32,7 @@ export class LoginComponent implements OnInit {
 	cargando$: Subject<boolean> = new Subject<boolean>();
 	esCelular: boolean;
 	inPhonegap: boolean = environment.inPhonegap;
+	falloUltimoLogin: boolean = false;
 
 	constructor(
 		private formBuilder: FormBuilder,
@@ -84,6 +85,7 @@ export class LoginComponent implements OnInit {
 		if (!this.logueando) {
 			this.logueando = true;
 			this.cargando$.next(true);
+			this.falloUltimoLogin = true;
 
 			const frm = this.frmLogin.value;
 			this.authenticationService.login(frm.username, frm.password).subscribe(
@@ -120,12 +122,14 @@ export class LoginComponent implements OnInit {
 					} else {
 						this.cargando$.next(false);
 						this.logueando = false;
+						this.falloUltimoLogin = true;
 						this.openSnackBar((respuesta.mensaje) ? respuesta.mensaje : 'Acceso denegado', "Login");
 					}
 				},
 				error => {
 					this.cargando$.next(false);
 					this.logueando = false;
+					this.falloUltimoLogin = true;
 					this.openSnackBar(error, "Login");
 				});
 		} else {
