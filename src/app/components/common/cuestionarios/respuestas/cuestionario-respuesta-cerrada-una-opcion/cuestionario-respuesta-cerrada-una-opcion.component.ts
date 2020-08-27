@@ -39,6 +39,7 @@ export class CuestionarioRespuestaCerradaUnaOpcionComponent implements OnInit {
   actualizarRespuestaOpcionSeleccionada(opcionSeleccionada: any) {
     if (this.pregunta && this.pregunta.respuesta && this.pregunta.respuesta.length > 0) {
       this.pregunta.respuesta[0].formularioOpcion = opcionSeleccionada;
+      this.pregunta.respuesta[0].respuesta = (opcionSeleccionada.especificable == true) ? this.respuestaTexto : null;
     } else {
       this.pregunta.respuesta = [
         {
