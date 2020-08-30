@@ -313,6 +313,8 @@ import { UploadListaDocumentosProgressComponent } from './components/common/docu
 import { CuestionarioComponent } from './components/common/cuestionarios/cuestionario/cuestionario.component';
 import { CuestionarioPreguntaConRespuestaComponent } from './components/common/cuestionarios/cuestionario-pregunta-con-respuesta/cuestionario-pregunta-con-respuesta.component';
 import { CuestionarioRespuestaAbiertaTextoComponent } from './components/common/cuestionarios/respuestas/cuestionario-respuesta-abierta-texto/cuestionario-respuesta-abierta-texto.component';
+import { FalloRecuperacionPasswordCardComponent } from './components/usuarios-y-perfiles/fallo-recuperacion-password-card/fallo-recuperacion-password-card.component';
+import { ModalEnvioRestablecerPasswordComponent } from './components/usuarios-y-perfiles/modal-envio-restablecer-password/modal-envio-restablecer-password.component';
 
 
 registerLocaleData(localeEsAr, 'es-AR');
@@ -592,7 +594,9 @@ export function tokenGetter() {
 		UploadListaDocumentosProgressComponent,
 		CuestionarioComponent,
 		CuestionarioPreguntaConRespuestaComponent,
-		CuestionarioRespuestaAbiertaTextoComponent
+		CuestionarioRespuestaAbiertaTextoComponent,
+		FalloRecuperacionPasswordCardComponent,
+		ModalEnvioRestablecerPasswordComponent
 	],
 	imports: [
 		HttpClientModule,
@@ -694,7 +698,8 @@ export function tokenGetter() {
 		CompletarRegistroDialogComponent,
 		MensajeFotoSubidaComponent,
 		InfoPerfilLimiteCreditoComponent,
-		SituacionUsuarioComponent
+		SituacionUsuarioComponent,
+		ModalEnvioRestablecerPasswordComponent
 	],
 	bootstrap: [AppComponent]
 })

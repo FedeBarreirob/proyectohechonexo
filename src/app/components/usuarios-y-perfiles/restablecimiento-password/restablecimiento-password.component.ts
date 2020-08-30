@@ -1,7 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { FormGroup, FormBuilder } from '@angular/forms';
-import { MatSnackBar } from '@angular/material';
+import { MatSnackBar, ThemePalette } from '@angular/material';
 import { AuthenticationService } from '../../../services/security/authentication.service';
 import { NuevoPassword } from '../../../interfaces/security/nuevo-password';
 import { Subject } from 'rxjs';
@@ -14,11 +14,16 @@ import { DeviceDetectorService } from 'ngx-device-detector';
 })
 export class RestablecimientoPasswordComponent implements OnInit {
 
+	@Input()
+	color: ThemePalette
+
 	token: string;
 	frmRecup: FormGroup;
 	cargando: boolean = false;
 	passwordActualizado: boolean = false;
 	cargando$: Subject<boolean> = new Subject<boolean>();
+	hidePassword = true;
+	hidePasswordd = true;
 	esCelular: boolean;
 
 	constructor(

@@ -1,12 +1,13 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
-import { MatSnackBar } from '@angular/material';
+import { MatSnackBar, MatDialog, MatDialogRef } from '@angular/material';
 import { AuthenticationService } from '../../../services/security/authentication.service';
 import { SolicitudRecuperacionPassword } from '../../../interfaces/security/solicitud-recuperacion-password';
 import { environment } from '../../../../environments/environment';
 import { Subject } from 'rxjs';
 import { DeviceDetectorService } from 'ngx-device-detector';
+import { ModalEnvioRestablecerPasswordComponent } from '../modal-envio-restablecer-password/modal-envio-restablecer-password.component';
 
 @Component({
 	selector: 'app-recuperacion-password',
@@ -20,8 +21,10 @@ export class RecuperacionPasswordComponent implements OnInit {
 	solicitudEnviada: boolean = false;
 	cargando$: Subject<boolean> = new Subject<boolean>();
 	esCelular: boolean;
+	falloEnvioEmail: boolean = false;
 
 	constructor(
+		private dialog: MatDialog,
 		private formBuilder: FormBuilder,
 		private router: Router,
 		private snackBar: MatSnackBar,
@@ -42,6 +45,7 @@ export class RecuperacionPasswordComponent implements OnInit {
 		if (this.cargando == false) {
 			this.cargando = true;
 			this.cargando$.next(true);
+			this.falloEnvioEmail = true;
 
 			let solicitud: SolicitudRecuperacionPassword = {
 				email: this.frmRecup.value.email,
@@ -53,16 +57,26 @@ export class RecuperacionPasswordComponent implements OnInit {
 
 					if (respuesta.exito) {
 						this.solicitudEnviada = true;
+
+						this.dialog.open(ModalEnvioRestablecerPasswordComponent, {
+							maxWidth: '100vw',
+							width: '100%',
+							maxHeight: '100vh',
+							height: '100%',
+							panelClass: 'modal-sin-padding'
+						});
 					}
 
 					this.openSnackBar(respuesta.mensaje);
 					this.cargando = false;
 					this.cargando$.next(false);
+					this.falloEnvioEmail = true;
 				},
 				error => {
 					console.log(error);
 					this.cargando = false;
 					this.cargando$.next(false);
+					this.falloEnvioEmail = true;
 				}
 			);
 		}
