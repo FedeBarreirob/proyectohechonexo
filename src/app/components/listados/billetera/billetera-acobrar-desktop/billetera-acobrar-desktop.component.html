@@ -1,0 +1,22 @@
+<mat-card fxLayout="column" class="card">
+
+  <div fxLayout="row" fxFlex="100%" fxLayoutAlign="space-between" fxLayoutGap="20px" class="titulo-card" style="font-size: 20px;"
+    *ngIf="esCelular != null && esCelular == false">
+    A cobrar
+  </div>
+
+  <div fxLayout="column" fxFlex="100%" fxLayoutAlign="space-between" class="contenedor">
+
+    <!--Spinner-->
+    <div fxLayout="row" fxLayoutAlign="center center" *ngIf="cargando == true" style="margin-top: 10px; width: 100%;">
+      <mat-spinner diameter="24"></mat-spinner>
+    </div>
+    <app-tarjeta-tab-container *ngIf="saldoGlobal != null && seObtuvoSaldoExito == true" [saldoGlobal]="saldoGlobal"></app-tarjeta-tab-container>
+  </div>
+
+  <!--
+  <app-billetera-acobrar-resumen-item *ngFor="let detail of detalleCuenta" [detail]="detail">
+  </app-billetera-acobrar-resumen-item>
+-->
+
+</mat-card>

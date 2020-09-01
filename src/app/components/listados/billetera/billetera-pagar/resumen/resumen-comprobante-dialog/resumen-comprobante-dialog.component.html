@@ -1,0 +1,88 @@
+<div *ngIf="esCelular">
+  <div fxLayout="row" fxLayoutAlign="end center" class="encabezado-filtro">
+    <div fxFlex="100%">
+      <button mat-icon-button class="boton-close" (click)="volverAlInicio()">
+        <mat-icon>close</mat-icon>
+      </button>
+    </div>
+  </div>
+  
+  <div style="margin-top: 10px;">
+    
+    <div class="texto-filtrar-mobile" fxLayoutAlign="start center">
+      Comprobante
+    </div>
+
+    <div fxLayout="column" class="card-mobile" fxLayoutAlign="space-between center" style="padding: 10px;">
+      <div>
+        <button mat-icon-button>
+          <mat-icon style="color: green;">schedule</mat-icon>
+        </button>
+      </div>
+      <div>
+        <p style="font-size: 18px; font-family: Rubik;">Tu nuevo pago
+          #{{ solicitudDePagoCreada.id | zeropading: 10 }} está en proceso.</p>
+        <p style="font-size: 16px; font-family: Rubik; margin-top: -10px; margin-bottom: 50px;">Estamos generando las
+          órdenes de venta del grano. Cuando todo esté listo recibirás una confirmación.</p>
+      </div>
+    </div>
+  
+    <app-resumen-resumen [solicitudDePagoCreada]="solicitudDePagoCreada" [unidadMedida]="unidadMedida" [total]="total">
+    </app-resumen-resumen>
+  </div>
+  
+  <div fxLayout="column">
+    <div fxFlexFill fxLayout="row" fxLayoutALign="space-between center">
+      <a routerLink="/billetera"><button mat-button style="background-color: green; color: white; margin-top: 10px; width: 350px;" 
+       (click)="volverAlInicio()">Volver al inicio</button></a>
+    </div>
+    <div fxFlexFill fxLayout="row" fxLayoutALign="space-between center">
+      <button mat-button style="background-color: white; color: green; border: solid 1px green; margin-top: 10px; width: 350px;"
+       (click)="realizarNuevoPago()">Realizar nuevo pago</button>
+    </div>
+  </div>
+</div>
+
+<!-- VISTA DESKTOP-->
+<div *ngIf="!esCelular">
+  <div fxLayout="row" fxLayoutAlign="end center" class="encabezado-filtro">
+    <div fxFlex="100%">
+      <button mat-icon-button class="boton-close" (click)="volverAlInicio()">
+        <mat-icon>close</mat-icon>
+      </button>
+    </div>
+  </div>
+  
+  <div style="margin-top: 10px;">
+    
+    <div class="texto-filtrar" fxLayoutAlign="space-between start">
+      Comprobante
+    </div>
+
+    <div fxLayout="column" class="card-desktop" fxLayoutAlign="space-between start" style="padding: 10px;">
+      <div>
+        <button mat-icon-button>
+          <mat-icon style="color: green;">schedule</mat-icon>
+        </button>
+      </div>
+      <div>
+        <p style="font-size: 18px; font-family: Rubik;">Tu nuevo pago
+          #{{ solicitudDePagoCreada.id | zeropading: 10 }} está en proceso.</p>
+        <p style="font-size: 16px; font-family: Rubik; margin-top: -10px; margin-bottom: 50px;">Estamos generando las
+          órdenes de venta del grano. Cuando todo esté listo recibirás una confirmación.</p>
+      </div>
+    </div>
+  
+    <app-resumen-resumen [solicitudDePagoCreada]="solicitudDePagoCreada" [unidadMedida]="unidadMedida" [total]="total">
+    </app-resumen-resumen>
+  </div>
+  
+  <div fxLayout="row" class="card-buttons">
+    <div>
+      <a routerLink="/billetera"><button mat-button class="button-volver" (click)="volverAlInicio()">Volver al inicio</button></a>
+    </div>
+    <div style="margin-left: 10px;">
+      <button mat-button class="button-realizar" (click)="realizarNuevoPago()">Realizar nuevo pago</button>
+    </div>
+  </div>
+</div>

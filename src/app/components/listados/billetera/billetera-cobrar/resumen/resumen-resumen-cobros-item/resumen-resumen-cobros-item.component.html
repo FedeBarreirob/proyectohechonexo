@@ -1,0 +1,17 @@
+<div *ngIf="esCelular" class="card-desktop">
+  <div style="font-size: 16px;">${{ cobroProgramado.monto | number }}</div>
+  <div class="datos">
+    <div>Fecha de cobro: {{ cobroProgramado.fechaACobrar }}</div>
+    <div>Medio: {{ medio }}</div>
+    <div>{{ detalle }}</div>
+  </div>
+</div>
+
+<div *ngIf="!esCelular" class="card-desktop">
+  <div style="font-size: 14px;">${{ cobroProgramado.monto | number }}</div>
+  <div class="datos">
+    <div>Fecha de cobro: {{ cobroProgramado.fechaACobrar }}</div>
+    <div>Medio: {{ medio }}</div>
+    <div>{{ detalle }}</div>
+  </div>
+</div>

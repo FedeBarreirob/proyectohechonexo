@@ -4,7 +4,7 @@
 
 export const environment = {
   production: false,
-  inPhonegap: true,
+  inPhonegap: false,
   oneSignalApiKey: '39901250-6212-4942-9d7a-413712e251fb',
   googleAnalyticsID: 'UA-144101541-1',
   trackear: false,
@@ -19,12 +19,26 @@ export const environment = {
 
 
   // testing
-  hostSeguridad: 'http://192.168.20.66:8080/DigitalSeguridad-1.0-SNAPSHOT/api',
+
+  /*hostSeguridad: 'http://192.168.20.66:8080/DigitalSeguridad-1.0-SNAPSHOT/api',
   hostCtaCte: 'http://192.168.20.66:8080/DigitalCuentaCorriente-1.0-SNAPSHOT/api',
   hostEntregasYVentas: 'http://192.168.20.66:8080/DigitalEntregasYVentas-1.0-SNAPSHOT/api',
   hostComunicaciones: 'http://192.168.20.66:8080/Comunicaciones-1.0-SNAPSHOT/api',
   hostGeneradorComprobantes: 'http://192.168.20.66:8080/GeneradorComprobantes-1.0-SNAPSHOT/api',
-  baseUrl: 'http://192.168.20.66/DigitalUIClientes/#'
+  hostFinanzas: 'http://192.168.20.66:8080/DigitalFinanzas-1.0-SNAPSHOT/api',
+  baseUrl: 'http://192.168.20.66/DigitalUIClientes/#'*/
+
+  // testing azure
+  hostSeguridad: 'http://gavigliodigitaltest.eastus.cloudapp.azure.com:8080/DigitalSeguridad-1.0-SNAPSHOT/api',
+  hostCtaCte: 'http://gavigliodigitaltest.eastus.cloudapp.azure.com:8080/DigitalCuentaCorriente-1.0-SNAPSHOT/api',
+  hostEntregasYVentas: 'http://gavigliodigitaltest.eastus.cloudapp.azure.com:8080/DigitalEntregasYVentas-1.0-SNAPSHOT/api',
+  hostComunicaciones: 'http://gavigliodigitaltest.eastus.cloudapp.azure.com:8080/Comunicaciones-1.0-SNAPSHOT/api',
+  hostGeneradorComprobantes: 'http://gavigliodigitaltest.eastus.cloudapp.azure.com:8080/GeneradorComprobantes-1.0-SNAPSHOT/api',
+  hostFinanzas: 'http://gavigliodigitaltest.eastus.cloudapp.azure.com:8080/DigitalFinanzas-1.0-SNAPSHOT/api',
+  hostFileStorage: 'http://gavigliodigitaltest.eastus.cloudapp.azure.com:8080/FileStorage-1.0-SNAPSHOT/api',
+  hostCuestionarios: 'http://gavigliodigitaltest.eastus.cloudapp.azure.com:8080/Cuestionarios-1.0-SNAPSHOT/api',
+  baseUrl: 'http://gavigliodigitaltest.eastus.cloudapp.azure.com/#'
+
 
   //produccion por vpn
   /*

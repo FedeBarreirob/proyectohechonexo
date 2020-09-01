@@ -1,0 +1,23 @@
+<div class="card" fxLayoutAlign="space-between center" *ngFor="let item of stockFijar">
+  <div class="60%" fxLayout="column">
+    <h5 style="margin-top: 5px;">Stock a fijar</h5>
+    <h3 style="margin-top: -15px; margin-bottom: 3px;">{{item.cantidadF}} Tn</h3>
+    <mat-divider></mat-divider>
+    <h6 style="margin-top: 3px;">Disponible: {{item.cantidadFDisponible}} Tn</h6>
+  </div>
+  <div class="40%" fxLayout="row" align="end">
+    <button mat-button class="link-ver-todas">Definir boletos<mat-icon>keyboard_arrow_right</mat-icon></button>
+  </div>
+</div>
+
+<div class="card" fxLayoutAlign="space-between center" *ngFor="let items of stockPesificar">
+  <div class="60%" fxLayout="column">
+    <h5 style="margin-top: 5px;">Stock a pesificar</h5>
+    <h3 style="margin-top: -15px; margin-bottom: 3px;">{{items.cantidadP}} Tn</h3>
+    <mat-divider></mat-divider>
+    <h6 style="margin-top: 3px;">Disponible: {{items.cantidadPDisponible}} Tn</h6>
+  </div>
+  <div class="40%" fxLayout="row" align="end">
+    <button mat-button class="link-ver-todas">Definir boletos<mat-icon>keyboard_arrow_right</mat-icon></button>
+  </div>
+</div>

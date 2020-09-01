@@ -1,0 +1,49 @@
+<!--Tipo de cambio modo celular-->
+<div class="contenedor-fecha-tipocambio" fxLayout="row" fxLayoutAlign="space-between center"
+     *ngIf="esCelular">
+  <div fxFlex="50%" class="contenedor-fecha-hora">
+    <app-fecha-hora></app-fecha-hora>
+  </div>
+  <div fxFlex="50%">
+    <div fxFlex class="contenedor-tipo-cambio">
+      <img src="assets/varios/tc.png" class="img-tc" />
+      <span *ngIf="saldoGlobal != null && seObtuvoSaldoExito == true && saldoGlobal.esTipoCambioDeHoy == true">TC
+        ${{ saldoGlobal.tipoDeCambio | number: '.2' }}</span>
+
+      <span *ngIf="saldoGlobal != null && seObtuvoSaldoExito == true && saldoGlobal.esTipoCambioDeHoy == false">TC
+        ${{ saldoGlobal.tipoDeCambio | number: '.2' }} <span class="fecha-tc">al
+          {{saldoGlobal.fechaTipoCambio}}</span></span>
+
+      <span *ngIf="saldoGlobal == null || seObtuvoSaldoExito == false">TC no disp.</span>
+    </div>
+  </div>
+</div>
+
+<!--Tipo de cambio modo desktop-->
+<div class="contenedor-fecha-tipocambio-desktop" fxLayout="row" fxLayoutAlign="space-between center"
+     *ngIf="!esCelular">
+  <div fxFlex="50%" class="contenedor-saludo-desktop">
+    Hola {{nombre}}
+  </div>
+  <div fxFlex="50%">
+    <div fxLayout="column" fxLayoutAlign="space-between end" class="tc-y-fecha-desktop-container">
+
+      <div fxFlex="100%" class="contenedor-tipo-cambio">
+        <img src="assets/varios/tc.png" class="img-tc" />
+        <span *ngIf="saldoGlobal != null && seObtuvoSaldoExito == true && saldoGlobal.esTipoCambioDeHoy == true">TC
+          ${{ saldoGlobal.tipoDeCambio | number: '.2' }}</span>
+
+        <span *ngIf="saldoGlobal != null && seObtuvoSaldoExito == true && saldoGlobal.esTipoCambioDeHoy == false">TC
+          ${{ saldoGlobal.tipoDeCambio | number: '.2' }} <span class="fecha-tc">al
+            {{saldoGlobal.fechaTipoCambio}}</span></span>
+
+        <span *ngIf="saldoGlobal == null || seObtuvoSaldoExito == false">TC no disp.</span>
+      </div>
+
+      <div fxFlex="100%">
+        <app-fecha-hora></app-fecha-hora>
+      </div>
+
+    </div>
+  </div>
+</div>

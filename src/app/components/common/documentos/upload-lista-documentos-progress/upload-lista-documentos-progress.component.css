@@ -1,0 +1,97 @@
+.container{
+    width: 320px;
+    height: 165px;
+    margin-top: 20px;
+    margin-bottom: 20px;
+    background-color: #ffffff;
+    border-radius: 4px;
+    border: solid 1px #ececec;
+}
+
+.body{
+    padding: 10px;
+}
+
+.title{
+    font-family: Rubik;
+    font-size: 16px;
+    line-height: 24px;
+    color: #333333;
+}
+
+.text{
+    margin-top: 10px;
+    font-family: Rubik;
+    font-size: 12px;
+    line-height: 16px;
+    color: #666666;
+}
+
+.progress-bar{
+    margin-top: 10px;
+}
+
+.porcent{
+    margin-top: 0px;
+}
+
+.porcent-0{
+    font-family: Rubik;
+    font-size: 14px;
+    line-height: 20px;
+    color: #333333;
+    text-align: start;
+}
+
+.porcent-100{
+    font-family: Rubik;
+    font-size: 14px;
+    line-height: 20px;
+    color: #333333;
+    text-align: end;
+}
+
+.informacion{
+    margin-top: 10px;
+}
+
+.info{
+    color: green;
+    width: 14px;
+    height: 14px;
+    margin-top: 5px;
+}
+
+.text-info{
+    margin-left: 4px;
+    font-family: Rubik;
+    font-size: 12px;
+    line-height: 16px;
+    color: #666666;
+}
+
+/*barra de progreso*/
+::ng-deep .pb-amarillo .mat-progress-bar-fill::after {
+    background-color: #fbbc1b;
+}
+
+::ng-deep .pb-amarillo .mat-progress-bar-buffer {
+    background: #E4E8EB;
+}
+
+::ng-deep .pb-amarillo .mat-progress-bar {
+    border-radius: 2px;
+}
+
+/*barra de progreso*/
+::ng-deep .pb-verde .mat-progress-bar-fill::after {
+    background-color: #379d50;
+}
+
+::ng-deep .pb-verde .mat-progress-bar-buffer {
+    background: #E4E8EB;
+}
+
+::ng-deep .pb-verde .mat-progress-bar {
+    border-radius: 2px;
+}

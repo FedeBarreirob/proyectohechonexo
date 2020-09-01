@@ -1,0 +1,94 @@
+<mat-card class="card">
+
+  <div class="num-boleto">
+    Boleto #{{ boletoAPesificar.numeroComprobanteContrato }} <mat-chip *ngIf="boletoAPesificar.vencidoFijacion">Vencido
+    </mat-chip>
+  </div>
+
+  <div class="tn-a-fijar">
+    <mat-checkbox [(ngModel)]="boletoSeleccionado" (change)="notificarCambios()">
+      {{ boletoAPesificar.kgDisponiblesPendientesDePesificar | kilosA: unidadMedida | number: (unidadMedida == 'tn' ? '.0-1' : '.0-0')}}
+      {{unidadMedida | kilosTextoA}}
+    </mat-checkbox>
+  </div>
+
+  <mat-radio-group [(ngModel)]="tipoPesificacion" [disabled]="!boletoSeleccionado" (change)="notificarCambios()">
+    <mat-radio-button [value]="contratoTipoPesificacion.PARCIAL" style="margin-bottom: 10px;">Pesificación parcial:
+      <input style="width: 50%;" [(ngModel)]="stockAPesificar" numeric numericType="decimal"
+        (change)="notificarCambios()" (keyup)="notificarCambios()"></mat-radio-button>
+    <mat-radio-button [value]="contratoTipoPesificacion.TOTAL">Pesificación total</mat-radio-button>
+  </mat-radio-group>
+
+  <div class="saldo-boleto">
+    Saldo del boleto: {{ saldoBoleto | number: (unidadMedida == 'tn' ? '.0-1' : '.0-0') }}
+    {{unidadMedida | kilosTextoA}}
+  </div>
+
+  <!--Detalle-->
+  <div *ngIf="modoVerDetalle">
+
+    <div fxLayout="row" fxLayoutAlign="space-between center" fxLayoutGap="5px" class="titulo-detalle">
+      <div fxFlex="50%">
+        Fecha
+      </div>
+
+      <div fxFlex="50%">
+        Cosecha
+      </div>
+    </div>
+
+    <div fxLayout="row" fxLayoutAlign="space-between center" fxLayoutGap="5px" class="texto-detalle">
+      <div fxFlex="50%">
+        {{ boletoAPesificar.fechaVenta }}
+      </div>
+
+      <div fxFlex="50%">
+        {{ boletoAPesificar.cosecha }}
+      </div>
+    </div>
+
+    <div fxLayout="row" fxLayoutAlign="space-between center" fxLayoutGap="5px" class="titulo-detalle">
+      <div fxFlex="50%">
+        Fijación desde
+      </div>
+
+      <div fxFlex="50%">
+        Fijación hasta
+      </div>
+    </div>
+
+    <div fxLayout="row" fxLayoutAlign="space-between center" fxLayoutGap="5px" class="texto-detalle">
+      <div fxFlex="50%">
+        {{ boletoAPesificar.fechaFijacionDesde }}
+      </div>
+
+      <div fxFlex="50%">
+        {{ boletoAPesificar.fechaFijacionHasta }}
+      </div>
+    </div>
+
+    <div fxLayout="row" fxLayoutAlign="space-between center" fxLayoutGap="5px" class="titulo-detalle">
+      <div fxFlex>
+        Destino de mercadería
+      </div>
+    </div>
+
+    <div fxLayout="row" fxLayoutAlign="space-between center" fxLayoutGap="5px" class="texto-detalle">
+      <div fxFlex>
+        {{ boletoAPesificar.destinoDescripcion }}
+      </div>
+    </div>
+
+  </div>
+  <!--Fin Detalle-->
+
+  <div fxLayout="row" fxLayoutAlign="center center">
+    <div fxFlex="nogrow">
+      <button class="button-detalle" mat-button (click)="toggleModoVerDetalle()" *ngIf="!modoVerDetalle">Mostrar
+        detalles</button>
+      <button class="button-detalle" mat-button (click)="toggleModoVerDetalle()" *ngIf="modoVerDetalle">Ocultar
+        detalles</button>
+    </div>
+  </div>
+
+</mat-card>

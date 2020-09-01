@@ -1,0 +1,27 @@
+<div *ngIf="esCelular">
+  <div class="card-container">
+    <div fxLayout="row" fxLayoutAlign="space-between center">
+      <div fxLayout="column">
+        <h5>Total</h5>
+        <h3 style="margin-top: -20px;">$ {{ (totalEvent$ | async) | number }}</h3>
+      </div>
+      <div fxLayout="row">
+        <button mat-flat-button matStepperNext style="background-color: green; color: white;">Siguiente</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div *ngIf="!esCelular">
+  <div class="card-container">
+    <div fxLayout="row" fxLayoutAlign="space-between center">
+      <div fxLayout="column">
+        <h5>Total</h5>
+        <h3 style="margin-top: -20px;">$ {{ (totalEvent$ | async) | number }}</h3>
+      </div>
+      <div fxLayout="row">
+        <button mat-flat-button matStepperNext style="background-color: green; color: white;">Siguiente</button>
+      </div>
+    </div>
+  </div>
+</div>

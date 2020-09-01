@@ -1,0 +1,9 @@
+.pregunta-contenedor {
+    padding-top: 5px;;
+    padding-bottom: 20px;
+
+    font-family: Rubik;
+    font-size: 12px;
+    color: #666666;
+    width: 100%;
+}

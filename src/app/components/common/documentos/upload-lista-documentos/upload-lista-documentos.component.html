@@ -1,0 +1,16 @@
+<!--Spinner-->
+<div fxLayout="row" fxLayoutAlign="center center" *ngIf="cargando" style="margin-top: 10px">
+  <mat-spinner diameter="24"></mat-spinner>
+</div>
+
+<div>
+  <app-upload-lista-documentos-progress [documentacion$]="documentacion$"></app-upload-lista-documentos-progress>
+</div>
+
+<app-upload-documento-generico *ngFor="let documento of documentacion" [documento]="documento"
+  (cargaFinalizada)="notificarProgresoCargaTotal()">
+</app-upload-documento-generico>
+
+<div fxLayoutAlign="center center">
+  <button mat-button class="button-save" (click)="registrarDocumentacion()" [disabled]="cargando">Guardar</button>
+</div>

@@ -1,0 +1,29 @@
+<div class="container" *ngIf="documentosFaltantes > 0 && authenticationService.esRol('PRODUCTOR')">
+
+  <!--Spinner-->
+  <div fxLayout="row" fxLayoutAlign="center center" *ngIf="cargando" style="margin-top: 10px">
+    <mat-spinner diameter="24"></mat-spinner>
+  </div>
+
+  <div *ngIf="indicador && !cargando">
+    <div fxLayout="row" class="header">
+      <div fxFlex="30" fxLayoutAlign="center center">
+        <circle-progress [percent]="indicador.porcentajeDeCarga" [radius]="30" [maxPercent]="100" [outerStrokeWidth]="8" [innerStrokeWidth]="4"
+          [outerStrokeColor]="'#2DA442'" [innerStrokeColor]="'none'"  [titleColor]="'#2DA442'"
+          [titleFontSize]="'20'" [subtitle]="''" [subtitleColor]="'#2DA442'" [subtitleFontSize]="'10'"
+          [animation]="true" [animationDuration]="300">
+        </circle-progress>
+      </div>
+      <div fxFlex="70" fxLayoutAlign="start center" class="title">Tiene {{ indicador.porcentajeDeCarga | number }}% de documentación subida
+      </div>
+    </div>
+    <div fxLayout="column" class="content">
+      <div class="text">Solo te faltan por subir {{documentosFaltantes}} documentos para que respaldemos tu cuenta.
+        Una vez cargados podrás operar tu cuenta con normalidad.
+      </div>
+      <div routerLink="/apertura-legajo" fxLayoutAlign="start center" *ngIf="documentosFaltantes && documentosFaltantes > 0">
+        <button mat-button class="button-complete">Completar ahora</button>
+      </div>
+    </div>
+  </div>
+</div>

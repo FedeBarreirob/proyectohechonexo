@@ -1,0 +1,63 @@
+<div *ngIf="esCelular" class="card-mobile">
+
+  <div class="pesos">
+    <p>Comprobantes pagados</p>
+  </div>
+
+  <app-resumen-resumen-comprobante-apagar-item *ngFor="let concepto of solicitudDePagoCreada.conceptosAPagar"
+    [concepto]="concepto">
+  </app-resumen-resumen-comprobante-apagar-item>
+
+  <mat-divider style="margin-bottom: 10px;"></mat-divider>
+  <div class="medio" fxLayout="column">
+    <p>Medio</p>
+    <h4 style="color: black; font-family: Rubik; font-size: 14px; margin-top: -5px; margin-left: 10px;">Canje</h4>
+
+    <p style="margin-top: -5px; color: black;" *ngFor="let canje of solicitudDePagoCreada.canjes">
+      {{ canje.especieDescripcion }}:
+      {{ (canje.kgAFijar + canje.kgAPesificar ) | kilosA: unidadMedida | number: '.0-2' }}
+      {{ unidadMedida | kilosTextoA}}
+    </p>
+
+    <app-resumen-info-operacion style="padding: 10px;"></app-resumen-info-operacion>
+  </div>
+  <mat-divider style="margin-bottom: 10px;"></mat-divider>
+  <div class="total" fxLayout="column">
+    <p>Total pagado</p>
+    <h2 style="color: black; font-family: Rubik; font-size: 18px; margin-top: -5px; margin-left: 10px;">$
+      {{ total | number }}</h2>
+  </div>
+</div>
+
+<!--VISTA DESKTOP-->
+
+<div *ngIf="!esCelular" class="card-desktop">
+
+  <div class="pesos">
+    <p>Comprobantes pagados</p>
+  </div>
+
+  <app-resumen-resumen-comprobante-apagar-item *ngFor="let concepto of solicitudDePagoCreada.conceptosAPagar"
+    [concepto]="concepto">
+  </app-resumen-resumen-comprobante-apagar-item>
+
+  <mat-divider style="margin-bottom: 10px;"></mat-divider>
+  <div class="medio" fxLayout="column">
+    <p>Medio</p>
+    <h4 style="color: black; font-family: Rubik; font-size: 14px; margin-top: -5px; margin-left: 10px;">Canje</h4>
+
+    <p style="margin-top: -5px; color: black;" *ngFor="let canje of solicitudDePagoCreada.canjes">
+      {{ canje.especieDescripcion }}:
+      {{ (canje.kgAFijar + canje.kgAPesificar ) | kilosA: unidadMedida | number: '.0-2' }}
+      {{ unidadMedida | kilosTextoA}}
+    </p>
+
+    <app-resumen-info-operacion style="padding: 10px;"></app-resumen-info-operacion>
+  </div>
+  <mat-divider style="margin-bottom: 10px;"></mat-divider>
+  <div class="total" fxLayout="column">
+    <p>Total pagado</p>
+    <h2 style="color: black; font-family: Rubik; font-size: 18px; margin-top: -5px; margin-left: 10px;">$
+      {{ total | number }}</h2>
+  </div>
+</div>

@@ -9,6 +9,9 @@ import { EllipsisModule } from 'ngx-ellipsis';
 import { DeviceDetectorModule } from 'ngx-device-detector';
 import { NgxGaugeModule } from 'ngx-gauge';
 import { NgxSpinnerModule } from 'ngx-spinner';
+import {WebcamModule} from 'ngx-webcam';
+import { NgCircleProgressModule } from 'ng-circle-progress';
+// import { NgCircleProgressModule } from './ng-circle-progress.module';
 
 // swiper
 import { SwiperModule } from 'ngx-swiper-wrapper';
@@ -19,6 +22,8 @@ const DEFAULT_SWIPER_CONFIG: SwiperConfigInterface = {
 	direction: 'horizontal',
 	slidesPerView: 'auto'
 };
+
+import {AutocompleteLibModule} from 'angular-ng-autocomplete';
 
 // locale
 import { registerLocaleData, DecimalPipe, CommonModule, DatePipe } from '@angular/common';
@@ -189,19 +194,146 @@ import { AppDateAdapter, APP_DATE_FORMATS } from './format-datepicker';
 import { SeleccionadosModalComponent } from './components/listados/comprobantes/descargas-comprobantes/seleccionados-modal/seleccionados-modal.component';
 import { ReporteUsuariosComponent } from './components/listados/reportes/reporte-usuarios/reporte-usuarios/reporte-usuarios.component';
 import { ReporteUsuariosToolbarComponent } from './components/listados/reportes/reporte-usuarios/reporte-usuarios-toolbar/reporte-usuarios-toolbar.component';
+import { ReporteProductoresComponent } from './components/listados/reportes/reporte-productores/reporte-productores/reporte-productores.component';
+import { ReporteProductoresToolbarComponent } from './components/listados/reportes/reporte-productores/reporte-productores-toolbar/reporte-productores-toolbar.component';
 import { SaldoConDiferenciaDeCamioEIvaComponent } from './components/listados/cuenta-corriente/saldo-con-diferencia-de-camio-eiva/saldo-con-diferencia-de-camio-eiva.component';
 import { LongPressDirective } from './directives/long-press.directive';
+import { BilleteraComponent } from './components/listados/billetera/billetera/billetera.component';
+import { BilleteraPagarComponent } from './components/listados/billetera/billetera-pagar/billetera-pagar.component';
+import { BilleteraCobrarComponent } from './components/listados/billetera/billetera-cobrar/billetera-cobrar.component';
+import { TarjetaTabContainerComponent } from './components/listados/billetera/tarjeta-tab-container/tarjeta-tab-container.component';
+import { PagarCobrarContainerComponent } from './components/listados/billetera/pagar-cobrar-container/pagar-cobrar-container.component';
+import { TablaOperacionesRecientesComponent } from './components/listados/billetera/tabla-operaciones-recientes/tabla-operaciones-recientes.component';
+import { ListaOperacionesMovilComponent } from './components/listados/billetera/lista-operaciones-movil/lista-operaciones-movil.component';
+import { TarjetaTabContainerWeb1Component } from './components/listados/billetera/tarjeta-tab-container-web1/tarjeta-tab-container-web1.component';
+import { TarjetaTabContainerWebComponent } from './components/listados/billetera/tarjeta-tab-container-web/tarjeta-tab-container-web.component';
+import { SaldoTcComponent } from './components/listados/billetera/saldo-tc/saldo-tc.component';
+import { BilleteraAcobrarDesktopComponent } from './components/listados/billetera/billetera-acobrar-desktop/billetera-acobrar-desktop.component';
+import { BilleteraApagarDesktopComponent } from './components/listados/billetera/billetera-apagar-desktop/billetera-apagar-desktop.component';
+import { BilleteraAcobrarResumenItemComponent } from './components/listados/billetera/billetera-acobrar-resumen-item/billetera-acobrar-resumen-item.component';
+import { BilleteraOperacionesItemComponent } from './components/listados/billetera/billetera-operaciones-item/billetera-operaciones-item.component';
+import { PagarCobrarContainerDesktopComponent } from './components/listados/billetera/pagar-cobrar-container-desktop/pagar-cobrar-container-desktop.component';
+import { BilleteraCobrarCardComponent } from './components/listados/billetera/billetera-cobrar/billetera-cobrar-card/billetera-cobrar-card.component';
+import { BilleteraCobrarListComponent } from './components/listados/billetera/billetera-cobrar/billetera-cobrar-list/billetera-cobrar-list.component';
+import { BilleteraCobrarCardCobroComponent } from './components/listados/billetera/billetera-cobrar/billetera-cobrar-card-cobro/billetera-cobrar-card-cobro.component';
+import { BilleteraCobrarCardTotalComponent } from './components/listados/billetera/billetera-cobrar/billetera-cobrar-card-total/billetera-cobrar-card-total.component';
+import { BilleteraCobrarCuentaComponent } from './components/listados/billetera/billetera-cobrar/billetera-cobrar-cuenta/billetera-cobrar-cuenta.component';
+import { BilleteraSaldoMovilComponent } from './components/listados/billetera/billetera-saldo-movil/billetera-saldo-movil.component';
+import { BilleteraLiquidacionesDetalleComponent } from './components/listados/billetera/billetera-liquidaciones-detalle/billetera-liquidaciones-detalle.component';
+import { BilleteraLiquidacionesDetalleUnaLiquidacionComponent } from './components/listados/billetera/billetera-liquidaciones-detalle-una-liquidacion/billetera-liquidaciones-detalle-una-liquidacion.component';
+import { BilleteraCobrarIndicacionImportesComponent } from './components/listados/billetera/billetera-cobrar/billetera-cobrar-indicacion-importes/billetera-cobrar-indicacion-importes/billetera-cobrar-indicacion-importes.component';
+import { BilleteraCobrarResumenComponent } from './components/listados/billetera/billetera-cobrar/billetera-cobrar-resumen/billetera-cobrar-resumen.component';
+import { BilleteraCobrarResumenTotalComponent } from './components/listados/billetera/billetera-cobrar/billetera-cobrar-resumen-total/billetera-cobrar-resumen-total.component';
+import { CuentaBancariaSelectorComponent } from './components/common/cuenta-bancaria-selector/cuenta-bancaria-selector.component';
+import { PagarFiltroComponent } from './components/listados/billetera/billetera-pagar/pagar-filtro/pagar-filtro.component';
+import { PagarInfoComponent } from './components/listados/billetera/billetera-pagar/pagar-info/pagar-info.component';
+import { PagarListadoComponent } from './components/listados/billetera/billetera-pagar/pagar-listado/pagar-listado.component';
+import { PagarComprobantesTotalComponent } from './components/listados/billetera/billetera-pagar/pagar-comprobantes-total/pagar-comprobantes-total.component';
+import { PagarListadoConceptoAPagarComponent } from './components/listados/billetera/billetera-pagar/pagar-listado-concepto-apagar/pagar-listado-concepto-apagar.component';
+import { BilleteraCardInfoComponent } from './components/listados/billetera/billetera-card-info/billetera-card-info.component';
+import { TotalPagarPagosComponent } from './components/listados/billetera/billetera-pagar/total-pagar-pagos/total-pagar-pagos.component';
+import { PagosOpcionesComponent } from './components/listados/billetera/billetera-pagar/pagos-opciones/pagos-opciones.component';
+import { PagarCanjeTotalComponent } from './components/listados/billetera/billetera-pagar/pagar-canje-total/pagar-canje-total.component';
+import { PagarCanjeInfoComponent } from './components/listados/billetera/billetera-pagar/pagar-canje-info/pagar-canje-info.component';
+import { CardPagarStockComponent } from './components/listados/billetera/billetera-pagar/card-pagar-stock/card-pagar-stock.component';
+import { PagoConCanjeComponent } from './components/listados/billetera/billetera-pagar/pago-con-canje/pago-con-canje.component';
+import { PagoConCanjeDisponibleComponent } from './components/listados/billetera/billetera-pagar/pago-con-canje-disponible/pago-con-canje-disponible.component';
+import { OnlyNumberDirective } from './directives/only-number.directive';
+import { PrecioTNAPipe } from './pipes/precio-tna.pipe';
+import { PreciosDeGranosComponent } from './components/listados/billetera/billetera-pagar/precios-de-granos/precios-de-granos.component';
+import { GestionDeSolicitudesComponent } from './components/listados/gestion-de-solicitudes/gestion-de-solicitudes.component';
+import { InicioFiltroComponent } from './components/listados/gestion-de-solicitudes/inicio-filtro/inicio-filtro.component';
+import { InicioCardComponent } from './components/listados/gestion-de-solicitudes/inicio-card/inicio-card.component';
+import { DefinirBoletosComponent } from './components/listados/gestion-de-solicitudes/definir-boletos/definir-boletos.component';
+import { SolicitudesTotalComponent } from './components/listados/gestion-de-solicitudes/solicitudes-total/solicitudes-total.component';
+import { PagarConCanjeDisponibleComponent } from './components/listados/gestion-de-solicitudes/pagar-con-canje-disponible/pagar-con-canje-disponible.component';
+import { DefinicionDeBoletosComponent } from './components/listados/gestion-de-solicitudes/definicion-de-boletos/definicion-de-boletos.component';
+import { DefinicionInfoComponent } from './components/listados/billetera/billetera-pagar/definicion-de-boletos/definicion-info/definicion-info.component';
+import { DefinicionBoletosComponent } from './components/listados/gestion-de-solicitudes/definicion-de-boletos/definicion-boletos/definicion-boletos.component';
+import { DefinicionFiltroComponent } from './components/listados/billetera/billetera-pagar/definicion-de-boletos/definicion-filtro/definicion-filtro.component';
+import { ResumenPagoComponent } from './components/listados/billetera/billetera-pagar/resumen/resumen-pago/resumen-pago.component';
+import { ResumenPesosComponent } from './components/listados/billetera/billetera-pagar/resumen/resumen-pesos/resumen-pesos.component';
+import { ResumenDolaresComponent } from './components/listados/billetera/billetera-pagar/resumen/resumen-dolares/resumen-dolares.component';
+import { ResumenTipoPagoComponent } from './components/listados/billetera/billetera-pagar/resumen/resumen-tipo-pago/resumen-tipo-pago.component';
+import { ResumenTotalPagoComponent } from './components/listados/billetera/billetera-pagar/resumen/resumen-total-pago/resumen-total-pago.component';
+import { ResumenTotalPagoInfoComponent } from './components/listados/billetera/billetera-pagar/resumen/resumen-total-pago-info/resumen-total-pago-info.component';
+import { ResumenComprobanteDialogComponent } from './components/listados/billetera/billetera-pagar/resumen/resumen-comprobante-dialog/resumen-comprobante-dialog.component';
+import { ResumenInfoSumaComponent } from './components/listados/billetera/billetera-pagar/resumen/resumen-info-suma/resumen-info-suma.component';
+import { ResumenInfoOperacionComponent } from './components/listados/billetera/billetera-pagar/resumen/resumen-info-operacion/resumen-info-operacion.component';
+import { ResumenResumenComponent } from './components/listados/billetera/billetera-pagar/resumen/resumen-resumen/resumen-resumen.component';
+import { TarjetaTabContainerPagarComponent } from './components/listados/billetera/tarjeta-tab-container-pagar/tarjeta-tab-container-pagar.component';
+import { DefinicionDeBoletosAFijarComponent } from './components/listados/billetera/billetera-pagar/definicion-de-boletos/definicion-de-boletos-afijar/definicion-de-boletos-afijar.component';
+import { DefinicionDeUnBoletoAFijarComponent } from './components/listados/billetera/billetera-pagar/definicion-de-boletos/definicion-de-un-boleto-afijar/definicion-de-un-boleto-afijar.component';
+import { DefinicionDeBoletosAFijarTotalComponent } from './components/listados/billetera/billetera-pagar/definicion-de-boletos/definicion-de-boletos-afijar-total/definicion-de-boletos-afijar-total.component';
+import { DefinicionDeBoletosAPesificarComponent } from './components/listados/billetera/billetera-pagar/definicion-de-boletos/definicion-de-boletos-apesificar/definicion-de-boletos-apesificar.component';
+import { DefinicionDeUnBoletoAPesificarComponent } from './components/listados/billetera/billetera-pagar/definicion-de-boletos/definicion-de-un-boleto-apesificar/definicion-de-un-boleto-apesificar.component';
+import { DefinicionDeBoletosAPesificarTotalComponent } from './components/listados/billetera/billetera-pagar/definicion-de-boletos/definicion-de-boletos-apesificar-total/definicion-de-boletos-apesificar-total.component';
+import { ResumenPagoComprobanteAPagarComponent } from './components/listados/billetera/billetera-pagar/resumen/resumen-pago-comprobante-apagar/resumen-pago-comprobante-apagar.component';
+import { ResumenPagoMedioCanjeComponent } from './components/listados/billetera/billetera-pagar/resumen/resumen-pago-medio-canje/resumen-pago-medio-canje.component';
+import { ResumenComprobanteDialogCobrosComponent } from './components/listados/billetera/billetera-cobrar/resumen/resumen-comprobante-dialog-cobros/resumen-comprobante-dialog-cobros.component';
+import { ResumenResumenCobrosComponent } from './components/listados/billetera/billetera-cobrar/resumen/resumen-resumen-cobros/resumen-resumen-cobros.component';
+import { ZeropadingPipe } from './pipes/zeropading.pipe';
+import { ResumenResumenCobrosItemComponent } from './components/listados/billetera/billetera-cobrar/resumen/resumen-resumen-cobros-item/resumen-resumen-cobros-item.component';
+import { ResumenResumenComprobanteAPagarItemComponent } from './components/listados/billetera/billetera-pagar/resumen/resumen-resumen-comprobante-apagar-item/resumen-resumen-comprobante-apagar-item.component';
+import { NumeroAKilosPipe } from './pipes/numero-akilos.pipe';
+import { GestionDeSolicitudesListadoComponent } from './components/listados/gestion-de-solicitudes/gestion-de-solicitudes-listado/gestion-de-solicitudes-listado.component';
+import { GestionDeSolicitudesListadoItemComponent } from './components/listados/gestion-de-solicitudes/gestion-de-solicitudes-listado-item/gestion-de-solicitudes-listado-item.component';
+import { PerfilesAutocompleteComponent } from './components/common/perfiles-autocomplete/perfiles-autocomplete.component';
+import { BilleteraCardInfoPagosComponent } from './components/listados/billetera/billetera-card-info-pagos/billetera-card-info-pagos.component';
+import { CardMasInformacionComponent } from './components/listados/billetera/card-mas-informacion/card-mas-informacion.component';
+import { InicioRegistroComponent } from './components/registro-usuario/inicio-registro/inicio-registro.component';
+import { InicioRegistroDefinirCuentaComponent } from './components/registro-usuario/inicio-registro-definir-cuenta/inicio-registro-definir-cuenta.component';
+import { InicioRegistroConfirmacionMailComponent } from './components/registro-usuario/inicio-registro-confirmacion-mail/inicio-registro-confirmacion-mail.component';
+import { ValidarDocumentacionComponent } from './components/validar-documentacion/validar-documentacion/validar-documentacion.component';
+import { ValidarDocumentacionStepComponent } from './components/validar-documentacion/validar-documentacion-step/validar-documentacion-step.component';
+import { SituacionUsuarioComponent } from './components/validar-documentacion/situacion-usuario/situacion-usuario.component';
+import { SituacionUsuarioCompletaComponent } from './components/validar-documentacion/situacion-usuario-completa/situacion-usuario-completa.component';
+import { FrenteDniComponent } from './components/validar-documentacion/frente-dni/frente-dni.component';
+import { DorsoDniComponent } from './components/validar-documentacion/dorso-dni/dorso-dni.component';
+import { SelfieComponent } from './components/validar-documentacion/selfie/selfie.component';
+import { MensajeBienvenidaDialogComponent } from './components/tablero/mensaje-bienvenida-dialog/mensaje-bienvenida-dialog.component';
+import { CompletarDocumentacionCardComponent } from './components/tablero/completar-documentacion-card/completar-documentacion-card.component';
+import { CompletarDocumentacionNavComponent } from './components/menu/completar-documentacion-nav/completar-documentacion-nav.component';
+import { AperturaLegajoComponent } from './components/listados/documentacion/apertura-legajo/apertura-legajo.component';
+import { ProgressUploadFilesComponent } from './components/listados/documentacion/progress-upload-files/progress-upload-files.component';
+import { CompletarRegistroDialogComponent } from './components/listados/billetera/completar-registro-dialog/completar-registro-dialog.component';
+import { UploaderDocumentosComponent } from './components/common/documentos/uploader-documentos/uploader-documentos.component';
+import { AperturaLegajoUploadDocumentoComponent } from './components/listados/documentacion/apertura-legajo-upload-documento/apertura-legajo-upload-documento.component';
+import { MensajeFotoSubidaComponent } from './components/validar-documentacion/mensaje-foto-subida/mensaje-foto-subida.component';
+import { InfoPerfilLimiteCreditoComponent } from './components/usuarios-y-perfiles/info-perfil-limite-credito/info-perfil-limite-credito.component';
+import { DocumentacionRequeridaComponent } from './components/usuarios-y-perfiles/info-perfil-limite-credito/documentacion/documentacion-requerida/documentacion-requerida.component';
+import { RespondaPreguntasComponent } from './components/usuarios-y-perfiles/info-perfil-limite-credito/responda-preguntas/responda-preguntas.component';
+import { ConfirmacionEnvioComponent } from './components/usuarios-y-perfiles/info-perfil-limite-credito/confirmacion-envio/confirmacion-envio.component';
+import { ClienteProductorCardComponent } from './components/registro-usuario/cliente-productor-card/cliente-productor-card.component';
+import { NuevoColaboradorCardComponent } from './components/registro-usuario/nuevo-colaborador-card/nuevo-colaborador-card.component';
+import { FalloLoginInfoComponent } from './components/registro-usuario/fallo-login-info/fallo-login-info.component';
+import { UploadDocumentoGenericoComponent } from './components/common/documentos/upload-documento-generico/upload-documento-generico.component';
+import { UploadListaDocumentosComponent } from './components/common/documentos/upload-lista-documentos/upload-lista-documentos.component';
+import { UploadListaDocumentosProgressComponent } from './components/common/documentos/upload-lista-documentos-progress/upload-lista-documentos-progress.component';
+import { CuestionarioComponent } from './components/common/cuestionarios/cuestionario/cuestionario.component';
+import { CuestionarioPreguntaConRespuestaComponent } from './components/common/cuestionarios/cuestionario-pregunta-con-respuesta/cuestionario-pregunta-con-respuesta.component';
+import { CuestionarioRespuestaAbiertaTextoComponent } from './components/common/cuestionarios/respuestas/cuestionario-respuesta-abierta-texto/cuestionario-respuesta-abierta-texto.component';
+import { CuestionarioRespuestaAbiertaDoubleComponent } from './components/common/cuestionarios/respuestas/cuestionario-respuesta-abierta-double/cuestionario-respuesta-abierta-double.component';
+import { CuestionarioRespuestaAbiertaEnteroComponent } from './components/common/cuestionarios/respuestas/cuestionario-respuesta-abierta-entero/cuestionario-respuesta-abierta-entero.component';
+import { CuestionarioRespuestaCerradaUnaOpcionComponent } from './components/common/cuestionarios/respuestas/cuestionario-respuesta-cerrada-una-opcion/cuestionario-respuesta-cerrada-una-opcion.component';
+import { CuestionarioRespuestaCerradaMultiplesOpcionesComponent } from './components/common/cuestionarios/respuestas/cuestionario-respuesta-cerrada-multiples-opciones/cuestionario-respuesta-cerrada-multiples-opciones.component';
+import { CuestionarioRespuestaAbiertaPesosComponent } from './components/common/cuestionarios/respuestas/cuestionario-respuesta-abierta-pesos/cuestionario-respuesta-abierta-pesos.component';
+import { CuestionarioRespuestaAbiertaDolaresComponent } from './components/common/cuestionarios/respuestas/cuestionario-respuesta-abierta-dolares/cuestionario-respuesta-abierta-dolares.component';
+import { FalloRecuperacionPasswordCardComponent } from './components/usuarios-y-perfiles/fallo-recuperacion-password-card/fallo-recuperacion-password-card.component';
+import { ModalEnvioRestablecerPasswordComponent } from './components/usuarios-y-perfiles/modal-envio-restablecer-password/modal-envio-restablecer-password.component';
+
+
 
 registerLocaleData(localeEsAr, 'es-AR');
 
 export function tokenGetter() {
-	let usuario = JSON.parse(localStorage.getItem('currentUser'));
-	return usuario != null ? usuario.token : '';
+  const usuario = JSON.parse(localStorage.getItem('currentUser'));
+  return usuario != null ? usuario.token : '';
 }
 
 @NgModule({
-	declarations: [
-		AppComponent,
+  declarations: [
+    AppComponent,
 		LoginComponent,
 		DashboardComponent,
 		MainNavComponent,
@@ -350,8 +482,134 @@ export function tokenGetter() {
 		SeleccionadosModalComponent,
 		ReporteUsuariosComponent,
 		ReporteUsuariosToolbarComponent,
+		ReporteProductoresComponent,
+		ReporteProductoresToolbarComponent,
 		SaldoConDiferenciaDeCamioEIvaComponent,
-		LongPressDirective
+		LongPressDirective,
+		BilleteraComponent,
+		BilleteraPagarComponent,
+		BilleteraCobrarComponent,
+		TarjetaTabContainerComponent,
+		PagarCobrarContainerComponent,
+		TablaOperacionesRecientesComponent,
+		ListaOperacionesMovilComponent,
+		TarjetaTabContainerWeb1Component,
+		TarjetaTabContainerWebComponent,
+		SaldoTcComponent,
+		BilleteraAcobrarDesktopComponent,
+		BilleteraApagarDesktopComponent,
+		BilleteraAcobrarResumenItemComponent,
+		BilleteraOperacionesItemComponent,
+		PagarCobrarContainerDesktopComponent,
+		BilleteraCobrarCardComponent,
+		BilleteraCobrarListComponent,
+		BilleteraCobrarCardCobroComponent,
+		BilleteraCobrarCardTotalComponent,
+		BilleteraCobrarCuentaComponent,
+		BilleteraSaldoMovilComponent,
+		BilleteraLiquidacionesDetalleComponent,
+		BilleteraLiquidacionesDetalleUnaLiquidacionComponent,
+		BilleteraCobrarIndicacionImportesComponent,
+		BilleteraCobrarResumenComponent,
+		BilleteraCobrarResumenTotalComponent,
+		CuentaBancariaSelectorComponent,
+		PagarFiltroComponent,
+		PagarInfoComponent,
+		PagarListadoComponent,
+		PagarComprobantesTotalComponent,
+		PagarListadoConceptoAPagarComponent,
+		BilleteraCardInfoComponent,
+		TotalPagarPagosComponent,
+		PagosOpcionesComponent,
+		PagarCanjeTotalComponent,
+		PagarCanjeInfoComponent,
+		CardPagarStockComponent,
+		PagoConCanjeComponent,
+		PagoConCanjeDisponibleComponent,
+		OnlyNumberDirective,
+		PrecioTNAPipe,
+		PreciosDeGranosComponent,
+		GestionDeSolicitudesComponent,
+		InicioFiltroComponent,
+		InicioCardComponent,
+		DefinirBoletosComponent,
+		SolicitudesTotalComponent,
+		PagarConCanjeDisponibleComponent,
+		DefinicionDeBoletosComponent,
+		DefinicionInfoComponent,
+		DefinicionBoletosComponent,
+		DefinicionFiltroComponent,
+		ResumenPagoComponent,
+		ResumenPesosComponent,
+		ResumenDolaresComponent,
+		ResumenTipoPagoComponent,
+		ResumenTotalPagoComponent,
+		ResumenTotalPagoInfoComponent,
+		ResumenComprobanteDialogComponent,
+		ResumenInfoSumaComponent,
+		ResumenInfoOperacionComponent,
+		ResumenResumenComponent,
+		TarjetaTabContainerPagarComponent,
+		DefinicionDeBoletosAFijarComponent,
+		DefinicionDeUnBoletoAFijarComponent,
+		DefinicionDeBoletosAFijarTotalComponent,
+		DefinicionDeBoletosAPesificarComponent,
+		DefinicionDeUnBoletoAPesificarComponent,
+		DefinicionDeBoletosAPesificarTotalComponent,
+		ResumenPagoComprobanteAPagarComponent,
+		ResumenPagoMedioCanjeComponent,
+		ResumenComprobanteDialogCobrosComponent,
+		ResumenResumenCobrosComponent,
+		ZeropadingPipe,
+		ResumenResumenCobrosItemComponent,
+		ResumenResumenComprobanteAPagarItemComponent,
+		NumeroAKilosPipe,
+		GestionDeSolicitudesListadoComponent,
+		GestionDeSolicitudesListadoItemComponent,
+		PerfilesAutocompleteComponent,
+		BilleteraCardInfoPagosComponent,
+		CardMasInformacionComponent,
+		InicioRegistroComponent,
+		InicioRegistroDefinirCuentaComponent,
+		InicioRegistroConfirmacionMailComponent,
+		ValidarDocumentacionComponent,
+		ValidarDocumentacionStepComponent,
+		SituacionUsuarioComponent,
+		SituacionUsuarioCompletaComponent,
+		FrenteDniComponent,
+		DorsoDniComponent,
+		SelfieComponent,
+		MensajeBienvenidaDialogComponent,
+		CompletarDocumentacionCardComponent,
+		CompletarDocumentacionNavComponent,
+		AperturaLegajoComponent,
+		ProgressUploadFilesComponent,
+		CompletarRegistroDialogComponent,
+		MensajeFotoSubidaComponent,
+		InfoPerfilLimiteCreditoComponent,
+		DocumentacionRequeridaComponent,
+		RespondaPreguntasComponent,
+		ConfirmacionEnvioComponent,
+		ClienteProductorCardComponent,
+		NuevoColaboradorCardComponent,
+		FalloLoginInfoComponent,
+		UploaderDocumentosComponent,
+		AperturaLegajoUploadDocumentoComponent,
+		MensajeFotoSubidaComponent,
+		UploadDocumentoGenericoComponent,
+		UploadListaDocumentosComponent,
+		UploadListaDocumentosProgressComponent,
+		CuestionarioComponent,
+		CuestionarioPreguntaConRespuestaComponent,
+		CuestionarioRespuestaAbiertaTextoComponent,
+		CuestionarioRespuestaAbiertaDoubleComponent,
+		CuestionarioRespuestaAbiertaEnteroComponent,
+		CuestionarioRespuestaCerradaUnaOpcionComponent,
+		CuestionarioRespuestaCerradaMultiplesOpcionesComponent,
+		CuestionarioRespuestaAbiertaPesosComponent,
+		CuestionarioRespuestaAbiertaDolaresComponent,
+		FalloRecuperacionPasswordCardComponent,
+		ModalEnvioRestablecerPasswordComponent
 	],
 	imports: [
 		HttpClientModule,
@@ -384,7 +642,10 @@ export function tokenGetter() {
 		InfiniteScrollModule,
 		NgxGaugeModule,
 		SwiperModule,
-		NgxSpinnerModule
+		NgxSpinnerModule,
+		AutocompleteLibModule,
+		WebcamModule,
+		NgCircleProgressModule.forRoot(),
 	],
 	providers: [
 		{ provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true },
@@ -432,7 +693,26 @@ export function tokenGetter() {
 		CuentaCorrienteAplicadaDetalleComponent,
 		TutorialModalComponent,
 		NotificacionDetalleUrlComponent,
-		SeleccionadosModalComponent
+		SeleccionadosModalComponent,
+		BilleteraLiquidacionesDetalleComponent,
+		BilleteraCobrarCuentaComponent,
+		BilleteraCardInfoComponent,
+		PreciosDeGranosComponent,
+		ResumenComprobanteDialogComponent,
+		DefinicionDeBoletosAFijarComponent,
+		DefinicionDeBoletosAPesificarComponent,
+		ResumenComprobanteDialogCobrosComponent,
+		BilleteraCardInfoPagosComponent,
+		CardMasInformacionComponent,
+		FrenteDniComponent,
+		DorsoDniComponent,
+		SelfieComponent,
+		MensajeBienvenidaDialogComponent,
+		CompletarRegistroDialogComponent,
+		MensajeFotoSubidaComponent,
+		InfoPerfilLimiteCreditoComponent,
+		SituacionUsuarioComponent,
+		ModalEnvioRestablecerPasswordComponent
 	],
 	bootstrap: [AppComponent]
 })

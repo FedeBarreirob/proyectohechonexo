@@ -1,0 +1,32 @@
+<div class="card">
+  <div fxLayout="row" fxLayoutALign="space-between center">
+    <div fxFlex="nogrow" style="padding: 10px; color: #ccc;">
+      <p style="font-family: Rubik; font-size: 14px; color: #666; margin-top: 20px;">Total a pagar: </p>
+    </div>
+    <div fxFlex="nogrow" style="padding: 10px;">
+      <h3>$ {{ (totalEvent$ | async) | number }}</h3>
+    </div>
+  </div>
+  <mat-divider></mat-divider>
+  <div fxLayout="row" fxLayoutALign="space-between center">
+    <div fxFlex="nogrow" style="padding: 10px; color: #ccc;">
+      <p style="font-family: Rubik; font-size: 14px; color: #666; margin-top: 25px;">Total para canjear: </p>
+    </div>
+    <div fxFlex="nogrow" style="padding: 10px;">
+      <h2>$ {{ (totalImporteCanje$ | async) | number }}</h2>
+    </div>
+  </div>
+
+  <div fxLayout="row" class="card-indicador" fxLayoutAlign="space-between center" *ngIf="esMontoInsuficiente">
+    <div fxFlex="10%">
+      <button mat-icon-button style="margin-top: -3px; margin-left: -3px;">
+        <mat-icon style="color: green;">info</mat-icon>
+      </button>
+    </div>
+    <div fxFlex="90%">
+      <p style="color: #333333; font-family: Rubik;
+      font-size: 11px;">Aún no cubres el monto total a pagar. El pago se hará de manera parcial.</p>
+    </div>
+  </div>
+
+</div>

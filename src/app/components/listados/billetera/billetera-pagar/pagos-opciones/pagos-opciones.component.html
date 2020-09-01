@@ -1,0 +1,93 @@
+<div *ngIf="esCelular">
+  <mat-card class="card-movile">
+    <div fxLayoutAlign="space-between center" fxLayout="row">
+      <div fxFlex="25%">
+        <button mat-button style="background-color: green; width: 40px; height: 60px; border-radius: 40px;">
+          <mat-icon style="color: white;">autorenew</mat-icon>
+        </button>
+      </div>
+      <div fxFlex="50%">
+        <h4>Canje</h4>
+      </div>
+      <div fxFlex="25%">
+        <button mat-button matStepperNext style="background-color: transparent;"><mat-icon style="color: green; font-size: 50px; margin-top: -25px;">keyboard_arrow_right</mat-icon></button>
+      </div>
+    </div>
+  </mat-card>
+  
+  <mat-card class="card-movile" style="margin-top: 20px;">
+    <div fxLayoutAlign="space-between center" fxLayout="row">
+      <div fxFlex="25%">
+        <button mat-button style="background-color: green; width: 40px; height: 60px; border-radius: 40px;">
+          <mat-icon style="color: white;">monetization_on</mat-icon>
+        </button>
+      </div>
+      <div fxFlex="50%">
+        <h4>Dinero disponible</h4>
+      </div>
+      <div fxFlex="25%">
+        <button mat-button style="background-color: transparent;"><mat-icon style="color: green; font-size: 50px; margin-top: -25px;">keyboard_arrow_right</mat-icon></button>
+      </div>
+    </div>
+  </mat-card>
+  
+  <mat-card class="card-mobile" style="margin-top: 20px;">
+    <div fxLayoutAlign="space-between center" fxLayout="row">
+      <div fxFlex="25%">
+        <button mat-button style="background-color: green; width: 40px; height: 60px; border-radius: 40px;">
+          <mat-icon style="color: white;">credit_card</mat-icon>
+        </button>
+      </div>
+      <div fxFlex="50%">
+        <h4>Tarjeta de crédito</h4>
+      </div>
+      <div fxFlex="25%">
+        <button mat-button style="background-color: transparent;"><mat-icon style="color: green; font-size: 50px; margin-top: -25px;">keyboard_arrow_right</mat-icon></button>
+      </div>
+    </div>
+  </mat-card>
+</div>
+
+<div *ngIf="!esCelular">
+  <mat-card class="card-desktop">
+    <div fxLayout="row">
+      <div fxFlex="25%" fxLayoutAlign="center center">
+        <button mat-fab style="background-color: green;" ><mat-icon style="color: white;">autorenew</mat-icon></button>
+      </div>
+      <div fxFlex="50%" fxLayoutAlign="start center">
+        <h4 style="margin-left: 0px;">Canje</h4>
+      </div>
+      <div fxFlex="25%" fxLayoutAlign="end center">
+        <button mat-button matStepperNext style="background-color: transparent;"><mat-icon style="color: green; font-size: 50px; margin-top: -25px;">keyboard_arrow_right</mat-icon></button>
+      </div>
+    </div>
+  </mat-card>
+  
+  <mat-card class="card-desktop" style="margin-top: 20px;">
+    <div fxLayout="row">
+      <div fxFlex="25%" fxLayoutAlign="center center">
+        <button mat-fab style="background-color: green;" ><mat-icon style="color: white;">monetization_on</mat-icon></button>
+      </div>
+      <div fxFlex="50%" fxLayoutAlign="start center">
+        <h4 style="margin-left: 0px;">Dinero disponible</h4>
+      </div>
+      <div fxFlex="25%" fxLayoutAlign="end center">
+        <button mat-button style="background-color: transparent;"><mat-icon style="color: green; font-size: 50px; margin-top: -25px;">keyboard_arrow_right</mat-icon></button>
+      </div>
+    </div>
+  </mat-card>
+  
+  <mat-card class="card-desktop" style="margin-top: 20px;">
+    <div fxLayout="row">
+      <div fxFlex="25%" fxLayoutAlign="center center">
+        <button mat-fab style="background-color: green;" ><mat-icon style="color: white;">credit_card</mat-icon></button>
+      </div>
+      <div fxFlex="50%" fxLayoutAlign="start center">
+        <h4 style="margin-left: 0px;">Tarjeta de crédito</h4>
+      </div>
+      <div fxFlex="25%" fxLayoutAlign="end center">
+        <button mat-button style="background-color: transparent;"><mat-icon style="color: green; font-size: 50px; margin-top: -25px;">keyboard_arrow_right</mat-icon></button>
+      </div>
+    </div>
+  </mat-card>
+</div>

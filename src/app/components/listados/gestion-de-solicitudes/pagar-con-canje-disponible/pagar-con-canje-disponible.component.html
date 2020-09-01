@@ -1,0 +1,56 @@
+<div class="card">
+  <div fxLayout="column">
+  
+    <mat-card>
+
+      <div fxLayout="row" fxLayoutAlign="space-between center">
+        <img src="../../../../../assets/cereal-filtro/soja.png" style="width: 30px; height: 30px;">
+        <h3>Soja</h3>
+      </div>
+
+      <div fxLayout="row" fxLayoutAlign="space-between center" fxLayoutGap="5px" style="margin-bottom: 10px;">
+  
+        <div fxFlex="55%">
+  
+          <div fxLayout="column" fxLayoutAlign="space-between start">
+            <div fxFlex>Stock a fijar</div>
+            <div fxFlex style="border-bottom: 1px solid #999999;" (change)="notificarImporteCalculado()"
+              (keyup)="notificarImporteCalculado()"><input [(ngModel)]="stockAFijar" numeric numericType="decimal"
+                style="border: none; width: 80px;" /> {{unidadMedida | kilosTextoA}}</div>
+            <div fxFlex class="disponible-text">Disponible: {{ disponibleStockAFijar | number: '.0-2' }}
+              {{unidadMedida | kilosTextoA}} </div>
+          </div>
+  
+        </div>
+  
+        <div fxFlex="45%">
+          <a routerLink="/definicion-de-boletos"><button mat-button class="link-ver-todas">Definir boletos<mat-icon>keyboard_arrow_right</mat-icon></button></a>
+        </div>
+  
+      </div>
+  
+      <mat-divider></mat-divider>
+  
+      <div fxLayout="row" fxLayoutAlign="space-between center" fxLayoutGap="5px" style="margin-top: 20px;">
+  
+        <div fxFlex="55%">
+  
+          <div fxLayout="column" fxLayoutAlign="space-between start">
+            <div fxFlex>Stock a pesificar</div>
+            <div fxFlex style="border-bottom: 1px solid #999999;"><input [(ngModel)]="stockAPesificar" numeric
+                numericType="decimal" style="border: none; width: 80px;" /> {{unidadMedida | kilosTextoA}} </div>
+            <div fxFlex class="disponible-text">Disponible: {{ disponibleStockAPesificar | number: '.0-2' }}
+              {{unidadMedida | kilosTextoA}} </div>
+          </div>
+  
+        </div>
+  
+        <div fxFlex="45%">
+          <a routerLink="/definicion-de-boletos"><button mat-button class="link-ver-todas">Definir boletos<mat-icon>keyboard_arrow_right</mat-icon></button></a>
+        </div>
+  
+      </div>
+  
+    </mat-card>
+  </div>
+</div>

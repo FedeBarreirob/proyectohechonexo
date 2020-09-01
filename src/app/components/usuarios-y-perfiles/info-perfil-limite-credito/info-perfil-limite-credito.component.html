@@ -1,0 +1,14 @@
+<app-tool-bar-para-modal titulo="Sección de Límite de Crédito" (botonSalirEjecutado)="salir()"></app-tool-bar-para-modal>
+
+<mat-horizontal-stepper>
+
+  <mat-step>
+    <ng-template matStepLabel>Documentación</ng-template>
+    <app-documentacion-requerida></app-documentacion-requerida>
+  </mat-step>
+  <mat-step>
+    <ng-template matStepLabel>Cuestionario</ng-template>
+    <app-responda-preguntas></app-responda-preguntas>
+  </mat-step>
+  
+</mat-horizontal-stepper>

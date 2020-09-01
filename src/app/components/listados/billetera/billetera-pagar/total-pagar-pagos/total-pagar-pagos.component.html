@@ -1,0 +1,17 @@
+<div *ngIf="esCelular">
+  <div class="card-container">
+    <div fxLayout="row" fxLayoutAlign="space-between center" style="margin-top: 2px;">
+      <h5 fxFlex="40%" style="padding-left: 10px;color: #666; font-size: 14px; font-family: Rubik;">Total a pagar</h5>
+      <h3 fxFlex="60%" style="font-size: 24px; width: 100%; font-family: Rubik;">$ {{ (totalEvent$ | async) | number }}</h3>
+    </div>
+  </div>
+</div>
+
+<div *ngIf="!esCelular">
+  <div class="card-container-desktop">
+    <div fxLayout="row" fxLayoutAlign="space-between center">
+      <h5 fxFlex style="padding-left: 10px;color: #999; font-size: 18px;">Total a pagar</h5>
+      <h3 fxFlex style="font-size: 25px; font-family: Rubik; width: 100%;">$ {{ (totalEvent$ | async) | number }}</h3>
+    </div>
+  </div>
+</div>

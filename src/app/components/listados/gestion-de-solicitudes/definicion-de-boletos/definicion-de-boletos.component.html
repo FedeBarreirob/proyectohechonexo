@@ -1,0 +1,33 @@
+<mat-sidenav-container [ngClass]="{'contenedor-solicitudes': esCelular, 'contenedor-desktop': !esCelular }">
+  <mat-sidenav #menuDefiniciones position="end" class="sidenav-filtro">
+    <app-definicion-filtro [cuenta]="cuenta" (botonCerrar)="menuDefiniciones.toggle()" [observerFiltro$]="observerFiltro$">
+    </app-definicion-filtro>
+  </mat-sidenav>
+
+  <div class="title">
+    <a routerLink="/definir-boletos" fxFlex="25%" fxLayoutAlign="space-between center">
+      <button mat-mini-fab style="background-color: transparent;">
+        <mat-icon style="color: green;">arrow_back</mat-icon>
+      </button>
+    </a>
+    <h3 fxFlex="75%" style="margin-left: 10px; color: black; font-family: Rubik;">Gestión de solicitudes</h3>
+  </div>
+
+  <section>
+    <p style="padding: 20px; color: #999; font-family: Rubik; font-size: 12px;">Los boletos que definas se usaran para el canje. Puedes sumar boletos para cumplir con el monto objetivo.</p>
+
+    <div fxLayout="row" fxLayoutAlign="space-between center" style="padding: 10px;">
+      <h3 class="titulo-card">Boletos de Soja</h3>
+      <button mat-button (click)="mostrarOcultarFiltros()">Filtrar</button>
+    </div>
+
+    <div style="padding: 20px; margin-top: -20px;">
+      <app-definicion-info></app-definicion-info>
+    </div>
+
+    <div style="padding: 20px;">
+      <app-definicion-boletos></app-definicion-boletos>
+    </div>
+
+  </section>
+</mat-sidenav-container>

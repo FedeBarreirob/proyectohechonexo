@@ -1,0 +1,14 @@
+<div fxLayout="row" fxLayoutAlign="space-between center">
+  <div fxFlex="nogrow">
+    Liquidaciones
+  </div>
+
+  <div fxFlex="nogrow">
+    <button mat-icon-button (click)="cerrar()">
+      <mat-icon>close</mat-icon>
+    </button>
+  </div>
+</div>
+
+<app-billetera-liquidaciones-detalle-una-liquidacion *ngFor="let liquidacion of liquidaciones"
+  [liquidacion]="liquidacion"></app-billetera-liquidaciones-detalle-una-liquidacion>

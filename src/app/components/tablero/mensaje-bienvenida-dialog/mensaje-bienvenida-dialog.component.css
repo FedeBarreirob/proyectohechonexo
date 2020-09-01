@@ -1,0 +1,46 @@
+.container{
+    background-color: #ffffff;
+    width: 100%;
+    height: 100%;
+    border-radius: 4px;
+}
+
+.header{
+    padding: 0;
+    margin-bottom: 10px;
+}
+
+.title{
+    font-family: Rubik;
+    font-size: 16px;
+    line-height: 24px;
+    color: #333333;
+}
+
+.boton-close {
+    margin-top: -50px;
+}
+
+.body{
+    margin-top: 10px;
+}
+
+.text{
+    font-family: Rubik;
+    font-size: 14px;
+    line-height: 20px;
+    color: #333333;
+}
+
+.button-complete{
+    margin-top: 20px;
+    margin-bottom: -20px;
+    width: 100%;
+    height: 40px;
+    font-family: Rubik;
+    font-size: 16px;
+    line-height: 24px;
+    text-align: center;
+    color: white;
+    background-color: #2da442;
+}

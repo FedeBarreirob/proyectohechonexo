@@ -1,9 +1,9 @@
 export interface FiltroCtacteAplicada {
     cuenta: string,
-    fechaDesde: string,
-    fechaHasta: string,
-    totales: boolean,
-    paginado: boolean,
+    fechaDesde?: string,
+    fechaHasta?: string,
+    totales?: boolean,
+    paginado?: boolean,
     pagina?: number,
     cantPorPagina?: number,
     ordenado?: boolean,
@@ -13,5 +13,7 @@ export interface FiltroCtacteAplicada {
     AVencer?: boolean,
     granos?: boolean,
     agroinsumos?: boolean,
-    nutricionAnimal?: boolean
+    nutricionAnimal?: boolean,
+    moneda?: string,
+    servicios?: boolean
 }

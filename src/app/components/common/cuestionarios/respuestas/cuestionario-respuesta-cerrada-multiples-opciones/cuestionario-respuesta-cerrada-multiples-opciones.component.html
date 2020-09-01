@@ -1,0 +1,16 @@
+<mat-radio-group [(ngModel)]="opcionSeleccionada" (ngModelChange)="actualizarRespuestaOpcionSeleccionada($event)">
+
+  <div fxLayout="row" fxLayoutAlign="space-between center" *ngFor="let opcion of pregunta.opciones">
+
+    <div fxFlex="nogrow">
+      <mat-radio-button [value]="opcion">{{ opcion.opcion }} <br />
+        {{ opcion.descripcion }}</mat-radio-button>
+    </div>
+
+    <div fxFlex="grow" *ngIf="opcion.especificable">
+      <input class="input" matInput type="text" [(ngModel)]="respuestaTexto" (ngModelChange)="actualizarRespuestaText($event)">
+    </div>
+
+  </div>
+
+</mat-radio-group>

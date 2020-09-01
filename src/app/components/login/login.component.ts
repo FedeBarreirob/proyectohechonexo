@@ -3,12 +3,18 @@ import { FormGroup, FormBuilder } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { AuthenticationService } from '../../services/security/authentication.service';
 import { PerfilesService } from '../../services/perfiles/perfiles.service';
-import { MatSnackBar } from '@angular/material';
+import { MatSnackBar, MatDialog } from '@angular/material';
 import { Observable, Subject } from 'rxjs';
 import { NotificacionesService } from '../../services/notificaciones/notificaciones.service';
 import { OneSignalService } from '../../services/push/one-signal.service';
 import { DeviceDetectorService } from 'ngx-device-detector';
 import { environment } from '../../../environments/environment';
+import { MensajeBienvenidaDialogComponent } from '../tablero/mensaje-bienvenida-dialog/mensaje-bienvenida-dialog.component';
+import { PerfilBasico } from '../../interfaces/perfiles/perfil-basico';
+import { FileStorageService } from '../../services/file-storage/file-storage.service';
+import { RoleEnum } from '../../enums/role-enum.enum';
+
+declare var require: any;
 
 @Component({
 	selector: 'app-login',
@@ -17,6 +23,8 @@ import { environment } from '../../../environments/environment';
 })
 export class LoginComponent implements OnInit {
 
+	version: string = require('../../../../package.json').version;
+
 	frmLogin: FormGroup;
 	logueando: boolean = false;
 	returnUrl: string;
@@ -24,6 +32,7 @@ export class LoginComponent implements OnInit {
 	cargando$: Subject<boolean> = new Subject<boolean>();
 	esCelular: boolean;
 	inPhonegap: boolean = environment.inPhonegap;
+	falloUltimoLogin: boolean = false;
 
 	constructor(
 		private formBuilder: FormBuilder,
@@ -34,7 +43,9 @@ export class LoginComponent implements OnInit {
 		private snackBar: MatSnackBar,
 		private notificacionService: NotificacionesService,
 		private oneSignalService: OneSignalService,
-		private deviceService: DeviceDetectorService
+		private deviceService: DeviceDetectorService,
+		private dialog: MatDialog,
+		private fileStorageService: FileStorageService
 	) { }
 
 	ngOnInit() {
@@ -74,6 +85,7 @@ export class LoginComponent implements OnInit {
 		if (!this.logueando) {
 			this.logueando = true;
 			this.cargando$.next(true);
+			this.falloUltimoLogin = true;
 
 			const frm = this.frmLogin.value;
 			this.authenticationService.login(frm.username, frm.password).subscribe(
@@ -104,21 +116,40 @@ export class LoginComponent implements OnInit {
 								this.authenticationService.loginCompleto();
 								this.oneSignalService.init();
 								this.router.navigate([this.returnUrl]);
+								this.mostrarCuadroDeBienvenida();
 							}
 						});
 					} else {
 						this.cargando$.next(false);
 						this.logueando = false;
+						this.falloUltimoLogin = true;
 						this.openSnackBar((respuesta.mensaje) ? respuesta.mensaje : 'Acceso denegado', "Login");
 					}
 				},
 				error => {
 					this.cargando$.next(false);
 					this.logueando = false;
+					this.falloUltimoLogin = true;
 					this.openSnackBar(error, "Login");
 				});
 		} else {
 			this.openSnackBar("Existe un proceso de login ejecutándose.", "Login");
+		}
+	}
+
+	private mostrarCuadroDeBienvenida() {
+
+		let perfil: PerfilBasico = this.authenticationService.perfilUsuarioLogueado();
+		let perfilValidado: boolean = (perfil && (perfil.identidadValidada == true || perfil.rol && perfil.rol.id != RoleEnum.PRODUCTOR));
+		let esProductor: boolean = perfil && perfil.rol && perfil.rol.id == RoleEnum.PRODUCTOR;
+
+		if (this.fileStorageService.esDocLegajoCargado.getValue() == false && perfilValidado && esProductor) {
+			this.dialog.open(MensajeBienvenidaDialogComponent, {
+				maxWidth: '100vw',
+				width: '312px',
+				maxHeight: '100vh',
+				height: '331px'
+			});
 		}
 	}
 
@@ -129,6 +160,7 @@ export class LoginComponent implements OnInit {
 
 				if (respuesta != null && respuesta.exito == true) {
 					localStorage.setItem('currentUserPerfil', JSON.stringify(respuesta.datos));
+					this.cargarEstadoDecargaDelLegajo(respuesta.datos);
 					observer.next(true);
 				} else {
 					console.log(respuesta);
@@ -147,5 +179,25 @@ export class LoginComponent implements OnInit {
 		this.snackBar.open(message, action, {
 			duration: 2000,
 		});
+	}
+
+	/**
+	 * Notifica el estado de carga de la documentación del legajo
+	 * @param perfil 
+	 */
+	cargarEstadoDecargaDelLegajo(perfil: PerfilBasico) {
+		try {
+			if (perfil && perfil.rol.id == RoleEnum.PRODUCTOR) {
+
+				if (perfil.indicadorCargaLegajo.totalDocumentacionACompletar == perfil.indicadorCargaLegajo.cantDocumentacionCompletada) {
+					this.fileStorageService.esDocLegajoCargado.next(true);
+				} else {
+					this.fileStorageService.esDocLegajoCargado.next(false);
+				}
+
+			}
+		} catch (e) {
+			console.log(e);
+		}
 	}
 }

@@ -1,0 +1,19 @@
+<mat-card class="card">
+
+  <div fxLayout="row" fxLayoutAlign="space-between center">
+    <div fxFlex>
+      <span style="color: #999;">{{ movimiento.moneda | moneda }}</span>
+      <span style="color: red; margin-left: 3px;">
+        <span *ngIf="movimiento.moneda == 'P'">{{ movimiento.saldoPesos * (-1) | number }}</span>
+        <span *ngIf="movimiento.moneda != 'P'">{{ movimiento.saldoDolares * (-1) | number }}</span>
+      </span>
+    </div>
+  </div>
+
+  <div fxLayout="row" fxLayoutAlign="space-between center">
+    <div fxFlex style="color: #999; font-family: Rubik; font-size: 10px;">
+      {{ movimiento.comprobanteAfectado }} - {{ (esVencido) ? 'Venció' : 'Vence' }}: {{ movimiento.fechaVencimiento }}
+    </div>
+  </div>
+
+</mat-card>

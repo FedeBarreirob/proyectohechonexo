@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { FiltroCtacteAplicada } from '../../interfaces/ctacte-aplicada/filtro-ctacte-aplicada';
 import { environment } from '../../../environments/environment';
 import { Observable } from 'rxjs';
@@ -16,6 +16,8 @@ export class CtacteAplicadaService {
   private urlCuentaCorrienteAplicadaSaldoGlobal = `${environment.hostCtaCte}/CuentaAplicadaCorriente/saldoGlobal`;
   private urlCuentaCorrienteAplicadaSaldo = `${environment.hostCtaCte}/CuentaAplicadaCorriente/saldo`;
   private urlCuentaCorrienteAplicadaSaldoSegunComprobantes = `${environment.hostCtaCte}/CuentaAplicadaCorriente/saldoComprobantes`;
+  private urlCuentaCorrienteAplicadaComprobantesAgrupadosPorVencimiento = `${environment.hostCtaCte}/CuentaAplicadaCorriente/comprobantesAgrupadosPorVencimiento`;
+  private urlCuentaCorrienteAplicadaListadoFiltrado = `${environment.hostCtaCte}/CuentaAplicadaCorriente/listadoFiltrado`;
 
   constructor(private http: HttpClient) { }
 
@@ -82,5 +84,37 @@ export class CtacteAplicadaService {
     };
 
     return this.http.post<ResponseServicio>(this.urlCuentaCorrienteAplicadaSaldoSegunComprobantes, movimientosCtaCteAplicada, httpOptions);
+  }
+
+  /**
+   * Retorna lo disponble a cobrar, a cobrar vencido agrupado por fecha de vencimiento junto a sus comprobantes
+   * @param cuenta 
+   */
+  comprobantesAgrupadosPorVencimiento(cuenta: string): Observable<ResponseServicio> {
+
+    const httpOptions = {
+      headers: new HttpHeaders({
+        'Content-Type': 'application/json'
+      })
+    };
+
+    let urlConParametro = `${this.urlCuentaCorrienteAplicadaComprobantesAgrupadosPorVencimiento}/${cuenta}`;
+    return this.http.get<ResponseServicio>(urlConParametro, httpOptions);
+  }
+
+  /**
+   * Devuelve un listado de movimientos de ctacte aplicada filtrada por get
+   * @param filtro 
+   */
+  listadoCtaCteFiltrado(filtro: FiltroCtacteAplicada) {
+
+    const httpOptions = {
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      params: <any>filtro
+    };
+
+    return this.http.get<ResponseServicio>(this.urlCuentaCorrienteAplicadaListadoFiltrado, httpOptions);
   }
 }

@@ -1,0 +1,43 @@
+.card-container{
+    padding: 10px;
+    background-color: #ccc;
+    width: 60%;
+    margin-top: 100px;
+    margin-left: 350px;
+    border-radius: 5px;
+    border: solid 2px #999;
+}
+
+.titulo{
+    text-align: center;
+}
+
+form {
+    padding: 10px;
+    margin: 0 auto;
+    width: 300px;
+    font-size: 15px;
+    color: #999;
+}
+
+input, textarea {
+    border: 0;
+    outline: none;
+}
+
+.field {
+    border: solid 1px #ccc;
+    padding: 5px;
+    width: 280px;
+}
+
+.field1 {
+    border: solid 1px #ccc;
+    padding: 10px;
+    width: 500px;
+    border-radius: 4px;
+}
+
+mat-form-field {
+    width: 100%;
+}

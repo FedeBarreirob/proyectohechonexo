@@ -43,13 +43,38 @@
 		[attr.role]="(isHandset$ | async) ? 'dialog' : 'navigation'" [mode]="(isHandset$ | async) ? 'over' : 'side'"
 		[opened]="!(isHandset$ | async)">
 
+		<p class="menu-text"
+			*ngIf="authService.esAdmin || authService.esRol('SUB_ADMINISTRADOR') || authService.esRol('COMERCIAL')">
+			ADMINISTRADOR</p>
+
+		<mat-nav-list
+			*ngIf="authService.esAdmin || authService.esRol('SUB_ADMINISTRADOR') || authService.esRol('COMERCIAL')">
+
+			<div *ngFor="let link of Adminlinks">
+				<app-link-menu [link]="link" *ngIf="!(link.ocultarDesktop == true && !esCelular)"></app-link-menu>
+			</div>
+
+		</mat-nav-list>
+
 		<app-info-perfil *ngIf="esCelular"></app-info-perfil>
 
 		<p class="menu-text" *ngIf="!esCelular">MENÚ</p>
 
+		<!--card de completar documentación-->
+		<div fxLayoutAlign="center center" style="margin-top: 20px; margin-bottom: 20px;"
+			*ngIf="authService.esRol('PRODUCTOR')">
+			<app-completar-documentacion-nav></app-completar-documentacion-nav>
+		</div>
+
 		<mat-nav-list>
 
 			<div *ngFor="let link of links">
+				<app-link-menu [link]="link"
+					*ngIf="!(link.ocultarDesktop == true && !esCelular) && ((fileStorageService.esDocLegajoCargado | async) || !authService.esRol('PRODUCTOR'))">
+				</app-link-menu>
+			</div>
+
+			<div *ngFor="let link of sesionLinks">
 				<app-link-menu [link]="link" *ngIf="!(link.ocultarDesktop == true && !esCelular)"></app-link-menu>
 			</div>
 

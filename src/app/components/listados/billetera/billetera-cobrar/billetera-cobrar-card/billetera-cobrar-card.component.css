@@ -1,0 +1,52 @@
+.card-container{
+  background-color: white;
+  border-radius: 5px;
+  padding: 10px;
+}
+
+.detalle {
+    color: #666666;
+    font-family: Rubik;
+    font-size: 12px;
+    letter-spacing: 1.2px;
+    text-align: left;
+    padding-top: 5px;
+  }
+  
+  .button-info{
+    cursor: pointer;
+    color: #23B950;
+    text-align: center;
+  }
+
+  .button-bill{
+    height: 35px;
+    width: 35px;
+    border-radius: 35px;
+    background-color: #23B950;
+  }
+  
+  .monto {
+    color: #333333;
+    font-family: RubikLight;
+    font-size: 20px;
+  }
+  
+  .cuenta-item {
+    margin-bottom: 10px;
+    margin-top: 20px;
+  }
+  
+  .contenedor {
+    margin-top: -10px;
+    margin-left: 10px;
+  }
+
+  .more-items{
+    margin-top: 0px;
+  }
+
+  .items{
+    color: green;
+    text-align: right;
+  }

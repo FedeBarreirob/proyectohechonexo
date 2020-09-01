@@ -1,0 +1,42 @@
+<div *ngIf="esCelular">
+  <div fxLayout="row">
+    <h3>Total</h3>
+  </div>
+  <mat-card class="container" fxLayout="row">
+    <div fxLayout="row">
+      <p style="font-size: 20px;">$ {{total | number}}</p>
+    </div>
+  </mat-card>
+
+  <!--Spinner-->
+  <div fxLayout="row" fxLayoutAlign="center center" *ngIf="guardando == true" style="margin-top: 10px; width: 100%;">
+    <mat-spinner diameter="24"></mat-spinner>
+  </div>
+
+  <div fxLayout="row" style="margin-left: 150px; margin-top: 20px;">
+    <button [disabled]="!hayCobrosProgramados" mat-flat-button style="background-color: green; color: white;"
+      (click)="registrarSolicitudDeCobro()">Confirmar</button>
+  </div>
+</div>
+
+<div *ngIf="!esCelular" fxFlex="100%">
+  <div fxLayout="row">
+    <h3>Total</h3>
+  </div>
+  <mat-card class="container" fxLayout="row">
+    <div fxLayout="row">
+      <p style="font-size: 20px;">$ {{total | number}}</p>
+    </div>
+  </mat-card>
+
+  <!--Spinner-->
+  <div fxLayout="row" fxLayoutAlign="center center" *ngIf="guardando == true" style="margin-top: 10px; width: 100%;">
+    <mat-spinner diameter="24"></mat-spinner>
+  </div>
+
+  <div fxLayout="row" fxLayoutAlign="end end" style="margin-left: auto; margin-top: 20px;">
+    
+    <button [disabled]="!hayCobrosProgramados" mat-flat-button style="background-color: green; color: white;"
+      (click)="registrarSolicitudDeCobro()">Confirmar</button>
+  </div>
+</div>

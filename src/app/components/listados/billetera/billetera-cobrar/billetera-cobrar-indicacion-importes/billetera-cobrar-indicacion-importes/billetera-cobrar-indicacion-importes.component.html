@@ -1,0 +1,14 @@
+<app-billetera-cobrar-card-cobro *ngFor="let cobroProgramado of cobrosProgramados" [cobroProgramado]="cobroProgramado"
+  (quitar)="quitarCobro($event)" (change)="notificarCambios()">
+</app-billetera-cobrar-card-cobro>
+
+<div fxLayout="row" fxLayoutAlign="space-between center" class="items">
+  <div fxFlex>
+    <button mat-button (click)="agregarCobro()">
+      <mat-icon class="button-info">add</mat-icon>Agregar un cobro
+    </button>
+  </div>
+</div>
+
+<app-billetera-cobrar-card-total style="position: -webkit-sticky; position: sticky; bottom: 0px; padding: -20px;" [actualizarTotal$]="actualizarTotal$">
+</app-billetera-cobrar-card-total>

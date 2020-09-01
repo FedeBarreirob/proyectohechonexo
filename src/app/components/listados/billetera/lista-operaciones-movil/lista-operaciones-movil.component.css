@@ -1,0 +1,44 @@
+
+.price{
+  margin-top: 20px;
+  float: right;
+}
+
+.cobro{
+  color: #333333;
+  font-family: Rubik;
+  font-size: 14px;
+}
+
+.dinero{
+  color: #333333;
+  font-family: Rubik;
+  font-size: 16px;
+  text-align: right;
+}
+
+.enProceso{
+  background-color: white;
+  border-radius: 5px;
+  border: solid 1px #FFBC00;
+  color: #FFBC00;
+}
+
+.Aprobada{
+  background-color: #2DA442;
+  border-radius: 5px;
+  color: white;
+}
+
+.opEjecutada{
+  background-color: white;
+  border-radius: 5px;
+  border: solid 1px blue;
+  color: blue;
+}
+
+.Rechazada{
+  background-color: red;
+  border-radius: 5px;
+  color: white;
+}

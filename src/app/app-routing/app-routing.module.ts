@@ -26,6 +26,23 @@ import { InformacionDePerfilDesktopComponent } from '../components/usuarios-y-pe
 import { LoginLayoutComponent } from '../components/layouts/login-layout/login-layout.component';
 import { HomeLayoutComponent } from '../components/layouts/home-layout/home-layout.component';
 import { NotificacionDetalleUrlComponent } from '../components/notificaciones/notificacion-detalle-url/notificacion-detalle-url.component';
+import { BilleteraComponent } from '../components/listados/billetera/billetera/billetera.component';
+import { BilleteraPagarComponent } from '../components/listados/billetera/billetera-pagar/billetera-pagar.component';
+import { BilleteraCobrarComponent } from '../components/listados/billetera/billetera-cobrar/billetera-cobrar.component';
+import { BilleteraCobrarCuentaComponent } from '../components/listados/billetera/billetera-cobrar/billetera-cobrar-cuenta/billetera-cobrar-cuenta.component';
+import { GestionDeSolicitudesComponent } from '../components/listados/gestion-de-solicitudes/gestion-de-solicitudes.component';
+import { DefinirBoletosComponent } from '../components/listados/gestion-de-solicitudes/definir-boletos/definir-boletos.component';
+import { DefinicionDeBoletosComponent } from '../components/listados/gestion-de-solicitudes/definicion-de-boletos/definicion-de-boletos.component';
+import { InicioRegistroComponent } from '../components/registro-usuario/inicio-registro/inicio-registro.component';
+import { InicioRegistroDefinirCuentaComponent } from '../components/registro-usuario/inicio-registro-definir-cuenta/inicio-registro-definir-cuenta.component';
+import { InicioRegistroConfirmacionMailComponent } from '../components/registro-usuario/inicio-registro-confirmacion-mail/inicio-registro-confirmacion-mail.component';
+import { ValidarDocumentacionComponent } from '../components/validar-documentacion/validar-documentacion/validar-documentacion.component';
+import { ValidarDocumentacionStepComponent } from '../components/validar-documentacion/validar-documentacion-step/validar-documentacion-step.component';
+import { SituacionUsuarioComponent } from '../components/validar-documentacion/situacion-usuario/situacion-usuario.component';
+import { SituacionUsuarioCompletaComponent } from '../components/validar-documentacion/situacion-usuario-completa/situacion-usuario-completa.component';
+import { AperturaLegajoComponent } from '../components/listados/documentacion/apertura-legajo/apertura-legajo.component';
+import { ValidacionDeIdentidadGuard } from '../security/validacion-de-identidad.guard';
+import { ModalCambioPasswordComponent } from '../components/usuarios-y-perfiles/modal-cambio-password/modal-cambio-password.component';
 
 const routes: Routes = [
 	{
@@ -41,9 +58,63 @@ const routes: Routes = [
 		}]
 	},
 	{
+		path: 'inicio-registro', component: LoginLayoutComponent,
+		children: [{
+			path: '', component: InicioRegistroComponent
+		}]
+	},
+	{
+		path: 'definir-cuenta', component: LoginLayoutComponent,
+		children: [{
+			path: '', component: InicioRegistroDefinirCuentaComponent
+		}]
+	},
+	{
+		path: 'confirmacion-mail/:mail', component: LoginLayoutComponent,
+		children: [{
+			path: '', component: InicioRegistroConfirmacionMailComponent
+		}]
+	},
+	{
+		path: 'validar-documentacion', component: LoginLayoutComponent,
+		children: [{
+			path: '', component: ValidarDocumentacionComponent
+		}]
+	},
+	{
+		path: 'validacion-step', component: LoginLayoutComponent,
+		children: [{
+			path: '', component: ValidarDocumentacionStepComponent
+		}]
+	},
+	/*{
+		path: 'situacion-usuario', component: LoginLayoutComponent,
+		children: [{
+			path: '', component: SituacionUsuarioComponent
+		}]
+	},*/
+	{
+		path: 'situacion-completada', component: LoginLayoutComponent,
+		children: [{
+			path: '', component: SituacionUsuarioCompletaComponent
+		}]
+	},
+	{
+		path: 'apertura-legajo', component: LoginLayoutComponent,
+		children: [{
+			path: '', component: AperturaLegajoComponent
+		}]
+	},
+	{
 		path: 'restablecer-password/:token', component: LoginLayoutComponent,
 		children: [{
 			path: '', component: RestablecimientoPasswordComponent
+		}]
+	},
+	{
+		path: 'restablecer-password-send-email', component: LoginLayoutComponent,
+		children: [{
+			path: '', component: ModalCambioPasswordComponent
 		}]
 	},
 	{
@@ -52,7 +123,7 @@ const routes: Routes = [
 			{
 				path: 'dashboard',
 				component: DashboardComponent,
-				canActivate: [AuthGuardGuard],
+				canActivate: [AuthGuardGuard, ValidacionDeIdentidadGuard],
 				data: {
 					rolAdmin: false
 				}
@@ -60,15 +131,55 @@ const routes: Routes = [
 			{
 				path: 'ctacte',
 				component: CuentaCorrienteComponent,
-				canActivate: [AuthGuardGuard],
+				canActivate: [AuthGuardGuard, ValidacionDeIdentidadGuard],
 				data: {
 					rolAdmin: false
 				}
 			},
 			{
+				path: 'billetera',
+				component: BilleteraComponent,
+				canActivate: [AuthGuardGuard, ValidacionDeIdentidadGuard],
+				data: {
+					rolAdmin: false
+				}
+			},
+			{
+				path: 'pagar',
+				component: BilleteraPagarComponent,
+				canActivate: [AuthGuardGuard, ValidacionDeIdentidadGuard],
+				data: {
+					rolAdmin: false
+				}
+			},
+			{
+				path: 'pagar/:solicitudId',
+				component: BilleteraPagarComponent,
+				canActivate: [AuthGuardGuard, ValidacionDeIdentidadGuard],
+				data: {
+					rolAdmin: false
+				}
+			},
+			{
+				path: 'cobrar',
+				component: BilleteraCobrarComponent,
+				canActivate: [AuthGuardGuard, ValidacionDeIdentidadGuard],
+				data: {
+					rolAdmin: false
+				}
+			},
+			/*{
+				path: 'nuevacuenta',
+				component: BilleteraCobrarCuentaComponent,
+				canActivate: [AuthGuardGuard],
+				data: {
+					rolAdmin: false
+				}
+			},*/
+			{
 				path: 'entregas',
 				component: EntregasComponent,
-				canActivate: [AuthGuardGuard],
+				canActivate: [AuthGuardGuard, ValidacionDeIdentidadGuard],
 				data: {
 					rolAdmin: false
 				}
@@ -76,7 +187,7 @@ const routes: Routes = [
 			{
 				path: 'notificacion/:id',
 				component: NotificacionDetalleUrlComponent,
-				canActivate: [AuthGuardGuard],
+				canActivate: [AuthGuardGuard, ValidacionDeIdentidadGuard],
 				data: {
 					rolAdmin: false
 				}
@@ -84,7 +195,7 @@ const routes: Routes = [
 			{
 				path: 'ventas',
 				component: VentasComponent,
-				canActivate: [AuthGuardGuard],
+				canActivate: [AuthGuardGuard, ValidacionDeIdentidadGuard],
 				data: {
 					rolAdmin: false
 				}
@@ -92,7 +203,7 @@ const routes: Routes = [
 			{
 				path: 'mercaderia-pendiente-entregar',
 				component: MercPendEntregarComponent,
-				canActivate: [AuthGuardGuard],
+				canActivate: [AuthGuardGuard, ValidacionDeIdentidadGuard],
 				data: {
 					rolAdmin: false
 				}
@@ -100,7 +211,7 @@ const routes: Routes = [
 			{
 				path: 'comprobantes-pendientes-facturar',
 				component: ComprobantesPendFacturarComponent,
-				canActivate: [AuthGuardGuard],
+				canActivate: [AuthGuardGuard, ValidacionDeIdentidadGuard],
 				data: {
 					rolAdmin: false
 				}
@@ -108,7 +219,7 @@ const routes: Routes = [
 			{
 				path: 'otros-movimientos',
 				component: OtrosMovimientosComponent,
-				canActivate: [AuthGuardGuard],
+				canActivate: [AuthGuardGuard, ValidacionDeIdentidadGuard],
 				data: {
 					rolAdmin: false
 				}
@@ -116,7 +227,31 @@ const routes: Routes = [
 			{
 				path: 'administrador-de-cuentas',
 				component: PerfilesListadoComponent,
-				canActivate: [AuthGuardGuard],
+				canActivate: [AuthGuardGuard, ValidacionDeIdentidadGuard],
+				data: {
+					rolAdmin: false
+				}
+			},
+			{
+				path: 'gestion-de-solicitudes',
+				component: GestionDeSolicitudesComponent,
+				canActivate: [AuthGuardGuard, ValidacionDeIdentidadGuard],
+				data: {
+					rolAdmin: false
+				}
+			},
+			{
+				path: 'definir-boletos',
+				component: DefinirBoletosComponent,
+				canActivate: [AuthGuardGuard, ValidacionDeIdentidadGuard],
+				data: {
+					rolAdmin: false
+				}
+			},
+			{
+				path: 'definicion-de-boletos',
+				component: DefinicionDeBoletosComponent,
+				canActivate: [AuthGuardGuard, ValidacionDeIdentidadGuard],
 				data: {
 					rolAdmin: false
 				}
@@ -124,7 +259,7 @@ const routes: Routes = [
 			{
 				path: 'informacion-de-perfil',
 				component: InformacionDePerfilComponent,
-				canActivate: [AuthGuardGuard],
+				canActivate: [AuthGuardGuard, ValidacionDeIdentidadGuard],
 				data: {
 					rolAdmin: false
 				}
@@ -132,7 +267,7 @@ const routes: Routes = [
 			{
 				path: 'archivo-de-comprobantes',
 				component: ComprobantesComponent,
-				canActivate: [AuthGuardGuard],
+				canActivate: [AuthGuardGuard, ValidacionDeIdentidadGuard],
 				data: {
 					rolAdmin: false
 				}
@@ -140,7 +275,7 @@ const routes: Routes = [
 			{
 				path: 'buzon',
 				component: BuzonComponent,
-				canActivate: [AuthGuardGuard],
+				canActivate: [AuthGuardGuard, ValidacionDeIdentidadGuard],
 				data: {
 					rolAdmin: false
 				}
@@ -148,7 +283,7 @@ const routes: Routes = [
 			{
 				path: 'contratos',
 				component: ContratosComponent,
-				canActivate: [AuthGuardGuard],
+				canActivate: [AuthGuardGuard, ValidacionDeIdentidadGuard],
 				data: {
 					rolAdmin: false
 				}
@@ -156,7 +291,7 @@ const routes: Routes = [
 			{
 				path: 'reportes',
 				component: ReportesComponent,
-				canActivate: [AuthGuardGuard],
+				canActivate: [AuthGuardGuard, ValidacionDeIdentidadGuard],
 				data: {
 					rolAdmin: false
 				}
@@ -164,7 +299,7 @@ const routes: Routes = [
 			{
 				path: 'informacion-de-perfil-desktop',
 				component: InformacionDePerfilDesktopComponent,
-				canActivate: [AuthGuardGuard],
+				canActivate: [AuthGuardGuard, ValidacionDeIdentidadGuard],
 				data: {
 					rolAdmin: false
 				}

@@ -1,0 +1,32 @@
+<div class="container">
+  <div class="header">
+    <a fxFlex="25%" fxLayoutAlign="center center">
+      <button mat-button class="button" (click)="salir()">
+        <mat-icon style="color: #666666">arrow_back</mat-icon>
+      </button>
+    </a>
+    <div fxFlex="75%" class="title-header">Documentación</div>
+  </div>
+
+  <div class="body" fxLayout="column">
+    <div class="title">Apertura de legajo</div>
+    <div class="text">Con esta documentación respaldaremos tu cuenta y aumentaremos su seguridad.</div>
+
+    <!--Spinner-->
+    <div fxLayout="row" fxLayoutAlign="center center" *ngIf="cargando" style="margin-top: 10px">
+      <mat-spinner diameter="24"></mat-spinner>
+    </div>
+
+    <div>
+      <app-progress-upload-files [documentacion$]="documentacion$"></app-progress-upload-files>
+    </div>
+
+    <app-apertura-legajo-upload-documento *ngFor="let documento of documentacion" [documento]="documento"
+      (cargaFinalizada)="notificarProgresoCargaTotal()">
+    </app-apertura-legajo-upload-documento>
+
+    <div fxLayoutAlign="center center">
+      <button mat-button class="button-save" (click)="registrarDocumentacion()">Guardar</button>
+    </div>
+  </div>
+</div>

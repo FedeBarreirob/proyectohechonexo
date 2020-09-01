@@ -1,0 +1,45 @@
+<!--Spinner-->
+<div fxLayout="row" fxLayoutAlign="center center" *ngIf="cargando == true" style="width: 100%;">
+  <mat-spinner diameter="24"></mat-spinner>
+</div>
+
+<button mat-button [matMenuTriggerFor]="cuentasBanco">
+
+  <span *ngIf="cuentaSeleccionada">
+    {{ cuentaSeleccionada.referencia}} ({{ cuentaSeleccionada.banco.descripcionCorta}})
+  </span>
+
+  <span *ngIf="!cuentaSeleccionada">Seleccione una cuenta</span>
+
+  <mat-icon>expand_more</mat-icon>
+</button>
+<mat-menu #cuentasBanco="matMenu" [overlapTrigger]="false">
+
+  <button mat-menu-item style="white-space: normal" *ngFor="let unaCuenta of cuentasBancarias"
+    (click)="seleccionarCuenta(unaCuenta)"
+    [ngClass]="{'activo': cuentaSeleccionada === unaCuenta, 'inactivo': cuentaSeleccionada !== unaCuenta }">
+
+    <div fxLayout="column" fxLayoutAlign="center start">
+      <div fxFlex>
+        {{ unaCuenta.referencia }}
+      </div>
+
+      <div fxFlex>
+        <div fxLayout="row" fxLayoutAlign="space-between center" style="width: 100%;" fxLayoutGap="5px">
+          <div fxFlex="grow">
+            {{ unaCuenta.banco.descripcion }}
+          </div>
+          <div fxFlex="nogrow" *ngIf="unaCuenta.estado == cuentaBancariaEstado.PENDIENTE">
+            <mat-chip>Pendiente</mat-chip>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+  </button>
+
+  <button mat-menu-item (click)="agregarCuenta()">
+    <mat-icon>add</mat-icon>Agregar cuenta
+  </button>
+</mat-menu>

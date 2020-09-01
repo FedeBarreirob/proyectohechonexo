@@ -1,0 +1,58 @@
+/* encabezado */
+
+.encabezado-filtro {
+    padding-top: 10px;
+}
+ 
+.texto-filtrar {
+    margin-left: 355px;
+    margin-bottom: 20px;
+    width: 127px;
+    color: #333333;
+    font-family: Rubik;
+    font-size: 20px;
+}
+
+.texto-filtrar-mobile{
+    margin-bottom: 20px;
+    color: #333333;
+    font-family: Rubik;
+    font-size: 20px;
+}
+ 
+.boton-close {
+    margin-top: -35px;
+}
+
+.card-mobile{
+    background-color: #ECECEC;
+    border-radius: 4px;
+}
+
+.card-desktop{
+    background-color: #ECECEC;
+    border-radius: 4px;
+    height: 177px;
+    width: 570px;
+    margin-left: 355px;
+    margin-right: 355px;
+}
+
+.card-buttons{
+    margin-left: 355px;
+    margin-right: 355px;
+}
+
+.button-realizar{
+    width: 170px;
+    border-radius: 4px;
+    background-color: #2DA442;
+    color: white;
+}
+
+.button-volver{
+    width: 170px;
+    border-radius: 4px;
+    color: #2DA442;
+    background-color: white;
+}

@@ -1,0 +1,11 @@
+<button mat-icon-button (click)="fileInput.click()" *ngIf="!cargando" class="button-upload">
+  <img src="assets/varios/upload.png"> Subir
+</button>
+
+<button mat-icon-button (click)="cancelar()" *ngIf="cargando">
+  <mat-icon>clear</mat-icon>
+</button>
+
+<form [formGroup]="form">
+  <input #fileInput type='file' (change)="onSelectArchivo($event)" name="documento" style="display:none;" />
+</form>

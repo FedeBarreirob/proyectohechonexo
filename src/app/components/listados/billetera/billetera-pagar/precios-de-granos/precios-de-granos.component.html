@@ -1,0 +1,38 @@
+<div fxLayout="row" fxLayoutAlign="center" class="encabezado-filtro">
+  <div fxFlex="80%" class="texto-filtrar">
+    Precio de los granos
+  </div>
+
+  <div fxFlex="20%">
+    <button mat-icon-button class="boton-close" (click)="salir()">
+      <mat-icon>close</mat-icon>
+    </button>
+  </div>
+</div>
+<mat-divider></mat-divider>
+
+<!--Spinner-->
+<div fxLayout="row" fxLayoutAlign="center center" *ngIf="cargando == true" style="margin-top: 10px;">
+  <mat-spinner diameter="24"></mat-spinner>
+</div>
+
+<p style="font-size: 15px; text-align: left; font-family: Rubik;">Las cantidades se multiplican automáticamente al
+  precio del grano del día {{ fecha }}</p>
+
+<div fxLayout="column" fxLayoutAlign="space-around start" *ngFor="let precio of precios" style="margin-bottom: 15px;">
+
+  <div fxFlex class="titulo-principal">{{unidadMedida | kilosTextoA}} de {{ precio.especieDescripcion }}</div>
+
+  <div fxFlex>
+    <div fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="10px">
+      <div fxFlex="nogrow">
+        <img class="icono" src="{{precio.especieCodigo | imagenEspecie}}" />
+      </div>
+
+      <div fxFlex>
+        $ {{ precio.precio | precioTNA: unidadMedida | number: '.0-2' }}
+      </div>
+    </div>
+  </div>
+
+</div>

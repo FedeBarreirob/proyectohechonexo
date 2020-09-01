@@ -1,0 +1,11 @@
+.card-mobile{
+    height: 40px;
+    border-radius: 4px;
+    background-color: #ECECEC;
+}
+
+.card-desktop{
+    height: 56px;
+    border-radius: 4px;
+    background-color: #ECECEC;
+}

@@ -1,0 +1,27 @@
+<div *ngIf="esCelular">
+  <div class="container">
+    
+    <div class="header">
+      <div fxLayoutAlign="start center" fxFlex="50%"><img class="logo" src="../../../../assets/varios/color.png"></div>
+      
+    </div>
+    <mat-divider style="margin-top: 16px; margin-bottom: 20px; width: 112.5%;margin-left: -20px;"></mat-divider>
+    <div class="body">
+      <div fxLayout="column">
+        <div class="contenedor-imagen">
+          <img class="imagen-mail" src="../../../../assets/varios/validar.png">
+        </div>
+        <div class="title">
+          Necesitamos validar tu identidad
+        </div>
+        <div class="subtitle">
+          Para proteger tu cuenta vamos a pedirte un par de fotos por única vez. Recordá tener tu DNI a la mano.
+        </div>
+      </div>
+      <div routerLink="/validacion-step" fxLayoutAlign="start center">
+        <button mat-button class="button-start">Empezar</button>
+      </div>
+    </div>
+
+  </div>
+</div>

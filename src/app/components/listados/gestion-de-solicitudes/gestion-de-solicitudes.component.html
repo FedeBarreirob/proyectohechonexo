@@ -1,0 +1,22 @@
+<mat-sidenav-container [ngClass]="{'contenedor-solicitudes': esCelular, 'contenedor-desktop': !esCelular }">
+  <mat-sidenav #menuSolicitudes position="end" [ngClass]="{'sidenav-filtro': esCelular, 'sidenav-filtro-desktop': !esCelular }">
+    <app-inicio-filtro (botonCerrar)="menuSolicitudes.toggle()" [observerFiltro$]="observerFiltro$">
+    </app-inicio-filtro>
+  </mat-sidenav>
+
+  <section>
+    <div class="fondo-gris" [ngClass]="{'fondo-gris': esCelular, 'fondo-gris-desktop': !esCelular}">
+
+      <app-tool-bar-general *ngIf="esCelular" [titulo]="'Gestión de solicitudes'" [disabled]="false">
+      </app-tool-bar-general>
+
+      <div fxLayout="row" fxLayoutAlign="space-between center">
+        <h3 [ngClass]="{'titulo-card': esCelular, 'titulo-card-desktop': !esCelular }">Solicitudes de pago</h3>
+        <button mat-button (click)="mostrarOcultarFiltros()"><img style="width: 20px; height: 20px;" src="../../../../assets/toolbar/embudo.png"></button>
+      </div>
+
+      <app-gestion-de-solicitudes-listado [observerFiltro$]="observerFiltro$"></app-gestion-de-solicitudes-listado>
+    </div>
+  </section>
+
+</mat-sidenav-container>

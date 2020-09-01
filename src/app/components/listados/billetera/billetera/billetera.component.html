@@ -1,0 +1,104 @@
+<mat-sidenav-container [ngClass]="{'contenedor-notificaciones': esCelular, 'contenedor-desktop': !esCelular }">
+  <mat-sidenav #menuNotificaciones position="end" class="sidenav-notificaciones" *ngIf="esCelular">
+
+    <app-panel-notificaciones (botonCerrar)="menuNotificaciones.toggle()"></app-panel-notificaciones>
+
+  </mat-sidenav>
+  <section>
+
+    <div class="fondo-verde" [ngClass]="{'fondo-verde': esCelular, 'fondo-verde-desktop': !esCelular}">
+
+      <!-- TIPO CAMBIO Y NAV MODO MOVILE -->
+      <app-tool-bar-general *ngIf="esCelular" titulo="Billetera" [disabled]="false" colorIndicador="white"
+        (botonPersonalizadoEjecutado)="mostrarOcultarNotificaciones()"
+        [urlImagenAccionPersonalizada]="hayNotificacionesNuevas ? 'assets/toolbar/bell-white-hot.svg' : 'assets/toolbar/bell-white.svg'">
+      </app-tool-bar-general>
+
+      <app-billetera-saldo-movil *ngIf="esCelular"></app-billetera-saldo-movil>
+
+      <!--TIPO CAMBIO MODO DESKTOP-->
+      <div class="contenedor-fecha-tipocambio-desktop" fxLayout="row" fxLayoutAlign="space-between center"
+        *ngIf="!esCelular">
+        <div fxFlex="50%" class="contenedor-saludo-desktop">
+          Esta es tu nueva <b>billetera digital Gaviglio</b>
+        </div>
+        <div fxFlex="50%">
+          <div fxLayout="column" fxLayoutAlign="space-between end" class="tc-y-fecha-desktop-container">
+            <div fxFlex="100%" class="contenedor-tipo-cambio">
+              <img src="assets/varios/tc.png" class="img-tc" />
+              <span
+                *ngIf="saldoGlobal != null && seObtuvoSaldoExito == true && saldoGlobal.esTipoCambioDeHoy == true">TC
+                ${{ saldoGlobal.tipoDeCambio | number: '.2' }}</span>
+              <span
+                *ngIf="saldoGlobal != null && seObtuvoSaldoExito == true && saldoGlobal.esTipoCambioDeHoy == false">TC
+                ${{ saldoGlobal.tipoDeCambio | number: '.2' }} <span class="fecha-tc">al
+                  {{saldoGlobal.fechaTipoCambio}}</span></span>
+              <span *ngIf="saldoGlobal == null || seObtuvoSaldoExito == false">TC no disp.</span>
+            </div>
+            <div fxFlex="100%">
+              <app-fecha-hora></app-fecha-hora>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+    <div [ngClass]="{'fondo-blanco': esCelular, 'fondo-blanco-desktop': !esCelular}">
+
+      <!-- TABLA DE COBROS WEB -->
+
+      <div *ngIf="!esCelular">
+        <table width="100%" style="margin-top: -120px;">
+          <tr>
+            <td style="width: 420px; height: 339px;">
+              <app-billetera-acobrar-desktop *ngIf="cargando == false"></app-billetera-acobrar-desktop>
+            </td>
+            <td style="width: 420px; height: 339px;">
+              <app-billetera-apagar-desktop *ngIf="cargando == false"></app-billetera-apagar-desktop>
+            </td>
+          </tr>
+        </table>
+      </div>
+
+      <!--CARD COMPLETAR REGISTRO PARA USUARIOS DE LEGAJO-->
+      <div *ngIf="esCelular">
+        <app-completar-documentacion-card></app-completar-documentacion-card>
+      </div>
+
+      <!-- CONTENEDOR DE PAGAR Y COBRAR -->
+      <div *ngIf="esCelular">
+        <div class="pagar-cobrar">
+          <app-pagar-cobrar-container></app-pagar-cobrar-container>
+        </div>
+      </div>
+
+      <div class="pagar-cobrar-desktop" *ngIf="!esCelular">
+        <app-pagar-cobrar-container-desktop style="margin-left: 150px; margin-right: 150px;"></app-pagar-cobrar-container-desktop>
+      </div>
+
+      <!-- LISTA DE OPERACIONES -->
+      <div class="op-recientes-desktop" *ngIf="!esCelular" style="margin-left: 150px; margin-right: 150px;">
+        <app-tabla-operaciones-recientes></app-tabla-operaciones-recientes>
+      </div>
+
+      <div class="op-recientes" *ngIf="esCelular">
+        <app-tabla-operaciones-recientes></app-tabla-operaciones-recientes>
+      </div>
+
+      <div style="padding-right: 10px; padding-left: 10px;" *ngIf="esCelular">
+        <app-lista-operaciones-movil></app-lista-operaciones-movil>
+      </div>
+
+      <div style="margin-top: 30px; margin-left: 140px; margin-right: 140px;" *ngIf="!esCelular">
+        <!--Spinner-->
+        <div fxLayout="row" fxLayoutAlign="center center" *ngIf="cargando == true" style="margin-top: 10px">
+          <mat-spinner diameter="24"></mat-spinner>
+        </div>
+        <app-lista-operaciones-movil></app-lista-operaciones-movil>
+      </div>
+
+    </div>
+
+  </section>
+</mat-sidenav-container>

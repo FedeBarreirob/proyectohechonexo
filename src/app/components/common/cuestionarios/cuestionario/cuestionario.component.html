@@ -1,0 +1,11 @@
+<app-cuestionario-pregunta-con-respuesta *ngFor="let pregunta of formulario?.preguntas" [pregunta]="pregunta">
+</app-cuestionario-pregunta-con-respuesta>
+
+<!--Spinner-->
+<div fxLayout="row" fxLayoutAlign="center center" *ngIf="guardando" style="margin-top: 10px">
+    <mat-spinner diameter="24"></mat-spinner>
+</div>
+
+<div fxLayoutAlign="center center">
+    <button mat-button class="button-save" (click)="registrar()" [disabled]="guardando">Guardar</button>
+</div>

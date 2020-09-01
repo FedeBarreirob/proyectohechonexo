@@ -1,0 +1,72 @@
+<div fxLayout="row" fxLayoutAlign="center" class="encabezado-filtro">
+  <div fxFlex="80%" class="texto-filtrar">
+    FILTRAR
+  </div>
+
+  <div fxFlex="20%">
+    <button mat-icon-button class="boton-close" (click)="cerrar()">
+      <mat-icon>close</mat-icon>
+    </button>
+  </div>
+</div>
+
+<!--Productos-->
+<div fxLayout="row" fxLayoutAlign="space-around center">
+  <div fxFlex="100%" class="titulo-filtro">
+    Producto
+  </div>
+</div>
+
+<mat-button-toggle-group class="grupo-botones-rubro" [(ngModel)]="rubro">
+
+  <div *ngFor="let rubro of (rubros ? rubros : [])" class="boton-rubro">
+    <mat-button-toggle value="{{rubro.codigo}}">
+      <img src="{{rubro.imagen}}" />
+      <div class="texto-rubro">{{rubro.texto}}</div>
+    </mat-button-toggle>
+  </div>
+
+</mat-button-toggle-group>
+
+<mat-divider></mat-divider>
+
+<!--Monedas-->
+<div fxLayout="row" fxLayoutAlign="space-around center">
+  <div fxFlex="100%" class="titulo-filtro" style="padding-top: 20px;">
+    Moneda
+  </div>
+</div>
+
+<div class="button" style="padding-top: 20px; margin-bottom: 10px;">
+  <mat-radio-group fxLayout="column" style="padding-left: 20px;" [(ngModel)]="monedaSeleccionada">
+    <mat-radio-button style="margin-top: 10px;" *ngFor="let moneda of monedasOptions" [value]="moneda.value">
+      {{ moneda.descripcion }}</mat-radio-button>
+  </mat-radio-group>
+</div>
+
+<mat-divider></mat-divider>
+
+<!--Vencimientos-->
+<div fxLayout="row" fxLayoutAlign="space-around center">
+  <div fxFlex="100%" class="titulo-filtro" style="padding-top: 20px;">
+    Vencimiento
+  </div>
+</div>
+
+<div class="button" style="padding-top: 20px; margin-bottom: 10px;">
+  <mat-radio-group fxLayout="column" style="padding-left: 20px;" [(ngModel)]="vencimientoSeleccionado">
+    <mat-radio-button style="margin-top: 10px;" *ngFor="let vencimiento of vencimientoOptions"
+      [value]="vencimiento.value">{{ vencimiento.descripcion }}</mat-radio-button>
+  </mat-radio-group>
+</div>
+
+<!--Ejecutar filtro-->
+<div fxLayout="row" fxLayoutAlign="space-between center" class="contenedor-botones">
+  <div fxFlex="50%">
+    <button mat-button class="boton-limpiar" (click)="limpiar()">Limpiar</button>
+  </div>
+
+  <div fxFlex="50%">
+    <button mat-button class="boton-aplicar" (click)="aplicar()">Aplicar</button>
+  </div>
+</div>

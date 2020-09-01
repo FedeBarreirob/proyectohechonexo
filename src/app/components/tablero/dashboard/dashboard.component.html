@@ -7,38 +7,49 @@
 	<section>
 
 		<div class="fondo-verde" [ngClass]="{'fondo-verde': esCelular, 'fondo-verde-desktop': !esCelular}">
-			<app-tool-bar-general *ngIf="esCelular" [titulo]="'Inicio'" [disabled]="false"
-				colorIndicador="white" (botonPersonalizadoEjecutado)="mostrarOcultarNotificaciones()"
-				[urlImagenAccionPersonalizada]="hayNotificacionesNuevas ? 'assets/toolbar/bell-white-hot.svg' : 'assets/toolbar/bell-white.svg'"></app-tool-bar-general>
+			<app-tool-bar-general *ngIf="esCelular" [titulo]="'Inicio'" [disabled]="false" colorIndicador="white"
+				(botonPersonalizadoEjecutado)="mostrarOcultarNotificaciones()"
+				[urlImagenAccionPersonalizada]="hayNotificacionesNuevas ? 'assets/toolbar/bell-white-hot.svg' : 'assets/toolbar/bell-white.svg'">
+			</app-tool-bar-general>
 
 			<app-saldo-cta-cte-aplicada-global (cargandoChange)="esCargandoCtaCte($event)">
 			</app-saldo-cta-cte-aplicada-global>
 		</div>
 
 		<div [ngClass]="{'fondo-blanco': esCelular, 'fondo-blanco-desktop': !esCelular}">
-			<app-contrato-indicador-entregas-yventas (cargandoChange)="esCargandoIndicadorContratos($event)">
-			</app-contrato-indicador-entregas-yventas>
 
 			<div *ngIf="esCelular">
-				<app-contrato-indicador-entregas-recientes
-					(cargandoChange)="esCargandoIndicadorEntregasRecientes($event)">
-				</app-contrato-indicador-entregas-recientes>
-				<app-contrato-indicador-ventas-recientes (cargandoChange)="esCargandoIndicadorVentasRecientes($event)">
-				</app-contrato-indicador-ventas-recientes>
+				<app-completar-documentacion-card></app-completar-documentacion-card>
 			</div>
 
-			<div *ngIf="!esCelular" fxLayout="row" fxLayoutAlign="space-between start" style="padding: 10px;">
-				<div fxFlex="50%">
+			<span *ngIf="(fileStorageService.esDocLegajoCargado | async) || !authenticationService.esRol('PRODUCTOR')">
+
+				<app-contrato-indicador-entregas-yventas (cargandoChange)="esCargandoIndicadorContratos($event)">
+				</app-contrato-indicador-entregas-yventas>
+
+				<div *ngIf="esCelular">
 					<app-contrato-indicador-entregas-recientes
 						(cargandoChange)="esCargandoIndicadorEntregasRecientes($event)">
 					</app-contrato-indicador-entregas-recientes>
-				</div>
-				<div fxFlex="50%">
 					<app-contrato-indicador-ventas-recientes
 						(cargandoChange)="esCargandoIndicadorVentasRecientes($event)">
 					</app-contrato-indicador-ventas-recientes>
 				</div>
-			</div>
+
+				<div *ngIf="!esCelular" fxLayout="row" fxLayoutAlign="space-between start" style="padding: 10px;">
+					<div fxFlex="50%">
+						<app-contrato-indicador-entregas-recientes
+							(cargandoChange)="esCargandoIndicadorEntregasRecientes($event)">
+						</app-contrato-indicador-entregas-recientes>
+					</div>
+					<div fxFlex="50%">
+						<app-contrato-indicador-ventas-recientes
+							(cargandoChange)="esCargandoIndicadorVentasRecientes($event)">
+						</app-contrato-indicador-ventas-recientes>
+					</div>
+				</div>
+
+			</span>
 
 		</div>
 

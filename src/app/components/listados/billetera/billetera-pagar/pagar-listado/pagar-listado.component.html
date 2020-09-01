@@ -1,0 +1,8 @@
+<!--Spinner-->
+<div fxLayout="row" fxLayoutAlign="center center" *ngIf="cargando == true" style="margin-top: 10px;">
+  <mat-spinner diameter="24"></mat-spinner>
+</div>
+
+<app-pagar-listado-concepto-apagar *ngFor="let concepto of listado" [concepto]="concepto.concepto"
+  [esConceptoSeleccionado]="concepto.esConceptoSeleccionado" (seleccion)="seleccionarConcepto($event)">
+</app-pagar-listado-concepto-apagar>

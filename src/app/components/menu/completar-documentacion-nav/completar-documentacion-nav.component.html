@@ -1,0 +1,12 @@
+<div class="container" fxLayoutAlign="center center" *ngIf="documentosFaltantes > 0">
+  <div class="content" fxLayout="column" fxLayoutAlign="center center">
+
+    <div class="title">Tienes {{ indicador.porcentajeDeCarga | number }}% de documentación subida</div>
+
+    <p class="text">Solo te queda subir {{documentosFaltantes}} documentos para operar tu cuenta</p>
+
+    <div fxLayoutAlign="start center">
+      <button mat-button (click)="abrirUploader()" class="button-complete">Completar ahora</button>
+    </div>
+  </div>
+</div>

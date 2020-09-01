@@ -1,0 +1,73 @@
+<div *ngIf="esCelular">
+  <div class="container">
+
+    <div class="header">
+      <div fxLayoutAlign="start center" fxFlex="50%"><img class="logo" src="assets/varios/color.png"></div>
+      <div fxLayoutAlign="end center" fxFlex="50%" fxLayout="row">
+        <button routerLink="/login" fxLayoutAlign="center center" class="button-ingreso">
+          <img class="icon-user" src="assets/varios/user.png">
+          Ingresar
+        </button>
+      </div>
+    </div>
+    <mat-divider style="margin-top: 16px; margin-bottom: 20px; width: 112.5%;margin-left: -20px;"></mat-divider>
+    <div class="body">
+      <div fxLayout="column">
+        <div routerLink="/login" fxLayoutAlign="start center">
+          <button mat-button class="button-arrow">
+            <mat-icon style="color: #2da442;">arrow_back</mat-icon>
+          </button>
+        </div>
+        <div class="contenedor-imagen">
+          <img class="imagen-mail" src="assets/varios/ilus_1.png">
+        </div>
+        <div class="title">
+          Te hemos enviado un enlace al correo {{mail}}
+        </div>
+        <div class="subtitle">
+          Ingresá de mail y hace clic en el enlace que te enviamos para continuar el registro. No olvides revisar en la
+          casilla de SPAM.
+        </div>
+      </div>
+    </div>
+
+
+
+  </div>
+</div>
+
+<div *ngIf="!esCelular">
+  <div class="container-desktop">
+    <div fxLayout="row" fxLayoutAlign="center center">
+      <div fxFlex.xs="30%">
+        <img src="assets/logo.png" mat-card-image class="logo-desktop" alt="Gaviglio" />
+      </div>
+    </div>
+  </div>
+
+  <div fxLayout="row" fxLayoutAlign="center">
+    <div fxFlex="nogrow">
+      <mat-card class="card-base-desktop">
+        <mat-card-content style="margin-bottom: 20px;">
+          <div fxLayout="column">
+            <div routerLink="/definir-cuenta" fxLayoutAlign="start center">
+              <button mat-button class="button-arrow">
+                <mat-icon style="color: #2da442;">arrow_back</mat-icon>
+              </button>
+            </div>
+            <div class="contenedor-imagen-desktop">
+              <img class="imagen-mail-desktop" src="assets/varios/ilus_1.png">
+            </div>
+            <div class="title">
+              Te hemos enviado un enlace al correo [mail@mail.com]
+            </div>
+            <div class="subtitle">
+              Ingresá de mail y hace clic en el enlace que te enviamos para continuar el registro. No olvides revisar en
+              la casilla de SPAM.
+            </div>
+          </div>
+        </mat-card-content>
+      </mat-card>
+    </div>
+  </div>
+</div>

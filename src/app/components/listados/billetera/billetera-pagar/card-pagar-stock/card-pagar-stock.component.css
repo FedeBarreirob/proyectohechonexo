@@ -1,0 +1,15 @@
+.card{
+    background-color: white;
+    border-radius: 4px;
+    border: solid 1px #999;
+    padding: 5px;
+    padding-left: 10px;
+}
+
+
+.link-ver-todas {
+    color: #23B950;
+    font-family: Rubik;
+    font-size: 16px;
+    text-align: right;
+}

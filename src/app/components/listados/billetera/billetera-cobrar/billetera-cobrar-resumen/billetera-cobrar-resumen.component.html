@@ -1,0 +1,39 @@
+<div *ngIf="esCelular">
+  <div fxLayout="row">
+    <h3>Importe(s) a cobrar</h3>
+  </div>
+
+  <mat-card class="container" fxLayout="row" *ngFor="let item of cobrosProgramados">
+
+    <div fxLayout="row" style="padding: 10px; margin-top: -20px; margin-bottom: -10px; margin-right: -10px;">
+      <div fxLayout="column" fxFlex="90%">
+        <p style="font-size: 20px;">$ {{item.monto | number}}</p>
+        <p style="margin-top: -10px; font-size: 12px;">Fecha de cobro: {{item.fechaCobroProgramado | date: 'dd/MM/yyyy'}} - Medio de
+          cobro: {{medioCobro(item)}} - {{infoAdicionalMedioCobroSeleccionado(item)}} </p>
+      </div>
+    </div>
+    <a fxLayoutAlign="center center">
+      <button mat-stroked-button style="color: green; border: solid 1px green;" matStepperPrevious>Modificar</button>
+    </a>
+  </mat-card>
+
+</div>
+
+<div *ngIf="!esCelular" fxFlex="100%">
+  <div fxLayout="row">
+    <h3>Importe(s) a cobrar</h3>
+  </div>
+  <mat-card class="container" fxLayout="row" *ngFor="let item of cobrosProgramados">
+
+    <div fxLayout="row" style="padding: 10px;">
+      <div fxLayout="column" fxFlex="90%">
+        <p style="font-size: 20px;">$ {{item.monto | number}}</p>
+        <p style="margin-top: -10px;">Fecha de cobro: {{item.fechaCobroProgramado | date: 'dd/MM/yyyy'}} - Medio de
+          cobro: {{medioCobro(item)}} - {{infoAdicionalMedioCobroSeleccionado(item)}} </p>
+      </div>
+    </div>
+    <a fxLayoutAlign="space-between center">
+      <button mat-stroked-button style="color: green; border: solid 1px green;" matStepperPrevious>Modificar</button>
+    </a>
+  </mat-card>
+</div>

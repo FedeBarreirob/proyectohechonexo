@@ -1,0 +1,84 @@
+<div fxLayout="row" fxLayoutAlign="center" class="encabezado-filtro">
+  <div fxFlex="80%" class="texto-filtrar">
+    FILTRAR
+  </div>
+
+  <div fxFlex="20%">
+    <button mat-icon-button class="boton-close" (click)="cerrar()">
+      <mat-icon>close</mat-icon>
+    </button>
+  </div>
+</div>
+
+<mat-divider></mat-divider>
+
+<!--Spinner-->
+<div fxLayout="row" fxLayoutAlign="center center" *ngIf="cargando == true" style="margin-top: 10px;">
+  <mat-spinner diameter="24"></mat-spinner>
+</div>
+
+<!--Cosecha-->
+<div fxLayout="row" fxLayoutAlign="space-around center" *ngIf="!cargando && cosechas">
+  <div fxFlex="100%" class="titulo-filtro" style="padding-top: 20px;">
+    Cosecha
+  </div>
+</div>
+
+<div *ngIf="!cargando && cosechas">
+  <mat-button-toggle-group class="grupo-botones-cosecha" [(ngModel)]="cosecha">
+
+    <div fxLayout="row" *ngFor="let unaCosecha of cosechas" class="boton-cosecha">
+      <mat-button-toggle [value]="unaCosecha.cosecha">
+        <div class="texto-campania">{{unaCosecha.cosechaDescripcion}}</div>
+      </mat-button-toggle>
+    </div>
+
+  </mat-button-toggle-group>
+</div>
+
+<mat-divider></mat-divider>
+
+<!--Productor-->
+<div fxLayout="row" fxLayoutAlign="space-around center">
+  <div fxFlex="100%" class="titulo-filtro">
+    Fecha de fijación
+  </div>
+</div>
+
+<div style="padding: 10px;">
+  <mat-form-field appearance="fill">
+    <mat-label>Fija una fecha</mat-label>
+    <input readonly matInput [matDatepicker]="picker" [(ngModel)]="fechaFijacion">
+    <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+    <mat-datepicker #picker></mat-datepicker>
+  </mat-form-field>
+</div>
+
+<mat-divider></mat-divider>
+
+<!--Destino de mercadería-->
+<div fxLayout="row" fxLayoutAlign="space-around center">
+  <div fxFlex="100%" class="titulo-filtro" style="padding-top: 20px; margin-bottom: 30px;">
+    Destino de mercadería
+  </div>
+</div>
+
+<div fxLayout="row" fxLayoutAlign="space-around center">
+  <div fxFlex>
+    <mat-radio-group [(ngModel)]="tipoDestinoSeleccionado">
+      <mat-radio-button style="padding: 10px;" *ngFor="let destino of destinos" [value]="destino.value">{{ destino.descripcion }}
+      </mat-radio-button>
+    </mat-radio-group>
+  </div>
+</div>
+
+<!--botones-->
+<div fxLayout="row" fxLayoutAlign="space-between center" class="contenedor-botones">
+  <div fxFlex="50%">
+    <button mat-button class="boton-limpiar" (click)="limpiar()" [disabled]="cargando">Limpiar</button>
+  </div>
+
+  <div fxFlex="50%">
+    <button mat-button class="boton-aplicar" (click)="aplicar()" [disabled]="cargando">Aplicar</button>
+  </div>
+</div>

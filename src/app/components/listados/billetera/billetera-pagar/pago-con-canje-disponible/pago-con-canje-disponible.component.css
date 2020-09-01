@@ -1,0 +1,53 @@
+.card-container {
+    background-color: white;
+    margin-top: 10px;
+    height: 334px;
+}
+
+.card {
+    background-color: white;
+    margin-top: 10px;
+    padding-top: 5px;
+    border-radius: 4px;
+    border: solid 1px #ccc;
+}
+
+.link-ver-todas {
+    color: #2DA442;
+    font-family: Rubik;
+    font-size: 11px;
+    text-align: right;
+    line-height: 16px;
+}
+
+.titulo-principal {
+    color: #333333;
+    font-family: Rubik;
+    font-size: 16px;
+    letter-spacing: 1.2px;
+}
+
+.icono {
+    height: 24px;
+    width: 24px;
+}
+
+.disponible-text {
+    margin-top: 10px;
+    color: #333333;
+    font-family: Rubik;
+    font-size: 11px;
+}
+
+.card-contenido{
+    height: 222px;
+}
+
+.button-definir{
+    margin-top: -35px;
+    font-family: RUbik;
+    font-size: 14px;
+    color: #2DA442;
+    height: 20px;
+    line-height: 20px;
+}

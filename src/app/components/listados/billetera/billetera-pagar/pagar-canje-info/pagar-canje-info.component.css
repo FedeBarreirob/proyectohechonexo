@@ -1,0 +1,13 @@
+.card-desktop{
+    height: 40px;
+    border-radius: 4px;
+    background-color: #ECECEC;
+    padding-right: 5px;
+    border-radius: 4px;
+}
+
+.card-mobile{
+    height: 40px;
+    border-radius: 4px;
+    background-color: #ECECEC;
+}

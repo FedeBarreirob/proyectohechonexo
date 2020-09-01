@@ -80,6 +80,7 @@ export class ReportesComponent implements OnInit, AfterViewInit {
       case 2: return "INSUMOS PENDIENTES";
       case 3: return "COMPRABANTES PENDIENTES DE FACTURAR";
       case 4: return "REPORTE DE USUARIOS";
+      case 5: return "REPORTE DE PRODUCTORES";
     }
   }
 }

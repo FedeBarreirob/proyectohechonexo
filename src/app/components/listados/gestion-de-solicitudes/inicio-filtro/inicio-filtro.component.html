@@ -1,0 +1,105 @@
+<div fxLayout="row" fxLayoutAlign="center" class="encabezado-filtro">
+  <div fxFlex="80%" class="texto-filtrar">
+    FILTRAR
+  </div>
+
+  <div fxFlex="20%">
+    <button mat-icon-button class="boton-close" (click)="cerrar()">
+      <mat-icon>close</mat-icon>
+    </button>
+  </div>
+</div>
+
+<mat-divider></mat-divider>
+
+<!--Vencimientos-->
+<div fxLayout="row" fxLayoutAlign="space-around center">
+  <div fxFlex="100%" class="titulo-filtro">
+    Estado
+  </div>
+</div>
+
+<div fxLayout="row" fxLayoutAlign="space-around center">
+  <div fxFlex>
+    <mat-radio-group [(ngModel)]="estadoSeleccionado">
+      <mat-radio-button style="padding: 10px;" *ngFor="let unEstado of estados" [value]="unEstado.value">
+        {{ unEstado.descripcion }}
+      </mat-radio-button>
+    </mat-radio-group>
+  </div>
+</div>
+
+<mat-divider></mat-divider>
+
+<!--Productor-->
+<div fxLayout="row" fxLayoutAlign="space-around center">
+  <div fxFlex="100%" class="titulo-filtro">
+    Productor
+  </div>
+</div>
+
+<app-perfiles-autocomplete (select)="seleccionarPerfil($event)" [clearAll$]="clearAll$"></app-perfiles-autocomplete>
+
+<mat-divider></mat-divider>
+
+<!--Granos-->
+<div fxLayout="row" fxLayoutAlign="space-around center">
+  <div fxFlex="100%" class="titulo-filtro">
+    Granos
+  </div>
+</div>
+
+<!--Spinner-->
+<div fxLayout="row" fxLayoutAlign="center center" *ngIf="cargando" style="margin-top: 10px">
+  <mat-spinner diameter="24"></mat-spinner>
+</div>
+
+<mat-button-toggle-group class="grupo-botones-rubro" [(ngModel)]="especieIdSeleccionado">
+
+  <div *ngFor="let especie of especies" class="boton-rubro">
+    <mat-button-toggle value="{{especie.id}}">
+      <img src="{{especie.codigoEspecie | imagenEspecie}}" />
+      <div class="texto-rubro">{{especie.especieDescripcion}}</div>
+    </mat-button-toggle>
+  </div>
+
+</mat-button-toggle-group>
+
+<mat-divider></mat-divider>
+
+<!--Método-->
+<div fxLayout="row" fxLayoutAlign="space-around center">
+  <div fxFlex="100%" class="titulo-filtro">
+    Método
+  </div>
+</div>
+
+<div fxLayout="row" fxLayoutAlign="space-around center">
+  <div fxFlex>
+    <mat-radio-group [(ngModel)]="metodoSeleccionado">
+      <mat-radio-button style="padding: 10px;" *ngFor="let unMetodo of metodos" [value]="unMetodo.value">
+        {{ unMetodo.descripcion }}
+      </mat-radio-button>
+    </mat-radio-group>
+  </div>
+</div>
+
+<div style="padding: 10px;">
+  <mat-form-field appearance="fill">
+    <mat-label>Fecha de solicitud</mat-label>
+    <input readonly matInput [matDatepicker]="picker" [(ngModel)]="fechaDeSolicitud">
+    <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+    <mat-datepicker #picker></mat-datepicker>
+  </mat-form-field>
+</div>
+
+<!--botones-->
+<div fxLayout="row" fxLayoutAlign="space-between center" class="contenedor-botones">
+  <div fxFlex="50%">
+    <button mat-button class="boton-limpiar" (click)="limpiar()" [disabled]="cargando">Limpiar</button>
+  </div>
+
+  <div fxFlex="50%">
+    <button mat-button class="boton-aplicar" (click)="aplicar()" [disabled]="cargando">Aplicar</button>
+  </div>
+</div>

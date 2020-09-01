@@ -1,0 +1,22 @@
+.contenedor-desktop {
+  height: 100%;
+  padding-top: 100px;
+}
+
+.mat-stepper-horizontal {
+  margin-top: 0px;
+  background-color: rgb(247, 247, 247);
+}
+  
+.mat-form-field {
+  margin-top: 16px;
+}
+
+.tittle{
+  margin-top: 25px;
+  background-color: white;
+}
+
+.button{
+  background-color: #f7f8f8;
+}
