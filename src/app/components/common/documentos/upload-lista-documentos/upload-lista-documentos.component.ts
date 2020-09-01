@@ -73,17 +73,26 @@ export class UploadListaDocumentosComponent implements OnInit, OnDestroy {
    * Registra toda la documentación relevada
    */
   registrarDocumentacion() {
-    if (this.documentacion) {
+    if (this.documentacion && this.cargando == false) {
+
+      this.cargando = true;
 
       this.fileStorageService.registrarDocumentacion(this.documentacion).subscribe(
         respuesta => {
           if (respuesta.exito == true) {
             this.notificarProgresoCargaTotal();
             this.registroEjecutado.emit(this.esCargaCompleta);
+            this.openSnackBar("Documentos enviados correctamente");
           } else {
             this.openSnackBar(respuesta.mensaje);
           }
-        }
+          
+        },
+        error => {
+          console.log(error);
+          this.cargando = false;
+        },
+        () => this.cargando = false
       );
 
     }

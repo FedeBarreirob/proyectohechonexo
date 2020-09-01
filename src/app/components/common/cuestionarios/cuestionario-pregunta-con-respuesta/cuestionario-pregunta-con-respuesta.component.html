@@ -4,10 +4,28 @@
     {{ pregunta.pregunta }}
   </div>
 
-  <div fxFlex>
+  <div fxFlex style="padding-top: 10px;">
 
     <app-cuestionario-respuesta-abierta-texto *ngIf="pregunta.tipoPregunta == tipoFormularioPregunta.ABIERTA_TEXTO"
       [pregunta]="pregunta"></app-cuestionario-respuesta-abierta-texto>
+
+    <app-cuestionario-respuesta-abierta-double *ngIf="pregunta.tipoPregunta == tipoFormularioPregunta.ABIERTA_DOUBLE"
+      [pregunta]="pregunta"></app-cuestionario-respuesta-abierta-double>
+
+    <app-cuestionario-respuesta-abierta-entero *ngIf="pregunta.tipoPregunta == tipoFormularioPregunta.ABIERTA_ENTERO"
+      [pregunta]="pregunta"></app-cuestionario-respuesta-abierta-entero>
+
+    <app-cuestionario-respuesta-cerrada-una-opcion
+      *ngIf="pregunta.tipoPregunta == tipoFormularioPregunta.CERRRADA_UNA_OPCION" [pregunta]="pregunta">
+    </app-cuestionario-respuesta-cerrada-una-opcion>
+
+    <app-cuestionario-respuesta-abierta-pesos
+      *ngIf="pregunta.tipoPregunta == tipoFormularioPregunta.ABIERTA_MONEDA_PESOS" [pregunta]="pregunta">
+    </app-cuestionario-respuesta-abierta-pesos>
+
+    <app-cuestionario-respuesta-abierta-dolares
+      *ngIf="pregunta.tipoPregunta == tipoFormularioPregunta.ABIERTA_MONEDA_USD" [pregunta]="pregunta">
+    </app-cuestionario-respuesta-abierta-dolares>
 
   </div>
 

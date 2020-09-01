@@ -1,0 +1,9 @@
+<div fxLayout="row" fxLayoutAlign="space-between center" fxLayoutGap="10px">
+
+    <div fxFlex="grow">
+        <input class="input" matInput [(ngModel)]="respuesta" numeric numericType="decimal"
+            (ngModelChange)="actualizarRespuesta($event)">
+    </div>
+    <div fxFlex="nogrow">USD</div>
+
+</div>
