@@ -36,6 +36,7 @@ export class ModalCambioPasswordComponent implements OnInit {
 		});
 	}
 
+	
 	// funcion encargada de enviar los datos para su persistencia
 	guardar() {
 		if (this.guardando == false) {

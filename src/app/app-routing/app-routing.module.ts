@@ -42,6 +42,7 @@ import { SituacionUsuarioComponent } from '../components/validar-documentacion/s
 import { SituacionUsuarioCompletaComponent } from '../components/validar-documentacion/situacion-usuario-completa/situacion-usuario-completa.component';
 import { AperturaLegajoComponent } from '../components/listados/documentacion/apertura-legajo/apertura-legajo.component';
 import { ValidacionDeIdentidadGuard } from '../security/validacion-de-identidad.guard';
+import { ModalCambioPasswordComponent } from '../components/usuarios-y-perfiles/modal-cambio-password/modal-cambio-password.component';
 
 const routes: Routes = [
 	{
@@ -108,6 +109,12 @@ const routes: Routes = [
 		path: 'restablecer-password/:token', component: LoginLayoutComponent,
 		children: [{
 			path: '', component: RestablecimientoPasswordComponent
+		}]
+	},
+	{
+		path: 'restablecer-password-send-email', component: LoginLayoutComponent,
+		children: [{
+			path: '', component: ModalCambioPasswordComponent
 		}]
 	},
 	{

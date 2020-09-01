@@ -319,6 +319,9 @@ import { CuestionarioRespuestaCerradaUnaOpcionComponent } from './components/com
 import { CuestionarioRespuestaCerradaMultiplesOpcionesComponent } from './components/common/cuestionarios/respuestas/cuestionario-respuesta-cerrada-multiples-opciones/cuestionario-respuesta-cerrada-multiples-opciones.component';
 import { CuestionarioRespuestaAbiertaPesosComponent } from './components/common/cuestionarios/respuestas/cuestionario-respuesta-abierta-pesos/cuestionario-respuesta-abierta-pesos.component';
 import { CuestionarioRespuestaAbiertaDolaresComponent } from './components/common/cuestionarios/respuestas/cuestionario-respuesta-abierta-dolares/cuestionario-respuesta-abierta-dolares.component';
+import { FalloRecuperacionPasswordCardComponent } from './components/usuarios-y-perfiles/fallo-recuperacion-password-card/fallo-recuperacion-password-card.component';
+import { ModalEnvioRestablecerPasswordComponent } from './components/usuarios-y-perfiles/modal-envio-restablecer-password/modal-envio-restablecer-password.component';
+
 
 
 registerLocaleData(localeEsAr, 'es-AR');
@@ -604,7 +607,9 @@ export function tokenGetter() {
 		CuestionarioRespuestaCerradaUnaOpcionComponent,
 		CuestionarioRespuestaCerradaMultiplesOpcionesComponent,
 		CuestionarioRespuestaAbiertaPesosComponent,
-		CuestionarioRespuestaAbiertaDolaresComponent
+		CuestionarioRespuestaAbiertaDolaresComponent,
+		FalloRecuperacionPasswordCardComponent,
+		ModalEnvioRestablecerPasswordComponent
 	],
 	imports: [
 		HttpClientModule,
@@ -706,7 +711,8 @@ export function tokenGetter() {
 		CompletarRegistroDialogComponent,
 		MensajeFotoSubidaComponent,
 		InfoPerfilLimiteCreditoComponent,
-		SituacionUsuarioComponent
+		SituacionUsuarioComponent,
+		ModalEnvioRestablecerPasswordComponent
 	],
 	bootstrap: [AppComponent]
 })
